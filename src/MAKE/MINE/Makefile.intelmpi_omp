@@ -14,7 +14,7 @@ CCFLAGS    =  -g -traceback -qopenmp -qno-offload \
 SHFLAGS    =  -fPIC
 DEPFLAGS   =  -M
 
-LINK       =  mpiicpc -std=c++11 -static-intel
+LINK       =  mpiicpc -std=c++11 -static-intel -static-libgcc -static-libstdc++
 LINKFLAGS  =  -g -qopenmp $(OPTFLAGS)
 LIB        =  /opt/intel/parallel_studio_xe_2016_update3/compilers_and_libraries_2016.3.210/linux/compiler/lib/intel64/libifcore.a
 SIZE       =  size
