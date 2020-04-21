@@ -175,6 +175,8 @@ class KSpace : protected Pointers {
   double **get_gcons() { return gcons; }
   double **get_dgcons() { return dgcons; }
 
+  int get_gewaldflag() { return gewaldflag; }
+
  protected:
   int gridflag,gridflag_6;
   int gewaldflag,gewaldflag_6;

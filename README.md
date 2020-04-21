@@ -1,0 +1,1 @@
+Customized LAMMPS(7Aug2019) for Neural Network Potential, by AdvanceSoft Corp. <http://www.advancesoft.jp>.
