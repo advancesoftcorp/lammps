@@ -7,7 +7,7 @@
 
 #include "nnp_symm_func.h"
 
-SymmFunc::SymmFunc(int numElems)
+SymmFunc::SymmFunc(int numElems, bool tanhCutFunc, bool elemWeight)
 {
     if (numElems < 1)
     {
@@ -15,7 +15,12 @@ SymmFunc::SymmFunc(int numElems)
     }
 
     this->numElems = numElems;
+
     this->numBasis = 0;
+
+    this->tanhCutFunc = tanhCutFunc;
+
+    this->elemWeight = elemWeight;
 }
 
 SymmFunc::~SymmFunc()
