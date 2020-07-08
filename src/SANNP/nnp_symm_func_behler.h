@@ -14,8 +14,8 @@
 class SymmFuncBehler : public SymmFunc
 {
 public:
-    SymmFuncBehler(int numElems, int sizeRad, int sizeAng, real radiusCut,
-                   const real* radiusEta, const real* radiusShift, const real* angleEta, const real* angleZeta);
+    SymmFuncBehler(int numElems, bool tanhCutFunc, bool elemWeight,
+                   int sizeRad, int sizeAng, real rcutRad, real rcutAng);
 
     virtual ~SymmFuncBehler();
 
@@ -32,6 +32,59 @@ public:
         return this->numAngBasis;
     }
 
+    void setRadiusData(const real* radiusEta, const real* radiusShift)
+    {
+        if (this->sizeRad < 1)
+        {
+            return;
+        }
+
+        if (radiusEta == NULL)
+        {
+            stop_by_error("radiusEta is null.");
+        }
+
+        if (radiusShift == NULL)
+        {
+            stop_by_error("radiusShift is null.");
+        }
+
+        this->radiusEta = radiusEta;
+
+        this->radiusShift = radiusShift;
+    }
+
+    void setAngleData(bool angleMod, const real* angleEta, const real* angleZeta, const real* angleShift)
+    {
+        if (this->sizeAng < 1)
+        {
+            return;
+        }
+
+        if (angleEta == NULL)
+        {
+            stop_by_error("angleEta is null.");
+        }
+
+        if (angleZeta == NULL)
+        {
+            stop_by_error("angleZeta is null.");
+        }
+
+        if (angleShift == NULL)
+        {
+            stop_by_error("angleShift is null.");
+        }
+
+        this->angleMod = angleMod;
+
+        this->angleEta = angleEta;
+
+        this->angleZeta = angleZeta;
+
+        this->angleShift = angleShift;
+    }
+
 private:
     int sizeRad;
     int sizeAng;
@@ -39,13 +92,18 @@ private:
     int numRadBasis;
     int numAngBasis;
 
+    real rcutRad;
+    real rcutAng;
+
     real radiusCut;
 
     const real* radiusEta;
     const real* radiusShift;
 
+    bool angleMod;
     const real* angleEta;
     const real* angleZeta;
+    const real* angleShift;
 };
 
 #endif /* NNP_SYMM_FUNC_BEHLER_H_ */
