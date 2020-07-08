@@ -7,9 +7,14 @@
 
 #include "nnp_symm_func_manybody.h"
 
-SymmFuncManyBody::SymmFuncManyBody(int numElems, int size2Body, int size3Body,
-                                   real radiusInner, real radiusOuter) : SymmFunc(numElems)
+SymmFuncManyBody::SymmFuncManyBody(int numElems, bool elemWeight, int size2Body, int size3Body,
+                                   real radiusInner, real radiusOuter) : SymmFunc(numElems, false, elemWeight)
 {
+    if (this->elemWeight)
+    {
+        stop_by_error("many-body does not support elemWeight.");
+    }
+
     if (size2Body < 1)
     {
         stop_by_error("size of 2-body is not positive.");
@@ -140,6 +145,11 @@ void SymmFuncManyBody::calculate(int numNeighbor, real** posNeighbor, int* elemN
         jelem1 = elemNeighbor[ineigh1];
 
         r1 = posNeighbor[ineigh1][0];
+        if (r1 >= this->radiusOuter)
+        {
+            continue;
+        }
+
         x1 = posNeighbor[ineigh1][1];
         y1 = posNeighbor[ineigh1][2];
         z1 = posNeighbor[ineigh1][3];
@@ -187,6 +197,11 @@ void SymmFuncManyBody::calculate(int numNeighbor, real** posNeighbor, int* elemN
         jelem2 = elemNeighbor[ineigh2];
 
         r2 = posNeighbor[ineigh2][0];
+        if (r2 >= this->radiusOuter)
+        {
+            continue;
+        }
+
         x2 = posNeighbor[ineigh2][1];
         y2 = posNeighbor[ineigh2][2];
         z2 = posNeighbor[ineigh2][3];
@@ -208,6 +223,11 @@ void SymmFuncManyBody::calculate(int numNeighbor, real** posNeighbor, int* elemN
             }
 
             r1 = posNeighbor[ineigh1][0];
+            if (r1 >= this->radiusOuter)
+            {
+                continue;
+            }
+
             x1 = posNeighbor[ineigh1][1];
             y1 = posNeighbor[ineigh1][2];
             z1 = posNeighbor[ineigh1][3];
@@ -222,6 +242,12 @@ void SymmFuncManyBody::calculate(int numNeighbor, real** posNeighbor, int* elemN
             dy = y2 - y1;
             dz = z2 - z1;
             rr = dx * dx + dy * dy + dz * dz;
+
+            if (rr >= this->radiusOuter * this->radiusOuter)
+            {
+                continue;
+            }
+
             r3 = sqrt(rr);
 
             staMode3 = (int) ((r3 - this->radiusInner) / this->step3Body);
