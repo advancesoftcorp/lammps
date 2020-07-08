@@ -22,11 +22,13 @@ using namespace std;
 #define real     float
 #define REAL(x)  x##f
 
-#define IFORM_F1     "%f"
-#define IFORM_F2     "%f %f"
-#define IFORM_S1_F2  "%s %f %f"
-#define IFORM_D2_F1  "%d %d %f"
-#define IFORM_D2_F2  "%d %d %f %f"
+#define IFORM_F1        "%f"
+#define IFORM_F2        "%f %f"
+#define IFORM_F3        "%f %f %f"
+#define IFORM_S1_F2     "%s %f %f"
+#define IFORM_D2_F1     "%d %d %f"
+#define IFORM_D2_F2     "%d %d %f %f"
+#define IFORM_D2_F2_D1  "%d %d %f %f %d"
 
 #define xgemv_  sgemv_
 #define xgemm_  sgemm_
@@ -38,11 +40,13 @@ using namespace std;
 #define real     double
 #define REAL(x)  x
 
-#define IFORM_F1     "%lf"
-#define IFORM_F2     "%lf %lf"
-#define IFORM_S1_F2  "%s %lf %lf"
-#define IFORM_D2_F1  "%d %d %lf"
-#define IFORM_D2_F2  "%d %d %lf %lf"
+#define IFORM_F1        "%lf"
+#define IFORM_F2        "%lf %lf"
+#define IFORM_F3        "%lf %lf %lf"
+#define IFORM_S1_F2     "%s %lf %lf"
+#define IFORM_D2_F1     "%d %d %lf"
+#define IFORM_D2_F2     "%d %d %lf %lf"
+#define IFORM_D2_F2_D1  "%d %d %lf %lf %d"
 
 #define xgemm_  dgemm_
 #define xgemv_  dgemv_

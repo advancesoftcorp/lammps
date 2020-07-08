@@ -23,6 +23,26 @@ public:
         return this->symmFunc;
     }
 
+    int getElemWeight() const
+    {
+        return this->elemWeight;
+    }
+
+    int getTanhCutoff() const
+    {
+        return this->tanhCutoff;
+    }
+
+    real getRcutoff() const
+    {
+        if (this->symmFunc == SYMM_FUNC_MANYBODY)
+        {
+            return this->router;
+        }
+
+        return max(this->rcutRadius, this->rcutAngle);
+    }
+
     int getM2() const
     {
         return this->m2;
@@ -53,6 +73,21 @@ public:
         return this->numAngle;
     }
 
+    real getRcutRadius() const
+    {
+        return this->rcutRadius;
+    }
+
+    real getRcutAngle() const
+    {
+        return this->rcutAngle;
+    }
+
+    int getBehlerG4() const
+    {
+        return this->behlerG4;
+    }
+
     const real* getBehlerEta1() const
     {
         return this->behlerEta1;
@@ -63,9 +98,14 @@ public:
         return this->behlerEta2;
     }
 
-    const real* getBehlerRs() const
+    const real* getBehlerRs1() const
     {
-        return this->behlerRs;
+        return this->behlerRs1;
+    }
+
+    const real* getBehlerRs2() const
+    {
+        return this->behlerRs2;
     }
 
     const real* getBehlerZeta() const
@@ -108,9 +148,16 @@ public:
         return this->withCharge;
     }
 
+    int getWithHDNNP() const
+    {
+        return this->withHDNNP;
+    }
+
 private:
     // about symmetry functions
     int symmFunc;
+    int elemWeight;
+    int tanhCutoff;
 
     int m2;
     int m3;
@@ -119,9 +166,13 @@ private:
 
     int   numRadius;
     int   numAngle;
+    real  rcutRadius;
+    real  rcutAngle;
+
     real* behlerEta1;
     real* behlerEta2;
-    real* behlerRs;
+    real* behlerRs1;
+    real* behlerRs2;
     real* behlerZeta;
 
     // about neural networks
@@ -134,6 +185,7 @@ private:
     int  activCharge;
 
     int  withCharge;
+    int  withHDNNP;
 };
 
 #endif /* NNP_PROPERTY_H_ */
