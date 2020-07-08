@@ -157,9 +157,9 @@ void SymmFuncManyBody::calculate(int numNeighbor, real** posNeighbor, int* elemN
 
             phi1 = REAL(0.5) * cos(PI * t1) + REAL(0.5);
             dphi1dr = -REAL(0.5) * PI / this->step2Body * sin(PI * t1);
-            dphi1dx = x1 / r1 * dphi1dr;
-            dphi1dy = y1 / r1 * dphi1dr;
-            dphi1dz = z1 / r1 * dphi1dr;
+            dphi1dx = -x1 / r1 * dphi1dr;
+            dphi1dy = -y1 / r1 * dphi1dr;
+            dphi1dz = -z1 / r1 * dphi1dr;
 
             ibase = imode1 + jelem1 * this->size2Body;
 
@@ -250,9 +250,9 @@ void SymmFuncManyBody::calculate(int numNeighbor, real** posNeighbor, int* elemN
 
                     phi2 = REAL(0.5) * cos(PI * t2) + REAL(0.5);
                     dphi2dr = -REAL(0.5) * PI / this->step3Body * sin(PI * t2);
-                    dphi2dx = x2 / r2 * dphi2dr;
-                    dphi2dy = y2 / r2 * dphi2dr;
-                    dphi2dz = z2 / r2 * dphi2dr;
+                    dphi2dx = -x2 / r2 * dphi2dr;
+                    dphi2dy = -y2 / r2 * dphi2dr;
+                    dphi2dz = -z2 / r2 * dphi2dr;
 
                     ibase2 = imode2 + jelem2 * this->size3Body;
                     ibase2 = ibase2 * (ibase2 + 1) / 2;
@@ -266,9 +266,9 @@ void SymmFuncManyBody::calculate(int numNeighbor, real** posNeighbor, int* elemN
 
                         phi1 = REAL(0.5) * cos(PI * t1) + REAL(0.5);
                         dphi1dr = -REAL(0.5) * PI / this->step3Body * sin(PI * t1);
-                        dphi1dx = x1 / r1 * dphi1dr;
-                        dphi1dy = y1 / r1 * dphi1dr;
-                        dphi1dz = z1 / r1 * dphi1dr;
+                        dphi1dx = -x1 / r1 * dphi1dr;
+                        dphi1dy = -y1 / r1 * dphi1dr;
+                        dphi1dz = -z1 / r1 * dphi1dr;
 
                         ibase1 = imode1 + jelem1 * this->size3Body;
 

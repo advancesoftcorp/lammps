@@ -176,7 +176,7 @@ bool PairNNP::prepareNN()
     }
 
     // generate indexNeighborNN
-    #pragma omp parallel for ordered private(iatom, nneigh, ineigh)
+    #pragma omp parallel for private(iatom, nneigh, ineigh)
     for (iatom = 0; iatom < inum; ++iatom)
     {
         nneigh = numneigh[ilist[iatom]];
