@@ -71,7 +71,7 @@ Property::~Property()
     }
 }
 
-void Property::readProperty(const FILE* fp, int rank, MPI_Comm world)
+void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
 {
     int ierr;
 
@@ -229,7 +229,7 @@ void Property::readProperty(const FILE* fp, int rank, MPI_Comm world)
                         break;
                     }
 
-                    if (sscanf(line, IFORM_F2, &(this->behlerEta1[i]), &(this->behlerRs[i])) != 2)
+                    if (sscanf(line, IFORM_F2, &(this->behlerEta1[i]), &(this->behlerRs1[i])) != 2)
                     {
                         ierr = 1;
                         break;
@@ -241,7 +241,7 @@ void Property::readProperty(const FILE* fp, int rank, MPI_Comm world)
             if (ierr != 0) stop_by_error("cannot read ffield file, at Behler parameter");
 
             MPI_Bcast(&(this->behlerEta1[0]), this->numRadius, MPI_REAL0, 0, world);
-            MPI_Bcast(&(this->behlerRs[0]),   this->numRadius, MPI_REAL0, 0, world);
+            MPI_Bcast(&(this->behlerRs1[0]),  this->numRadius, MPI_REAL0, 0, world);
         }
 
         if (this->numAngle > 0)

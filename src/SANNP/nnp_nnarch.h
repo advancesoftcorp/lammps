@@ -27,10 +27,10 @@ public:
         return this->atomNum[ielem];
     }
 
-    void restoreNN(const FILE* fp, int numElems, const char** elemNames, int rank, MPI_Comm world);
+    void restoreNN(FILE* fp, int numElems, char** elemNames, int rank, MPI_Comm world);
 
-    void initGeometry(int numAtoms, const int* elements,
-                      const int* numNeighbor, const int** elemNeighbor, const real*** posNeighbor)
+    void initGeometry(int numAtoms, int* elements,
+                      int* numNeighbor, int** elemNeighbor, real*** posNeighbor);
 
     void clearGeometry();
 
@@ -63,10 +63,10 @@ private:
 
     int* atomNum;
 
-    const int*    elements;
-    const int*    numNeighbor;
-    const int**   elemNeighbor;
-    const real*** posNeighbor;
+    int*    elements;
+    int*    numNeighbor;
+    int**   elemNeighbor;
+    real*** posNeighbor;
 
     int   mbatch;
     int*  nbatch;

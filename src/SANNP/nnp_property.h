@@ -16,7 +16,7 @@ public:
     Property();
     virtual ~Property();
 
-    void readProperty(const FILE* fp, int rank, MPI_Comm world);
+    void readProperty(FILE* fp, int rank, MPI_Comm world);
 
     int getSymmFunc() const
     {
@@ -182,6 +182,7 @@ private:
     real  rcutRadius;
     real  rcutAngle;
 
+    int   behlerG4;
     real* behlerEta1;
     real* behlerEta2;
     real* behlerRs1;

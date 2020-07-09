@@ -27,7 +27,7 @@ NNArch::NNArch(int mode, int numElems, const Property* property)
 
     this->property = property;
 
-    this->atomNum = new real[numElems];
+    this->atomNum = new int[numElems];
 
     this->elements     = NULL;
     this->numNeighbor  = NULL;
@@ -158,7 +158,7 @@ NNArch::~NNArch()
     }
 }
 
-void NNArch::restoreNN(const FILE* fp, int numElems, const char** elemNames, int rank, MPI_Comm world)
+void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, int rank, MPI_Comm world)
 {
     int  symmFunc = this->property->getSymmFunc();
     int  m2 = this->property->getM2();
@@ -224,7 +224,7 @@ void NNArch::restoreNN(const FILE* fp, int numElems, const char** elemNames, int
             {
                 ierr = 1;
             }
-            else (nelemOld < 1)
+            else if (nelemOld < 1)
             {
                 ierr = 1;
             }
@@ -303,7 +303,7 @@ void NNArch::restoreNN(const FILE* fp, int numElems, const char** elemNames, int
     for (ielem = 0; ielem < nelemNew; ++ielem)
     {
         elemNamesNew[ielem] = new char[lenElemName];
-        strcpy(elemNamesNew[ielem], elementNames[ielem]);
+        strcpy(elemNamesNew[ielem], elemNames[ielem]);
     }
 
     // map of elements
@@ -672,8 +672,8 @@ void NNArch::restoreNN(const FILE* fp, int numElems, const char** elemNames, int
     delete[] mapSymmFunc;
 }
 
-void NNArch::initGeometry(int numAtoms, const int* elements,
-                          const int* numNeighbor, const int** elemNeighbor, const real*** posNeighbor)
+void NNArch::initGeometry(int numAtoms, int* elements,
+                          int* numNeighbor, int** elemNeighbor, real*** posNeighbor)
 {
 
     this->numAtoms = numAtoms;
@@ -968,7 +968,7 @@ SymmFunc* NNArch::getSymmFunc()
             const real* zeta = this->property->getBehlerZeta();
 
             SymmFuncBehler* symmFuncBehler = NULL;
-            symmFuncBehler = new SymmFuncBehler(numElemes, tanhCut, weight, nrad, nang, rrad, rang);
+            symmFuncBehler = new SymmFuncBehler(this->numElems, tanhCut, weight, nrad, nang, rrad, rang);
 
             symmFuncBehler->setRadiusData(eta1, rs1);
             symmFuncBehler->setAngleData(useG4, eta2, zeta, rs2);
@@ -985,7 +985,7 @@ SymmFunc* NNArch::getSymmFunc()
             bool weight  = (this->property->getElemWeight() != 0);
             bool tanhCut = (this->property->getTanhCutoff() != 0);
 
-            this->symmFunc = new SymmFuncChebyshev(numElemes, tanhCut, weight, nrad, nang, rrad, rang);
+            this->symmFunc = new SymmFuncChebyshev(this->numElems, tanhCut, weight, nrad, nang, rrad, rang);
         }
 
         if (this->symmFunc == NULL)

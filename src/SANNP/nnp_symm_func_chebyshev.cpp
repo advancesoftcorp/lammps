@@ -57,8 +57,8 @@ SymmFuncChebyshev::~SymmFuncChebyshev()
     // NOP
 }
 
-void SymmFuncBehler::calculate(int numNeighbor, const int* elemNeighbor, const real** posNeighbor,
-                               real* symmData, real* symmDiff) const
+void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, real** posNeighbor,
+                                  real* symmData, real* symmDiff) const
 {
     if (elemNeighbor == NULL || posNeighbor == NULL)
     {
@@ -240,12 +240,6 @@ void SymmFuncBehler::calculate(int numNeighbor, const int* elemNeighbor, const r
 
     if (numNeighbor < 2 || this->sizeAng < 1)
     {
-        for (ineigh1 = 0; ineigh1 < numNeigh; ++ineigh1)
-        {
-            delete[] posNeighbor[ineigh1];
-        }
-        delete[] posNeighbor;
-
         return;
     }
 
@@ -274,7 +268,7 @@ void SymmFuncBehler::calculate(int numNeighbor, const int* elemNeighbor, const r
         {
             jelem2 = elemNeighbor[ineigh2];
             zanum2 = ONE;
-            mneigh = numNeigh;
+            mneigh = numNeighbor;
         }
 
         this->cutoffFunction(&fc2, &dfc2dr2, r2, this->rcutAng);

@@ -63,7 +63,7 @@ SymmFuncBehler::~SymmFuncBehler()
     // NOP
 }
 
-void SymmFuncBehler::calculate(int numNeighbor, const int* elemNeighbor, const real** posNeighbor,
+void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, real** posNeighbor,
                                real* symmData, real* symmDiff) const
 {
     if (elemNeighbor == NULL || posNeighbor == NULL)
@@ -264,7 +264,7 @@ void SymmFuncBehler::calculate(int numNeighbor, const int* elemNeighbor, const r
         {
             jelem2 = elemNeighbor[ineigh2];
             zanum2 = ONE;
-            mneigh = numNeigh;
+            mneigh = numNeighbor;
         }
 
         this->cutoffFunction(&fc2, &dfc2dr2, r2, this->rcutAng);

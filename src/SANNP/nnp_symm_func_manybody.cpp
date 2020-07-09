@@ -66,7 +66,7 @@ SymmFuncManyBody::~SymmFuncManyBody()
     // NOP
 }
 
-void SymmFuncManyBody::calculate(int numNeighbor, const int* elemNeighbor, const real** posNeighbor,
+void SymmFuncManyBody::calculate(int numNeighbor, int* elemNeighbor, real** posNeighbor,
                                  real* symmData, real* symmDiff) const
 {
     if (elemNeighbor == NULL || posNeighbor == NULL)

@@ -11,12 +11,12 @@ using namespace LAMMPS_NS;
 
 PairNNP::PairNNP(LAMMPS *lmp) : Pair(lmp)
 {
-    this->typeMap = NULL;
+    this->typeMap  = NULL;
     this->property = NULL;
-    this->arch = NULL;
+    this->arch     = NULL;
 
-    int max = 10;
-    this->maxinum = max;
+    const int max   = 10;
+    this->maxinum   = max;
     this->maxnneigh = max;
 }
 
@@ -124,19 +124,14 @@ bool PairNNP::prepareNN()
         memory->grow(this->elements,    this->maxinum, "pair:elements");
         memory->grow(this->energies,    this->maxinum, "pair:energies");
         memory->grow(this->numNeighbor, this->maxinum, "pair:numNeighborNN");
+    }
 
+    if (hasGrown || nneigh > this->maxnneigh)
+    {
         if (nneigh > this->maxnneigh)
         {
             this->maxnneigh = nneigh + this->maxnneigh / 2;
         }
-
-        memory->grow(this->forces,       this->maxinum, this->maxnneigh + 1, 3, "pair:forces");
-        memory->grow(this->elemNeighbor, this->maxinum, this->maxnneigh,        "pair:elemNighbor");
-        memory->grow(this->posNeighbor,  this->maxinum, this->maxnneigh,     4, "pair:posNighbor");
-    }
-    else if (nneigh > this->maxnneigh)
-    {
-        this->maxnneigh = nneigh + this->maxnneigh / 2;
 
         memory->grow(this->forces,       this->maxinum, this->maxnneigh + 1, 3, "pair:forces");
         memory->grow(this->elemNeighbor, this->maxinum, this->maxnneigh,        "pair:elemNighbor");

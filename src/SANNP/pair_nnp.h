@@ -46,19 +46,19 @@ public:
     virtual void init_style();
 
 protected:
-    int* typeMap;
+    int*      typeMap;
     Property* property;
-    NNArch* arch;
+    NNArch*   arch;
 
-    int* elements;
-    real* energies;
+    int*    elements;
+    real*   energies;
     real*** forces;
 
     int maxinum;
     int maxnneigh;
 
-    int* numNeighbor;
-    int** elemNeighbor;
+    int*    numNeighbor;
+    int**   elemNeighbor;
     real*** posNeighbor;
 
     virtual void allocate();
