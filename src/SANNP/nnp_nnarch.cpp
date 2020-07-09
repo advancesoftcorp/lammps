@@ -409,7 +409,7 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, int rank, MPI_C
         }
 
         // read NN Charge
-        if (withCharge != 0 && interLayersCharge != nullptr && lastLayersCharge != nullptr)
+        if (withCharge != 0 && interLayersCharge != NULL && lastLayersCharge != NULL)
         {
             for (ilayer = 0; ilayer < nlayerCharge; ++ilayer)
             {
