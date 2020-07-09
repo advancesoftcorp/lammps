@@ -49,13 +49,13 @@ SymmFuncBehler::SymmFuncBehler(int numElems, bool tanhCutFunc, bool elemWeight, 
     this->rcutRad = rcutRad;
     this->rcutAng = rcutAng;
 
-    this->radiusEta   = nullptr;
-    this->radiusShift = nullptr;
+    this->radiusEta   = NULL;
+    this->radiusShift = NULL;
 
     this->angleMod   = false;
-    this->angleEta   = nullptr;
-    this->angleZeta  = nullptr;
-    this->angleShift = nullptr;
+    this->angleEta   = NULL;
+    this->angleZeta  = NULL;
+    this->angleShift = NULL;
 }
 
 SymmFuncBehler::~SymmFuncBehler()
