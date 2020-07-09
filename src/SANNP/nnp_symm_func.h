@@ -16,7 +16,7 @@ public:
     SymmFunc(int numElemes, bool tanhCutFunc, bool elemWeight);
     virtual ~SymmFunc();
 
-    virtual void calculate(int numNeighbor, real** posNeighbor, int* elemNeighbor,
+    virtual void calculate(int numNeighbor, const int* elemNeighbor, const real** posNeighbor,
                            real* symmData, real* symmDiff) const = 0;
 
     int getNumBasis() const

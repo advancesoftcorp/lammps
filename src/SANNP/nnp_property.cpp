@@ -71,7 +71,7 @@ Property::~Property()
     }
 }
 
-void Property::peekProperty(FILE* fp, int rank, MPI_Comm world)
+void Property::readProperty(const FILE* fp, int rank, MPI_Comm world)
 {
     int ierr;
 
@@ -113,7 +113,7 @@ void Property::peekProperty(FILE* fp, int rank, MPI_Comm world)
     }
 
     MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
-    if (ierr != 0) stop_by_error("cannot peek ffield file, at symmFunc");
+    if (ierr != 0) stop_by_error("cannot read ffield file, at symmFunc");
 
     MPI_Bcast(&(this->symmFunc), 1, MPI_INT, 0, world);
 
@@ -137,7 +137,7 @@ void Property::peekProperty(FILE* fp, int rank, MPI_Comm world)
         }
 
         MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
-        if (ierr != 0) stop_by_error("cannot peek ffield file, at symmFunc parameter (many-body)");
+        if (ierr != 0) stop_by_error("cannot read ffield file, at symmFunc parameter (many-body)");
 
         MPI_Bcast(&(this->m2),     1, MPI_INT,   0, world);
         MPI_Bcast(&(this->m3),     1, MPI_INT,   0, world);
@@ -174,7 +174,7 @@ void Property::peekProperty(FILE* fp, int rank, MPI_Comm world)
         }
 
         MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
-        if (ierr != 0) stop_by_error("cannot peek ffield file, at symmFunc parameter (Behler)");
+        if (ierr != 0) stop_by_error("cannot read ffield file, at symmFunc parameter (Behler)");
 
         MPI_Bcast(&(this->numRadius),  1, MPI_INT,   0, world);
         MPI_Bcast(&(this->numAngle),   1, MPI_INT,   0, world);
@@ -238,7 +238,7 @@ void Property::peekProperty(FILE* fp, int rank, MPI_Comm world)
             }
 
             MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
-            if (ierr != 0) stop_by_error("cannot peek ffield file, at Behler parameter");
+            if (ierr != 0) stop_by_error("cannot read ffield file, at Behler parameter");
 
             MPI_Bcast(&(this->behlerEta1[0]), this->numRadius, MPI_REAL0, 0, world);
             MPI_Bcast(&(this->behlerRs[0]),   this->numRadius, MPI_REAL0, 0, world);
@@ -274,7 +274,7 @@ void Property::peekProperty(FILE* fp, int rank, MPI_Comm world)
             }
 
             MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
-            if (ierr != 0) stop_by_error("cannot peek ffield file, at Behler parameter");
+            if (ierr != 0) stop_by_error("cannot read ffield file, at Behler parameter");
 
             MPI_Bcast(&(this->behlerEta2[0]), this->numAngle, MPI_REAL0, 0, world);
             MPI_Bcast(&(this->behlerZeta[0]), this->numAngle, MPI_REAL0, 0, world);
@@ -303,7 +303,7 @@ void Property::peekProperty(FILE* fp, int rank, MPI_Comm world)
         }
 
         MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
-        if (ierr != 0) stop_by_error("cannot peek ffield file, at symmFunc parameter (Chebyshev)");
+        if (ierr != 0) stop_by_error("cannot read ffield file, at symmFunc parameter (Chebyshev)");
 
         MPI_Bcast(&(this->numRadius),  1, MPI_INT,   0, world);
         MPI_Bcast(&(this->numAngle),   1, MPI_INT,   0, world);
@@ -313,7 +313,7 @@ void Property::peekProperty(FILE* fp, int rank, MPI_Comm world)
 
     else
     {
-        stop_by_error("cannot peek ffield file, at symmFunc (unknown type)");
+        stop_by_error("cannot read ffield file, at symmFunc (unknown type)");
     }
 
     ierr = 0;
@@ -334,7 +334,7 @@ void Property::peekProperty(FILE* fp, int rank, MPI_Comm world)
     }
 
     MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
-    if (ierr != 0) stop_by_error("cannot peek ffield file, at withCharge");
+    if (ierr != 0) stop_by_error("cannot read ffield file, at withCharge");
 
     MPI_Bcast(&(this->withCharge), 1, MPI_INT, 0, world);
 
@@ -357,7 +357,7 @@ void Property::peekProperty(FILE* fp, int rank, MPI_Comm world)
     }
 
     MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
-    if (ierr != 0) stop_by_error("cannot peek ffield file, at layersEnergy");
+    if (ierr != 0) stop_by_error("cannot read ffield file, at layersEnergy");
 
     MPI_Bcast(&(this->layersEnergy), 1, MPI_INT, 0, world);
     MPI_Bcast(&(this->nodesEnergy),  1, MPI_INT, 0, world);
@@ -384,7 +384,7 @@ void Property::peekProperty(FILE* fp, int rank, MPI_Comm world)
         }
 
         MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
-        if (ierr != 0) stop_by_error("cannot peek ffield file, at layersCharge");
+        if (ierr != 0) stop_by_error("cannot read ffield file, at layersCharge");
 
         MPI_Bcast(&(this->layersCharge), 1, MPI_INT, 0, world);
         MPI_Bcast(&(this->nodesCharge),  1, MPI_INT, 0, world);

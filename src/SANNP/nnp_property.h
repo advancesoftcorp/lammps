@@ -16,7 +16,7 @@ public:
     Property();
     virtual ~Property();
 
-    void peekProperty(FILE* fp, int rank, MPI_Comm world);
+    void readProperty(const FILE* fp, int rank, MPI_Comm world);
 
     int getSymmFunc() const
     {

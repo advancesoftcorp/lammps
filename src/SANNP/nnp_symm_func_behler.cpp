@@ -63,10 +63,10 @@ SymmFuncBehler::~SymmFuncBehler()
     // NOP
 }
 
-void SymmFuncBehler::calculate(int numNeighbor, real** posNeighbor, int* elemNeighbor,
+void SymmFuncBehler::calculate(int numNeighbor, const int* elemNeighbor, const real** posNeighbor,
                                real* symmData, real* symmDiff) const
 {
-    if (posNeighbor == NULL || elemNeighbor == NULL)
+    if (elemNeighbor == NULL || posNeighbor == NULL)
     {
         stop_by_error("neighbor is null.");
     }

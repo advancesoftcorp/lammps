@@ -19,7 +19,7 @@ public:
 
     virtual ~SymmFuncBehler();
 
-    void calculate(int numNeighbor, real** posNeighbor, int* elemNeighbor,
+    void calculate(int numNeighbor, const int* elemNeighbor, const real** posNeighbor,
                    real* symmData, real* symmDiff) const;
 
     int getNumRadBasis() const

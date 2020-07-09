@@ -26,6 +26,7 @@ using namespace std;
 #define IFORM_F2        "%f %f"
 #define IFORM_F3        "%f %f %f"
 #define IFORM_S1_F2     "%s %f %f"
+#define IFORM_S1_F2_D1  "%s %f %f %d"
 #define IFORM_D2_F1     "%d %d %f"
 #define IFORM_D2_F2     "%d %d %f %f"
 #define IFORM_D2_F2_D1  "%d %d %f %f %d"
@@ -44,6 +45,7 @@ using namespace std;
 #define IFORM_F2        "%lf %lf"
 #define IFORM_F3        "%lf %lf %lf"
 #define IFORM_S1_F2     "%s %lf %lf"
+#define IFORM_S1_F2_D1  "%s %lf %lf %d"
 #define IFORM_D2_F1     "%d %d %lf"
 #define IFORM_D2_F2     "%d %d %lf %lf"
 #define IFORM_D2_F2_D1  "%d %d %lf %lf %d"
@@ -73,20 +75,21 @@ int xgemv_(const char* trans, const int* m, const int* n,
 
 }
 
-#define SYMM_FUNC_NULL      0
-#define SYMM_FUNC_MANYBODY  1
-#define SYMM_FUNC_BEHLER    2
+#define SYMM_FUNC_NULL       0
+#define SYMM_FUNC_MANYBODY   1
+#define SYMM_FUNC_BEHLER     2
+#define SYMM_FUNC_CHEBYSHEV  3
 
-#define ACTIVATION_NULL     0
-#define ACTIVATION_ASIS     1
-#define ACTIVATION_SIGMOID  2
-#define ACTIVATION_TANH     3
-#define ACTIVATION_ELU      4
+#define ACTIVATION_NULL      0
+#define ACTIVATION_ASIS      1
+#define ACTIVATION_SIGMOID   2
+#define ACTIVATION_TANH      3
+#define ACTIVATION_ELU       4
 
 // NNArch
-#define NNARCH_MODE_BOTH    0
-#define NNARCH_MODE_ENERGY  1
-#define NNARCH_MODE_CHARGE  2
+#define NNARCH_MODE_BOTH     0
+#define NNARCH_MODE_ENERGY   1
+#define NNARCH_MODE_CHARGE   2
 
 inline void stop_by_error(const char* message)
 {

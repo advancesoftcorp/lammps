@@ -376,7 +376,7 @@ void PairNNP::coeff(int narg, char **arg)
         {
             this->typeMap[i + 1] = ntypesEff + 1;
             typeNames[ntypesEff] = arg[i + 3];
-        	ntypesEff++;
+            ntypesEff++;
         }
     }
 
@@ -400,7 +400,7 @@ void PairNNP::coeff(int narg, char **arg)
     }
 
     this->property = new Property();
-    this->property->peekProperty(fp, comm->me, world);
+    this->property->readProperty(fp, comm->me, world);
 
     if (this->arch != NULL)
     {

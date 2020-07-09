@@ -75,7 +75,7 @@ void NNLayer::setSizeOfBatch(int sizeBatch)
     this->inpGrad = new real[this->numInpNodes * this->sizeBatch];
 }
 
-void NNLayer::scanWeight(FILE* fp, int rank, MPI_Comm world)
+void NNLayer::scanWeight(const FILE* fp, int rank, MPI_Comm world)
 {
     int iweight;
     int nweight = this->numInpNodes * this->numOutNodes;

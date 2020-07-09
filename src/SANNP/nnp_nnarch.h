@@ -22,15 +22,19 @@ public:
     NNArch(int mode, int numElems, const Property* property);
     virtual ~NNArch();
 
-    void restoreNN(FILE* fp, int numElement, char** elementNames, int rank, MPI_Comm world);
+    int getAtomNum(int ielem) const
+    {
+        return this->atomNum[ielem];
+    }
 
-    void setMapElem(int* mapElem);
+    void restoreNN(const FILE* fp, int numElems, const char** elemNames, int rank, MPI_Comm world);
 
-    void initGeometry(int inum, int* ilist, int* type, int* typeMap, int* numneigh);
+    void initGeometry(int numAtoms, const int* elements,
+                      const int* numNeighbor, const int** elemNeighbor, const real*** posNeighbor)
 
     void clearGeometry();
 
-    void calculateSymmFuncs(int* numNeighbor, int** elemNeighbor, real*** posNeighbor);
+    void calculateSymmFuncs();
 
     void renormalizeSymmFuncs();
 
@@ -51,15 +55,18 @@ public:
 private:
     int mode;
 
-    int numElems;
-    int numAtoms;
+    bool elemWeight;
+    int  numElems;
+    int  numAtoms;
 
     const Property* property;
 
-    int* mapElem;
+    int* atomNum;
 
-    int* indexElem; // iatom -> ielem
-    int* numNeighbor; // iatom -> nneigh
+    const int*    elements;
+    const int*    numNeighbor;
+    const int**   elemNeighbor;
+    const real*** posNeighbor;
 
     int   mbatch;
     int*  nbatch;
@@ -72,8 +79,8 @@ private:
 
     real** chargeData;
 
-    real**   symmData;
-    real**   symmDiff;
+    real**    symmData;
+    real**    symmDiff;
     real*     symmAve;
     real*     symmDev;
     SymmFunc* symmFunc;
@@ -93,8 +100,6 @@ private:
     {
         return this->mode == NNARCH_MODE_BOTH || this->mode == NNARCH_MODE_CHARGE;
     }
-
-    void initGeometries();
 
     SymmFunc* getSymmFunc();
 };

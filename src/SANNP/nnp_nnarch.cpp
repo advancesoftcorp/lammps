@@ -21,16 +21,22 @@ NNArch::NNArch(int mode, int numElems, const Property* property)
 
     this->mode = mode;
 
-    this->numElems = numElems;
-    this->numAtoms = 0;
+    this->elemWeight = (property->getElemWeight() != 0);
+    this->numElems   = this->elemWeight ? 1 : numElems;
+    this->numAtoms   = 0;
 
     this->property = property;
+
+    this->atomNum = new real[numElems];
+
+    this->elements     = NULL;
+    this->numNeighbor  = NULL;
+    this->elemNeighbor = NULL;
+    this->posNeighbor  = NULL;
 
     this->mbatch = 0;
     this->nbatch = new int[this->numElems];
     this->ibatch = NULL;
-
-    this->mapElem = NULL;
 
     if (this->isEnergyMode())
     {
@@ -69,11 +75,10 @@ NNArch::NNArch(int mode, int numElems, const Property* property)
 
 NNArch::~NNArch()
 {
-    int iatom;
-    int natom = this->numAtoms;
-
-    int ineigh;
-    int nneigh;
+    if (this->numAtoms > 0)
+    {
+        this->clearGeometry();
+    }
 
     int ielem;
     int nelem = this->numElems;
@@ -81,6 +86,8 @@ NNArch::~NNArch()
     int ilayer;
     int nlayerEnergy = this->property->getLayersEnergy();
     int nlayerCharge = this->property->getLayersCharge();
+
+    delete[] this->atomNum;
 
     delete[] this->nbatch;
 
@@ -91,21 +98,6 @@ NNArch::~NNArch()
     if (this->energyGrad != NULL)
     {
         delete[] this->energyGrad;
-    }
-
-    if (this->forceData != NULL)
-    {
-        for (iatom = 0; iatom < natom; ++iatom)
-        {
-            nneigh = this->numNeighbor[iatom] + 1;
-
-            for (ineigh = 0; ineigh < nneigh; ++ineigh)
-            {
-                delete[] this->forceData[iatom][ineigh];
-            }
-
-            delete[] this->forceData[iatom];
-        }
     }
 
     if (this->chargeData != NULL)
@@ -164,12 +156,9 @@ NNArch::~NNArch()
         }
         delete[] this->lastLayersCharge;
     }
-
-    delete[] this->indexElem;
-    delete[] this->numNeighbor;
 }
 
-void NNArch::restoreNN(FILE* fp, int numElement, char** elementNames, int rank, MPI_Comm world)
+void NNArch::restoreNN(const FILE* fp, int numElems, const char** elemNames, int rank, MPI_Comm world)
 {
     int  symmFunc = this->property->getSymmFunc();
     int  m2 = this->property->getM2();
@@ -189,17 +178,17 @@ void NNArch::restoreNN(FILE* fp, int numElement, char** elementNames, int rank, 
     int ilayer;
     int nlayerEnergy = property->getLayersEnergy();
     int nlayerCharge = property->getLayersCharge();
-    int nnodeEnergy = property->getNodesEnergy();
-    int nnodeCharge = property->getNodesCharge();
-    int activEnergy = property->getActivEnergy();
-    int activCharge = property->getActivCharge();
-    int withCharge = property->getWithCharge();
+    int nnodeEnergy  = property->getNodesEnergy();
+    int nnodeCharge  = property->getNodesCharge();
+    int activEnergy  = property->getActivEnergy();
+    int activCharge  = property->getActivCharge();
+    int withCharge   = property->getWithCharge();
 
     int ielem,  jelem;
     int kelem,  lelem;
     int kelem_, lelem_;
     int nelemOld;
-    int nelemNew = numElement;
+    int nelemNew = numElems;
 
     const int lenElemName = 32;
     char** elemNamesOld;
@@ -209,6 +198,7 @@ void NNArch::restoreNN(FILE* fp, int numElement, char** elementNames, int rank, 
 
     real* symmAveOld;
     real* symmDevOld;
+    int*  atomNumOld;
 
     int* mapSymmFunc;
 
@@ -216,15 +206,33 @@ void NNArch::restoreNN(FILE* fp, int numElement, char** elementNames, int rank, 
 
     int ierr;
 
+    const int lenLine = 256;
+    char line[lenLine];
+
     // read number of elements
     ierr = 0;
-    if (rank == 0 && fscanf(fp, "%d", &nelemOld) == EOF)
+    if (rank == 0)
     {
-        ierr = 0;
+        if (fgets(line, lenLine, fp) == NULL)
+        {
+            ierr = 1;
+        }
+
+        if (ierr == 0)
+        {
+            if (sscanf(line, "%d", &nelemOld) != 1)
+            {
+                ierr = 1;
+            }
+            else (nelemOld < 1)
+            {
+                ierr = 1;
+            }
+        }
     }
 
     MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
-    if (ierr != 0) stop_by_error("cannot peek ffield file, at nelem");
+    if (ierr != 0) stop_by_error("cannot read ffield file, at nelem");
 
     MPI_Bcast(&nelemOld, 1, MPI_INT, 0, world);
 
@@ -234,42 +242,63 @@ void NNArch::restoreNN(FILE* fp, int numElement, char** elementNames, int rank, 
 
     symmAveOld = new real[nelemOld];
     symmDevOld = new real[nelemOld];
+    atomNumOld = new int [nelemOld];
 
     for (ielem = 0; ielem < nelemOld; ++ielem)
     {
         elemNamesOld[ielem] = new char[lenElemName];
         symmAveOld  [ielem] = ZERO;
         symmDevOld  [ielem] = -ONE;
+        atomNumOld  [ielem] = 0;
 
         ierr = 0;
         if (rank == 0)
         {
-            if (fscanf(fp, IFORM_S1_F2, elemNamesOld[ielem], &symmAveOld[ielem], &symmDevOld[ielem]) == EOF)
+            if (fgets(line, lenLine, fp) == NULL)
             {
                 ierr = 1;
+            }
+
+            if (ierr == 0)
+            {
+                if (sscanf(line, IFORM_S1_F2_D1, elemNamesOld[ielem], &symmAveOld[ielem],
+                                                  &symmDevOld[ielem], &atomNumOld[ielem]) != 4)
+                {
+                    if (sscanf(line, IFORM_S1_F2, elemNamesOld[ielem], &symmAveOld[ielem],
+                                                   &symmDevOld[ielem]) != 3)
+                    {
+                        ierr = 1;
+                    }
+                    else
+                    {
+                        atomNumOld[ielem] = 0;
+                    }
+                }
+            }
+
+            if (ierr == 0)
+            {
+                if (symmDevOld[ielem] <= ZERO)
+                {
+                	ierr = 1;
+                }
+
+                if (this->elemWeight && atomNumOld[ielem] < 1)
+                {
+                	ierr = 1;
+                }
             }
         }
 
         MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
-        if (ierr != 0) stop_by_error("cannot peek ffield file.");
-
-        ierr = 0;
-        if (rank == 0)
-        {
-            if (symmDevOld[ielem] <= ZERO)
-            {
-                ierr = 1;
-            }
-        }
-
-        MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
-        if (ierr != 0) stop_by_error("deviation of symmetry functions is not positive.");
+        if (ierr != 0) stop_by_error("cannot read ffield file, at element.");
 
         MPI_Bcast(elemNamesOld[ielem], lenElemName, MPI_CHAR, 0, world);
     }
 
-    MPI_Bcast(&symmAveOld[0], nelemOld, MPI_REAL0, 0, world);
-    MPI_Bcast(&symmDevOld[0], nelemOld, MPI_REAL0, 0, world);
+    MPI_Bcast(&symmAveOld[0], nelemOld, MPI_REAL0,   0, world);
+    MPI_Bcast(&symmDevOld[0], nelemOld, MPI_REAL0,   0, world);
+    MPI_Bcast(&atomNumOld[0], nelemOld, MPI_INTEGER, 0, world);
 
     for (ielem = 0; ielem < nelemNew; ++ielem)
     {
@@ -318,16 +347,81 @@ void NNArch::restoreNN(FILE* fp, int numElement, char** elementNames, int rank, 
     }
 
     // set symmetry function's properties
+    if (this->elemWeight)
+    {
+        this->symmAve[0] = symmAveOld[0];
+        this->symmDev[0] = symmDevOld[0];
+
+        for (ielem = 0; ielem < nelemOld; ++ielem)
+        {
+            kelem = mapElem[ielem];
+            if (kelem >= 0)
+            {
+                this->atomNum[kelem] = atomNumOld[ielem];
+            }
+        }
+    }
+
+    else
+    {
+        for (ielem = 0; ielem < nelemOld; ++ielem)
+        {
+            kelem = mapElem[ielem];
+            if (kelem >= 0)
+            {
+                this->symmAve[kelem] = symmAveOld[ielem];
+                this->symmDev[kelem] = symmDevOld[ielem];
+                this->atomNum[kelem] = atomNumOld[ielem];
+            }
+        }
+    }
+
+    // release memory
     for (ielem = 0; ielem < nelemOld; ++ielem)
     {
-        kelem = mapElem[ielem];
-        if (kelem < 0)
+        delete[] elemNamesOld[ielem];
+    }
+
+    for (ielem = 0; ielem < nelemNew; ++ielem)
+    {
+        delete[] elemNamesNew[ielem];
+    }
+
+    delete[] elemNamesOld;
+    delete[] elemNamesNew;
+
+    delete[] symmAveOld;
+    delete[] symmDevOld;
+    delete[] atomNumOld;
+
+    // in case of element-weighted
+    if (this->elemWeight)
+    {
+        // read NN Energy
+        if (interLayersEnergy != NULL && lastLayersEnergy != NULL)
         {
-            continue;
+            for (ilayer = 0; ilayer < nlayerEnergy; ++ilayer)
+            {
+                interLayersEnergy[0][ilayer]->scanWeight(fp, rank, world);
+            }
+
+            lastLayersEnergy[0]->scanWeight(fp, rank, world);
         }
 
-        symmAve[kelem] = symmAveOld[ielem];
-        symmDev[kelem] = symmDevOld[ielem];
+        // read NN Charge
+        if (withCharge != 0 && interLayersCharge != nullptr && lastLayersCharge != nullptr)
+        {
+            for (ilayer = 0; ilayer < nlayerCharge; ++ilayer)
+            {
+                interLayersCharge[0][ilayer]->scanWeight(fp, rank, world);
+            }
+
+            lastLayersCharge[0]->scanWeight(fp, rank, world);
+        }
+
+        delete[] mapElem;
+
+        return;
     }
 
     // map of symmetry functions
@@ -415,10 +509,12 @@ void NNArch::restoreNN(FILE* fp, int numElement, char** elementNames, int rank, 
         }
     }
 
-    else //if (symmFunc == SYMM_FUNC_BEHLER)
+    else //if (symmFunc == SYMM_FUNC_BEHLER || symmFunc == SYMM_FUNC_CHEBYSHEV)
     {
+        int mang = symmFunc == SYMM_FUNC_BEHLER ? (nang * 2) : nang;
+
         ibase = 0;
-        nbase = nrad * nelemOld + nang * 2 * nelemOld * (nelemOld + 1) / 2;
+        nbase = nrad * nelemOld + mang * nelemOld * (nelemOld + 1) / 2;
 
         mapSymmFunc = new int[nbase];
 
@@ -456,7 +552,7 @@ void NNArch::restoreNN(FILE* fp, int numElement, char** elementNames, int rank, 
 
                 if (lelem < 0 || kelem < 0)
                 {
-                    for (iang = 0; iang < (nang * 2); ++iang)
+                    for (iang = 0; iang < mang; ++iang)
                     {
                         mapSymmFunc[ibase] = -1;
                         ibase++;
@@ -468,9 +564,9 @@ void NNArch::restoreNN(FILE* fp, int numElement, char** elementNames, int rank, 
                     lelem_ = max(kelem, lelem);
                     kelem_ = min(kelem, lelem);
 
-                    jbase = nrad * nelemNew + nang * 2 * (kelem_ + lelem_ * (lelem_ + 1) / 2);
+                    jbase = nrad * nelemNew + mang * (kelem_ + lelem_ * (lelem_ + 1) / 2);
 
-                    for (iang = 0; iang < (nang * 2); ++iang)
+                    for (iang = 0; iang < mang; ++iang)
                     {
                         mapSymmFunc[ibase] = iang + jbase;
                         ibase++;
@@ -572,34 +668,27 @@ void NNArch::restoreNN(FILE* fp, int numElement, char** elementNames, int rank, 
         }
     }
 
-    // release memory
-    for (ielem = 0; ielem < nelemOld; ++ielem)
-    {
-        delete[] elemNamesOld[ielem];
-    }
-
-    for (ielem = 0; ielem < nelemNew; ++ielem)
-    {
-        delete[] elemNamesNew[ielem];
-    }
-
-    delete[] elemNamesOld;
-    delete[] elemNamesNew;
-
     delete[] mapElem;
-
-    delete[] symmAveOld;
-    delete[] symmDevOld;
-
     delete[] mapSymmFunc;
 }
 
-void NNArch::initGeometry(int inum, int* ilist, int* type, int* typeMap, int* numNeighbor)
+void NNArch::initGeometry(int numAtoms, const int* elements,
+                          const int* numNeighbor, const int** elemNeighbor, const real*** posNeighbor)
 {
-    this->numAtoms = inum;
+
+    this->numAtoms = numAtoms;
+    if (this->numAtoms < 1)
+    {
+        stop_by_error("#atoms is not positive.");
+    }
+
+    if (elements == NULL || numNeighbor == NULL || elemNeighbor == NULL || posNeighbor == NULL)
+    {
+        stop_by_error("geometric data is null.");
+    }
 
     int iatom;
-    int natom = inum;
+    int natom = this->numAtoms;
 
     int ielem;
     int nelem = this->numElems;
@@ -612,15 +701,10 @@ void NNArch::initGeometry(int inum, int* ilist, int* type, int* typeMap, int* nu
 
     int jbatch;
 
-    // allocate memory
-    this->indexElem = new int[natom];
-    this->numNeighbor = new int[natom];
-
-    // generate indexElem
-    for (iatom = 0; iatom < natom; ++iatom)
-    {
-        this->indexElem[iatom] = typeMap[type[ilist[iatom]]] - 1;
-    }
+    this->elements     = elements;
+    this->numNeighbor  = numNeighbor;
+    this->elemNeighbor = elemNeighbor;
+    this->posNeighbor  = posNeighbor;
 
     // count size of batch
     for (ielem = 0; ielem < nelem; ++ielem)
@@ -632,7 +716,7 @@ void NNArch::initGeometry(int inum, int* ilist, int* type, int* typeMap, int* nu
 
     for (iatom = 0; iatom < natom; ++iatom)
     {
-        ielem = this->indexElem[iatom];
+        ielem = this->elemWeight ? 0 : this->elements[iatom];
         this->ibatch[iatom] = this->nbatch[ielem];
         this->nbatch[ielem]++;
     }
@@ -714,6 +798,11 @@ void NNArch::initGeometry(int inum, int* ilist, int* type, int* typeMap, int* nu
 
 void NNArch::clearGeometry()
 {
+    if (this-> numAtoms < 1)
+    {
+        stop_by_error("#atoms is not positive.");
+    }
+
     int iatom;
     int natom = this->numAtoms;
 
@@ -799,6 +888,13 @@ void NNArch::clearGeometry()
     }
 
     // initialize memory
+    this->numAtoms = 0;
+
+    this->elements     = NULL;
+    this->numNeighbor  = NULL;
+    this->elemNeighbor = NULL;
+    this->posNeighbor  = NULL;
+
     this->mbatch = 0;
     this->ibatch = NULL;
     for (ielem = 0; ielem < nelem; ++ielem)
@@ -851,21 +947,45 @@ SymmFunc* NNArch::getSymmFunc()
             real rinner = this->property->getRinner();
             real router = this->property->getRouter();
 
-            this->symmFunc = new SymmFuncManyBody(this->numElems, m2, m3, rinner, router);
+            this->symmFunc = new SymmFuncManyBody(this->numElems, false, m2, m3, rinner, router);
         }
 
         else if (this->property->getSymmFunc() == SYMM_FUNC_BEHLER)
         {
-            int  nrad = this->property->getNumRadius();
-            int  nang = this->property->getNumAngle();
-            real rcut = this->property->getRouter();
+            int  nrad    = this->property->getNumRadius();
+            int  nang    = this->property->getNumAngle();
+            real rrad    = this->property->getRcutRadius();
+            real rang    = this->property->getRcutAngle();
+            bool weight  = (this->property->getElemWeight() != 0);
+            bool tanhCut = (this->property->getTanhCutoff() != 0);
+
+            bool useG4 = (this->property->getBehlerG4() != 0);
 
             const real* eta1 = this->property->getBehlerEta1();
             const real* eta2 = this->property->getBehlerEta2();
-            const real* rs   = this->property->getBehlerRs();
+            const real* rs1  = this->property->getBehlerRs1();
+            const real* rs2  = this->property->getBehlerRs2();
             const real* zeta = this->property->getBehlerZeta();
 
-            this->symmFunc = new SymmFuncBehler(this->numElems, nrad, nang, rcut, eta1, rs, eta2, zeta);
+            SymmFuncBehler* symmFuncBehler = NULL;
+            symmFuncBehler = new SymmFuncBehler(numElemes, tanhCut, weight, nrad, nang, rrad, rang);
+
+            symmFuncBehler->setRadiusData(eta1, rs1);
+            symmFuncBehler->setAngleData(useG4, eta2, zeta, rs2);
+
+            this->symmFunc = symmFuncBehler;
+        }
+
+        else if (this->property->getSymmFunc() == SYMM_FUNC_CHEBYSHEV)
+        {
+            int  nrad    = this->property->getNumRadius();
+            int  nang    = this->property->getNumAngle();
+            real rrad    = this->property->getRcutRadius();
+            real rang    = this->property->getRcutAngle();
+            bool weight  = (this->property->getElemWeight() != 0);
+            bool tanhCut = (this->property->getTanhCutoff() != 0);
+
+            this->symmFunc = new SymmFuncChebyshev(numElemes, tanhCut, weight, nrad, nang, rrad, rang);
         }
 
         if (this->symmFunc == NULL)
@@ -883,7 +1003,7 @@ SymmFunc* NNArch::getSymmFunc()
     return this->symmFunc;
 }
 
-void NNArch::calculateSymmFuncs(int* numNeighbor, int** elemNeighbor, real*** posNeighbor)
+void NNArch::calculateSymmFuncs()
 {
     int iatom;
     int natom = this->numAtoms;
@@ -892,33 +1012,26 @@ void NNArch::calculateSymmFuncs(int* numNeighbor, int** elemNeighbor, real*** po
 
     int nbase = this->getSymmFunc()->getNumBasis();
 
-    real** symmData;
-    real** symmDiff;
-
     // allocate memory
-    symmData = new real*[natom];
-    symmDiff = new real*[natom];
+    this->symmData = new real*[natom];
+    this->symmDiff = new real*[natom];
 
     for (iatom = 0; iatom < natom; ++iatom)
     {
-        nneigh = numNeighbor[iatom] + 1;
+        nneigh = this->numNeighbor[iatom] + 1;
 
-        symmData[iatom] = new real[nbase];
-        symmDiff[iatom] = new real[nbase * 3 * nneigh];
-
-        this->numNeighbor[iatom] = numNeighbor[iatom];
+        this->symmData[iatom] = new real[nbase];
+        this->symmDiff[iatom] = new real[nbase * 3 * nneigh];
     }
 
     // calculate symmetry functions
     #pragma omp parallel for private(iatom)
     for (iatom = 0; iatom < natom; ++iatom)
     {
-        this->symmFunc->calculate(numNeighbor[iatom], posNeighbor[iatom], elemNeighbor[iatom],
-                                  symmData[iatom], symmDiff[iatom]);
+        this->symmFunc->calculate(this->numNeighbor[iatom],
+                                  this->elemNeighbor[iatom], this->posNeighbor[iatom],
+                                  this->symmData[iatom], this->symmDiff[iatom]);
     }
-
-    this->symmData = symmData;
-    this->symmDiff = symmDiff;
 }
 
 void NNArch::renormalizeSymmFuncs()
@@ -939,9 +1052,6 @@ void NNArch::renormalizeSymmFuncs()
     real ave;
     real dev;
 
-    real** symmData;
-    real** symmDiff;
-
     for (ielem = 0; ielem < nelem; ++ielem)
     {
         if (this->symmDev[ielem] <= ZERO)
@@ -950,15 +1060,15 @@ void NNArch::renormalizeSymmFuncs()
         }
     }
 
-    symmData = this->symmData;
-    symmDiff = this->symmDiff;
+    this->symmData = this->symmData;
+    this->symmDiff = this->symmDiff;
 
     #pragma omp parallel for private (iatom, ielem, ibase, \
                                       nneigh, nneigh3, ineigh, ave, dev)
     for (iatom = 0; iatom < natom; ++iatom)
     {
-        ielem = this->indexElem[iatom];
-        nneigh = this->numNeighbor[iatom] + 1;
+        ielem   = this->elemWeight ? 0 : this->elements[iatom];
+        nneigh  = this->numNeighbor[iatom] + 1;
         nneigh3 = 3 * nneigh;
 
         ave = this->symmAve[ielem];
@@ -966,15 +1076,15 @@ void NNArch::renormalizeSymmFuncs()
 
         for (ibase = 0; ibase < nbase; ++ibase)
         {
-            symmData[iatom][ibase] -= ave;
-            symmData[iatom][ibase] /= dev;
+            this->symmData[iatom][ibase] -= ave;
+            this->symmData[iatom][ibase] /= dev;
         }
 
         for (ineigh = 0; ineigh < nneigh3; ++ineigh)
         {
             for (ibase = 0; ibase < nbase; ++ibase)
             {
-                symmDiff[iatom][ibase + ineigh * nbase] /= dev;
+                this->symmDiff[iatom][ibase + ineigh * nbase] /= dev;
             }
         }
     }
@@ -1018,8 +1128,7 @@ void NNArch::initLayers()
         this->lastLayersEnergy = new NNLayer*[nelem];
         for (ielem = 0; ielem < nelem; ++ielem)
         {
-            this->lastLayersEnergy[ielem]
-            = new NNLayer(nnode, 1, ACTIVATION_ASIS);
+            this->lastLayersEnergy[ielem] = new NNLayer(nnode, 1, ACTIVATION_ASIS);
         }
     }
 
@@ -1043,8 +1152,7 @@ void NNArch::initLayers()
         this->lastLayersCharge = new NNLayer*[nelem];
         for (ielem = 0; ielem < nelem; ++ielem)
         {
-            this->lastLayersCharge[ielem]
-            = new NNLayer(nnode, 1, ACTIVATION_ASIS);
+            this->lastLayersCharge[ielem] = new NNLayer(nnode, 1, ACTIVATION_ASIS);
         }
     }
 }
@@ -1074,7 +1182,7 @@ void NNArch::goForwardOnEnergy()
     #pragma omp parallel for private(iatom, ielem, jbatch, ibase)
     for (iatom = 0; iatom < natom; ++iatom)
     {
-        ielem = this->indexElem[iatom];
+        ielem  = this->elemWeight ? 0 : this->elements[iatom];
         jbatch = this->ibatch[iatom];
 
         for (ibase = 0; ibase < nbase; ++ibase)
@@ -1196,7 +1304,7 @@ void NNArch::goBackwardOnForce()
     }
 
     #pragma omp parallel private(iatom, ielem, jbatch, ibase, \
-                             nneigh, nneigh3, ineigh, forceNeigh, symmGrad)
+                                 nneigh, nneigh3, ineigh, forceNeigh, symmGrad)
     {
         forceNeigh = new real[3 * mneigh];
         symmGrad = new real[nbase];
@@ -1204,7 +1312,7 @@ void NNArch::goBackwardOnForce()
         #pragma omp for
         for (iatom = 0; iatom < natom; ++iatom)
         {
-            ielem = this->indexElem[iatom];
+            ielem  = this->elemWeight ? 0 : this->elements[iatom];
             jbatch = this->ibatch[iatom];
 
             nneigh = this->numNeighbor[iatom] + 1;
@@ -1259,7 +1367,7 @@ void NNArch::goForwardOnCharge()
     #pragma omp parallel for private(iatom, ielem, jbatch, ibase)
     for (iatom = 0; iatom < natom; ++iatom)
     {
-        ielem = this->indexElem[iatom];
+        ielem  = this->elemWeight ? 0 : this->elements[iatom];
         jbatch = this->ibatch[iatom];
 
         for (ibase = 0; ibase < nbase; ++ibase)
@@ -1316,7 +1424,7 @@ void NNArch::obtainEnergies(real* energies) const
     #pragma omp parallel for private(iatom, ielem, jbatch)
     for (iatom = 0; iatom < natom; ++iatom)
     {
-        ielem = this->indexElem[iatom];
+        ielem  = this->elemWeight ? 0 : this->elements[iatom];
         jbatch = this->ibatch[iatom];
 
         energies[iatom] = this->energyData[ielem][jbatch];
@@ -1377,7 +1485,7 @@ void NNArch::obtainCharges(real* charges) const
     #pragma omp parallel for private(iatom, ielem, jbatch)
     for (iatom = 0; iatom < natom; ++iatom)
     {
-        ielem = this->indexElem[iatom];
+        ielem  = this->elemWeight ? 0 : this->elements[iatom];
         jbatch = this->ibatch[iatom];
 
         charges[iatom] = this->chargeData[ielem][jbatch];

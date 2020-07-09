@@ -17,7 +17,7 @@ public:
     SymmFuncManyBody(int numElems, bool elemWeight, int size2Body, int size3Body, real radiusInner, real radiusOuter);
     virtual ~SymmFuncManyBody();
 
-    void calculate(int numNeighbor, real** posNeighbor, int* elemNeighbor,
+    void calculate(int numNeighbor, const int* elemNeighbor, const real** posNeighbor,
                    real* symmData, real* symmDiff) const;
 
     int getNum2BodyBasis() const

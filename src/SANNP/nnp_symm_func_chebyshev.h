@@ -19,7 +19,8 @@ public:
 
     virtual ~SymmFuncChebyshev();
 
-    void calculate(const Geometry* geometry, int iatom, real* symmData, real* symmDiff) const;
+    void calculate(int numNeighbor, const int* elemNeighbor, const real** posNeighbor,
+                   real* symmData, real* symmDiff) const;
 
     int getNumRadBasis() const
     {
