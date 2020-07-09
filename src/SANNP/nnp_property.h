@@ -40,7 +40,20 @@ public:
             return this->router;
         }
 
-        return max(this->rcutRadius, this->rcutAngle);
+        if (this->numRadius > 0 && this->numAngle > 0)
+        {
+            return max(this->rcutRadius, this->rcutAngle);
+        }
+        else if (this->numRadius > 0)
+        {
+            return this->rcutRadius;
+        }
+        else if (this->numAngle > 0)
+        {
+            return this->rcutAngle;
+        }
+
+        return 0.0;
     }
 
     int getM2() const

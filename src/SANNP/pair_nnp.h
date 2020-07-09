@@ -50,19 +50,16 @@ protected:
     Property* property;
     NNArch* arch;
 
+    int* elements;
     real* energies;
     real*** forces;
 
     int maxinum;
     int maxnneigh;
-    int maxnneighNN;
 
+    int* numNeighbor;
+    int** elemNeighbor;
     real*** posNeighbor;
-
-    real*** posNeighborNN;
-    int* numNeighborNN;
-    int** elemNeighborNN;
-    int** indexNeighborNN;
 
     virtual void allocate();
 

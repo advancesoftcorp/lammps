@@ -34,7 +34,7 @@ void PairNNPCoulCut::compute(int eflag, int vflag)
     int** firstneigh = list->firstneigh;
 
     double r;
-    double rcut = this->property->getRouter();
+    double rcut = this->property->getRcutoff();
 
     double delx, dely, delz;
     double fx, fy, fz;
@@ -90,10 +90,10 @@ void PairNNPCoulCut::compute(int eflag, int vflag)
                 if (x[j][2] == ztmp && x[j][1] == ytmp && x[j][0] < xtmp) continue;
             }
 
-            r    = posNeighbor[ii][jj][0];
-            delx = posNeighbor[ii][jj][1];
-            dely = posNeighbor[ii][jj][2];
-            delz = posNeighbor[ii][jj][3];
+            r    = this->posNeighbor[ii][jj][0];
+            delx = this->posNeighbor[ii][jj][1];
+            dely = this->posNeighbor[ii][jj][2];
+            delz = this->posNeighbor[ii][jj][3];
 
             if (r < this->cutcoul)
             {

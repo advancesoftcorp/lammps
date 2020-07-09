@@ -127,7 +127,7 @@ void PairNNPCharge::coeff(int narg, char **arg)
 
     if (this->cutcoul <= 0.0)
     {
-        this->cutcoul = this->property->getRouter();
+        this->cutcoul = this->property->getRcutoff();
     }
 }
 
@@ -143,8 +143,8 @@ void PairNNPCharge::init_style()
 
 double PairNNPCharge::get_cutoff()
 {
-    double router = this->property->getRouter();
-    return max(this->cutcoul, router);
+    double rcut = this->property->getRcutoff();
+    return max(this->cutcoul, rcut);
 }
 
 void *PairNNPCharge::extract(const char *str, int &dim)
