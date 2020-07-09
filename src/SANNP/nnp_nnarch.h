@@ -9,6 +9,12 @@
 #define NNP_NNARCH_H_
 
 #include "nnp_common.h"
+#include "nnp_property.h"
+#include "nnp_symm_func.h"
+#include "nnp_symm_func_manybody.h"
+#include "nnp_symm_func_behler.h"
+#include "nnp_symm_func_chebyshev.h"
+#include "nnp_nnlayer.h"
 
 class NNArch
 {
