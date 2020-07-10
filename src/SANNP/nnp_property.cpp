@@ -13,6 +13,8 @@ Property::Property()
      * set default values
      */
     this->symmFunc     = SYMM_FUNC_CHEBYSHEV;
+    this->elemWeight   = 1;
+    this->tanhCutoff   = 0;
 
     this->m2           = 100;
     this->m3           = 10;
@@ -40,7 +42,6 @@ Property::Property()
     this->activCharge  = ACTIVATION_TANH;
 
     this->withCharge   = 0;
-    this->withHDNNP    = 1;
 }
 
 Property::~Property()
@@ -115,7 +116,9 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
     MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
     if (ierr != 0) stop_by_error("cannot read ffield file, at symmFunc");
 
-    MPI_Bcast(&(this->symmFunc), 1, MPI_INT, 0, world);
+    MPI_Bcast(&(this->symmFunc),   1, MPI_INT, 0, world);
+    MPI_Bcast(&(this->elemWeight), 1, MPI_INT, 0, world);
+    MPI_Bcast(&(this->tanhCutoff), 1, MPI_INT, 0, world);
 
     if (this->symmFunc == SYMM_FUNC_MANYBODY)
     {

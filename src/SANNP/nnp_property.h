@@ -199,7 +199,6 @@ private:
     int  activCharge;
 
     int  withCharge;
-    int  withHDNNP;
 };
 
 #endif /* NNP_PROPERTY_H_ */

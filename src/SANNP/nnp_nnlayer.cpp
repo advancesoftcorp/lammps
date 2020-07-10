@@ -118,7 +118,7 @@ void NNLayer::scanWeight(FILE* fp, int rank, MPI_Comm world)
     if (ierr != 0) stop_by_error("cannot scan neural network @bias");
 
     MPI_Bcast(&(this->weight[0]), nweight, MPI_REAL0, 0, world);
-    MPI_Bcast(&(this->bias[0]), nbias, MPI_REAL0, 0, world);
+    MPI_Bcast(&(this->bias[0]),   nbias,   MPI_REAL0, 0, world);
 }
 
 void NNLayer::projectWeightFrom(NNLayer* src, int* mapInpNodes)
