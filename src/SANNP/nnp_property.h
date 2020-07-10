@@ -161,11 +161,6 @@ public:
         return this->withCharge;
     }
 
-    int getWithHDNNP() const
-    {
-        return this->withHDNNP;
-    }
-
 private:
     // about symmetry functions
     int symmFunc;
