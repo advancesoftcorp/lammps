@@ -170,7 +170,7 @@ bool PairNNP::prepareNN()
         else
         {
             itype = this->typeMap[type[i]];
-            this->elements[iatom] = this->arch->getAtomNum(itype);
+            this->elements[iatom] = this->arch->getAtomNum(itype - 1);
 
             for (ineigh = 0; ineigh < nneigh; ++ineigh)
             {
@@ -178,7 +178,7 @@ bool PairNNP::prepareNN()
                 j &= NEIGHMASK;
 
                 jtype = this->typeMap[type[j]];
-                this->elemNeighbor[iatom][ineigh] = this->arch->getAtomNum(jtype);
+                this->elemNeighbor[iatom][ineigh] = this->arch->getAtomNum(jtype - 1);
             }
         }
 
