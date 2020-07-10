@@ -1060,9 +1060,6 @@ void NNArch::renormalizeSymmFuncs()
         }
     }
 
-    this->symmData = this->symmData;
-    this->symmDiff = this->symmDiff;
-
     #pragma omp parallel for private (iatom, ielem, ibase, \
                                       nneigh, nneigh3, ineigh, ave, dev)
     for (iatom = 0; iatom < natom; ++iatom)
