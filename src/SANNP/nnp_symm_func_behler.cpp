@@ -272,7 +272,7 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, real** posNei
         dfc2dy2 = y2 / r2 * dfc2dr2;
         dfc2dz2 = z2 / r2 * dfc2dr2;
 
-        for (ineigh1 = 0; ineigh1 < numNeighbor; ++ineigh1)
+        for (ineigh1 = 0; ineigh1 < mneigh; ++ineigh1)
         {
             r1 = posNeighbor[ineigh1][0];
             if (r1 >= this->rcutAng)
