@@ -201,8 +201,11 @@ bool PairNNP::prepareNN()
         }
     }
 
-    this->arch->initGeometry(inum, this->elements,
-                             this->numNeighbor, this->elemNeighbor, this->posNeighbor);
+    if (inum > 0)
+    {
+        this->arch->initGeometry(inum, this->elements,
+                                 this->numNeighbor, this->elemNeighbor, this->posNeighbor);
+    }
 
     return hasGrown;
 }
@@ -226,15 +229,18 @@ void PairNNP::performNN(int eflag)
 
     double evdwl = 0.0;
 
-    this->arch->calculateSymmFuncs();
+    if (inum > 0)
+    {
+        this->arch->calculateSymmFuncs();
 
-    this->arch->renormalizeSymmFuncs();
+        this->arch->renormalizeSymmFuncs();
 
-    this->arch->goForwardOnEnergy();
-    this->arch->obtainEnergies(energies);
+        this->arch->goForwardOnEnergy();
+        this->arch->obtainEnergies(energies);
 
-    this->arch->goBackwardOnForce();
-    this->arch->obtainForces(forces);
+        this->arch->goBackwardOnForce();
+        this->arch->obtainForces(forces);
+    }
 
     for (iatom = 0; iatom < inum; ++iatom)
     {
@@ -285,7 +291,12 @@ void PairNNP::performNN(int eflag)
 
 void PairNNP::clearNN()
 {
-    this->arch->clearGeometry();
+    int inum = list->inum;
+
+    if (inum > 0)
+    {
+        this->arch->clearGeometry();
+    }
 }
 
 void PairNNP::settings(int narg, char **arg)

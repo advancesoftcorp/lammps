@@ -67,8 +67,11 @@ void PairNNPCharge::performNN(int eflag)
         return;
     }
 
-    this->arch->goForwardOnCharge();
-    this->arch->obtainCharges(charges);
+    if (inum > 0)
+    {
+        this->arch->goForwardOnCharge();
+        this->arch->obtainCharges(charges);
+    }
 
     #pragma omp parallel for private(iatom, i)
     for (iatom = 0; iatom < inum; ++iatom)
