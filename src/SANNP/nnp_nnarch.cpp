@@ -296,9 +296,9 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, int rank, MPI_C
         MPI_Bcast(elemNamesOld[ielem], lenElemName, MPI_CHAR, 0, world);
     }
 
-    MPI_Bcast(&symmAveOld[0], nelemOld, MPI_REAL0,   0, world);
-    MPI_Bcast(&symmDevOld[0], nelemOld, MPI_REAL0,   0, world);
-    MPI_Bcast(&atomNumOld[0], nelemOld, MPI_INT,     0, world);
+    MPI_Bcast(&symmAveOld[0], nelemOld, MPI_REAL0, 0, world);
+    MPI_Bcast(&symmDevOld[0], nelemOld, MPI_REAL0, 0, world);
+    MPI_Bcast(&atomNumOld[0], nelemOld, MPI_INT,   0, world);
 
     for (ielem = 0; ielem < nelemNew; ++ielem)
     {
