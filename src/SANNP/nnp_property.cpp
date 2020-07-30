@@ -12,19 +12,19 @@ Property::Property()
     /*
      * set default values
      */
-    this->symmFunc     = SYMM_FUNC_CHEBYSHEV;
-    this->elemWeight   = 1;
+    this->symmFunc     = SYMM_FUNC_NULL;
+    this->elemWeight   = 0;
     this->tanhCutoff   = 0;
 
-    this->m2           = 100;
-    this->m3           = 10;
-    this->rinner       = REAL(0.0);  // Angs
-    this->router       = REAL(8.0);  // Angs
+    this->m2           = 0;
+    this->m3           = 0;
+    this->rinner       = ZERO;
+    this->router       = ZERO;
 
-    this->numRadius    = 20;
-    this->numAngle     = 20;
-    this->rcutRadius   = REAL(8.0);
-    this->rcutAngle    = REAL(8.0);
+    this->numRadius    = 0;
+    this->numAngle     = 0;
+    this->rcutRadius   = ZERO;
+    this->rcutAngle    = ZERO;
 
     this->behlerG4     = 0;
     this->behlerEta1   = NULL;
@@ -33,13 +33,13 @@ Property::Property()
     this->behlerRs2    = NULL;
     this->behlerZeta   = NULL;
 
-    this->layersEnergy = 2;
-    this->nodesEnergy  = 15;
-    this->activEnergy  = ACTIVATION_TANH;
+    this->layersEnergy = 0;
+    this->nodesEnergy  = 0;
+    this->activEnergy  = ACTIVATION_NULL;
 
-    this->layersCharge = 2;
-    this->nodesCharge  = 15;
-    this->activCharge  = ACTIVATION_TANH;
+    this->layersCharge = 0;
+    this->nodesCharge  = 0;
+    this->activCharge  = ACTIVATION_NULL;
 
     this->withCharge   = 0;
 }

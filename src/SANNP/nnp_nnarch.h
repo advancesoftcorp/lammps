@@ -54,10 +54,8 @@ public:
 
 private:
     int mode;
-
-    bool elemWeight;
-    int  numElems;
-    int  numAtoms;
+    int numElems;
+    int numAtoms;
 
     const Property* property;
 
