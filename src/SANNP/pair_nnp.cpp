@@ -123,7 +123,7 @@ bool PairNNP::prepareNN()
 
         memory->grow(this->elements,    this->maxinum, "pair:elements");
         memory->grow(this->energies,    this->maxinum, "pair:energies");
-        memory->grow(this->numNeighbor, this->maxinum, "pair:numNeighborNN");
+        memory->grow(this->numNeighbor, this->maxinum, "pair:numNeighbor");
     }
 
     if (hasGrown || nneigh > this->maxnneigh)
