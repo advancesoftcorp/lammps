@@ -153,11 +153,11 @@ bool PairNNP::prepareNN()
 
         this->numNeighbor[iatom] = nneigh;
 
+        itype = this->typeMap[type[i]];
+        this->elements[iatom] = itype - 1;
+
         if (this->property->getElemWeight() == 0)
         {
-            itype = this->typeMap[type[i]];
-            this->elements[iatom] = itype - 1;
-
             for (ineigh = 0; ineigh < nneigh; ++ineigh)
             {
                 j = firstneigh[i][ineigh];
@@ -169,9 +169,6 @@ bool PairNNP::prepareNN()
         }
         else
         {
-            itype = this->typeMap[type[i]];
-            this->elements[iatom] = this->arch->getAtomNum(itype - 1);
-
             for (ineigh = 0; ineigh < nneigh; ++ineigh)
             {
                 j = firstneigh[i][ineigh];
