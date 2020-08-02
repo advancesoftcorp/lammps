@@ -63,7 +63,7 @@ void PairNNP::allocate()
     memory->create(cutsq,   ntypes + 1, ntypes + 1, "pair:cutsq");
     memory->create(setflag, ntypes + 1, ntypes + 1, "pair:setflag");
 
-    memory->create(this->elements, this->maxinum,                         "pair:energies");
+    memory->create(this->elements, this->maxinum,                         "pair:elements");
     memory->create(this->energies, this->maxinum,                         "pair:energies");
     memory->create(this->forces,   this->maxinum, this->maxnneigh + 1, 3, "pair:forces");
 
