@@ -376,6 +376,9 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, int rank, MPI_C
     // map of symmetry functions
     if (this->property->getElemWeight() != 0)
     {
+        int mang = symmFunc == SYMM_FUNC_BEHLER ? (nang * 2) : nang;
+        nbase = nrad + mang;
+
         mapSymmFunc = NULL;
     }
 
