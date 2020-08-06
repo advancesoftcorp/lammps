@@ -290,11 +290,13 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, real** posNei
             {
                 jelem1 = 0;
                 zanum1 = (real) elemNeighbor[ineigh1];
+                zscale = sqrt(zanum1 * zanum2);
             }
             else
             {
                 jelem1 = elemNeighbor[ineigh1];
                 zanum1 = ONE;
+                zscale = ONE;
 
                 if (jelem1 > jelem2 || (jelem1 == jelem2 && ineigh1 >= ineigh2))
                 {
@@ -303,7 +305,6 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, real** posNei
             }
 
             kbase  = (jelem1 + jelem2 * (jelem2 + 1) / 2) * 2 * this->sizeAng;
-            zscale = zanum1 * zanum2;
 
             this->cutoffFunction(&fc1, &dfc1dr1, r1, this->rcutAng);
             dfc1dx1 = x1 / r1 * dfc1dr1;
