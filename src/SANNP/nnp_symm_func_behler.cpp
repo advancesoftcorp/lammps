@@ -189,8 +189,8 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, real** posNei
         jbase  = jelem1 * this->sizeRad;
         zscale = zanum1;
 
-        fc1    = posNeighbor[ineigh1][4];
-        dfc1dr = posNeighbor[ineigh1][5];
+        fc1     = posNeighbor[ineigh1][4];
+        dfc1dr1 = posNeighbor[ineigh1][5];
         dfc1dx1 = x1 / r1 * dfc1dr1;
         dfc1dy1 = y1 / r1 * dfc1dr1;
         dfc1dz1 = z1 / r1 * dfc1dr1;
@@ -268,8 +268,8 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, real** posNei
             mneigh = numNeighbor;
         }
 
-        fc2    = posNeighbor[ineigh2][6];
-        dfc2dr = posNeighbor[ineigh2][7];
+        fc2     = posNeighbor[ineigh2][6];
+        dfc2dr2 = posNeighbor[ineigh2][7];
         dfc2dx2 = x2 / r2 * dfc2dr2;
         dfc2dy2 = y2 / r2 * dfc2dr2;
         dfc2dz2 = z2 / r2 * dfc2dr2;
@@ -308,8 +308,8 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, real** posNei
 
             kbase  = (jelem1 + jelem2 * (jelem2 + 1) / 2) * 2 * this->sizeAng;
 
-            fc1    = posNeighbor[ineigh1][6];
-            dfc1dr = posNeighbor[ineigh1][7];
+            fc1     = posNeighbor[ineigh1][6];
+            dfc1dr1 = posNeighbor[ineigh1][7];
             dfc1dx1 = x1 / r1 * dfc1dr1;
             dfc1dy1 = y1 / r1 * dfc1dr1;
             dfc1dz1 = z1 / r1 * dfc1dr1;
