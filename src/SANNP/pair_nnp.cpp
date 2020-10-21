@@ -61,18 +61,7 @@ void PairNNP::allocate()
 
     const int ntypes = atom->ntypes;
 
-    const int cutoffMode = this->property->getCutoffMode();
-
-    int posDim = 4;
-
-    if (cutoffMode == CUTOFF_MODE_SINGLE)
-    {
-        posDim = 6;
-    }
-    else if (cutoffMode == CUTOFF_MODE_DOUBLE || cutoffMode == CUTOFF_MODE_IPSO)
-    {
-        posDim = 8;
-    }
+    const int dim = this->dimensionPosNeighbor();
 
     memory->create(cutsq,   ntypes + 1, ntypes + 1, "pair:cutsq");
     memory->create(setflag, ntypes + 1, ntypes + 1, "pair:setflag");
@@ -81,9 +70,9 @@ void PairNNP::allocate()
     memory->create(this->energies, this->maxinum,                         "pair:energies");
     memory->create(this->forces,   this->maxinum, this->maxnneigh + 1, 3, "pair:forces");
 
-    memory->create(this->numNeighbor,  this->maxinum,                          "pair:numNeighbor");
-    memory->create(this->elemNeighbor, this->maxinum, this->maxnneigh,         "pair:elemNeighbor");
-    memory->create(this->posNeighbor,  this->maxinum, this->maxnneigh, posDim, "pair:posNeighbor");
+    memory->create(this->numNeighbor,  this->maxinum,                       "pair:numNeighbor");
+    memory->create(this->elemNeighbor, this->maxinum, this->maxnneigh,      "pair:elemNeighbor");
+    memory->create(this->posNeighbor,  this->maxinum, this->maxnneigh, dim, "pair:posNeighbor");
 }
 
 void PairNNP::compute(int eflag, int vflag)
@@ -154,20 +143,11 @@ bool PairNNP::prepareNN()
             this->maxnneigh = nneigh + this->maxnneigh / 2;
         }
 
-        int posDim = 4;
+        const int dim = this->dimensionPosNeighbor();
 
-        if (cutoffMode == CUTOFF_MODE_SINGLE)
-        {
-            posDim = 6;
-        }
-        else if (cutoffMode == CUTOFF_MODE_DOUBLE || cutoffMode == CUTOFF_MODE_IPSO)
-        {
-            posDim = 8;
-        }
-
-        memory->grow(this->forces,       this->maxinum, this->maxnneigh + 1, 3,  "pair:forces");
-        memory->grow(this->elemNeighbor, this->maxinum, this->maxnneigh,         "pair:elemNighbor");
-        memory->grow(this->posNeighbor,  this->maxinum, this->maxnneigh, posDim, "pair:posNighbor");
+        memory->grow(this->forces,       this->maxinum, this->maxnneigh + 1, 3, "pair:forces");
+        memory->grow(this->elemNeighbor, this->maxinum, this->maxnneigh,        "pair:elemNighbor");
+        memory->grow(this->posNeighbor,  this->maxinum, this->maxnneigh,   dim, "pair:posNighbor");
     }
 
     // generate numNeighbor, elemNeighbor, posNeighbor
@@ -560,5 +540,27 @@ void PairNNP::init_style()
 double PairNNP::get_cutoff()
 {
     return this->property->getRcutoff();
+}
+
+int PariNNP::dimensionPosNeighbor()
+{
+    const int cutoffMode = this->property->getCutoffMode();
+
+    int dim;
+
+    if (cutoffMode == CUTOFF_MODE_SINGLE)
+    {
+        dim = 6;
+    }
+    else if (cutoffMode == CUTOFF_MODE_DOUBLE || cutoffMode == CUTOFF_MODE_IPSO)
+    {
+        dim = 8;
+    }
+    else
+    {
+        dim = 4;
+    }
+
+    return dim;
 }
 

@@ -70,6 +70,9 @@ protected:
     void clearNN();
 
     virtual double get_cutoff();
+
+private:
+    int dimensionPosNeighbor();
 };
 
 }  // namespace LAMMPS_NS
