@@ -87,10 +87,10 @@ int xgemv_(const char* trans, const int* m, const int* n,
 #define ACTIVATION_ELU       4
 
 // SymmFunc
-#define CUTOFF_MODE_NULL    0
-#define CUTOFF_MODE_SINGLE  1
-#define CUTOFF_MODE_DOUBLE  2
-#define CUTOFF_MODE_IPSO    3
+#define CUTOFF_MODE_NULL     0
+#define CUTOFF_MODE_SINGLE   1
+#define CUTOFF_MODE_DOUBLE   2
+#define CUTOFF_MODE_IPSO     3
 
 // NNArch
 #define NNARCH_MODE_BOTH     0
