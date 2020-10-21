@@ -321,29 +321,23 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
 
     if (this->symmFunc == SYMM_FUNC_BEHLER || this->symmFunc == SYMM_FUNC_CHEBYSHEV)
     {
-        real rcut1 = this->rcutRadius;
-        real rcut2 = this->numAngle < 1 ? -ONE : this->rcutAngle;
-
-        if (rcut1 > ZERO && rcut2 <= ZERO)
+        if (this->numAngle < 1)
         {
-            cutoffMode = CUTOFF_MODE_SINGLE;
+            this->cutoffMode = CUTOFF_MODE_SINGLE;
         }
-
-        else if (rcut1 > ZERO && rcut2 > ZERO)
+        else
         {
+            real rcut1 = this->rcutRadius;
+            real rcut2 = this->rcutAngle;
+
             if (fabs(rcut1 - rcut2) > REAL(1.0e-4))
             {
-                cutoffMode = CUTOFF_MODE_DOUBLE;
+                this->cutoffMode = CUTOFF_MODE_DOUBLE;
             }
             else
             {
-                cutoffMode = CUTOFF_MODE_IPSO;
+                this->cutoffMode = CUTOFF_MODE_IPSO;
             }
-        }
-
-        else
-        {
-            cutoffMode = CUTOFF_MODE_NULL;
         }
     }
 
