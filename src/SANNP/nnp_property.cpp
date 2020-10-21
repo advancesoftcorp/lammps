@@ -319,6 +319,41 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
         stop_by_error("cannot read ffield file, at symmFunc (unknown type)");
     }
 
+    if (this->symmFunc == SYMM_FUNC_BEHLER || this->symmFunc == SYMM_FUNC_CHEBYSHEV)
+    {
+        real rcut1 = this->rcutRadius;
+        real rcut2 = this->numAngle < 1 ? -ONE : this->rcutAngle;
+
+        if (rcut1 > ZERO && rcut2 <= ZERO)
+        {
+            cutoffMode = CUTOFF_MODE_SINGLE;
+        }
+
+        else if (rcut1 > ZERO && rcut2 > ZERO)
+        {
+            if (fabs(rcut1 - rcut2) > REAL(1.0e-4))
+            {
+                cutoffMode = CUTOFF_MODE_DOUBLE;
+            }
+            else
+            {
+                cutoffMode = CUTOFF_MODE_IPSO;
+            }
+        }
+
+        else
+        {
+            cutoffMode = CUTOFF_MODE_NULL;
+        }
+    }
+
+    else
+    {
+        this->cutoffMode = CUTOFF_MODE_NULL;
+    }
+
+    MPI_Bcast(&(this->cutoffMode), 1, MPI_INT, 0, world);
+
     ierr = 0;
     if (rank == 0)
     {

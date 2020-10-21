@@ -122,13 +122,14 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, real** pos
     real zanum1, zanum2;
     real zscale;
 
-    real s;
-    real t0, dt0ds;
-    real t1, dt1ds;
-    real t2, dt2ds;
-
     real cos0, sin0;
     real coef0, coef1, coef2, coef3;
+
+    const int ncheby = max(2, max(this->sizeRad, this->sizeAng));
+
+    real scheby;
+    real tcheby[ncheby];
+    real dcheby[ncheby];
 
     // initialize symmetry functions
     for (ibase = 0; ibase < this->numBasis; ++ibase)
@@ -178,43 +179,21 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, real** pos
         jbase  = jelem1 * this->sizeRad;
         zscale = zanum1;
 
-        this->cutoffFunction(&fc1, &dfc1dr1, r1, this->rcutRad);
+        fc1     = posNeighbor[ineigh1][4];
+        dfc1dr1 = posNeighbor[ineigh1][5];
         dfc1dx1 = x1 / r1 * dfc1dr1;
         dfc1dy1 = y1 / r1 * dfc1dr1;
         dfc1dz1 = z1 / r1 * dfc1dr1;
 
-        s     = REAL(2.0) * r1 / this->rcutRad - ONE;
-        coef0 = REAL(2.0) / this->rcutRad / r1;
-        t0    = ONE;
-        dt0ds = ZERO;
-        t1    = s;
-        dt1ds = ONE;
+        scheby = REAL(2.0) * r1 / this->rcutRad - ONE;
+        coef0  = REAL(2.0) / this->rcutRad / r1;
+        this->chebyshevFunction(tcheby, dcheby, scheby, this->sizeRad);
 
+        #pragma simd
         for (imode = 0; imode < this->sizeRad; ++imode)
         {
-            if (imode == 0)
-            {
-                t2    = t0;
-                dt2ds = dt0ds;
-            }
-            else if (imode == 1)
-            {
-                t2    = t1;
-                dt2ds = dt1ds;
-            }
-            else
-            {
-                t2    = REAL(2.0) * s * t1 - t0;
-                dt2ds = REAL(2.0) * (s * dt1ds + t1) - dt0ds;
-
-                t0    = t1;
-                dt0ds = dt1ds;
-                t1    = t2;
-                dt1ds = dt2ds;
-            }
-
-            phi     = t2;
-            coef1   = dt2ds * coef0;
+            phi     = tcheby[imode];
+            coef1   = dcheby[imode] * coef0;
             dphidx1 = x1 * coef1;
             dphidy1 = y1 * coef1;
             dphidz1 = z1 * coef1;
@@ -271,7 +250,8 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, real** pos
             mneigh = numNeighbor;
         }
 
-        this->cutoffFunction(&fc2, &dfc2dr2, r2, this->rcutAng);
+        fc2     = posNeighbor[ineigh2][6];
+        dfc2dr2 = posNeighbor[ineigh2][7];
         dfc2dx2 = x2 / r2 * dfc2dr2;
         dfc2dy2 = y2 / r2 * dfc2dr2;
         dfc2dz2 = z2 / r2 * dfc2dr2;
@@ -308,9 +288,10 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, real** pos
                 }
             }
 
-            jbase  = (jelem1 + jelem2 * (jelem2 + 1) / 2) * this->sizeAng;
+            jbase = (jelem1 + jelem2 * (jelem2 + 1) / 2) * this->sizeAng;
 
-            this->cutoffFunction(&fc1, &dfc1dr1, r1, this->rcutAng);
+            fc1     = posNeighbor[ineigh1][6];
+            dfc1dr1 = posNeighbor[ineigh1][7];
             dfc1dx1 = x1 / r1 * dfc1dr1;
             dfc1dy1 = y1 / r1 * dfc1dr1;
             dfc1dz1 = z1 / r1 * dfc1dr1;
@@ -341,38 +322,15 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, real** pos
             dthtdy2 = (coef0 * y1 - coef2 * y2) * coef3;
             dthtdz2 = (coef0 * z1 - coef2 * z2) * coef3;
 
-            s     = REAL(2.0) * tht / PI - ONE;
-            coef0 = REAL(2.0) / PI;
-            t0    = ONE;
-            dt0ds = ZERO;
-            t1    = s;
-            dt1ds = ONE;
+            scheby = REAL(2.0) * tht / PI - ONE;
+            coef0  = REAL(2.0) / PI;
+            this->chebyshevFunction(tcheby, dcheby, scheby, this->sizeAng);
 
+            #pragma simd
             for (imode = 0; imode < this->sizeAng; ++imode)
             {
-                if (imode == 0)
-                {
-                    t2    = t0;
-                    dt2ds = dt0ds;
-                }
-                else if (imode == 1)
-                {
-                    t2    = t1;
-                    dt2ds = dt1ds;
-                }
-                else
-                {
-                    t2    = REAL(2.0) * s * t1 - t0;
-                    dt2ds = REAL(2.0) * (s * dt1ds + t1) - dt0ds;
-
-                    t0    = t1;
-                    dt0ds = dt1ds;
-                    t1    = t2;
-                    dt1ds = dt2ds;
-                }
-
-                phi     = t2;
-                dphidth = dt2ds * coef0;
+                phi     = tcheby[imode];
+                dphidth = dcheby[imode] * coef0;
                 dphidx1 = dphidth * dthtdx1;
                 dphidy1 = dphidth * dthtdy1;
                 dphidz1 = dphidth * dthtdz1;

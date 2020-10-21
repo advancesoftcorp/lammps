@@ -1300,7 +1300,7 @@ void NNArch::goBackwardOnForce()
                                  nneigh, nneigh3, ineigh, forceNeigh, symmGrad)
     {
         forceNeigh = new real[3 * mneigh];
-        symmGrad = new real[nbase];
+        symmGrad   = new real[nbase];
 
         #pragma omp for
         for (iatom = 0; iatom < natom; ++iatom)
@@ -1311,10 +1311,11 @@ void NNArch::goBackwardOnForce()
             nneigh = this->numNeighbor[iatom] + 1;
             nneigh3 = 3 * nneigh;
 
+            #pragma simd
             for (ibase = 0; ibase < nbase; ++ibase)
             {
                 symmGrad[ibase] =
-                    this->interLayersEnergy[ielem][0]->getGrad()[ibase + jbatch * nbase];
+                this->interLayersEnergy[ielem][0]->getGrad()[ibase + jbatch * nbase];
             }
 
             xgemv_("T", &nbase, &nneigh3,
@@ -1322,6 +1323,7 @@ void NNArch::goBackwardOnForce()
                    &(symmGrad[0]), &i1,
                    &a0, &(forceNeigh[0]), &i1);
 
+            // cannot be simd
             for (ineigh = 0; ineigh < nneigh; ++ineigh)
             {
                 this->forceData[iatom][ineigh][0] = -forceNeigh[3 * ineigh + 0];

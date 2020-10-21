@@ -34,6 +34,8 @@ public:
 
     void clearGeometry();
 
+    SymmFunc* getSymmFunc();
+
     void calculateSymmFuncs();
 
     void renormalizeSymmFuncs();
@@ -98,8 +100,6 @@ private:
     {
         return this->mode == NNARCH_MODE_BOTH || this->mode == NNARCH_MODE_CHARGE;
     }
-
-    SymmFunc* getSymmFunc();
 };
 
 #endif /* NNP_NNARCH_H_ */

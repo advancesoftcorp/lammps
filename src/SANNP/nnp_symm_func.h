@@ -24,14 +24,14 @@ public:
         return this->numBasis;
     }
 
+    void cutoffFunction(real* fc, real* dfcdr, real r, real rc) const;
+
 protected:
     int numElems;
 
     int numBasis;
 
     bool elemWeight;
-
-    void cutoffFunction(real* fc, real* dfcdr, real r, real rc) const;
 
 private:
     bool tanhCutFunc;

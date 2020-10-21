@@ -103,7 +103,14 @@ bool PairNNP::prepareNN()
     int* numneigh = list->numneigh;
     int** firstneigh = list->firstneigh;
 
-    real x0, y0, z0, dx, dy, dz, r, rr;
+    real x0, y0, z0, dx, dy, dz, r, rr, fc, dfcdr;
+
+    const int elemWeight = this->property->getElemWeight();
+    const int cutoffMode = this->property->getCutoffMode();
+    const double rcutRad = this->property->getRcutRadius();
+    const double rcutAng = this->property->getRcutAngle();
+
+    SymmFunc* symmFunc = this->arch->getSymmFunc();
 
     bool hasGrown = false;
 
@@ -133,14 +140,25 @@ bool PairNNP::prepareNN()
             this->maxnneigh = nneigh + this->maxnneigh / 2;
         }
 
-        memory->grow(this->forces,       this->maxinum, this->maxnneigh + 1, 3, "pair:forces");
-        memory->grow(this->elemNeighbor, this->maxinum, this->maxnneigh,        "pair:elemNighbor");
-        memory->grow(this->posNeighbor,  this->maxinum, this->maxnneigh,     4, "pair:posNighbor");
+        int posDim = 4;
+
+        if (cutoffMode == CUTOFF_MODE_SINGLE)
+        {
+            posDim = 6;
+        }
+        else if (cutoffMode == CUTOFF_MODE_DOUBLE || cutoffMode == CUTOFF_MODE_IPSO)
+        {
+            posDim = 8;
+        }
+
+        memory->grow(this->forces,       this->maxinum, this->maxnneigh + 1, 3,  "pair:forces");
+        memory->grow(this->elemNeighbor, this->maxinum, this->maxnneigh,         "pair:elemNighbor");
+        memory->grow(this->posNeighbor,  this->maxinum, this->maxnneigh, posDim, "pair:posNighbor");
     }
 
     // generate numNeighbor, elemNeighbor, posNeighbor
     #pragma omp parallel for private(iatom, i, itype, x0, y0, z0, \
-                                     nneigh, ineigh, j, jtype, dx, dy, dz, rr, r)
+                                     nneigh, ineigh, j, jtype, dx, dy, dz, rr, r, fc, dfcdr)
     for (iatom = 0; iatom < inum; ++iatom)
     {
         i = ilist[iatom];
@@ -156,7 +174,7 @@ bool PairNNP::prepareNN()
         itype = this->typeMap[type[i]];
         this->elements[iatom] = itype - 1;
 
-        if (this->property->getElemWeight() == 0)
+        if (elemWeight == 0)
         {
             for (ineigh = 0; ineigh < nneigh; ++ineigh)
             {
@@ -195,6 +213,84 @@ bool PairNNP::prepareNN()
             this->posNeighbor[iatom][ineigh][1] = dx;
             this->posNeighbor[iatom][ineigh][2] = dy;
             this->posNeighbor[iatom][ineigh][3] = dz;
+        }
+
+        if (cutoffMode == CUTOFF_MODE_SINGLE)
+        {
+            for (ineigh = 0; ineigh < nneigh; ++ineigh)
+            {
+                r = this->posNeighbor[iatom][ineigh][0];
+
+                if (r < rcutRad)
+                {
+                    symmFunc->cutoffFunction(&fc, &dfcdr, r, rcutRad);
+                }
+                else
+                {
+                    fc    = 0.0;
+                    dfcdr = 0.0;
+                }
+
+                this->posNeighbor[iatom][ineigh][4] = fc;
+                this->posNeighbor[iatom][ineigh][5] = dfcdr;
+            }
+        }
+
+        else if (cutoffMode == CUTOFF_MODE_DOUBLE)
+        {
+            for (ineigh = 0; ineigh < nneigh; ++ineigh)
+            {
+                r = this->posNeighbor[iatom][ineigh][0];
+
+                if (r < rcutRad)
+                {
+                    symmFunc->cutoffFunction(&fc, &dfcdr, r, rcutRad);
+                }
+                else
+                {
+                    fc    = 0.0;
+                    dfcdr = 0.0;
+                }
+
+                this->posNeighbor[iatom][ineigh][4] = fc;
+                this->posNeighbor[iatom][ineigh][5] = dfcdr;
+
+                if (r < rcutAng)
+                {
+                    symmFunc->cutoffFunction(&fc, &dfcdr, r, rcutAng);
+                }
+                else
+                {
+                    fc    = 0.0;
+                    dfcdr = 0.0;
+                }
+
+                this->posNeighbor[iatom][ineigh][6] = fc;
+                this->posNeighbor[iatom][ineigh][7] = dfcdr;
+            }
+        }
+
+        else if (cutoffMode == CUTOFF_MODE_IPSO)
+        {
+            for (ineigh = 0; ineigh < nneigh; ++ineigh)
+            {
+                r = this->posNeighbor[iatom][ineigh][0];
+
+                if (r < rcutRad)
+                {
+                    symmFunc->cutoffFunction(&fc, &dfcdr, r, rcutRad);
+                }
+                else
+                {
+                    fc    = 0.0;
+                    dfcdr = 0.0;
+                }
+
+                this->posNeighbor[iatom][ineigh][4] = fc;
+                this->posNeighbor[iatom][ineigh][5] = dfcdr;
+                this->posNeighbor[iatom][ineigh][6] = fc;
+                this->posNeighbor[iatom][ineigh][7] = dfcdr;
+            }
         }
     }
 

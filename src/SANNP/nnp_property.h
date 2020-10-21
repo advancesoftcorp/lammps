@@ -126,6 +126,11 @@ public:
         return this->behlerZeta;
     }
 
+    int getCutoffMode() const
+    {
+        return this->cutoffMode;
+    }
+
     int getLayersEnergy() const
     {
         return this->layersEnergy;
@@ -184,16 +189,18 @@ private:
     real* behlerRs2;
     real* behlerZeta;
 
+    int cutoffMode;
+
     // about neural networks
-    int  layersEnergy;
-    int  nodesEnergy;
-    int  activEnergy;
+    int layersEnergy;
+    int nodesEnergy;
+    int activEnergy;
 
-    int  layersCharge;
-    int  nodesCharge;
-    int  activCharge;
+    int layersCharge;
+    int nodesCharge;
+    int activCharge;
 
-    int  withCharge;
+    int withCharge;
 };
 
 #endif /* NNP_PROPERTY_H_ */
