@@ -58,7 +58,21 @@ PairNNP::~PairNNP()
 void PairNNP::allocate()
 {
     allocated = 1;
-    int ntypes = atom->ntypes;
+
+    const int ntypes = atom->ntypes;
+
+    const int cutoffMode = this->property->getCutoffMode();
+
+    int posDim = 4;
+
+    if (cutoffMode == CUTOFF_MODE_SINGLE)
+    {
+        posDim = 6;
+    }
+    else if (cutoffMode == CUTOFF_MODE_DOUBLE || cutoffMode == CUTOFF_MODE_IPSO)
+    {
+        posDim = 8;
+    }
 
     memory->create(cutsq,   ntypes + 1, ntypes + 1, "pair:cutsq");
     memory->create(setflag, ntypes + 1, ntypes + 1, "pair:setflag");
@@ -67,9 +81,9 @@ void PairNNP::allocate()
     memory->create(this->energies, this->maxinum,                         "pair:energies");
     memory->create(this->forces,   this->maxinum, this->maxnneigh + 1, 3, "pair:forces");
 
-    memory->create(this->numNeighbor,  this->maxinum,                     "pair:numNeighbor");
-    memory->create(this->elemNeighbor, this->maxinum, this->maxnneigh,    "pair:elemNeighbor");
-    memory->create(this->posNeighbor,  this->maxinum, this->maxnneigh, 4, "pair:posNeighbor");
+    memory->create(this->numNeighbor,  this->maxinum,                          "pair:numNeighbor");
+    memory->create(this->elemNeighbor, this->maxinum, this->maxnneigh,         "pair:elemNeighbor");
+    memory->create(this->posNeighbor,  this->maxinum, this->maxnneigh, posDim, "pair:posNeighbor");
 }
 
 void PairNNP::compute(int eflag, int vflag)
@@ -411,11 +425,6 @@ void PairNNP::coeff(int narg, char **arg)
     int ntypesEff;
     char** typeNames;
 
-    if (!allocated)
-    {
-        allocate();
-    }
-
     if (narg != (3 + ntypes))
     {
         error->all(FLERR, "Incorrect number of arguments for pair_coeff.");
@@ -488,6 +497,11 @@ void PairNNP::coeff(int narg, char **arg)
     }
 
     delete[] typeNames;
+
+    if (!allocated)
+    {
+        allocate();
+    }
 
     count = 0;
     r = get_cutoff();
