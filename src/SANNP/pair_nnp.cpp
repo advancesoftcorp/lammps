@@ -542,7 +542,7 @@ double PairNNP::get_cutoff()
     return this->property->getRcutoff();
 }
 
-int PariNNP::dimensionPosNeighbor()
+int PairNNP::dimensionPosNeighbor()
 {
     const int cutoffMode = this->property->getCutoffMode();
 
