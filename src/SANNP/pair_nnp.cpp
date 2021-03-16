@@ -427,11 +427,23 @@ void PairNNP::coeff(int narg, char **arg)
 
     for (i = 0; i < ntypes; ++i)
     {
+        this->typeMap[i + 1] = 0;
+
         if (strcmp(arg[i + 3], "NULL") == 0)
         {
-            this->typeMap[i + 1] = 0;
+            continue;
         }
-        else
+
+        for (j = 0; j < i; ++j)
+        {
+            if (strcmp(arg[i + 3], arg[j + 3]) == 0)
+            {
+                this->typeMap[i + 1] = this->typeMap[j + 1];
+                break;
+            }
+        }
+
+        if (this->typeMap[i + 1] == 0)
         {
             this->typeMap[i + 1] = ntypesEff + 1;
             typeNames[ntypesEff] = arg[i + 3];
