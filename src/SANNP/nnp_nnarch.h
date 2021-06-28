@@ -54,6 +54,26 @@ public:
 
     void obtainCharges(real* charges) const;
 
+    const real* getLJLikeA1() const
+    {
+    	return this->ljlikeA1;
+    }
+
+    const real* getLJLikeA2() const
+    {
+    	return this->ljlikeA2;
+    }
+
+    const real* getLJLikeA3() const
+    {
+    	return this->ljlikeA3;
+    }
+
+    const real* getLJLikeA4() const
+    {
+    	return this->ljlikeA4;
+    }
+
 private:
     int mode;
     int numElems;
@@ -90,6 +110,11 @@ private:
 
     NNLayer*** interLayersCharge;
     NNLayer**  lastLayersCharge;
+
+    real* ljlikeA1;
+    real* ljlikeA2;
+    real* ljlikeA3;
+    real* ljlikeA4;
 
     bool isEnergyMode() const
     {

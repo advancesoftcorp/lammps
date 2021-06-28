@@ -68,6 +68,11 @@ NNArch::NNArch(int mode, int numElems, const Property* property)
 
     this->interLayersCharge = NULL;
     this->lastLayersCharge  = NULL;
+
+    this->ljlikeA1 = NULL;
+    this->ljlikeA2 = NULL;
+    this->ljlikeA3 = NULL;
+    this->ljlikeA4 = NULL;
 }
 
 NNArch::~NNArch()
@@ -153,6 +158,23 @@ NNArch::~NNArch()
         }
         delete[] this->lastLayersCharge;
     }
+
+    if (this->ljlikeA1 != NULL)
+    {
+    	delete[] this->ljlikeA1;
+    }
+    if (this->ljlikeA2 != NULL)
+    {
+    	delete[] this->ljlikeA2;
+    }
+    if (this->ljlikeA3 != NULL)
+    {
+    	delete[] this->ljlikeA3;
+    }
+    if (this->ljlikeA4 != NULL)
+    {
+    	delete[] this->ljlikeA4;
+    }
 }
 
 void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, int rank, MPI_Comm world)
@@ -173,21 +195,28 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, int rank, MPI_C
     int  nbase, ibase, jbase;
 
     int ilayer;
-    int nlayerEnergy = property->getLayersEnergy();
-    int nlayerCharge = property->getLayersCharge();
-    int nnodeEnergy  = property->getNodesEnergy();
-    int nnodeCharge  = property->getNodesCharge();
-    int activEnergy  = property->getActivEnergy();
-    int activCharge  = property->getActivCharge();
-    int withCharge   = property->getWithCharge();
+    int nlayerEnergy = this->property->getLayersEnergy();
+    int nlayerCharge = this->property->getLayersCharge();
+    int nnodeEnergy  = this->property->getNodesEnergy();
+    int nnodeCharge  = this->property->getNodesCharge();
+    int activEnergy  = this->property->getActivEnergy();
+    int activCharge  = this->property->getActivCharge();
+    int withCharge   = this->property->getWithCharge();
 
     int ielem,  jelem;
     int kelem,  lelem;
     int kelem_, lelem_;
+    int ielem1, ielem2;
+    int jelem1, jelem2;
+    int kelem1, kelem2;
     int nelemOld;
     int nelemNew = numElems;
+    int melemOld;
+    int melemNew;
 
     const int lenElemName = 32;
+    char*  elemName1[lenElemName];
+    char*  elemName2[lenElemName];
     char** elemNamesOld;
     char** elemNamesNew;
 
@@ -353,6 +382,114 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, int rank, MPI_C
             this->symmDev[kelem] = symmDevOld[ielem];
             this->atomNum[kelem] = atomNumOld[ielem];
         }
+    }
+
+    // read parameters of LJ-like potential
+    if (this->property->getWithClassical() != 0)
+    {
+        melemNew = nelemNew * (nelemNew + 1) / 2;
+
+        this->ljlikeA1 = new real[melemNew];
+        this->ljlikeA2 = new real[melemNew];
+        this->ljlikeA3 = new real[melemNew];
+        this->ljlikeA4 = new real[melemNew];
+
+        for (kelem = 0; kelem < melemNew; ++kelem)
+        {
+            this->ljlikeA1[kelem] = ZERO;
+            this->ljlikeA2[kelem] = ZERO;
+            this->ljlikeA3[kelem] = ZERO;
+            this->ljlikeA4[kelem] = ZERO;
+        }
+
+        ierr = 0;
+        if (rank == 0)
+        {
+            melemOld = 0;
+            if (fgets(line, lenLine, fp) == NULL)
+            {
+                ierr = 1;
+            }
+
+            if (ierr == 0)
+            {
+                if (sscanf(line, "%d", &melemOld) != 1)
+                {
+                    ierr = 1;
+                }
+            }
+
+            if (ierr != 0)
+            {
+                melemOld = 0;
+            }
+
+            for (lelem = 0; lelem < melemOld; ++lelem)
+            {
+                if (fgets(line, lenLine, fp) == NULL)
+                {
+                    ierr = 1;
+                    break;
+                }
+
+                if (sscanf(line, IFORM_S2_F4, elemName1, elemName2, &A1, &A2, &A3, &A4) != 6)
+                {
+                	ierr = 1;
+            	    break;
+                }
+
+                ielem1 = -1;
+                ielem2 = -1;
+
+                for (ielem = 0; ielem < nelemOld; ++ielem)
+                {
+                    if (ielem1 < 0 && strcmp(elemName1, elemNamesOld[ielem]) == 0)
+                    {
+                        ielem1 = ielem;
+                    }
+
+                    if (ielem2 < 0 &&strcmp(elemName2, elemNamesOld[ielem]) == 0)
+                    {
+                        ielem2 = ielem;
+                    }
+
+                    if (ielem1 > -1 && ielem2 > -1)
+                    {
+                        break;
+                    }
+                }
+
+                if (ielem1 < 0 || ielem2 < 0)
+                {
+                    continue;
+                }
+
+                jelem1 = mapElem[ielem1];
+                jelem2 = mapElem[ielem2];
+
+                if (jelem1 < 0 || jelem2 < 0)
+                {
+                    continue;
+                }
+
+                kelem1 = max(jelem1, jelem2);
+                kelem2 = min(jelem1, jelem2);
+                kelem  = kelem2 + kelem1 * (kelem1 + 1) / 2;
+
+                this->ljlikeA1[kelem] = A1;
+                this->ljlikeA2[kelem] = A2;
+                this->ljlikeA3[kelem] = A3;
+                this->ljlikeA4[kelem] = A4;
+            }
+        }
+
+        MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
+        if (ierr != 0) stop_by_error("cannot read ffield file, at LJ-like.");
+
+        MPI_Bcast(&(this->ljlikeA1[0]), melemNew, MPI_REAL0, 0, world);
+        MPI_Bcast(&(this->ljlikeA2[0]), melemNew, MPI_REAL0, 0, world);
+        MPI_Bcast(&(this->ljlikeA3[0]), melemNew, MPI_REAL0, 0, world);
+        MPI_Bcast(&(this->ljlikeA4[0]), melemNew, MPI_REAL0, 0, world);
     }
 
     // release memory
