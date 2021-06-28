@@ -60,6 +60,8 @@ void PairNNPCoulCut::compute(int eflag, int vflag)
 
     clearNN();
 
+    computeLJLike(eflag);
+
     for (ii = 0; ii < inum; ii++)
     {
         i = ilist[ii];

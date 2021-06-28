@@ -85,6 +85,8 @@ void PairNNP::compute(int eflag, int vflag)
 
     clearNN();
 
+    computeLJLike(eflag);
+
     if (vflag_fdotr)
     {
         virial_fdotr_compute();
@@ -383,6 +385,139 @@ void PairNNP::clearNN()
     if (inum > 0)
     {
         this->arch->clearGeometry();
+    }
+}
+
+void PairNNP::computeLJLike(int eflag)
+{
+    if (this->property->getWithClassical() == 0)
+    {
+        return;
+    }
+
+    int* type = atom->type;
+    double** x = atom->x;
+    double** f = atom->f;
+    tagint *tag = atom->tag;
+    int nlocal = atom->nlocal;
+    int newton_pair = force->newton_pair;
+
+    int inum = list->inum;
+    int* ilist = list->ilist;
+    int* numneigh = list->numneigh;
+    int** firstneigh = list->firstneigh;
+
+    double r, r2, r6, r8, r10, r12;
+    double rcut = this->property->getRcutoff();
+
+    double delx, dely, delz;
+    double fx, fy, fz;
+
+    int i, j;
+    int ii, jj, jnum;
+    int ielem1, jelem1;
+    int ielem2, jelem2;
+    int kelem;
+    int *jlist;
+    tagint itag, jtag;
+    double xtmp, ytmp, ztmp;
+    double evdwl, fpair;
+
+    double* ljlikeA1 = this->arch->getLJLikeA1();
+    double* ljlikeA2 = this->arch->getLJLikeA2();
+    double* ljlikeA3 = this->arch->getLJLikeA3();
+    double* ljlikeA4 = this->arch->getLJLikeA4();
+    double A1, A2, A3, A4;
+    double B1, B2, B3, B4;
+
+    evdwl = 0.0;
+
+    for (ii = 0; ii < inum; ii++)
+    {
+        i = ilist[ii];
+        itag = tag[i];
+        xtmp = x[i][0];
+        ytmp = x[i][1];
+        ztmp = x[i][2];
+
+        ielem1 = this->typeMap[type[i]] - 1;
+
+        jlist = firstneigh[i];
+        jnum = numneigh[i];
+
+        for (jj = 0; jj < jnum; jj++)
+        {
+            j = jlist[jj];
+            j &= NEIGHMASK;
+
+            // skip half of atoms
+            jtag = tag[j];
+            if (itag > jtag) {
+                if ((itag + jtag) % 2 == 0) continue;
+            } else if (itag < jtag) {
+                if ((itag + jtag) % 2 == 1) continue;
+            } else {
+                if (x[j][2] < ztmp) continue;
+                if (x[j][2] == ztmp && x[j][1] < ytmp) continue;
+                if (x[j][2] == ztmp && x[j][1] == ytmp && x[j][0] < xtmp) continue;
+            }
+
+            r    = this->posNeighbor[ii][jj][0];
+            delx = this->posNeighbor[ii][jj][1];
+            dely = this->posNeighbor[ii][jj][2];
+            delz = this->posNeighbor[ii][jj][3];
+
+            jelem1 = this->typeMap[type[j]] - 1;
+
+            if (r < rcut)
+            {
+                ielem2 = max(ielem1, jelem1);
+                jelem2 = min(ielem1, jelem1);
+                kelem  = jelem2 + ielem2 * (ielem2 + 1) / 2;
+
+                A1 = ljlikeA1[kelem];
+                A2 = ljlikeA2[kelem];
+                A3 = ljlikeA3[kelem];
+                A4 = ljlikeA4[kelem];
+
+                r2  = r * r;
+                r6  = r2 * r2 * r2;
+                r8  = r2 * r6;
+                r10 = r2 * r8;
+                r12 = r2 * r10;
+
+                B1 = A1 / r12;
+                B2 = A2 / r10;
+                B3 = A3 / r8;
+                B4 = A4 / r6;
+
+                fpair = 12.0 * B1 + 10.0 * B2 + 8.0 * B3 + 6.0 * B4;
+                fpair /= r2;
+
+                fx = delx * fpair;
+                fy = dely * fpair;
+                fz = delz * fpair;
+
+                f[i][0] += fx;
+                f[i][1] += fy;
+                f[i][2] += fz;
+
+                f[j][0] -= fx;
+                f[j][1] -= fy;
+                f[j][2] -= fz;
+
+                if (eflag)
+                {
+                    evdwl = B1 + B2 + B3 + B4;
+                }
+
+                if (evflag)
+                {
+                    ev_tally(i, j, nlocal, newton_pair,
+                             evdwl, 0.0, fpair, delx, dely, delz);
+                }
+            }
+        }
     }
 }
 

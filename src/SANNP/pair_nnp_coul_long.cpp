@@ -71,6 +71,8 @@ void PairNNPCoulLong::compute(int eflag, int vflag)
 
     performNN(eflag);
 
+    computeLJLike(eflag);
+
     clearNN();
 
     for (ii = 0; ii < inum; ii++)

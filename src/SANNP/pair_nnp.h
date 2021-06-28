@@ -69,6 +69,8 @@ protected:
 
     void clearNN();
 
+    void computeLJLike(int);
+
     virtual double get_cutoff();
 
 private:
