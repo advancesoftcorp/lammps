@@ -367,9 +367,9 @@ void PairNNP::performNN(int eflag)
 
             if (evflag)
             {
-                delx = this->posNeighbor[iatom][ineigh][1];
-                dely = this->posNeighbor[iatom][ineigh][2];
-                delz = this->posNeighbor[iatom][ineigh][3];
+                delx = -this->posNeighbor[iatom][ineigh][1];
+                dely = -this->posNeighbor[iatom][ineigh][2];
+                delz = -this->posNeighbor[iatom][ineigh][3];
 
                 ev_tally_xyz(i, j, nlocal, newton_pair,
                              0.0, 0.0, -fx, -fy, -fz, delx, dely, delz);
@@ -462,10 +462,10 @@ void PairNNP::computeLJLike(int eflag)
                 if (x[j][2] == ztmp && x[j][1] == ytmp && x[j][0] < xtmp) continue;
             }
 
-            r    = this->posNeighbor[ii][jj][0];
-            delx = this->posNeighbor[ii][jj][1];
-            dely = this->posNeighbor[ii][jj][2];
-            delz = this->posNeighbor[ii][jj][3];
+            r    =  this->posNeighbor[ii][jj][0];
+            delx = -this->posNeighbor[ii][jj][1];
+            dely = -this->posNeighbor[ii][jj][2];
+            delz = -this->posNeighbor[ii][jj][3];
 
             jelem1 = this->typeMap[type[j]] - 1;
 

@@ -92,10 +92,10 @@ void PairNNPCoulCut::compute(int eflag, int vflag)
                 if (x[j][2] == ztmp && x[j][1] == ytmp && x[j][0] < xtmp) continue;
             }
 
-            r    = this->posNeighbor[ii][jj][0];
-            delx = this->posNeighbor[ii][jj][1];
-            dely = this->posNeighbor[ii][jj][2];
-            delz = this->posNeighbor[ii][jj][3];
+            r    =  this->posNeighbor[ii][jj][0];
+            delx = -this->posNeighbor[ii][jj][1];
+            dely = -this->posNeighbor[ii][jj][2];
+            delz = -this->posNeighbor[ii][jj][3];
 
             if (r < this->cutcoul)
             {
