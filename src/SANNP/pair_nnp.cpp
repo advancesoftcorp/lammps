@@ -423,10 +423,10 @@ void PairNNP::computeLJLike(int eflag)
     double xtmp, ytmp, ztmp;
     double evdwl, fpair;
 
-    double* ljlikeA1 = this->arch->getLJLikeA1();
-    double* ljlikeA2 = this->arch->getLJLikeA2();
-    double* ljlikeA3 = this->arch->getLJLikeA3();
-    double* ljlikeA4 = this->arch->getLJLikeA4();
+    const double* ljlikeA1 = this->arch->getLJLikeA1();
+    const double* ljlikeA2 = this->arch->getLJLikeA2();
+    const double* ljlikeA3 = this->arch->getLJLikeA3();
+    const double* ljlikeA4 = this->arch->getLJLikeA4();
     double A1, A2, A3, A4;
     double B1, B2, B3, B4;
 

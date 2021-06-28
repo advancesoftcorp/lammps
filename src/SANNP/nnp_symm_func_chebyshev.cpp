@@ -189,7 +189,7 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, real** pos
         coef0  = REAL(2.0) / this->rcutRad / r1;
         this->chebyshevFunction(tcheby, dcheby, scheby, this->sizeRad);
 
-        #pragma simd
+        #pragma omp simd
         for (imode = 0; imode < this->sizeRad; ++imode)
         {
             phi     = tcheby[imode];
@@ -326,7 +326,7 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, real** pos
             coef0  = REAL(2.0) / PI;
             this->chebyshevFunction(tcheby, dcheby, scheby, this->sizeAng);
 
-            #pragma simd
+            #pragma omp simd
             for (imode = 0; imode < this->sizeAng; ++imode)
             {
                 phi     = tcheby[imode];

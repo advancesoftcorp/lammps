@@ -215,8 +215,8 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, int rank, MPI_C
     int melemNew;
 
     const int lenElemName = 32;
-    char*  elemName1[lenElemName];
-    char*  elemName2[lenElemName];
+    char   elemName1[lenElemName];
+    char   elemName2[lenElemName];
     char** elemNamesOld;
     char** elemNamesNew;
 
@@ -225,6 +225,8 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, int rank, MPI_C
     real* symmAveOld;
     real* symmDevOld;
     int*  atomNumOld;
+
+    real A1, A2, A3, A4;
 
     int* mapSymmFunc;
 
@@ -1448,7 +1450,7 @@ void NNArch::goBackwardOnForce()
             nneigh = this->numNeighbor[iatom] + 1;
             nneigh3 = 3 * nneigh;
 
-            #pragma simd
+            #pragma omp simd
             for (ibase = 0; ibase < nbase; ++ibase)
             {
                 symmGrad[ibase] =

@@ -195,7 +195,7 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, real** posNei
         dfc1dy1 = y1 / r1 * dfc1dr1;
         dfc1dz1 = z1 / r1 * dfc1dr1;
 
-        #pragma simd
+        #pragma omp simd
         for (imode = 0; imode < this->sizeRad; ++imode)
         {
             eta = this->radiusEta[imode];
@@ -381,7 +381,7 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, real** posNei
 
                 if (this->angleMod)
                 {
-                    #pragma simd
+                    #pragma omp simd
                     for (imode = 0; imode < this->sizeAng; ++imode)
                     {
                         eta   = this->angleEta[imode];
@@ -433,7 +433,7 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, real** posNei
 
                 else
                 {
-                    #pragma simd
+                    #pragma omp simd
                     for (imode = 0; imode < this->sizeAng; ++imode)
                     {
                         eta   = this->angleEta[imode];
