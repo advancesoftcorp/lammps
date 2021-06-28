@@ -33,6 +33,11 @@ public:
         return this->tanhCutoff;
     }
 
+    int getWithClassical() const
+    {
+        return this->withClassical;
+    }
+
     real getRcutoff() const
     {
         if (this->symmFunc == SYMM_FUNC_MANYBODY)
@@ -171,6 +176,7 @@ private:
     int symmFunc;
     int elemWeight;
     int tanhCutoff;
+    int withClassical;
 
     int m2;
     int m3;

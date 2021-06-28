@@ -12,36 +12,37 @@ Property::Property()
     /*
      * set default values
      */
-    this->symmFunc     = SYMM_FUNC_NULL;
-    this->elemWeight   = 0;
-    this->tanhCutoff   = 0;
+    this->symmFunc      = SYMM_FUNC_NULL;
+    this->elemWeight    = 0;
+    this->tanhCutoff    = 0;
+    this->withClassical = 0;
 
-    this->m2           = 0;
-    this->m3           = 0;
-    this->rinner       = ZERO;
-    this->router       = ZERO;
+    this->m2            = 0;
+    this->m3            = 0;
+    this->rinner        = ZERO;
+    this->router        = ZERO;
 
-    this->numRadius    = 0;
-    this->numAngle     = 0;
-    this->rcutRadius   = ZERO;
-    this->rcutAngle    = ZERO;
+    this->numRadius     = 0;
+    this->numAngle      = 0;
+    this->rcutRadius    = ZERO;
+    this->rcutAngle     = ZERO;
 
-    this->behlerG4     = 0;
-    this->behlerEta1   = NULL;
-    this->behlerEta2   = NULL;
-    this->behlerRs1    = NULL;
-    this->behlerRs2    = NULL;
-    this->behlerZeta   = NULL;
+    this->behlerG4      = 0;
+    this->behlerEta1    = NULL;
+    this->behlerEta2    = NULL;
+    this->behlerRs1     = NULL;
+    this->behlerRs2     = NULL;
+    this->behlerZeta    = NULL;
 
-    this->layersEnergy = 0;
-    this->nodesEnergy  = 0;
-    this->activEnergy  = ACTIVATION_NULL;
+    this->layersEnergy  = 0;
+    this->nodesEnergy   = 0;
+    this->activEnergy   = ACTIVATION_NULL;
 
-    this->layersCharge = 0;
-    this->nodesCharge  = 0;
-    this->activCharge  = ACTIVATION_NULL;
+    this->layersCharge  = 0;
+    this->nodesCharge   = 0;
+    this->activCharge   = ACTIVATION_NULL;
 
-    this->withCharge   = 0;
+    this->withCharge    = 0;
 }
 
 Property::~Property()
@@ -98,16 +99,26 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
 
         if (ierr == 0)
         {
-            if (sscanf(line, "%d %d %d", &(this->symmFunc), &(this->elemWeight), &(this->tanhCutoff)) != 3)
+            if (sscanf(line, "%d %d %d %d", &(this->symmFunc), &(this->elemWeight),
+                                            &(this->tanhCutoff), &(this->withClassical)) != 4)
             {
-                if (sscanf(line, "%d", &(this->symmFunc)) != 1)
+                if (sscanf(line, "%d %d %d", &(this->symmFunc),
+                                             &(this->elemWeight), &(this->tanhCutoff)) != 3)
                 {
-                    ierr = 1;
+                    if (sscanf(line, "%d", &(this->symmFunc)) != 1)
+                    {
+                        ierr = 1;
+                    }
+                    else
+                    {
+                        this->elemWeight    = 0;
+                        this->tanhCutoff    = 1;
+                        this->withClassical = 0;
+                    }
                 }
                 else
                 {
-                    this->elemWeight = 0;
-                    this->tanhCutoff = 1;
+                    this->withClassical = 0;
                 }
             }
         }
@@ -116,9 +127,10 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
     MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
     if (ierr != 0) stop_by_error("cannot read ffield file, at symmFunc");
 
-    MPI_Bcast(&(this->symmFunc),   1, MPI_INT, 0, world);
-    MPI_Bcast(&(this->elemWeight), 1, MPI_INT, 0, world);
-    MPI_Bcast(&(this->tanhCutoff), 1, MPI_INT, 0, world);
+    MPI_Bcast(&(this->symmFunc),      1, MPI_INT, 0, world);
+    MPI_Bcast(&(this->elemWeight),    1, MPI_INT, 0, world);
+    MPI_Bcast(&(this->tanhCutoff),    1, MPI_INT, 0, world);
+    MPI_Bcast(&(this->withClassical), 1, MPI_INT, 0, world);
 
     if (this->symmFunc == SYMM_FUNC_MANYBODY)
     {
