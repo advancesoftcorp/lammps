@@ -24,7 +24,7 @@ public:
 
     void goForward(real* outData) const;
 
-    void goBackward(const real* outData, real* outGrad, bool toInpGrad);
+    void goBackward(real* outGrad, bool toInpGrad);
 
     int getNumInpNodes() const
     {
@@ -55,13 +55,12 @@ private:
 
     real* inpData;
     real* inpGrad;
+    real* outDrv1;
 
     real* weight;
     real* bias;
 
     void operateActivation(real* outData) const;
-
-    void deriveActivation(const real* outData, real* outGrad) const;
 };
 
 #endif /* NNP_NNLAYER_H_ */

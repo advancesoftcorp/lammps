@@ -7,6 +7,9 @@
 
 #include "nnp_nnlayer.h"
 
+#define SIGMOID_MAX   REAL(50.0)
+#define TWTANH_ALPHA  REAL(0.16)
+
 NNLayer::NNLayer(int numInpNodes, int numOutNodes, int activation)
 {
     if (numInpNodes < 1)
@@ -27,9 +30,10 @@ NNLayer::NNLayer(int numInpNodes, int numOutNodes, int activation)
 
     this->inpData = NULL;
     this->inpGrad = NULL;
+    this->outDrv1 = NULL;
 
     this->weight = new real[this->numInpNodes * this->numOutNodes];
-    this->bias = new real[this->numOutNodes];
+    this->bias   = new real[this->numOutNodes];
 }
 
 NNLayer::~NNLayer()
@@ -41,6 +45,10 @@ NNLayer::~NNLayer()
     if (this->inpGrad != NULL)
     {
         delete[] this->inpGrad;
+    }
+    if (this->outDrv1 != NULL)
+    {
+        delete[] this->outDrv1;
     }
 
     delete[] this->weight;
@@ -71,8 +79,14 @@ void NNLayer::setSizeOfBatch(int sizeBatch)
         delete[] this->inpGrad;
     }
 
+    if (this->outDrv1 != NULL)
+    {
+        delete[] this->outDrv1;
+    }
+
     this->inpData = new real[this->numInpNodes * this->sizeBatch];
     this->inpGrad = new real[this->numInpNodes * this->sizeBatch];
+    this->outDrv1 = new real[this->numOutNodes * this->sizeBatch];
 }
 
 void NNLayer::scanWeight(FILE* fp, int rank, MPI_Comm world)
@@ -211,13 +225,8 @@ void NNLayer::goForward(real* outData) const
     this->operateActivation(outData);
 }
 
-void NNLayer::goBackward(const real* outData, real* outGrad, bool toInpGrad)
+void NNLayer::goBackward(real* outGrad, bool toInpGrad)
 {
-    if (outData == NULL)
-    {
-        stop_by_error("outData is null.");
-    }
-
     if (outGrad == NULL)
     {
         stop_by_error("outGrad is null.");
@@ -229,7 +238,14 @@ void NNLayer::goBackward(const real* outData, real* outGrad, bool toInpGrad)
     }
 
     // derive activation function
-    this->deriveActivation(outData, outGrad);
+    int idata;
+    int ndata = this->numOutNodes * this->sizeBatch;
+
+    #pragma omp parallel for private (idata)
+    for (idata = 0; idata < ndata; ++idata)
+    {
+        outGrad[idata] *= this->outDrv1[idata];
+    }
 
     real a0 = ZERO;
     real a1 = ONE;
@@ -250,84 +266,106 @@ void NNLayer::goBackward(const real* outData, real* outGrad, bool toInpGrad)
 
 void NNLayer::operateActivation(real* outData) const
 {
-    real x;
+    if (this->outDrv1 == NULL)
+    {
+        stop_by_error("outDrv1 is null.");
+    }
+
+    real x, y, z;
+
     int idata;
     int ndata = this->sizeBatch * this->numOutNodes;
 
     if (this->activation == ACTIVATION_ASIS)
     {
-        // NOP
+        #pragma omp parallel for private (idata)
+        for (idata = 0; idata < ndata; ++idata)
+        {
+            this->outDrv1[idata] = ONE;
+        }
     }
 
     else if (this->activation == ACTIVATION_SIGMOID)
     {
-        #pragma omp parallel for private (idata, x)
+        #pragma omp parallel for private (idata, x, y, z)
         for (idata = 0; idata < ndata; ++idata)
         {
             x = outData[idata];
-            outData[idata] = ONE / (ONE + exp(-x));
+            if (x < -SIGMOID_MAX)
+            {
+                y = ZERO;
+                z = ZERO;
+            }
+            else if (x > SIGMOID_MAX)
+            {
+                y = ONE;
+                z = ZERO;
+            }
+            else
+            {
+                y = ONE / (ONE + exp(-x));
+                z = y * (ONE - y);
+            }
+
+            outData[idata] = y;
+            this->outDrv1[idata] = z;
         }
     }
 
     else if (this->activation == ACTIVATION_TANH)
     {
-        #pragma omp parallel for private (idata, x)
+        #pragma omp parallel for private (idata, x, y, z)
         for (idata = 0; idata < ndata; ++idata)
         {
             x = outData[idata];
-            outData[idata] = tanh(x);
+            y = tanh(x);
+            z = ONE - y * y;
+
+            outData[idata] = y;
+            this->outDrv1[idata] = z;
         }
     }
 
     else if (this->activation == ACTIVATION_ELU)
     {
-        #pragma omp parallel for private (idata, x)
+        #pragma omp parallel for private (idata, x, y, z)
         for (idata = 0; idata < ndata; ++idata)
         {
             x = outData[idata];
-            outData[idata] = (x >= ZERO) ? x : (exp(x) - ONE);
+            y = (x >= ZERO) ? x : (exp(x) - ONE);
+            z = (x >= ZERO) ? ONE  : (y + ONE);
+
+            outData[idata] = y;
+            this->outDrv1[idata] = z;
+        }
+    }
+
+    else if (this->activation == ACTIVATION_TWTANH)
+    {
+        #pragma omp parallel for private (idata, x, y, z)
+        for (idata = 0; idata < ndata; ++idata)
+        {
+            x = outData[idata];
+            y = tanh(x);
+            z = ONE - y * y;
+
+            outData[idata] = y + TWTANH_ALPHA * x;
+            this->outDrv1[idata] = z + TWTANH_ALPHA;
+        }
+    }
+
+    else if (this->activation == ACTIVATION_GELU)
+    {
+        #pragma omp parallel for private (idata, x, y, z)
+        for (idata = 0; idata < ndata; ++idata)
+        {
+            x = outData[idata];
+            y = REAL(0.5) * (ONE + erf(x / ROOT2));        // -> phi
+            z = exp(-REAL(0.5) * x * x) / ROOT2 / ROOTPI;  // -> dphi/dx
+
+            outData[idata] = x * y;
+            this->outDrv1[idata] = y + x * z;
         }
     }
 }
 
-void NNLayer::deriveActivation(const real* outData, real* outGrad) const
-{
-    real y;
-    int idata;
-    int ndata = this->sizeBatch * this->numOutNodes;
-
-    if (this->activation == ACTIVATION_ASIS)
-    {
-        // NOP
-    }
-
-    else if (this->activation == ACTIVATION_SIGMOID)
-    {
-        #pragma omp parallel for private (idata, y)
-        for (idata = 0; idata < ndata; ++idata)
-        {
-            y = outData[idata];
-            outGrad[idata] *= y * (ONE - y);
-        }
-    }
-
-    else if (this->activation == ACTIVATION_TANH)
-    {
-        #pragma omp parallel for private (idata, y)
-        for (idata = 0; idata < ndata; ++idata)
-        {
-            y = outData[idata];
-            outGrad[idata] *= ONE - y * y;
-        }
-    }
-
-    else if (this->activation == ACTIVATION_ELU)
-    {
-        #pragma omp parallel for private (idata, y)
-        for (idata = 0; idata < ndata; ++idata)
-        {
-            y = outData[idata];
-            outGrad[idata] *= (y >= ZERO) ? ONE : (y + ONE);
-        }
-    }
-}

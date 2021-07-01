@@ -59,10 +59,12 @@ using namespace std;
 
 #endif
 
-#define ZERO       REAL(0.0)
-#define ONE        REAL(1.0)
-#define PI         REAL(3.14159265358979324)
-#define PId        3.14159265358979324
+#define ZERO    REAL(0.0)
+#define ONE     REAL(1.0)
+#define PI      REAL(3.14159265358979324)
+#define PId     3.14159265358979324
+#define ROOT2   REAL(1.41421356237309505)
+#define ROOTPI  REAL(1.77245385090551603)
 
 extern "C"
 {
@@ -87,6 +89,8 @@ int xgemv_(const char* trans, const int* m, const int* n,
 #define ACTIVATION_SIGMOID   2
 #define ACTIVATION_TANH      3
 #define ACTIVATION_ELU       4
+#define ACTIVATION_TWTANH    5
+#define ACTIVATION_GELU      6
 
 // SymmFunc
 #define CUTOFF_MODE_NULL     0

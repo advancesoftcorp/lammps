@@ -1405,22 +1405,18 @@ void NNArch::goBackwardOnForce()
             continue;
         }
 
-        this->lastLayersEnergy[ielem]->goBackward(
-                this->energyData[ielem],
-                this->energyGrad[ielem], true);
+        this->lastLayersEnergy[ielem]->goBackward(this->energyGrad[ielem], true);
 
         for (ilayer = (nlayer - 1); ilayer >= 0; --ilayer)
         {
             if (ilayer < (nlayer - 1))
             {
                 this->interLayersEnergy[ielem][ilayer]->goBackward(
-                this->interLayersEnergy[ielem][ilayer + 1]->getData(),
                 this->interLayersEnergy[ielem][ilayer + 1]->getGrad(), true);
             }
             else
             {
                 this->interLayersEnergy[ielem][ilayer]->goBackward(
-                this->lastLayersEnergy[ielem]->getData(),
                 this->lastLayersEnergy[ielem]->getGrad(), true);
             }
         }
