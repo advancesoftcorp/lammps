@@ -44,8 +44,8 @@ LMP_INC =  -DLAMMPS_SMALLBIG -DLAMMPS_XDR -DLAMMPS_GZIP
 # PATH = path for MPI library
 # LIB = name of MPI library
 
-MPI_INC  =  -I/home/nakayama/msmpi/Include
-MPI_PATH =  -L/home/nakayama/msmpi/Lib
+MPI_INC  =  -I"C:\mingw64\mingw64\include"
+MPI_PATH =  -L"C:\mingw64\mingw64\lib"
 MPI_LIB  =  -lmsmpi
 
 # FFT library
@@ -55,8 +55,8 @@ MPI_LIB  =  -lmsmpi
 # PATH = path for FFT library
 # LIB = name of FFT library
 
-FFT_INC  =  -DFFT_MKL -I/c/ProgramFilesx86/IntelSWTools/compilers_and_libraries/windows/mkl/include
-FFT_PATH =  -L/c/ProgramFilesx86/IntelSWTools/compilers_and_libraries/windows/mkl/lib/intel64
+FFT_INC  =  -DFFT_MKL -I"C:\Program Files (x86)\IntelSWTools\compilers_and_libraries\windows\mkl\include"
+FFT_PATH =  -L"C:\Program Files (x86)\IntelSWTools\compilers_and_libraries\windows\mkl\lib\intel64"
 FFT_LIB  =  -lmkl_rt
 
 # JPEG and/or PNG library
