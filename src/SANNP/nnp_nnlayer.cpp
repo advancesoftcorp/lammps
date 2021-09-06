@@ -171,6 +171,8 @@ void NNLayer::projectWeightFrom(NNLayer* src, int* mapInpNodes)
     #pragma omp parallel for private (ioutNodes, iinpNodes1, iinpNodes2)
     for (ioutNodes = 0; ioutNodes < numOutNodes1; ++ioutNodes)
     {
+        this->bias[ioutNodes] = src->bias[ioutNodes];
+
         for (iinpNodes1 = 0; iinpNodes1 < numInpNodes1; ++iinpNodes1)
         {
             iinpNodes2 = mapInpNodes[iinpNodes1];
