@@ -19,6 +19,7 @@ PairStyle(nnp, PairNNP)
 #include "error.h"
 #include "pair.h"
 #include "force.h"
+#include "update.h"
 #include "memory.h"
 #include "neigh_list.h"
 #include "neigh_request.h"

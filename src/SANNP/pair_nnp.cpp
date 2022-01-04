@@ -596,7 +596,7 @@ void PairNNP::coeff(int narg, char **arg)
 
         if (fp == NULL)
         {
-            error->all(FLERR, "cannot open ffield file.");
+            error->one(FLERR, "cannot open ffield file.");
         }
     }
 
@@ -671,12 +671,17 @@ void PairNNP::init_style()
 {
     if (atom->tag_enable == 0)
     {
-        error->all(FLERR,"Pair style NNP requires atom IDs");
+        error->all(FLERR, "Pair style NNP requires atom IDs");
     }
 
     if (force->newton_pair == 0)
     {
         error->all(FLERR, "Pair style NNP requires newton pair on");
+    }
+
+    if (strcmp(update->unit_style, "metal") != 0)
+    {
+        error->all(FLERR, "Pair style NNP requires 'units metal'");
     }
 
     int irequest = neighbor->request(this, instance_me);
