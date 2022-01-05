@@ -19,8 +19,8 @@ using namespace std;
 
 #ifdef _SINGLE
 
-#define real     float
-#define REAL(x)  x##f
+#define nnpreal     float
+#define NNPREAL(x)  x##f
 
 #define IFORM_F1        "%f"
 #define IFORM_F2        "%f %f"
@@ -35,12 +35,12 @@ using namespace std;
 #define xgemv_  sgemv_
 #define xgemm_  sgemm_
 
-#define MPI_REAL0  MPI_FLOAT
+#define MPI_NNPREAL  MPI_FLOAT
 
 #else
 
-#define real     double
-#define REAL(x)  x
+#define nnpreal     double
+#define NNPREAL(x)  x
 
 #define IFORM_F1        "%lf"
 #define IFORM_F2        "%lf %lf"
@@ -55,27 +55,27 @@ using namespace std;
 #define xgemm_  dgemm_
 #define xgemv_  dgemv_
 
-#define MPI_REAL0  MPI_DOUBLE
+#define MPI_NNPREAL  MPI_DOUBLE
 
 #endif
 
-#define ZERO    REAL(0.0)
-#define ONE     REAL(1.0)
-#define PI      REAL(3.14159265358979324)
+#define ZERO    NNPREAL(0.0)
+#define ONE     NNPREAL(1.0)
+#define PI      NNPREAL(3.14159265358979324)
 #define PId     3.14159265358979324
-#define ROOT2   REAL(1.41421356237309505)
-#define ROOTPI  REAL(1.77245385090551603)
+#define ROOT2   NNPREAL(1.41421356237309505)
+#define ROOTPI  NNPREAL(1.77245385090551603)
 
 extern "C"
 {
 
 int xgemm_(const char* transa, const char* transb, const int* m, const int* n, const int* k,
-           const real* alpha, real* a, const int* lda, real* b, const int* ldb,
-           const real* beta, real* c, const int* ldc);
+           const nnpreal* alpha, nnpreal* a, const int* lda, nnpreal* b, const int* ldb,
+           const nnpreal* beta, nnpreal* c, const int* ldc);
 
 int xgemv_(const char* trans, const int* m, const int* n,
-           const real* alpha, real* a, const int* lda, real* x, const int* incx,
-           const real* beta, real* y, const int* incy);
+           const nnpreal* alpha, nnpreal* a, const int* lda, nnpreal* x, const int* incx,
+           const nnpreal* beta, nnpreal* y, const int* incy);
 
 }
 

@@ -17,12 +17,12 @@ class SymmFuncChebyshev : public SymmFunc
 {
 public:
     SymmFuncChebyshev(int numElems, bool tanhCutFunc, bool elemWeight,
-                      int sizeRad, int sizeAng, real rcutRad, real rcutAng);
+                      int sizeRad, int sizeAng, nnpreal rcutRad, nnpreal rcutAng);
 
     virtual ~SymmFuncChebyshev();
 
-    void calculate(int numNeighbor, int* elemNeighbor, real** posNeighbor,
-                   real* symmData, real* symmDiff) const;
+    void calculate(int numNeighbor, int* elemNeighbor, nnpreal** posNeighbor,
+                   nnpreal* symmData, nnpreal* symmDiff) const;
 
     int getNumRadBasis() const
     {
@@ -41,13 +41,13 @@ private:
     int numRadBasis;
     int numAngBasis;
 
-    real rcutRad;
-    real rcutAng;
+    nnpreal rcutRad;
+    nnpreal rcutAng;
 
-    void chebyshevFunction(real* t, real* dt, real s, int n) const;
+    void chebyshevFunction(nnpreal* t, nnpreal* dt, nnpreal s, int n) const;
 };
 
-inline void SymmFuncChebyshev::chebyshevFunction(real* t, real* dt, real s, int n) const
+inline void SymmFuncChebyshev::chebyshevFunction(nnpreal* t, nnpreal* dt, nnpreal s, int n) const
 {
     int i;
     int m;
@@ -65,10 +65,10 @@ inline void SymmFuncChebyshev::chebyshevFunction(real* t, real* dt, real s, int 
 
     for (i = 2; i < m; i += 2)
     {
-        t [i    ] = REAL(2.0) * s * t[i - 1] - t[i - 2];
-        t [i + 1] = REAL(2.0) * s * t[i    ] - t[i - 1];
-        dt[i    ] = REAL(2.0) * (s * dt[i - 1] + t[i - 1]) - dt[i - 2];
-        dt[i + 1] = REAL(2.0) * (s * dt[i    ] + t[i    ]) - dt[i - 1];
+        t [i    ] = NNPREAL(2.0) * s * t[i - 1] - t[i - 2];
+        t [i + 1] = NNPREAL(2.0) * s * t[i    ] - t[i - 1];
+        dt[i    ] = NNPREAL(2.0) * (s * dt[i - 1] + t[i - 1]) - dt[i - 2];
+        dt[i + 1] = NNPREAL(2.0) * (s * dt[i    ] + t[i    ]) - dt[i - 1];
     }
 
 #elif defined(CHEBYSHEV_UNROLL4)
@@ -76,14 +76,14 @@ inline void SymmFuncChebyshev::chebyshevFunction(real* t, real* dt, real s, int 
 
     for (i = 2; i < m; i += 4)
     {
-        t [i    ] = REAL(2.0) * s * t[i - 1] - t[i - 2];
-        t [i + 1] = REAL(2.0) * s * t[i    ] - t[i - 1];
-        t [i + 2] = REAL(2.0) * s * t[i + 1] - t[i    ];
-        t [i + 3] = REAL(2.0) * s * t[i + 2] - t[i + 1];
-        dt[i    ] = REAL(2.0) * (s * dt[i - 1] + t[i - 1]) - dt[i - 2];
-        dt[i + 1] = REAL(2.0) * (s * dt[i    ] + t[i    ]) - dt[i - 1];
-        dt[i + 2] = REAL(2.0) * (s * dt[i + 1] + t[i + 1]) - dt[i    ];
-        dt[i + 3] = REAL(2.0) * (s * dt[i + 2] + t[i + 2]) - dt[i + 1];
+        t [i    ] = NNPREAL(2.0) * s * t[i - 1] - t[i - 2];
+        t [i + 1] = NNPREAL(2.0) * s * t[i    ] - t[i - 1];
+        t [i + 2] = NNPREAL(2.0) * s * t[i + 1] - t[i    ];
+        t [i + 3] = NNPREAL(2.0) * s * t[i + 2] - t[i + 1];
+        dt[i    ] = NNPREAL(2.0) * (s * dt[i - 1] + t[i - 1]) - dt[i - 2];
+        dt[i + 1] = NNPREAL(2.0) * (s * dt[i    ] + t[i    ]) - dt[i - 1];
+        dt[i + 2] = NNPREAL(2.0) * (s * dt[i + 1] + t[i + 1]) - dt[i    ];
+        dt[i + 3] = NNPREAL(2.0) * (s * dt[i + 2] + t[i + 2]) - dt[i + 1];
     }
 
 #elif defined(CHEBYSHEV_UNROLL6)
@@ -91,32 +91,32 @@ inline void SymmFuncChebyshev::chebyshevFunction(real* t, real* dt, real s, int 
 
     for (i = 2; i < l; i += 6)
     {
-        t [i    ] = REAL(2.0) * s * t[i - 1] - t[i - 2];
-        t [i + 1] = REAL(2.0) * s * t[i    ] - t[i - 1];
-        t [i + 2] = REAL(2.0) * s * t[i + 1] - t[i    ];
-        t [i + 3] = REAL(2.0) * s * t[i + 2] - t[i + 1];
-        t [i + 4] = REAL(2.0) * s * t[i + 3] - t[i + 2];
-        t [i + 5] = REAL(2.0) * s * t[i + 4] - t[i + 3];
-        dt[i    ] = REAL(2.0) * (s * dt[i - 1] + t[i - 1]) - dt[i - 2];
-        dt[i + 1] = REAL(2.0) * (s * dt[i    ] + t[i    ]) - dt[i - 1];
-        dt[i + 2] = REAL(2.0) * (s * dt[i + 1] + t[i + 1]) - dt[i    ];
-        dt[i + 3] = REAL(2.0) * (s * dt[i + 2] + t[i + 2]) - dt[i + 1];
-        dt[i + 4] = REAL(2.0) * (s * dt[i + 3] + t[i + 3]) - dt[i + 2];
-        dt[i + 5] = REAL(2.0) * (s * dt[i + 4] + t[i + 4]) - dt[i + 3];
+        t [i    ] = NNPREAL(2.0) * s * t[i - 1] - t[i - 2];
+        t [i + 1] = NNPREAL(2.0) * s * t[i    ] - t[i - 1];
+        t [i + 2] = NNPREAL(2.0) * s * t[i + 1] - t[i    ];
+        t [i + 3] = NNPREAL(2.0) * s * t[i + 2] - t[i + 1];
+        t [i + 4] = NNPREAL(2.0) * s * t[i + 3] - t[i + 2];
+        t [i + 5] = NNPREAL(2.0) * s * t[i + 4] - t[i + 3];
+        dt[i    ] = NNPREAL(2.0) * (s * dt[i - 1] + t[i - 1]) - dt[i - 2];
+        dt[i + 1] = NNPREAL(2.0) * (s * dt[i    ] + t[i    ]) - dt[i - 1];
+        dt[i + 2] = NNPREAL(2.0) * (s * dt[i + 1] + t[i + 1]) - dt[i    ];
+        dt[i + 3] = NNPREAL(2.0) * (s * dt[i + 2] + t[i + 2]) - dt[i + 1];
+        dt[i + 4] = NNPREAL(2.0) * (s * dt[i + 3] + t[i + 3]) - dt[i + 2];
+        dt[i + 5] = NNPREAL(2.0) * (s * dt[i + 4] + t[i + 4]) - dt[i + 3];
     }
 
     m = n - ((n - l) % 4);
 
     for (i = l; i < m; i += 4)
     {
-        t [i    ] = REAL(2.0) * s * t[i - 1] - t[i - 2];
-        t [i + 1] = REAL(2.0) * s * t[i    ] - t[i - 1];
-        t [i + 2] = REAL(2.0) * s * t[i + 1] - t[i    ];
-        t [i + 3] = REAL(2.0) * s * t[i + 2] - t[i + 1];
-        dt[i    ] = REAL(2.0) * (s * dt[i - 1] + t[i - 1]) - dt[i - 2];
-        dt[i + 1] = REAL(2.0) * (s * dt[i    ] + t[i    ]) - dt[i - 1];
-        dt[i + 2] = REAL(2.0) * (s * dt[i + 1] + t[i + 1]) - dt[i    ];
-        dt[i + 3] = REAL(2.0) * (s * dt[i + 2] + t[i + 2]) - dt[i + 1];
+        t [i    ] = NNPREAL(2.0) * s * t[i - 1] - t[i - 2];
+        t [i + 1] = NNPREAL(2.0) * s * t[i    ] - t[i - 1];
+        t [i + 2] = NNPREAL(2.0) * s * t[i + 1] - t[i    ];
+        t [i + 3] = NNPREAL(2.0) * s * t[i + 2] - t[i + 1];
+        dt[i    ] = NNPREAL(2.0) * (s * dt[i - 1] + t[i - 1]) - dt[i - 2];
+        dt[i + 1] = NNPREAL(2.0) * (s * dt[i    ] + t[i    ]) - dt[i - 1];
+        dt[i + 2] = NNPREAL(2.0) * (s * dt[i + 1] + t[i + 1]) - dt[i    ];
+        dt[i + 3] = NNPREAL(2.0) * (s * dt[i + 2] + t[i + 2]) - dt[i + 1];
     }
 
 #elif defined(CHEBYSHEV_UNROLL8)
@@ -124,43 +124,43 @@ inline void SymmFuncChebyshev::chebyshevFunction(real* t, real* dt, real s, int 
 
     for (i = 2; i < l; i += 8)
     {
-        t [i    ] = REAL(2.0) * s * t[i - 1] - t[i - 2];
-        t [i + 1] = REAL(2.0) * s * t[i    ] - t[i - 1];
-        t [i + 2] = REAL(2.0) * s * t[i + 1] - t[i    ];
-        t [i + 3] = REAL(2.0) * s * t[i + 2] - t[i + 1];
-        t [i + 4] = REAL(2.0) * s * t[i + 3] - t[i + 2];
-        t [i + 5] = REAL(2.0) * s * t[i + 4] - t[i + 3];
-        t [i + 6] = REAL(2.0) * s * t[i + 5] - t[i + 4];
-        t [i + 7] = REAL(2.0) * s * t[i + 6] - t[i + 5];
-        dt[i    ] = REAL(2.0) * (s * dt[i - 1] + t[i - 1]) - dt[i - 2];
-        dt[i + 1] = REAL(2.0) * (s * dt[i    ] + t[i    ]) - dt[i - 1];
-        dt[i + 2] = REAL(2.0) * (s * dt[i + 1] + t[i + 1]) - dt[i    ];
-        dt[i + 3] = REAL(2.0) * (s * dt[i + 2] + t[i + 2]) - dt[i + 1];
-        dt[i + 4] = REAL(2.0) * (s * dt[i + 3] + t[i + 3]) - dt[i + 2];
-        dt[i + 5] = REAL(2.0) * (s * dt[i + 4] + t[i + 4]) - dt[i + 3];
-        dt[i + 6] = REAL(2.0) * (s * dt[i + 5] + t[i + 5]) - dt[i + 4];
-        dt[i + 7] = REAL(2.0) * (s * dt[i + 6] + t[i + 6]) - dt[i + 5];
+        t [i    ] = NNPREAL(2.0) * s * t[i - 1] - t[i - 2];
+        t [i + 1] = NNPREAL(2.0) * s * t[i    ] - t[i - 1];
+        t [i + 2] = NNPREAL(2.0) * s * t[i + 1] - t[i    ];
+        t [i + 3] = NNPREAL(2.0) * s * t[i + 2] - t[i + 1];
+        t [i + 4] = NNPREAL(2.0) * s * t[i + 3] - t[i + 2];
+        t [i + 5] = NNPREAL(2.0) * s * t[i + 4] - t[i + 3];
+        t [i + 6] = NNPREAL(2.0) * s * t[i + 5] - t[i + 4];
+        t [i + 7] = NNPREAL(2.0) * s * t[i + 6] - t[i + 5];
+        dt[i    ] = NNPREAL(2.0) * (s * dt[i - 1] + t[i - 1]) - dt[i - 2];
+        dt[i + 1] = NNPREAL(2.0) * (s * dt[i    ] + t[i    ]) - dt[i - 1];
+        dt[i + 2] = NNPREAL(2.0) * (s * dt[i + 1] + t[i + 1]) - dt[i    ];
+        dt[i + 3] = NNPREAL(2.0) * (s * dt[i + 2] + t[i + 2]) - dt[i + 1];
+        dt[i + 4] = NNPREAL(2.0) * (s * dt[i + 3] + t[i + 3]) - dt[i + 2];
+        dt[i + 5] = NNPREAL(2.0) * (s * dt[i + 4] + t[i + 4]) - dt[i + 3];
+        dt[i + 6] = NNPREAL(2.0) * (s * dt[i + 5] + t[i + 5]) - dt[i + 4];
+        dt[i + 7] = NNPREAL(2.0) * (s * dt[i + 6] + t[i + 6]) - dt[i + 5];
     }
 
     m = n - ((n - l) % 4);
 
     for (i = l; i < m; i += 4)
     {
-        t [i    ] = REAL(2.0) * s * t[i - 1] - t[i - 2];
-        t [i + 1] = REAL(2.0) * s * t[i    ] - t[i - 1];
-        t [i + 2] = REAL(2.0) * s * t[i + 1] - t[i    ];
-        t [i + 3] = REAL(2.0) * s * t[i + 2] - t[i + 1];
-        dt[i    ] = REAL(2.0) * (s * dt[i - 1] + t[i - 1]) - dt[i - 2];
-        dt[i + 1] = REAL(2.0) * (s * dt[i    ] + t[i    ]) - dt[i - 1];
-        dt[i + 2] = REAL(2.0) * (s * dt[i + 1] + t[i + 1]) - dt[i    ];
-        dt[i + 3] = REAL(2.0) * (s * dt[i + 2] + t[i + 2]) - dt[i + 1];
+        t [i    ] = NNPREAL(2.0) * s * t[i - 1] - t[i - 2];
+        t [i + 1] = NNPREAL(2.0) * s * t[i    ] - t[i - 1];
+        t [i + 2] = NNPREAL(2.0) * s * t[i + 1] - t[i    ];
+        t [i + 3] = NNPREAL(2.0) * s * t[i + 2] - t[i + 1];
+        dt[i    ] = NNPREAL(2.0) * (s * dt[i - 1] + t[i - 1]) - dt[i - 2];
+        dt[i + 1] = NNPREAL(2.0) * (s * dt[i    ] + t[i    ]) - dt[i - 1];
+        dt[i + 2] = NNPREAL(2.0) * (s * dt[i + 1] + t[i + 1]) - dt[i    ];
+        dt[i + 3] = NNPREAL(2.0) * (s * dt[i + 2] + t[i + 2]) - dt[i + 1];
     }
 #endif
 
     for (i = m; i < n; ++i)
     {
-        t [i] = REAL(2.0) * s * t[i - 1] - t[i - 2];
-        dt[i] = REAL(2.0) * (s * dt[i - 1] + t[i - 1]) - dt[i - 2];
+        t [i] = NNPREAL(2.0) * s * t[i - 1] - t[i - 2];
+        dt[i] = NNPREAL(2.0) * (s * dt[i - 1] + t[i - 1]) - dt[i - 2];
     }
 }
 

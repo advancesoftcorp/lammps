@@ -7,8 +7,8 @@
 
 #include "nnp_nnlayer.h"
 
-#define SIGMOID_MAX   REAL(50.0)
-#define TWTANH_ALPHA  REAL(0.16)
+#define SIGMOID_MAX   NNPREAL(50.0)
+#define TWTANH_ALPHA  NNPREAL(0.16)
 
 NNLayer::NNLayer(int numInpNodes, int numOutNodes, int activation)
 {
@@ -32,8 +32,8 @@ NNLayer::NNLayer(int numInpNodes, int numOutNodes, int activation)
     this->inpGrad = NULL;
     this->outDrv1 = NULL;
 
-    this->weight = new real[this->numInpNodes * this->numOutNodes];
-    this->bias   = new real[this->numOutNodes];
+    this->weight = new nnpreal[this->numInpNodes * this->numOutNodes];
+    this->bias   = new nnpreal[this->numOutNodes];
 }
 
 NNLayer::~NNLayer()
@@ -84,9 +84,9 @@ void NNLayer::setSizeOfBatch(int sizeBatch)
         delete[] this->outDrv1;
     }
 
-    this->inpData = new real[this->numInpNodes * this->sizeBatch];
-    this->inpGrad = new real[this->numInpNodes * this->sizeBatch];
-    this->outDrv1 = new real[this->numOutNodes * this->sizeBatch];
+    this->inpData = new nnpreal[this->numInpNodes * this->sizeBatch];
+    this->inpGrad = new nnpreal[this->numInpNodes * this->sizeBatch];
+    this->outDrv1 = new nnpreal[this->numOutNodes * this->sizeBatch];
 }
 
 void NNLayer::scanWeight(FILE* fp, int rank, MPI_Comm world)
@@ -131,8 +131,8 @@ void NNLayer::scanWeight(FILE* fp, int rank, MPI_Comm world)
     MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
     if (ierr != 0) stop_by_error("cannot scan neural network @bias");
 
-    MPI_Bcast(&(this->weight[0]), nweight, MPI_REAL0, 0, world);
-    MPI_Bcast(&(this->bias[0]),   nbias,   MPI_REAL0, 0, world);
+    MPI_Bcast(&(this->weight[0]), nweight, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->bias[0]),   nbias,   MPI_NNPREAL, 0, world);
 }
 
 void NNLayer::projectWeightFrom(NNLayer* src, int* mapInpNodes)
@@ -186,7 +186,7 @@ void NNLayer::projectWeightFrom(NNLayer* src, int* mapInpNodes)
     }
 }
 
-void NNLayer::goForward(real* outData) const
+void NNLayer::goForward(nnpreal* outData) const
 {
     if (outData == NULL)
     {
@@ -204,8 +204,8 @@ void NNLayer::goForward(real* outData) const
     }
 
     // inpData -> outData, through neural network
-    real a0 = ZERO;
-    real a1 = ONE;
+    nnpreal a0 = ZERO;
+    nnpreal a1 = ONE;
 
     xgemm_("T", "N", &(this->numOutNodes), &(this->sizeBatch), &(this->numInpNodes),
            &a1, this->weight, &(this->numInpNodes), this->inpData, &(this->numInpNodes),
@@ -227,7 +227,7 @@ void NNLayer::goForward(real* outData) const
     this->operateActivation(outData);
 }
 
-void NNLayer::goBackward(real* outGrad, bool toInpGrad)
+void NNLayer::goBackward(nnpreal* outGrad, bool toInpGrad)
 {
     if (outGrad == NULL)
     {
@@ -249,8 +249,8 @@ void NNLayer::goBackward(real* outGrad, bool toInpGrad)
         outGrad[idata] *= this->outDrv1[idata];
     }
 
-    real a0 = ZERO;
-    real a1 = ONE;
+    nnpreal a0 = ZERO;
+    nnpreal a1 = ONE;
 
     // outGrad -> inpGrad, through neural network
     if (toInpGrad)
@@ -266,14 +266,14 @@ void NNLayer::goBackward(real* outGrad, bool toInpGrad)
     }
 }
 
-void NNLayer::operateActivation(real* outData) const
+void NNLayer::operateActivation(nnpreal* outData) const
 {
     if (this->outDrv1 == NULL)
     {
         stop_by_error("outDrv1 is null.");
     }
 
-    real x, y, z;
+    nnpreal x, y, z;
 
     int idata;
     int ndata = this->sizeBatch * this->numOutNodes;
@@ -362,8 +362,8 @@ void NNLayer::operateActivation(real* outData) const
         for (idata = 0; idata < ndata; ++idata)
         {
             x = outData[idata];
-            y = REAL(0.5) * (ONE + erf(x / ROOT2));        // -> phi
-            z = exp(-REAL(0.5) * x * x) / ROOT2 / ROOTPI;  // -> dphi/dx
+            y = NNPREAL(0.5) * (ONE + erf(x / ROOT2));        // -> phi
+            z = exp(-NNPREAL(0.5) * x * x) / ROOT2 / ROOTPI;  // -> dphi/dx
 
             outData[idata] = x * y;
             this->outDrv1[idata] = y + x * z;

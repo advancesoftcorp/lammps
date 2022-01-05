@@ -38,7 +38,7 @@ public:
         return this->withClassical;
     }
 
-    real getRcutoff() const
+    nnpreal getRcutoff() const
     {
         if (this->symmFunc == SYMM_FUNC_MANYBODY)
         {
@@ -71,12 +71,12 @@ public:
         return this->m3;
     }
 
-    real getRinner() const
+    nnpreal getRinner() const
     {
         return this->rinner;
     }
 
-    real getRouter() const
+    nnpreal getRouter() const
     {
         return this->router;
     }
@@ -91,12 +91,12 @@ public:
         return this->numAngle;
     }
 
-    real getRcutRadius() const
+    nnpreal getRcutRadius() const
     {
         return this->rcutRadius;
     }
 
-    real getRcutAngle() const
+    nnpreal getRcutAngle() const
     {
         return this->rcutAngle;
     }
@@ -106,27 +106,27 @@ public:
         return this->behlerG4;
     }
 
-    const real* getBehlerEta1() const
+    const nnpreal* getBehlerEta1() const
     {
         return this->behlerEta1;
     }
 
-    const real* getBehlerEta2() const
+    const nnpreal* getBehlerEta2() const
     {
         return this->behlerEta2;
     }
 
-    const real* getBehlerRs1() const
+    const nnpreal* getBehlerRs1() const
     {
         return this->behlerRs1;
     }
 
-    const real* getBehlerRs2() const
+    const nnpreal* getBehlerRs2() const
     {
         return this->behlerRs2;
     }
 
-    const real* getBehlerZeta() const
+    const nnpreal* getBehlerZeta() const
     {
         return this->behlerZeta;
     }
@@ -180,20 +180,20 @@ private:
 
     int m2;
     int m3;
-    real rinner;
-    real router;
+    nnpreal rinner;
+    nnpreal router;
 
-    int   numRadius;
-    int   numAngle;
-    real  rcutRadius;
-    real  rcutAngle;
+    int     numRadius;
+    int     numAngle;
+    nnpreal rcutRadius;
+    nnpreal rcutAngle;
 
-    int   behlerG4;
-    real* behlerEta1;
-    real* behlerEta2;
-    real* behlerRs1;
-    real* behlerRs2;
-    real* behlerZeta;
+    int      behlerG4;
+    nnpreal* behlerEta1;
+    nnpreal* behlerEta2;
+    nnpreal* behlerRs1;
+    nnpreal* behlerRs2;
+    nnpreal* behlerZeta;
 
     int cutoffMode;
 

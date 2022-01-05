@@ -45,7 +45,7 @@ public:
 
 protected:
     double cutcoul;
-    real* charges;
+    nnpreal* charges;
 
     void allocate();
 

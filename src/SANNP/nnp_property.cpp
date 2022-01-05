@@ -154,10 +154,10 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
         MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
         if (ierr != 0) stop_by_error("cannot read ffield file, at symmFunc parameter (many-body)");
 
-        MPI_Bcast(&(this->m2),     1, MPI_INT,   0, world);
-        MPI_Bcast(&(this->m3),     1, MPI_INT,   0, world);
-        MPI_Bcast(&(this->rinner), 1, MPI_REAL0, 0, world);
-        MPI_Bcast(&(this->router), 1, MPI_REAL0, 0, world);
+        MPI_Bcast(&(this->m2),     1, MPI_INT,     0, world);
+        MPI_Bcast(&(this->m3),     1, MPI_INT,     0, world);
+        MPI_Bcast(&(this->rinner), 1, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->router), 1, MPI_NNPREAL, 0, world);
     }
 
     else if (this->symmFunc == SYMM_FUNC_BEHLER)
@@ -191,11 +191,11 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
         MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
         if (ierr != 0) stop_by_error("cannot read ffield file, at symmFunc parameter (Behler)");
 
-        MPI_Bcast(&(this->numRadius),  1, MPI_INT,   0, world);
-        MPI_Bcast(&(this->numAngle),   1, MPI_INT,   0, world);
-        MPI_Bcast(&(this->rcutRadius), 1, MPI_REAL0, 0, world);
-        MPI_Bcast(&(this->rcutAngle),  1, MPI_REAL0, 0, world);
-        MPI_Bcast(&(this->behlerG4),   1, MPI_INT,   0, world);
+        MPI_Bcast(&(this->numRadius),  1, MPI_INT,     0, world);
+        MPI_Bcast(&(this->numAngle),   1, MPI_INT,     0, world);
+        MPI_Bcast(&(this->rcutRadius), 1, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->rcutAngle),  1, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->behlerG4),   1, MPI_INT,     0, world);
 
         if (this->behlerEta1 != NULL)
         {
@@ -220,15 +220,15 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
 
         if (this->numRadius > 0)
         {
-            this->behlerEta1 = new real[this->numRadius];
-            this->behlerRs1  = new real[this->numRadius];
+            this->behlerEta1 = new nnpreal[this->numRadius];
+            this->behlerRs1  = new nnpreal[this->numRadius];
         }
 
         if (this->numAngle > 0)
         {
-            this->behlerEta2 = new real[this->numAngle];
-            this->behlerZeta = new real[this->numAngle];
-            this->behlerRs2  = new real[this->numAngle];
+            this->behlerEta2 = new nnpreal[this->numAngle];
+            this->behlerZeta = new nnpreal[this->numAngle];
+            this->behlerRs2  = new nnpreal[this->numAngle];
         }
 
         if (this->numRadius > 0)
@@ -255,8 +255,8 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
             MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
             if (ierr != 0) stop_by_error("cannot read ffield file, at Behler parameter");
 
-            MPI_Bcast(&(this->behlerEta1[0]), this->numRadius, MPI_REAL0, 0, world);
-            MPI_Bcast(&(this->behlerRs1[0]),  this->numRadius, MPI_REAL0, 0, world);
+            MPI_Bcast(&(this->behlerEta1[0]), this->numRadius, MPI_NNPREAL, 0, world);
+            MPI_Bcast(&(this->behlerRs1[0]),  this->numRadius, MPI_NNPREAL, 0, world);
         }
 
         if (this->numAngle > 0)
@@ -291,9 +291,9 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
             MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
             if (ierr != 0) stop_by_error("cannot read ffield file, at Behler parameter");
 
-            MPI_Bcast(&(this->behlerEta2[0]), this->numAngle, MPI_REAL0, 0, world);
-            MPI_Bcast(&(this->behlerZeta[0]), this->numAngle, MPI_REAL0, 0, world);
-            MPI_Bcast(&(this->behlerRs2[0]),  this->numAngle, MPI_REAL0, 0, world);
+            MPI_Bcast(&(this->behlerEta2[0]), this->numAngle, MPI_NNPREAL, 0, world);
+            MPI_Bcast(&(this->behlerZeta[0]), this->numAngle, MPI_NNPREAL, 0, world);
+            MPI_Bcast(&(this->behlerRs2[0]),  this->numAngle, MPI_NNPREAL, 0, world);
         }
     }
 
@@ -320,10 +320,10 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
         MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
         if (ierr != 0) stop_by_error("cannot read ffield file, at symmFunc parameter (Chebyshev)");
 
-        MPI_Bcast(&(this->numRadius),  1, MPI_INT,   0, world);
-        MPI_Bcast(&(this->numAngle),   1, MPI_INT,   0, world);
-        MPI_Bcast(&(this->rcutRadius), 1, MPI_REAL0, 0, world);
-        MPI_Bcast(&(this->rcutAngle),  1, MPI_REAL0, 0, world);
+        MPI_Bcast(&(this->numRadius),  1, MPI_INT,     0, world);
+        MPI_Bcast(&(this->numAngle),   1, MPI_INT,     0, world);
+        MPI_Bcast(&(this->rcutRadius), 1, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->rcutAngle),  1, MPI_NNPREAL, 0, world);
     }
 
     else
@@ -339,10 +339,10 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
         }
         else
         {
-            real rcut1 = this->rcutRadius;
-            real rcut2 = this->rcutAngle;
+            nnpreal rcut1 = this->rcutRadius;
+            nnpreal rcut2 = this->rcutAngle;
 
-            if (fabs(rcut1 - rcut2) > REAL(1.0e-4))
+            if (fabs(rcut1 - rcut2) > NNPREAL(1.0e-4))
             {
                 this->cutoffMode = CUTOFF_MODE_DOUBLE;
             }

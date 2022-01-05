@@ -8,7 +8,7 @@
 #include "nnp_symm_func_behler.h"
 
 SymmFuncBehler::SymmFuncBehler(int numElems, bool tanhCutFunc, bool elemWeight, int sizeRad, int sizeAng,
-                               real rcutRad, real rcutAng) : SymmFunc(numElems, tanhCutFunc, elemWeight)
+                               nnpreal rcutRad, nnpreal rcutAng) : SymmFunc(numElems, tanhCutFunc, elemWeight)
 {
     if (sizeRad < 1)
     {
@@ -63,8 +63,8 @@ SymmFuncBehler::~SymmFuncBehler()
     // NOP
 }
 
-void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, real** posNeighbor,
-                               real* symmData, real* symmDiff) const
+void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, nnpreal** posNeighbor,
+                               nnpreal* symmData, nnpreal* symmDiff) const
 {
     if (elemNeighbor == NULL || posNeighbor == NULL)
     {
@@ -93,53 +93,53 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, real** posNei
     int imode;
     int ibase, jbase, kbase;
 
-    real x1, x2, x3;
-    real y1, y2, y3;
-    real z1, z2, z3;
-    real r1, r2, r3, dr, rr;
+    nnpreal x1, x2, x3;
+    nnpreal y1, y2, y3;
+    nnpreal z1, z2, z3;
+    nnpreal r1, r2, r3, dr, rr;
 
-    real rs, eta;
-    real zeta, zeta0;
-    real zeta1[this->sizeAng];
+    nnpreal rs, eta;
+    nnpreal zeta, zeta0;
+    nnpreal zeta1[this->sizeAng];
 
-    int  ilambda;
-    real lambda;
+    int     ilambda;
+    nnpreal lambda;
 
-    real fc1, fc2, fc3;
-    real dfc1dr1, dfc2dr2, dfc3dr3;
-    real dfc1dx1, dfc2dx2, dfc3dx3;
-    real dfc1dy1, dfc2dy2, dfc3dy3;
-    real dfc1dz1, dfc2dz2, dfc3dz3;
+    nnpreal fc1, fc2, fc3;
+    nnpreal dfc1dr1, dfc2dr2, dfc3dr3;
+    nnpreal dfc1dx1, dfc2dx2, dfc3dx3;
+    nnpreal dfc1dy1, dfc2dy2, dfc3dy3;
+    nnpreal dfc1dz1, dfc2dz2, dfc3dz3;
 
-    real fc0;
-    real dfc0dx1, dfc0dx2, dfc0dx3;
-    real dfc0dy1, dfc0dy2, dfc0dy3;
-    real dfc0dz1, dfc0dz2, dfc0dz3;
+    nnpreal fc0;
+    nnpreal dfc0dx1, dfc0dx2, dfc0dx3;
+    nnpreal dfc0dy1, dfc0dy2, dfc0dy3;
+    nnpreal dfc0dz1, dfc0dz2, dfc0dz3;
 
-    real gau;
-    real dgaudx1, dgaudx2, dgaudx3;
-    real dgaudy1, dgaudy2, dgaudy3;
-    real dgaudz1, dgaudz2, dgaudz3;
+    nnpreal gau;
+    nnpreal dgaudx1, dgaudx2, dgaudx3;
+    nnpreal dgaudy1, dgaudy2, dgaudy3;
+    nnpreal dgaudz1, dgaudz2, dgaudz3;
 
-    real psi;
-    real dpsidx1, dpsidx2;
-    real dpsidy1, dpsidy2;
-    real dpsidz1, dpsidz2;
+    nnpreal psi;
+    nnpreal dpsidx1, dpsidx2;
+    nnpreal dpsidy1, dpsidy2;
+    nnpreal dpsidz1, dpsidz2;
 
-    real chi;
-    real chi0;
-    real dchidpsi;
-    const real chi0_thr = REAL(1.0e-6);
+    nnpreal chi;
+    nnpreal chi0;
+    nnpreal dchidpsi;
+    const nnpreal chi0_thr = NNPREAL(1.0e-6);
 
-    real g;
-    real dgdx1, dgdx2, dgdx3;
-    real dgdy1, dgdy2, dgdy3;
-    real dgdz1, dgdz2, dgdz3;
+    nnpreal g;
+    nnpreal dgdx1, dgdx2, dgdx3;
+    nnpreal dgdy1, dgdy2, dgdy3;
+    nnpreal dgdz1, dgdz2, dgdz3;
 
-    real zanum1, zanum2;
-    real zscale;
+    nnpreal zanum1, zanum2;
+    nnpreal zscale;
 
-    real coef0, coef1, coef2, coef3;
+    nnpreal coef0, coef1, coef2, coef3;
 
     // initialize symmetry functions
     for (ibase = 0; ibase < this->numBasis; ++ibase)
@@ -178,7 +178,7 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, real** posNei
         if (this->elemWeight)
         {
             jelem1 = 0;
-            zanum1 = (real) elemNeighbor[ineigh1];
+            zanum1 = (nnpreal) elemNeighbor[ineigh1];
         }
         else
         {
@@ -205,7 +205,7 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, real** posNei
             rr  = dr * dr;
 
             gau     = exp(-eta * rr);
-            coef0   = -REAL(2.0) * eta * dr / r1 * gau;
+            coef0   = -NNPREAL(2.0) * eta * dr / r1 * gau;
             dgaudx1 = x1 * coef0;
             dgaudy1 = y1 * coef0;
             dgaudz1 = z1 * coef0;
@@ -238,7 +238,7 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, real** posNei
     for (imode = 0; imode < this->sizeAng; ++imode)
     {
         zeta = this->angleZeta[imode];
-        zeta1[imode] = pow(REAL(2.0), ONE - zeta);
+        zeta1[imode] = pow(NNPREAL(2.0), ONE - zeta);
     }
 
     for (ineigh2 = 0; ineigh2 < numNeighbor; ++ineigh2)
@@ -258,7 +258,7 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, real** posNei
         if (this->elemWeight)
         {
             jelem2 = 0;
-            zanum2 = (real) elemNeighbor[ineigh2];
+            zanum2 = (nnpreal) elemNeighbor[ineigh2];
             mneigh = ineigh2;
         }
         else
@@ -291,7 +291,7 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, real** posNei
             if (this->elemWeight)
             {
                 jelem1 = 0;
-                zanum1 = (real) elemNeighbor[ineigh1];
+                zanum1 = (nnpreal) elemNeighbor[ineigh1];
                 zscale = sqrt(zanum1 * zanum2);
             }
             else
@@ -395,7 +395,7 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, real** posNei
                         rr = (r1 - rs) * (r1 - rs) + (r2 - rs) * (r2 - rs);
 
                         gau     = exp(-eta * rr);
-                        coef0   = -REAL(2.0) * eta * gau;
+                        coef0   = -NNPREAL(2.0) * eta * gau;
                         coef1   = coef0 * (r1 - rs) / r1;
                         coef2   = coef0 * (r2 - rs) / r2;
                         dgaudx1 = coef1 * x1;
@@ -447,7 +447,7 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, real** posNei
                         rr = (r1 - rs) * (r1 - rs) + (r2 - rs) * (r2 - rs) + (r3 - rs) * (r3 - rs);
 
                         gau     = exp(-eta * rr);
-                        coef0   = -REAL(2.0) * eta * gau;
+                        coef0   = -NNPREAL(2.0) * eta * gau;
                         coef1   = coef0 * (r1 - rs) / r1;
                         coef2   = coef0 * (r2 - rs) / r2;
                         coef3   = coef0 * (r3 - rs) / r3;

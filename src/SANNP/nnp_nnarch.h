@@ -30,7 +30,7 @@ public:
     void restoreNN(FILE* fp, int numElems, char** elemNames, int rank, MPI_Comm world);
 
     void initGeometry(int numAtoms, int* elements,
-                      int* numNeighbor, int** elemNeighbor, real*** posNeighbor);
+                      int* numNeighbor, int** elemNeighbor, nnpreal*** posNeighbor);
 
     void clearGeometry();
 
@@ -48,28 +48,28 @@ public:
 
     void goForwardOnCharge();
 
-    void obtainEnergies(real* energies) const;
+    void obtainEnergies(nnpreal* energies) const;
 
-    void obtainForces(real*** forces) const;
+    void obtainForces(nnpreal*** forces) const;
 
-    void obtainCharges(real* charges) const;
+    void obtainCharges(nnpreal* charges) const;
 
-    const real* getLJLikeA1() const
+    const nnpreal* getLJLikeA1() const
     {
     	return this->ljlikeA1;
     }
 
-    const real* getLJLikeA2() const
+    const nnpreal* getLJLikeA2() const
     {
     	return this->ljlikeA2;
     }
 
-    const real* getLJLikeA3() const
+    const nnpreal* getLJLikeA3() const
     {
     	return this->ljlikeA3;
     }
 
-    const real* getLJLikeA4() const
+    const nnpreal* getLJLikeA4() const
     {
     	return this->ljlikeA4;
     }
@@ -83,27 +83,27 @@ private:
 
     int* atomNum;
 
-    int*    elements;
-    int*    numNeighbor;
-    int**   elemNeighbor;
-    real*** posNeighbor;
+    int*       elements;
+    int*       numNeighbor;
+    int**      elemNeighbor;
+    nnpreal*** posNeighbor;
 
     int   mbatch;
     int*  nbatch;
     int*  ibatch;
 
-    real** energyData;
-    real** energyGrad;
+    nnpreal** energyData;
+    nnpreal** energyGrad;
 
-    real*** forceData;
+    nnpreal*** forceData;
 
-    real** chargeData;
+    nnpreal** chargeData;
 
-    real**    symmData;
-    real**    symmDiff;
-    real*     symmAve;
-    real*     symmDev;
-    SymmFunc* symmFunc;
+    nnpreal**    symmData;
+    nnpreal**    symmDiff;
+    nnpreal*     symmAve;
+    nnpreal*     symmDev;
+    SymmFunc*    symmFunc;
 
     NNLayer*** interLayersEnergy;
     NNLayer**  lastLayersEnergy;
@@ -111,10 +111,10 @@ private:
     NNLayer*** interLayersCharge;
     NNLayer**  lastLayersCharge;
 
-    real* ljlikeA1;
-    real* ljlikeA2;
-    real* ljlikeA3;
-    real* ljlikeA4;
+    nnpreal* ljlikeA1;
+    nnpreal* ljlikeA2;
+    nnpreal* ljlikeA3;
+    nnpreal* ljlikeA4;
 
     bool isEnergyMode() const
     {

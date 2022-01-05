@@ -14,11 +14,11 @@
 class SymmFuncManyBody : public SymmFunc
 {
 public:
-    SymmFuncManyBody(int numElems, bool elemWeight, int size2Body, int size3Body, real radiusInner, real radiusOuter);
+    SymmFuncManyBody(int numElems, bool elemWeight, int size2Body, int size3Body, nnpreal radiusInner, nnpreal radiusOuter);
     virtual ~SymmFuncManyBody();
 
-    void calculate(int numNeighbor, int* elemNeighbor, real** posNeighbor,
-                   real* symmData, real* symmDiff) const;
+    void calculate(int numNeighbor, int* elemNeighbor, nnpreal** posNeighbor,
+                   nnpreal* symmData, nnpreal* symmDiff) const;
 
     int getNum2BodyBasis() const
     {
@@ -37,11 +37,11 @@ private:
     int num2BodyBasis;
     int num3BodyBasis;
 
-    real radiusInner;
-    real radiusOuter;
+    nnpreal radiusInner;
+    nnpreal radiusOuter;
 
-    real step2Body;
-    real step3Body;
+    nnpreal step2Body;
+    nnpreal step3Body;
 };
 
 #endif /* NNP_SYMM_FUNC_MANYBODY_H_ */

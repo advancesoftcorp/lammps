@@ -7,10 +7,10 @@
 
 #include "nnp_symm_func_chebyshev.h"
 
-#define SMALL  REAL(0.001)
+#define SMALL  NNPREAL(0.001)
 
 SymmFuncChebyshev::SymmFuncChebyshev(int numElems, bool tanhCutFunc, bool elemWeight, int sizeRad, int sizeAng,
-                                     real rcutRad, real rcutAng) : SymmFunc(numElems, tanhCutFunc, elemWeight)
+                                     nnpreal rcutRad, nnpreal rcutAng) : SymmFunc(numElems, tanhCutFunc, elemWeight)
 {
     if (sizeRad < 1)
     {
@@ -57,8 +57,8 @@ SymmFuncChebyshev::~SymmFuncChebyshev()
     // NOP
 }
 
-void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, real** posNeighbor,
-                                  real* symmData, real* symmDiff) const
+void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, nnpreal** posNeighbor,
+                                  nnpreal* symmData, nnpreal* symmDiff) const
 {
     if (elemNeighbor == NULL || posNeighbor == NULL)
     {
@@ -87,49 +87,49 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, real** pos
     int imode;
     int ibase, jbase;
 
-    real x1, x2;
-    real y1, y2;
-    real z1, z2;
-    real r1, r2, rr;
+    nnpreal x1, x2;
+    nnpreal y1, y2;
+    nnpreal z1, z2;
+    nnpreal r1, r2, rr;
 
-    real fc1, fc2;
-    real dfc1dr1, dfc2dr2;
-    real dfc1dx1, dfc2dx2;
-    real dfc1dy1, dfc2dy2;
-    real dfc1dz1, dfc2dz2;
+    nnpreal fc1, fc2;
+    nnpreal dfc1dr1, dfc2dr2;
+    nnpreal dfc1dx1, dfc2dx2;
+    nnpreal dfc1dy1, dfc2dy2;
+    nnpreal dfc1dz1, dfc2dz2;
 
-    real fc0;
-    real dfc0dx1, dfc0dx2;
-    real dfc0dy1, dfc0dy2;
-    real dfc0dz1, dfc0dz2;
+    nnpreal fc0;
+    nnpreal dfc0dx1, dfc0dx2;
+    nnpreal dfc0dy1, dfc0dy2;
+    nnpreal dfc0dz1, dfc0dz2;
 
-    real phi;
-    real dphidth;
-    real dphidx1, dphidx2;
-    real dphidy1, dphidy2;
-    real dphidz1, dphidz2;
+    nnpreal phi;
+    nnpreal dphidth;
+    nnpreal dphidx1, dphidx2;
+    nnpreal dphidy1, dphidy2;
+    nnpreal dphidz1, dphidz2;
 
-    real tht;
-    real dthtdx1, dthtdx2;
-    real dthtdy1, dthtdy2;
-    real dthtdz1, dthtdz2;
+    nnpreal tht;
+    nnpreal dthtdx1, dthtdx2;
+    nnpreal dthtdy1, dthtdy2;
+    nnpreal dthtdz1, dthtdz2;
 
-    real g;
-    real dgdx1, dgdx2;
-    real dgdy1, dgdy2;
-    real dgdz1, dgdz2;
+    nnpreal g;
+    nnpreal dgdx1, dgdx2;
+    nnpreal dgdy1, dgdy2;
+    nnpreal dgdz1, dgdz2;
 
-    real zanum1, zanum2;
-    real zscale;
+    nnpreal zanum1, zanum2;
+    nnpreal zscale;
 
-    real cos0, sin0;
-    real coef0, coef1, coef2, coef3;
+    nnpreal cos0, sin0;
+    nnpreal coef0, coef1, coef2, coef3;
 
     const int ncheby = max(2, max(this->sizeRad, this->sizeAng));
 
-    real scheby;
-    real tcheby[ncheby];
-    real dcheby[ncheby];
+    nnpreal scheby;
+    nnpreal tcheby[ncheby];
+    nnpreal dcheby[ncheby];
 
     // initialize symmetry functions
     for (ibase = 0; ibase < this->numBasis; ++ibase)
@@ -168,7 +168,7 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, real** pos
         if (this->elemWeight)
         {
             jelem1 = 0;
-            zanum1 = (real) elemNeighbor[ineigh1];
+            zanum1 = (nnpreal) elemNeighbor[ineigh1];
         }
         else
         {
@@ -185,8 +185,8 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, real** pos
         dfc1dy1 = y1 / r1 * dfc1dr1;
         dfc1dz1 = z1 / r1 * dfc1dr1;
 
-        scheby = REAL(2.0) * r1 / this->rcutRad - ONE;
-        coef0  = REAL(2.0) / this->rcutRad / r1;
+        scheby = NNPREAL(2.0) * r1 / this->rcutRad - ONE;
+        coef0  = NNPREAL(2.0) / this->rcutRad / r1;
         this->chebyshevFunction(tcheby, dcheby, scheby, this->sizeRad);
 
         #pragma omp simd
@@ -240,7 +240,7 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, real** pos
         if (this->elemWeight)
         {
             jelem2 = 0;
-            zanum2 = (real) elemNeighbor[ineigh2];
+            zanum2 = (nnpreal) elemNeighbor[ineigh2];
             mneigh = ineigh2;
         }
         else
@@ -273,7 +273,7 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, real** pos
             if (this->elemWeight)
             {
                 jelem1 = 0;
-                zanum1 = (real) elemNeighbor[ineigh1];
+                zanum1 = (nnpreal) elemNeighbor[ineigh1];
                 zscale = sqrt(zanum1 * zanum2);
             }
             else
@@ -322,8 +322,8 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, real** pos
             dthtdy2 = (coef0 * y1 - coef2 * y2) * coef3;
             dthtdz2 = (coef0 * z1 - coef2 * z2) * coef3;
 
-            scheby = REAL(2.0) * tht / PI - ONE;
-            coef0  = REAL(2.0) / PI;
+            scheby = NNPREAL(2.0) * tht / PI - ONE;
+            coef0  = NNPREAL(2.0) / PI;
             this->chebyshevFunction(tcheby, dcheby, scheby, this->sizeAng);
 
             #pragma omp simd

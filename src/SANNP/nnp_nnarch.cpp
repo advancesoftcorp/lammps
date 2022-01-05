@@ -37,8 +37,8 @@ NNArch::NNArch(int mode, int numElems, const Property* property)
 
     if (this->isEnergyMode())
     {
-        this->energyData = new real*[this->numElems];
-        this->energyGrad = new real*[this->numElems];
+        this->energyData = new nnpreal*[this->numElems];
+        this->energyGrad = new nnpreal*[this->numElems];
     }
     else
     {
@@ -50,7 +50,7 @@ NNArch::NNArch(int mode, int numElems, const Property* property)
 
     if (this->isChargeMode())
     {
-        this->chargeData = new real*[this->numElems];
+        this->chargeData = new nnpreal*[this->numElems];
     }
     else
     {
@@ -59,8 +59,8 @@ NNArch::NNArch(int mode, int numElems, const Property* property)
 
     this->symmData    = NULL;
     this->symmDiff    = NULL;
-    this->symmAve     = new real[this->numElems];
-    this->symmDev     = new real[this->numElems];
+    this->symmAve     = new nnpreal[this->numElems];
+    this->symmDev     = new nnpreal[this->numElems];
     this->symmFunc    = NULL;
 
     this->interLayersEnergy = NULL;
@@ -222,11 +222,11 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, int rank, MPI_C
 
     int* mapElem;
 
-    real* symmAveOld;
-    real* symmDevOld;
-    int*  atomNumOld;
+    nnpreal* symmAveOld;
+    nnpreal* symmDevOld;
+    int*     atomNumOld;
 
-    real A1, A2, A3, A4;
+    nnpreal A1, A2, A3, A4;
 
     int* mapSymmFunc;
 
@@ -268,9 +268,9 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, int rank, MPI_C
     elemNamesOld = new char*[nelemOld];
     elemNamesNew = new char*[nelemNew];
 
-    symmAveOld = new real[nelemOld];
-    symmDevOld = new real[nelemOld];
-    atomNumOld = new int [nelemOld];
+    symmAveOld = new nnpreal[nelemOld];
+    symmDevOld = new nnpreal[nelemOld];
+    atomNumOld = new int    [nelemOld];
 
     for (ielem = 0; ielem < nelemOld; ++ielem)
     {
@@ -324,9 +324,9 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, int rank, MPI_C
         MPI_Bcast(elemNamesOld[ielem], lenElemName, MPI_CHAR, 0, world);
     }
 
-    MPI_Bcast(&symmAveOld[0], nelemOld, MPI_REAL0, 0, world);
-    MPI_Bcast(&symmDevOld[0], nelemOld, MPI_REAL0, 0, world);
-    MPI_Bcast(&atomNumOld[0], nelemOld, MPI_INT,   0, world);
+    MPI_Bcast(&symmAveOld[0], nelemOld, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&symmDevOld[0], nelemOld, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&atomNumOld[0], nelemOld, MPI_INT,     0, world);
 
     for (ielem = 0; ielem < nelemNew; ++ielem)
     {
@@ -391,10 +391,10 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, int rank, MPI_C
     {
         melemNew = nelemNew * (nelemNew + 1) / 2;
 
-        this->ljlikeA1 = new real[melemNew];
-        this->ljlikeA2 = new real[melemNew];
-        this->ljlikeA3 = new real[melemNew];
-        this->ljlikeA4 = new real[melemNew];
+        this->ljlikeA1 = new nnpreal[melemNew];
+        this->ljlikeA2 = new nnpreal[melemNew];
+        this->ljlikeA3 = new nnpreal[melemNew];
+        this->ljlikeA4 = new nnpreal[melemNew];
 
         for (kelem = 0; kelem < melemNew; ++kelem)
         {
@@ -488,10 +488,10 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, int rank, MPI_C
         MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
         if (ierr != 0) stop_by_error("cannot read ffield file, at LJ-like.");
 
-        MPI_Bcast(&(this->ljlikeA1[0]), melemNew, MPI_REAL0, 0, world);
-        MPI_Bcast(&(this->ljlikeA2[0]), melemNew, MPI_REAL0, 0, world);
-        MPI_Bcast(&(this->ljlikeA3[0]), melemNew, MPI_REAL0, 0, world);
-        MPI_Bcast(&(this->ljlikeA4[0]), melemNew, MPI_REAL0, 0, world);
+        MPI_Bcast(&(this->ljlikeA1[0]), melemNew, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->ljlikeA2[0]), melemNew, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->ljlikeA3[0]), melemNew, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->ljlikeA4[0]), melemNew, MPI_NNPREAL, 0, world);
     }
 
     // release memory
@@ -808,7 +808,7 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, int rank, MPI_C
 }
 
 void NNArch::initGeometry(int numAtoms, int* elements,
-                          int* numNeighbor, int** elemNeighbor, real*** posNeighbor)
+                          int* numNeighbor, int** elemNeighbor, nnpreal*** posNeighbor)
 {
 
     this->numAtoms = numAtoms;
@@ -880,8 +880,8 @@ void NNArch::initGeometry(int numAtoms, int* elements,
 
             jbatch = this->nbatch[ielem];
 
-            this->energyData[ielem] = new real[jbatch];
-            this->energyGrad[ielem] = new real[jbatch];
+            this->energyData[ielem] = new nnpreal[jbatch];
+            this->energyGrad[ielem] = new nnpreal[jbatch];
 
             for (ilayer = 0; ilayer < nlayer; ++ilayer)
             {
@@ -891,17 +891,17 @@ void NNArch::initGeometry(int numAtoms, int* elements,
             this->lastLayersEnergy[ielem]->setSizeOfBatch(jbatch);
         }
 
-        this->forceData = new real**[natom];
+        this->forceData = new nnpreal**[natom];
 
         for (iatom = 0; iatom < natom; ++iatom)
         {
             nneigh = numNeighbor[iatom] + 1;
 
-            this->forceData[iatom] = new real*[nneigh];
+            this->forceData[iatom] = new nnpreal*[nneigh];
 
             for (ineigh = 0; ineigh < nneigh; ++ineigh)
             {
-                this->forceData[iatom][ineigh] = new real[3];
+                this->forceData[iatom][ineigh] = new nnpreal[3];
             }
         }
     }
@@ -919,7 +919,7 @@ void NNArch::initGeometry(int numAtoms, int* elements,
 
             jbatch = this->nbatch[ielem];
 
-            this->chargeData[ielem] = new real[jbatch];
+            this->chargeData[ielem] = new nnpreal[jbatch];
 
             for (ilayer = 0; ilayer < nlayer; ++ilayer)
             {
@@ -1079,28 +1079,28 @@ SymmFunc* NNArch::getSymmFunc()
             int  m2 = this->property->getM2();
             int  m3 = this->property->getM3();
 
-            real rinner = this->property->getRinner();
-            real router = this->property->getRouter();
+            nnpreal rinner = this->property->getRinner();
+            nnpreal router = this->property->getRouter();
 
             this->symmFunc = new SymmFuncManyBody(this->numElems, false, m2, m3, rinner, router);
         }
 
         else if (this->property->getSymmFunc() == SYMM_FUNC_BEHLER)
         {
-            int  nrad    = this->property->getNumRadius();
-            int  nang    = this->property->getNumAngle();
-            real rrad    = this->property->getRcutRadius();
-            real rang    = this->property->getRcutAngle();
-            bool weight  = (this->property->getElemWeight() != 0);
-            bool tanhCut = (this->property->getTanhCutoff() != 0);
+            int     nrad    = this->property->getNumRadius();
+            int     nang    = this->property->getNumAngle();
+            nnpreal rrad    = this->property->getRcutRadius();
+            nnpreal rang    = this->property->getRcutAngle();
+            bool    weight  = (this->property->getElemWeight() != 0);
+            bool    tanhCut = (this->property->getTanhCutoff() != 0);
 
             bool useG4 = (this->property->getBehlerG4() != 0);
 
-            const real* eta1 = this->property->getBehlerEta1();
-            const real* eta2 = this->property->getBehlerEta2();
-            const real* rs1  = this->property->getBehlerRs1();
-            const real* rs2  = this->property->getBehlerRs2();
-            const real* zeta = this->property->getBehlerZeta();
+            const nnpreal* eta1 = this->property->getBehlerEta1();
+            const nnpreal* eta2 = this->property->getBehlerEta2();
+            const nnpreal* rs1  = this->property->getBehlerRs1();
+            const nnpreal* rs2  = this->property->getBehlerRs2();
+            const nnpreal* zeta = this->property->getBehlerZeta();
 
             SymmFuncBehler* symmFuncBehler = NULL;
             symmFuncBehler = new SymmFuncBehler(this->numElems, tanhCut, weight, nrad, nang, rrad, rang);
@@ -1113,12 +1113,12 @@ SymmFunc* NNArch::getSymmFunc()
 
         else if (this->property->getSymmFunc() == SYMM_FUNC_CHEBYSHEV)
         {
-            int  nrad    = this->property->getNumRadius();
-            int  nang    = this->property->getNumAngle();
-            real rrad    = this->property->getRcutRadius();
-            real rang    = this->property->getRcutAngle();
-            bool weight  = (this->property->getElemWeight() != 0);
-            bool tanhCut = (this->property->getTanhCutoff() != 0);
+            int     nrad    = this->property->getNumRadius();
+            int     nang    = this->property->getNumAngle();
+            nnpreal rrad    = this->property->getRcutRadius();
+            nnpreal rang    = this->property->getRcutAngle();
+            bool    weight  = (this->property->getElemWeight() != 0);
+            bool    tanhCut = (this->property->getTanhCutoff() != 0);
 
             this->symmFunc = new SymmFuncChebyshev(this->numElems, tanhCut, weight, nrad, nang, rrad, rang);
         }
@@ -1148,15 +1148,15 @@ void NNArch::calculateSymmFuncs()
     int nbase = this->getSymmFunc()->getNumBasis();
 
     // allocate memory
-    this->symmData = new real*[natom];
-    this->symmDiff = new real*[natom];
+    this->symmData = new nnpreal*[natom];
+    this->symmDiff = new nnpreal*[natom];
 
     for (iatom = 0; iatom < natom; ++iatom)
     {
         nneigh = this->numNeighbor[iatom] + 1;
 
-        this->symmData[iatom] = new real[nbase];
-        this->symmDiff[iatom] = new real[nbase * 3 * nneigh];
+        this->symmData[iatom] = new nnpreal[nbase];
+        this->symmDiff[iatom] = new nnpreal[nbase * 3 * nneigh];
     }
 
     // calculate symmetry functions
@@ -1184,8 +1184,8 @@ void NNArch::renormalizeSymmFuncs()
     int ibase;
     int nbase = this->getSymmFunc()->getNumBasis();
 
-    real ave;
-    real dev;
+    nnpreal ave;
+    nnpreal dev;
 
     for (ielem = 0; ielem < nelem; ++ielem)
     {
@@ -1376,12 +1376,12 @@ void NNArch::goBackwardOnForce()
 
     int jbatch;
 
-    real*  symmGrad;
-    real*  forceNeigh;
+    nnpreal*  symmGrad;
+    nnpreal*  forceNeigh;
 
-    const int  i1 = 1;
-    const real a0 = ZERO;
-    const real a1 = ONE;
+    const int     i1 = 1;
+    const nnpreal a0 = ZERO;
+    const nnpreal a1 = ONE;
 
     // derive energies by itselves, to be units
     for (ielem = 0; ielem < nelem; ++ielem)
@@ -1434,8 +1434,8 @@ void NNArch::goBackwardOnForce()
     #pragma omp parallel private(iatom, ielem, jbatch, ibase, \
                                  nneigh, nneigh3, ineigh, forceNeigh, symmGrad)
     {
-        forceNeigh = new real[3 * mneigh];
-        symmGrad   = new real[nbase];
+        forceNeigh = new nnpreal[3 * mneigh];
+        symmGrad   = new nnpreal[nbase];
 
         #pragma omp for
         for (iatom = 0; iatom < natom; ++iatom)
@@ -1532,7 +1532,7 @@ void NNArch::goForwardOnCharge()
     }
 }
 
-void NNArch::obtainEnergies(real* energies) const
+void NNArch::obtainEnergies(nnpreal* energies) const
 {
     if (energies == NULL)
     {
@@ -1561,7 +1561,7 @@ void NNArch::obtainEnergies(real* energies) const
     }
 }
 
-void NNArch::obtainForces(real*** forces) const
+void NNArch::obtainForces(nnpreal*** forces) const
 {
     if (forces == NULL)
     {
@@ -1593,7 +1593,7 @@ void NNArch::obtainForces(real*** forces) const
     }
 }
 
-void NNArch::obtainCharges(real* charges) const
+void NNArch::obtainCharges(nnpreal* charges) const
 {
     if (charges == NULL)
     {

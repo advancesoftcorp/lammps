@@ -15,12 +15,12 @@ class SymmFuncBehler : public SymmFunc
 {
 public:
     SymmFuncBehler(int numElems, bool tanhCutFunc, bool elemWeight,
-                   int sizeRad, int sizeAng, real rcutRad, real rcutAng);
+                   int sizeRad, int sizeAng, nnpreal rcutRad, nnpreal rcutAng);
 
     virtual ~SymmFuncBehler();
 
-    void calculate(int numNeighbor, int* elemNeighbor, real** posNeighbor,
-                   real* symmData, real* symmDiff) const;
+    void calculate(int numNeighbor, int* elemNeighbor, nnpreal** posNeighbor,
+                   nnpreal* symmData, nnpreal* symmDiff) const;
 
     int getNumRadBasis() const
     {
@@ -32,7 +32,7 @@ public:
         return this->numAngBasis;
     }
 
-    void setRadiusData(const real* radiusEta, const real* radiusShift)
+    void setRadiusData(const nnpreal* radiusEta, const nnpreal* radiusShift)
     {
         if (this->sizeRad < 1)
         {
@@ -54,7 +54,7 @@ public:
         this->radiusShift = radiusShift;
     }
 
-    void setAngleData(bool angleMod, const real* angleEta, const real* angleZeta, const real* angleShift)
+    void setAngleData(bool angleMod, const nnpreal* angleEta, const nnpreal* angleZeta, const nnpreal* angleShift)
     {
         if (this->sizeAng < 1)
         {
@@ -92,18 +92,18 @@ private:
     int numRadBasis;
     int numAngBasis;
 
-    real rcutRad;
-    real rcutAng;
+    nnpreal rcutRad;
+    nnpreal rcutAng;
 
-    real radiusCut;
+    nnpreal radiusCut;
 
-    const real* radiusEta;
-    const real* radiusShift;
+    const nnpreal* radiusEta;
+    const nnpreal* radiusShift;
 
     bool angleMod;
-    const real* angleEta;
-    const real* angleZeta;
-    const real* angleShift;
+    const nnpreal* angleEta;
+    const nnpreal* angleZeta;
+    const nnpreal* angleShift;
 };
 
 #endif /* NNP_SYMM_FUNC_BEHLER_H_ */

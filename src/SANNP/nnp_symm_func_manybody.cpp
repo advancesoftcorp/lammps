@@ -8,7 +8,7 @@
 #include "nnp_symm_func_manybody.h"
 
 SymmFuncManyBody::SymmFuncManyBody(int numElems, bool elemWeight, int size2Body, int size3Body,
-                                   real radiusInner, real radiusOuter) : SymmFunc(numElems, false, elemWeight)
+                                   nnpreal radiusInner, nnpreal radiusOuter) : SymmFunc(numElems, false, elemWeight)
 {
     if (this->elemWeight)
     {
@@ -49,11 +49,11 @@ SymmFuncManyBody::SymmFuncManyBody(int numElems, bool elemWeight, int size2Body,
     this->radiusInner = radiusInner;
     this->radiusOuter = radiusOuter;
 
-    this->step2Body = (this->radiusOuter - this->radiusInner) / ((real) this->size2Body);
+    this->step2Body = (this->radiusOuter - this->radiusInner) / ((nnpreal) this->size2Body);
 
     if (this->size3Body > 0)
     {
-        this->step3Body = (this->radiusOuter - this->radiusInner) / ((real) this->size3Body);
+        this->step3Body = (this->radiusOuter - this->radiusInner) / ((nnpreal) this->size3Body);
     }
     else
     {
@@ -66,8 +66,8 @@ SymmFuncManyBody::~SymmFuncManyBody()
     // NOP
 }
 
-void SymmFuncManyBody::calculate(int numNeighbor, int* elemNeighbor, real** posNeighbor,
-                                 real* symmData, real* symmDiff) const
+void SymmFuncManyBody::calculate(int numNeighbor, int* elemNeighbor, nnpreal** posNeighbor,
+                                 nnpreal* symmData, nnpreal* symmDiff) const
 {
     if (elemNeighbor == NULL || posNeighbor == NULL)
     {
@@ -103,21 +103,21 @@ void SymmFuncManyBody::calculate(int numNeighbor, int* elemNeighbor, real** posN
     int ibase;
     int ibase1, ibase2, ibase3;
 
-    real x1, x2, dx;
-    real y1, y2, dy;
-    real z1, z2, dz;
-    real r1, r2, r3, rr;
-    real s1, s2, s3;
-    real t1, t2, t3;
+    nnpreal x1, x2, dx;
+    nnpreal y1, y2, dy;
+    nnpreal z1, z2, dz;
+    nnpreal r1, r2, r3, rr;
+    nnpreal s1, s2, s3;
+    nnpreal t1, t2, t3;
 
-    real phi1, phi2, phi3;
-    real dphi1dr, dphi2dr, dphi3dr;
-    real dphi1dx, dphi2dx, dphi3dx;
-    real dphi1dy, dphi2dy, dphi3dy;
-    real dphi1dz, dphi2dz, dphi3dz;
-    real dphi1dx_, dphi2dx_, dphi3dx_;
-    real dphi1dy_, dphi2dy_, dphi3dy_;
-    real dphi1dz_, dphi2dz_, dphi3dz_;
+    nnpreal phi1, phi2, phi3;
+    nnpreal dphi1dr, dphi2dr, dphi3dr;
+    nnpreal dphi1dx, dphi2dx, dphi3dx;
+    nnpreal dphi1dy, dphi2dy, dphi3dy;
+    nnpreal dphi1dz, dphi2dz, dphi3dz;
+    nnpreal dphi1dx_, dphi2dx_, dphi3dx_;
+    nnpreal dphi1dy_, dphi2dy_, dphi3dy_;
+    nnpreal dphi1dz_, dphi2dz_, dphi3dz_;
 
     // initialize symmetry functions
     for (ibase = 0; ibase < this->numBasis; ++ibase)
@@ -162,11 +162,11 @@ void SymmFuncManyBody::calculate(int numNeighbor, int* elemNeighbor, real** posN
 
         for (imode1 = staMode1; imode1 <= endMode1; ++imode1)
         {
-            s1 = this->radiusInner + ((real) imode1) * this->step2Body;
+            s1 = this->radiusInner + ((nnpreal) imode1) * this->step2Body;
             t1 = (r1 - s1) / this->step2Body;
 
-            phi1 = REAL(0.5) * cos(PI * t1) + REAL(0.5);
-            dphi1dr = -REAL(0.5) * PI / this->step2Body * sin(PI * t1);
+            phi1 = NNPREAL(0.5) * cos(PI * t1) + NNPREAL(0.5);
+            dphi1dr = -NNPREAL(0.5) * PI / this->step2Body * sin(PI * t1);
             dphi1dx = -x1 / r1 * dphi1dr;
             dphi1dy = -y1 / r1 * dphi1dr;
             dphi1dz = -z1 / r1 * dphi1dr;
@@ -258,11 +258,11 @@ void SymmFuncManyBody::calculate(int numNeighbor, int* elemNeighbor, real** posN
 
             for (imode3 = staMode3; imode3 <= endMode3; ++imode3)
             {
-                s3 = this->radiusInner + ((real) imode3) * this->step3Body;
+                s3 = this->radiusInner + ((nnpreal) imode3) * this->step3Body;
                 t3 = (r3 - s3) / this->step3Body;
 
-                phi3 = REAL(0.5) * cos(PI * t3) + REAL(0.5);
-                dphi3dr = -REAL(0.5) * PI / this->step3Body * sin(PI * t3);
+                phi3 = NNPREAL(0.5) * cos(PI * t3) + NNPREAL(0.5);
+                dphi3dr = -NNPREAL(0.5) * PI / this->step3Body * sin(PI * t3);
                 dphi3dx = (x1 - x2) / r3 * dphi3dr;
                 dphi3dy = (y1 - y2) / r3 * dphi3dr;
                 dphi3dz = (z1 - z2) / r3 * dphi3dr;
@@ -271,11 +271,11 @@ void SymmFuncManyBody::calculate(int numNeighbor, int* elemNeighbor, real** posN
 
                 for (imode2 = staMode2; imode2 <= endMode2; ++imode2)
                 {
-                    s2 = this->radiusInner + ((real) imode2) * this->step3Body;
+                    s2 = this->radiusInner + ((nnpreal) imode2) * this->step3Body;
                     t2 = (r2 - s2) / this->step3Body;
 
-                    phi2 = REAL(0.5) * cos(PI * t2) + REAL(0.5);
-                    dphi2dr = -REAL(0.5) * PI / this->step3Body * sin(PI * t2);
+                    phi2 = NNPREAL(0.5) * cos(PI * t2) + NNPREAL(0.5);
+                    dphi2dr = -NNPREAL(0.5) * PI / this->step3Body * sin(PI * t2);
                     dphi2dx = -x2 / r2 * dphi2dr;
                     dphi2dy = -y2 / r2 * dphi2dr;
                     dphi2dz = -z2 / r2 * dphi2dr;
@@ -287,11 +287,11 @@ void SymmFuncManyBody::calculate(int numNeighbor, int* elemNeighbor, real** posN
 
                     for (imode1 = staMode1; imode1 <= endMode1_; ++imode1)
                     {
-                        s1 = this->radiusInner + ((real) imode1) * this->step3Body;
+                        s1 = this->radiusInner + ((nnpreal) imode1) * this->step3Body;
                         t1 = (r1 - s1) / this->step3Body;
 
-                        phi1 = REAL(0.5) * cos(PI * t1) + REAL(0.5);
-                        dphi1dr = -REAL(0.5) * PI / this->step3Body * sin(PI * t1);
+                        phi1 = NNPREAL(0.5) * cos(PI * t1) + NNPREAL(0.5);
+                        dphi1dr = -NNPREAL(0.5) * PI / this->step3Body * sin(PI * t1);
                         dphi1dx = -x1 / r1 * dphi1dr;
                         dphi1dy = -y1 / r1 * dphi1dr;
                         dphi1dz = -z1 / r1 * dphi1dr;

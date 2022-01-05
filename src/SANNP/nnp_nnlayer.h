@@ -22,9 +22,9 @@ public:
 
     void projectWeightFrom(NNLayer* src, int* mapInpNodes);
 
-    void goForward(real* outData) const;
+    void goForward(nnpreal* outData) const;
 
-    void goBackward(real* outGrad, bool toInpGrad);
+    void goBackward(nnpreal* outGrad, bool toInpGrad);
 
     int getNumInpNodes() const
     {
@@ -36,12 +36,12 @@ public:
         return this->numOutNodes;
     }
 
-    real* getData()
+    nnpreal* getData()
     {
         return this->inpData;
     }
 
-    real* getGrad()
+    nnpreal* getGrad()
     {
         return this->inpGrad;
     }
@@ -53,14 +53,14 @@ private:
 
     int activation;
 
-    real* inpData;
-    real* inpGrad;
-    real* outDrv1;
+    nnpreal* inpData;
+    nnpreal* inpGrad;
+    nnpreal* outDrv1;
 
-    real* weight;
-    real* bias;
+    nnpreal* weight;
+    nnpreal* bias;
 
-    void operateActivation(real* outData) const;
+    void operateActivation(nnpreal* outData) const;
 };
 
 #endif /* NNP_NNLAYER_H_ */

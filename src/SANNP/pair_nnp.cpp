@@ -108,7 +108,7 @@ bool PairNNP::prepareNN()
     int* numneigh = list->numneigh;
     int** firstneigh = list->firstneigh;
 
-    real x0, y0, z0, dx, dy, dz, r, rr, fc, dfcdr;
+    nnpreal x0, y0, z0, dx, dy, dz, r, rr, fc, dfcdr;
 
     const int elemWeight = this->property->getElemWeight();
     const int cutoffMode = this->property->getCutoffMode();
