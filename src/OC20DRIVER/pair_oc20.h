@@ -14,6 +14,7 @@ PairStyle(oc20, PairOC20)
 #ifndef LMP_PAIR_OC20_H_
 #define LMP_PAIR_OC20_H_
 
+#include <Python.h>
 #include "atom.h"
 #include "comm.h"
 #include "error.h"
@@ -25,7 +26,6 @@ PairStyle(oc20, PairOC20)
 #include "neigh_request.h"
 #include "neighbor.h"
 #include "domain.h"
-#include <Python.h>
 
 namespace LAMMPS_NS
 {
