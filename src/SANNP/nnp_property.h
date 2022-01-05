@@ -210,7 +210,7 @@ private:
 
     void printProperty();
 
-    void activToString(char* str, int activ)
+    void activToString(char* str, int activ);
 };
 
 #endif /* NNP_PROPERTY_H_ */
