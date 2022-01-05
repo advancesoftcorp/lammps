@@ -337,6 +337,8 @@ double PairOC20::initializePython(const char *name, int gpu)
 
     double cutoff = -1.0;
 
+    PyObject* pySys    = NULL;
+    PyObject* pyPath   = NULL;
     PyObject* pyName   = NULL;
     PyObject* pyModule = NULL;
     PyObject* pyFunc   = NULL;
@@ -347,7 +349,11 @@ double PairOC20::initializePython(const char *name, int gpu)
 
     Py_Initialize();
 
-    pyName = PyUnicode_FromString("oc20_driver");
+    pySys  = PyImport_ImportModule("sys");
+    pyPath = PyObject_GetAttrString(pySys, "path");
+    PyList_Append(pyPath, PyUnicode_DecodeFSDefault("."));
+
+    pyName = PyUnicode_DecodeFSDefault("oc20_driver");
 
     if (pyName != NULL)
     {
