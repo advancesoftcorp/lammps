@@ -173,9 +173,9 @@ void PairOC20::performGNN()
     {
         i = ilist[iatom];
 
-        f[i][0] += forces[iatom][0][0];
-        f[i][1] += forces[iatom][0][1];
-        f[i][2] += forces[iatom][0][2];
+        f[i][0] += forces[iatom][0];
+        f[i][1] += forces[iatom][1];
+        f[i][2] += forces[iatom][2];
     }
 }
 
@@ -439,7 +439,7 @@ double PairOC20::calculatePython()
     int hasEnergy = 0;
     int hasForces = 0;
 
-    PyObject* pyFunc  = this-pyFunc;
+    PyObject* pyFunc  = this->pyFunc;
     PyObject* pyArgs  = NULL;
     PyObject* pyArg1  = NULL;
     PyObject* pyArg2  = NULL;
