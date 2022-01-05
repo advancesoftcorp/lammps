@@ -65,9 +65,13 @@ def oc20_initialize(model_name, gpu = True):
     else:
         raise Exception("incorrect model_name.")
 
+    gpu_ = (gpu and torch.cuda.is_available())
+
     logFile = open("log.oc20", "w")
     logFile.write("\n");
     logFile.write("model_name = " + model_name + "\n");
+    logFile.write("gpu (in)   = " + str(gpu)   + "\n");
+    logFile.write("gpu (eff)  = " + str(gpu_)  + "\n");
     logFile.write("config_yml = " + config_yml + "\n");
     logFile.write("checkpoint = " + checkpoint + "\n");
 
@@ -104,7 +108,7 @@ def oc20_initialize(model_name, gpu = True):
         slurm      = config.get("slurm", {}),
         local_rank = config.get("local_rank", 0),
         is_debug   = config.get("is_debug", False),
-        cpu        = not (gpu and torch.cuda.is_available())
+        cpu        = not gpu_
     )
 
     # Load checkpoint
