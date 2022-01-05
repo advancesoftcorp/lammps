@@ -449,6 +449,8 @@ void Property::printProperty()
         return;
     }
 
+    fprintf(fp, "\n");
+
     if (this->symmFunc == SYMM_FUNC_MANYBODY)
     {
         fprintf(fp, "  %s\n", "Symmetry Function (Many-Body Method):");

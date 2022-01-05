@@ -66,6 +66,7 @@ def oc20_initialize(model_name, gpu = True):
         raise Exception("incorrect model_name.")
 
     logFile = open("log.oc20", "w")
+    logFile.write("\n");
     logFile.write("model_name = " + model_name + "\n");
     logFile.write("config_yml = " + config_yml + "\n");
     logFile.write("checkpoint = " + checkpoint + "\n");
@@ -86,7 +87,7 @@ def oc20_initialize(model_name, gpu = True):
     config["model"]["otf_graph"] = True
 
     logFile.write("\nconfig:\n");
-    logFile.write(str(config));
+    logFile.write(str(config) + "\n");
     logFile.write("\n");
     logFile.close()
 
