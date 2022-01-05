@@ -463,13 +463,13 @@ void Property::printProperty()
 
     else if (this->symmFunc == SYMM_FUNC_BEHLER)
     {
-        real eta1;
-        real eta1Min = ZERO;
-        real eta1Max = ZERO;
+        nnpreal eta1;
+        nnpreal eta1Min = ZERO;
+        nnpreal eta1Max = ZERO;
 
-        real rs1;
-        real rs1Min = ZERO;
-        real rs1Max = ZERO;
+        nnpreal rs1;
+        nnpreal rs1Min = ZERO;
+        nnpreal rs1Max = ZERO;
 
         if (this->numRadius > 0)
         {
@@ -485,17 +485,17 @@ void Property::printProperty()
             }
         }
 
-        real eta2;
-        real eta2Min = ZERO;
-        real eta2Max = ZERO;
+        nnpreal eta2;
+        nnpreal eta2Min = ZERO;
+        nnpreal eta2Max = ZERO;
 
-        real zeta;
-        real zetaMin = ZERO;
-        real zetaMax = ZERO;
+        nnpreal zeta;
+        nnpreal zetaMin = ZERO;
+        nnpreal zetaMax = ZERO;
 
-        real rs2;
-        real rs2Min = ZERO;
-        real rs2Max = ZERO;
+        nnpreal rs2;
+        nnpreal rs2Min = ZERO;
+        nnpreal rs2Max = ZERO;
 
         if (this->numAngle > 0)
         {
@@ -540,7 +540,7 @@ void Property::printProperty()
         fprintf(fp, "  %s%.3f%s\n",     "  Rcut for G2    = ",           this->rcutRadius, " Angstrom");
         fprintf(fp, "  %s%d%s%.3f%s\n", "  Rcut for G", gType, "    = ", this->rcutAngle,  " Angstrom");
 
-        real max0 = ZERO;
+        nnpreal max0 = ZERO;
         max0 = max(max0, eta1Max);
         max0 = max(max0, rs1Max);
         max0 = max(max0, eta2Max);
