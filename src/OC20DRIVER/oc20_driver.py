@@ -62,7 +62,7 @@ def oc20_initialize(model_name, gpu = True):
         config_yml = "oc20_configs/spinconv.yml"
         checkpoint = "oc20_checkpt/spinconv_force_centric_all.pt"
 
-    else
+    else:
         raise Exception("incorrect model_name.")
 
     logFile = open("log.oc20", "w")
