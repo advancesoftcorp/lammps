@@ -18,6 +18,7 @@ from ocpmodels.common.utils import (
 
 from ocpmodels.datasets import data_list_collater
 from ocpmodels.preprocessing import AtomsToGraphs
+from cgi import logfile
 
 def oc20_initialize(model_name, gpu = True):
     """
@@ -64,17 +65,30 @@ def oc20_initialize(model_name, gpu = True):
     else
         raise Exception("incorrect model_name.")
 
+    logFile = open("log.oc20", "w")
+    logFile.write("model_name = " + model_name + "\n");
+    logFile.write("config_yml = " + config_yml + "\n");
+    logFile.write("checkpoint = " + checkpoint + "\n");
+
     config = yaml.safe_load(open(config_yml, "r"))
 
     # Check max_neigh and cutoff
     max_neigh = config["model"].get("max_neighbors", 50)
     cutoff    = config["model"].get("cutoff", 6.0)
 
+    logFile.write("max_neigh  = " + str(max_neigh) + "\n");
+    logFile.write("cutoff     = " + str(cutoff) + "\n");
+
     assert max_neigh > 0
     assert cutoff    > 0.0
 
     # To calculate the edge indices on-the-fly
     config["model"]["otf_graph"] = True
+
+    logFile.write("\nconfig:\n");
+    logFile.write(str(config));
+    logFile.write("\n");
+    logFile.close()
 
     # Create trainer, that is pre-trained
     trainer = registry.get_trainer_class(
