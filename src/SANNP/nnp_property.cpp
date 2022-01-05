@@ -434,4 +434,218 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
         MPI_Bcast(&(this->nodesCharge),  1, MPI_INT, 0, world);
         MPI_Bcast(&(this->activCharge),  1, MPI_INT, 0, world);
     }
+
+    if (rank == 0)
+    {
+        this->printProperty();
+    }
 }
+
+void Property::printProperty()
+{
+    FILE* fp = fopen("log.nnp", "w");
+    if (fp == NULL)
+    {
+        return;
+    }
+
+    if (this->symmFunc == SYMM_FUNC_MANYBODY)
+    {
+        fprintf(fp, "  %s\n", "Symmetry Function (Many-Body Method):");
+        fprintf(fp, "  %s%d\n",     "  M2     = ", this->m2);
+        fprintf(fp, "  %s%d\n",     "  M3     = ", this->m3);
+        fprintf(fp, "  %s%.3f%s\n", "  Rinner = ", this->rinner, " Angstrom");
+        fprintf(fp, "  %s%.3f%s\n", "  Router = ", this->router, " Angstrom");
+        fprintf(fp, "\n");
+        fprintf(fp, "  %s\n", "  [See Y.Huang, et al., Rhys. Rev. B 99, 064103 (2019)]");
+        fprintf(fp, "\n");
+    }
+
+    else if (this->symmFunc == SYMM_FUNC_BEHLER)
+    {
+        real eta1;
+        real eta1Min = ZERO;
+        real eta1Max = ZERO;
+
+        real rs1;
+        real rs1Min = ZERO;
+        real rs1Max = ZERO;
+
+        if (this->numRadius > 0)
+        {
+            for (int i = 0; i < this->numRadius; ++i)
+            {
+                eta1 = this->behlerEta1[i];
+                eta1Min = i == 0 ? eta1 : min(eta1Min, eta1);
+                eta1Max = i == 0 ? eta1 : max(eta1Max, eta1);
+
+                rs1 = this->behlerRs1[i];
+                rs1Min = i == 0 ? rs1 : min(rs1Min, rs1);
+                rs1Max = i == 0 ? rs1 : max(rs1Max, rs1);
+            }
+        }
+
+        real eta2;
+        real eta2Min = ZERO;
+        real eta2Max = ZERO;
+
+        real zeta;
+        real zetaMin = ZERO;
+        real zetaMax = ZERO;
+
+        real rs2;
+        real rs2Min = ZERO;
+        real rs2Max = ZERO;
+
+        if (this->numAngle > 0)
+        {
+            for (int i = 0; i < this->numAngle; ++i)
+            {
+                eta2 = this->behlerEta2[i];
+                eta2Min = i == 0 ? eta2 : min(eta2Min, eta2);
+                eta2Max = i == 0 ? eta2 : max(eta2Max, eta2);
+
+                zeta = this->behlerZeta[i];
+                zetaMin = i == 0 ? zeta : min(zetaMin, zeta);
+                zetaMax = i == 0 ? zeta : max(zetaMax, zeta);
+
+                rs2 = this->behlerRs2[i];
+                rs2Min = i == 0 ? rs2 : min(rs2Min, rs2);
+                rs2Max = i == 0 ? rs2 : max(rs2Max, rs2);
+            }
+        }
+
+        int gType;
+        if (this->behlerG4)
+        {
+            gType = 4;
+        }
+        else
+        {
+            gType = 3;
+        }
+
+        if (this->tanhCutoff != 0)
+        {
+            fprintf(fp, "  %s%d%s\n", "Symmetry Function (Behler's G2 & G", gType, " w/ tanh3-cutoff):");
+        }
+        else
+        {
+            fprintf(fp, "  %s%d%s\n", "Symmetry Function (Behler's G2 & G", gType, " w/ cosine-cutoff):");
+        }
+
+        fprintf(fp, "  %s%s\n",         "  Element Weight = ",           this->elemWeight != 0 ? "Yes" : "No");
+        fprintf(fp, "  %s%d\n",         "  Number of G2s  = ",           this->numRadius);
+        fprintf(fp, "  %s%d%s%d%s\n",   "  Number of G", gType, "s  = ", this->numAngle, " x 2");
+        fprintf(fp, "  %s%.3f%s\n",     "  Rcut for G2    = ",           this->rcutRadius, " Angstrom");
+        fprintf(fp, "  %s%d%s%.3f%s\n", "  Rcut for G", gType, "    = ", this->rcutAngle,  " Angstrom");
+
+        real max0 = ZERO;
+        max0 = max(max0, eta1Max);
+        max0 = max(max0, rs1Max);
+        max0 = max(max0, eta2Max);
+        max0 = max(max0, zetaMax);
+        max0 = max(max0, rs2Max);
+
+        const char* form1;
+        const char* form2;
+        const char* form3;
+        if (max0 < 9.9995)
+        {
+            form1 = "  %s%5.3f%s%5.3f%s\n";
+            form2 = "  %s%d%s%5.3f%s%5.3f%s\n";
+            form3 = "  %s%d%s%5.3f%s%5.3f\n";
+        }
+        else
+        {
+            form1 = "  %s%6.3f%s%6.3f%s\n";
+            form2 = "  %s%d%s%6.3f%s%6.3f%s\n";
+            form3 = "  %s%d%s%6.3f%s%6.3f\n";
+        }
+
+        fprintf(fp, form1, "  Eta  for G2    = ",           eta1Min, " ~ ", eta1Max, " Angstorm^-2");
+        fprintf(fp, form1, "  Rs   for G2    = ",           rs1Min,  " ~ ", rs1Max,  " Angstrom");
+        fprintf(fp, form2, "  Eta  for G", gType, "    = ", eta2Min, " ~ ", eta2Max, " Angstrom^-2");
+        fprintf(fp, form3, "  Zeta for G", gType, "    = ", zetaMin, " ~ ", zetaMax);
+        fprintf(fp, form2, "  Rs   for G", gType, "    = ", rs2Min,  " ~ ", rs2Max,  " Angstrom");
+        fprintf(fp, "\n");
+        fprintf(fp, "  %s\n", "  [See J.Behler, Int. J. Quant. Chem. 115, 1032 (2015)]");
+        fprintf(fp, "  %s\n", "  [See M.Gastegger, et al., J. Chem. Phys. 148, 241709 (2018)]");
+        fprintf(fp, "\n");
+    }
+
+    else if (this->symmFunc == SYMM_FUNC_CHEBYSHEV)
+    {
+        if (this->tanhCutoff != 0)
+        {
+            fprintf(fp, "  %s\n", "Symmetry Function (Chebyshev polynomial w/ tanh3-cutoff):");
+        }
+        else
+        {
+            fprintf(fp, "  %s\n", "Symmetry Function (Chebyshev polynomial w/ cosine-cutoff):");
+        }
+
+        fprintf(fp, "  %s%s\n",     "  Element Weight = ", this->elemWeight != 0 ? "Yes" : "No");
+        fprintf(fp, "  %s%d\n",     "  Number of C2s  = ", this->numRadius);
+        fprintf(fp, "  %s%d\n",     "  Number of C3s  = ", this->numAngle);
+        fprintf(fp, "  %s%.3f%s\n", "  Rcut for C2    = ", this->rcutRadius, " Angstrom");
+        fprintf(fp, "  %s%.3f%s\n", "  Rcut for C3    = ", this->rcutAngle,  " Angstrom");
+        fprintf(fp, "\n");
+        fprintf(fp, "  %s\n", "  [See N.Artrith, et al., Rhys. Rev. B 96, 014112 (2017)]");
+        fprintf(fp, "\n");
+    }
+
+    char strActivEnergy[32] = "???";
+    this->activToString(strActivEnergy, this->activEnergy);
+
+    fprintf(fp, "  %s\n", "Neural Network for Energy:");
+    fprintf(fp, "  %s%d\n", "  Number of Layers    = ", this->layersEnergy);
+    fprintf(fp, "  %s%d\n", "  Number of Nodes     = ", this->nodesEnergy);
+    fprintf(fp, "  %s%s\n", "  Activation Func.    = ", strActivEnergy);
+    fprintf(fp, "  %s%s\n", "  With Atomic Charge  = ", this->withCharge    != 0 ? "Yes" : "No");
+    fprintf(fp, "  %s%s\n", "  Classical Potential = ", this->withClassical != 0 ? "Yes" : "No");
+    fprintf(fp, "\n");
+
+    if (this->withCharge != 0)
+    {
+        char strActivCharge[32] = "???";
+        this->activToString(strActivCharge, this->activCharge);
+
+        fprintf(fp, "  %s\n", "Neural Network for Charge:");
+        fprintf(fp, "  %s%d\n", "  Number of Layers    = ", this->layersCharge);
+        fprintf(fp, "  %s%d\n", "  Number of Nodes     = ", this->nodesCharge);
+        fprintf(fp, "  %s%s\n", "  Activation Func.    = ", strActivCharge);
+        fprintf(fp, "\n");
+    }
+
+    fclose(fp);
+}
+
+void Property::activToString(char* str, int activ)
+{
+    if (activ == ACTIVATION_ASIS)
+    {
+        strcpy(str, "Not Used");
+    }
+    else if (activ == ACTIVATION_SIGMOID)
+    {
+        strcpy(str, "sigmoid");
+    }
+    else if (activ == ACTIVATION_TANH)
+    {
+        strcpy(str, "tanh");
+    }
+    else if (activ == ACTIVATION_ELU)
+    {
+        strcpy(str, "eLU");
+    }
+    else if (activ == ACTIVATION_TWTANH)
+    {
+        strcpy(str, "Twisted tanh");
+    }
+    else if (activ == ACTIVATION_GELU)
+    {
+        strcpy(str, "GELU");
+    }
+}
+

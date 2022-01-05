@@ -207,6 +207,10 @@ private:
     int activCharge;
 
     int withCharge;
+
+    void printProperty();
+
+    void activToString(char* str, int activ)
 };
 
 #endif /* NNP_PROPERTY_H_ */
