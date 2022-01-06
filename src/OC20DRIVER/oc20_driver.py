@@ -131,6 +131,8 @@ def oc20_initialize(model_name, gpu = True):
     atoms = None
 
     # Converter: Atoms -> Graphs (the edges on-the-fly)
+    global a2g
+
     a2g = AtomsToGraphs(
         max_neigh   = max_neigh,
         radius      = cutoff,
@@ -172,6 +174,8 @@ def oc20_get_energy_and_forces(cell, atomic_numbers, positions):
         atoms.set_positions(positions)
 
     # Preprossing atomic positions (the edges on-the-fly)
+    global a2g
+
     data  = a2g.convert(atoms)
     batch = data_list_collater([data], otf_graph = True)
 
