@@ -126,7 +126,7 @@ def oc20_initialize(model_name, gpu = True):
 
     # Atoms object of ASE, that is empty here
     global atoms
-    atoms = Atoms(pbc = [True, True, True])
+    atoms = None
 
     # Converter: Atoms -> Graphs (the edges on-the-fly)
     a2g = AtomsToGraphs(
@@ -155,9 +155,19 @@ def oc20_get_energy_and_forces(cell, atomic_numbers, positions):
 
     # Initialize Atoms
     global atoms
-    atoms.set_cell(cell)
-    atoms.set_atomic_numbers(atomic_numbers)
-    atoms.set_positions(positions)
+
+    if atoms is None:
+        atoms = Atoms(
+            numbers   = atomic_numbers,
+            positions = posisitons,
+            cell      = cell,
+            pbc       = [True, True, True]
+        )
+
+    else:
+        atoms.set_cell(cell)
+        atoms.set_atomic_numbers(atomic_numbers)
+        atoms.set_positions(positions)
 
     # Preprossing atomic positions (the edges on-the-fly)
     data  = a2g.convert(atoms)
