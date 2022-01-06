@@ -6,6 +6,7 @@ found in the LICENSE file in the root directory of this source tree.
 """
 
 import os
+import pprint
 import torch
 import yaml
 
@@ -99,7 +100,7 @@ def oc20_initialize(model_name, gpu = True):
     config["model"]["otf_graph"] = True
 
     log_file.write("\nconfig:\n");
-    log_file.write(str(config) + "\n");
+    log_file.write(pprint.pformat(config) + "\n");
     log_file.write("\n");
     log_file.close()
 
