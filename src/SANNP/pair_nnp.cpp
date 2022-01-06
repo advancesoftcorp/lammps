@@ -11,9 +11,10 @@ using namespace LAMMPS_NS;
 
 PairNNP::PairNNP(LAMMPS *lmp) : Pair(lmp)
 {
-    this->typeMap  = NULL;
-    this->property = NULL;
-    this->arch     = NULL;
+    this->typeMap   = NULL;
+    this->zeroEatom = 0;
+    this->property  = NULL;
+    this->arch      = NULL;
 
     const int max   = 10;
     this->maxinum   = max;
@@ -536,11 +537,13 @@ void PairNNP::coeff(int narg, char **arg)
     double r, rr;
     FILE* fp;
 
+    int argOffset;
+
     int ntypes = atom->ntypes;
     int ntypesEff;
     char** typeNames;
 
-    if (narg != (3 + ntypes))
+    if (narg != (3 + ntypes) && narg != (5 + ntypes))
     {
         error->all(FLERR, "Incorrect number of arguments for pair_coeff.");
     }
@@ -548,6 +551,22 @@ void PairNNP::coeff(int narg, char **arg)
     if (strcmp(arg[0], "*") != 0 || strcmp(arg[1], "*") != 0)
     {
         error->all(FLERR, "Only wildcard asterisk is allowed in place of atom types for pair_coeff.");
+    }
+
+    argOffset = 3;
+
+    if (narg > 3 && strcmp(arg[3], "eatom") == 0)
+    {
+        argOffset = 5;
+
+        if (narg > 4 && strcmp(arg[4], "zero") == 0)
+        {
+            this->zeroEatom = 1;
+        }
+        else if (narg > 4 && strcmp(arg[4], "finite") == 0)
+        {
+            this->zeroEatom = 0;
+        }
     }
 
     if (this->typeMap != NULL)
@@ -564,14 +583,14 @@ void PairNNP::coeff(int narg, char **arg)
     {
         this->typeMap[i + 1] = 0;
 
-        if (strcmp(arg[i + 3], "NULL") == 0)
+        if (strcmp(arg[i + argOffset], "NULL") == 0)
         {
             continue;
         }
 
         for (j = 0; j < i; ++j)
         {
-            if (strcmp(arg[i + 3], arg[j + 3]) == 0)
+            if (strcmp(arg[i + argOffset], arg[j + argOffset]) == 0)
             {
                 this->typeMap[i + 1] = this->typeMap[j + 1];
                 break;
@@ -581,7 +600,7 @@ void PairNNP::coeff(int narg, char **arg)
         if (this->typeMap[i + 1] == 0)
         {
             this->typeMap[i + 1] = ntypesEff + 1;
-            typeNames[ntypesEff] = arg[i + 3];
+            typeNames[ntypesEff] = arg[i + argOffset];
             ntypesEff++;
         }
     }
@@ -617,7 +636,7 @@ void PairNNP::coeff(int narg, char **arg)
     this->arch = new NNArch(withCharge ? NNARCH_MODE_BOTH : NNARCH_MODE_ENERGY, ntypesEff, this->property);
 
     this->arch->initLayers();
-    this->arch->restoreNN(fp, ntypesEff, typeNames, comm->me, world);
+    this->arch->restoreNN(fp, ntypesEff, typeNames, this->zeroEatom != 0, comm->me, world);
 
     if (comm->me == 0) {
         fclose(fp);

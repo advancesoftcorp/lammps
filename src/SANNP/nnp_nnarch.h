@@ -27,7 +27,7 @@ public:
         return this->atomNum[ielem];
     }
 
-    void restoreNN(FILE* fp, int numElems, char** elemNames, int rank, MPI_Comm world);
+    void restoreNN(FILE* fp, int numElems, char** elemNames, bool zeroEatom, int rank, MPI_Comm world);
 
     void initGeometry(int numAtoms, int* elements,
                       int* numNeighbor, int** elemNeighbor, nnpreal*** posNeighbor);

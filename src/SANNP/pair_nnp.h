@@ -48,6 +48,7 @@ public:
 
 protected:
     int*      typeMap;
+    int       zeroEatom;
     Property* property;
     NNArch*   arch;
 

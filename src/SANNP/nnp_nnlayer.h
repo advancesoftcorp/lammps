@@ -18,7 +18,12 @@ public:
 
     void setSizeOfBatch(int sizeBatch);
 
-    void scanWeight(FILE* fp, int rank, MPI_Comm world);
+    void scanWeight(FILE* fp, bool zeroBias, int rank, MPI_Comm world);
+
+    void scanWeight(FILE* fp, int rank, MPI_Comm world)
+    {
+        this->scanWeight(fp, false, rank, world);
+    }
 
     void projectWeightFrom(NNLayer* src, int* mapInpNodes);
 

@@ -89,7 +89,7 @@ void NNLayer::setSizeOfBatch(int sizeBatch)
     this->outDrv1 = new nnpreal[this->numOutNodes * this->sizeBatch];
 }
 
-void NNLayer::scanWeight(FILE* fp, int rank, MPI_Comm world)
+void NNLayer::scanWeight(FILE* fp, bool zeroBias, int rank, MPI_Comm world)
 {
     int iweight;
     int nweight = this->numInpNodes * this->numOutNodes;
@@ -99,6 +99,7 @@ void NNLayer::scanWeight(FILE* fp, int rank, MPI_Comm world)
 
     int ierr;
 
+    // read weight
     ierr = 0;
     if (rank == 0)
     {
@@ -115,24 +116,37 @@ void NNLayer::scanWeight(FILE* fp, int rank, MPI_Comm world)
     MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
     if (ierr != 0) stop_by_error("cannot scan neural network @weight");
 
-    ierr = 0;
-    if (rank == 0)
+    MPI_Bcast(&(this->weight[0]), nweight, MPI_NNPREAL, 0, world);
+
+    if (zeroBias)
     {
+        // set bias = 0
         for (ibias = 0; ibias < nbias; ++ibias)
         {
-            if (fscanf(fp, IFORM_F1, &(this->bias[ibias])) != 1)
-            {
-                ierr = 1;
-                break;
-            }
+            this->bias[ibias] = ZERO;
         }
     }
+    else
+    {
+        // read bias
+        ierr = 0;
+        if (rank == 0)
+        {
+            for (ibias = 0; ibias < nbias; ++ibias)
+            {
+                if (fscanf(fp, IFORM_F1, &(this->bias[ibias])) != 1)
+                {
+                    ierr = 1;
+                    break;
+                }
+            }
+        }
 
-    MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
-    if (ierr != 0) stop_by_error("cannot scan neural network @bias");
+        MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
+        if (ierr != 0) stop_by_error("cannot scan neural network @bias");
 
-    MPI_Bcast(&(this->weight[0]), nweight, MPI_NNPREAL, 0, world);
-    MPI_Bcast(&(this->bias[0]),   nbias,   MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->bias[0]), nbias, MPI_NNPREAL, 0, world);
+    }
 }
 
 void NNLayer::projectWeightFrom(NNLayer* src, int* mapInpNodes)

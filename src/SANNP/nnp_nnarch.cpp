@@ -177,7 +177,7 @@ NNArch::~NNArch()
     }
 }
 
-void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, int rank, MPI_Comm world)
+void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, bool zeroEatom, int rank, MPI_Comm world)
 {
     int  symmFunc = this->property->getSymmFunc();
     int  m2 = this->property->getM2();
@@ -731,7 +731,7 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, int rank, MPI_C
                     interLayersEnergy[kelem][ilayer]->scanWeight(fp, rank, world);
                 }
 
-                lastLayersEnergy[kelem]->scanWeight(fp, rank, world);
+                lastLayersEnergy[kelem]->scanWeight(fp, zeroEatom, rank, world);
             }
         }
     }
