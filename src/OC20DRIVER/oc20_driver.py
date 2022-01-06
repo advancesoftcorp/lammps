@@ -98,10 +98,10 @@ def oc20_initialize(model_name, gpu = True):
     # To calculate the edge indices on-the-fly
     config["model"]["otf_graph"] = True
 
-    logFile.write("\nconfig:\n");
-    logFile.write(str(config) + "\n");
-    logFile.write("\n");
-    logFile.close()
+    log_file.write("\nconfig:\n");
+    log_file.write(str(config) + "\n");
+    log_file.write("\n");
+    log_file.close()
 
     # Create trainer, that is pre-trained
     trainer = registry.get_trainer_class(
