@@ -48,31 +48,33 @@ def oc20_initialize(model_name, gpu = True):
         model_name = model_name.lower()
 
     if model_name == "DimeNet++".lower():
-        config_yml = "oc20_configs/dimenetpp.yml"
-        checkpoint = "oc20_checkpt/dimenetpp_all.pt"
+        config_yml = "dimenetpp.yml"
+        checkpoint = "dimenetpp_all.pt"
 
     elif model_name == "GemNet-dT".lower():
-        config_yml = "oc20_configs/gemnet.yml"
-        checkpoint = "oc20_checkpt/gemnet_t_direct_h512_all.pt"
+        config_yml = "gemnet.yml"
+        checkpoint = "gemnet_t_direct_h512_all.pt"
 
     elif model_name == "CGCNN".lower():
-        config_yml = "oc20_configs/cgcnn.yml"
-        checkpoint = "oc20_checkpt/cgcnn_all.pt"
+        config_yml = "cgcnn.yml"
+        checkpoint = "cgcnn_all.pt"
 
     elif model_name == "SchNet".lower():
-        config_yml = "oc20_configs/schnet.yml"
-        checkpoint = "oc20_checkpt/schnet_all_large.pt"
+        config_yml = "schnet.yml"
+        checkpoint = "schnet_all_large.pt"
 
     elif model_name == "SpinConv".lower():
-        config_yml = "oc20_configs/spinconv.yml"
-        checkpoint = "oc20_checkpt/spinconv_force_centric_all.pt"
+        config_yml = "spinconv.yml"
+        checkpoint = "spinconv_force_centric_all.pt"
 
     else:
         raise Exception("incorrect model_name.")
 
     basePath   = os.path.dirname(os.path.abspath(__file__))
-    config_yml = os.path.normpath(os.path.join(basePath, config_yml))
-    checkpoint = os.path.normpath(os.path.join(basePath, checkpoint))
+    config_dir = os.path.normpath(os.path.join(basePath, "oc20_configs"))
+    chekpt_dir = os.path.normpath(os.path.join(basePath, "oc20_checkpt"))
+    config_yml = os.path.normpath(os.path.join(config_dir, config_yml))
+    checkpoint = os.path.normpath(os.path.join(chekpt_dir, checkpoint))
 
     log_file.write("config_yml = " + config_yml + "\n");
     log_file.write("checkpoint = " + checkpoint + "\n");
@@ -98,6 +100,13 @@ def oc20_initialize(model_name, gpu = True):
 
     # To calculate the edge indices on-the-fly
     config["model"]["otf_graph"] = True
+
+    # Modify path of scale_file for GemNet-dT
+    scale_file = config["model"].get("scale_file", None)
+
+    if scale_file is not None:
+        scale_file = os.path.normpath(os.path.join(config_dir, scale_file))
+        config["model"]["scale_file"] = scale_file
 
     log_file.write("\nconfig:\n");
     log_file.write(pprint.pformat(config) + "\n");
