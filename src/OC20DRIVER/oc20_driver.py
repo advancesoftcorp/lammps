@@ -5,6 +5,7 @@ This source code is licensed under the GNU General Public License Version 2
 found in the LICENSE file in the root directory of this source tree.
 """
 
+import os
 import torch
 import yaml
 
@@ -18,7 +19,6 @@ from ocpmodels.common.utils import (
 
 from ocpmodels.datasets import data_list_collater
 from ocpmodels.preprocessing import AtomsToGraphs
-from cgi import logfile
 
 def oc20_initialize(model_name, gpu = True):
     """
@@ -64,6 +64,10 @@ def oc20_initialize(model_name, gpu = True):
 
     else:
         raise Exception("incorrect model_name.")
+
+    basePath   = os.path.dirname(os.path.abspath(__file__))
+    config_yml = os.path.normpath(os.path.join(basePath, config_yml))
+    checkpoint = os.path.normpath(os.path.join(basePath, checkpoint))
 
     gpu_ = (gpu and torch.cuda.is_available())
 
