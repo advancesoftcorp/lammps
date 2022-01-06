@@ -39,6 +39,10 @@ def oc20_initialize(model_name, gpu = True):
     setup_logging()
 
     # Check model_name
+    log_file = open("log.oc20", "w")
+    log_file.write("\n");
+    log_file.write("model_name = " + model_name + "\n");
+
     if model_name is not None:
         model_name = model_name.lower()
 
@@ -69,24 +73,24 @@ def oc20_initialize(model_name, gpu = True):
     config_yml = os.path.normpath(os.path.join(basePath, config_yml))
     checkpoint = os.path.normpath(os.path.join(basePath, checkpoint))
 
+    log_file.write("config_yml = " + config_yml + "\n");
+    log_file.write("checkpoint = " + checkpoint + "\n");
+
+    # Check gpu
     gpu_ = (gpu and torch.cuda.is_available())
 
-    logFile = open("log.oc20", "w")
-    logFile.write("\n");
-    logFile.write("model_name = " + model_name + "\n");
-    logFile.write("gpu (in)   = " + str(gpu)   + "\n");
-    logFile.write("gpu (eff)  = " + str(gpu_)  + "\n");
-    logFile.write("config_yml = " + config_yml + "\n");
-    logFile.write("checkpoint = " + checkpoint + "\n");
+    log_file.write("gpu (in)   = " + str(gpu)   + "\n");
+    log_file.write("gpu (eff)  = " + str(gpu_)  + "\n");
 
+    # Load configuration
     config = yaml.safe_load(open(config_yml, "r"))
 
     # Check max_neigh and cutoff
     max_neigh = config["model"].get("max_neighbors", 50)
     cutoff    = config["model"].get("cutoff", 6.0)
 
-    logFile.write("max_neigh  = " + str(max_neigh) + "\n");
-    logFile.write("cutoff     = " + str(cutoff) + "\n");
+    log_file.write("max_neigh  = " + str(max_neigh) + "\n");
+    log_file.write("cutoff     = " + str(cutoff) + "\n");
 
     assert max_neigh > 0
     assert cutoff    > 0.0

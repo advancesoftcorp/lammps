@@ -6,6 +6,7 @@
  */
 
 #include "pair_oc20.h"
+#include <stdlib.h>
 
 using namespace LAMMPS_NS;
 
@@ -15,6 +16,7 @@ PairOC20::PairOC20(LAMMPS *lmp) : Pair(lmp)
     this->maxinum           = 10;
     this->initializedPython = 0;
     this->cutoff            = 0.0;
+    this->pythonPath        = NULL;
     this->pyModule          = NULL;
     this->pyFunc            = NULL;
 }
@@ -39,6 +41,11 @@ PairOC20::~PairOC20()
         memory->destroy(this->atomNums);
         memory->destroy(this->positions);
         memory->destroy(this->forces);
+    }
+
+    if (this->pythonPath != NULL)
+    {
+        delete[] this->pythonPath;
     }
 
     if (this->initializedPython)
@@ -181,9 +188,18 @@ void PairOC20::performGNN()
 
 void PairOC20::settings(int narg, char **arg)
 {
-    if (narg != 0)
+    if (narg == 0)
     {
-        error->all(FLERR, "pair_style oc20 command has unnecessary argument(s).");
+        // NOP
+    }
+    else if (narg == 1)
+    {
+        this->pythonPath = new char[512];
+        strcpy(this->pythonPath, arg[0]);
+    }
+    else
+    {
+        error->all(FLERR, "Illegal number of arguments for Pair style OCC.");
     }
 }
 
@@ -352,6 +368,11 @@ double PairOC20::initializePython(const char *name, int gpu)
     pySys  = PyImport_ImportModule("sys");
     pyPath = PyObject_GetAttrString(pySys, "path");
     PyList_Append(pyPath, PyUnicode_DecodeFSDefault("."));
+
+    if (this->pythonPath != NULL)
+    {
+        PyList_Append(pyPath, PyUnicode_DecodeFSDefault(this->pythonPath));
+    }
 
     pyName = PyUnicode_DecodeFSDefault("oc20_driver");
 
