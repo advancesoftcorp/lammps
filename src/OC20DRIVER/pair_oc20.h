@@ -61,7 +61,9 @@ private:
     int       initializedPython;
     double    cutoff;
 
-    char*     pythonPath;
+    int       npythonPath;
+    char**    pythonPaths;
+
     PyObject* pyModule;
     PyObject* pyFunc;
 

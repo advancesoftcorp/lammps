@@ -15,7 +15,8 @@ PairOC20::PairOC20(LAMMPS *lmp) : Pair(lmp)
     this->maxinum           = 10;
     this->initializedPython = 0;
     this->cutoff            = 0.0;
-    this->pythonPath        = NULL;
+    this->npythonPath       = 0;
+    this->pythonPaths       = NULL;
     this->pyModule          = NULL;
     this->pyFunc            = NULL;
 }
@@ -42,9 +43,14 @@ PairOC20::~PairOC20()
         memory->destroy(this->forces);
     }
 
-    if (this->pythonPath != NULL)
+    if (this->pythonPaths != NULL)
     {
-        delete[] this->pythonPath;
+        for (int i = 0; i < this->npythonPath; ++i)
+        {
+            delete[] this->pythonPaths[i];
+        }
+
+        delete[] this->pythonPaths;
     }
 
     if (this->initializedPython)
@@ -188,18 +194,18 @@ void PairOC20::performGNN()
 
 void PairOC20::settings(int narg, char **arg)
 {
-    if (narg == 0)
+    if (narg < 1)
     {
-        // NOP
+        return;
     }
-    else if (narg == 1)
+
+    this->npythonPath = narg;
+    this->pythonPaths = new char*[this->npythonPath];
+
+    for (int i = 0; i < this->npythonPath; ++i)
     {
-        this->pythonPath = new char[512];
-        strcpy(this->pythonPath, arg[0]);
-    }
-    else
-    {
-        error->all(FLERR, "Illegal number of arguments for Pair style OCC.");
+        this->pythonPaths[i] = new char[512];
+        strcpy(this->pythonPaths[i], arg[i]);
     }
 }
 
@@ -369,9 +375,12 @@ double PairOC20::initializePython(const char *name, int gpu)
     pyPath = PyObject_GetAttrString(pySys, "path");
     PyList_Append(pyPath, PyUnicode_DecodeFSDefault("."));
 
-    if (this->pythonPath != NULL)
+    if (this->pythonPaths != NULL)
     {
-        PyList_Append(pyPath, PyUnicode_DecodeFSDefault(this->pythonPath));
+        for (int i = 0; i < this->npythonPath; ++i)
+        {
+            PyList_Append(pyPath, PyUnicode_DecodeFSDefault(this->pythonPaths[i]));
+        }
     }
 
     pyName = PyUnicode_DecodeFSDefault("oc20_driver");
