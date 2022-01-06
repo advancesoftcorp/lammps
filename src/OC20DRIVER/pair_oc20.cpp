@@ -373,18 +373,28 @@ double PairOC20::initializePython(const char *name, int gpu)
 
     pySys  = PyImport_ImportModule("sys");
     pyPath = PyObject_GetAttrString(pySys, "path");
-    PyList_Append(pyPath, PyUnicode_DecodeFSDefault("."));
+
+    pyName = PyUnicode_DecodeFSDefault(".");
+    if (pyName != NULL)
+    {
+        PyList_Append(pyPath, pyName);
+        Py_DECREF(pyName);
+    }
 
     if (this->pythonPaths != NULL)
     {
         for (int i = 0; i < this->npythonPath; ++i)
         {
-            PyList_Append(pyPath, PyUnicode_DecodeFSDefault(this->pythonPaths[i]));
+            pyName = PyUnicode_DecodeFSDefault(this->pythonPaths[i]);
+            if (pyName != NULL)
+            {
+                PyList_Append(pyPath, pyName);
+                Py_DECREF(pyName);
+            }
         }
     }
 
     pyName = PyUnicode_DecodeFSDefault("oc20_driver");
-
     if (pyName != NULL)
     {
         pyModule = PyImport_Import(pyName);
@@ -497,10 +507,7 @@ double PairOC20::calculatePython()
         PyList_SetItem(pyAsub, 1, PyFloat_FromDouble(this->cell[i][1]));
         PyList_SetItem(pyAsub, 2, PyFloat_FromDouble(this->cell[i][2]));
         PyList_SetItem(pyArg1, i, pyAsub);
-        Py_DECREF(pyAsub);
     }
-
-    Py_DECREF(pyArg1);
 
     // set atomNums -> pyArgs2
     pyArg2 = PyList_New(natom);
@@ -509,8 +516,6 @@ double PairOC20::calculatePython()
     {
         PyList_SetItem(pyArg2, iatom, PyLong_FromLong(this->atomNums[iatom]));
     }
-
-    Py_DECREF(pyArg2);
 
     // set positions -> pyArgs3
     pyArg3 = PyList_New(natom);
@@ -522,10 +527,7 @@ double PairOC20::calculatePython()
         PyList_SetItem(pyAsub, 1, PyFloat_FromDouble(this->positions[iatom][1]));
         PyList_SetItem(pyAsub, 2, PyFloat_FromDouble(this->positions[iatom][2]));
         PyList_SetItem(pyArg3, iatom, pyAsub);
-        Py_DECREF(pyAsub);
     }
-
-    Py_DECREF(pyArg3);
 
     // call function
     pyArgs = PyTuple_New(3);
