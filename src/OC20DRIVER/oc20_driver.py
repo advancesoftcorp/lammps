@@ -105,6 +105,7 @@ def oc20_initialize(model_name, gpu = True):
     log_file.close()
 
     # Create trainer, that is pre-trained
+    global trainer
     trainer = registry.get_trainer_class(
         config.get("trainer", "forces")
     )(
@@ -124,6 +125,7 @@ def oc20_initialize(model_name, gpu = True):
     trainer.load_checkpoint(checkpoint)
 
     # Atoms object of ASE, that is empty here
+    global atoms
     atoms = Atoms(pbc = [True, True, True])
 
     # Converter: Atoms -> Graphs (the edges on-the-fly)
@@ -152,6 +154,7 @@ def oc20_get_energy_and_forces(cell, atomic_numbers, positions):
     """
 
     # Initialize Atoms
+    global atoms
     atoms.set_cell(cell)
     atoms.set_atomic_numbers(atomic_numbers)
     atoms.set_positions(positions)
@@ -161,6 +164,7 @@ def oc20_get_energy_and_forces(cell, atomic_numbers, positions):
     batch = data_list_collater([data], otf_graph = True)
 
     # Predicting energy and forces
+    global trainer
     predictions = trainer.predict(
         batch,
         per_image    = False,
