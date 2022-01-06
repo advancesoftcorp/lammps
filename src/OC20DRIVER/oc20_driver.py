@@ -161,7 +161,7 @@ def oc20_get_energy_and_forces(cell, atomic_numbers, positions):
     if atoms is None:
         atoms = Atoms(
             numbers   = atomic_numbers,
-            positions = posisitons,
+            positions = positions,
             cell      = cell,
             pbc       = [True, True, True]
         )
