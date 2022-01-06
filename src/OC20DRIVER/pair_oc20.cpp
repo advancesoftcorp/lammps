@@ -6,7 +6,6 @@
  */
 
 #include "pair_oc20.h"
-#include <stdlib.h>
 
 using namespace LAMMPS_NS;
 
@@ -78,11 +77,6 @@ void PairOC20::compute(int eflag, int vflag)
         error->all(FLERR, "Pair style OC20 does not support atomic energy");
     }
 
-    if (vflag)
-    {
-        error->all(FLERR, "Pair style OC20 does currently not support virial pressure");
-    }
-
     if (vflag_atom)
     {
         error->all(FLERR, "Pair style OC20 does not support atomic virial pressure");
@@ -94,6 +88,12 @@ void PairOC20::compute(int eflag, int vflag)
         {
             error->all(FLERR, "Pair style OC20 does not support explicit virial pressure");
         }
+    }
+
+    if (vflag)
+    {
+        error->warning(FLERR, "Pair style OC20 does currently not support virial pressure");
+        error->warning(FLERR, "Calculated pressure is INCORRECT");
     }
 
     this->prepareGNN();
