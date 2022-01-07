@@ -1,0 +1,38 @@
+#
+# This is an example of the driver of `Open Catalyst 2020' <https://github.com/Open-Catalyst-Project/ocp>,
+# which contains a state-of-the-art Graph Neural Network Potential as the S2EF task.
+# This driver is developed by AdvanceSoft Corp <https://www.advancesoft.jp>.
+# Before you use this driver, you have to install python3 and ocp-models.
+#
+# NOTE:
+#   1) the units must be metal
+#   2) the 3D periodic boundary condition must be used
+#   3) cannot use MPI parallelization, only OpenMP or GPU
+#   4) cannot calculate virial pressure
+#
+
+units         metal
+boundary      p p p
+atom_style    atomic
+
+pair_style    oc20  ../../potentials/OC20DRIVER
+#pair_style    oc20/gpu  ../../potentials/OC20DRIVER
+
+read_data     ./dat.lammps
+
+pair_coeff    * *  GemNet-dT  Rh N O
+#pair_coeff    * *  DimeNet++  Rh N O
+#pair_coeff    * *  CGCNN      Rh N O
+#pair_coeff    * *  SchNet     Rh N O
+#pair_coeff    * *  SpinConv   Rh N O
+
+dump          myDump all custom 10 xyz.lammpstrj id element x y z
+dump_modify   myDump sort id element Rh N O
+
+thermo_style  custom step time cpu pe ke etotal temp
+thermo        10
+
+velocity      all create 300.0 12345
+fix           myEnse all nvt temp 300.0 300.0 0.1
+timestep      5.0e-4
+run           10000
