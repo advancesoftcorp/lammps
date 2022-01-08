@@ -114,9 +114,9 @@ def oc20_initialize(model_name, gpu = True):
     log_file.close()
 
     # Create trainer, that is pre-trained
-    global trainer
+    global myTrainer
 
-    trainer = registry.get_trainer_class(
+    myTrainer = registry.get_trainer_class(
         config.get("trainer", "forces")
     )(
         task       = config["task"],
@@ -132,17 +132,17 @@ def oc20_initialize(model_name, gpu = True):
     )
 
     # Load checkpoint
-    trainer.load_checkpoint(checkpoint)
+    myTrainer.load_checkpoint(checkpoint)
 
     # Atoms object of ASE, that is empty here
-    global atoms
+    global myAtoms
 
-    atoms = None
+    myAtoms = None
 
     # Converter: Atoms -> Graphs (the edges on-the-fly)
-    global a2g
+    global myA2G
 
-    a2g = AtomsToGraphs(
+    myA2G = AtomsToGraphs(
         max_neigh   = max_neigh,
         radius      = cutoff,
         r_energy    = False,
@@ -167,10 +167,10 @@ def oc20_get_energy_and_forces(cell, atomic_numbers, positions):
     """
 
     # Initialize Atoms
-    global atoms
+    global myAtoms
 
-    if atoms is None:
-        atoms = Atoms(
+    if myAtoms is None:
+        myAtoms = Atoms(
             numbers   = atomic_numbers,
             positions = positions,
             cell      = cell,
@@ -178,20 +178,20 @@ def oc20_get_energy_and_forces(cell, atomic_numbers, positions):
         )
 
     else:
-        atoms.set_cell(cell)
-        atoms.set_atomic_numbers(atomic_numbers)
-        atoms.set_positions(positions)
+        myAtoms.set_cell(cell)
+        myAtoms.set_atomic_numbers(atomic_numbers)
+        myAtoms.set_positions(positions)
 
     # Preprossing atomic positions (the edges on-the-fly)
-    global a2g
+    global myA2G
 
-    data  = a2g.convert(atoms)
+    data  = myA2G.convert(myAtom)
     batch = data_list_collater([data], otf_graph = True)
 
     # Predicting energy and forces
-    global trainer
+    global myTrainer
 
-    predictions = trainer.predict(
+    predictions = myTrainer.predict(
         batch,
         per_image    = False,
         disable_tqdm = True
