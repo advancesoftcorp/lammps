@@ -185,7 +185,7 @@ def oc20_get_energy_and_forces(cell, atomic_numbers, positions):
     # Preprossing atomic positions (the edges on-the-fly)
     global myA2G
 
-    data  = myA2G.convert(myAtom)
+    data  = myA2G.convert(myAtoms)
     batch = data_list_collater([data], otf_graph = True)
 
     # Predicting energy and forces
