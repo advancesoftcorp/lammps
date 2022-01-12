@@ -10,13 +10,15 @@ CC         =  mpiicpc -std=c++11
 OPTFLAGS   =  -O2 -fp-model precise -qoverride-limits
 CCFLAGS    =  -g -traceback -qopenmp -qno-offload \
               -fno-alias -ansi-alias -restrict \
-              -DLAMMPS_MEMALIGN=64 $(OPTFLAGS)
+              -DLAMMPS_MEMALIGN=64 $(OPTFLAGS) \
+              -I/home/s-nishihara/miniconda3/envs/ocp-models/include/python3.8
 SHFLAGS    =  -fPIC
 DEPFLAGS   =  -M
 
 LINK       =  mpiicpc -std=c++11 -static-intel -static-libgcc -static-libstdc++
 LINKFLAGS  =  -g -qopenmp $(OPTFLAGS)
-LIB        =  /opt/app/intel2019/compilers_and_libraries_2019.5.281/linux/compiler/lib/intel64_lin/libifcore.a
+LIB        =  /opt/app/intel2019/compilers_and_libraries_2019.5.281/linux/compiler/lib/intel64_lin/libifcore.a \
+              -L/home/s-nishihara/miniconda3/envs/ocp-models/lib -lpython3 -lpython3.8
 SIZE       =  size
 
 ARCHIVE    =  ar
