@@ -1,4 +1,4 @@
-# msmpi_mkl = Win 64-bit, gcc-7.3.0, MinGW, FFT_MKL, MS-MPI, OpenMP
+# intelmpi_omp = USER-INTEL package, Intel MPI, MKL FFT
 
 SHELL = /bin/sh
 
@@ -6,24 +6,24 @@ SHELL = /bin/sh
 # compiler/linker settings
 # specify flags and libraries needed for your compiler
 
-CC         =  g++
-CCFLAGS    =  -g -O3 -fopenmp -ffast-math -fstrict-aliasing -fno-trapping-math \
-              -Wall -W -Wno-uninitialized
-
-SHFLAGS    =  # -fPIC (not needed on windows, all code is PIC)
+CC         =  mpiicpc -std=c++11
+OPTFLAGS   =  -O2 -fp-model precise -qoverride-limits
+CCFLAGS    =  -g -traceback -qopenmp -qno-offload \
+              -fno-alias -ansi-alias -restrict \
+              -DLAMMPS_MEMALIGN=64 $(OPTFLAGS) \
+              -I/home/s-nishihara/miniconda3/envs/ocp-models/include/python3.8
+SHFLAGS    =  -fPIC
 DEPFLAGS   =  -M
 
-LINK       =  g++ -static
-LINKFLAGS  =  -g -O2 -fopenmp -fno-trapping-math
-LIB        =  -lwsock32 -static-libgcc -lquadmath -lpsapi
+LINK       =  mpiicpc -std=c++11 -static-intel -static-libgcc -static-libstdc++
+LINKFLAGS  =  -g -qopenmp $(OPTFLAGS)
+LIB        =  /opt/app/intel2019/compilers_and_libraries_2019.5.281/linux/compiler/lib/intel64_lin/libifcore.a \
+              -L/home/s-nishihara/miniconda3/envs/ocp-models/lib -lpython3 -lpython3.8
 SIZE       =  size
 
 ARCHIVE    =  ar
 ARFLAGS    =  -rc
 SHLIBFLAGS =  -shared
-
-# name of object file subdir for libraries in lib with leading '/'
-LIBOBJDIR  =  /Obj_msmpi_mkl
 
 # ---------------------------------------------------------------------
 # LAMMPS-specific settings, all OPTIONAL
@@ -33,7 +33,7 @@ LIBOBJDIR  =  /Obj_msmpi_mkl
 # LAMMPS ifdef settings
 # see possible settings in Section 2.2 (step 4) of manual
 
-LMP_INC =  -DLAMMPS_SMALLBIG -DLAMMPS_XDR -DLAMMPS_GZIP
+LMP_INC =  -DLAMMPS_GZIP
 
 # MPI library
 # see discussion in Section 2.2 (step 5) of manual
@@ -44,20 +44,24 @@ LMP_INC =  -DLAMMPS_SMALLBIG -DLAMMPS_XDR -DLAMMPS_GZIP
 # PATH = path for MPI library
 # LIB = name of MPI library
 
-MPI_INC  =  -I"C:\mingw64\mingw64\include"
-MPI_PATH =  -L"C:\mingw64\mingw64\lib"
-MPI_LIB  =  -lmsmpi
+MPI_INC  =  -DMPICH_SKIP_MPICXX -DOMPI_SKIP_MPICXX=1
+MPI_PATH = 
+MPI_LIB  =
 
 # FFT library
-# see discussion in Section 2.2 (step 6) of manual
+# see discussion in Section 2.2 (step 6) of manaul
 # can be left blank to use provided KISS FFT library
 # INC = -DFFT setting, e.g. -DFFT_FFTW, FFT compiler settings
 # PATH = path for FFT library
 # LIB = name of FFT library
 
-FFT_INC  =  -DFFT_MKL -I"C:\Program Files (x86)\IntelSWTools\compilers_and_libraries\windows\mkl\include"
-FFT_PATH =  -L"C:\Program Files (x86)\IntelSWTools\compilers_and_libraries\windows\mkl\lib\intel64"
-FFT_LIB  =  -lmkl_rt
+FFT_INC  =  -DFFT_MKL
+FFT_PATH =
+FFT_LIB  =  -Wl,--start-group \
+            /opt/app/intel2019/mkl/lib/intel64_lin/libmkl_intel_lp64.a \
+            /opt/app/intel2019/mkl/lib/intel64_lin/libmkl_intel_thread.a \
+            /opt/app/intel2019/mkl/lib/intel64_lin/libmkl_core.a \
+            -Wl,--end-group
 
 # JPEG and/or PNG library
 # see discussion in Section 2.2 (step 7) of manual
@@ -92,7 +96,7 @@ vpath %.h ..
 
 $(EXE):	$(OBJ) $(EXTRA_LINK_DEPENDS)
 	$(LINK) $(LINKFLAGS) $(EXTRA_PATH) $(OBJ) $(EXTRA_LIB) $(LIB) -o $(EXE)
-	$(SIZE) $(EXE).exe
+	$(SIZE) $(EXE)
 
 # Library targets
 
