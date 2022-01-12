@@ -16,7 +16,8 @@ DEPFLAGS   =  -M
 
 LINK       =  g++ -static
 LINKFLAGS  =  -g -O2 -fopenmp -fno-trapping-math
-LIB        =  -lwsock32 -static-libgcc -lquadmath -lpsapi -lpython3 -lpython38
+LIB        =  -lwsock32 -static-libgcc -lquadmath -lpsapi \
+              -L"C:\Users\nishihara.satomichi\Miniconda3\envs\ocp-models\libs" -lpython3 -lpython38
 SIZE       =  size
 
 ARCHIVE    =  ar
