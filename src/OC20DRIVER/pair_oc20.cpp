@@ -194,6 +194,11 @@ void PairOC20::performGNN()
 
 void PairOC20::settings(int narg, char **arg)
 {
+    if (comm->nprocs > 1)
+    {
+        error->all(FLERR, "Pair style OC20 does not support MPI parallelization");
+    }
+
     if (narg < 1)
     {
         return;
@@ -322,11 +327,6 @@ void PairOC20::init_style()
     if (!(periodicity[0] && periodicity[1] && periodicity[2]))
     {
         error->all(FLERR, "Pair style OC20 requires periodic boundary condition");
-    }
-
-    if (comm->nprocs > 1)
-    {
-        error->all(FLERR, "Pair style OC20 does not support MPI parallelization");
     }
 
     neighbor->request(this, instance_me);
