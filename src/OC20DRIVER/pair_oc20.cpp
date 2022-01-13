@@ -628,10 +628,6 @@ const char* ALL_ELEMENTS[] = {
 
 int PairOC20::elementToAtomNum(const char *elem)
 {
-    int n = strlen(elem);
-    n = n > 2 ? 2 : n;
-
-    int m = n;
     char elem1[16];
 
     strcpy(elem1, elem);
