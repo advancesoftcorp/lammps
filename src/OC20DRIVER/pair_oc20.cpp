@@ -14,6 +14,7 @@ PairOC20::PairOC20(LAMMPS *lmp) : Pair(lmp)
     this->atomNumMap        = NULL;
     this->maxinum           = 10;
     this->initializedPython = 0;
+    this->virialWarning     = 0;
     this->cutoff            = 0.0;
     this->npythonPath       = 0;
     this->pythonPaths       = NULL;
@@ -98,8 +99,12 @@ void PairOC20::compute(int eflag, int vflag)
 
     if (vflag)
     {
-        error->warning(FLERR, "Pair style OC20 does currently not support virial pressure");
-        error->warning(FLERR, "Calculated pressure is INCORRECT");
+        if (this->virialWarning == 0)
+        {
+            this->virialWarning = 1;
+            error->warning(FLERR, "Pair style OC20 does currently not support virial pressure");
+            error->warning(FLERR, "Calculated pressure is INCORRECT");
+        }
     }
 
     this->prepareGNN();

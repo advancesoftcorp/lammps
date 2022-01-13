@@ -59,6 +59,7 @@ private:
 
     int       maxinum;
     int       initializedPython;
+    int       virialWarning;
     double    cutoff;
 
     int       npythonPath;
