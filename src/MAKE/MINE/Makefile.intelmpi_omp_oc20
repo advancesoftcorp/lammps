@@ -1,4 +1,4 @@
-# intelmpi_omp = USER-INTEL package, Intel MPI, MKL FFT
+# intelmpi_omp_oc20 = USER-INTEL package, Intel MPI, MKL FFT for OC20DRIVER
 
 SHELL = /bin/sh
 
