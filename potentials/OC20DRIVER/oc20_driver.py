@@ -129,7 +129,7 @@ def oc20_initialize(model_name, gpu = True):
         identifier = "",
         slurm      = config.get("slurm", {}),
         local_rank = config.get("local_rank", 0),
-        is_debug   = config.get("is_debug", False),
+        is_debug   = config.get("is_debug", True),
         cpu        = not gpu_
     )
 
