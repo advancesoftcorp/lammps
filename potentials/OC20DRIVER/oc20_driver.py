@@ -20,6 +20,8 @@ from ocpmodels.common.utils import (
 
 from ocpmodels.datasets import data_list_collater
 from ocpmodels.preprocessing import AtomsToGraphs
+from ocpmodels.models import BaseModel
+from ocpmodels.trainers import BaseTrainer
 
 def oc20_initialize(model_name, gpu = True):
     """
