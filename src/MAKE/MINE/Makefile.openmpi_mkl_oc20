@@ -1,4 +1,4 @@
-# intelmpi_omp_oc20 = USER-INTEL package, Intel MPI, MKL FFT for OC20DRIVER
+# openmpi_mkl_oc20 = USER-INTEL package, OpenMPI, MKL FFT for OC20DRIVER
 
 SHELL = /bin/sh
 
@@ -6,7 +6,7 @@ SHELL = /bin/sh
 # compiler/linker settings
 # specify flags and libraries needed for your compiler
 
-CC         =  mpiicpc -std=c++11
+CC         =  mpicxx -std=c++11
 OPTFLAGS   =  -O2 -fp-model precise -qoverride-limits
 CCFLAGS    =  -g -traceback -qopenmp -qno-offload \
               -fno-alias -ansi-alias -restrict \
@@ -15,9 +15,9 @@ CCFLAGS    =  -g -traceback -qopenmp -qno-offload \
 SHFLAGS    =  -fPIC
 DEPFLAGS   =  -M
 
-LINK       =  mpiicpc -std=c++11 -static-intel -static-libgcc -static-libstdc++
+LINK       =  mpicxx -std=c++11 -static-intel -static-libgcc
 LINKFLAGS  =  -g -qopenmp $(OPTFLAGS)
-LIB        =  /opt/app/intel2019/compilers_and_libraries_2019.5.281/linux/compiler/lib/intel64_lin/libifcore.a \
+LIB        =  /opt/app/oneapi/compiler/2021.4.0/linux/compiler/lib/intel64_lin/libifcore.a \
               -L/home/s-nishihara/miniconda3/envs/ocp-models/lib -lpython3 -lpython3.8
 SIZE       =  size
 
@@ -58,9 +58,9 @@ MPI_LIB  =
 FFT_INC  =  -DFFT_MKL
 FFT_PATH =
 FFT_LIB  =  -Wl,--start-group \
-            /opt/app/intel2019/mkl/lib/intel64_lin/libmkl_intel_lp64.a \
-            /opt/app/intel2019/mkl/lib/intel64_lin/libmkl_intel_thread.a \
-            /opt/app/intel2019/mkl/lib/intel64_lin/libmkl_core.a \
+            /opt/app/oneapi/mkl/2021.4.0/lib/intel64/libmkl_intel_lp64.a \
+            /opt/app/oneapi/mkl/2021.4.0/lib/intel64/libmkl_intel_thread.a \
+            /opt/app/oneapi/mkl/2021.4.0/lib/intel64/libmkl_core.a \
             -Wl,--end-group
 
 # JPEG and/or PNG library
