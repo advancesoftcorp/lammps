@@ -144,12 +144,12 @@ void PairOC20::prepareGNN()
     this->cell[0][0] = domain->h[0]; // xx
     this->cell[1][1] = domain->h[1]; // yy
     this->cell[2][2] = domain->h[2]; // zz
-    this->cell[1][2] = domain->h[3]; // yz
-    this->cell[0][2] = domain->h[4]; // xz
-    this->cell[0][1] = domain->h[5]; // xy
-    this->cell[1][0] = this->cell[0][1];
-    this->cell[2][0] = this->cell[0][2];
-    this->cell[2][1] = this->cell[1][2];
+    this->cell[2][1] = domain->h[3]; // yz
+    this->cell[2][0] = domain->h[4]; // xz
+    this->cell[1][0] = domain->h[5]; // xy
+    this->cell[0][1] = 0.0;
+    this->cell[0][2] = 0.0;
+    this->cell[1][2] = 0.0;
 
     // set atomNums and positions
     #pragma omp parallel for private(iatom, i)
