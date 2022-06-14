@@ -2,7 +2,7 @@
 
 // This file is part of the Collective Variables module (Colvars).
 // The original version of Colvars and its updates are located at:
-// https://github.com/colvars/colvars
+// https://github.com/Colvars/colvars
 // Please update all Colvars source files before making any changes.
 // If you wish to distribute your changes, please submit them to the
 // Colvars repository at GitHub.
@@ -94,41 +94,43 @@ colvar::coordnum::coordnum(std::string const &conf)
   : cvc(conf), b_anisotropic(false), pairlist(NULL)
 
 {
-  function_type = "coordnum";
+  set_function_type("coordNum");
   x.type(colvarvalue::type_scalar);
+
+  colvarproxy *proxy = cvm::main()->proxy;
 
   group1 = parse_group(conf, "group1");
   group2 = parse_group(conf, "group2");
 
   if (group1 == NULL || group2 == NULL) {
     cvm::error("Error: failed to initialize atom groups.\n",
-                INPUT_ERROR);
+                COLVARS_INPUT_ERROR);
     return;
   }
 
   if (int atom_number = cvm::atom_group::overlap(*group1, *group2)) {
     cvm::error("Error: group1 and group2 share a common atom (number: " +
-               cvm::to_str(atom_number) + ")\n", INPUT_ERROR);
+               cvm::to_str(atom_number) + ")\n", COLVARS_INPUT_ERROR);
     return;
   }
 
   if (group1->b_dummy) {
     cvm::error("Error: only group2 is allowed to be a dummy atom\n",
-               INPUT_ERROR);
+               COLVARS_INPUT_ERROR);
     return;
   }
 
   bool const b_isotropic = get_keyval(conf, "cutoff", r0,
-                                      cvm::real(4.0 * cvm::unit_angstrom()));
+                                      cvm::real(4.0 * proxy->angstrom_value));
 
   if (get_keyval(conf, "cutoff3", r0_vec,
-                 cvm::rvector(4.0 * cvm::unit_angstrom(),
-                              4.0 * cvm::unit_angstrom(),
-                              4.0 * cvm::unit_angstrom()))) {
+                 cvm::rvector(4.0 * proxy->angstrom_value,
+                              4.0 * proxy->angstrom_value,
+                              4.0 * proxy->angstrom_value))) {
     if (b_isotropic) {
       cvm::error("Error: cannot specify \"cutoff\" and \"cutoff3\" "
                  "at the same time.\n",
-                 INPUT_ERROR);
+                 COLVARS_INPUT_ERROR);
       return;
     }
 
@@ -144,12 +146,12 @@ colvar::coordnum::coordnum(std::string const &conf)
 
   if ( (en%2) || (ed%2) ) {
     cvm::error("Error: odd exponent(s) provided, can only use even ones.\n",
-               INPUT_ERROR);
+               COLVARS_INPUT_ERROR);
   }
 
   if ( (en <= 0) || (ed <= 0) ) {
     cvm::error("Error: negative exponent(s) provided.\n",
-               INPUT_ERROR);
+               COLVARS_INPUT_ERROR);
   }
 
   if (!is_enabled(f_cvc_pbc_minimum_image)) {
@@ -160,10 +162,11 @@ colvar::coordnum::coordnum(std::string const &conf)
 
   get_keyval(conf, "tolerance", tolerance, 0.0);
   if (tolerance > 0) {
+    cvm::main()->cite_feature("coordNum pairlist");
     get_keyval(conf, "pairListFrequency", pairlist_freq, 100);
     if ( ! (pairlist_freq > 0) ) {
       cvm::error("Error: non-positive pairlistfrequency provided.\n",
-                 INPUT_ERROR);
+                 COLVARS_INPUT_ERROR);
       return; // and do not allocate the pairlists below
     }
     if (b_group2_center_only) {
@@ -174,14 +177,10 @@ colvar::coordnum::coordnum(std::string const &conf)
     }
   }
 
-}
-
-
-colvar::coordnum::coordnum()
-  : b_anisotropic(false), pairlist(NULL)
-{
-  function_type = "coordnum";
-  x.type(colvarvalue::type_scalar);
+  init_scalar_boundaries(0.0, b_group2_center_only ?
+                         static_cast<cvm::real>(group1->size()) :
+                         static_cast<cvm::real>(group1->size() *
+                                                group2->size()));
 }
 
 
@@ -308,12 +307,15 @@ colvar::h_bond::h_bond(std::string const &conf)
   if (cvm::debug())
     cvm::log("Initializing h_bond object.\n");
 
-  function_type = "h_bond";
+  set_function_type("hBond");
   x.type(colvarvalue::type_scalar);
+  init_scalar_boundaries(0.0, 1.0);
 
-  int a_num, d_num;
-  get_keyval(conf, "acceptor", a_num, -1);
-  get_keyval(conf, "donor",    d_num, -1);
+  colvarproxy *proxy = cvm::main()->proxy;
+
+  int a_num = -1, d_num = -1;
+  get_keyval(conf, "acceptor", a_num, a_num);
+  get_keyval(conf, "donor",    d_num, a_num);
 
   if ( (a_num == -1) || (d_num == -1) ) {
     cvm::error("Error: either acceptor or donor undefined.\n");
@@ -326,18 +328,18 @@ colvar::h_bond::h_bond(std::string const &conf)
   atom_groups[0]->add_atom(acceptor);
   atom_groups[0]->add_atom(donor);
 
-  get_keyval(conf, "cutoff",   r0, (3.3 * cvm::unit_angstrom()));
+  get_keyval(conf, "cutoff",   r0, (3.3 * proxy->angstrom_value));
   get_keyval(conf, "expNumer", en, 6);
   get_keyval(conf, "expDenom", ed, 8);
 
   if ( (en%2) || (ed%2) ) {
     cvm::error("Error: odd exponent(s) provided, can only use even ones.\n",
-               INPUT_ERROR);
+               COLVARS_INPUT_ERROR);
   }
 
   if ( (en <= 0) || (ed <= 0) ) {
     cvm::error("Error: negative exponent(s) provided.\n",
-               INPUT_ERROR);
+               COLVARS_INPUT_ERROR);
   }
 
   if (cvm::debug())
@@ -350,20 +352,13 @@ colvar::h_bond::h_bond(cvm::atom const &acceptor,
                        cvm::real r0_i, int en_i, int ed_i)
   : r0(r0_i), en(en_i), ed(ed_i)
 {
-  function_type = "h_bond";
+  set_function_type("hBond");
   x.type(colvarvalue::type_scalar);
+  init_scalar_boundaries(0.0, 1.0);
 
   register_atom_group(new cvm::atom_group);
   atom_groups[0]->add_atom(acceptor);
   atom_groups[0]->add_atom(donor);
-}
-
-
-colvar::h_bond::h_bond()
-  : cvc()
-{
-  function_type = "h_bond";
-  x.type(colvarvalue::type_scalar);
 }
 
 
@@ -403,24 +398,26 @@ simple_scalar_dist_functions(h_bond)
 colvar::selfcoordnum::selfcoordnum(std::string const &conf)
   : cvc(conf), pairlist(NULL)
 {
-  function_type = "selfcoordnum";
+  set_function_type("selfCoordNum");
   x.type(colvarvalue::type_scalar);
+
+  colvarproxy *proxy = cvm::main()->proxy;
 
   group1 = parse_group(conf, "group1");
 
-  get_keyval(conf, "cutoff", r0, cvm::real(4.0 * cvm::unit_angstrom()));
+  get_keyval(conf, "cutoff", r0, cvm::real(4.0 * proxy->angstrom_value));
   get_keyval(conf, "expNumer", en, 6);
   get_keyval(conf, "expDenom", ed, 12);
 
 
   if ( (en%2) || (ed%2) ) {
     cvm::error("Error: odd exponent(s) provided, can only use even ones.\n",
-               INPUT_ERROR);
+               COLVARS_INPUT_ERROR);
   }
 
   if ( (en <= 0) || (ed <= 0) ) {
     cvm::error("Error: negative exponent(s) provided.\n",
-               INPUT_ERROR);
+               COLVARS_INPUT_ERROR);
   }
 
   if (!is_enabled(f_cvc_pbc_minimum_image)) {
@@ -432,19 +429,14 @@ colvar::selfcoordnum::selfcoordnum(std::string const &conf)
     get_keyval(conf, "pairListFrequency", pairlist_freq, 100);
     if ( ! (pairlist_freq > 0) ) {
       cvm::error("Error: non-positive pairlistfrequency provided.\n",
-                 INPUT_ERROR);
+                 COLVARS_INPUT_ERROR);
       return;
     }
     pairlist = new bool[(group1->size()-1) * (group1->size()-1)];
   }
-}
 
-
-colvar::selfcoordnum::selfcoordnum()
-  : pairlist(NULL)
-{
-  function_type = "selfcoordnum";
-  x.type(colvarvalue::type_scalar);
+  init_scalar_boundaries(0.0, static_cast<cvm::real>((group1->size()-1) *
+                                                     (group1->size()-1)));
 }
 
 
@@ -551,8 +543,11 @@ simple_scalar_dist_functions(selfcoordnum)
 colvar::groupcoordnum::groupcoordnum(std::string const &conf)
   : distance(conf), b_anisotropic(false)
 {
-  function_type = "groupcoordnum";
+  set_function_type("groupCoord");
   x.type(colvarvalue::type_scalar);
+  init_scalar_boundaries(0.0, 1.0);
+
+  colvarproxy *proxy = cvm::main()->proxy;
 
   // group1 and group2 are already initialized by distance()
   if (group1->b_dummy || group2->b_dummy) {
@@ -561,7 +556,7 @@ colvar::groupcoordnum::groupcoordnum(std::string const &conf)
   }
 
   bool const b_scale = get_keyval(conf, "cutoff", r0,
-                                  cvm::real(4.0 * cvm::unit_angstrom()));
+                                  cvm::real(4.0 * proxy->angstrom_value));
 
   if (get_keyval(conf, "cutoff3", r0_vec,
                  cvm::rvector(4.0, 4.0, 4.0), parse_silent)) {
@@ -583,26 +578,18 @@ colvar::groupcoordnum::groupcoordnum(std::string const &conf)
 
   if ( (en%2) || (ed%2) ) {
     cvm::error("Error: odd exponent(s) provided, can only use even ones.\n",
-               INPUT_ERROR);
+               COLVARS_INPUT_ERROR);
   }
 
   if ( (en <= 0) || (ed <= 0) ) {
     cvm::error("Error: negative exponent(s) provided.\n",
-               INPUT_ERROR);
+               COLVARS_INPUT_ERROR);
   }
 
   if (!is_enabled(f_cvc_pbc_minimum_image)) {
     cvm::log("Warning: only minimum-image distances are used by this variable.\n");
   }
 
-}
-
-
-colvar::groupcoordnum::groupcoordnum()
-  : b_anisotropic(false)
-{
-  function_type = "groupcoordnum";
-  x.type(colvarvalue::type_scalar);
 }
 
 

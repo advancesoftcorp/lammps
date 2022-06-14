@@ -1,8 +1,0 @@
-bench/
-doc/
-examples/
-!examples/OC20DRIVER/
-potentials/
-!potentials/OC20DRIVER/
-python/
-tools/

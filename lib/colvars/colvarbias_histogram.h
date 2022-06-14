@@ -2,7 +2,7 @@
 
 // This file is part of the Collective Variables module (Colvars).
 // The original version of Colvars and its updates are located at:
-// https://github.com/colvars/colvars
+// https://github.com/Colvars/colvars
 // Please update all Colvars source files before making any changes.
 // If you wish to distribute your changes, please submit them to the
 // Colvars repository at GitHub.
@@ -35,7 +35,6 @@ protected:
   colvar_grid_scalar *grid;
   std::vector<int> bin;
   std::string out_name, out_name_dx;
-  size_t output_freq;
 
   /// If one or more of the variables are \link colvarvalue::type_vector \endlink, treat them as arrays of this length
   size_t colvar_array_size;

@@ -1,6 +1,7 @@
+// clang-format off
 /* ----------------------------------------------------------------------
    LAMMPS - Large-scale Atomic/Molecular Massively Parallel Simulator
-   http://lammps.sandia.gov, Sandia National Laboratories
+   https://www.lammps.org/, Sandia National Laboratories
    Steve Plimpton, sjplimp@sandia.gov
 
    Copyright (2003) Sandia Corporation.  Under the terms of Contract
@@ -12,10 +13,11 @@
 ------------------------------------------------------------------------- */
 
 #include "rcb.h"
-#include <mpi.h>
-#include <cstring>
+
 #include "irregular.h"
 #include "memory.h"
+
+#include <cstring>
 
 using namespace LAMMPS_NS;
 
@@ -38,19 +40,19 @@ RCB::RCB(LAMMPS *lmp) : Pointers(lmp)
   MPI_Comm_size(world,&nprocs);
 
   ndot = maxdot = 0;
-  dots = NULL;
+  dots = nullptr;
 
   nlist = maxlist = 0;
-  dotlist = dotmark = dotmark_select = NULL;
+  dotlist = dotmark = dotmark_select = nullptr;
 
   maxbuf = 0;
-  buf = NULL;
+  buf = nullptr;
 
   maxrecv = maxsend = 0;
-  recvproc = recvindex = sendproc = sendindex = NULL;
+  recvproc = recvindex = sendproc = sendindex = nullptr;
 
-  tree = NULL;
-  irregular = NULL;
+  tree = nullptr;
+  irregular = nullptr;
 
   // create MPI data and function types for box and median AllReduce ops
 
@@ -94,7 +96,7 @@ RCB::~RCB()
    NEW version: each RCB cut is tested in all dimensions
      dimeension that produces 2 boxes with largest min size is selected
      this is to prevent very narrow boxes from being produced
-   if wt = NULL, ignore per-particle weights
+   if wt = nullptr, ignore per-particle weights
    if wt defined, per-particle weights > 0.0
    dimension = 2 or 3
    as documented in rcb.h:
@@ -283,7 +285,7 @@ void RCB::compute(int dimension, int n, double **x, double *wt,
       first_iteration = 1;
       indexlo = indexhi = 0;
 
-      while (1) {
+      while (true) {
 
         // choose bisector value
         // use old value on 1st iteration if old cut dimension is the same
@@ -572,10 +574,10 @@ void RCB::compute(int dimension, int n, double **x, double *wt,
     // handshake before sending dots to insure recvs have been posted
 
     if (readnumber > 0) {
-      MPI_Send(NULL,0,MPI_INT,procpartner,0,world);
-      if (readnumber == 2) MPI_Send(NULL,0,MPI_INT,procpartner2,0,world);
+      MPI_Send(nullptr,0,MPI_INT,procpartner,0,world);
+      if (readnumber == 2) MPI_Send(nullptr,0,MPI_INT,procpartner2,0,world);
     }
-    MPI_Recv(NULL,0,MPI_INT,procpartner,0,world,MPI_STATUS_IGNORE);
+    MPI_Recv(nullptr,0,MPI_INT,procpartner,0,world,MPI_STATUS_IGNORE);
 
     // send dots to partner
 
@@ -631,7 +633,7 @@ void RCB::compute(int dimension, int n, double **x, double *wt,
 /* ----------------------------------------------------------------------
    perform RCB balancing of N particles at coords X in bounding box LO/HI
    OLD version: each RCB cut is made in longest dimension of sub-box
-   if wt = NULL, ignore per-particle weights
+   if wt = nullptr, ignore per-particle weights
    if wt defined, per-particle weights > 0.0
    dimension = 2 or 3
    as documented in rcb.h:
@@ -812,7 +814,7 @@ void RCB::compute_old(int dimension, int n, double **x, double *wt,
     first_iteration = 1;
     indexlo = indexhi = 0;
 
-    while (1) {
+    while (true) {
 
       // choose bisector value
       // use old value on 1st iteration if old cut dimension is the same
@@ -1064,10 +1066,10 @@ void RCB::compute_old(int dimension, int n, double **x, double *wt,
     // handshake before sending dots to insure recvs have been posted
 
     if (readnumber > 0) {
-      MPI_Send(NULL,0,MPI_INT,procpartner,0,world);
-      if (readnumber == 2) MPI_Send(NULL,0,MPI_INT,procpartner2,0,world);
+      MPI_Send(nullptr,0,MPI_INT,procpartner,0,world);
+      if (readnumber == 2) MPI_Send(nullptr,0,MPI_INT,procpartner2,0,world);
     }
-    MPI_Recv(NULL,0,MPI_INT,procpartner,0,world,MPI_STATUS_IGNORE);
+    MPI_Recv(nullptr,0,MPI_INT,procpartner,0,world,MPI_STATUS_IGNORE);
 
     // send dots to partner
 
@@ -1128,8 +1130,8 @@ void RCB::compute_old(int dimension, int n, double **x, double *wt,
 void box_merge(void *in, void *inout, int * /*len*/, MPI_Datatype * /*dptr*/)
 
 {
-  RCB::BBox *box1 = (RCB::BBox *) in;
-  RCB::BBox *box2 = (RCB::BBox *) inout;
+  auto box1 = (RCB::BBox *) in;
+  auto box2 = (RCB::BBox *) inout;
 
   for (int i = 0; i < 3; i++) {
     if (box1->lo[i] < box2->lo[i]) box2->lo[i] = box1->lo[i];
@@ -1158,8 +1160,8 @@ void box_merge(void *in, void *inout, int * /*len*/, MPI_Datatype * /*dptr*/)
 void median_merge(void *in, void *inout, int * /*len*/, MPI_Datatype * /*dptr*/)
 
 {
-  RCB::Median *med1 = (RCB::Median *) in;
-  RCB::Median *med2 = (RCB::Median *) inout;
+  auto med1 = (RCB::Median *) in;
+  auto med2 = (RCB::Median *) inout;
 
   med2->totallo += med1->totallo;
   if (med1->valuelo > med2->valuelo) {
@@ -1207,8 +1209,7 @@ void RCB::invert(int sortflag)
   int *proclist;
   memory->create(proclist,nsend,"RCB:proclist");
 
-  Invert *sinvert =
-    (Invert *) memory->smalloc(nsend*sizeof(Invert),"RCB:sinvert");
+  auto sinvert = (Invert *) memory->smalloc(nsend*sizeof(Invert),"RCB:sinvert");
 
   int m = 0;
   for (int i = nkeep; i < nfinal; i++) {
@@ -1223,8 +1224,7 @@ void RCB::invert(int sortflag)
   // nrecv = # of my dots to send to other procs
 
   int nrecv = irregular->create_data(nsend,proclist,sortflag);
-  Invert *rinvert =
-    (Invert *) memory->smalloc(nrecv*sizeof(Invert),"RCB:rinvert");
+  auto rinvert = (Invert *) memory->smalloc(nrecv*sizeof(Invert),"RCB:rinvert");
   irregular->exchange_data((char *) sinvert,sizeof(Invert),(char *) rinvert);
   irregular->destroy_data();
 
@@ -1260,9 +1260,9 @@ void RCB::invert(int sortflag)
    memory use of Irregular
 ------------------------------------------------------------------------- */
 
-bigint RCB::memory_usage()
+double RCB::memory_usage()
 {
-  bigint bytes = 0;
+  double bytes = 0;
   if (irregular) bytes += irregular->memory_usage();
   return bytes;
 }

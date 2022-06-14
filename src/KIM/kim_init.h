@@ -1,6 +1,6 @@
 /* -*- c++ -*- ----------------------------------------------------------
    LAMMPS - Large-scale Atomic/Molecular Massively Parallel Simulator
-   http://lammps.sandia.gov, Sandia National Laboratories
+   https://www.lammps.org/, Sandia National Laboratories
    Steve Plimpton, sjplimp@sandia.gov
 
    Copyright (2003) Sandia Corporation.  Under the terms of Contract
@@ -13,8 +13,9 @@
 
 /* ----------------------------------------------------------------------
    Contributing authors: Axel Kohlmeyer (Temple U),
-                         Ryan S. Elliott (UMN)
-                         Ellad B. Tadmor (UMN)
+                         Ryan S. Elliott (UMN),
+                         Ellad B. Tadmor (UMN),
+                         Yaser Afshar (UMN)
 ------------------------------------------------------------------------- */
 
 /* ----------------------------------------------------------------------
@@ -55,77 +56,35 @@
    Designed for use with the kim-api-2.1.0 (and newer) package
 ------------------------------------------------------------------------- */
 
-#ifdef COMMAND_CLASS
-
-CommandStyle(kim_init,KimInit)
-
-#else
-
 #ifndef LMP_KIM_INIT_H
 #define LMP_KIM_INIT_H
 
 #include "pointers.h"
-#include <string>
+
+// Forward declaration.
+struct KIM_Model;
+struct KIM_Collections;
 
 namespace LAMMPS_NS {
 
 class KimInit : protected Pointers {
  public:
-  KimInit(class LAMMPS *lmp) : Pointers(lmp) {};
+  KimInit(class LAMMPS *lmp) : Pointers(lmp){};
   void command(int, char **);
+  enum model_type_enum { MO, SM };
+  static void write_log_cite(class LAMMPS *, model_type_enum, char *);
+
  private:
-  enum model_type_enum {MO, SM};
   model_type_enum model_type;
   bool unit_conversion_mode;
 
-  void determine_model_type_and_units(char *, char *, char **);
-  void write_log_cite(char *);
-  void do_init(char *, char *, char *);
-  void do_variables(char*, char*);
-  void kim_init_log_delimiter(std::string const begin_end) const;
+  void determine_model_type_and_units(char *, char *, char **, KIM_Model *&);
+  void do_init(char *, char *, char *, KIM_Model *&);
+  void do_variables(const std::string &, const std::string &);
+
+  void print_dirs(struct KIM_Collections *const collections) const;
 };
 
-}
+}    // namespace LAMMPS_NS
 
 #endif
-#endif
-
-/* ERROR/WARNING messages:
-
-E: Illegal kim_init command
-
-Incorrect number or kind of arguments to kim_init.
-
-E: Must use 'kim_init' command before simulation box is defined
-
-Self-explanatory.
-
-E: KIM Model does not support the requested unit system
-
-Self-explanatory.
-
-E: KIM Model does not support any lammps unit system
-
-Self-explanatory.
-
-E: KIM model name not found
-
-Self-explanatory.
-
-E: Incompatible KIM Simulator Model
-
-The requested KIM Simulator Model was defined for a different MD code
-and thus is not compatible with LAMMPS.
-
-E: Incompatible units for KIM Simulator Model
-
-The selected unit style is not compatible with the requested KIM
-Simulator Model.
-
-E: KIM Simulator Model has no Model definition
-
-There is no model definition (key: model-defn) in the KIM Simulator
-Model.  Please contact the OpenKIM database maintainers to verify
-and potentially correct this.
-
-*/

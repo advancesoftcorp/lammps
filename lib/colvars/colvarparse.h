@@ -2,7 +2,7 @@
 
 // This file is part of the Collective Variables module (Colvars).
 // The original version of Colvars and its updates are located at:
-// https://github.com/colvars/colvars
+// https://github.com/Colvars/colvars
 // Please update all Colvars source files before making any changes.
 // If you wish to distribute your changes, please submit them to the
 // Colvars repository at GitHub.
@@ -12,10 +12,10 @@
 
 #include <cstring>
 #include <string>
-#include <map>
 
 #include "colvarmodule.h"
 #include "colvarvalue.h"
+#include "colvarparams.h"
 
 
 /// \file colvarparse.h Parsing functions for collective variables
@@ -23,37 +23,24 @@
 
 /// \brief Base class containing parsing functions; all objects which
 /// need to parse input inherit from this
-class colvarparse {
+class colvarparse : public colvarparams {
 
 public:
 
   /// Default constructor
-  inline colvarparse()
-  {
-    init();
-  }
+  colvarparse();
 
   /// Constructor that stores the object's config string
-  inline colvarparse(const std::string& conf)
-  {
-    init(conf);
-  }
+  colvarparse(const std::string& conf);
 
   /// Set the object ready to parse a new configuration string
-  inline void init()
-  {
-    config_string.clear();
-    clear_keyword_registry();
-  }
+  void clear();
 
   /// Set a new config string for this object
-  inline void init(std::string const &conf)
-  {
-    if (! config_string.size()) {
-      init();
-      config_string = conf;
-    }
-  }
+  void set_string(std::string const &conf);
+
+  /// Default destructor
+  virtual ~colvarparse();
 
   /// Get the configuration string (includes comments)
   inline std::string const & get_config() const
@@ -69,6 +56,8 @@ public:
     parse_echo = (1<<1),
     /// Print the default value of a keyword, if it is NOT given
     parse_echo_default = (1<<2),
+    /// Print a deprecation warning if the keyword is given
+    parse_deprecation_warning = (1<<3),
     /// Do not print the keyword
     parse_silent = 0,
     /// Raise error if the keyword is not provided
@@ -79,7 +68,9 @@ public:
     /// The call is being executed from a read_restart() function
     parse_restart = (1<<18),
     /// Alias for old default behavior (should be phased out)
-    parse_normal = (1<<2) | (1<<1) | (1<<17)
+    parse_normal = (1<<1) | (1<<2) | (1<<17),
+    /// Settings for a deprecated keyword
+    parse_deprecated = (1<<1) | (1<<3) | (1<<17)
   };
 
   /// \brief Check that all the keywords within "conf" are in the list
@@ -285,14 +276,18 @@ public:
   /// skipping other blocks
   class read_block {
 
-    std::string const   key;
+    /// The keyword that identifies the block
+    std::string const key;
+
+    /// Where to keep the data (may be NULL)
     std::string * const data;
 
   public:
-    inline read_block(std::string const &key_in, std::string &data_in)
-      : key(key_in), data(&data_in)
-    {}
-    inline ~read_block() {}
+
+    read_block(std::string const &key_in, std::string *data_in = NULL);
+
+    ~read_block();
+
     friend std::istream & operator >> (std::istream &is, read_block const &rb);
   };
 
@@ -326,6 +321,10 @@ public:
   /// from this position
   static int check_braces(std::string const &conf, size_t const start_pos);
 
+  /// \brief Check that a config string contains non-ASCII characters
+  /// \param conf The configuration string
+  static int check_ascii(std::string const &conf);
+
   /// \brief Split a string with a specified delimiter into a vector
   /// \param data The string to be splitted
   /// \param delim A delimiter
@@ -333,6 +332,12 @@ public:
   static void split_string(const std::string& data, const std::string& delim, std::vector<std::string>& dest);
 
 protected:
+
+  /// Characters allowed immediately to the left of a kewyord
+  std::string const keyword_delimiters_left;
+
+  /// Characters allowed immediately to the right of a kewyord
+  std::string const keyword_delimiters_right;
 
   /// \brief List of legal keywords for this object: this is updated
   /// by each call to colvarparse::get_keyval() or

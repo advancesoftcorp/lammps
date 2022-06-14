@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1.1.6. Scatter/gather operations &mdash; LAMMPS documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/lammps.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="1.1.7. Neighbor list access" href="Library_neighbor.html" />
+    <link rel="prev" title="1.1.5. Compute, fixes, variables" href="Library_objects.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="Manual.html">
+            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
+              <div class="lammps_release">git info: patch 2Jun2022</div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Install.html">2. Install LAMMPS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Build.html">3. Build LAMMPS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Run_head.html">4. Run LAMMPS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Commands.html">5. Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Packages.html">6. Optional packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Speed.html">7. Accelerate performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Howto.html">8. Howto discussions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Examples.html">9. Example scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tools.html">10. Auxiliary tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Errors.html">11. Errors</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Programmer Guide</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="Library.html">1. LAMMPS Library Interfaces</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="Library.html#lammps-c-library-api">1.1. LAMMPS C Library API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Library_create.html">1.1.1. Creating or deleting a LAMMPS object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Library_execute.html">1.1.2. Executing commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Library_properties.html">1.1.3. System properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Library_atoms.html">1.1.4. Per-atom properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Library_objects.html">1.1.5. Compute, fixes, variables</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">1.1.6. Scatter/gather operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Library_neighbor.html">1.1.7. Neighbor list access</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Library_config.html">1.1.8. Configuration information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Library_utility.html">1.1.9. Utility functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Library_add.html">1.1.10. Extending the C API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Library.html#lammps-python-apis">1.2. LAMMPS Python APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Library.html#lammps-fortran-api">1.3. LAMMPS Fortran API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Library.html#lammps-cplusplus-api">1.4. LAMMPS C++ API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Python_head.html">2. Use Python with LAMMPS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Modify.html">3. Modifying &amp; extending LAMMPS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Developer.html">4. Information for Developers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="commands_list.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fixes.html">Fixes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="computes.html">Computes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pairs.html">Pair Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bonds.html">Bond Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="Manual.html">LAMMPS</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="Library.html"><span class="section-number">1. </span>LAMMPS Library Interfaces</a> &raquo;</li>
+      <li><span class="section-number">1.1.6. </span>Scatter/gather operations</li>
+      <li class="wy-breadcrumbs-aside">
+          <a href="https://www.lammps.org">Website</a>
+          <a href="Commands_all.html">Commands</a>
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="Library_objects.html" class="btn btn-neutral float-left" title="1.1.5. Compute, fixes, variables" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Library_neighbor.html" class="btn btn-neutral float-right" title="1.1.7. Neighbor list access" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="scatter-gather-operations">
+<h1><span class="section-number">1.1.6. </span>Scatter/gather operations<a class="headerlink" href="#scatter-gather-operations" title="Permalink to this headline">¶</a></h1>
+<p>This section has functions which gather per-atom data from one or more
+processors into a contiguous global list ordered by atom ID.  The same
+list is returned to all calling processors.  It also contains
+functions which scatter per-atom data from a contiguous global list
+across the processors that own those atom IDs.  It also has a
+create_atoms() function which can create new atoms by scattering them
+appropriately to owning processors in the LAMMPS spatial
+decomposition.</p>
+<p>It documents the following functions:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv419lammps_gather_atomsPvPciiPv" title="lammps_gather_atoms"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_gather_atoms()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#_CPPv426lammps_gather_atoms_concatPvPciiPv" title="lammps_gather_atoms_concat"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_gather_atoms_concat()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#_CPPv426lammps_gather_atoms_subsetPvPciiiPiPv" title="lammps_gather_atoms_subset"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_gather_atoms_subset()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#_CPPv420lammps_scatter_atomsPvPciiPv" title="lammps_scatter_atoms"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_scatter_atoms()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#_CPPv427lammps_scatter_atoms_subsetPvPciiiPiPv" title="lammps_scatter_atoms_subset"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_scatter_atoms_subset()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#_CPPv419lammps_gather_bondsPvPv" title="lammps_gather_bonds"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_gather_bonds()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#_CPPv413lammps_gatherPvPciiPv" title="lammps_gather"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_gather()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#_CPPv420lammps_gather_concatPvPciiPv" title="lammps_gather_concat"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_gather_concat()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#_CPPv420lammps_gather_subsetPvPciiiPiPv" title="lammps_gather_subset"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_gather_subset()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#_CPPv414lammps_scatterPvPciiPv" title="lammps_scatter"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_scatter()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#_CPPv421lammps_scatter_subsetPvPciiiPiPv" title="lammps_scatter_subset"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_scatter_subset()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#_CPPv419lammps_create_atomsPviPKiPKiPKdPKdPKii" title="lammps_create_atoms"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_create_atoms()</span></code></a></p></li>
+</ul>
+<hr class="docutils" />
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv419lammps_gather_atomsPvPciiPv">
+<span id="_CPPv319lammps_gather_atomsPvPciiPv"></span><span id="_CPPv219lammps_gather_atomsPvPciiPv"></span><span id="lammps_gather_atoms__voidP.cP.i.i.voidP"></span><span class="target" id="library_8h_1a08b464e199dd239e544be02fc7654274"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_gather_atoms</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">name</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">type</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">count</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lammps_gather_atomsPvPciiPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<hr class="docutils" />
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv426lammps_gather_atoms_concatPvPciiPv">
+<span id="_CPPv326lammps_gather_atoms_concatPvPciiPv"></span><span id="_CPPv226lammps_gather_atoms_concatPvPciiPv"></span><span id="lammps_gather_atoms_concat__voidP.cP.i.i.voidP"></span><span class="target" id="library_8h_1a20c86eb77163fd9f9e7d147dfdd9e77b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_gather_atoms_concat</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">name</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">type</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">count</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426lammps_gather_atoms_concatPvPciiPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<hr class="docutils" />
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv426lammps_gather_atoms_subsetPvPciiiPiPv">
+<span id="_CPPv326lammps_gather_atoms_subsetPvPciiiPiPv"></span><span id="_CPPv226lammps_gather_atoms_subsetPvPciiiPiPv"></span><span id="lammps_gather_atoms_subset__voidP.cP.i.i.i.iP.voidP"></span><span class="target" id="library_8h_1aec4f0c5fbd9b87532e0380da24fd3e27"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_gather_atoms_subset</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">name</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">type</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">count</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ndata</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ids</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426lammps_gather_atoms_subsetPvPciiiPiPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<hr class="docutils" />
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv420lammps_scatter_atomsPvPciiPv">
+<span id="_CPPv320lammps_scatter_atomsPvPciiPv"></span><span id="_CPPv220lammps_scatter_atomsPvPciiPv"></span><span id="lammps_scatter_atoms__voidP.cP.i.i.voidP"></span><span class="target" id="library_8h_1a56a5b41df74d0e0f2f3c9229bc357c7f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_scatter_atoms</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">name</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">type</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">count</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lammps_scatter_atomsPvPciiPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<hr class="docutils" />
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv427lammps_scatter_atoms_subsetPvPciiiPiPv">
+<span id="_CPPv327lammps_scatter_atoms_subsetPvPciiiPiPv"></span><span id="_CPPv227lammps_scatter_atoms_subsetPvPciiiPiPv"></span><span id="lammps_scatter_atoms_subset__voidP.cP.i.i.i.iP.voidP"></span><span class="target" id="library_8h_1a647c17855cb7059ef5d34a1accf94879"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_scatter_atoms_subset</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">name</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">type</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">count</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ndata</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ids</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427lammps_scatter_atoms_subsetPvPciiiPiPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<hr class="docutils" />
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv419lammps_gather_bondsPvPv">
+<span id="_CPPv319lammps_gather_bondsPvPv"></span><span id="_CPPv219lammps_gather_bondsPvPv"></span><span id="lammps_gather_bonds__voidP.voidP"></span><span class="target" id="library_8h_1a360d274b56e28d7a9fd0e195ff2171af"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_gather_bonds</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lammps_gather_bondsPvPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Gather type and constituent atom info for all bonds</p>
+<p><p>This function copies the list of all bonds into a buffer provided by
+the calling code. The buffer will be filled with bond type, bond atom 1,
+bond atom 2 for each bond. Thus the buffer has to be allocated to the
+dimension of 3 times the <strong>total</strong> number of bonds times the size of
+the LAMMPS “tagint” type, which is either 4 or 8 bytes depending on
+whether they are stored in 32-bit or 64-bit integers, respectively.
+This size depends on the compile time settings used when compiling
+the LAMMPS library and can be queried by calling
+<a class="reference internal" href="Library_properties.html#_CPPv422lammps_extract_settingPvPKc" title="lammps_extract_setting"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_extract_setting()</span></code></a> with the keyword “tagint”.</p>
+<p>When running in parallel, the data buffer must be allocated on <strong>all</strong>
+MPI ranks and will be filled with the information for <strong>all</strong> bonds
+in the system.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 28Jul2021.</span></p>
+</div>
+<p>Below is a brief C code demonstrating accessing this collected bond information.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;library.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">tagintsize</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">nbonds</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">bonds</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lammps_open_no_mpi</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">lammps_file</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;in.some_input&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">tagintsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lammps_extract_setting</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;tagint&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">tagintsize</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">nbonds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="kt">int32_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">lammps_extract_global</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nbonds&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">     </span><span class="k">else</span><span class="w"></span>
+<span class="w">        </span><span class="n">nbonds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="kt">int64_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">lammps_extract_global</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nbonds&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">bonds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="n">nbonds</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">tagintsize</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">lammps_gather_bonds</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="n">bonds</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">lammps_extract_setting</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;world_rank&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">tagintsize</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="kt">int32_t</span><span class="w"> </span><span class="o">*</span><span class="n">bonds_real</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int32_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">bonds</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">nbonds</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;bond % 4ld: type = %d, atoms: % 4d  % 4d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="n">bonds_real</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">bonds_real</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">bonds_real</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="kt">int64_t</span><span class="w"> </span><span class="o">*</span><span class="n">bonds_real</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int64_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">bonds</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">nbonds</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;bond % 4ld: type = %ld, atoms: % 4ld  % 4ld</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="n">bonds_real</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">bonds_real</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">bonds_real</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">lammps_close</span><span class="p">(</span><span class="n">handle</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">lammps_mpi_finalize</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">free</span><span class="p">(</span><span class="n">bonds</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>handle</strong> – pointer to a previously created LAMMPS instance </p></li>
+<li><p><strong>data</strong> – pointer to data to copy the result to </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv413lammps_gatherPvPciiPv">
+<span id="_CPPv313lammps_gatherPvPciiPv"></span><span id="_CPPv213lammps_gatherPvPciiPv"></span><span id="lammps_gather__voidP.cP.i.i.voidP"></span><span class="target" id="library_8h_1a5a11a7aa7a1843632178d123a0f9ca9f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_gather</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">name</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">type</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">count</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413lammps_gatherPvPciiPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<hr class="docutils" />
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv420lammps_gather_concatPvPciiPv">
+<span id="_CPPv320lammps_gather_concatPvPciiPv"></span><span id="_CPPv220lammps_gather_concatPvPciiPv"></span><span id="lammps_gather_concat__voidP.cP.i.i.voidP"></span><span class="target" id="library_8h_1aad13b838d3ca4157da4b421a1fde6c30"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_gather_concat</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">name</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">type</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">count</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lammps_gather_concatPvPciiPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<hr class="docutils" />
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv420lammps_gather_subsetPvPciiiPiPv">
+<span id="_CPPv320lammps_gather_subsetPvPciiiPiPv"></span><span id="_CPPv220lammps_gather_subsetPvPciiiPiPv"></span><span id="lammps_gather_subset__voidP.cP.i.i.i.iP.voidP"></span><span class="target" id="library_8h_1a672d61b6d67d25676aa91cdf875caedc"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_gather_subset</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">name</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">type</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">count</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ndata</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ids</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lammps_gather_subsetPvPciiiPiPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<hr class="docutils" />
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv414lammps_scatterPvPciiPv">
+<span id="_CPPv314lammps_scatterPvPciiPv"></span><span id="_CPPv214lammps_scatterPvPciiPv"></span><span id="lammps_scatter__voidP.cP.i.i.voidP"></span><span class="target" id="library_8h_1a473a3ced2b6374f1fdcc36d62c787392"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_scatter</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">name</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">type</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">count</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414lammps_scatterPvPciiPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<hr class="docutils" />
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv421lammps_scatter_subsetPvPciiiPiPv">
+<span id="_CPPv321lammps_scatter_subsetPvPciiiPiPv"></span><span id="_CPPv221lammps_scatter_subsetPvPciiiPiPv"></span><span id="lammps_scatter_subset__voidP.cP.i.i.i.iP.voidP"></span><span class="target" id="library_8h_1a0de1c2e6f5145759e8a9fa9eade756d1"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_scatter_subset</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">name</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">type</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">count</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ndata</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ids</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lammps_scatter_subsetPvPciiiPiPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<hr class="docutils" />
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv419lammps_create_atomsPviPKiPKiPKdPKdPKii">
+<span id="_CPPv319lammps_create_atomsPviPKiPKiPKdPKdPKii"></span><span id="_CPPv219lammps_create_atomsPviPKiPKiPKdPKdPKii"></span><span id="lammps_create_atoms__voidP.i.iCP.iCP.doubleCP.doubleCP.iCP.i"></span><span class="target" id="library_8h_1aeebd5ebadb0c014f80e2c25dd369ff44"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_create_atoms</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">id</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">type</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">x</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">v</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">image</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">bexpand</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lammps_create_atomsPviPKiPKiPKdPKdPKii" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create N atoms from list of coordinates</p>
+<p><p>The prototype for this function when compiling with <code class="docutils literal notranslate"><span class="pre">-DLAMMPS_BIGBIG</span></code>
+is:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">lammps_create_atoms</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="kt">int64_t</span><span class="w"> </span><span class="o">*</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="kt">int64_t</span><span class="w"> </span><span class="o">*</span><span class="n">image</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">bexpand</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This function creates additional atoms from a given list of coordinates
+and a list of atom types.  Additionally the atom-IDs, velocities, and
+image flags may be provided.  If atom-IDs are not provided, they will be
+automatically created as a sequence following the largest existing
+atom-ID.</p>
+<p>This function is useful to add atoms to a simulation or - in tandem with
+<a class="reference internal" href="Library_properties.html#_CPPv416lammps_reset_boxPvPdPdddd" title="lammps_reset_box"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_reset_box()</span></code></a> - to restore a previously extracted and
+saved state of a simulation.  Additional properties for the new atoms
+can then be assigned via the <a class="reference internal" href="#_CPPv420lammps_scatter_atomsPvPciiPv" title="lammps_scatter_atoms"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_scatter_atoms()</span></code></a>
+<a class="reference internal" href="Library_atoms.html#_CPPv419lammps_extract_atomPvPKc" title="lammps_extract_atom"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_extract_atom()</span></code></a> functions.</p>
+<p>For non-periodic boundaries, atoms will <strong>not</strong> be created that have
+coordinates outside the box unless it is a shrink-wrap boundary and the
+shrinkexceed flag has been set to a non-zero value.  For periodic
+boundaries atoms will be wrapped back into the simulation cell and its
+image flags adjusted accordingly, unless explicit image flags are
+provided.</p>
+<p>The function returns the number of atoms created or -1 on failure, e.g.
+when called before as box has been created.</p>
+<p>Coordinates and velocities have to be given in a 1d-array in the order
+X(1),Y(1),Z(1),X(2),Y(2),Z(2),…,X(N),Y(N),Z(N).</p>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>handle</strong> – pointer to a previously created LAMMPS instance </p></li>
+<li><p><strong>n</strong> – number of atoms, N, to be added to the system </p></li>
+<li><p><strong>id</strong> – pointer to N atom IDs; <code class="docutils literal notranslate"><span class="pre">NULL</span></code> will generate IDs </p></li>
+<li><p><strong>type</strong> – pointer to N atom types (required) </p></li>
+<li><p><strong>x</strong> – pointer to 3N doubles with x-,y-,z- positions of the new atoms (required) </p></li>
+<li><p><strong>v</strong> – pointer to 3N doubles with x-,y-,z- velocities of the new atoms (set to 0.0 if <code class="docutils literal notranslate"><span class="pre">NULL</span></code>) </p></li>
+<li><p><strong>image</strong> – pointer to N imageint sets of image flags, or <code class="docutils literal notranslate"><span class="pre">NULL</span></code> </p></li>
+<li><p><strong>bexpand</strong> – if 1, atoms outside of shrink-wrap boundaries will still be created and not dropped and the box extended </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>number of atoms created on success; -1 on failure (no box, no atom IDs, etc.) </p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Library_objects.html" class="btn btn-neutral float-left" title="1.1.5. Compute, fixes, variables" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Library_neighbor.html" class="btn btn-neutral float-right" title="1.1.7. Neighbor list access" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

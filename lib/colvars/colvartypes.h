@@ -2,7 +2,7 @@
 
 // This file is part of the Collective Variables module (Colvars).
 // The original version of Colvars and its updates are located at:
-// https://github.com/colvars/colvars
+// https://github.com/Colvars/colvars
 // Please update all Colvars source files before making any changes.
 // If you wish to distribute your changes, please submit them to the
 // Colvars repository at GitHub.
@@ -270,7 +270,7 @@ public:
                                             cvm::vector1d<T> &v)
   {
     if (v.size() == 0) return is;
-    size_t const start_pos = is.tellg();
+    std::streampos const start_pos = is.tellg();
     char sep;
     if ( !(is >> sep) || !(sep == '(') ) {
       is.clear();
@@ -385,7 +385,7 @@ protected:
     {
       if (v.size() != length) {
         return cvm::error("Error: setting a matrix row from a vector of "
-                          "incompatible size.\n", BUG_ERROR);
+                          "incompatible size.\n", COLVARS_BUG_ERROR);
       }
       for (size_t i = 0; i < length; i++) data[i] = v[i];
       return COLVARS_OK;
@@ -1294,8 +1294,7 @@ public:
 
     if (cos_omega > 0.0) {
       return 2.0*omega*grad1;
-    }
-    else {
+    } else {
       return -2.0*(PI-omega)*grad1;
     }
   }
@@ -1388,31 +1387,20 @@ public:
   void calc_optimal_rotation(std::vector<atom_pos> const &pos1,
                              std::vector<atom_pos> const &pos2);
 
+  /// Initialize member data
+  int init();
+
   /// Default constructor
-  inline rotation()
-    : b_debug_gradients(false)
-  {}
+  rotation();
 
   /// Constructor after a quaternion
-  inline rotation(cvm::quaternion const &qi)
-    : q(qi),
-      b_debug_gradients(false)
-  {
-  }
+  rotation(cvm::quaternion const &qi);
 
   /// Constructor after an axis of rotation and an angle (in radians)
-  inline rotation(cvm::real angle, cvm::rvector const &axis)
-    : b_debug_gradients(false)
-  {
-    cvm::rvector const axis_n = axis.unit();
-    cvm::real const sina = cvm::sin(angle/2.0);
-    q = cvm::quaternion(cvm::cos(angle/2.0),
-                        sina * axis_n.x, sina * axis_n.y, sina * axis_n.z);
-  }
+  rotation(cvm::real angle, cvm::rvector const &axis);
 
   /// Destructor
-  inline ~rotation()
-  {}
+  ~rotation();
 
   /// Return the rotated vector
   inline cvm::rvector rotate(cvm::rvector const &v) const
@@ -1431,7 +1419,6 @@ public:
   {
     return q.rotation_matrix();
   }
-
 
   /// \brief Return the spin angle (in degrees) with respect to the
   /// provided axis (which MUST be normalized)
@@ -1537,10 +1524,8 @@ protected:
   /// Compute the overlap matrix S (used by calc_optimal_rotation())
   void compute_overlap_matrix();
 
-  /// Diagonalize a given matrix m (used by calc_optimal_rotation())
-  static void diagonalize_matrix(cvm::matrix2d<cvm::real> &m,
-                                 cvm::vector1d<cvm::real> &eigval,
-                                 cvm::matrix2d<cvm::real> &eigvec);
+  /// Pointer to instance of Jacobi solver
+  void *jacobi;
 };
 
 

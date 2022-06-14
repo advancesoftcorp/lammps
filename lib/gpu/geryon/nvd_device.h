@@ -37,6 +37,8 @@ namespace ucl_cudadr {
 // --------------------------------------------------------------------------
 typedef CUstream command_queue;
 
+inline void ucl_flush(command_queue &cq) {}
+
 inline void ucl_sync(CUstream &stream) {
   CU_SAFE_CALL(cuStreamSynchronize(stream));
 }
@@ -156,14 +158,25 @@ class UCL_Device {
   inline std::string device_type_name(const int i) { return "GPU"; }
 
   /// Get current device type (UCL_CPU, UCL_GPU, UCL_ACCELERATOR, UCL_DEFAULT)
-  inline int device_type() { return device_type(_device); }
+  inline enum UCL_DEVICE_TYPE device_type() { return device_type(_device); }
   /// Get device type (UCL_CPU, UCL_GPU, UCL_ACCELERATOR, UCL_DEFAULT)
-  inline int device_type(const int i) { return UCL_GPU; }
+  inline enum UCL_DEVICE_TYPE device_type(const int i) { return UCL_GPU; }
 
   /// Returns true if host memory is efficiently addressable from device
   inline bool shared_memory() { return shared_memory(_device); }
   /// Returns true if host memory is efficiently addressable from device
   inline bool shared_memory(const int i) { return device_type(i)==UCL_CPU; }
+
+  /// Returns preferred vector width
+  inline int preferred_fp32_width() { return preferred_fp32_width(_device); }
+  /// Returns preferred vector width
+  inline int preferred_fp32_width(const int i)
+    {return _properties[i].SIMDWidth;}
+  /// Returns preferred vector width
+  inline int preferred_fp64_width() { return preferred_fp64_width(_device); }
+  /// Returns preferred vector width
+  inline int preferred_fp64_width(const int i)
+    {return _properties[i].SIMDWidth;}
 
   /// Returns true if double precision is support for the current device
   inline bool double_precision() { return double_precision(_device); }
@@ -228,6 +241,18 @@ class UCL_Device {
   /// Get the maximum number of threads per block
   inline size_t group_size(const int i)
     { return _properties[i].maxThreadsPerBlock; }
+  /// Get the maximum number of threads per block in dimension 'dim'
+  inline size_t group_size_dim(const int dim)
+    { return group_size_dim(_device, dim); }
+  /// Get the maximum number of threads per block in dimension 'dim'
+  inline size_t group_size_dim(const int i, const int dim)
+    { return _properties[i].maxThreadsDim[dim]; }
+
+  /// Get the shared local memory size in bytes
+  inline size_t slm_size() { return slm_size(_device); }
+  /// Get the shared local memory size in bytes
+  inline size_t slm_size(const int i)
+    { return _properties[i].sharedMemPerBlock; }
 
   /// Return the maximum memory pitch in bytes for current device
   inline size_t max_pitch() { return max_pitch(_device); }
@@ -268,11 +293,22 @@ class UCL_Device {
   inline int max_sub_devices(const int i)
     { return 0; }
 
+  /// True if the device supports shuffle intrinsics
+  inline bool has_shuffle_support()
+    { return has_shuffle_support(_device); }
+  /// True if the device supports shuffle intrinsics
+  inline bool has_shuffle_support(const int i)
+    { return arch(i)>=3.0; }
+
   /// List all devices along with all properties
   inline void print_all(std::ostream &out);
 
-  /// Select the platform that has accelerators (for compatibility with OpenCL)
-  inline int set_platform_accelerator(int pid=-1) { return UCL_SUCCESS; }
+  /// For compatability with OCL API
+  inline int auto_set_platform(const enum UCL_DEVICE_TYPE type=UCL_GPU,
+			       const std::string vendor="",
+			       const int ndevices=-1,
+			       const int first_device=-1)
+    { return set_platform(0); }
 
  private:
   int _device, _num_devices;
@@ -284,6 +320,9 @@ class UCL_Device {
 
 // Grabs the properties for all devices
 UCL_Device::UCL_Device() {
+#if CUDA_VERSION < 8000
+#error CUDA Toolkit version 8 or later required
+#endif
   CU_SAFE_CALL_NS(cuInit(0));
   CU_SAFE_CALL_NS(cuDeviceGetCount(&_num_devices));
   for (int i=0; i<_num_devices; ++i) {
@@ -322,16 +361,12 @@ UCL_Device::UCL_Device() {
     CU_SAFE_CALL_NS(cuDeviceGetAttribute(&prop.clockRate, CU_DEVICE_ATTRIBUTE_CLOCK_RATE, dev));
     CU_SAFE_CALL_NS(cuDeviceGetAttribute(&prop.textureAlign, CU_DEVICE_ATTRIBUTE_TEXTURE_ALIGNMENT, dev));
 
-    #if CUDA_VERSION >= 2020
     CU_SAFE_CALL_NS(cuDeviceGetAttribute(&prop.kernelExecTimeoutEnabled, CU_DEVICE_ATTRIBUTE_KERNEL_EXEC_TIMEOUT,dev));
     CU_SAFE_CALL_NS(cuDeviceGetAttribute(&prop.integrated, CU_DEVICE_ATTRIBUTE_INTEGRATED, dev));
     CU_SAFE_CALL_NS(cuDeviceGetAttribute(&prop.canMapHostMemory, CU_DEVICE_ATTRIBUTE_CAN_MAP_HOST_MEMORY, dev));
     CU_SAFE_CALL_NS(cuDeviceGetAttribute(&prop.computeMode, CU_DEVICE_ATTRIBUTE_COMPUTE_MODE,dev));
-    #endif
-    #if CUDA_VERSION >= 3010
     CU_SAFE_CALL_NS(cuDeviceGetAttribute(&prop.concurrentKernels, CU_DEVICE_ATTRIBUTE_CONCURRENT_KERNELS, dev));
     CU_SAFE_CALL_NS(cuDeviceGetAttribute(&prop.ECCEnabled, CU_DEVICE_ATTRIBUTE_ECC_ENABLED, dev));
-    #endif
 
     _properties.push_back(prop);
   }
@@ -379,13 +414,10 @@ void UCL_Device::clear() {
 
 // List all devices along with all properties
 void UCL_Device::print_all(std::ostream &out) {
-  #if CUDA_VERSION >= 2020
   int driver_version;
   cuDriverGetVersion(&driver_version);
   out << "CUDA Driver Version:                           "
-      << driver_version/1000 << "." << driver_version%100
-                  << std::endl;
-  #endif
+      << driver_version/1000 << "." << driver_version%100 << std::endl;
 
   if (num_devices() == 0)
     out << "There is no device supporting CUDA\n";
@@ -402,12 +434,10 @@ void UCL_Device::print_all(std::ostream &out) {
       out << "No\n";
     out << "  Total amount of global memory:                 "
         << gigabytes(i) << " GB\n";
-    #if CUDA_VERSION >= 2000
     out << "  Number of compute units/multiprocessors:       "
         << _properties[i].multiProcessorCount << std::endl;
     out << "  Number of cores:                               "
         << cores(i) << std::endl;
-    #endif
     out << "  Total amount of constant memory:               "
         << _properties[i].totalConstantMemory << " bytes\n";
     out << "  Total amount of local/shared memory per block: "
@@ -432,7 +462,6 @@ void UCL_Device::print_all(std::ostream &out) {
         << _properties[i].textureAlign << " bytes\n";
     out << "  Clock rate:                                    "
         << clock_rate(i) << " GHz\n";
-    #if CUDA_VERSION >= 2020
     out << "  Run time limit on kernels:                     ";
     if (_properties[i].kernelExecTimeoutEnabled)
       out << "Yes\n";
@@ -451,22 +480,14 @@ void UCL_Device::print_all(std::ostream &out) {
     out << "  Compute mode:                                  ";
     if (_properties[i].computeMode == CU_COMPUTEMODE_DEFAULT)
       out << "Default\n"; // multiple threads can use device
-#if CUDA_VERSION >= 8000
     else if (_properties[i].computeMode == CU_COMPUTEMODE_EXCLUSIVE_PROCESS)
-#else
-    else if (_properties[i].computeMode == CU_COMPUTEMODE_EXCLUSIVE)
-#endif
       out << "Exclusive\n"; // only thread can use device
     else if (_properties[i].computeMode == CU_COMPUTEMODE_PROHIBITED)
       out << "Prohibited\n"; // no thread can use device
-    #if CUDART_VERSION >= 4000
     else if (_properties[i].computeMode == CU_COMPUTEMODE_EXCLUSIVE_PROCESS)
       out << "Exclusive Process\n"; // multiple threads 1 process
-    #endif
     else
       out << "Unknown\n";
-    #endif
-    #if CUDA_VERSION >= 3010
     out << "  Concurrent kernel execution:                   ";
     if (_properties[i].concurrentKernels)
       out << "Yes\n";
@@ -477,7 +498,6 @@ void UCL_Device::print_all(std::ostream &out) {
       out << "Yes\n";
     else
       out << "No\n";
-    #endif
   }
 }
 

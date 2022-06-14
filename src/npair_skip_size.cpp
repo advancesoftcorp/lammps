@@ -1,6 +1,6 @@
 /* ----------------------------------------------------------------------
    LAMMPS - Large-scale Atomic/Molecular Massively Parallel Simulator
-   http://lammps.sandia.gov, Sandia National Laboratories
+   https://www.lammps.org/, Sandia National Laboratories
    Steve Plimpton, sjplimp@sandia.gov
 
    Copyright (2003) Sandia Corporation.  Under the terms of Contract
@@ -12,11 +12,11 @@
 ------------------------------------------------------------------------- */
 
 #include "npair_skip_size.h"
-#include "neigh_list.h"
+
 #include "atom.h"
-#include "atom_vec.h"
-#include "my_page.h"
 #include "error.h"
+#include "my_page.h"
+#include "neigh_list.h"
 
 using namespace LAMMPS_NS;
 
@@ -31,8 +31,8 @@ NPairSkipSize::NPairSkipSize(LAMMPS *lmp) : NPair(lmp) {}
 
 void NPairSkipSize::build(NeighList *list)
 {
-  int i,j,ii,jj,n,itype,jnum,joriginal;
-  int *neighptr,*jlist;
+  int i, j, ii, jj, n, itype, jnum, joriginal;
+  int *neighptr, *jlist;
 
   int *type = atom->type;
   int *ilist = list->ilist;
@@ -79,8 +79,7 @@ void NPairSkipSize::build(NeighList *list)
     firstneigh[i] = neighptr;
     numneigh[i] = n;
     ipage->vgot(n);
-    if (ipage->status())
-      error->one(FLERR,"Neighbor list overflow, boost neigh_modify one");
+    if (ipage->status()) error->one(FLERR, "Neighbor list overflow, boost neigh_modify one");
   }
 
   list->inum = inum;

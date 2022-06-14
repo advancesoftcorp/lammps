@@ -1,6 +1,6 @@
 /* -*- c++ -*- ----------------------------------------------------------
    LAMMPS - Large-scale Atomic/Molecular Massively Parallel Simulator
-   http://lammps.sandia.gov, Sandia National Laboratories
+   https://www.lammps.org/, Sandia National Laboratories
    Steve Plimpton, sjplimp@sandia.gov
 
    Copyright (2003) Sandia Corporation.  Under the terms of Contract
@@ -12,9 +12,9 @@
 ------------------------------------------------------------------------- */
 
 #ifdef FIX_CLASS
-
-FixStyle(ave/histo/weight,FixAveHistoWeight)
-
+// clang-format off
+FixStyle(ave/histo/weight,FixAveHistoWeight);
+// clang-format on
 #else
 
 #ifndef LMP_FIX_AVE_HISTO_WEIGHT_H
@@ -27,8 +27,8 @@ namespace LAMMPS_NS {
 class FixAveHistoWeight : public FixAveHisto {
  public:
   FixAveHistoWeight(class LAMMPS *, int, char **);
-  ~FixAveHistoWeight() {}
-  void end_of_step();
+
+  void end_of_step() override;
 
  private:
   void bin_one_weights(double, double);
@@ -36,34 +36,7 @@ class FixAveHistoWeight : public FixAveHisto {
   void bin_atoms_weights(double *, int, double *, int);
 };
 
-}
+}    // namespace LAMMPS_NS
 
 #endif
 #endif
-
-/* ERROR/WARNING messages:
-
-E: Illegal ... command
-
-Self-explanatory.  Check the input script syntax and compare to the
-documentation for the command.  You can use -echo screen as a
-command-line option when running LAMMPS to see the offending line.
-
-E: Fix ave/histo/weight value and weight vector lengths do not match
-
-Self-explanatory.
-
-E: Invalid timestep reset for fix ave/histo
-
-Resetting the timestep has invalidated the sequence of timesteps this
-fix needs to process.
-
-E: Fix ave/histo/weight option not yet supported
-
-UNDOCUMENTED
-
-E: Error writing out histogram data
-
-Something in the output to the file triggered an error.
-
-*/
