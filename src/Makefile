@@ -101,6 +101,8 @@ PACKAGE = \
 	ml-quip \
 	ml-rann \
 	ml-snap \
+	ml-sannp \
+	ml-oc20driver \
 	mofff \
 	molecule \
 	molfile \
@@ -178,6 +180,8 @@ PACKMOST = \
 	meam \
 	misc \
 	ml-snap \
+	ml-sannp \
+	ml-oc20driver \
 	mofff \
 	molecule \
 	openmp \
