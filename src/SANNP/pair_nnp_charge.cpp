@@ -11,7 +11,8 @@ using namespace LAMMPS_NS;
 
 PairNNPCharge::PairNNPCharge(LAMMPS *lmp) : PairNNP(lmp)
 {
-    comm_forward = comm_reverse = 1;
+    comm_forward = 1;
+    comm_reverse = 1;
 }
 
 PairNNPCharge::~PairNNPCharge()

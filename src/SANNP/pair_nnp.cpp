@@ -11,6 +11,11 @@ using namespace LAMMPS_NS;
 
 PairNNP::PairNNP(LAMMPS *lmp) : Pair(lmp)
 {
+    single_enable   = 0;
+    restartinfo     = 0;
+    one_coeff       = 1;
+    manybody_flag   = 1;
+
     this->typeMap   = NULL;
     this->zeroEatom = 0;
     this->property  = NULL;
