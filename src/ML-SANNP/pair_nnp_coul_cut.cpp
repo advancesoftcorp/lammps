@@ -154,6 +154,6 @@ void PairNNPCoulCut::settings(int narg, char **arg)
         error->all(FLERR, "Illegal number of arguments for pair_style nnp/coul/cut command.");
     }
 
-    this->cutcoul = force->numeric(FLERR, arg[0]);
+    this->cutcoul = utils::numeric(FLERR, arg[0], false, lmp);
 }
 
