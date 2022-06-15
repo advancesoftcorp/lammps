@@ -72,6 +72,10 @@ JPG_INC  =
 JPG_PATH =
 JPG_LIB  =
 
+#  library for loading shared objects (defaults to -ldl but must be empty on Windows)
+
+override DYN_LIB =
+
 # ---------------------------------------------------------------------
 # build rules and dependencies
 # do not edit this section
