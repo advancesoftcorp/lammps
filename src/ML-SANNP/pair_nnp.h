@@ -34,17 +34,17 @@ class PairNNP: public Pair
 public:
     PairNNP(class LAMMPS*);
 
-    virtual ~PairNNP();
+    virtual ~PairNNP() override;
 
-    virtual void compute(int, int);
+    virtual void compute(int, int) override;
 
-    virtual void settings(int, char **);
+    virtual void settings(int, char **) override;
 
-    virtual void coeff(int, char **);
+    virtual void coeff(int, char **) override;
 
-    double init_one(int, int);
+    double init_one(int, int) override;
 
-    virtual void init_style();
+    virtual void init_style() override;
 
 protected:
     int*      typeMap;

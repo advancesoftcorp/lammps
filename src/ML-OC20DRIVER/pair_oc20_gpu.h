@@ -24,10 +24,10 @@ class PairOC20GPU: public PairOC20
 public:
     PairOC20GPU(class LAMMPS*);
 
-    virtual ~PairOC20GPU();
+    virtual ~PairOC20GPU() override;
 
 protected:
-    int withGPU();
+    int withGPU() override;
 };
 
 }  // namespace LAMMPS_NS

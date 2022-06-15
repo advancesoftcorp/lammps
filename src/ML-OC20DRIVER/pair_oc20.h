@@ -35,17 +35,17 @@ class PairOC20: public Pair
 public:
     PairOC20(class LAMMPS*);
 
-    virtual ~PairOC20();
+    virtual ~PairOC20() override;
 
-    void compute(int, int);
+    void compute(int, int) override;
 
-    void settings(int, char **);
+    void settings(int, char **) override;
 
-    void coeff(int, char **);
+    void coeff(int, char **) override;
 
-    double init_one(int, int);
+    double init_one(int, int) override;
 
-    void init_style();
+    void init_style() override;
 
 protected:
     virtual int withGPU();

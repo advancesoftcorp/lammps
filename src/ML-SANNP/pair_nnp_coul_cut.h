@@ -24,11 +24,11 @@ class PairNNPCoulCut : public PairNNPCharge
 public:
     PairNNPCoulCut(class LAMMPS*);
 
-    virtual ~PairNNPCoulCut();
+    virtual ~PairNNPCoulCut() override;
 
-    void compute(int, int);
+    void compute(int, int) override;
 
-    void settings(int, char **);
+    void settings(int, char **) override;
 };
 
 }  // namespace LAMMPS_NS

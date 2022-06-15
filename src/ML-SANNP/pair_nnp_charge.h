@@ -25,35 +25,35 @@ class PairNNPCharge : public PairNNP
 public:
     PairNNPCharge(class LAMMPS*);
 
-    virtual ~PairNNPCharge();
+    virtual ~PairNNPCharge() override;
 
-    virtual void settings(int, char **);
+    virtual void settings(int, char **) override;
 
-    void coeff(int, char **);
+    void coeff(int, char **) override;
 
-    virtual void init_style();
+    virtual void init_style() override;
 
-    void *extract(const char *, int &);
+    void *extract(const char *, int &) override;
 
-    int pack_forward_comm(int, int *, double *, int, int *);
+    int pack_forward_comm(int, int *, double *, int, int *) override;
 
-    void unpack_forward_comm(int, int, double *);
+    void unpack_forward_comm(int, int, double *) override;
 
-    int pack_reverse_comm(int, int, double *);
+    int pack_reverse_comm(int, int, double *) override;
 
-    void unpack_reverse_comm(int, int *, double *);
+    void unpack_reverse_comm(int, int *, double *) override;
 
 protected:
     double cutcoul;
     nnpreal* charges;
 
-    void allocate();
+    void allocate() override;
 
-    bool prepareNN();
+    bool prepareNN() override;
 
-    void performNN(int);
+    void performNN(int) override;
 
-    double get_cutoff();
+    double get_cutoff() override;
 };
 
 }  // namespace LAMMPS_NS

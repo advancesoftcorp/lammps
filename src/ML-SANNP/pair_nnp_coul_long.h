@@ -32,11 +32,11 @@ class PairNNPCoulLong : public PairNNPCharge
 public:
     PairNNPCoulLong(class LAMMPS*);
 
-    virtual ~PairNNPCoulLong();
+    virtual ~PairNNPCoulLong() override;
 
-    void compute(int, int);
+    void compute(int, int) override;
 
-    void init_style();
+    void init_style() override;
 
 protected:
     double g_ewald;
