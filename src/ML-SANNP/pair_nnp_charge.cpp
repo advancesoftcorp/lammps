@@ -155,7 +155,7 @@ void *PairNNPCharge::extract(const char *str, int &dim)
 {
     dim = 1;
     if (strcmp(str,"cut_coul") == 0) return (void *) &(this->cutcoul);
-    return NULL;
+    return nullptr;
 }
 
 int PairNNPCharge::pack_forward_comm(int n, int *list, double *buf,

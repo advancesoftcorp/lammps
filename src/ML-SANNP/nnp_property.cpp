@@ -28,11 +28,11 @@ Property::Property()
     this->rcutAngle     = ZERO;
 
     this->behlerG4      = 0;
-    this->behlerEta1    = NULL;
-    this->behlerEta2    = NULL;
-    this->behlerRs1     = NULL;
-    this->behlerRs2     = NULL;
-    this->behlerZeta    = NULL;
+    this->behlerEta1    = nullptr;
+    this->behlerEta2    = nullptr;
+    this->behlerRs1     = nullptr;
+    this->behlerRs2     = nullptr;
+    this->behlerZeta    = nullptr;
 
     this->layersEnergy  = 0;
     this->nodesEnergy   = 0;
@@ -47,27 +47,27 @@ Property::Property()
 
 Property::~Property()
 {
-    if (this->behlerEta1 != NULL)
+    if (this->behlerEta1 != nullptr)
     {
         delete[] this->behlerEta1;
     }
 
-    if (this->behlerEta2 != NULL)
+    if (this->behlerEta2 != nullptr)
     {
         delete[] this->behlerEta2;
     }
 
-    if (this->behlerRs1 != NULL)
+    if (this->behlerRs1 != nullptr)
     {
         delete[] this->behlerRs1;
     }
 
-    if (this->behlerRs2 != NULL)
+    if (this->behlerRs2 != nullptr)
     {
         delete[] this->behlerRs2;
     }
 
-    if (this->behlerZeta != NULL)
+    if (this->behlerZeta != nullptr)
     {
         delete[] this->behlerZeta;
     }
@@ -81,7 +81,7 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
     char line[lenLine];
 
     ierr = 0;
-    if (rank == 0 && fp == NULL)
+    if (rank == 0 && fp == nullptr)
     {
         ierr = 1;
     }
@@ -92,7 +92,7 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
     ierr = 0;
     if (rank == 0)
     {
-        if (fgets(line, lenLine, fp) == NULL)
+        if (fgets(line, lenLine, fp) == nullptr)
         {
             ierr = 1;
         }
@@ -137,7 +137,7 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
         ierr = 0;
         if (rank == 0)
         {
-            if (fgets(line, lenLine, fp) == NULL)
+            if (fgets(line, lenLine, fp) == nullptr)
             {
                 ierr = 1;
             }
@@ -165,7 +165,7 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
         ierr = 0;
         if (rank == 0)
         {
-            if (fgets(line, lenLine, fp) == NULL)
+            if (fgets(line, lenLine, fp) == nullptr)
             {
                 ierr = 1;
             }
@@ -197,23 +197,23 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
         MPI_Bcast(&(this->rcutAngle),  1, MPI_NNPREAL, 0, world);
         MPI_Bcast(&(this->behlerG4),   1, MPI_INT,     0, world);
 
-        if (this->behlerEta1 != NULL)
+        if (this->behlerEta1 != nullptr)
         {
             delete[] this->behlerEta1;
         }
-        if (this->behlerEta2 != NULL)
+        if (this->behlerEta2 != nullptr)
         {
             delete[] this->behlerEta2;
         }
-        if (this->behlerRs1 != NULL)
+        if (this->behlerRs1 != nullptr)
         {
             delete[] this->behlerRs1;
         }
-        if (this->behlerRs2 != NULL)
+        if (this->behlerRs2 != nullptr)
         {
             delete[] this->behlerRs2;
         }
-        if (this->behlerZeta != NULL)
+        if (this->behlerZeta != nullptr)
         {
             delete[] this->behlerZeta;
         }
@@ -238,7 +238,7 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
             {
                 for (int i = 0; i < this->numRadius; ++i)
                 {
-                    if (fgets(line, lenLine, fp) == NULL)
+                    if (fgets(line, lenLine, fp) == nullptr)
                     {
                         ierr = 1;
                         break;
@@ -266,7 +266,7 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
             {
                 for (int i = 0; i < this->numAngle; ++i)
                 {
-                    if (fgets(line, lenLine, fp) == NULL)
+                    if (fgets(line, lenLine, fp) == nullptr)
                     {
                         ierr = 1;
                         break;
@@ -302,7 +302,7 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
         ierr = 0;
         if (rank == 0)
         {
-            if (fgets(line, lenLine, fp) == NULL)
+            if (fgets(line, lenLine, fp) == nullptr)
             {
                 ierr = 1;
             }
@@ -363,7 +363,7 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
     ierr = 0;
     if (rank == 0)
     {
-        if (fgets(line, lenLine, fp) == NULL)
+        if (fgets(line, lenLine, fp) == nullptr)
         {
             ierr = 1;
         }
@@ -385,7 +385,7 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
     ierr = 0;
     if (rank == 0)
     {
-        if (fgets(line, lenLine, fp) == NULL)
+        if (fgets(line, lenLine, fp) == nullptr)
         {
             ierr = 1;
         }
@@ -412,7 +412,7 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
         ierr = 0;
         if (rank == 0)
         {
-            if (fgets(line, lenLine, fp) == NULL)
+            if (fgets(line, lenLine, fp) == nullptr)
             {
                 ierr = 1;
             }
@@ -444,7 +444,7 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
 void Property::printProperty()
 {
     FILE* fp = fopen("log.nnp", "w");
-    if (fp == NULL)
+    if (fp == nullptr)
     {
         return;
     }

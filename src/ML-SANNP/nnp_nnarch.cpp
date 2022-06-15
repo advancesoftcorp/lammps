@@ -14,7 +14,7 @@ NNArch::NNArch(int mode, int numElems, const Property* property)
         stop_by_error("#elements is not positive.");
     }
 
-    if (property == NULL)
+    if (property == nullptr)
     {
         stop_by_error("property is null.");
     }
@@ -26,14 +26,14 @@ NNArch::NNArch(int mode, int numElems, const Property* property)
 
     this->atomNum = new int[numElems];
 
-    this->elements     = NULL;
-    this->numNeighbor  = NULL;
-    this->elemNeighbor = NULL;
-    this->posNeighbor  = NULL;
+    this->elements     = nullptr;
+    this->numNeighbor  = nullptr;
+    this->elemNeighbor = nullptr;
+    this->posNeighbor  = nullptr;
 
     this->mbatch = 0;
     this->nbatch = new int[this->numElems];
-    this->ibatch = NULL;
+    this->ibatch = nullptr;
 
     if (this->isEnergyMode())
     {
@@ -42,11 +42,11 @@ NNArch::NNArch(int mode, int numElems, const Property* property)
     }
     else
     {
-        this->energyData = NULL;
-        this->energyGrad = NULL;
+        this->energyData = nullptr;
+        this->energyGrad = nullptr;
     }
 
-    this->forceData = NULL;
+    this->forceData = nullptr;
 
     if (this->isChargeMode())
     {
@@ -54,25 +54,25 @@ NNArch::NNArch(int mode, int numElems, const Property* property)
     }
     else
     {
-        this->chargeData = NULL;
+        this->chargeData = nullptr;
     }
 
-    this->symmData    = NULL;
-    this->symmDiff    = NULL;
+    this->symmData    = nullptr;
+    this->symmDiff    = nullptr;
     this->symmAve     = new nnpreal[this->numElems];
     this->symmDev     = new nnpreal[this->numElems];
-    this->symmFunc    = NULL;
+    this->symmFunc    = nullptr;
 
-    this->interLayersEnergy = NULL;
-    this->lastLayersEnergy  = NULL;
+    this->interLayersEnergy = nullptr;
+    this->lastLayersEnergy  = nullptr;
 
-    this->interLayersCharge = NULL;
-    this->lastLayersCharge  = NULL;
+    this->interLayersCharge = nullptr;
+    this->lastLayersCharge  = nullptr;
 
-    this->ljlikeA1 = NULL;
-    this->ljlikeA2 = NULL;
-    this->ljlikeA3 = NULL;
-    this->ljlikeA4 = NULL;
+    this->ljlikeA1 = nullptr;
+    this->ljlikeA2 = nullptr;
+    this->ljlikeA3 = nullptr;
+    this->ljlikeA4 = nullptr;
 }
 
 NNArch::~NNArch()
@@ -93,16 +93,16 @@ NNArch::~NNArch()
 
     delete[] this->nbatch;
 
-    if (this->energyData != NULL)
+    if (this->energyData != nullptr)
     {
         delete[] this->energyData;
     }
-    if (this->energyGrad != NULL)
+    if (this->energyGrad != nullptr)
     {
         delete[] this->energyGrad;
     }
 
-    if (this->chargeData != NULL)
+    if (this->chargeData != nullptr)
     {
         delete[] this->chargeData;
     }
@@ -110,12 +110,12 @@ NNArch::~NNArch()
     delete[] this->symmAve;
     delete[] this->symmDev;
 
-    if (this->symmFunc != NULL)
+    if (this->symmFunc != nullptr)
     {
         delete this->symmFunc;
     }
 
-    if (this->interLayersEnergy != NULL)
+    if (this->interLayersEnergy != nullptr)
     {
         for (ielem = 0; ielem < nelem; ++ielem)
         {
@@ -128,7 +128,7 @@ NNArch::~NNArch()
         delete[] this->interLayersEnergy;
     }
 
-    if (this->lastLayersEnergy != NULL)
+    if (this->lastLayersEnergy != nullptr)
     {
         for (ielem = 0; ielem < nelem; ++ielem)
         {
@@ -137,7 +137,7 @@ NNArch::~NNArch()
         delete[] this->lastLayersEnergy;
     }
 
-    if (this->interLayersCharge != NULL)
+    if (this->interLayersCharge != nullptr)
     {
         for (ielem = 0; ielem < nelem; ++ielem)
         {
@@ -150,7 +150,7 @@ NNArch::~NNArch()
         delete[] this->interLayersCharge;
     }
 
-    if (this->lastLayersCharge != NULL)
+    if (this->lastLayersCharge != nullptr)
     {
         for (ielem = 0; ielem < nelem; ++ielem)
         {
@@ -159,19 +159,19 @@ NNArch::~NNArch()
         delete[] this->lastLayersCharge;
     }
 
-    if (this->ljlikeA1 != NULL)
+    if (this->ljlikeA1 != nullptr)
     {
     	delete[] this->ljlikeA1;
     }
-    if (this->ljlikeA2 != NULL)
+    if (this->ljlikeA2 != nullptr)
     {
     	delete[] this->ljlikeA2;
     }
-    if (this->ljlikeA3 != NULL)
+    if (this->ljlikeA3 != nullptr)
     {
     	delete[] this->ljlikeA3;
     }
-    if (this->ljlikeA4 != NULL)
+    if (this->ljlikeA4 != nullptr)
     {
     	delete[] this->ljlikeA4;
     }
@@ -241,7 +241,7 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, bool zeroEatom,
     ierr = 0;
     if (rank == 0)
     {
-        if (fgets(line, lenLine, fp) == NULL)
+        if (fgets(line, lenLine, fp) == nullptr)
         {
             ierr = 1;
         }
@@ -282,7 +282,7 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, bool zeroEatom,
         ierr = 0;
         if (rank == 0)
         {
-            if (fgets(line, lenLine, fp) == NULL)
+            if (fgets(line, lenLine, fp) == nullptr)
             {
                 ierr = 1;
             }
@@ -408,7 +408,7 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, bool zeroEatom,
         if (rank == 0)
         {
             melemOld = 0;
-            if (fgets(line, lenLine, fp) == NULL)
+            if (fgets(line, lenLine, fp) == nullptr)
             {
                 ierr = 1;
             }
@@ -428,7 +428,7 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, bool zeroEatom,
 
             for (lelem = 0; lelem < melemOld; ++lelem)
             {
-                if (fgets(line, lenLine, fp) == NULL)
+                if (fgets(line, lenLine, fp) == nullptr)
                 {
                     ierr = 1;
                     break;
@@ -518,7 +518,7 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, bool zeroEatom,
         int mang = symmFunc == SYMM_FUNC_BEHLER ? (nang * 2) : nang;
         nbase = nrad + mang;
 
-        mapSymmFunc = NULL;
+        mapSymmFunc = nullptr;
     }
 
     else if (symmFunc == SYMM_FUNC_MANYBODY)
@@ -673,14 +673,14 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, bool zeroEatom,
     }
 
     // read NN energy
-    if (interLayersEnergy != NULL && lastLayersEnergy != NULL)
+    if (interLayersEnergy != nullptr && lastLayersEnergy != nullptr)
     {
         for (ielem = 0; ielem < nelemOld; ++ielem)
         {
             kelem = mapElem[ielem];
 
             // the first layer
-            if (mapSymmFunc != NULL)
+            if (mapSymmFunc != nullptr)
             {
                 oldLayer = new NNLayer(nbase, nnodeEnergy, activEnergy);
                 oldLayer->scanWeight(fp, rank, world);
@@ -737,14 +737,14 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, bool zeroEatom,
     }
 
     // read NN charge
-    if (withCharge != 0 && interLayersCharge != NULL && lastLayersCharge != NULL)
+    if (withCharge != 0 && interLayersCharge != nullptr && lastLayersCharge != nullptr)
     {
         for (ielem = 0; ielem < nelemOld; ++ielem)
         {
             kelem = mapElem[ielem];
 
             // the first layer
-            if (mapSymmFunc != NULL)
+            if (mapSymmFunc != nullptr)
             {
                 oldLayer = new NNLayer(nbase, nnodeCharge, activCharge);
                 oldLayer->scanWeight(fp, rank, world);
@@ -801,7 +801,7 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, bool zeroEatom,
 
     delete[] mapElem;
 
-    if (mapSymmFunc != NULL)
+    if (mapSymmFunc != nullptr)
     {
         delete[] mapSymmFunc;
     }
@@ -817,7 +817,7 @@ void NNArch::initGeometry(int numAtoms, int* elements,
         stop_by_error("#atoms is not positive.");
     }
 
-    if (elements == NULL || numNeighbor == NULL || elemNeighbor == NULL || posNeighbor == NULL)
+    if (elements == nullptr || numNeighbor == nullptr || elemNeighbor == nullptr || posNeighbor == nullptr)
     {
         stop_by_error("geometric data is null.");
     }
@@ -948,7 +948,7 @@ void NNArch::clearGeometry()
     int nelem = this->numElems;
 
     // release memory
-    if (this->ibatch != NULL)
+    if (this->ibatch != nullptr)
     {
         delete[] this->ibatch;
     }
@@ -962,17 +962,17 @@ void NNArch::clearGeometry()
                 continue;
             }
 
-            if (this->energyData[ielem] != NULL)
+            if (this->energyData[ielem] != nullptr)
             {
                 delete[] this->energyData[ielem];
             }
-            if (this->energyGrad[ielem] != NULL)
+            if (this->energyGrad[ielem] != nullptr)
             {
                 delete[] this->energyGrad[ielem];
             }
         }
 
-        if (this->forceData != NULL)
+        if (this->forceData != nullptr)
         {
             for (iatom = 0; iatom < natom; ++iatom)
             {
@@ -997,14 +997,14 @@ void NNArch::clearGeometry()
                 continue;
             }
 
-            if (this->chargeData[ielem] != NULL)
+            if (this->chargeData[ielem] != nullptr)
             {
                 delete[] this->chargeData[ielem];
             }
         }
     }
 
-    if (this->symmData != NULL)
+    if (this->symmData != nullptr)
     {
         for (iatom = 0; iatom < natom; ++iatom)
         {
@@ -1013,7 +1013,7 @@ void NNArch::clearGeometry()
         delete[] this->symmData;
     }
 
-    if (this->symmDiff != NULL)
+    if (this->symmDiff != nullptr)
     {
         for (iatom = 0; iatom < natom; ++iatom)
         {
@@ -1025,13 +1025,13 @@ void NNArch::clearGeometry()
     // initialize memory
     this->numAtoms = 0;
 
-    this->elements     = NULL;
-    this->numNeighbor  = NULL;
-    this->elemNeighbor = NULL;
-    this->posNeighbor  = NULL;
+    this->elements     = nullptr;
+    this->numNeighbor  = nullptr;
+    this->elemNeighbor = nullptr;
+    this->posNeighbor  = nullptr;
 
     this->mbatch = 0;
-    this->ibatch = NULL;
+    this->ibatch = nullptr;
     for (ielem = 0; ielem < nelem; ++ielem)
     {
         this->nbatch[ielem] = 0;
@@ -1041,35 +1041,35 @@ void NNArch::clearGeometry()
     {
         for (ielem = 0; ielem < nelem; ++ielem)
         {
-            this->energyData[ielem] = NULL;
-            this->energyGrad[ielem] = NULL;
+            this->energyData[ielem] = nullptr;
+            this->energyGrad[ielem] = nullptr;
         }
 
-        this->forceData = NULL;
+        this->forceData = nullptr;
     }
 
     if (this->isChargeMode())
     {
         for (ielem = 0; ielem < nelem; ++ielem)
         {
-            this->chargeData[ielem] = NULL;
+            this->chargeData[ielem] = nullptr;
         }
     }
 
-    this->symmData = NULL;
-    this->symmDiff = NULL;
+    this->symmData = nullptr;
+    this->symmDiff = nullptr;
 }
 
 SymmFunc* NNArch::getSymmFunc()
 {
-    if (this->symmFunc == NULL)
+    if (this->symmFunc == nullptr)
     {
         if (this->numElems < 1)
         {
             stop_by_error("#elements is not positive.");
         }
 
-        if (this->property == NULL)
+        if (this->property == nullptr)
         {
             stop_by_error("property is null.");
         }
@@ -1102,7 +1102,7 @@ SymmFunc* NNArch::getSymmFunc()
             const nnpreal* rs2  = this->property->getBehlerRs2();
             const nnpreal* zeta = this->property->getBehlerZeta();
 
-            SymmFuncBehler* symmFuncBehler = NULL;
+            SymmFuncBehler* symmFuncBehler = nullptr;
             symmFuncBehler = new SymmFuncBehler(this->numElems, tanhCut, weight, nrad, nang, rrad, rang);
 
             symmFuncBehler->setRadiusData(eta1, rs1);
@@ -1123,7 +1123,7 @@ SymmFunc* NNArch::getSymmFunc()
             this->symmFunc = new SymmFuncChebyshev(this->numElems, tanhCut, weight, nrad, nang, rrad, rang);
         }
 
-        if (this->symmFunc == NULL)
+        if (this->symmFunc == nullptr)
         {
             stop_by_error("cannot create symmFunc.");
         }
@@ -1534,7 +1534,7 @@ void NNArch::goForwardOnCharge()
 
 void NNArch::obtainEnergies(nnpreal* energies) const
 {
-    if (energies == NULL)
+    if (energies == nullptr)
     {
         stop_by_error("energies is null.");
     }
@@ -1563,7 +1563,7 @@ void NNArch::obtainEnergies(nnpreal* energies) const
 
 void NNArch::obtainForces(nnpreal*** forces) const
 {
-    if (forces == NULL)
+    if (forces == nullptr)
     {
         stop_by_error("forces is null.");
     }
@@ -1595,7 +1595,7 @@ void NNArch::obtainForces(nnpreal*** forces) const
 
 void NNArch::obtainCharges(nnpreal* charges) const
 {
-    if (charges == NULL)
+    if (charges == nullptr)
     {
         stop_by_error("charges is null.");
     }

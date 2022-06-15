@@ -60,17 +60,17 @@ SymmFuncChebyshev::~SymmFuncChebyshev()
 void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, nnpreal** posNeighbor,
                                   nnpreal* symmData, nnpreal* symmDiff) const
 {
-    if (elemNeighbor == NULL || posNeighbor == NULL)
+    if (elemNeighbor == nullptr || posNeighbor == nullptr)
     {
         stop_by_error("neighbor is null.");
     }
 
-    if (symmData == NULL)
+    if (symmData == nullptr)
     {
         stop_by_error("symmData is null.");
     }
 
-    if (symmDiff == NULL)
+    if (symmDiff == nullptr)
     {
         stop_by_error("symmDiff is null.");
     }

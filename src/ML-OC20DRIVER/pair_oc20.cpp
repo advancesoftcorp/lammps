@@ -16,15 +16,15 @@ PairOC20::PairOC20(LAMMPS *lmp) : Pair(lmp)
     one_coeff       = 1;
     manybody_flag   = 1;
 
-    this->atomNumMap        = NULL;
+    this->atomNumMap        = nullptr;
     this->maxinum           = 10;
     this->initializedPython = 0;
     this->virialWarning     = 0;
     this->cutoff            = 0.0;
     this->npythonPath       = 0;
-    this->pythonPaths       = NULL;
-    this->pyModule          = NULL;
-    this->pyFunc            = NULL;
+    this->pythonPaths       = nullptr;
+    this->pyModule          = nullptr;
+    this->pyFunc            = nullptr;
 }
 
 PairOC20::~PairOC20()
@@ -34,7 +34,7 @@ PairOC20::~PairOC20()
         return;
     }
 
-    if (this->atomNumMap != NULL)
+    if (this->atomNumMap != nullptr)
     {
         delete[] this->atomNumMap;
     }
@@ -49,7 +49,7 @@ PairOC20::~PairOC20()
         memory->destroy(this->forces);
     }
 
-    if (this->pythonPaths != NULL)
+    if (this->pythonPaths != nullptr)
     {
         for (int i = 0; i < this->npythonPath; ++i)
         {
@@ -245,7 +245,7 @@ void PairOC20::coeff(int narg, char **arg)
         error->all(FLERR, "Only wildcard asterisk is allowed in place of atom types for pair_coeff.");
     }
 
-    if (this->atomNumMap != NULL)
+    if (this->atomNumMap != nullptr)
     {
         delete this->atomNumMap;
     }
@@ -255,7 +255,7 @@ void PairOC20::coeff(int narg, char **arg)
     ntypesEff = 0;
     for (i = 0; i < ntypes; ++i)
     {
-        if (strcmp(arg[i + 3], "NULL") == 0)
+        if (strcmp(arg[i + 3], "nullptr") == 0)
         {
             this->atomNumMap[i + 1] = 0;
         }
@@ -369,15 +369,15 @@ double PairOC20::initializePython(const char *name, int gpu)
 
     double cutoff = -1.0;
 
-    PyObject* pySys    = NULL;
-    PyObject* pyPath   = NULL;
-    PyObject* pyName   = NULL;
-    PyObject* pyModule = NULL;
-    PyObject* pyFunc   = NULL;
-    PyObject* pyArgs   = NULL;
-    PyObject* pyArg1   = NULL;
-    PyObject* pyArg2   = NULL;
-    PyObject* pyValue  = NULL;
+    PyObject* pySys    = nullptr;
+    PyObject* pyPath   = nullptr;
+    PyObject* pyName   = nullptr;
+    PyObject* pyModule = nullptr;
+    PyObject* pyFunc   = nullptr;
+    PyObject* pyArgs   = nullptr;
+    PyObject* pyArg1   = nullptr;
+    PyObject* pyArg2   = nullptr;
+    PyObject* pyValue  = nullptr;
 
     Py_Initialize();
 
@@ -385,18 +385,18 @@ double PairOC20::initializePython(const char *name, int gpu)
     pyPath = PyObject_GetAttrString(pySys, "path");
 
     pyName = PyUnicode_DecodeFSDefault(".");
-    if (pyName != NULL)
+    if (pyName != nullptr)
     {
         PyList_Append(pyPath, pyName);
         Py_DECREF(pyName);
     }
 
-    if (this->pythonPaths != NULL)
+    if (this->pythonPaths != nullptr)
     {
         for (int i = 0; i < this->npythonPath; ++i)
         {
             pyName = PyUnicode_DecodeFSDefault(this->pythonPaths[i]);
-            if (pyName != NULL)
+            if (pyName != nullptr)
             {
                 PyList_Append(pyPath, pyName);
                 Py_DECREF(pyName);
@@ -405,17 +405,17 @@ double PairOC20::initializePython(const char *name, int gpu)
     }
 
     pyName = PyUnicode_DecodeFSDefault("oc20_driver");
-    if (pyName != NULL)
+    if (pyName != nullptr)
     {
         pyModule = PyImport_Import(pyName);
         Py_DECREF(pyName);
     }
 
-    if (pyModule != NULL)
+    if (pyModule != nullptr)
     {
         pyFunc = PyObject_GetAttrString(pyModule, "oc20_initialize");
 
-        if (pyFunc != NULL && PyCallable_Check(pyFunc))
+        if (pyFunc != nullptr && PyCallable_Check(pyFunc))
         {
             pyArg1 = PyUnicode_FromString(name);
             pyArg2 = PyBool_FromLong(gpu);
@@ -428,7 +428,7 @@ double PairOC20::initializePython(const char *name, int gpu)
 
             Py_DECREF(pyArgs);
 
-            if (pyValue != NULL && PyFloat_Check(pyValue))
+            if (pyValue != nullptr && PyFloat_Check(pyValue))
             {
                 this->initializedPython = 1;
                 cutoff = PyFloat_AsDouble(pyValue);
@@ -450,7 +450,7 @@ double PairOC20::initializePython(const char *name, int gpu)
 
         pyFunc = PyObject_GetAttrString(pyModule, "oc20_get_energy_and_forces");
 
-        if (pyFunc != NULL && PyCallable_Check(pyFunc))
+        if (pyFunc != nullptr && PyCallable_Check(pyFunc))
         {
             // NOP
         }
@@ -496,16 +496,16 @@ double PairOC20::calculatePython()
     int hasForces = 0;
 
     PyObject* pyFunc  = this->pyFunc;
-    PyObject* pyArgs  = NULL;
-    PyObject* pyArg1  = NULL;
-    PyObject* pyArg2  = NULL;
-    PyObject* pyArg3  = NULL;
-    PyObject* pyAsub  = NULL;
-    PyObject* pyValue = NULL;
-    PyObject* pyVal1  = NULL;
-    PyObject* pyVal2  = NULL;
-    PyObject* pyVsub  = NULL;
-    PyObject* pyVobj  = NULL;
+    PyObject* pyArgs  = nullptr;
+    PyObject* pyArg1  = nullptr;
+    PyObject* pyArg2  = nullptr;
+    PyObject* pyArg3  = nullptr;
+    PyObject* pyAsub  = nullptr;
+    PyObject* pyValue = nullptr;
+    PyObject* pyVal1  = nullptr;
+    PyObject* pyVal2  = nullptr;
+    PyObject* pyVsub  = nullptr;
+    PyObject* pyVobj  = nullptr;
 
     // set cell -> pyArgs1
     pyArg1 = PyList_New(3);
@@ -549,11 +549,11 @@ double PairOC20::calculatePython()
 
     Py_DECREF(pyArgs);
 
-    if (pyValue != NULL && PyTuple_Check(pyValue) && PyTuple_Size(pyValue) >= 2)
+    if (pyValue != nullptr && PyTuple_Check(pyValue) && PyTuple_Size(pyValue) >= 2)
     {
         // get energy <- pyValue
         pyVal1 = PyTuple_GetItem(pyValue, 0);
-        if (pyVal1 != NULL && PyFloat_Check(pyVal1))
+        if (pyVal1 != nullptr && PyFloat_Check(pyVal1))
         {
             hasEnergy = 1;
             energy = PyFloat_AsDouble(pyVal1);
@@ -565,19 +565,19 @@ double PairOC20::calculatePython()
 
         // get forces <- pyValue
         pyVal2 = PyTuple_GetItem(pyValue, 1);
-        if (pyVal2 != NULL && PyList_Check(pyVal2) && PyList_Size(pyVal2) >= natom)
+        if (pyVal2 != nullptr && PyList_Check(pyVal2) && PyList_Size(pyVal2) >= natom)
         {
             hasForces = 1;
 
             for (iatom = 0; iatom < natom; ++iatom)
             {
                 pyVsub = PyList_GetItem(pyVal2, iatom);
-                if (pyVsub != NULL && PyList_Check(pyVsub) && PyList_Size(pyVsub) >= 3)
+                if (pyVsub != nullptr && PyList_Check(pyVsub) && PyList_Size(pyVsub) >= 3)
                 {
                     for (i = 0; i < 3; ++i)
                     {
                         pyVobj = PyList_GetItem(pyVsub, i);
-                        if (pyVobj != NULL && PyFloat_Check(pyVobj))
+                        if (pyVobj != nullptr && PyFloat_Check(pyVobj))
                         {
                             this->forces[iatom][i] = PyFloat_AsDouble(pyVobj);
                         }

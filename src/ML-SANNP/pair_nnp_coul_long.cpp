@@ -11,8 +11,9 @@ using namespace LAMMPS_NS;
 
 PairNNPCoulLong::PairNNPCoulLong(LAMMPS *lmp) : PairNNPCharge(lmp)
 {
-    ewaldflag = pppmflag = 1;
-    ftable = NULL;
+    ewaldflag = 1;
+    pppmflag  = 1;
+    ftable    = nullptr;
 }
 
 PairNNPCoulLong::~PairNNPCoulLong()
@@ -228,7 +229,7 @@ void PairNNPCoulLong::init_style()
 
     // insure use of KSpace long-range solver, set g_ewald
 
-    if (force->kspace == NULL)
+    if (force->kspace == nullptr)
     {
         error->all(FLERR, "Pair style requires a KSpace style");
     }
@@ -243,7 +244,7 @@ void PairNNPCoulLong::init_style()
 
     if (ncoultablebits)
     {
-        init_tables(this->cutcoul, NULL);
+        init_tables(this->cutcoul, nullptr);
     }
 }
 

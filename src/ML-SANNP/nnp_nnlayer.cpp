@@ -28,9 +28,9 @@ NNLayer::NNLayer(int numInpNodes, int numOutNodes, int activation)
 
     this->activation = activation;
 
-    this->inpData = NULL;
-    this->inpGrad = NULL;
-    this->outDrv1 = NULL;
+    this->inpData = nullptr;
+    this->inpGrad = nullptr;
+    this->outDrv1 = nullptr;
 
     this->weight = new nnpreal[this->numInpNodes * this->numOutNodes];
     this->bias   = new nnpreal[this->numOutNodes];
@@ -38,15 +38,15 @@ NNLayer::NNLayer(int numInpNodes, int numOutNodes, int activation)
 
 NNLayer::~NNLayer()
 {
-    if (this->inpData != NULL)
+    if (this->inpData != nullptr)
     {
         delete[] this->inpData;
     }
-    if (this->inpGrad != NULL)
+    if (this->inpGrad != nullptr)
     {
         delete[] this->inpGrad;
     }
-    if (this->outDrv1 != NULL)
+    if (this->outDrv1 != nullptr)
     {
         delete[] this->outDrv1;
     }
@@ -69,17 +69,17 @@ void NNLayer::setSizeOfBatch(int sizeBatch)
 
     this->sizeBatch = sizeBatch;
 
-    if (this->inpData != NULL)
+    if (this->inpData != nullptr)
     {
         delete[] this->inpData;
     }
 
-    if (this->inpGrad != NULL)
+    if (this->inpGrad != nullptr)
     {
         delete[] this->inpGrad;
     }
 
-    if (this->outDrv1 != NULL)
+    if (this->outDrv1 != nullptr)
     {
         delete[] this->outDrv1;
     }
@@ -145,12 +145,12 @@ void NNLayer::scanWeight(FILE* fp, bool zeroBias, int rank, MPI_Comm world)
 
 void NNLayer::projectWeightFrom(NNLayer* src, int* mapInpNodes)
 {
-    if (src == NULL)
+    if (src == nullptr)
     {
         stop_by_error("source layer is null.");
     }
 
-    if (mapInpNodes == NULL)
+    if (mapInpNodes == nullptr)
     {
         stop_by_error("map of input nodes is null.");
     }
@@ -196,12 +196,12 @@ void NNLayer::projectWeightFrom(NNLayer* src, int* mapInpNodes)
 
 void NNLayer::goForward(nnpreal* outData) const
 {
-    if (outData == NULL)
+    if (outData == nullptr)
     {
         stop_by_error("outData is null.");
     }
 
-    if (this->inpData == NULL)
+    if (this->inpData == nullptr)
     {
         stop_by_error("inpData is null.");
     }
@@ -237,7 +237,7 @@ void NNLayer::goForward(nnpreal* outData) const
 
 void NNLayer::goBackward(nnpreal* outGrad, bool toInpGrad)
 {
-    if (outGrad == NULL)
+    if (outGrad == nullptr)
     {
         stop_by_error("outGrad is null.");
     }
@@ -263,7 +263,7 @@ void NNLayer::goBackward(nnpreal* outGrad, bool toInpGrad)
     // outGrad -> inpGrad, through neural network
     if (toInpGrad)
     {
-        if (this->inpGrad == NULL)
+        if (this->inpGrad == nullptr)
         {
             stop_by_error("inpGrad is null.");
         }
@@ -276,7 +276,7 @@ void NNLayer::goBackward(nnpreal* outGrad, bool toInpGrad)
 
 void NNLayer::operateActivation(nnpreal* outData) const
 {
-    if (this->outDrv1 == NULL)
+    if (this->outDrv1 == nullptr)
     {
         stop_by_error("outDrv1 is null.");
     }

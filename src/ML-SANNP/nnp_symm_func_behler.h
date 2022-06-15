@@ -39,12 +39,12 @@ public:
             return;
         }
 
-        if (radiusEta == NULL)
+        if (radiusEta == nullptr)
         {
             stop_by_error("radiusEta is null.");
         }
 
-        if (radiusShift == NULL)
+        if (radiusShift == nullptr)
         {
             stop_by_error("radiusShift is null.");
         }
@@ -61,17 +61,17 @@ public:
             return;
         }
 
-        if (angleEta == NULL)
+        if (angleEta == nullptr)
         {
             stop_by_error("angleEta is null.");
         }
 
-        if (angleZeta == NULL)
+        if (angleZeta == nullptr)
         {
             stop_by_error("angleZeta is null.");
         }
 
-        if (angleShift == NULL)
+        if (angleShift == nullptr)
         {
             stop_by_error("angleShift is null.");
         }

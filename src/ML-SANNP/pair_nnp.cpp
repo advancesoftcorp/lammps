@@ -16,10 +16,10 @@ PairNNP::PairNNP(LAMMPS *lmp) : Pair(lmp)
     one_coeff       = 1;
     manybody_flag   = 1;
 
-    this->typeMap   = NULL;
+    this->typeMap   = nullptr;
     this->zeroEatom = 0;
-    this->property  = NULL;
-    this->arch      = NULL;
+    this->property  = nullptr;
+    this->arch      = nullptr;
 
     const int max   = 10;
     this->maxinum   = max;
@@ -33,17 +33,17 @@ PairNNP::~PairNNP()
         return;
     }
 
-    if (this->typeMap != NULL)
+    if (this->typeMap != nullptr)
     {
         delete[] this->typeMap;
     }
 
-    if (this->property != NULL)
+    if (this->property != nullptr)
     {
         delete this->property;
     }
 
-    if (this->arch != NULL)
+    if (this->arch != nullptr)
     {
         delete this->arch;
     }
@@ -574,7 +574,7 @@ void PairNNP::coeff(int narg, char **arg)
         }
     }
 
-    if (this->typeMap != NULL)
+    if (this->typeMap != nullptr)
     {
         delete this->typeMap;
     }
@@ -618,13 +618,13 @@ void PairNNP::coeff(int narg, char **arg)
     if (comm->me == 0) {
         fp = fopen(arg[2], "r");
 
-        if (fp == NULL)
+        if (fp == nullptr)
         {
             error->one(FLERR, "cannot open ffield file.");
         }
     }
 
-    if (this->property != NULL)
+    if (this->property != nullptr)
     {
         delete this->property;
     }
@@ -632,7 +632,7 @@ void PairNNP::coeff(int narg, char **arg)
     this->property = new Property();
     this->property->readProperty(fp, comm->me, world);
 
-    if (this->arch != NULL)
+    if (this->arch != nullptr)
     {
         delete this->arch;
     }
