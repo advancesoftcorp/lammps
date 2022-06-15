@@ -99,7 +99,7 @@ void PairNNPCharge::performNN(int eflag)
         q[i] -= qoffset;
     }
 
-    comm->forward_comm_pair(this);
+    comm->forward_comm(this);
 
     if (force->kspace)
     {
@@ -111,7 +111,7 @@ void PairNNPCharge::settings(int narg, char **arg)
 {
     if (narg == 1)
     {
-        this->cutcoul = force->numeric(FLERR, arg[0]);
+        this->cutcoul = utils::numeric(FLERR, arg[0], false, lmp);
     }
 
     else if (narg == 0)

@@ -708,9 +708,7 @@ void PairNNP::init_style()
         error->all(FLERR, "Pair style NNP requires 'units metal'");
     }
 
-    int irequest = neighbor->request(this, instance_me);
-    neighbor->requests[irequest]->half = 0;
-    neighbor->requests[irequest]->full = 1;
+    neighbor->add_request(this, NeighConst::REQ_FULL);
 }
 
 double PairNNP::get_cutoff()
