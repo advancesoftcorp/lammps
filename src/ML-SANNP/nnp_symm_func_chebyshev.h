@@ -12,6 +12,9 @@
 #include "nnp_symm_func.h"
 
 #define CHEBYSHEV_UNROLL4
+#define CHEBYSHEV_TRIGONO
+
+#define SMALL_ANG  NNPREAL(0.00001)
 
 class SymmFuncChebyshev : public SymmFunc
 {
@@ -44,9 +47,23 @@ private:
     nnpreal rcutRad;
     nnpreal rcutAng;
 
+#ifdef CHEBYSHEV_TRIGONO
+    void chebyshevTrigonometric(nnpreal* t, nnpreal* dt, nnpreal r, int n) const;
+#else
     void chebyshevFunction(nnpreal* t, nnpreal* dt, nnpreal s, int n) const;
+#endif
 };
 
+#ifdef CHEBYSHEV_TRIGONO
+inline void SymmFuncChebyshev::chebyshevTrigonometric(nnpreal* t, nnpreal* dt, nnpreal r, int n) const
+{
+    nnpreal k = (nnpreal) n;
+    t [0]     = cos(k * r);
+    dt[0]     = r < SMALL_ANG ? (k * k * (ONE - (k * k - ONE) / NNPREAL(6.0) * r * r))
+              : (k * sin(k * r) / sin(r));
+}
+
+#else
 inline void SymmFuncChebyshev::chebyshevFunction(nnpreal* t, nnpreal* dt, nnpreal s, int n) const
 {
     int i;
@@ -163,5 +180,6 @@ inline void SymmFuncChebyshev::chebyshevFunction(nnpreal* t, nnpreal* dt, nnprea
         dt[i] = NNPREAL(2.0) * (s * dt[i - 1] + t[i - 1]) - dt[i - 2];
     }
 }
+#endif
 
 #endif /* NNP_SYMM_FUNC_CHEBYSHEV_H_ */

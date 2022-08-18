@@ -7,7 +7,7 @@
 
 #include "nnp_symm_func_chebyshev.h"
 
-#define SMALL  NNPREAL(0.001)
+#define SMALL_SIN  NNPREAL(0.001)
 
 SymmFuncChebyshev::SymmFuncChebyshev(int numElems, bool tanhCutFunc, bool elemWeight, int sizeRad, int sizeAng,
                                      nnpreal rcutRad, nnpreal rcutAng) : SymmFunc(numElems, tanhCutFunc, elemWeight)
@@ -125,11 +125,13 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, nnpreal** 
     nnpreal cos0, sin0;
     nnpreal coef0, coef1, coef2, coef3;
 
-    const int ncheby = max(2, max(this->sizeRad, this->sizeAng));
-
     nnpreal scheby;
+
+#ifndef CHEBYSHEV_TRIGON
+    const int ncheby = max(2, max(this->sizeRad, this->sizeAng));
     nnpreal tcheby[ncheby];
     nnpreal dcheby[ncheby];
+#endif
 
     // initialize symmetry functions
     for (ibase = 0; ibase < this->numBasis; ++ibase)
@@ -187,13 +189,23 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, nnpreal** 
 
         scheby = NNPREAL(2.0) * r1 / this->rcutRad - ONE;
         coef0  = NNPREAL(2.0) / this->rcutRad / r1;
+
+#ifdef CHEBYSHEV_TRIGONO
+        scheby = acos(scheby)
+#else
         this->chebyshevFunction(tcheby, dcheby, scheby, this->sizeRad);
+#endif
 
         #pragma omp simd
         for (imode = 0; imode < this->sizeRad; ++imode)
         {
+#ifdef CHEBYSHEV_TRIGONO
+            this->chebyshevTrigonometric(&phi, &coef1, scheby, imode);
+            coef1  *= coef0;
+#else
             phi     = tcheby[imode];
             coef1   = dcheby[imode] * coef0;
+#endif
             dphidx1 = x1 * coef1;
             dphidy1 = y1 * coef1;
             dphidz1 = z1 * coef1;
@@ -308,7 +320,7 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, nnpreal** 
             cos0 = cos0 >  ONE ?  ONE : cos0;
             cos0 = cos0 < -ONE ? -ONE : cos0;
             sin0 = sqrt(ONE - cos0 * cos0);
-            sin0 = sin0 < SMALL ? SMALL : sin0;
+            sin0 = sin0 < SMALL_SIN ? SMALL_SIN : sin0;
 
             coef0   =  ONE / r1 / r2;
             coef1   = cos0 / r1 / r1;
@@ -324,13 +336,23 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, nnpreal** 
 
             scheby = NNPREAL(2.0) * tht / PI - ONE;
             coef0  = NNPREAL(2.0) / PI;
+
+#ifdef CHEBYSHEV_TRIGONO
+            scheby = acos(scheby);
+#else
             this->chebyshevFunction(tcheby, dcheby, scheby, this->sizeAng);
+#endif
 
             #pragma omp simd
             for (imode = 0; imode < this->sizeAng; ++imode)
             {
+#ifdef CHEBYSHEV_TRIGONO
+                this->chebyshevTrigonometric(&phi, &dphidth, scheby, imode);
+                dphidth *= coef0;
+#else
                 phi     = tcheby[imode];
                 dphidth = dcheby[imode] * coef0;
+#endif
                 dphidx1 = dphidth * dthtdx1;
                 dphidy1 = dphidth * dthtdy1;
                 dphidz1 = dphidth * dthtdz1;
