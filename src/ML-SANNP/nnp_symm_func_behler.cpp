@@ -7,6 +7,8 @@
 
 #include "nnp_symm_func_behler.h"
 
+#define CHI0_THR  NNPREAL(1.0e-6)
+
 SymmFuncBehler::SymmFuncBehler(int numElems, bool tanhCutFunc, bool elemWeight, int sizeRad, int sizeAng,
                                nnpreal rcutRad, nnpreal rcutAng) : SymmFunc(numElems, tanhCutFunc, elemWeight)
 {
@@ -129,7 +131,6 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, nnpreal** pos
     nnpreal chi;
     nnpreal chi0;
     nnpreal dchidpsi;
-    const nnpreal chi0_thr = NNPREAL(1.0e-6);
 
     nnpreal g;
     nnpreal dgdx1, dgdx2, dgdx3;
@@ -372,7 +373,7 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, nnpreal** pos
                 lambda = (ilambda == 0) ? ONE : (-ONE);
 
                 chi0 = ONE + lambda * psi;
-                if (chi0 < chi0_thr)
+                if (chi0 < CHI0_THR)
                 {
                     continue;
                 }
