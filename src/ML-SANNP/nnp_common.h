@@ -15,12 +15,12 @@
 #include <time.h>
 #include <algorithm>
 #include <cmath>
-#ifdef _GPU
+#ifdef _NNP_GPU
 #include <cuda_runtime.h>
 #endif
 using namespace std;
 
-#ifdef _SINGLE
+#ifdef _NNP_SINGLE
 
 #define nnpreal     float
 #define NNPREAL(x)  x##f

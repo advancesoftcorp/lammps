@@ -1102,7 +1102,7 @@ SymmFunc* NNArch::getSymmFunc()
             const nnpreal* rs2  = this->property->getBehlerRs2();
             const nnpreal* zeta = this->property->getBehlerZeta();
 
-#ifdef _GPU
+#ifdef _NNP_GPU
             // sizeAng = 2 * nang, for GPU
             SymmFuncGPUBehler* symmFuncBehler = nullptr;
             symmFuncBehler = new SymmFuncGPUBehler(this->numElems, tanhCut, weight, nrad, 2 * nang, rrad, rang);
@@ -1128,7 +1128,7 @@ SymmFunc* NNArch::getSymmFunc()
             bool    weight  = (this->property->getElemWeight() != 0);
             bool    tanhCut = (this->property->getTanhCutoff() != 0);
 
-#ifdef _GPU
+#ifdef _NNP_GPU
             SymmFuncGPUChebyshev* symmFuncChebyshev = nullptr;
             symmFuncChebyshev = new SymmFuncGPUChebyshev(this->numElems, tanhCut, weight, nrad, nang, rrad, rang);
             symmFuncChebyshev->setMaxThreadsPerBlock(property->getGpuThreads());
@@ -1159,7 +1159,7 @@ void NNArch::calculateSymmFuncs()
 {
     int iatom;
     int natom = this->numAtoms;
-#ifdef _GPU
+#ifdef _NNP_GPU
     int lenAtoms;
     int iatomBlock = this->property->getGpuAtomBlock();
 #endif
@@ -1181,7 +1181,7 @@ void NNArch::calculateSymmFuncs()
     }
 
     // calculate symmetry functions
-#ifdef _GPU
+#ifdef _NNP_GPU
     for (iatom = 0; iatom < natom; iatom += iatomBlock)
     {
         lenAtoms = min(iatom + iatomBlock, natom) - iatom;

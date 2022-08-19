@@ -80,7 +80,7 @@ SymmFuncGPU::SymmFuncGPU(int numElems, bool tanhCutFunc, bool elemWeight, int si
     this->symmDiffAll      = nullptr;
     this->symmDiffAll_d    = nullptr;
 
-#ifdef _SINGLE
+#ifdef _NNP_SINGLE
     cudaError_t error = cudaDeviceSetSharedMemConfig(cudaSharedMemBankSizeFourByte);
 #else
     cudaError_t error = cudaDeviceSetSharedMemConfig(cudaSharedMemBankSizeEightByte);

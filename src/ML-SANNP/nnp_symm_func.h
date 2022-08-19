@@ -19,7 +19,7 @@ public:
     virtual void calculate(int numNeighbor, int* elemNeighbor, nnpreal** posNeighbor,
                            nnpreal* symmData, nnpreal* symmDiff) = 0;
 
-#ifdef _GPU
+#ifdef _NNP_GPU
     virtual void calculate(int numAtoms, int* numNeighbor, int** elemNeighbor, nnpreal*** posNeighbor,
                            nnpreal** symmData, nnpreal** symmDiff)
     {

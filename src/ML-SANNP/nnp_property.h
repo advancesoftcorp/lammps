@@ -171,7 +171,7 @@ public:
         return this->withCharge;
     }
 
-#ifdef _GPU
+#ifdef _NNP_GPU
     int getGpuThreads() const
     {
         return this->gpuThreads;
@@ -224,7 +224,7 @@ private:
 
     void activToString(char* str, int activ);
 
-#ifdef _GPU
+#ifdef _NNP_GPU
     // for GPU
     int gpuThreads;
     int gpuAtomBlock;

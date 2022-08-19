@@ -44,7 +44,7 @@ Property::Property()
 
     this->withCharge    = 0;
 
-#ifdef _GPU
+#ifdef _NNP_GPU
     this->gpuThreads    = 256;
     this->gpuAtomBlock  = 512;
 #endif
@@ -445,7 +445,7 @@ void Property::readProperty(FILE* fp, int rank, int nproc, MPI_Comm world)
         this->printProperty();
     }
 
-#ifdef _GPU
+#ifdef _NNP_GPU
     this->readGpuProperty(rank, nproc, world);
 #endif
 }
@@ -660,7 +660,7 @@ void Property::activToString(char* str, int activ)
     }
 }
 
-#ifdef _GPU
+#ifdef _NNP_GPU
 void Property::readGpuProperty(int rank, int nproc, MPI_Comm world)
 {
     int ierr    = 0;

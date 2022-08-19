@@ -11,7 +11,7 @@
 #include "nnp_common.h
 
 // sizeof(gint) has to equal sizeof(nnpreal), to avoid bank conflict on shared memory
-#ifdef _SINGLE
+#ifdef _NNP_SINGLE
 #define gint  int
 #else
 #define gint  long long

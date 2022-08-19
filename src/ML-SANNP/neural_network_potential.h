@@ -12,7 +12,7 @@
 #include "nnp_property.h"
 #include "nnp_symm_func.h"
 #include "nnp_symm_func_manybody.h"
-#ifdef _GPU
+#ifdef _NNP_GPU
 #include "nnp_symm_func_gpu.h"
 #include "nnp_symm_func_gpu_behler.h"
 #include "nnp_symm_func_gpu_chebyshev.h"
