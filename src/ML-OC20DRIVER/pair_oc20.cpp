@@ -255,7 +255,7 @@ void PairOC20::coeff(int narg, char **arg)
     ntypesEff = 0;
     for (i = 0; i < ntypes; ++i)
     {
-        if (strcmp(arg[i + 3], "nullptr") == 0)
+        if (strcmp(arg[i + 3], "NULL") == 0)
         {
             this->atomNumMap[i + 1] = 0;
         }
