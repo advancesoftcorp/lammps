@@ -736,7 +736,7 @@ void Property::readGpuProperty(int rank, int nproc, MPI_Comm world)
                         break;
                     }
 
-                    if (gpuDeviceMap[iproc] < 0 || nproc <= gpuDeviceMap[iproc])
+                    if (gpuDeviceMap[iproc] < 0)
                     {
                         ierr = 1;
                         break;
