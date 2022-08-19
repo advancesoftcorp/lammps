@@ -78,7 +78,7 @@ Property::~Property()
     }
 }
 
-void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
+void Property::readProperty(FILE* fp, int rank, int nproc, MPI_Comm world)
 {
     int ierr;
 
@@ -446,7 +446,7 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
     }
 
 #ifdef _GPU
-    this->readGpuProperty(rank, world);
+    this->readGpuProperty(rank, nproc, world);
 #endif
 }
 
@@ -661,13 +661,51 @@ void Property::activToString(char* str, int activ)
 }
 
 #ifdef _GPU
-void Property::readGpuProperty(int rank, MPI_Comm world)
+void Property::readGpuProperty(int rank, int nproc, MPI_Comm world)
 {
+    int hasFile = 0;
 
-	// TODO
-	// TODO
-	// TODO
+    int* gpuDeviceMap;
 
+    if (rank == 0)
+    {
+        FILE* fp = fopen(fileName, "r");
+
+        if (fp != NULL)
+        {
+            hasFile = 1;
+
+            gpuDeviceMap = new int[nproc];
+
+            // TODO
+            // TODO read gpuThreads, gpuAtomBlock and gpuDeviceMap
+            // TODO
+
+        }
+
+        fclose(fp);
+    }
+
+    MPI_Bcast(&hasFile, 1, MPI_INT, 0, world);
+
+    if (hasFile == 0)
+    {
+        return;
+    }
+
+    MPI_Bcast(&(this->gpuThreads),   1, MPI_INT, 0, world);
+    MPI_Bcast(&(this->gpuAtomBlock), 1, MPI_INT, 0, world);
+
+    if (rank != 0)
+    {
+    	gpuDeviceMap = new int[nproc];
+    }
+
+    MPI_Bcast(gpuDeviceMap, nproc, MPI_INT, 0, world);
+
+    cudaSetDevice(gpuDeviceMap[rank]);
+
+    delete[] gpuDeviceMap;
 }
 #endif
 

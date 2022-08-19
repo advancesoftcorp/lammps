@@ -16,7 +16,7 @@ public:
     Property();
     virtual ~Property();
 
-    void readProperty(FILE* fp, int rank, MPI_Comm world);
+    void readProperty(FILE* fp, int rank, int nproc, MPI_Comm world);
 
     int getSymmFunc() const
     {
@@ -229,7 +229,7 @@ private:
     int gpuThreads;
     int gpuAtomBlock;
 
-    void readGpuProperty(int rank, MPI_Comm world);
+    void readGpuProperty(int rank, int nproc, MPI_Comm world);
 #endif
 };
 

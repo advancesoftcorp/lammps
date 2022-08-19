@@ -630,7 +630,7 @@ void PairNNP::coeff(int narg, char **arg)
     }
 
     this->property = new Property();
-    this->property->readProperty(fp, comm->me, world);
+    this->property->readProperty(fp, comm->me, comm->nprocs, world);
 
     if (this->arch != nullptr)
     {
