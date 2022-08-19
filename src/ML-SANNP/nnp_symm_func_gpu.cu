@@ -83,18 +83,18 @@ SymmFuncGPU::SymmFuncGPU(int numElems, bool tanhCutFunc, bool elemWeight, int si
 
 SymmFuncGPU::~SymmFuncGPU()
 {
-    if (this->numNeighs        != NULL) cudaFreeHost(this->numNeighs);
-    if (this->numNeighs_d      != NULL) cudaFree    (this->numNeighs_d);
-    if (this->idxNeighs        != NULL) cudaFreeHost(this->idxNeighs);
-    if (this->idxNeighs_d      != NULL) cudaFree    (this->idxNeighs_d);
-    if (this->elementAll       != NULL) cudaFreeHost(this->elementAll);
-    if (this->elementAll_d     != NULL) cudaFree    (this->elementAll_d);
-    if (this->posNeighborAll   != NULL) cudaFreeHost(this->posNeighborAll);
-    if (this->posNeighborAll_d != NULL) cudaFree    (this->posNeighborAll_d);
-    if (this->symmDataAll      != NULL) cudaFreeHost(this->symmDataAll);
-    if (this->symmDataAll_d    != NULL) cudaFree    (this->symmDataAll_d);
-    if (this->symmDiffAll      != NULL) cudaFreeHost(this->symmDiffAll);
-    if (this->symmDiffAll_d    != NULL) cudaFree    (this->symmDiffAll_d);
+    if (this->numNeighs        != nullptr) cudaFreeHost(this->numNeighs);
+    if (this->numNeighs_d      != nullptr) cudaFree    (this->numNeighs_d);
+    if (this->idxNeighs        != nullptr) cudaFreeHost(this->idxNeighs);
+    if (this->idxNeighs_d      != nullptr) cudaFree    (this->idxNeighs_d);
+    if (this->elementAll       != nullptr) cudaFreeHost(this->elementAll);
+    if (this->elementAll_d     != nullptr) cudaFree    (this->elementAll_d);
+    if (this->posNeighborAll   != nullptr) cudaFreeHost(this->posNeighborAll);
+    if (this->posNeighborAll_d != nullptr) cudaFree    (this->posNeighborAll_d);
+    if (this->symmDataAll      != nullptr) cudaFreeHost(this->symmDataAll);
+    if (this->symmDataAll_d    != nullptr) cudaFree    (this->symmDataAll_d);
+    if (this->symmDiffAll      != nullptr) cudaFreeHost(this->symmDiffAll);
+    if (this->symmDiffAll_d    != nullptr) cudaFree    (this->symmDiffAll_d);
 }
 
 void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, nnpreal*** posNeighbor,
@@ -150,10 +150,10 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
     // allocate memory about lenAtoms
     if (this->sizeLenAtoms < lenAtoms)
     {
-        if (this->numNeighs   != NULL) cudaFreeHost(this->numNeighs);
-        if (this->numNeighs_d != NULL) cudaFree    (this->numNeighs_d);
-        if (this->idxNeighs   != NULL) cudaFreeHost(this->idxNeighs);
-        if (this->idxNeighs_d != NULL) cudaFree    (this->idxNeighs_d);
+        if (this->numNeighs   != nullptr) cudaFreeHost(this->numNeighs);
+        if (this->numNeighs_d != nullptr) cudaFree    (this->numNeighs_d);
+        if (this->idxNeighs   != nullptr) cudaFreeHost(this->idxNeighs);
+        if (this->idxNeighs_d != nullptr) cudaFree    (this->idxNeighs_d);
 
         cudaMallocHost(&(this->numNeighs),   sizeof(int) * lenAtoms);
         cudaMalloc    (&(this->numNeighs_d), sizeof(int) * lenAtoms);
@@ -225,14 +225,14 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
     // allocate memory about totNeigh
     if (this->sizeTotNeigh < totNeigh)
     {
-        if (this->elementAll       != NULL) cudaFreeHost(this->elementAll);
-        if (this->elementAll_d     != NULL) cudaFree    (this->elementAll_d);
-        if (this->posNeighborAll   != NULL) cudaFreeHost(this->posNeighborAll);
-        if (this->posNeighborAll_d != NULL) cudaFree    (this->posNeighborAll_d);
-        if (this->symmDataAll      != NULL) cudaFreeHost(this->symmDataAll);
-        if (this->symmDataAll_d    != NULL) cudaFree    (this->symmDataAll_d);
-        if (this->symmDiffAll      != NULL) cudaFreeHost(this->symmDiffAll);
-        if (this->symmDiffAll_d    != NULL) cudaFree    (this->symmDiffAll_d);
+        if (this->elementAll       != nullptr) cudaFreeHost(this->elementAll);
+        if (this->elementAll_d     != nullptr) cudaFree    (this->elementAll_d);
+        if (this->posNeighborAll   != nullptr) cudaFreeHost(this->posNeighborAll);
+        if (this->posNeighborAll_d != nullptr) cudaFree    (this->posNeighborAll_d);
+        if (this->symmDataAll      != nullptr) cudaFreeHost(this->symmDataAll);
+        if (this->symmDataAll_d    != nullptr) cudaFree    (this->symmDataAll_d);
+        if (this->symmDiffAll      != nullptr) cudaFreeHost(this->symmDiffAll);
+        if (this->symmDiffAll_d    != nullptr) cudaFree    (this->symmDiffAll_d);
 
         cudaMallocHost(&(this->elementAll),       sizeof(gint)    * totNeigh);
         cudaMalloc    (&(this->elementAll_d),     sizeof(gint)    * totNeigh);
