@@ -73,21 +73,6 @@ NNArch::NNArch(int mode, int numElems, const Property* property)
     this->ljlikeA2 = nullptr;
     this->ljlikeA3 = nullptr;
     this->ljlikeA4 = nullptr;
-
-#ifdef _GPU
-#ifdef _DOUBLE
-    cudaError_t error = cudaDeviceSetSharedMemConfig(cudaSharedMemBankSizeEightByte);
-#else
-    cudaError_t error = cudaDeviceSetSharedMemConfig(cudaSharedMemBankSizeFourByte);
-#endif
-
-    if (error != cudaSuccess)
-    {
-        char message[512];
-        sprintf(message, "error of cudaDeviceSetSharedMemConfig: %s\n", cudaGetErrorString(error));
-        stop_by_error(message);
-    }
-#endif
 }
 
 NNArch::~NNArch()

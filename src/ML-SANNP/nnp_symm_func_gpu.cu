@@ -79,6 +79,19 @@ SymmFuncGPU::SymmFuncGPU(int numElems, bool tanhCutFunc, bool elemWeight, int si
     this->symmDataAll_d    = nullptr;
     this->symmDiffAll      = nullptr;
     this->symmDiffAll_d    = nullptr;
+
+#ifdef _DOUBLE
+    cudaError_t error = cudaDeviceSetSharedMemConfig(cudaSharedMemBankSizeEightByte);
+#else
+    cudaError_t error = cudaDeviceSetSharedMemConfig(cudaSharedMemBankSizeFourByte);
+#endif
+
+    if (error != cudaSuccess)
+    {
+        char message[512];
+        sprintf(message, "error of cudaDeviceSetSharedMemConfig: %s\n", cudaGetErrorString(error));
+        stop_by_error(message);
+    }
 }
 
 SymmFuncGPU::~SymmFuncGPU()
