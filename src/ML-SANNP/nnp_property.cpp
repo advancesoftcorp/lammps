@@ -663,13 +663,14 @@ void Property::activToString(char* str, int activ)
 #ifdef _GPU
 void Property::readGpuProperty(int rank, int nproc, MPI_Comm world)
 {
+    int ierr    = 0;
     int hasFile = 0;
 
     int* gpuDeviceMap;
 
     if (rank == 0)
     {
-        FILE* fp = fopen(fileName, "r");
+        FILE* fp = fopen("gpu.conf", "r");
 
         if (fp != NULL)
         {
@@ -677,10 +678,114 @@ void Property::readGpuProperty(int rank, int nproc, MPI_Comm world)
 
             gpuDeviceMap = new int[nproc];
 
-            // TODO
-            // TODO read gpuThreads, gpuAtomBlock and gpuDeviceMap
-            // TODO
+            int iproc = 0;
 
+            bool nowThreads    = false;
+            bool nowAtomBlock  = false;
+            bool nowMpi2Device = false;
+
+            const int nline = 256;
+            char line[nline];
+
+            while (fgets(line, nline, fp) != NULL)
+            {
+                // reading threads
+                if (nowThreads)
+                {
+                    if (sscanf(line, "%d", &(this->gpuThreads)) != 1)
+                    {
+                        ierr = 1;
+                        break;
+                    }
+
+                    if (this->gpuThreads < 1)
+                    {
+                        ierr = 1;
+                        break;
+                    }
+
+                    nowThreads = false;
+                    continue;
+                }
+
+                // reading atomBlock
+                if (nowAtomBlock)
+                {
+                    if (sscanf(line, "%d", &(this->gpuAtomBlock)) != 1)
+                    {
+                        ierr = 1;
+                        break;
+                    }
+
+                    if (this->gpuAtomBlock < 1)
+                    {
+                        ierr = 1;
+                        break;
+                    }
+
+                    nowAtomBlock = false;
+                    continue;
+                }
+
+                // reading mpi2Device
+                if (nowAtomBlock)
+                {
+                    if (sscanf(line, "%d", &(gpuDeviceMap[iproc])) != 1)
+                    {
+                        ierr = 1;
+                        break;
+                    }
+
+                    if (gpuDeviceMap[iproc] < 0 || nproc <= gpuDeviceMap[iproc])
+                    {
+                        ierr = 1;
+                        break;
+                    }
+
+                    iproc++;
+                    if (iproc >= nproc)
+                    {
+                    	nowMpi2Device = false;
+                    }
+
+                    continue;
+                }
+
+                if (strlen(line) < 1)
+                {
+                    continue;
+                }
+
+                char token[nline] = "";
+                if (sscanf(line, "%s", token) != 1)
+                {
+                    continue;
+                }
+
+                if (strlen(token) < 1 || token[0] == '#' || token[0] == '!')
+                {
+                    continue;
+                }
+
+                if (strcmp(key, "threads") == 0)
+                {
+                    nowThreads = true;
+                }
+                else if (strcmp(key, "atomBlock") == 0)
+                {
+                    nowAtomBlock = true;
+                }
+                else if (strcmp(key, "mpi2Device") == 0)
+                {
+                    iproc = 0;
+                    nowMpi2Device = true;
+                }
+                else
+                {
+                	ierr = 1;
+                	break;
+                }
+            }
         }
 
         fclose(fp);
@@ -693,13 +798,19 @@ void Property::readGpuProperty(int rank, int nproc, MPI_Comm world)
         return;
     }
 
+    MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
+
+    if (ierr != 0)
+    {
+        if (rank == 0) delete[] gpuDeviceMap;
+        stop_by_error("error in reading gpu.conf");
+        return;
+    }
+
     MPI_Bcast(&(this->gpuThreads),   1, MPI_INT, 0, world);
     MPI_Bcast(&(this->gpuAtomBlock), 1, MPI_INT, 0, world);
 
-    if (rank != 0)
-    {
-    	gpuDeviceMap = new int[nproc];
-    }
+    if (rank != 0) gpuDeviceMap = new int[nproc];
 
     MPI_Bcast(gpuDeviceMap, nproc, MPI_INT, 0, world);
 
