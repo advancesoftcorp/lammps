@@ -1102,8 +1102,16 @@ SymmFunc* NNArch::getSymmFunc()
             const nnpreal* rs2  = this->property->getBehlerRs2();
             const nnpreal* zeta = this->property->getBehlerZeta();
 
+#ifdef _GPU
+            // sizeAng = 2 * nang, for GPU
+            SymmFuncGPUBehler* symmFuncBehler = nullptr;
+            symmFuncBehler = new SymmFuncGPUBehler(this->numElems, tanhCut, weight, nrad, 2 * nang, rrad, rang);
+            symmFuncBehler->setMaxThreadsPerBlock(property->getGpuThreads());
+#else
+            // sizeAng = nang, for CPU
             SymmFuncBehler* symmFuncBehler = nullptr;
             symmFuncBehler = new SymmFuncBehler(this->numElems, tanhCut, weight, nrad, nang, rrad, rang);
+#endif
 
             symmFuncBehler->setRadiusData(eta1, rs1);
             symmFuncBehler->setAngleData(useG4, eta2, zeta, rs2);
@@ -1120,7 +1128,16 @@ SymmFunc* NNArch::getSymmFunc()
             bool    weight  = (this->property->getElemWeight() != 0);
             bool    tanhCut = (this->property->getTanhCutoff() != 0);
 
-            this->symmFunc = new SymmFuncChebyshev(this->numElems, tanhCut, weight, nrad, nang, rrad, rang);
+#ifdef _GPU
+            SymmFuncGPUChebyshev* symmFuncChebyshev = nullptr;
+            symmFuncChebyshev = new SymmFuncGPUChebyshev(this->numElems, tanhCut, weight, nrad, nang, rrad, rang);
+            symmFuncChebyshev->setMaxThreadsPerBlock(property->getGpuThreads());
+#else
+            SymmFuncChebyshev* symmFuncChebyshev = nullptr;
+            symmFuncChebyshev = new SymmFuncChebyshev(this->numElems, tanhCut, weight, nrad, nang, rrad, rang);
+#endif
+
+            this->symmFunc = symmFuncChebyshev;
         }
 
         if (this->symmFunc == nullptr)
@@ -1142,6 +1159,10 @@ void NNArch::calculateSymmFuncs()
 {
     int iatom;
     int natom = this->numAtoms;
+#ifdef _GPU
+    int lenAtoms;
+    int iatomBlock = this->property->getGpuAtomBlock();
+#endif
 
     int nneigh;
 
@@ -1160,6 +1181,16 @@ void NNArch::calculateSymmFuncs()
     }
 
     // calculate symmetry functions
+#ifdef _GPU
+    for (iatom = 0; iatom < natom; iatom += iatomBlock)
+    {
+        lenAtoms = min(iatom + iatomBlock, natom) - iatom;
+
+        this->symmFunc->calculate(lenAtoms, &(this->numNeighbor[iatom]),
+                                  &(this->elemNeighbor[iatom]), &(this->posNeighbor[iatom]),
+                                  &(this->symmData[iatom]), &(this->symmDiff[iatom]));
+    }
+#else
     #pragma omp parallel for private(iatom)
     for (iatom = 0; iatom < natom; ++iatom)
     {
@@ -1167,6 +1198,7 @@ void NNArch::calculateSymmFuncs()
                                   this->elemNeighbor[iatom], this->posNeighbor[iatom],
                                   this->symmData[iatom], this->symmDiff[iatom]);
     }
+#endif
 }
 
 void NNArch::renormalizeSymmFuncs()

@@ -88,22 +88,22 @@ private:
     int**      elemNeighbor;
     nnpreal*** posNeighbor;
 
-    int   mbatch;
-    int*  nbatch;
-    int*  ibatch;
+    int  mbatch;
+    int* nbatch;
+    int* ibatch;
 
-    nnpreal** energyData;
-    nnpreal** energyGrad;
+    nnpreal**  energyData;
+    nnpreal**  energyGrad;
 
     nnpreal*** forceData;
 
-    nnpreal** chargeData;
+    nnpreal**  chargeData;
 
-    nnpreal**    symmData;
-    nnpreal**    symmDiff;
-    nnpreal*     symmAve;
-    nnpreal*     symmDev;
-    SymmFunc*    symmFunc;
+    nnpreal**  symmData;
+    nnpreal**  symmDiff;
+    nnpreal*   symmAve;
+    nnpreal*   symmDev;
+    SymmFunc*  symmFunc;
 
     NNLayer*** interLayersEnergy;
     NNLayer**  lastLayersEnergy;
