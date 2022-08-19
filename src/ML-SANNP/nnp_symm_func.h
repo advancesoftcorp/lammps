@@ -17,7 +17,21 @@ public:
     virtual ~SymmFunc();
 
     virtual void calculate(int numNeighbor, int* elemNeighbor, nnpreal** posNeighbor,
-                           nnpreal* symmData, nnpreal* symmDiff) const = 0;
+                           nnpreal* symmData, nnpreal* symmDiff) = 0;
+
+#ifdef _GPU
+    virtual void calculate(int numAtoms, int* numNeighbor, int** elemNeighbor, nnpreal*** posNeighbor,
+                           nnpreal** symmData, nnpreal** symmDiff)
+    {
+        int iatom;
+
+        for (iatom = 0; iatom < numAtoms; ++iatom)
+        {
+            this->calculate(numNeighbor[iatom], elemNeighbor[iatom], posNeighbor[iatom],
+                            symmData[iatom], symmDiff[iatom]);
+        }
+    }
+#endif
 
     int getNumBasis() const
     {
@@ -31,10 +45,9 @@ protected:
 
     int numBasis;
 
-    bool elemWeight;
-
-private:
     bool tanhCutFunc;
+
+    bool elemWeight;
 };
 
 inline void SymmFunc::cutoffFunction(nnpreal* fc, nnpreal* dfcdr, nnpreal r, nnpreal rc) const

@@ -17,10 +17,10 @@ public:
     SymmFuncBehler(int numElems, bool tanhCutFunc, bool elemWeight,
                    int sizeRad, int sizeAng, nnpreal rcutRad, nnpreal rcutAng);
 
-    virtual ~SymmFuncBehler();
+    virtual ~SymmFuncBehler() override;
 
     void calculate(int numNeighbor, int* elemNeighbor, nnpreal** posNeighbor,
-                   nnpreal* symmData, nnpreal* symmDiff) const;
+                   nnpreal* symmData, nnpreal* symmDiff) override;
 
     int getNumRadBasis() const
     {

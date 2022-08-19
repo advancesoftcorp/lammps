@@ -15,10 +15,10 @@ class SymmFuncManyBody : public SymmFunc
 {
 public:
     SymmFuncManyBody(int numElems, bool elemWeight, int size2Body, int size3Body, nnpreal radiusInner, nnpreal radiusOuter);
-    virtual ~SymmFuncManyBody();
+    virtual ~SymmFuncManyBody() override;
 
     void calculate(int numNeighbor, int* elemNeighbor, nnpreal** posNeighbor,
-                   nnpreal* symmData, nnpreal* symmDiff) const;
+                   nnpreal* symmData, nnpreal* symmDiff) override;
 
     int getNum2BodyBasis() const
     {

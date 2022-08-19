@@ -171,6 +171,16 @@ public:
         return this->withCharge;
     }
 
+    int getGpuThreads() const
+    {
+        return this->gpuThreads;
+    }
+
+    int getGpuAtomBlock() const
+    {
+        return this->gpuAtomBlock;
+    }
+
 private:
     // about symmetry functions
     int symmFunc;
@@ -207,6 +217,10 @@ private:
     int activCharge;
 
     int withCharge;
+
+    // for GPU
+    int gpuThreads;
+    int gpuAtomBlock;
 
     void printProperty();
 

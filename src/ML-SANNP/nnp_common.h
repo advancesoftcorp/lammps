@@ -15,6 +15,9 @@
 #include <time.h>
 #include <algorithm>
 #include <cmath>
+#ifdef _GPU
+#include <cuda_runtime.h>
+#endif
 using namespace std;
 
 #ifdef _SINGLE

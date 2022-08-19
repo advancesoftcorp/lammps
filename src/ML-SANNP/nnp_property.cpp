@@ -43,6 +43,9 @@ Property::Property()
     this->activCharge   = ACTIVATION_NULL;
 
     this->withCharge    = 0;
+
+    this->gpuThreads    = 256;
+    this->gpuAtomBlock  = 512;
 }
 
 Property::~Property()

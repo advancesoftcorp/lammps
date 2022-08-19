@@ -58,7 +58,7 @@ SymmFuncChebyshev::~SymmFuncChebyshev()
 }
 
 void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, nnpreal** posNeighbor,
-                                  nnpreal* symmData, nnpreal* symmDiff) const
+                                  nnpreal* symmData, nnpreal* symmDiff)
 {
     if (elemNeighbor == nullptr || posNeighbor == nullptr)
     {
