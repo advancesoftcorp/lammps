@@ -171,6 +171,7 @@ public:
         return this->withCharge;
     }
 
+#ifdef _GPU
     int getGpuThreads() const
     {
         return this->gpuThreads;
@@ -180,6 +181,7 @@ public:
     {
         return this->gpuAtomBlock;
     }
+#endif
 
 private:
     // about symmetry functions
@@ -218,13 +220,17 @@ private:
 
     int withCharge;
 
+    void printProperty();
+
+    void activToString(char* str, int activ);
+
+#ifdef _GPU
     // for GPU
     int gpuThreads;
     int gpuAtomBlock;
 
-    void printProperty();
-
-    void activToString(char* str, int activ);
+    void readGpuProperty(int rank, MPI_Comm world);
+#endif
 };
 
 #endif /* NNP_PROPERTY_H_ */

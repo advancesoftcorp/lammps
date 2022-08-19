@@ -44,8 +44,10 @@ Property::Property()
 
     this->withCharge    = 0;
 
+#ifdef _GPU
     this->gpuThreads    = 256;
     this->gpuAtomBlock  = 512;
+#endif
 }
 
 Property::~Property()
@@ -442,6 +444,10 @@ void Property::readProperty(FILE* fp, int rank, MPI_Comm world)
     {
         this->printProperty();
     }
+
+#ifdef _GPU
+    this->readGpuProperty(rank, world);
+#endif
 }
 
 void Property::printProperty()
@@ -653,4 +659,15 @@ void Property::activToString(char* str, int activ)
         strcpy(str, "GELU");
     }
 }
+
+#ifdef _GPU
+void Property::readGpuProperty(int rank, MPI_Comm world)
+{
+
+	// TODO
+	// TODO
+	// TODO
+
+}
+#endif
 
