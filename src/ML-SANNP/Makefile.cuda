@@ -1,0 +1,29 @@
+# Makefile for CUDA library
+
+.SUFFIXES :
+.SUFFIXES : .o .cu .h
+
+NVCC     = nvcc
+CXX      = mpiicpc
+CXXFLAGS = -std=c++11
+CFLAGS   = -O3 -qopenmp -qmkl=parallel -traceback -g -D_NNP_GPU -I$(CUDA_PATH)/include
+
+GPU_LIB  = libsannp_cuda.a
+GPU_OBJS = nnp_symm_func_gpu.o \
+           nnp_symm_func_gpu_behler.o \
+           nnp_symm_func_gpu_chebyshev.o
+
+ARCHIVE  = ar
+ARCHFLAG = -crusv
+
+all: $(GPU_LIB)
+
+clean:
+	rm -f $(GPU_LIB) $(GPU_OBJS)
+
+$(GPU_LIB): $(GPU_OBJS)
+	$(ARCHIVE) $(ARCHFLAG) $(GPU_LIB) $(GPU_OBJS)
+
+$(GPU_OBJS): %.o : %.cu %.h
+	$(NVCC) $(CXXFLAGS) -ccbin=$(CXX) -Xcompiler="$(CFLAGS)" -c $<
+
