@@ -767,15 +767,15 @@ void Property::readGpuProperty(int rank, int nproc, MPI_Comm world)
                     continue;
                 }
 
-                if (strcmp(key, "threads") == 0)
+                if (strcmp(token, "threads") == 0)
                 {
                     nowThreads = true;
                 }
-                else if (strcmp(key, "atomBlock") == 0)
+                else if (strcmp(token, "atomBlock") == 0)
                 {
                     nowAtomBlock = true;
                 }
-                else if (strcmp(key, "mpi2Device") == 0)
+                else if (strcmp(token, "mpi2Device") == 0)
                 {
                     iproc = 0;
                     nowMpi2Device = true;
