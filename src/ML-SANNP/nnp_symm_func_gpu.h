@@ -9,6 +9,7 @@
 #define NNP_SYMM_FUNC_GPU_H_
 
 #include "nnp_common.h"
+#include "nnp_symm_func.h"
 
 // sizeof(gint) has to equal sizeof(nnpreal), to avoid bank conflict on shared memory
 #ifdef _NNP_SINGLE
@@ -31,7 +32,7 @@ public:
     void calculate(int numNeighbor, int* elemNeighbor, nnpreal** posNeighbor,
                    nnpreal* symmData, nnpreal* symmDiff) override
     {
-        this->calculate(1, &numNeighbor, &elemNeighbor, &posNeighbor, &symmData, &symmDiff)
+        this->calculate(1, &numNeighbor, &elemNeighbor, &posNeighbor, &symmData, &symmDiff);
     }
 
     void calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, nnpreal*** posNeighbor,

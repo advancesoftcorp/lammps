@@ -111,9 +111,9 @@ SymmFuncGPU::~SymmFuncGPU()
 }
 
 void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, nnpreal*** posNeighbor,
-                            nnpreal** symmData, nnpreal** symmDiff);
+                            nnpreal** symmData, nnpreal** symmDiff)
 {
-    if (numAtoms < 0)
+    if (lenAtoms < 0)
     {
         stop_by_error("#atoms is not positive.");
     }
@@ -274,7 +274,7 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
         // element / atomnum of neighbor atoms
         for (ineigh = 0; ineigh < numNeigh; ++ineigh)
         {
-            this->elementAll[ineigh + idxNeigh] = elemNeighbor[iatom][ineigh]
+            this->elementAll[ineigh + idxNeigh] = elemNeighbor[iatom][ineigh];
         }
 
         // positions of neighbor atoms
