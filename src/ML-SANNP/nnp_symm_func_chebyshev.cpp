@@ -191,7 +191,7 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, nnpreal** 
         coef0  = NNPREAL(2.0) / this->rcutRad / r1;
 
 #ifdef CHEBYSHEV_TRIGONO
-        scheby = acos(scheby)
+        scheby = acos(scheby);
 #else
         this->chebyshevFunction(tcheby, dcheby, scheby, this->sizeRad);
 #endif
