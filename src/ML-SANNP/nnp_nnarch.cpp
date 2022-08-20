@@ -1132,7 +1132,7 @@ SymmFunc* NNArch::getSymmFunc()
 #ifdef _NNP_GPU
             SymmFuncGPUChebyshev* symmFuncChebyshev = nullptr;
             symmFuncChebyshev = new SymmFuncGPUChebyshev(
-            this->numElems, tanhCut, weight, nrad, nang, rrad, rang, this->property->getgetCutoffMode());
+            this->numElems, tanhCut, weight, nrad, nang, rrad, rang, this->property->getCutoffMode());
             symmFuncChebyshev->setMaxThreadsPerBlock(property->getGpuThreads());
 #else
             SymmFuncChebyshev* symmFuncChebyshev = nullptr;
