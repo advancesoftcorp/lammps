@@ -734,7 +734,7 @@ void Property::readGpuProperty(int rank, int nproc, MPI_Comm world)
                 }
 
                 // reading mpi2Device
-                if (nowAtomBlock)
+                if (nowMpi2Device)
                 {
                     if (sscanf(line, "%d", &(gpuDeviceMap[iproc])) != 1)
                     {
