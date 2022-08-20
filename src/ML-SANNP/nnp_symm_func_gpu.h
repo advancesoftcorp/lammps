@@ -8,7 +8,7 @@
 #ifndef NNP_SYMM_FUNC_GPU_H_
 #define NNP_SYMM_FUNC_GPU_H_
 
-#include "nnp_common.h
+#include "nnp_common.h"
 
 // sizeof(gint) has to equal sizeof(nnpreal), to avoid bank conflict on shared memory
 #ifdef _NNP_SINGLE

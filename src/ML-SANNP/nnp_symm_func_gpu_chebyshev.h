@@ -8,7 +8,7 @@
 #ifndef NNP_SYMM_FUNC_GPU_CHEBYSHEV_H_
 #define NNP_SYMM_FUNC_GPU_CHEBYSHEV_H_
 
-#include "nnp_common.h
+#include "nnp_common.h"
 #include "nnp_symm_func_gpu.h"
 
 class SymmFuncGPUChebyshev : public SymmFuncGPU
