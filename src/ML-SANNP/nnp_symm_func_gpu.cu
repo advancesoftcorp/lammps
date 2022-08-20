@@ -221,7 +221,7 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
 
             for (ineigh = 0; ineigh < numNeigh; ++ineigh)
             {
-                ifree   = 3 * (ineigh + 1);
+                ifree = 3 * (ineigh + 1);
 
                 for (ibase = 0; ibase < this->numBasis; ++ibase)
                 {
