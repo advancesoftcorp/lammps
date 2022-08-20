@@ -14,8 +14,8 @@ CCFLAGS    =  -g -traceback -qopenmp -qno-offload \
 SHFLAGS    =  -fPIC
 DEPFLAGS   =  -M
 
-LINK       =  mpiicpc -std=c++11 -static-intel -static-libgcc
-LINKFLAGS  =  -g -qopenmp $(OPTFLAGS)
+LINK       =  nvcc -std=c++11 -ccbin=mpiicpc
+LINKFLAGS  =  -Xcompiler="-static-intel -static-libgcc -g -qopenmp $(OPTFLAGS)"
 LIB        =  /opt/intel/oneapi/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libifcore.a \
               ../ML-SANNP/libsannp_cuda.a
 SIZE       =  size
@@ -56,11 +56,9 @@ MPI_LIB  =
 
 FFT_INC  =  -DFFT_MKL
 FFT_PATH =
-FFT_LIB  =  -Wl,--start-group \
-            /opt/intel/oneapi/mkl/2022.1.0/lib/intel64/libmkl_intel_lp64.a \
+FFT_LIB  =  /opt/intel/oneapi/mkl/2022.1.0/lib/intel64/libmkl_intel_lp64.a \
             /opt/intel/oneapi/mkl/2022.1.0/lib/intel64/libmkl_intel_thread.a \
-            /opt/intel/oneapi/mkl/2022.1.0/lib/intel64/libmkl_core.a \
-            -Wl,--end-group
+            /opt/intel/oneapi/mkl/2022.1.0/lib/intel64/libmkl_core.a
 
 # JPEG and/or PNG library
 # see discussion in Section 2.2 (step 7) of manual

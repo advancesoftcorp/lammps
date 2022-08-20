@@ -6,7 +6,12 @@
 NVCC     = nvcc
 CXX      = mpiicpc
 CXXFLAGS = -std=c++11
-CFLAGS   = -O3 -qopenmp -qmkl=parallel -traceback -g -D_NNP_GPU -I$(CUDA_PATH)/include
+SHFLAGS  =  -fPIC
+OPTFLAGS =  -O2 -fp-model precise -qoverride-limits
+CFLAGS   =  -g -traceback -qopenmp -qno-offload \
+            -fno-alias -ansi-alias -restrict \
+            -DLAMMPS_MEMALIGN=64 -D_NNP_GPU -I$(CUDA_PATH)/include \
+            $(OPTFLAGS) $(SHFLAG)
 
 GPU_LIB  = libsannp_cuda.a
 GPU_OBJS = nnp_symm_func_gpu.o \
