@@ -1105,7 +1105,8 @@ SymmFunc* NNArch::getSymmFunc()
 #ifdef _NNP_GPU
             // sizeAng = 2 * nang, for GPU
             SymmFuncGPUBehler* symmFuncBehler = nullptr;
-            symmFuncBehler = new SymmFuncGPUBehler(this->numElems, tanhCut, weight, nrad, 2 * nang, rrad, rang);
+            symmFuncBehler = new SymmFuncGPUBehler(
+            this->numElems, tanhCut, weight, nrad, 2 * nang, rrad, rang, this->property->getCutoffMode());
             symmFuncBehler->setMaxThreadsPerBlock(property->getGpuThreads());
 #else
             // sizeAng = nang, for CPU
@@ -1130,7 +1131,8 @@ SymmFunc* NNArch::getSymmFunc()
 
 #ifdef _NNP_GPU
             SymmFuncGPUChebyshev* symmFuncChebyshev = nullptr;
-            symmFuncChebyshev = new SymmFuncGPUChebyshev(this->numElems, tanhCut, weight, nrad, nang, rrad, rang);
+            symmFuncChebyshev = new SymmFuncGPUChebyshev(
+            this->numElems, tanhCut, weight, nrad, nang, rrad, rang, this->property->getgetCutoffMode());
             symmFuncChebyshev->setMaxThreadsPerBlock(property->getGpuThreads());
 #else
             SymmFuncChebyshev* symmFuncChebyshev = nullptr;
