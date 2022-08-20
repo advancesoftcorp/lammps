@@ -678,7 +678,13 @@ void Property::readGpuProperty(int rank, int nproc, MPI_Comm world)
 
             gpuDeviceMap = new int[nproc];
 
-            int iproc = 0;
+            int iproc;
+            for (iproc = 0; iproc < nproc; ++iproc)
+            {
+                gpuDeviceMap[iproc] = 0;
+            }
+
+            iproc = 0;
 
             bool nowThreads    = false;
             bool nowAtomBlock  = false;
@@ -786,9 +792,9 @@ void Property::readGpuProperty(int rank, int nproc, MPI_Comm world)
                 	break;
                 }
             }
-        }
 
-        fclose(fp);
+            fclose(fp);
+        }
     }
 
     MPI_Bcast(&hasFile, 1, MPI_INT, 0, world);
