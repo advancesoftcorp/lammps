@@ -77,10 +77,19 @@ __global__ void calculateBehlerG2(
     const int idxNeigh = ineigh1 + idxNeighs[iatom];
     const int idxPos   = idxNeigh * sizePosNeighbor;
 
+    const int jbase   = elemWeight ? 0 : (((int) element[idxNeigh]) * sizeRad);
+    const int ibase   = imode + jbase;
+    const int idxBase = ibase + idxNeigh * numBasis;
+    const int idxDiff = idxBase * 3;
+
     const nnpreal r1 = posNeighbor[0 + idxPos];
 
     if (r1 >= rcutRad)
     {
+        symmData[idxBase]     = ZERO;
+        symmDiff[idxDiff + 0] = ZERO;
+        symmDiff[idxDiff + 1] = ZERO;
+        symmDiff[idxDiff + 2] = ZERO;
         return;
     }
 
@@ -93,11 +102,7 @@ __global__ void calculateBehlerG2(
     const nnpreal dfc1dy1 = y1 / r1 * dfc1dr1;
     const nnpreal dfc1dz1 = z1 / r1 * dfc1dr1;
 
-    const nnpreal zscale  = elemWeight ? ((nnpreal) element[idxNeigh]) : ONE;
-    const int     jbase   = elemWeight ? 0 : (((int) element[idxNeigh]) * sizeRad);
-    const int     ibase   = imode + jbase;
-    const int     idxBase = ibase + idxNeigh * numBasis;
-    const int     idxDiff = idxBase * 3;
+    const nnpreal zscale = elemWeight ? ((nnpreal) element[idxNeigh]) : ONE;
 
     const nnpreal eta = radiusEta  [imode];
     const nnpreal rs  = radiusShift[imode];
@@ -169,10 +174,18 @@ __global__ void calculateBehlerG3EW(
         return;
     }
 
+    const int ibase   = imode + offsetBasis;
+    const int idxBase = ibase + idxNeigh * numBasis;
+    const int idxDiff = idxBase * 3;
+
     const nnpreal r1 = posNeighbor0[0 + idxPos1];
 
     if (r1 >= rcutAng)
     {
+        symmData[idxBase]     = ZERO;
+        symmDiff[idxDiff + 0] = ZERO;
+        symmDiff[idxDiff + 1] = ZERO;
+        symmDiff[idxDiff + 2] = ZERO;
         return;
     }
 
@@ -196,10 +209,6 @@ __global__ void calculateBehlerG3EW(
     const nnpreal dfc1dz1 = z1 / r1 * dfc1dr1;
     const nnpreal zanum1  = (nnpreal) element0[ineigh1];
     const nnpreal rr1     = (r1 - rs) * (r1 - rs);
-
-    const int  ibase    = imode + offsetBasis;
-    const int  idxBase  = ibase + idxNeigh * numBasis;
-    const int  idxDiff  = idxBase * 3;
 
     int ineigh2;
     int idxPos2;
@@ -384,6 +393,19 @@ __global__ void calculateBehlerG3NotEW(
 
     if (r1 >= rcutAng)
     {
+        for (kbase = 0; kbase < dimBasis; ++kbase)
+        {
+            jbase   = kbase * sizeAng;
+            ibase   = imode + jbase + offsetBasis;
+            idxBase = ibase + idxNeigh * numBasis;
+            idxDiff = idxBase * 3;
+
+            symmData[idxBase]     = ZERO;
+            symmDiff[idxDiff + 0] = ZERO;
+            symmDiff[idxDiff + 1] = ZERO;
+            symmDiff[idxDiff + 2] = ZERO;
+        }
+
         return;
     }
 
@@ -611,10 +633,18 @@ __global__ void calculateBehlerG4EW(
         return;
     }
 
+    const int ibase   = imode + offsetBasis;
+    const int idxBase = ibase + idxNeigh * numBasis;
+    const int idxDiff = idxBase * 3;
+
     const nnpreal r1 = posNeighbor0[0 + idxPos1];
 
     if (r1 >= rcutAng)
     {
+        symmData[idxBase]     = ZERO;
+        symmDiff[idxDiff + 0] = ZERO;
+        symmDiff[idxDiff + 1] = ZERO;
+        symmDiff[idxDiff + 2] = ZERO;
         return;
     }
 
@@ -638,10 +668,6 @@ __global__ void calculateBehlerG4EW(
     const nnpreal dfc1dz1 = z1 / r1 * dfc1dr1;
     const nnpreal zanum1  = (nnpreal) element0[ineigh1];
     const nnpreal rr1     = (r1 - rs) * (r1 - rs);
-
-    const int  ibase    = imode + offsetBasis;
-    const int  idxBase  = ibase + idxNeigh * numBasis;
-    const int  idxDiff  = idxBase * 3;
 
     int ineigh2;
     int idxPos2;
@@ -790,6 +816,19 @@ __global__ void calculateBehlerG4NotEW(
 
     if (r1 >= rcutAng)
     {
+        for (kbase = 0; kbase < dimBasis; ++kbase)
+        {
+            jbase   = kbase * sizeAng;
+            ibase   = imode + jbase + offsetBasis;
+            idxBase = ibase + idxNeigh * numBasis;
+            idxDiff = idxBase * 3;
+
+            symmData[idxBase]     = ZERO;
+            symmDiff[idxDiff + 0] = ZERO;
+            symmDiff[idxDiff + 1] = ZERO;
+            symmDiff[idxDiff + 2] = ZERO;
+        }
+
         return;
     }
 
