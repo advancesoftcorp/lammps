@@ -389,6 +389,12 @@ __global__ void calculateBehlerG3NotEW(
         return;
     }
 
+    int ibase;
+    int jbase;
+    int kbase;
+    int idxBase;
+    int idxDiff;
+
     const nnpreal r1 = posNeighbor0[0 + idxPos1];
 
     if (r1 >= rcutAng)
@@ -429,12 +435,6 @@ __global__ void calculateBehlerG3NotEW(
     const nnpreal dfc1dz1 = z1 / r1 * dfc1dr1;
     const nnpreal rr1     = (r1 - rs) * (r1 - rs);
     const int     ielem1  = (int) element0[ineigh1];
-
-    int ibase;
-    int jbase;
-    int kbase;
-    int idxBase;
-    int idxDiff;
 
     int ineigh2;
     int idxPos2;
@@ -812,6 +812,12 @@ __global__ void calculateBehlerG4NotEW(
         return;
     }
 
+    int ibase;
+    int jbase;
+    int kbase;
+    int idxBase;
+    int idxDiff;
+
     const nnpreal r1 = posNeighbor0[0 + idxPos1];
 
     if (r1 >= rcutAng)
@@ -852,12 +858,6 @@ __global__ void calculateBehlerG4NotEW(
     const nnpreal dfc1dz1 = z1 / r1 * dfc1dr1;
     const nnpreal rr1     = (r1 - rs) * (r1 - rs);
     const int     ielem1  = (int) element0[ineigh1];
-
-    int ibase;
-    int jbase;
-    int kbase;
-    int idxBase;
-    int idxDiff;
 
     int ineigh2;
     int idxPos2;
