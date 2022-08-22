@@ -88,7 +88,7 @@ void PairNNPCharge::performNN(int eflag)
 
     if (nlocal > 0)
     {
-        #pragma omp parallel for reduction(+:qsumlocal) private(i)
+        #pragma omp parallel for private(i) reduction(+:qsumlocal)
         for (i = 0; i < nlocal; i++) {
             qsumlocal += q[i];
         }

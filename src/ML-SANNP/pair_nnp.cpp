@@ -147,7 +147,7 @@ bool PairNNP::prepareNN()
     // grow with inum and nneighAll
     nneighAll = 0;
     #pragma omp parallel for private(iatom) reduction(max:nneighAll)
-    for (int iatom = 0; iatom < inum; ++iatom)
+    for (iatom = 0; iatom < inum; ++iatom)
     {
         nneighAll = max(nneighAll, numneigh[ilist[iatom]]);
     }
@@ -229,7 +229,7 @@ bool PairNNP::prepareNN()
     // grow with nneigh
     nneigh = 0;
     #pragma omp parallel for private(iatom) reduction(max:nneigh)
-    for (int iatom = 0; iatom < inum; ++iatom)
+    for (iatom = 0; iatom < inum; ++iatom)
     {
         nneigh = max(nneigh, this->numNeighbor[iatom]);
     }
