@@ -19,6 +19,8 @@ NNArch::NNArch(int mode, int numElems, const Property* property)
         stop_by_error("property is null.");
     }
 
+    int ielem;
+
     this->mode     = mode;
     this->numElems = numElems;
     this->numAtoms = 0;
@@ -39,6 +41,12 @@ NNArch::NNArch(int mode, int numElems, const Property* property)
     {
         this->energyData = new nnpreal*[this->numElems];
         this->energyGrad = new nnpreal*[this->numElems];
+
+        for (ielem = 0; ielem < this->numElems; ++ielem)
+        {
+            this->energyData[ielem] = nullptr;
+            this->energyGrad[ielem] = nullptr;
+        }
     }
     else
     {
@@ -51,17 +59,22 @@ NNArch::NNArch(int mode, int numElems, const Property* property)
     if (this->isChargeMode())
     {
         this->chargeData = new nnpreal*[this->numElems];
+
+        for (ielem = 0; ielem < this->numElems; ++ielem)
+        {
+            this->chargeData[ielem] = nullptr;
+        }
     }
     else
     {
         this->chargeData = nullptr;
     }
 
-    this->symmData    = nullptr;
-    this->symmDiff    = nullptr;
-    this->symmAve     = new nnpreal[this->numElems];
-    this->symmDev     = new nnpreal[this->numElems];
-    this->symmFunc    = nullptr;
+    this->symmData = nullptr;
+    this->symmDiff = nullptr;
+    this->symmAve  = new nnpreal[this->numElems];
+    this->symmDev  = new nnpreal[this->numElems];
+    this->symmFunc = nullptr;
 
     this->interLayersEnergy = nullptr;
     this->lastLayersEnergy  = nullptr;
@@ -891,18 +904,13 @@ void NNArch::initGeometry(int numAtoms, int* elements,
             this->lastLayersEnergy[ielem]->setSizeOfBatch(jbatch);
         }
 
-        this->forceData = new nnpreal**[natom];
+        this->forceData = new nnpreal*[natom];
 
         for (iatom = 0; iatom < natom; ++iatom)
         {
             nneigh = numNeighbor[iatom] + 1;
 
-            this->forceData[iatom] = new nnpreal*[nneigh];
-
-            for (ineigh = 0; ineigh < nneigh; ++ineigh)
-            {
-                this->forceData[iatom][ineigh] = new nnpreal[3];
-            }
+            this->forceData[iatom] = new nnpreal[3 * nneigh];
         }
     }
 
@@ -976,13 +984,6 @@ void NNArch::clearGeometry()
         {
             for (iatom = 0; iatom < natom; ++iatom)
             {
-                nneigh = this->numNeighbor[iatom] + 1;
-
-                for (ineigh = 0; ineigh < nneigh; ++ineigh)
-                {
-                    delete[] this->forceData[iatom][ineigh];
-                }
-
                 delete[] this->forceData[iatom];
             }
         }
@@ -1495,9 +1496,9 @@ void NNArch::goBackwardOnForce()
             // cannot be simd
             for (ineigh = 0; ineigh < nneigh; ++ineigh)
             {
-                this->forceData[iatom][ineigh][0] = -forceNeigh[3 * ineigh + 0];
-                this->forceData[iatom][ineigh][1] = -forceNeigh[3 * ineigh + 1];
-                this->forceData[iatom][ineigh][2] = -forceNeigh[3 * ineigh + 2];
+                this->forceData[iatom][3 * ineigh + 0] = -forceNeigh[3 * ineigh + 0];
+                this->forceData[iatom][3 * ineigh + 1] = -forceNeigh[3 * ineigh + 1];
+                this->forceData[iatom][3 * ineigh + 2] = -forceNeigh[3 * ineigh + 2];
             }
         }
 
@@ -1620,9 +1621,9 @@ void NNArch::obtainForces(nnpreal*** forces) const
 
         for (ineigh = 0; ineigh < nneigh; ++ineigh)
         {
-            forces[iatom][ineigh][0] = this->forceData[iatom][ineigh][0];
-            forces[iatom][ineigh][1] = this->forceData[iatom][ineigh][1];
-            forces[iatom][ineigh][2] = this->forceData[iatom][ineigh][2];
+            forces[iatom][ineigh][0] = this->forceData[iatom][3 * ineigh + 0];
+            forces[iatom][ineigh][1] = this->forceData[iatom][3 * ineigh + 1];
+            forces[iatom][ineigh][2] = this->forceData[iatom][3 * ineigh + 2];
         }
     }
 }

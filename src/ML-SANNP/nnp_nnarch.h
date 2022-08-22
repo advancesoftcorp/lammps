@@ -100,7 +100,7 @@ private:
     nnpreal**  energyData;
     nnpreal**  energyGrad;
 
-    nnpreal*** forceData;
+    nnpreal**  forceData;
 
     nnpreal**  chargeData;
 

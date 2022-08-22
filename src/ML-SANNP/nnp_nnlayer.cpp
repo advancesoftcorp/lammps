@@ -62,12 +62,14 @@ void NNLayer::setSizeOfBatch(int sizeBatch)
         stop_by_error("size of batch is not positive.");
     }
 
-    if (this->sizeBatch == sizeBatch)
+    int sizeBatchOld = this->sizeBatch;
+
+    this->sizeBatch = sizeBatch;
+
+    if (sizeBatchOld >= this->sizeBatch)
     {
         return;
     }
-
-    this->sizeBatch = sizeBatch;
 
     if (this->inpData != nullptr)
     {
