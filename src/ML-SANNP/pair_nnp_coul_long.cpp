@@ -109,13 +109,14 @@ void PairNNPCoulLong::compute(int eflag, int vflag)
             }
 
             r = this->posNeighborAll[ii][jj][0];
+            if (r <= 0.0) continue;
 
-            if (r > 0.0 && r < rcut)
+            delx = -this->posNeighborAll[ii][jj][1];
+            dely = -this->posNeighborAll[ii][jj][2];
+            delz = -this->posNeighborAll[ii][jj][3];
+
+            if (r < rcut)
             {
-                delx = -this->posNeighborAll[ii][jj][1];
-                dely = -this->posNeighborAll[ii][jj][2];
-                delz = -this->posNeighborAll[ii][jj][3];
-
                 rinv = 1.0 / r;
                 forcecoul = qqrd2e * qtmp * q[j] * rinv;
 
@@ -147,7 +148,7 @@ void PairNNPCoulLong::compute(int eflag, int vflag)
                 }
             }
 
-            if (r > 0.0 && r < this->cutcoul)
+            if (r < this->cutcoul)
             {
                 rr = r * r;
                 r2inv = 1.0 / rr;
