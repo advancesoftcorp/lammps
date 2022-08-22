@@ -14,6 +14,8 @@ PairNNPCoulLong::PairNNPCoulLong(LAMMPS *lmp) : PairNNPCharge(lmp)
     ewaldflag = 1;
     pppmflag  = 1;
     ftable    = nullptr;
+
+    this->g_ewald = 0.0;
 }
 
 PairNNPCoulLong::~PairNNPCoulLong()
@@ -106,13 +108,14 @@ void PairNNPCoulLong::compute(int eflag, int vflag)
                 if (x[j][2] == ztmp && x[j][1] == ytmp && x[j][0] < xtmp) continue;
             }
 
-            r    =  this->posNeighbor[ii][jj][0];
-            delx = -this->posNeighbor[ii][jj][1];
-            dely = -this->posNeighbor[ii][jj][2];
-            delz = -this->posNeighbor[ii][jj][3];
+            r = this->posNeighborAll[ii][jj][0];
 
-            if (r < rcut)
+            if (r > 0.0 && r < rcut)
             {
+                delx = -this->posNeighborAll[ii][jj][1];
+                dely = -this->posNeighborAll[ii][jj][2];
+                delz = -this->posNeighborAll[ii][jj][3];
+
                 rinv = 1.0 / r;
                 forcecoul = qqrd2e * qtmp * q[j] * rinv;
 
@@ -144,7 +147,7 @@ void PairNNPCoulLong::compute(int eflag, int vflag)
                 }
             }
 
-            if (r < this->cutcoul)
+            if (r > 0.0 && r < this->cutcoul)
             {
                 rr = r * r;
                 r2inv = 1.0 / rr;

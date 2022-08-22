@@ -13,6 +13,9 @@ PairNNPCharge::PairNNPCharge(LAMMPS *lmp) : PairNNP(lmp)
 {
     comm_forward = 1;
     comm_reverse = 1;
+
+    this->cutcoul = 0.0;
+    this->charges = nullptr;
 }
 
 PairNNPCharge::~PairNNPCharge()
@@ -24,13 +27,13 @@ PairNNPCharge::~PairNNPCharge()
 
     if (allocated)
     {
-        memory->destroy(charges);
+        memory->destroy(this->charges);
     }
 }
 
 void PairNNPCharge::allocate() {
     PairNNP::allocate();
-    memory->create(charges, this->maxinum, "pair:charges");
+    memory->create(this->charges, this->maxinum, "pair:charges");
 }
 
 bool PairNNPCharge::prepareNN()
@@ -39,7 +42,7 @@ bool PairNNPCharge::prepareNN()
 
     if (hasGrown)
     {
-        memory->grow(charges, this->maxinum, "pair:charges");
+        memory->grow(this->charges, this->maxinum, "pair:charges");
     }
 
     return hasGrown;
@@ -72,31 +75,37 @@ void PairNNPCharge::performNN(int eflag)
     {
         this->arch->goForwardOnCharge();
         this->arch->obtainCharges(charges);
-    }
 
-    #pragma omp parallel for private(iatom, i)
-    for (iatom = 0; iatom < inum; ++iatom)
-    {
-        i = ilist[iatom];
-        q[i] = charges[iatom];
+        #pragma omp parallel for private(iatom, i)
+        for (iatom = 0; iatom < inum; ++iatom)
+        {
+            i = ilist[iatom];
+            q[i] = charges[iatom];
+        }
     }
 
     qsumlocal = 0.0;
 
-    #pragma omp parallel for reduction(+:qsumlocal) private(i)
-    for (int i = 0; i < nlocal; i++) {
-        qsumlocal += q[i];
+    if (nlocal > 0)
+    {
+        #pragma omp parallel for reduction(+:qsumlocal) private(i)
+        for (i = 0; i < nlocal; i++) {
+            qsumlocal += q[i];
+        }
     }
 
     MPI_Allreduce(&qsumlocal, &qsum, 1, MPI_DOUBLE, MPI_SUM, world);
 
     qoffset = qsum / natoms;
 
-    #pragma omp parallel for private(iatom, i)
-    for (iatom = 0; iatom < inum; ++iatom)
+    if (inum > 0)
     {
-        i = ilist[iatom];
-        q[i] -= qoffset;
+        #pragma omp parallel for private(iatom, i)
+        for (iatom = 0; iatom < inum; ++iatom)
+        {
+            i = ilist[iatom];
+            q[i] -= qoffset;
+        }
     }
 
     comm->forward_comm(this);

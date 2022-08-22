@@ -58,10 +58,13 @@ protected:
 
     int maxinum;
     int maxnneigh;
+    int maxnneighAll;
 
     int*       numNeighbor;
+    int**      idxNeighbor;
     int**      elemNeighbor;
     nnpreal*** posNeighbor;
+    nnpreal*** posNeighborAll;
 
     virtual void allocate();
 

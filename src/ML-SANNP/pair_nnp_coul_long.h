@@ -38,7 +38,7 @@ public:
 
     void init_style() override;
 
-protected:
+private:
     double g_ewald;
 };
 

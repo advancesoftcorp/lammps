@@ -21,9 +21,20 @@ PairNNP::PairNNP(LAMMPS *lmp) : Pair(lmp)
     this->property  = nullptr;
     this->arch      = nullptr;
 
-    const int max   = 10;
-    this->maxinum   = max;
-    this->maxnneigh = max;
+    this->elements  = nullptr;
+    this->energies  = nullptr;
+    this->forces    = nullptr;
+
+    const int max      = 10;
+    this->maxinum      = max;
+    this->maxnneigh    = max;
+    this->maxnneighAll = max;
+
+    this->numNeighbor    = nullptr;
+    this->idxNeighbor    = nullptr;
+    this->elemNeighbor   = nullptr;
+    this->posNeighbor    = nullptr;
+    this->posNeighborAll = nullptr;
 }
 
 PairNNP::~PairNNP()
@@ -56,8 +67,10 @@ PairNNP::~PairNNP()
         memory->destroy(this->energies);
         memory->destroy(this->forces);
         memory->destroy(this->numNeighbor);
+        memory->destroy(this->idxNeighbor);
         memory->destroy(this->elemNeighbor);
         memory->destroy(this->posNeighbor);
+        memory->destroy(this->posNeighborAll);
     }
 }
 
@@ -79,6 +92,9 @@ void PairNNP::allocate()
     memory->create(this->numNeighbor,  this->maxinum,                       "pair:numNeighbor");
     memory->create(this->elemNeighbor, this->maxinum, this->maxnneigh,      "pair:elemNeighbor");
     memory->create(this->posNeighbor,  this->maxinum, this->maxnneigh, dim, "pair:posNeighbor");
+
+    memory->create(this->idxNeighbor,    this->maxinum, this->maxnneighAll,    "pair:idxNeighbor");
+    memory->create(this->posNeighborAll, this->maxinum, this->maxnneighAll, 4, "pair:posNeighborAll");
 }
 
 void PairNNP::compute(int eflag, int vflag)
@@ -101,9 +117,11 @@ void PairNNP::compute(int eflag, int vflag)
 
 bool PairNNP::prepareNN()
 {
+    bool hasGrown;
+
     int i, j;
     int iatom, jatom;
-    int ineigh, nneigh;
+    int ineigh, nneigh, nneighAll;
 
     int itype, jtype;
     int* type = atom->type;
@@ -116,22 +134,25 @@ bool PairNNP::prepareNN()
 
     nnpreal x0, y0, z0, dx, dy, dz, r, rr, fc, dfcdr;
 
-    const int elemWeight = this->property->getElemWeight();
-    const int cutoffMode = this->property->getCutoffMode();
-    const double rcutRad = this->property->getRcutRadius();
-    const double rcutAng = this->property->getRcutAngle();
+    const int elemWeight  = this->property->getElemWeight();
+    const int cutoffMode  = this->property->getCutoffMode();
+    const double rcutNNP  = this->property->getRcutoff();
+    const double rcutRad  = this->property->getRcutRadius();
+    const double rcutAng  = this->property->getRcutAngle();
+    const double rcutOut  = this->get_cutoff();
+    const double rrcutOut = rcutOut * rcutOut;
 
     SymmFunc* symmFunc = this->arch->getSymmFunc();
 
-    bool hasGrown = false;
-
-    // grow with inum and nneigh
-    nneigh = 0;
-    #pragma omp parallel for private(iatom) reduction(max:nneigh)
+    // grow with inum and nneighAll
+    nneighAll = 0;
+    #pragma omp parallel for private(iatom) reduction(max:nneighAll)
     for (int iatom = 0; iatom < inum; ++iatom)
     {
-        nneigh = max(nneigh, numneigh[ilist[iatom]]);
+        nneighAll = max(nneighAll, numneigh[ilist[iatom]]);
     }
+
+    hasGrown = false;
 
     if (inum > this->maxinum)
     {
@@ -142,6 +163,75 @@ bool PairNNP::prepareNN()
         memory->grow(this->elements,    this->maxinum, "pair:elements");
         memory->grow(this->energies,    this->maxinum, "pair:energies");
         memory->grow(this->numNeighbor, this->maxinum, "pair:numNeighbor");
+    }
+
+    if (hasGrown || nneighAll > this->maxnneighAll)
+    {
+        if (nneighAll > this->maxnneighAll)
+        {
+            this->maxnneighAll = nneighAll + this->maxnneighAll / 2;
+        }
+
+        memory->grow(this->idxNeighbor,    this->maxinum, this->maxnneighAll,    "pair:idxNighbor");
+        memory->grow(this->posNeighborAll, this->maxinum, this->maxnneighAll, 4, "pair:posNighborAll");
+    }
+
+    // generate elements, numNeighbor, idxNeighbor and posNeighborAll
+    #pragma omp parallel for private(iatom, i, j, itype, ineigh, nneigh, x0, y0, z0, dx, dy, dz, r, rr)
+    for (iatom = 0; iatom < inum; ++iatom)
+    {
+        i = ilist[iatom];
+
+        itype = this->typeMap[type[i]];
+        this->elements[iatom] = itype - 1;
+
+        x0 = x[i][0];
+        y0 = x[i][1];
+        z0 = x[i][2];
+
+        nneigh = numneigh[i];
+
+        this->numNeighbor[iatom] = 0;
+
+        for (ineigh = 0; ineigh < nneigh; ++ineigh)
+        {
+            j = firstneigh[i][ineigh];
+            j &= NEIGHMASK;
+
+            dx = x[j][0] - x0;
+            dy = x[j][1] - y0;
+            dz = x[j][2] - z0;
+
+            rr = dx * dx + dy * dy + dz * dz;
+
+            if (rr < rrcutOut)
+            {
+                r = sqrt(rr);
+
+                if (r < rcutNNP)
+                {
+                    this->idxNeighbor[iatom][this->numNeighbor[iatom]] = ineigh;
+                    this->numNeighbor[iatom]++;
+                }
+
+                this->posNeighborAll[iatom][ineigh][0] = r;
+                this->posNeighborAll[iatom][ineigh][1] = dx;
+                this->posNeighborAll[iatom][ineigh][2] = dy;
+                this->posNeighborAll[iatom][ineigh][3] = dz;
+            }
+            else
+            {
+                this->posNeighborAll[iatom][ineigh][0] = -1.0;
+            }
+        }
+    }
+
+    // grow with nneigh
+    nneigh = 0;
+    #pragma omp parallel for private(iatom) reduction(max:nneigh)
+    for (int iatom = 0; iatom < inum; ++iatom)
+    {
+        nneigh = max(nneigh, this->numNeighbor[iatom]);
     }
 
     if (hasGrown || nneigh > this->maxnneigh)
@@ -158,29 +248,19 @@ bool PairNNP::prepareNN()
         memory->grow(this->posNeighbor,  this->maxinum, this->maxnneigh,   dim, "pair:posNighbor");
     }
 
-    // generate numNeighbor, elemNeighbor, posNeighbor
-    #pragma omp parallel for private(iatom, i, itype, x0, y0, z0, \
-                                     nneigh, ineigh, j, jtype, dx, dy, dz, rr, r, fc, dfcdr)
+    // generate elemNeighbor and posNeighbor
+    #pragma omp parallel for private(iatom, i, j, jtype, ineigh, nneigh, r, fc, dfcdr)
     for (iatom = 0; iatom < inum; ++iatom)
     {
         i = ilist[iatom];
 
-        x0 = x[i][0];
-        y0 = x[i][1];
-        z0 = x[i][2];
-
-        nneigh = numneigh[i];
-
-        this->numNeighbor[iatom] = nneigh;
-
-        itype = this->typeMap[type[i]];
-        this->elements[iatom] = itype - 1;
+        nneigh = this->numNeighbor[iatom];
 
         if (elemWeight == 0)
         {
             for (ineigh = 0; ineigh < nneigh; ++ineigh)
             {
-                j = firstneigh[i][ineigh];
+                j = firstneigh[i][this->idxNeighbor[iatom][ineigh]];
                 j &= NEIGHMASK;
 
                 jtype = this->typeMap[type[j]];
@@ -191,7 +271,7 @@ bool PairNNP::prepareNN()
         {
             for (ineigh = 0; ineigh < nneigh; ++ineigh)
             {
-                j = firstneigh[i][ineigh];
+                j = firstneigh[i][this->idxNeighbor[iatom][ineigh]];
                 j &= NEIGHMASK;
 
                 jtype = this->typeMap[type[j]];
@@ -201,20 +281,12 @@ bool PairNNP::prepareNN()
 
         for (ineigh = 0; ineigh < nneigh; ++ineigh)
         {
-            j = firstneigh[i][ineigh];
-            j &= NEIGHMASK;
+            j = this->idxNeighbor[iatom][ineigh];
 
-            dx = x[j][0] - x0;
-            dy = x[j][1] - y0;
-            dz = x[j][2] - z0;
-
-            rr = dx * dx + dy * dy + dz * dz;
-            r = sqrt(rr);
-
-            this->posNeighbor[iatom][ineigh][0] = r;
-            this->posNeighbor[iatom][ineigh][1] = dx;
-            this->posNeighbor[iatom][ineigh][2] = dy;
-            this->posNeighbor[iatom][ineigh][3] = dz;
+            this->posNeighbor[iatom][ineigh][0] = this->posNeighborAll[iatom][j][0];
+            this->posNeighbor[iatom][ineigh][1] = this->posNeighborAll[iatom][j][1];
+            this->posNeighbor[iatom][ineigh][2] = this->posNeighborAll[iatom][j][2];
+            this->posNeighbor[iatom][ineigh][3] = this->posNeighborAll[iatom][j][3];
         }
 
         if (cutoffMode == CUTOFF_MODE_SINGLE)
@@ -360,7 +432,7 @@ void PairNNP::performNN(int eflag)
 
         for (ineigh = 0; ineigh < nneigh; ++ineigh)
         {
-            j = firstneigh[i][ineigh];
+            j = firstneigh[i][this->idxNeighbor[iatom][ineigh]];
             j &= NEIGHMASK;
 
             fx = forces[iatom][ineigh + 1][0];
@@ -468,15 +540,16 @@ void PairNNP::computeLJLike(int eflag)
                 if (x[j][2] == ztmp && x[j][1] == ytmp && x[j][0] < xtmp) continue;
             }
 
-            r    =  this->posNeighbor[ii][jj][0];
-            delx = -this->posNeighbor[ii][jj][1];
-            dely = -this->posNeighbor[ii][jj][2];
-            delz = -this->posNeighbor[ii][jj][3];
+            r = this->posNeighborAll[ii][jj][0];
 
-            jelem1 = this->typeMap[type[j]] - 1;
-
-            if (r < rcut)
+            if (r > 0.0 && r < rcut)
             {
+                delx = -this->posNeighborAll[ii][jj][1];
+                dely = -this->posNeighborAll[ii][jj][2];
+                delz = -this->posNeighborAll[ii][jj][3];
+
+                jelem1 = this->typeMap[type[j]] - 1;
+
                 ielem2 = max(ielem1, jelem1);
                 jelem2 = min(ielem1, jelem1);
                 kelem  = jelem2 + ielem2 * (ielem2 + 1) / 2;
