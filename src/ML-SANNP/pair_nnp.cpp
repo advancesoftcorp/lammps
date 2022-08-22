@@ -260,7 +260,8 @@ bool PairNNP::prepareNN()
         {
             for (ineigh = 0; ineigh < nneigh; ++ineigh)
             {
-                j = firstneigh[i][this->idxNeighbor[iatom][ineigh]];
+                j = this->idxNeighbor[iatom][ineigh];
+                j = firstneigh[i][j];
                 j &= NEIGHMASK;
 
                 jtype = this->typeMap[type[j]];
@@ -271,7 +272,8 @@ bool PairNNP::prepareNN()
         {
             for (ineigh = 0; ineigh < nneigh; ++ineigh)
             {
-                j = firstneigh[i][this->idxNeighbor[iatom][ineigh]];
+                j = this->idxNeighbor[iatom][ineigh];
+                j = firstneigh[i][j];
                 j &= NEIGHMASK;
 
                 jtype = this->typeMap[type[j]];
@@ -432,7 +434,8 @@ void PairNNP::performNN(int eflag)
 
         for (ineigh = 0; ineigh < nneigh; ++ineigh)
         {
-            j = firstneigh[i][this->idxNeighbor[iatom][ineigh]];
+            j = this->idxNeighbor[iatom][ineigh];
+            j = firstneigh[i][j];
             j &= NEIGHMASK;
 
             fx = forces[iatom][ineigh + 1][0];
