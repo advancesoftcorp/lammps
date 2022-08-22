@@ -242,7 +242,7 @@ void PairNNPCoulLong::init_style()
         error->all(FLERR, "Must use 'kspace_modify gewald' with Pair style nnp/coul/long");
     }
 
-    g_ewald = force->kspace->g_ewald;
+    this->g_ewald = force->kspace->g_ewald;
 
     // setup force tables
 
