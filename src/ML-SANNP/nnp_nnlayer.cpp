@@ -10,7 +10,7 @@
 #define SIGMOID_MAX   NNPREAL(50.0)
 #define TWTANH_ALPHA  NNPREAL(0.16)
 
-NNLayer::NNLayer(int numInpNodes, int numOutNodes, int activation)
+NNLayer::NNLayer(int numInpNodes, int numOutNodes, int activation, int imemory, LAMMPS_NS::Memory* memory)
 {
     if (numInpNodes < 1)
     {
@@ -22,11 +22,15 @@ NNLayer::NNLayer(int numInpNodes, int numOutNodes, int activation)
         stop_by_error("output size of neural network is not positive.");
     }
 
-    this->numInpNodes = numInpNodes;
-    this->numOutNodes = numOutNodes;
-    this->sizeBatch = 0;
+    this->numInpNodes  = numInpNodes;
+    this->numOutNodes  = numOutNodes;
+    this->sizeBatch    = 0;
+    this->sizeBatchMax = 0;
 
     this->activation = activation;
+
+    this->imemory = imemory;
+    this->memory  = memory;
 
     this->inpData = nullptr;
     this->inpGrad = nullptr;
@@ -36,19 +40,25 @@ NNLayer::NNLayer(int numInpNodes, int numOutNodes, int activation)
     this->bias   = new nnpreal[this->numOutNodes];
 }
 
+NNLayer::NNLayer(int numInpNodes, int numOutNodes, int activation) :
+         NNLayer(numInpNodes, numOutNodes, activation, 0, nullptr)
+{
+    // NOP
+}
+
 NNLayer::~NNLayer()
 {
     if (this->inpData != nullptr)
     {
-        delete[] this->inpData;
+        this->memory->destroy(this->inpData);
     }
     if (this->inpGrad != nullptr)
     {
-        delete[] this->inpGrad;
+        this->memory->destroy(this->inpGrad);
     }
     if (this->outDrv1 != nullptr)
     {
-        delete[] this->outDrv1;
+        this->memory->destroy(this->outDrv1);
     }
 
     delete[] this->weight;
@@ -62,33 +72,46 @@ void NNLayer::setSizeOfBatch(int sizeBatch)
         stop_by_error("size of batch is not positive.");
     }
 
-    int sizeBatchOld = this->sizeBatch;
-
     this->sizeBatch = sizeBatch;
 
-    if (sizeBatchOld >= this->sizeBatch)
+    if (this->sizeBatchMax < this->sizeBatch)
     {
-        return;
-    }
+        char nameInpData[64];
+        char nameInpGrad[64];
+        char nameOutDrv1[64];
+        sprintf(nameInpData, "nnp:inpData%d", this->imemory);
+        sprintf(nameInpGrad, "nnp:inpGrad%d", this->imemory);
+        sprintf(nameOutDrv1, "nnp:outDrv1%d", this->imemory);
 
-    if (this->inpData != nullptr)
-    {
-        delete[] this->inpData;
-    }
+        if (this->inpData == nullptr)
+        {
+            this->memory->create(this->inpData, this->numInpNodes * this->sizeBatch, nameInpData);
+        }
+        else
+        {
+            this->memory->grow  (this->inpData, this->numInpNodes * this->sizeBatch, nameInpData);
+        }
 
-    if (this->inpGrad != nullptr)
-    {
-        delete[] this->inpGrad;
-    }
+        if (this->inpGrad == nullptr)
+        {
+            this->memory->create(this->inpGrad, this->numInpNodes * this->sizeBatch, nameInpGrad);
+        }
+        else
+        {
+            this->memory->grow  (this->inpGrad, this->numInpNodes * this->sizeBatch, nameInpGrad);
+        }
 
-    if (this->outDrv1 != nullptr)
-    {
-        delete[] this->outDrv1;
-    }
+        if (this->outDrv1 == nullptr)
+        {
+            this->memory->create(this->outDrv1, this->numOutNodes * this->sizeBatch, nameOutDrv1);
+        }
+        else
+        {
+            this->memory->grow  (this->outDrv1, this->numOutNodes * this->sizeBatch, nameOutDrv1);
+        }
 
-    this->inpData = new nnpreal[this->numInpNodes * this->sizeBatch];
-    this->inpGrad = new nnpreal[this->numInpNodes * this->sizeBatch];
-    this->outDrv1 = new nnpreal[this->numOutNodes * this->sizeBatch];
+        this->sizeBatchMax = this->sizeBatch;
+    }
 }
 
 void NNLayer::scanWeight(FILE* fp, bool zeroBias, int rank, MPI_Comm world)

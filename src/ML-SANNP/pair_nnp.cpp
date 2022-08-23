@@ -702,7 +702,7 @@ void PairNNP::coeff(int narg, char **arg)
     }
 
     bool withCharge = (this->property->getWithCharge() != 0);
-    this->arch = new NNArch(withCharge ? NNARCH_MODE_BOTH : NNARCH_MODE_ENERGY, ntypesEff, this->property);
+    this->arch = new NNArch(withCharge ? NNARCH_MODE_BOTH : NNARCH_MODE_ENERGY, ntypesEff, this->property, memory);
 
     this->arch->initLayers();
     this->arch->restoreNN(fp, ntypesEff, typeNames, this->zeroEatom != 0, comm->me, world);

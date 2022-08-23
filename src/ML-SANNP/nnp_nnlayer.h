@@ -9,10 +9,12 @@
 #define NNP_NNLAYER_H_
 
 #include "nnp_common.h"
+#include "memory.h"
 
 class NNLayer
 {
 public:
+    NNLayer(int numInpNodes, int numOutNodes, int activation, int imemory, LAMMPS_NS::Memory* memory);
     NNLayer(int numInpNodes, int numOutNodes, int activation);
     virtual ~NNLayer();
 
@@ -55,8 +57,12 @@ private:
     int numInpNodes;
     int numOutNodes;
     int sizeBatch;
+    int sizeBatchMax;
 
     int activation;
+
+    int imemory;
+    LAMMPS_NS::Memory* memory;
 
     nnpreal* inpData;
     nnpreal* inpGrad;

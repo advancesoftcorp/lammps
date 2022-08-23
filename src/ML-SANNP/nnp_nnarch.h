@@ -20,11 +20,12 @@
 #include "nnp_symm_func_chebyshev.h"
 #endif
 #include "nnp_nnlayer.h"
+#include "memory.h"
 
 class NNArch
 {
 public:
-    NNArch(int mode, int numElems, const Property* property);
+    NNArch(int mode, int numElems, const Property* property, LAMMPS_NS::Memory* memory);
     virtual ~NNArch();
 
     int getAtomNum(int ielem) const
@@ -83,6 +84,8 @@ private:
     int numAtoms;
 
     const Property* property;
+
+    LAMMPS_NS::Memory* memory;
 
     int* atomNum;
 
