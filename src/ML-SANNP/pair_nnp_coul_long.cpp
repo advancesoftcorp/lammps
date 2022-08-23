@@ -66,10 +66,9 @@ void PairNNPCoulLong::compute(int eflag, int vflag)
     double qqrd2e = force->qqrd2e;
 
     int itable;
-    double fraction,table;
-    double grij,expm2,prefactor,t,erfc;
+    double fraction, table;
+    double grij, expm2, prefactor, t, erfc;
 
-    ecoul = 0.0;
     ev_init(eflag, vflag);
 
     prepareNN(hasGrown);
@@ -78,6 +77,9 @@ void PairNNPCoulLong::compute(int eflag, int vflag)
 
     computeLJLike(eflag);
 
+    #pragma omp parallel for private(i, j, ii, jj, jnum, jlist, itag, jtag, xtmp, ytmp, ztmp, qtmp, \
+                                     factor_coul, r, rr, rinv, r2inv, forcecoul, fc, dfcdr, ecoul, fpair, \
+                                     itable, fraction, table, grij, expm2, prefactor, t, erfc)
     for (ii = 0; ii < inum; ii++)
     {
         i = ilist[ii];
@@ -88,10 +90,14 @@ void PairNNPCoulLong::compute(int eflag, int vflag)
         qtmp = q[i];
 
         jlist = firstneigh[i];
-        jnum = numneigh[i];
+        jnum  = numneigh[i];
 
         for (jj = 0; jj < jnum; jj++)
         {
+            this->frcNeighborAll[ii][jj][0] = -1.0;
+            this->frcNeighborAll[ii][jj][1] =  0.0;
+            this->frcNeighborAll[ii][jj][2] =  0.0;
+
             j = jlist[jj];
             factor_coul = special_coul[sbmask(j)];
             j &= NEIGHMASK;
@@ -111,10 +117,6 @@ void PairNNPCoulLong::compute(int eflag, int vflag)
             r = this->posNeighborAll[ii][jj][0];
             if (r <= 0.0) continue;
 
-            delx = -this->posNeighborAll[ii][jj][1];
-            dely = -this->posNeighborAll[ii][jj][2];
-            delz = -this->posNeighborAll[ii][jj][3];
-
             if (r < rcut)
             {
                 rinv = 1.0 / r;
@@ -124,28 +126,11 @@ void PairNNPCoulLong::compute(int eflag, int vflag)
                 dfcdr = -0.5 * PId / rcut * sin(PId * r / rcut);
                 fpair = factor_coul * forcecoul * (rinv * fc - dfcdr) * rinv;
 
-                fx = -delx * fpair;
-                fy = -dely * fpair;
-                fz = -delz * fpair;
+                ecoul = eflag ? (factor_coul * forcecoul * fc) : 0.0;
 
-                f[i][0] += fx;
-                f[i][1] += fy;
-                f[i][2] += fz;
-
-                f[j][0] -= fx;
-                f[j][1] -= fy;
-                f[j][2] -= fz;
-
-                if (eflag)
-                {
-                    ecoul = factor_coul * forcecoul * fc;
-                }
-
-                if (evflag)
-                {
-                    ev_tally(i, j, nlocal, newton_pair,
-                             0.0, -ecoul, -fpair, delx, dely, delz);
-                }
+                this->frcNeighborAll[ii][jj][0]  = 1.0;
+                this->frcNeighborAll[ii][jj][1] -= ecoul;
+                this->frcNeighborAll[ii][jj][2] -= fpair;
             }
 
             if (r < this->cutcoul)
@@ -182,17 +167,7 @@ void PairNNPCoulLong::compute(int eflag, int vflag)
 
                 fpair = forcecoul * r2inv;
 
-                fx = delx * fpair;
-                fy = dely * fpair;
-                fz = delz * fpair;
-
-                f[i][0] += fx;
-                f[i][1] += fy;
-                f[i][2] += fz;
-
-                f[j][0] -= fx;
-                f[j][1] -= fy;
-                f[j][2] -= fz;
+                ecoul = 0.0;
 
                 if (eflag)
                 {
@@ -211,6 +186,46 @@ void PairNNPCoulLong::compute(int eflag, int vflag)
                         ecoul -= (1.0 - factor_coul) * prefactor;
                     }
                 }
+
+                this->frcNeighborAll[ii][jj][0]  = 1.0;
+                this->frcNeighborAll[ii][jj][1] += ecoul;
+                this->frcNeighborAll[ii][jj][2] += fpair;
+            }
+        }
+    }
+
+    for (ii = 0; ii < inum; ii++)
+    {
+        i = ilist[ii];
+
+        jlist = firstneigh[i];
+        jnum  = numneigh[i];
+
+        for (jj = 0; jj < jnum; jj++)
+        {
+            if (this->frcNeighborAll[ii][jj][0] > 0.0)
+            {
+                j = jlist[jj];
+                j &= NEIGHMASK;
+
+                delx = -this->posNeighborAll[ii][jj][1];
+                dely = -this->posNeighborAll[ii][jj][2];
+                delz = -this->posNeighborAll[ii][jj][3];
+
+                ecoul = this->frcNeighborAll[ii][jj][1];
+                fpair = this->frcNeighborAll[ii][jj][2];
+
+                fx = delx * fpair;
+                fy = dely * fpair;
+                fz = delz * fpair;
+
+                f[i][0] += fx;
+                f[i][1] += fy;
+                f[i][2] += fz;
+
+                f[j][0] -= fx;
+                f[j][1] -= fy;
+                f[j][2] -= fz;
 
                 if (evflag)
                 {

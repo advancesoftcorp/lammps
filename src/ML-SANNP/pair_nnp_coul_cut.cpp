@@ -53,7 +53,6 @@ void PairNNPCoulCut::compute(int eflag, int vflag)
     double *special_coul = force->special_coul;
     double qqrd2e = force->qqrd2e;
 
-    ecoul = 0.0;
     ev_init(eflag, vflag);
 
     prepareNN(hasGrown);
@@ -62,6 +61,8 @@ void PairNNPCoulCut::compute(int eflag, int vflag)
 
     computeLJLike(eflag);
 
+    #pragma omp parallel for private(i, j, ii, jj, jnum, jlist, itag, jtag, xtmp, ytmp, ztmp, qtmp, \
+                                     factor_coul, r, rinv, r2inv, forcecoul, fc, dfcdr, ecoul, fpair)
     for (ii = 0; ii < inum; ii++)
     {
         i = ilist[ii];
@@ -72,10 +73,12 @@ void PairNNPCoulCut::compute(int eflag, int vflag)
         qtmp = q[i];
 
         jlist = firstneigh[i];
-        jnum = numneigh[i];
+        jnum  = numneigh[i];
 
         for (jj = 0; jj < jnum; jj++)
         {
+            this->frcNeighborAll[ii][jj][0] = -1.0;
+
             j = jlist[jj];
             factor_coul = special_coul[sbmask(j)];
             j &= NEIGHMASK;
@@ -96,10 +99,6 @@ void PairNNPCoulCut::compute(int eflag, int vflag)
 
             if (r > 0.0 && r < this->cutcoul)
             {
-                delx = -this->posNeighborAll[ii][jj][1];
-                dely = -this->posNeighborAll[ii][jj][2];
-                delz = -this->posNeighborAll[ii][jj][3];
-
                 rinv = 1.0 / r;
                 r2inv = rinv * rinv;
                 forcecoul = qqrd2e * qtmp * q[j] * rinv;
@@ -116,6 +115,36 @@ void PairNNPCoulCut::compute(int eflag, int vflag)
                     fpair = factor_coul * forcecoul * r2inv;
                 }
 
+                ecoul = eflag ? (factor_coul * forcecoul * fc) : 0.0;
+
+                this->frcNeighborAll[ii][jj][0] = 1.0;
+                this->frcNeighborAll[ii][jj][1] = ecoul;
+                this->frcNeighborAll[ii][jj][2] = fpair;
+            }
+        }
+    }
+
+    for (ii = 0; ii < inum; ii++)
+    {
+        i = ilist[ii];
+
+        jlist = firstneigh[i];
+        jnum  = numneigh[i];
+
+        for (jj = 0; jj < jnum; jj++)
+        {
+            if (this->frcNeighborAll[ii][jj][0] > 0.0)
+            {
+                j = jlist[jj];
+                j &= NEIGHMASK;
+
+                delx = -this->posNeighborAll[ii][jj][1];
+                dely = -this->posNeighborAll[ii][jj][2];
+                delz = -this->posNeighborAll[ii][jj][3];
+
+                ecoul = this->frcNeighborAll[ii][jj][1];
+                fpair = this->frcNeighborAll[ii][jj][2];
+
                 fx = delx * fpair;
                 fy = dely * fpair;
                 fz = delz * fpair;
@@ -127,11 +156,6 @@ void PairNNPCoulCut::compute(int eflag, int vflag)
                 f[j][0] -= fx;
                 f[j][1] -= fy;
                 f[j][2] -= fz;
-
-                if (eflag)
-                {
-                    ecoul = factor_coul * forcecoul * fc;
-                }
 
                 if (evflag)
                 {
