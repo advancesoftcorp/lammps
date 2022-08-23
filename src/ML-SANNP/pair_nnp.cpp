@@ -174,8 +174,8 @@ void PairNNP::prepareNN(bool* hasGrown)
             this->maxnneighAll = nneighAll + this->maxnneighAll / 2;
         }
 
-        memory->grow(this->idxNeighbor,    this->maxinum, this->maxnneighAll,    "pair:idxNighbor");
-        memory->grow(this->posNeighborAll, this->maxinum, this->maxnneighAll, 4, "pair:posNighborAll");
+        memory->grow(this->idxNeighbor,    this->maxinum, this->maxnneighAll,    "pair:idxNeighbor");
+        memory->grow(this->posNeighborAll, this->maxinum, this->maxnneighAll, 4, "pair:posNeighborAll");
     }
 
     // generate elements, numNeighbor, idxNeighbor and posNeighborAll
@@ -248,8 +248,8 @@ void PairNNP::prepareNN(bool* hasGrown)
         const int dim = this->dimensionPosNeighbor();
 
         memory->grow(this->forces,       this->maxinum, this->maxnneigh + 1, 3, "pair:forces");
-        memory->grow(this->elemNeighbor, this->maxinum, this->maxnneigh,        "pair:elemNighbor");
-        memory->grow(this->posNeighbor,  this->maxinum, this->maxnneigh,   dim, "pair:posNighbor");
+        memory->grow(this->elemNeighbor, this->maxinum, this->maxnneigh,        "pair:elemNeighbor");
+        memory->grow(this->posNeighbor,  this->maxinum, this->maxnneigh,   dim, "pair:posNeighbor");
     }
 
     // generate elemNeighbor and posNeighbor

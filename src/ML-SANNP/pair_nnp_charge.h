@@ -45,7 +45,10 @@ public:
 
 protected:
     double cutcoul;
+
     nnpreal* charges;
+
+    nnpreal*** frcNeighborAll;
 
     void allocate() override;
 

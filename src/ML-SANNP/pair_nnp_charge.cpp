@@ -14,8 +14,9 @@ PairNNPCharge::PairNNPCharge(LAMMPS *lmp) : PairNNP(lmp)
     comm_forward = 1;
     comm_reverse = 1;
 
-    this->cutcoul = 0.0;
-    this->charges = nullptr;
+    this->cutcoul        = 0.0;
+    this->charges        = nullptr;
+    this->frcNeighborAll = nullptr;
 }
 
 PairNNPCharge::~PairNNPCharge()
@@ -28,12 +29,14 @@ PairNNPCharge::~PairNNPCharge()
     if (allocated)
     {
         memory->destroy(this->charges);
+        memory->destroy(this->frcNeighborAll);
     }
 }
 
 void PairNNPCharge::allocate() {
     PairNNP::allocate();
-    memory->create(this->charges, this->maxinum, "pair:charges");
+    memory->create(this->charges,        this->maxinum,                        "pair:charges");
+    memory->create(this->frcNeighborAll, this->maxinum, this->maxnneighAll, 3, "pair:frcNeighborAll");
 }
 
 void PairNNPCharge::prepareNN(bool* hasGrown)
@@ -43,6 +46,11 @@ void PairNNPCharge::prepareNN(bool* hasGrown)
     if (hasGrown[0])
     {
         memory->grow(this->charges, this->maxinum, "pair:charges");
+    }
+
+    if (hasGrown[1])
+    {
+        memory->grow(this->frcNeighborAll, this->maxinum, this->maxnneighAll, 3, "pair:frcNeighborAll");
     }
 }
 
