@@ -823,7 +823,6 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, bool zeroEatom,
 void NNArch::initGeometry(int numAtoms, int* elements,
                           int* numNeighbor, int** elemNeighbor, nnpreal*** posNeighbor)
 {
-
     this->numAtoms = numAtoms;
     if (this->numAtoms < 1)
     {
