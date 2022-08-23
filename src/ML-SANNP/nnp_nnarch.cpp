@@ -33,6 +33,16 @@ NNArch::NNArch(int mode, int numElems, const Property* property)
     this->elemNeighbor = nullptr;
     this->posNeighbor  = nullptr;
 
+    this->sizeNatom  = 0;
+    this->sizeNbase  = 0;
+    this->sizeNneigh = 0;
+    this->sizeNbatch = new int[this->numElems];
+
+    for (ielem = 0; ielem < this->numElems; ++ielem)
+    {
+        this->sizeNbatch[ielem] = 0;
+    }
+
     this->mbatch = 0;
     this->nbatch = new int[this->numElems];
     this->ibatch = nullptr;
@@ -90,13 +100,11 @@ NNArch::NNArch(int mode, int numElems, const Property* property)
 
 NNArch::~NNArch()
 {
-    if (this->numAtoms > 0)
-    {
-        this->clearGeometry();
-    }
-
     int ielem;
     int nelem = this->numElems;
+
+    int iatom;
+    int natom = this->sizeNatom;
 
     int ilayer;
     int nlayerEnergy = this->property->getLayersEnergy();
@@ -104,20 +112,78 @@ NNArch::~NNArch()
 
     delete[] this->atomNum;
 
+    delete[] this->sizeNbatch;
+
     delete[] this->nbatch;
+
+    if (this->ibatch != nullptr)
+    {
+        delete[] this->ibatch;
+    }
 
     if (this->energyData != nullptr)
     {
+        for (ielem = 0; ielem < nelem; ++ielem)
+        {
+            if (this->energyData[ielem] != nullptr)
+            {
+                delete[] this->energyData[ielem];
+            }
+        }
         delete[] this->energyData;
     }
+
     if (this->energyGrad != nullptr)
     {
+        for (ielem = 0; ielem < nelem; ++ielem)
+        {
+            if (this->energyGrad[ielem] != nullptr)
+            {
+                delete[] this->energyGrad[ielem];
+            }
+        }
         delete[] this->energyGrad;
+    }
+
+    if (this->forceData != nullptr)
+    {
+        #pragma omp parallel for private(iatom)
+        for (iatom = 0; iatom < natom; ++iatom)
+        {
+            delete[] this->forceData[iatom];
+        }
     }
 
     if (this->chargeData != nullptr)
     {
+        for (ielem = 0; ielem < nelem; ++ielem)
+        {
+            if (this->chargeData[ielem] != nullptr)
+            {
+                delete[] this->chargeData[ielem];
+            }
+        }
         delete[] this->chargeData;
+    }
+
+    if (this->symmData != nullptr)
+    {
+        #pragma omp parallel for private(iatom)
+        for (iatom = 0; iatom < natom; ++iatom)
+        {
+            delete[] this->symmData[iatom];
+        }
+        delete[] this->symmData;
+    }
+
+    if (this->symmDiff != nullptr)
+    {
+        #pragma omp parallel for private(iatom)
+        for (iatom = 0; iatom < natom; ++iatom)
+        {
+            delete[] this->symmDiff[iatom];
+        }
+        delete[] this->symmDiff;
     }
 
     delete[] this->symmAve;
@@ -821,7 +887,7 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, bool zeroEatom,
 }
 
 void NNArch::initGeometry(int numAtoms, int* elements,
-                          int* numNeighbor, int** elemNeighbor, nnpreal*** posNeighbor)
+                          int maxNeighbor, int* numNeighbor, int** elemNeighbor, nnpreal*** posNeighbor)
 {
     this->numAtoms = numAtoms;
     if (this->numAtoms < 1)
@@ -841,12 +907,15 @@ void NNArch::initGeometry(int numAtoms, int* elements,
     int nelem = this->numElems;
 
     int ineigh;
-    int nneigh;
+    int nneigh = maxNeighbor + 1;
 
     int ilayer;
     int nlayer;
 
     int jbatch;
+    int sizeJbatch;
+
+    int nbase = this->getSymmFunc()->getNumBasis();
 
     this->elements     = elements;
     this->numNeighbor  = numNeighbor;
@@ -859,7 +928,15 @@ void NNArch::initGeometry(int numAtoms, int* elements,
         this->nbatch[ielem] = 0;
     }
 
-    this->ibatch = new int[natom];
+    if (this->sizeNatom < natom)
+    {
+        if (this->ibatch != nullptr)
+        {
+            delete[] this->ibatch;
+        }
+
+        this->ibatch = new int[natom];
+    }
 
     for (iatom = 0; iatom < natom; ++iatom)
     {
@@ -881,6 +958,7 @@ void NNArch::initGeometry(int numAtoms, int* elements,
 
     if (this->isEnergyMode())
     {
+        // (re)allocate memory of energies
         nlayer = this->property->getLayersEnergy();
 
         for (ielem = 0; ielem < nelem; ++ielem)
@@ -890,10 +968,23 @@ void NNArch::initGeometry(int numAtoms, int* elements,
                 continue;
             }
 
-            jbatch = this->nbatch[ielem];
+            jbatch     = this->nbatch    [ielem];
+            sizeJbatch = this->sizeNbatch[ielem];
 
-            this->energyData[ielem] = new nnpreal[jbatch];
-            this->energyGrad[ielem] = new nnpreal[jbatch];
+            if (sizeJbatch < jbatch)
+            {
+                if (this->energyData[ielem] != nullptr)
+                {
+                    delete[] this->energyData[ielem];
+                }
+                if (this->energyGrad[ielem] != nullptr)
+                {
+                    delete[] this->energyGrad[ielem];
+                }
+
+                this->energyData[ielem] = new nnpreal[jbatch];
+                this->energyGrad[ielem] = new nnpreal[jbatch];
+            }
 
             for (ilayer = 0; ilayer < nlayer; ++ilayer)
             {
@@ -903,18 +994,35 @@ void NNArch::initGeometry(int numAtoms, int* elements,
             this->lastLayersEnergy[ielem]->setSizeOfBatch(jbatch);
         }
 
-        this->forceData = new nnpreal*[natom];
-
-        for (iatom = 0; iatom < natom; ++iatom)
+        // (re)allocate memory of forces
+        if (this->sizeNatom < natom || this->sizeNneigh < nneigh)
         {
-            nneigh = numNeighbor[iatom] + 1;
+            if (this->forceData != nullptr)
+            {
+                #pragma omp parallel for private(iatom)
+                for (iatom = 0; iatom < this->sizeNatom; ++iatom)
+                {
+                    delete[] this->forceData[iatom];
+                }
+                delete[] this->forceData;
+            }
 
-            this->forceData[iatom] = new nnpreal[3 * nneigh];
+            int natom_  = max(natom,  this->sizeNatom);
+            int nneigh_ = max(nneigh, this->sizeNneigh);
+
+            this->forceData = new nnpreal*[natom_];
+
+            #pragma omp parallel for private(iatom)
+            for (iatom = 0; iatom < natom_; ++iatom)
+            {
+                this->forceData[iatom] = new nnpreal[3 * nneigh_];
+            }
         }
     }
 
     if (this->isChargeMode())
     {
+        // (re)allocate memory of charges
         nlayer = this->property->getLayersCharge();
 
         for (ielem = 0; ielem < nelem; ++ielem)
@@ -924,9 +1032,18 @@ void NNArch::initGeometry(int numAtoms, int* elements,
                 continue;
             }
 
-            jbatch = this->nbatch[ielem];
+            jbatch     = this->nbatch    [ielem];
+            sizeJbatch = this->sizeNbatch[ielem];
 
-            this->chargeData[ielem] = new nnpreal[jbatch];
+            if (sizeJbatch < jbatch)
+            {
+                if (this->chargeData[ielem] != nullptr)
+                {
+                    delete[] this->chargeData[ielem];
+                }
+
+                this->chargeData[ielem] = new nnpreal[jbatch];
+            }
 
             for (ilayer = 0; ilayer < nlayer; ++ilayer)
             {
@@ -936,128 +1053,74 @@ void NNArch::initGeometry(int numAtoms, int* elements,
             this->lastLayersCharge[ielem]->setSizeOfBatch(jbatch);
         }
     }
-}
 
-void NNArch::clearGeometry()
-{
-    if (this-> numAtoms < 1)
+    // (re)allocate memory of symmetry functions
+    if (this->sizeNatom < natom || this->sizeNbase < nbase)
     {
-        stop_by_error("#atoms is not positive.");
-    }
-
-    int iatom;
-    int natom = this->numAtoms;
-
-    int ineigh;
-    int nneigh;
-
-    int ielem;
-    int nelem = this->numElems;
-
-    // release memory
-    if (this->ibatch != nullptr)
-    {
-        delete[] this->ibatch;
-    }
-
-    if (this->isEnergyMode())
-    {
-        for (ielem = 0; ielem < nelem; ++ielem)
+        if (this->symmData != nullptr)
         {
-            if (this->nbatch[ielem] < 1)
+            #pragma omp parallel for private(iatom)
+            for (iatom = 0; iatom < this->sizeNatom; ++iatom)
             {
-                continue;
+                delete[] this->symmData[iatom];
             }
-
-            if (this->energyData[ielem] != nullptr)
-            {
-                delete[] this->energyData[ielem];
-            }
-            if (this->energyGrad[ielem] != nullptr)
-            {
-                delete[] this->energyGrad[ielem];
-            }
+            delete[] this->symmData;
         }
 
-        if (this->forceData != nullptr)
+        int natom_ = max(natom, this->sizeNatom);
+        int nbase_ = max(nbase, this->sizeNbase);
+
+        this->symmData = new nnpreal*[natom_];
+
+        #pragma omp parallel for private(iatom)
+        for (iatom = 0; iatom < natom_; ++iatom)
         {
-            for (iatom = 0; iatom < natom; ++iatom)
-            {
-                delete[] this->forceData[iatom];
-            }
+            this->symmData[iatom] = new nnpreal[nbase_];
         }
     }
 
-    if (this->isChargeMode())
+    if (this->sizeNatom < natom || this->sizeNbase < nbase || this->sizeNneigh < nneigh)
     {
-        for (ielem = 0; ielem < nelem; ++ielem)
+        if (this->symmDiff != nullptr)
         {
-            if (this->nbatch[ielem] < 1)
+            #pragma omp parallel for private(iatom)
+            for (iatom = 0; iatom < this->sizeNatom; ++iatom)
             {
-                continue;
+                delete[] this->symmDiff[iatom];
             }
-
-            if (this->chargeData[ielem] != nullptr)
-            {
-                delete[] this->chargeData[ielem];
-            }
+            delete[] this->symmDiff;
         }
-    }
 
-    if (this->symmData != nullptr)
-    {
-        for (iatom = 0; iatom < natom; ++iatom)
+        int natom_  = max(natom,  this->sizeNatom);
+        int nbase_  = max(nbase,  this->sizeNbase);
+        int nneigh_ = max(nneigh, this->sizeNneigh);
+
+        this->symmDiff = new nnpreal*[natom_];
+
+        #pragma omp parallel for private(iatom)
+        for (iatom = 0; iatom < natom_; ++iatom)
         {
-            delete[] this->symmData[iatom];
+            this->symmDiff[iatom] = new nnpreal[nbase_ * 3 * nneigh_];
         }
-        delete[] this->symmData;
     }
 
-    if (this->symmDiff != nullptr)
-    {
-        for (iatom = 0; iatom < natom; ++iatom)
-        {
-            delete[] this->symmDiff[iatom];
-        }
-        delete[] this->symmDiff;
-    }
+    // save size of memory
+    this->sizeNatom  = max(natom,  this->sizeNatom);
+    this->sizeNbase  = max(nbase,  this->sizeNbase);
+    this->sizeNneigh = max(nneigh, this->sizeNneigh);
 
-    // initialize memory
-    this->numAtoms = 0;
-
-    this->elements     = nullptr;
-    this->numNeighbor  = nullptr;
-    this->elemNeighbor = nullptr;
-    this->posNeighbor  = nullptr;
-
-    this->mbatch = 0;
-    this->ibatch = nullptr;
     for (ielem = 0; ielem < nelem; ++ielem)
     {
-        this->nbatch[ielem] = 0;
-    }
-
-    if (this->isEnergyMode())
-    {
-        for (ielem = 0; ielem < nelem; ++ielem)
+        if (this->nbatch[ielem] < 1)
         {
-            this->energyData[ielem] = nullptr;
-            this->energyGrad[ielem] = nullptr;
+            continue;
         }
 
-        this->forceData = nullptr;
-    }
+        jbatch     = this->nbatch    [ielem];
+        sizeJbatch = this->sizeNbatch[ielem];
 
-    if (this->isChargeMode())
-    {
-        for (ielem = 0; ielem < nelem; ++ielem)
-        {
-            this->chargeData[ielem] = nullptr;
-        }
+        this->sizeNbatch[ielem] = max(jbatch, sizeJbatch);
     }
-
-    this->symmData = nullptr;
-    this->symmDiff = nullptr;
 }
 
 SymmFunc* NNArch::getSymmFunc()
@@ -1166,23 +1229,6 @@ void NNArch::calculateSymmFuncs()
     int iatomBlock = this->property->getGpuAtomBlock();
 #endif
 
-    int nneigh;
-
-    int nbase = this->getSymmFunc()->getNumBasis();
-
-    // allocate memory
-    this->symmData = new nnpreal*[natom];
-    this->symmDiff = new nnpreal*[natom];
-
-    for (iatom = 0; iatom < natom; ++iatom)
-    {
-        nneigh = this->numNeighbor[iatom] + 1;
-
-        this->symmData[iatom] = new nnpreal[nbase];
-        this->symmDiff[iatom] = new nnpreal[nbase * 3 * nneigh];
-    }
-
-    // calculate symmetry functions
 #ifdef _NNP_GPU
     for (iatom = 0; iatom < natom; iatom += iatomBlock)
     {

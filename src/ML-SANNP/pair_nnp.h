@@ -72,8 +72,6 @@ protected:
 
     virtual void performNN(int);
 
-    void clearNN();
-
     void computeLJLike(int);
 
     virtual double get_cutoff();

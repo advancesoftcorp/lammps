@@ -105,8 +105,6 @@ void PairNNP::compute(int eflag, int vflag)
 
     performNN(eflag);
 
-    clearNN();
-
     computeLJLike(eflag);
 
     if (vflag_fdotr)
@@ -373,7 +371,7 @@ bool PairNNP::prepareNN()
     if (inum > 0)
     {
         this->arch->initGeometry(inum, this->elements,
-                                 this->numNeighbor, this->elemNeighbor, this->posNeighbor);
+                                 nneigh, this->numNeighbor, this->elemNeighbor, this->posNeighbor);
     }
 
     return hasGrown;
@@ -456,16 +454,6 @@ void PairNNP::performNN(int eflag)
                              0.0, 0.0, -fx, -fy, -fz, delx, dely, delz);
             }
         }
-    }
-}
-
-void PairNNP::clearNN()
-{
-    int inum = list->inum;
-
-    if (inum > 0)
-    {
-        this->arch->clearGeometry();
     }
 }
 

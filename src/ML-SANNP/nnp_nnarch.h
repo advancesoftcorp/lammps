@@ -35,9 +35,7 @@ public:
     void restoreNN(FILE* fp, int numElems, char** elemNames, bool zeroEatom, int rank, MPI_Comm world);
 
     void initGeometry(int numAtoms, int* elements,
-                      int* numNeighbor, int** elemNeighbor, nnpreal*** posNeighbor);
-
-    void clearGeometry();
+                      int maxNeighbor, int* numNeighbor, int** elemNeighbor, nnpreal*** posNeighbor);
 
     SymmFunc* getSymmFunc();
 
@@ -92,6 +90,11 @@ private:
     int*       numNeighbor;
     int**      elemNeighbor;
     nnpreal*** posNeighbor;
+
+    int  sizeNatom;
+    int  sizeNbase;
+    int  sizeNneigh;
+    int* sizeNbatch;
 
     int  mbatch;
     int* nbatch;
