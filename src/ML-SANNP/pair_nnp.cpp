@@ -477,7 +477,6 @@ void PairNNP::computeLJLike(int eflag)
     int** firstneigh = list->firstneigh;
 
     double r, r2, r6, r8, r10, r12;
-    double rcut = this->property->getRcutoff();
 
     double delx, dely, delz;
     double fx, fy, fz;
@@ -499,8 +498,9 @@ void PairNNP::computeLJLike(int eflag)
     double A1, A2, A3, A4;
     double B1, B2, B3, B4;
 
-    evdwl = 0.0;
-
+    #pragma omp parallel for private(i, j, ii, jj, jnum, jlist, itag, jtag, xtmp, ytmp, ztmp, \
+                                     ielem1, jelem1, ielem2, jelem2, kelem, r, r2, r6, r8, r10, r12, \
+                                     A1, A2, A3, A4, B1, B2, B3, B4, evdwl, fpair)
     for (ii = 0; ii < inum; ii++)
     {
         i = ilist[ii];
@@ -512,11 +512,14 @@ void PairNNP::computeLJLike(int eflag)
         ielem1 = this->typeMap[type[i]] - 1;
 
         jlist = firstneigh[i];
-        jnum = numneigh[i];
+        jnum  = this->numNeighbor[ii];
 
         for (jj = 0; jj < jnum; jj++)
         {
-            j = jlist[jj];
+            forces[ii][jj][0] = -1.0;
+
+            j = this->idxNeighbor[ii][jj];
+            j = jlist[j];
             j &= NEIGHMASK;
 
             // skip half of atoms
@@ -531,38 +534,60 @@ void PairNNP::computeLJLike(int eflag)
                 if (x[j][2] == ztmp && x[j][1] == ytmp && x[j][0] < xtmp) continue;
             }
 
-            r = this->posNeighborAll[ii][jj][0];
+            jelem1 = this->typeMap[type[j]] - 1;
 
-            if (r > 0.0 && r < rcut)
+            ielem2 = max(ielem1, jelem1);
+            jelem2 = min(ielem1, jelem1);
+            kelem  = jelem2 + ielem2 * (ielem2 + 1) / 2;
+
+            A1 = ljlikeA1[kelem];
+            A2 = ljlikeA2[kelem];
+            A3 = ljlikeA3[kelem];
+            A4 = ljlikeA4[kelem];
+
+            r   =  this->posNeighbor[ii][jj][0];
+            r2  = r * r;
+            r6  = r2 * r2 * r2;
+            r8  = r2 * r6;
+            r10 = r2 * r8;
+            r12 = r2 * r10;
+
+            B1 = A1 / r12;
+            B2 = A2 / r10;
+            B3 = A3 / r8;
+            B4 = A4 / r6;
+
+            evdwl = eflag ? (B1 + B2 + B3 + B4) : 0.0;
+            fpair = 12.0 * B1 + 10.0 * B2 + 8.0 * B3 + 6.0 * B4;
+            fpair /= r2;
+
+            forces[ii][jj][0] = 1.0;
+            forces[ii][jj][1] = evdwl;
+            forces[ii][jj][2] = fpair;
+        }
+    }
+
+    for (ii = 0; ii < inum; ii++)
+    {
+        i = ilist[ii];
+
+        jlist = firstneigh[i];
+        jnum  = this->numNeighbor[ii];
+
+        for (jj = 0; jj < jnum; jj++)
+        {
+            if (forces[ii][jj][0] > 0.0)
             {
-                delx = -this->posNeighborAll[ii][jj][1];
-                dely = -this->posNeighborAll[ii][jj][2];
-                delz = -this->posNeighborAll[ii][jj][3];
+                j = this->idxNeighbor[ii][jj];
+                j = jlist[j];
+                j &= NEIGHMASK;
 
-                jelem1 = this->typeMap[type[j]] - 1;
+                delx = -this->posNeighbor[ii][jj][1];
+                dely = -this->posNeighbor[ii][jj][2];
+                delz = -this->posNeighbor[ii][jj][3];
 
-                ielem2 = max(ielem1, jelem1);
-                jelem2 = min(ielem1, jelem1);
-                kelem  = jelem2 + ielem2 * (ielem2 + 1) / 2;
-
-                A1 = ljlikeA1[kelem];
-                A2 = ljlikeA2[kelem];
-                A3 = ljlikeA3[kelem];
-                A4 = ljlikeA4[kelem];
-
-                r2  = r * r;
-                r6  = r2 * r2 * r2;
-                r8  = r2 * r6;
-                r10 = r2 * r8;
-                r12 = r2 * r10;
-
-                B1 = A1 / r12;
-                B2 = A2 / r10;
-                B3 = A3 / r8;
-                B4 = A4 / r6;
-
-                fpair = 12.0 * B1 + 10.0 * B2 + 8.0 * B3 + 6.0 * B4;
-                fpair /= r2;
+                evdwl = forces[ii][jj][1];
+                fpair = forces[ii][jj][2];
 
                 fx = delx * fpair;
                 fy = dely * fpair;
@@ -575,11 +600,6 @@ void PairNNP::computeLJLike(int eflag)
                 f[j][0] -= fx;
                 f[j][1] -= fy;
                 f[j][2] -= fz;
-
-                if (eflag)
-                {
-                    evdwl = B1 + B2 + B3 + B4;
-                }
 
                 if (evflag)
                 {
