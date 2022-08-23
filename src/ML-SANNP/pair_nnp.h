@@ -68,7 +68,7 @@ protected:
 
     virtual void allocate();
 
-    virtual bool prepareNN();
+    virtual void prepareNN(bool* hasGrown);
 
     virtual void performNN(int);
 

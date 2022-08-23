@@ -36,16 +36,14 @@ void PairNNPCharge::allocate() {
     memory->create(this->charges, this->maxinum, "pair:charges");
 }
 
-bool PairNNPCharge::prepareNN()
+void PairNNPCharge::prepareNN(bool* hasGrown)
 {
-    bool hasGrown = PairNNP::prepareNN();
+    PairNNP::prepareNN(hasGrown);
 
-    if (hasGrown)
+    if (hasGrown[0])
     {
         memory->grow(this->charges, this->maxinum, "pair:charges");
     }
-
-    return hasGrown;
 }
 
 void PairNNPCharge::performNN(int eflag)

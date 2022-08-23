@@ -33,6 +33,8 @@ PairNNPCoulLong::~PairNNPCoulLong()
 
 void PairNNPCoulLong::compute(int eflag, int vflag)
 {
+    bool hasGrown[3];
+
     double** x = atom->x;
     double** f = atom->f;
     double* q = atom->q;
@@ -70,7 +72,7 @@ void PairNNPCoulLong::compute(int eflag, int vflag)
     ecoul = 0.0;
     ev_init(eflag, vflag);
 
-    prepareNN();
+    prepareNN(hasGrown);
 
     performNN(eflag);
 

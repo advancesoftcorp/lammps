@@ -99,9 +99,11 @@ void PairNNP::allocate()
 
 void PairNNP::compute(int eflag, int vflag)
 {
+    bool hasGrown[3];
+
     ev_init(eflag, vflag);
 
-    prepareNN();
+    prepareNN(hasGrown);
 
     performNN(eflag);
 
@@ -113,10 +115,8 @@ void PairNNP::compute(int eflag, int vflag)
     }
 }
 
-bool PairNNP::prepareNN()
+void PairNNP::prepareNN(bool* hasGrown)
 {
-    bool hasGrown;
-
     int i, j;
     int iatom, jatom;
     int ineigh, nneigh, nneighAll;
@@ -142,6 +142,10 @@ bool PairNNP::prepareNN()
 
     SymmFunc* symmFunc = this->arch->getSymmFunc();
 
+    hasGrown[0] = false;
+    hasGrown[1] = false;
+    hasGrown[2] = false;
+
     // grow with inum and nneighAll
     nneighAll = 0;
     #pragma omp parallel for private(iatom) reduction(max:nneighAll)
@@ -150,11 +154,9 @@ bool PairNNP::prepareNN()
         nneighAll = max(nneighAll, numneigh[ilist[iatom]]);
     }
 
-    hasGrown = false;
-
     if (inum > this->maxinum)
     {
-        hasGrown = true;
+        hasGrown[0] = true;
 
         this->maxinum = inum + this->maxinum / 2;
 
@@ -163,8 +165,10 @@ bool PairNNP::prepareNN()
         memory->grow(this->numNeighbor, this->maxinum, "pair:numNeighbor");
     }
 
-    if (hasGrown || nneighAll > this->maxnneighAll)
+    if (hasGrown[0] || nneighAll > this->maxnneighAll)
     {
+        hasGrown[1] = true;
+
         if (nneighAll > this->maxnneighAll)
         {
             this->maxnneighAll = nneighAll + this->maxnneighAll / 2;
@@ -232,8 +236,10 @@ bool PairNNP::prepareNN()
         nneigh = max(nneigh, this->numNeighbor[iatom]);
     }
 
-    if (hasGrown || nneigh > this->maxnneigh)
+    if (hasGrown[0] || nneigh > this->maxnneigh)
     {
+        hasGrown[2] = true;
+
         if (nneigh > this->maxnneigh)
         {
             this->maxnneigh = nneigh + this->maxnneigh / 2;
@@ -373,8 +379,6 @@ bool PairNNP::prepareNN()
         this->arch->initGeometry(inum, this->elements,
                                  nneigh, this->numNeighbor, this->elemNeighbor, this->posNeighbor);
     }
-
-    return hasGrown;
 }
 
 void PairNNP::performNN(int eflag)

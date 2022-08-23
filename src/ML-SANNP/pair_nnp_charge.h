@@ -49,7 +49,7 @@ protected:
 
     void allocate() override;
 
-    bool prepareNN() override;
+    void prepareNN(bool* hasGrown) override;
 
     void performNN(int) override;
 
