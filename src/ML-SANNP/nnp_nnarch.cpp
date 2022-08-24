@@ -1540,9 +1540,11 @@ void NNArch::goForwardOnCharge()
         ielem  = this->elements[iatom];
         jbatch = this->ibatch[iatom];
 
+        #pragma omp simd
         for (ibase = 0; ibase < nbase; ++ibase)
         {
-            this->interLayersCharge[ielem][0]->getData()[ibase + jbatch * nbase] = this->symmData[iatom][ibase];
+            this->interLayersCharge[ielem][0]->getData()[ibase + jbatch * nbase]
+            = this->symmData[iatom][ibase];
         }
     }
 
