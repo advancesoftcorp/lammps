@@ -342,6 +342,9 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
     cudaMemcpy(this->symmDataAll, this->symmDataAll_d, sizeof(nnpreal) * this->numBasis *     totNeigh, cudaMemcpyDeviceToHost);
     cudaMemcpy(this->symmDiffAll, this->symmDiffAll_d, sizeof(nnpreal) * this->numBasis * 3 * totNeigh, cudaMemcpyDeviceToHost);
 
+    // >>> TODO
+    // >>> TODO this is the bottleneck
+    // >>> TODO
     #pragma omp parallel for private (iatom, ineigh, jneigh, numNeigh, idxNeigh, ifree, ibase, idxBase)
     for (iatom = 0; iatom < lenAtoms; ++iatom)
     {
@@ -396,6 +399,9 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
             }
         }
     }
+    // <<< TODO
+    // <<< TODO this is the bottleneck
+    // <<< TODO
 
     // check error of cuda
     cudaError_t error = cudaGetLastError();
