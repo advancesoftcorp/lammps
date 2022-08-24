@@ -1234,15 +1234,16 @@ void NNArch::renormalizeSymmFuncs()
     int iatom;
     int natom = this->numAtoms;
 
-    int ineigh;
     int nneigh;
-    int nneigh3;
 
     int ielem;
     int nelem = this->numElems;
 
     int ibase;
     int nbase = this->getSymmFunc()->getNumBasis();
+
+    int idiff;
+    int ndiff;
 
     nnpreal ave;
     nnpreal dev;
@@ -1255,13 +1256,12 @@ void NNArch::renormalizeSymmFuncs()
         }
     }
 
-    #pragma omp parallel for private (iatom, ielem, ibase, \
-                                      nneigh, nneigh3, ineigh, ave, dev)
+    #pragma omp parallel for private (iatom, ielem, ibase, nneigh, ndiff, idiff, ave, dev)
     for (iatom = 0; iatom < natom; ++iatom)
     {
-        ielem   = this->elements[iatom];
-        nneigh  = this->numNeighbor[iatom] + 1;
-        nneigh3 = 3 * nneigh;
+        ielem  = this->elements[iatom];
+        nneigh = this->numNeighbor[iatom] + 1;
+        ndiff  = nbase * 3 * nneigh;
 
         ave = this->symmAve[ielem];
         dev = this->symmDev[ielem];
@@ -1273,13 +1273,10 @@ void NNArch::renormalizeSymmFuncs()
             this->symmData[iatom][ibase] /= dev;
         }
 
-        for (ineigh = 0; ineigh < nneigh3; ++ineigh)
+        #pragma omp simd
+        for (idiff = 0; idiff < ndiff; ++idiff)
         {
-            #pragma omp simd
-            for (ibase = 0; ibase < nbase; ++ibase)
-            {
-                this->symmDiff[iatom][ibase + ineigh * nbase] /= dev;
-            }
+            this->symmDiff[iatom][idiff] /= dev;
         }
     }
 }
