@@ -1266,6 +1266,7 @@ void NNArch::renormalizeSymmFuncs()
         ave = this->symmAve[ielem];
         dev = this->symmDev[ielem];
 
+        #pragma omp simd
         for (ibase = 0; ibase < nbase; ++ibase)
         {
             this->symmData[iatom][ibase] -= ave;
@@ -1274,6 +1275,7 @@ void NNArch::renormalizeSymmFuncs()
 
         for (ineigh = 0; ineigh < nneigh3; ++ineigh)
         {
+            #pragma omp simd
             for (ibase = 0; ibase < nbase; ++ibase)
             {
                 this->symmDiff[iatom][ibase + ineigh * nbase] /= dev;
@@ -1378,6 +1380,7 @@ void NNArch::goForwardOnEnergy()
         ielem  = this->elements[iatom];
         jbatch = this->ibatch[iatom];
 
+        #pragma omp simd
         for (ibase = 0; ibase < nbase; ++ibase)
         {
             this->interLayersEnergy[ielem][0]->getData()[ibase + jbatch * nbase]
@@ -1452,6 +1455,7 @@ void NNArch::goBackwardOnForce()
             continue;
         }
 
+        #pragma omp parallel for private(jbatch)
         for (jbatch = 0; jbatch < this->nbatch[ielem]; ++jbatch)
         {
             this->energyGrad[ielem][jbatch] = ONE;

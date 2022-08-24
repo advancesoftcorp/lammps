@@ -149,7 +149,6 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
     int idxPos;
 
     int idxBase;
-    int idxDiff;
 
     int numModeBatchs;
     int modesPerBatch;
@@ -200,11 +199,13 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
         #pragma omp parallel for private (iatom, ibase, ineigh, numNeigh, ifree)
         for (iatom = 0; iatom < lenAtoms; ++iatom)
         {
+            #pragma omp simd
             for (ibase = 0; ibase < this->numBasis; ++ibase)
             {
                 symmData[iatom][ibase] = ZERO;
             }
 
+            #pragma omp simd
             for (ibase = 0; ibase < this->numBasis; ++ibase)
             {
                 symmDiff[iatom][ibase + 0 * this->numBasis] = ZERO;
@@ -223,6 +224,7 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
             {
                 ifree = 3 * (ineigh + 1);
 
+                #pragma omp simd
                 for (ibase = 0; ibase < this->numBasis; ++ibase)
                 {
                     symmDiff[iatom][ibase + (ifree + 0) * this->numBasis] = ZERO;
@@ -354,14 +356,16 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
     cudaMemcpy(this->symmDataAll, this->symmDataAll_d, sizeof(nnpreal) * this->numBasis *     totNeigh, cudaMemcpyDeviceToHost);
     cudaMemcpy(this->symmDiffAll, this->symmDiffAll_d, sizeof(nnpreal) * this->numBasis * 3 * totNeigh, cudaMemcpyDeviceToHost);
 
-    #pragma omp parallel for private (iatom, ineigh, jneigh, numNeigh, idxNeigh, ifree, ibase, idxBase, idxDiff)
+    #pragma omp parallel for private (iatom, ineigh, jneigh, numNeigh, idxNeigh, ifree, ibase, idxBase)
     for (iatom = 0; iatom < lenAtoms; ++iatom)
     {
+        #pragma omp simd
         for (ibase = 0; ibase < this->numBasis; ++ibase)
         {
             symmData[iatom][ibase] = ZERO;
         }
 
+        #pragma omp simd
         for (ibase = 0; ibase < this->numBasis; ++ibase)
         {
             symmDiff[iatom][ibase + 0 * this->numBasis] = ZERO;
@@ -383,20 +387,26 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
             jneigh  = ineigh + idxNeigh;
             idxBase = jneigh * this->numBasis;
 
+            #pragma omp simd
             for (ibase = 0; ibase < this->numBasis; ++ibase)
             {
                 symmData[iatom][ibase] += this->symmDataAll[ibase + idxBase];
             }
 
+            #pragma omp simd
             for (ibase = 0; ibase < this->numBasis; ++ibase)
             {
-                idxDiff = (ibase + idxBase) * 3;
-                symmDiff[iatom][ibase + 0 * this->numBasis] -= this->symmDiffAll[idxDiff + 0];
-                symmDiff[iatom][ibase + 1 * this->numBasis] -= this->symmDiffAll[idxDiff + 1];
-                symmDiff[iatom][ibase + 2 * this->numBasis] -= this->symmDiffAll[idxDiff + 2];
-                symmDiff[iatom][ibase + (ifree + 0) * this->numBasis] = this->symmDiffAll[idxDiff + 0];
-                symmDiff[iatom][ibase + (ifree + 1) * this->numBasis] = this->symmDiffAll[idxDiff + 1];
-                symmDiff[iatom][ibase + (ifree + 2) * this->numBasis] = this->symmDiffAll[idxDiff + 2];
+                symmDiff[iatom][ibase + 0 * this->numBasis] -= this->symmDiffAll[(ibase + idxBase) * 3 + 0];
+                symmDiff[iatom][ibase + 1 * this->numBasis] -= this->symmDiffAll[(ibase + idxBase) * 3 + 1];
+                symmDiff[iatom][ibase + 2 * this->numBasis] -= this->symmDiffAll[(ibase + idxBase) * 3 + 2];
+            }
+
+            #pragma omp simd
+            for (ibase = 0; ibase < this->numBasis; ++ibase)
+            {
+                symmDiff[iatom][ibase + (ifree + 0) * this->numBasis] = this->symmDiffAll[(ibase + idxBase) * 3 + 0];
+                symmDiff[iatom][ibase + (ifree + 1) * this->numBasis] = this->symmDiffAll[(ibase + idxBase) * 3 + 1];
+                symmDiff[iatom][ibase + (ifree + 2) * this->numBasis] = this->symmDiffAll[(ibase + idxBase) * 3 + 2];
             }
         }
     }
