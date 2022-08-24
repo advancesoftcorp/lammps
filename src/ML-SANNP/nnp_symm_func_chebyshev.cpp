@@ -76,7 +76,7 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, nnpreal** 
     }
 
     // define varialbes
-    const int numFree = 3 * (1 + numNeighbor);
+    const int numFree = 3 * numNeighbor;
 
     int ineigh1, ineigh2;
     int mneigh;
@@ -165,7 +165,7 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, nnpreal** 
         y1 = posNeighbor[ineigh1][2];
         z1 = posNeighbor[ineigh1][3];
 
-        ifree1 = 3 * (ineigh1 + 1);
+        ifree1 = 3 * ineigh1;
 
         if (this->elemWeight)
         {
@@ -219,10 +219,6 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, nnpreal** 
 
             symmData[ibase] += g;
 
-            symmDiff[ibase + 0 * this->numBasis] -= dgdx1;
-            symmDiff[ibase + 1 * this->numBasis] -= dgdy1;
-            symmDiff[ibase + 2 * this->numBasis] -= dgdz1;
-
             symmDiff[ibase + (ifree1 + 0) * this->numBasis] += dgdx1;
             symmDiff[ibase + (ifree1 + 1) * this->numBasis] += dgdy1;
             symmDiff[ibase + (ifree1 + 2) * this->numBasis] += dgdz1;
@@ -247,7 +243,7 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, nnpreal** 
         y2 = posNeighbor[ineigh2][2];
         z2 = posNeighbor[ineigh2][3];
 
-        ifree2 = 3 * (ineigh2 + 1);
+        ifree2 = 3 * ineigh2;
 
         if (this->elemWeight)
         {
@@ -280,7 +276,7 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, nnpreal** 
             y1 = posNeighbor[ineigh1][2];
             z1 = posNeighbor[ineigh1][3];
 
-            ifree1 = 3 * (ineigh1 + 1);
+            ifree1 = 3 * ineigh1;
 
             if (this->elemWeight)
             {
@@ -371,10 +367,6 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, nnpreal** 
                 ibase = this->numRadBasis + imode + jbase;
 
                 symmData[ibase] += g;
-
-                symmDiff[ibase + 0 * this->numBasis] -= dgdx1 + dgdx2;
-                symmDiff[ibase + 1 * this->numBasis] -= dgdy1 + dgdy2;
-                symmDiff[ibase + 2 * this->numBasis] -= dgdz1 + dgdz2;
 
                 symmDiff[ibase + (ifree1 + 0) * this->numBasis] += dgdx1;
                 symmDiff[ibase + (ifree1 + 1) * this->numBasis] += dgdy1;

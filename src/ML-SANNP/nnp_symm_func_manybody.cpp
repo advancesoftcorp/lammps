@@ -88,7 +88,7 @@ void SymmFuncManyBody::calculate(int numNeighbor, int* elemNeighbor, nnpreal** p
     const int subDim3Body = this->numElems * this->size3Body;
     const int subSize3Body = subDim3Body * (subDim3Body + 1) / 2;
 
-    const int numFree = 3 * (1 + numNeighbor);
+    const int numFree = 3 * numNeighbor;
 
     int ineigh1, ineigh2;
 
@@ -141,7 +141,7 @@ void SymmFuncManyBody::calculate(int numNeighbor, int* elemNeighbor, nnpreal** p
     // 2-body
     for (ineigh1 = 0; ineigh1 < numNeighbor; ++ineigh1)
     {
-        ifree1 = 3 * (ineigh1 + 1);
+        ifree1 = 3 * ineigh1;
         jelem1 = elemNeighbor[ineigh1];
 
         r1 = posNeighbor[ineigh1][0];
@@ -175,10 +175,6 @@ void SymmFuncManyBody::calculate(int numNeighbor, int* elemNeighbor, nnpreal** p
 
             symmData[ibase] += phi1;
 
-            symmDiff[ibase + 0 * this->numBasis] += dphi1dx;
-            symmDiff[ibase + 1 * this->numBasis] += dphi1dy;
-            symmDiff[ibase + 2 * this->numBasis] += dphi1dz;
-
             symmDiff[ibase + (ifree1 + 0) * this->numBasis] -= dphi1dx;
             symmDiff[ibase + (ifree1 + 1) * this->numBasis] -= dphi1dy;
             symmDiff[ibase + (ifree1 + 2) * this->numBasis] -= dphi1dz;
@@ -193,7 +189,7 @@ void SymmFuncManyBody::calculate(int numNeighbor, int* elemNeighbor, nnpreal** p
     // 3-body
     for (ineigh2 = 0; ineigh2 < numNeighbor; ++ineigh2)
     {
-        ifree2 = 3 * (ineigh2 + 1);
+        ifree2 = 3 * ineigh2;
         jelem2 = elemNeighbor[ineigh2];
 
         r2 = posNeighbor[ineigh2][0];
@@ -214,7 +210,7 @@ void SymmFuncManyBody::calculate(int numNeighbor, int* elemNeighbor, nnpreal** p
 
         for (ineigh1 = 0; ineigh1 < numNeighbor; ++ineigh1)
         {
-            ifree1 = 3 * (ineigh1 + 1);
+            ifree1 = 3 * ineigh1;
             jelem1 = elemNeighbor[ineigh1];
 
             if (jelem1 > jelem2 || (jelem1 == jelem2 && ineigh1 >= ineigh2))
@@ -313,10 +309,6 @@ void SymmFuncManyBody::calculate(int numNeighbor, int* elemNeighbor, nnpreal** p
                         dphi3dx_ = phi1 * phi2 * dphi3dx;
                         dphi3dy_ = phi1 * phi2 * dphi3dy;
                         dphi3dz_ = phi1 * phi2 * dphi3dz;
-
-                        symmDiff[ibase + 0 * this->numBasis] += dphi1dx_ + dphi2dx_;
-                        symmDiff[ibase + 1 * this->numBasis] += dphi1dy_ + dphi2dy_;
-                        symmDiff[ibase + 2 * this->numBasis] += dphi1dz_ + dphi2dz_;
 
                         symmDiff[ibase + (ifree1 + 0) * this->numBasis] -= dphi1dx_ - dphi3dx_;
                         symmDiff[ibase + (ifree1 + 1) * this->numBasis] -= dphi1dy_ - dphi3dy_;

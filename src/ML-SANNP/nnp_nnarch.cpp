@@ -7,6 +7,8 @@
 
 #include "nnp_nnarch.h"
 
+#define MIN_NEIGHBOR  4
+
 NNArch::NNArch(int mode, int numElems, const Property* property, LAMMPS_NS::Memory* memory)
 {
     if (numElems < 1)
@@ -36,13 +38,14 @@ NNArch::NNArch(int mode, int numElems, const Property* property, LAMMPS_NS::Memo
 
     this->elements     = nullptr;
     this->numNeighbor  = nullptr;
+    this->idxNeighbor  = nullptr;
     this->elemNeighbor = nullptr;
     this->posNeighbor  = nullptr;
 
-    this->sizeNatom  = 0;
-    this->sizeNbase  = 0;
-    this->sizeNneigh = 0;
-    this->sizeNbatch = new int[this->numElems];
+    this->sizeNatom    = 0;
+    this->sizeNbase    = 0;
+    this->sizeTotNeigh = 0;
+    this->sizeNbatch   = new int[this->numElems];
 
     for (ielem = 0; ielem < this->numElems; ++ielem)
     {
@@ -114,6 +117,11 @@ NNArch::~NNArch()
     int nlayerCharge = this->property->getLayersCharge();
 
     delete[] this->atomNum;
+
+    if (this->idxNeighbor != nullptr)
+    {
+        this->memory->destroy(this->idxNeighbor);
+    }
 
     delete[] this->sizeNbatch;
 
@@ -876,7 +884,7 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, bool zeroEatom,
 }
 
 void NNArch::initGeometry(int numAtoms, int* elements,
-                          int maxNeighbor, int* numNeighbor, int** elemNeighbor, nnpreal*** posNeighbor)
+                          int* numNeighbor, int** elemNeighbor, nnpreal*** posNeighbor)
 {
     this->numAtoms = numAtoms;
     if (this->numAtoms < 1)
@@ -896,7 +904,7 @@ void NNArch::initGeometry(int numAtoms, int* elements,
     int nelem = this->numElems;
 
     int ineigh;
-    int nneigh = maxNeighbor + 1;
+    int totNeigh;
 
     int ilayer;
     int nlayer;
@@ -910,6 +918,28 @@ void NNArch::initGeometry(int numAtoms, int* elements,
     this->numNeighbor  = numNeighbor;
     this->elemNeighbor = elemNeighbor;
     this->posNeighbor  = posNeighbor;
+
+    // count index of neighbor
+    if (this->sizeNatom < natom)
+    {
+        if (this->idxNeighbor == nullptr)
+        {
+            this->memory->create(this->idxNeighbor, natom, "nnp:idxNeighbor");
+        }
+        else
+        {
+            this->memory->grow  (this->idxNeighbor, natom, "nnp:idxNeighbor");
+        }
+    }
+
+    totNeigh = 0;
+    for (iatom = 0; iatom < natom; ++iatom)
+    {
+        this->idxNeighbor[iatom] = totNeigh;
+        totNeigh += this->numNeighbor[iatom];
+    }
+
+    totNeigh = max(totNeigh, MIN_NEIGHBOR);
 
     // count size of batch
     for (ielem = 0; ielem < nelem; ++ielem)
@@ -997,18 +1027,15 @@ void NNArch::initGeometry(int numAtoms, int* elements,
         }
 
         // (re)allocate memory of forces
-        if (this->sizeNatom < natom || this->sizeNneigh < nneigh)
+        if (this->sizeTotNeigh < totNeigh)
         {
-            int natom_  = max(natom,  this->sizeNatom);
-            int nneigh_ = max(nneigh, this->sizeNneigh);
-
             if (this->forceData == nullptr)
             {
-                this->memory->create(this->forceData, natom_, 3 * nneigh_, "nnp:forceData");
+                this->memory->create(this->forceData, 3 * totNeigh, "nnp:forceData");
             }
             else
             {
-                this->memory->grow  (this->forceData, natom_, 3 * nneigh_, "nnp:forceData");
+                this->memory->grow  (this->forceData, 3 * totNeigh, "nnp:forceData");
             }
         }
     }
@@ -1060,34 +1087,33 @@ void NNArch::initGeometry(int numAtoms, int* elements,
 
         if (this->symmData == nullptr)
         {
-            this->memory->create(this->symmData, natom_, nbase_, "nnp:symmData");
+            this->memory->create(this->symmData, natom_ * nbase_, "nnp:symmData");
         }
         else
         {
-            this->memory->grow  (this->symmData, natom_, nbase_, "nnp:symmData");
+            this->memory->grow  (this->symmData, natom_ * nbase_, "nnp:symmData");
         }
     }
 
-    if (this->sizeNatom < natom || this->sizeNbase < nbase || this->sizeNneigh < nneigh)
+    if (this->sizeTotNeigh < totNeigh || this->sizeNbase < nbase)
     {
-        int natom_  = max(natom,  this->sizeNatom);
-        int nbase_  = max(nbase,  this->sizeNbase);
-        int nneigh_ = max(nneigh, this->sizeNneigh);
+        int totNeigh_ = max(totNeigh, this->sizeTotNeigh);
+        int nbase_    = max(nbase,    this->sizeNbase);
 
         if (this->symmDiff == nullptr)
         {
-            this->memory->create(this->symmDiff, natom_, nbase_ * 3 * nneigh_, "nnp:symmDiff");
+            this->memory->create(this->symmDiff, 3 * totNeigh_ * nbase_, "nnp:symmDiff");
         }
         else
         {
-            this->memory->grow  (this->symmDiff, natom_, nbase_ * 3 * nneigh_, "nnp:symmDiff");
+            this->memory->grow  (this->symmDiff, 3 * totNeigh_ * nbase_, "nnp:symmDiff");
         }
     }
 
     // save size of memory
-    this->sizeNatom  = max(natom,  this->sizeNatom);
-    this->sizeNbase  = max(nbase,  this->sizeNbase);
-    this->sizeNneigh = max(nneigh, this->sizeNneigh);
+    this->sizeNatom    = max(natom,    this->sizeNatom);
+    this->sizeNbase    = max(nbase,    this->sizeNbase);
+    this->sizeTotNeigh = max(totNeigh, this->sizeTotNeigh);
 
     for (ielem = 0; ielem < nelem; ++ielem)
     {
@@ -1209,22 +1235,32 @@ void NNArch::calculateSymmFuncs()
     int iatomBlock = this->property->getGpuAtomBlock();
 #endif
 
+    int idata;
+    int idiff;
+    int nbase = this->getSymmFunc()->getNumBasis();
+
 #ifdef _NNP_GPU
     for (iatom = 0; iatom < natom; iatom += iatomBlock)
     {
+        idata = iatom * nbase;
+        idiff = 3 * this->idxNeighbor[iatom] * nbase;
+
         lenAtoms = min(iatom + iatomBlock, natom) - iatom;
 
-        this->symmFunc->calculate(lenAtoms, &(this->numNeighbor[iatom]),
+        this->symmFunc->calculate(lenAtoms, &(this->numNeighbor[iatom]), &(this->idxNeighbor[iatom]),
                                   &(this->elemNeighbor[iatom]), &(this->posNeighbor[iatom]),
-                                  &(this->symmData[iatom]), &(this->symmDiff[iatom]));
+                                  &(this->symmData[idata]), &(this->symmDiff[idiff]));
     }
 #else
-    #pragma omp parallel for private(iatom)
+    #pragma omp parallel for private(iatom, idata, idiff)
     for (iatom = 0; iatom < natom; ++iatom)
     {
+        idata = iatom * nbase;
+        idiff = 3 * this->idxNeighbor[iatom] * nbase;
+
         this->symmFunc->calculate(this->numNeighbor[iatom],
                                   this->elemNeighbor[iatom], this->posNeighbor[iatom],
-                                  this->symmData[iatom], this->symmDiff[iatom]);
+                                  &(this->symmData[idata]), &(this->symmDiff[idiff]));
     }
 #endif
 }
@@ -1335,7 +1371,7 @@ void NNArch::goForwardOnEnergy()
         for (ibase = 0; ibase < nbase; ++ibase)
         {
             this->interLayersEnergy[ielem][0]->getData()[ibase + jbatch * nbase]
-            = (this->symmData[iatom][ibase] - ave) / dev;
+            = (this->symmData[ibase + iatom * nbase] - ave) / dev;
         }
     }
 
@@ -1376,6 +1412,7 @@ void NNArch::goBackwardOnForce()
     int natom = this->numAtoms;
 
     int nneigh;
+    int mneigh;
     int nneigh3;
 
     int ielem;
@@ -1439,7 +1476,8 @@ void NNArch::goBackwardOnForce()
     }
 
     // calculate forces w/ derivatives of symmetry functions
-    #pragma omp parallel private(iatom, ielem, jbatch, ibase, nneigh, nneigh3, dev, symmScale, symmGrad)
+    #pragma omp parallel private(iatom, ielem, jbatch, ibase, nneigh, mneigh, nneigh3, \
+                                 dev, symmScale, symmGrad)
     {
         symmGrad = new nnpreal[nbase];
 
@@ -1449,7 +1487,8 @@ void NNArch::goBackwardOnForce()
             ielem  = this->elements[iatom];
             jbatch = this->ibatch[iatom];
 
-            nneigh = this->numNeighbor[iatom] + 1;
+            nneigh = this->numNeighbor[iatom];
+            mneigh = this->idxNeighbor[iatom];
             nneigh3 = 3 * nneigh;
 
             dev = this->symmDev[ielem];
@@ -1465,16 +1504,16 @@ void NNArch::goBackwardOnForce()
             if (transDiff)
             {
                 xgemv_("N", &nneigh3, &nbase,
-                       &symmScale, &(this->symmDiff[iatom][0]), &nneigh3,
+                       &symmScale, &(this->symmDiff[3 * mneigh * nbase]), &nneigh3,
                        &(symmGrad[0]), &i1,
-                       &a0, &(this->forceData[iatom][0]), &i1);
+                       &a0, &(this->forceData[3 * mneigh]), &i1);
             }
             else
             {
                 xgemv_("T", &nbase, &nneigh3,
-                       &symmScale, &(this->symmDiff[iatom][0]), &nbase,
+                       &symmScale, &(this->symmDiff[3 * mneigh * nbase]), &nbase,
                        &(symmGrad[0]), &i1,
-                       &a0, &(this->forceData[iatom][0]), &i1);
+                       &a0, &(this->forceData[3 * mneigh]), &i1);
             }
         }
 
@@ -1520,7 +1559,7 @@ void NNArch::goForwardOnCharge()
         for (ibase = 0; ibase < nbase; ++ibase)
         {
             this->interLayersCharge[ielem][0]->getData()[ibase + jbatch * nbase]
-            = (this->symmData[iatom][ibase] - ave) / dev;
+            = (this->symmData[ibase + iatom * nbase] - ave) / dev;
         }
     }
 
@@ -1595,18 +1634,23 @@ void NNArch::obtainForces(nnpreal*** forces) const
     int natom = this->numAtoms;
 
     int ineigh;
+    int jneigh;
     int nneigh;
+    int mneigh;
 
-    #pragma omp parallel for private (iatom, ineigh, nneigh)
+    #pragma omp parallel for private (iatom, ineigh, jneigh, nneigh, mneigh)
     for (iatom = 0; iatom < natom; ++iatom)
     {
-        nneigh = this->numNeighbor[iatom] + 1;
+        nneigh = this->numNeighbor[iatom];
+        mneigh = this->idxNeighbor[iatom];
 
+        #pragma omp simd
         for (ineigh = 0; ineigh < nneigh; ++ineigh)
         {
-            forces[iatom][ineigh][0] = this->forceData[iatom][3 * ineigh + 0];
-            forces[iatom][ineigh][1] = this->forceData[iatom][3 * ineigh + 1];
-            forces[iatom][ineigh][2] = this->forceData[iatom][3 * ineigh + 2];
+            jneigh = ineigh + mneigh;
+            forces[iatom][ineigh][0] = this->forceData[3 * jneigh + 0];
+            forces[iatom][ineigh][1] = this->forceData[3 * jneigh + 1];
+            forces[iatom][ineigh][2] = this->forceData[3 * jneigh + 2];
         }
     }
 }

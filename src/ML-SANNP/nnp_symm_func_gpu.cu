@@ -112,15 +112,15 @@ SymmFuncGPU::~SymmFuncGPU()
     if (this->symmDiffAll_d    != nullptr) cudaFree    (this->symmDiffAll_d);
 }
 
-void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, nnpreal*** posNeighbor,
-                            nnpreal** symmData, nnpreal** symmDiff)
+void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int* idxNeighbor, int** elemNeighbor, nnpreal*** posNeighbor,
+                            nnpreal* symmData, nnpreal* symmDiff)
 {
     if (lenAtoms < 0)
     {
         stop_by_error("#atoms is not positive.");
     }
 
-    if (numNeighbor == nullptr || elemNeighbor == nullptr || posNeighbor == nullptr)
+    if (numNeighbor == nullptr || idxNeighbor == nullptr || elemNeighbor == nullptr || posNeighbor == nullptr)
     {
         stop_by_error("neighbor is null.");
     }
@@ -139,7 +139,7 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
     int iatom;
     int ineigh, jneigh;
     int ibase;
-    int idiff;
+    int idata;
     int ipos;
 
     int numNeigh;
@@ -147,11 +147,8 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
     int maxNeigh;
     int totNeigh;
 
+    int numData;
     int idxData;
-    int idxData0;
-    int idxDiff;
-
-    int numDiffs;
 
     int numPos;
     int idxPos;
@@ -161,9 +158,6 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
     int dimBasis;
 
     nnpreal symmData0;
-    nnpreal symmDiffX;
-    nnpreal symmDiffY;
-    nnpreal symmDiffZ;
 
     dim3 grid;
     dim3 block;
@@ -188,16 +182,17 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
 
     // count neighbors
     maxNeigh = 0;
-    totNeigh = 0;
+    totNeigh = numNeighbor[lenAtoms - 1] + idxNeighbor[lenAtoms - 1] - idxNeighbor[0];
 
+    #pragma omp parallel for private(iatom, numNeigh, idxNeigh) reduction(max:maxNeigh)
     for (iatom = 0; iatom < lenAtoms; ++iatom)
     {
         numNeigh = numNeighbor[iatom];
+        idxNeigh = idxNeighbor[iatom] - idxNeighbor[0];
         this->numNeighs[iatom] = numNeigh;
-        this->idxNeighs[iatom] = totNeigh;
+        this->idxNeighs[iatom] = idxNeigh;
 
         maxNeigh  = max(maxNeigh, numNeigh);
-        totNeigh += numNeigh;
     }
 
     if (maxNeigh > this->maxThreadsPerBlock)
@@ -207,25 +202,15 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
 
     if (maxNeigh < 1 || totNeigh < 1)
     {
-        #pragma omp parallel for private (iatom, ibase, idiff, numDiffs, numNeigh)
-        for (iatom = 0; iatom < lenAtoms; ++iatom)
+        // because this->numNeighs[iatom] is always 0,
+        // there is no need to do symmDiff = ZERO.
+
+        numData = lenAtoms * this->numBasis;
+
+        #pragma omp parallel for private (idata)
+        for (idata = 0; idata < numData; ++idata)
         {
-            numNeigh = this->numNeighs[iatom] + 1;
-            numDiffs = this->numBasis * 3 * numNeigh;
-
-            #pragma omp simd
-            for (ibase = 0; ibase < this->numBasis; ++ibase)
-            {
-                symmData[iatom][ibase] = ZERO;
-            }
-
-            #pragma omp simd
-            for (idiff = 0; idiff < numDiffs; ++idiff)
-            {
-                symmDiff[iatom][idiff] = ZERO;
-                symmDiff[iatom][idiff] = ZERO;
-                symmDiff[iatom][idiff] = ZERO;
-            }
+            symmData[idata] = ZERO;
         }
 
         return;
@@ -247,10 +232,12 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
         cudaMalloc    (&(this->elementAll_d),     sizeof(gint)    * totNeigh);
         cudaMallocHost(&(this->posNeighborAll),   sizeof(nnpreal) * this->sizePosNeighbor * totNeigh);
         cudaMalloc    (&(this->posNeighborAll_d), sizeof(nnpreal) * this->sizePosNeighbor * totNeigh);
-        cudaMallocHost(&(this->symmDataAll),      sizeof(nnpreal) * this->numBasis * totNeigh);
-        cudaMalloc    (&(this->symmDataAll_d),    sizeof(nnpreal) * this->numBasis * totNeigh);
-        cudaMallocHost(&(this->symmDiffAll),      sizeof(nnpreal) * this->numBasis * 3 * totNeigh);
-        cudaMalloc    (&(this->symmDiffAll_d),    sizeof(nnpreal) * this->numBasis * 3 * totNeigh);
+        cudaMallocHost(&(this->symmDataAll),      sizeof(nnpreal) *     totNeigh * this->numBasis);
+        cudaMalloc    (&(this->symmDataAll_d),    sizeof(nnpreal) *     totNeigh * this->numBasis);
+#ifndef SYMMDIFF_DIRECT_COPY
+        cudaMallocHost(&(this->symmDiffAll),      sizeof(nnpreal) * 3 * totNeigh * this->numBasis);
+#endif
+        cudaMalloc    (&(this->symmDiffAll_d),    sizeof(nnpreal) * 3 * totNeigh * this->numBasis);
 
         this->sizeTotNeigh = totNeigh;
     }
@@ -342,14 +329,15 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
     }
 
     // copy memory gpu -> host
-    cudaMemcpy(this->symmDataAll, this->symmDataAll_d, sizeof(nnpreal) * this->numBasis *     totNeigh, cudaMemcpyDeviceToHost);
-    cudaMemcpy(this->symmDiffAll, this->symmDiffAll_d, sizeof(nnpreal) * this->numBasis * 3 * totNeigh, cudaMemcpyDeviceToHost);
+    cudaMemcpy(this->symmDataAll, this->symmDataAll_d, sizeof(nnpreal) *     totNeigh * this->numBasis, cudaMemcpyDeviceToHost);
+#ifdef SYMMDIFF_DIRECT_COPY
+    cudaMemcpy(symmDiff,          this->symmDiffAll_d, sizeof(nnpreal) * 3 * totNeigh * this->numBasis, cudaMemcpyDeviceToHost);
+#else
+    cudaMemcpy(this->symmDiffAll, this->symmDiffAll_d, sizeof(nnpreal) * 3 * totNeigh * this->numBasis, cudaMemcpyDeviceToHost);
+    memcpy   (&(symmDiff[0]), &(this->symmDiffAll[0]), sizeof(nnpreal) * 3 * totNeigh * this->numBasis);
+#endif
 
-    // >>> TODO
-    // >>> TODO this is the bottleneck
-    // >>> TODO
-    #pragma omp parallel for private (iatom, ibase, ineigh, numNeigh, idxNeigh, \
-                                      idxData, idxData0, idxDiff, symmData0, symmDiffX, symmDiffY, symmDiffZ)
+    #pragma omp parallel for private (iatom, ibase, ineigh, numNeigh, idxNeigh, idxData, symmData0)
     for (iatom = 0; iatom < lenAtoms; ++iatom)
     {
         numNeigh = this->numNeighs[iatom];
@@ -357,57 +345,17 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
 
         for (ibase = 0; ibase < this->numBasis; ++ibase)
         {
-            idxData0  = ibase * numNeigh + numBasis * idxNeigh;
             symmData0 = ZERO;
+            idxData   = ibase * numNeigh + this->numBasis * idxNeigh;
 
             for (ineigh = 0; ineigh < numNeigh; ++ineigh)
             {
-                idxData = ineigh + idxData0;
-                symmData0 += this->symmDataAll[idxData];
+                symmData0 += this->symmDataAll[ineigh + idxData];
             }
 
-            symmData[iatom][ibase] = symmData0;
-        }
-
-        for (ibase = 0; ibase < this->numBasis; ++ibase)
-        {
-            idxData0  = ibase * numNeigh + numBasis * idxNeigh;
-            symmDiffX = ZERO;
-            symmDiffY = ZERO;
-            symmDiffZ = ZERO;
-
-            for (ineigh = 0; ineigh < numNeigh; ++ineigh)
-            {
-                idxData = ineigh + idxData0;
-                idxDiff = 3 * idxData;
-                symmDiffX -= this->symmDiffAll[idxDiff + 0];
-                symmDiffY -= this->symmDiffAll[idxDiff + 1];
-                symmDiffZ -= this->symmDiffAll[idxDiff + 2];
-            }
-
-            symmDiff[iatom][ibase * (numNeigh + 1) * 3 + 0] = symmDiffX;
-            symmDiff[iatom][ibase * (numNeigh + 1) * 3 + 1] = symmDiffY;
-            symmDiff[iatom][ibase * (numNeigh + 1) * 3 + 2] = symmDiffZ;
-        }
-
-        for (ibase = 0; ibase < this->numBasis; ++ibase)
-        {
-            idxData0  = ibase * numNeigh + numBasis * idxNeigh;
-
-            for (ineigh = 0; ineigh < numNeigh; ++ineigh)
-            {
-                idxData = ineigh + idxData0;
-                idxDiff = 3 * idxData;
-
-                symmDiff[iatom][(ibase * (numNeigh + 1) + ineigh + 1) * 3 + 0] = this->symmDiffAll[idxDiff + 0];
-                symmDiff[iatom][(ibase * (numNeigh + 1) + ineigh + 1) * 3 + 1] = this->symmDiffAll[idxDiff + 1];
-                symmDiff[iatom][(ibase * (numNeigh + 1) + ineigh + 1) * 3 + 2] = this->symmDiffAll[idxDiff + 2];
-            }
+            symmData[ibase + iatom * this->numBasis] = symmData0;
         }
     }
-    // <<< TODO
-    // <<< TODO this is the bottleneck
-    // <<< TODO
 
     // check error of cuda
     cudaError_t error = cudaGetLastError();

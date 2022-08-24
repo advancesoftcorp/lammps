@@ -85,9 +85,9 @@ void PairNNP::allocate()
     memory->create(cutsq,   ntypes + 1, ntypes + 1, "pair:cutsq");
     memory->create(setflag, ntypes + 1, ntypes + 1, "pair:setflag");
 
-    memory->create(this->elements, this->maxinum,                         "pair:elements");
-    memory->create(this->energies, this->maxinum,                         "pair:energies");
-    memory->create(this->forces,   this->maxinum, this->maxnneigh + 1, 3, "pair:forces");
+    memory->create(this->elements, this->maxinum,                     "pair:elements");
+    memory->create(this->energies, this->maxinum,                     "pair:energies");
+    memory->create(this->forces,   this->maxinum, this->maxnneigh, 3, "pair:forces");
 
     memory->create(this->numNeighbor,  this->maxinum,                       "pair:numNeighbor");
     memory->create(this->elemNeighbor, this->maxinum, this->maxnneigh,      "pair:elemNeighbor");
@@ -247,9 +247,9 @@ void PairNNP::prepareNN(bool* hasGrown)
 
         const int dim = this->dimensionPosNeighbor();
 
-        memory->grow(this->forces,       this->maxinum, this->maxnneigh + 1, 3, "pair:forces");
-        memory->grow(this->elemNeighbor, this->maxinum, this->maxnneigh,        "pair:elemNeighbor");
-        memory->grow(this->posNeighbor,  this->maxinum, this->maxnneigh,   dim, "pair:posNeighbor");
+        memory->grow(this->forces,       this->maxinum, this->maxnneigh,   3, "pair:forces");
+        memory->grow(this->elemNeighbor, this->maxinum, this->maxnneigh,      "pair:elemNeighbor");
+        memory->grow(this->posNeighbor,  this->maxinum, this->maxnneigh, dim, "pair:posNeighbor");
     }
 
     // generate elemNeighbor and posNeighbor
@@ -377,7 +377,7 @@ void PairNNP::prepareNN(bool* hasGrown)
     if (inum > 0)
     {
         this->arch->initGeometry(inum, this->elements,
-                                 nneigh, this->numNeighbor, this->elemNeighbor, this->posNeighbor);
+                                 this->numNeighbor, this->elemNeighbor, this->posNeighbor);
     }
 }
 
@@ -415,14 +415,6 @@ void PairNNP::performNN(int eflag)
     {
         i = ilist[iatom];
 
-        fx = forces[iatom][0][0];
-        fy = forces[iatom][0][1];
-        fz = forces[iatom][0][2];
-
-        f[i][0] += fx;
-        f[i][1] += fy;
-        f[i][2] += fz;
-
         if (eflag)
         {
             evdwl = energies[iatom];
@@ -438,9 +430,13 @@ void PairNNP::performNN(int eflag)
             j = firstneigh[i][j];
             j &= NEIGHMASK;
 
-            fx = forces[iatom][ineigh + 1][0];
-            fy = forces[iatom][ineigh + 1][1];
-            fz = forces[iatom][ineigh + 1][2];
+            fx = forces[iatom][ineigh][0];
+            fy = forces[iatom][ineigh][1];
+            fz = forces[iatom][ineigh][2];
+
+            f[i][0] -= fx;
+            f[i][1] -= fy;
+            f[i][2] -= fz;
 
             f[j][0] += fx;
             f[j][1] += fy;

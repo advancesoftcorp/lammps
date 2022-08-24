@@ -21,6 +21,8 @@
 #define MAX_ELEMENT_PAIRS   10
 #define MAX_ELEMENT_PAIRS3  30
 
+#define SYMMDIFF_DIRECT_COPY
+
 class SymmFuncGPU : public SymmFunc
 {
 public:
@@ -32,11 +34,11 @@ public:
     void calculate(int numNeighbor, int* elemNeighbor, nnpreal** posNeighbor,
                    nnpreal* symmData, nnpreal* symmDiff) override
     {
-        this->calculate(1, &numNeighbor, &elemNeighbor, &posNeighbor, &symmData, &symmDiff);
+        this->calculate(1, &numNeighbor, &elemNeighbor, &posNeighbor, symmData, symmDiff);
     }
 
-    void calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, nnpreal*** posNeighbor,
-                   nnpreal** symmData, nnpreal** symmDiff) override;
+    void calculate(int lenAtoms, int* numNeighbor, int idxNeighbor, int** elemNeighbor, nnpreal*** posNeighbor,
+                   nnpreal* symmData, nnpreal* symmDiff) override;
 
     void setMaxThreadsPerBlock(int maxThreadsPerBlock)
     {

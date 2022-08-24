@@ -20,15 +20,15 @@ public:
                            nnpreal* symmData, nnpreal* symmDiff) = 0;
 
 #ifdef _NNP_GPU
-    virtual void calculate(int numAtoms, int* numNeighbor, int** elemNeighbor, nnpreal*** posNeighbor,
-                           nnpreal** symmData, nnpreal** symmDiff)
+    virtual void calculate(int numAtoms, int* numNeighbor, int* idxNeighbor, int** elemNeighbor, nnpreal*** posNeighbor,
+                           nnpreal* symmData, nnpreal* symmDiff)
     {
         int iatom;
 
         for (iatom = 0; iatom < numAtoms; ++iatom)
         {
             this->calculate(numNeighbor[iatom], elemNeighbor[iatom], posNeighbor[iatom],
-                            symmData[iatom], symmDiff[iatom]);
+                            symmData, symmDiff);
         }
     }
 #endif
