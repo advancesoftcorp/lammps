@@ -1451,7 +1451,7 @@ void NNArch::goBackwardOnForce()
             nneigh3 = 3 * nneigh;
 
             dev = this->symmDev[ielem];
-            symmScale = ONE / dev;
+            symmScale = -ONE / dev;
 
             #pragma omp simd
             for (ibase = 0; ibase < nbase; ++ibase)
