@@ -1421,8 +1421,6 @@ void NNArch::goBackwardOnForce()
     int iatom;
     int natom = this->numAtoms;
 
-    int ineigh;
-    int mneigh;
     int nneigh;
     int nneigh3;
 
@@ -1437,12 +1435,11 @@ void NNArch::goBackwardOnForce()
 
     int jbatch;
 
-    nnpreal*  symmGrad;
-    nnpreal*  forceNeigh;
+    nnpreal* symmGrad;
 
     const int     i1 = 1;
     const nnpreal a0 = ZERO;
-    const nnpreal a1 = ONE;
+    const nnpreal a1 = -ONE;
 
     // derive energies by itselves, to be units
     for (ielem = 0; ielem < nelem; ++ielem)
@@ -1485,19 +1482,9 @@ void NNArch::goBackwardOnForce()
     }
 
     // calculate forces w/ derivatives of symmetry functions
-    mneigh = 0;
-    #pragma omp parallel for private(iatom, nneigh) reduction(max : mneigh)
-    for (iatom = 0; iatom < natom; ++iatom)
+    #pragma omp parallel private(iatom, ielem, jbatch, ibase, nneigh, nneigh3, symmGrad)
     {
-        nneigh = this->numNeighbor[iatom] + 1;
-        mneigh = max(mneigh, nneigh);
-    }
-
-    #pragma omp parallel private(iatom, ielem, jbatch, ibase, \
-                                 nneigh, nneigh3, ineigh, forceNeigh, symmGrad)
-    {
-        forceNeigh = new nnpreal[3 * mneigh];
-        symmGrad   = new nnpreal[nbase];
+        symmGrad = new nnpreal[nbase];
 
         #pragma omp for
         for (iatom = 0; iatom < natom; ++iatom)
@@ -1518,18 +1505,9 @@ void NNArch::goBackwardOnForce()
             xgemv_("T", &nbase, &nneigh3,
                    &a1, &(this->symmDiff[iatom][0]), &nbase,
                    &(symmGrad[0]), &i1,
-                   &a0, &(forceNeigh[0]), &i1);
-
-            // cannot be simd
-            for (ineigh = 0; ineigh < nneigh; ++ineigh)
-            {
-                this->forceData[iatom][3 * ineigh + 0] = -forceNeigh[3 * ineigh + 0];
-                this->forceData[iatom][3 * ineigh + 1] = -forceNeigh[3 * ineigh + 1];
-                this->forceData[iatom][3 * ineigh + 2] = -forceNeigh[3 * ineigh + 2];
-            }
+                   &a0, &(this->forceData[iatom][0]), &i1);
         }
 
-        delete[] forceNeigh;
         delete[] symmGrad;
     }
 }
