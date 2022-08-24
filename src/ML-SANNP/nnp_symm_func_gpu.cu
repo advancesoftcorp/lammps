@@ -138,6 +138,7 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
     int ineigh, jneigh;
     int ifree;
     int ibase;
+    int idiff;
     int ipos;
 
     int numNeigh;
@@ -145,10 +146,12 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
     int maxNeigh;
     int totNeigh;
 
+    int idxBase;
+
+    int numDiffs;
+
     int numPos;
     int idxPos;
-
-    int idxBase;
 
     int numModeBatchs;
     int modesPerBatch;
@@ -196,9 +199,12 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
 
     if (maxNeigh < 1 || totNeigh < 1)
     {
-        #pragma omp parallel for private (iatom, ibase, ineigh, numNeigh, ifree)
+        #pragma omp parallel for private (iatom, ibase, idiff, numDiffs, numNeigh)
         for (iatom = 0; iatom < lenAtoms; ++iatom)
         {
+            numNeigh = this->numNeighs[iatom] + 1;
+            numDiffs = this->numBasis * 3 * numNeigh;
+
             #pragma omp simd
             for (ibase = 0; ibase < this->numBasis; ++ibase)
             {
@@ -206,31 +212,11 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
             }
 
             #pragma omp simd
-            for (ibase = 0; ibase < this->numBasis; ++ibase)
+            for (idiff = 0; idiff < numDiffs; ++idiff)
             {
-                symmDiff[iatom][ibase + 0 * this->numBasis] = ZERO;
-                symmDiff[iatom][ibase + 1 * this->numBasis] = ZERO;
-                symmDiff[iatom][ibase + 2 * this->numBasis] = ZERO;
-            }
-
-            numNeigh = this->numNeighs[iatom];
-
-            if (numNeigh < 1)
-            {
-                continue;
-            }
-
-            for (ineigh = 0; ineigh < numNeigh; ++ineigh)
-            {
-                ifree = 3 * (ineigh + 1);
-
-                #pragma omp simd
-                for (ibase = 0; ibase < this->numBasis; ++ibase)
-                {
-                    symmDiff[iatom][ibase + (ifree + 0) * this->numBasis] = ZERO;
-                    symmDiff[iatom][ibase + (ifree + 1) * this->numBasis] = ZERO;
-                    symmDiff[iatom][ibase + (ifree + 2) * this->numBasis] = ZERO;
-                }
+                symmDiff[iatom][idiff] = ZERO;
+                symmDiff[iatom][idiff] = ZERO;
+                symmDiff[iatom][idiff] = ZERO;
             }
         }
 
