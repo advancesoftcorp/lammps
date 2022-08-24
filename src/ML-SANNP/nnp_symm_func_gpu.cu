@@ -350,6 +350,9 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
     #pragma omp parallel for private (iatom, ineigh, numNeigh, idxNeigh, ibase, idxData, idxDiff)
     for (iatom = 0; iatom < lenAtoms; ++iatom)
     {
+        numNeigh = this->numNeighs[iatom];
+        idxNeigh = this->idxNeighs[iatom];
+
         for (ibase = 0; ibase < this->numBasis; ++ibase)
         {
             symmData[iatom][ibase] = ZERO;
@@ -361,9 +364,6 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
             symmDiff[iatom][ibase * (numNeigh + 1) * 3 + 1] = ZERO;
             symmDiff[iatom][ibase * (numNeigh + 1) * 3 + 2] = ZERO;
         }
-
-        numNeigh = this->numNeighs[iatom];
-        idxNeigh = this->idxNeighs[iatom];
 
         if (numNeigh < 1 || idxNeigh < 0)
         {
