@@ -1393,6 +1393,8 @@ void NNArch::goBackwardOnForce()
     nnpreal  symmScale;
     nnpreal* symmGrad;
 
+    bool transDiff = this->getSymmFunc()->isTransDiff();
+
     const int     i1 = 1;
     const nnpreal a0 = ZERO;
 
@@ -1460,10 +1462,20 @@ void NNArch::goBackwardOnForce()
                 this->interLayersEnergy[ielem][0]->getGrad()[ibase + jbatch * nbase];
             }
 
-            xgemv_("T", &nbase, &nneigh3,
-                   &symmScale, &(this->symmDiff[iatom][0]), &nbase,
-                   &(symmGrad[0]), &i1,
-                   &a0, &(this->forceData[iatom][0]), &i1);
+            if (transDiff)
+            {
+                xgemv_("N", &nneigh3, &nbase,
+                       &symmScale, &(this->symmDiff[iatom][0]), &nneigh3,
+                       &(symmGrad[0]), &i1,
+                       &a0, &(this->forceData[iatom][0]), &i1);
+            }
+            else
+            {
+                xgemv_("T", &nbase, &nneigh3,
+                       &symmScale, &(this->symmDiff[iatom][0]), &nbase,
+                       &(symmGrad[0]), &i1,
+                       &a0, &(this->forceData[iatom][0]), &i1);
+            }
         }
 
         delete[] symmGrad;

@@ -47,19 +47,20 @@ __global__ void calculateChebyshevRad(
         return;
     }
 
-    const int idxNeigh = ineigh1 + idxNeighs[iatom];
-    const int idxPos   = idxNeigh * sizePosNeighbor;
+    const int idxNeigh0 = idxNeighs[iatom];
+    const int idxNeigh  = ineigh1 + idxNeigh0;
+    const int idxPos    = idxNeigh * sizePosNeighbor;
 
     const int jbase   = elemWeight ? 0 : (((int) element[idxNeigh]) * sizeRad);
     const int ibase   = imode + jbase;
-    const int idxBase = ibase + idxNeigh * numBasis;
-    const int idxDiff = idxBase * 3;
+    const int idxData = ineigh1 + ibase * numNeigh + numBasis * idxNeigh0;
+    const int idxDiff = idxData * 3;
 
     const nnpreal r1 = posNeighbor[0 + idxPos];
 
     if (r1 >= rcutRad)
     {
-        symmData[idxBase]     = ZERO;
+        symmData[idxData]     = ZERO;
         symmDiff[idxDiff + 0] = ZERO;
         symmDiff[idxDiff + 1] = ZERO;
         symmDiff[idxDiff + 2] = ZERO;
@@ -94,7 +95,7 @@ __global__ void calculateChebyshevRad(
     const nnpreal dgdy1 = zscale * (dphidy1 * fc1 + phi * dfc1dy1);
     const nnpreal dgdz1 = zscale * (dphidz1 * fc1 + phi * dfc1dz1);
 
-    symmData[idxBase]     = g;
+    symmData[idxData]     = g;
     symmDiff[idxDiff + 0] = dgdx1;
     symmDiff[idxDiff + 1] = dgdy1;
     symmDiff[idxDiff + 2] = dgdz1;
@@ -110,10 +111,11 @@ __global__ void calculateChebyshevAngEW(
     const int jmode         = threadIdx.x;
     const int imode         = jmode + blockIdx.y * modesPerBatch;
 
-    const int numNeigh = numNeighs[iatom];
-    const int idxNeigh = ineigh1 + idxNeighs[iatom];
-    const int idxPos   = idxNeigh * sizePosNeighbor;
-    const int idxPos1  = ineigh1  * 5;
+    const int numNeigh  = numNeighs[iatom];
+    const int idxNeigh0 = idxNeighs[iatom];
+    const int idxNeigh  = ineigh1 + idxNeigh0;
+    const int idxPos    = idxNeigh * sizePosNeighbor;
+    const int idxPos1   = ineigh1  * 5;
 
     if (numNeigh < 1)
     {
@@ -146,14 +148,14 @@ __global__ void calculateChebyshevAngEW(
     }
 
     const int ibase   = imode + offsetBasis;
-    const int idxBase = ibase + idxNeigh * numBasis;
-    const int idxDiff = idxBase * 3;
+    const int idxData = ineigh1 + ibase * numNeigh + numBasis * idxNeigh0;
+    const int idxDiff = idxData * 3;
 
     const nnpreal r1 = posNeighbor0[0 + idxPos1];
 
     if (r1 >= rcutAng)
     {
-        symmData[idxBase]     = ZERO;
+        symmData[idxData]     = ZERO;
         symmDiff[idxDiff + 0] = ZERO;
         symmDiff[idxDiff + 1] = ZERO;
         symmDiff[idxDiff + 2] = ZERO;
@@ -258,7 +260,7 @@ __global__ void calculateChebyshevAngEW(
         }
     }
 
-    symmData[idxBase]     = symmData0 * NNPREAL(0.5);
+    symmData[idxData]     = symmData0 * NNPREAL(0.5);
     symmDiff[idxDiff + 0] = symmDiffX;
     symmDiff[idxDiff + 1] = symmDiffY;
     symmDiff[idxDiff + 2] = symmDiffZ;
@@ -274,10 +276,12 @@ __global__ void calculateChebyshevAngNotEW(
     const int jmode         = threadIdx.x;
     const int imode         = jmode + blockIdx.y * modesPerBatch;
 
-    const int numNeigh = numNeighs[iatom];
-    const int idxNeigh = ineigh1 + idxNeighs[iatom];
-    const int idxPos   = idxNeigh * sizePosNeighbor;
-    const int idxPos1  = ineigh1  * 5;
+    const int numNeigh  = numNeighs[iatom];
+    const int idxNeigh0 = idxNeighs[iatom];
+    const int idxNeigh  = ineigh1 + idxNeigh0;
+    const int idxPos    = idxNeigh * sizePosNeighbor;
+    const int idxPos1   = ineigh1  * 5;
+    const int idxData0  = ineigh1 + numBasis * idxNeigh0;
 
     if (numNeigh < 1)
     {
@@ -312,7 +316,7 @@ __global__ void calculateChebyshevAngNotEW(
     int ibase;
     int jbase;
     int kbase;
-    int idxBase;
+    int idxData;
     int idxDiff;
 
     const nnpreal r1 = posNeighbor0[0 + idxPos1];
@@ -323,10 +327,10 @@ __global__ void calculateChebyshevAngNotEW(
         {
             jbase   = kbase * sizeAng;
             ibase   = imode + jbase + offsetBasis;
-            idxBase = ibase + idxNeigh * numBasis;
-            idxDiff = idxBase * 3;
+            idxData = ibase * numNeigh + idxData0;
+            idxDiff = idxData * 3;
 
-            symmData[idxBase]     = ZERO;
+            symmData[idxData]     = ZERO;
             symmDiff[idxDiff + 0] = ZERO;
             symmDiff[idxDiff + 1] = ZERO;
             symmDiff[idxDiff + 2] = ZERO;
@@ -447,10 +451,10 @@ __global__ void calculateChebyshevAngNotEW(
     {
         jbase   = kbase * sizeAng;
         ibase   = imode + jbase + offsetBasis;
-        idxBase = ibase + idxNeigh * numBasis;
-        idxDiff = idxBase * 3;
+        idxData = ibase * numNeigh + idxData0;
+        idxDiff = idxData * 3;
 
-        symmData[idxBase]     = symmData0[kbase] * NNPREAL(0.5);
+        symmData[idxData]     = symmData0[kbase] * NNPREAL(0.5);
         symmDiff[idxDiff + 0] = symmDiff0[kbase * 3 + 0];
         symmDiff[idxDiff + 1] = symmDiff0[kbase * 3 + 1];
         symmDiff[idxDiff + 2] = symmDiff0[kbase * 3 + 2];

@@ -21,6 +21,8 @@ SymmFunc::SymmFunc(int numElems, bool tanhCutFunc, bool elemWeight)
     this->tanhCutFunc = tanhCutFunc;
 
     this->elemWeight = elemWeight;
+
+    this->transDiff = false;
 }
 
 SymmFunc::~SymmFunc()

@@ -38,6 +38,11 @@ public:
         return this->numBasis;
     }
 
+    bool isTransDiff() const
+    {
+        return this->transDiff;
+    }
+
     void cutoffFunction(nnpreal* fc, nnpreal* dfcdr, nnpreal r, nnpreal rc) const;
 
 protected:
@@ -48,6 +53,8 @@ protected:
     bool tanhCutFunc;
 
     bool elemWeight;
+
+    bool transDiff;
 };
 
 inline void SymmFunc::cutoffFunction(nnpreal* fc, nnpreal* dfcdr, nnpreal r, nnpreal rc) const
