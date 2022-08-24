@@ -1229,58 +1229,6 @@ void NNArch::calculateSymmFuncs()
 #endif
 }
 
-void NNArch::renormalizeSymmFuncs()
-{
-    int iatom;
-    int natom = this->numAtoms;
-
-    int nneigh;
-
-    int ielem;
-    int nelem = this->numElems;
-
-    int ibase;
-    int nbase = this->getSymmFunc()->getNumBasis();
-
-    int idiff;
-    int ndiff;
-
-    nnpreal ave;
-    nnpreal dev;
-
-    for (ielem = 0; ielem < nelem; ++ielem)
-    {
-        if (this->symmDev[ielem] <= ZERO)
-        {
-            stop_by_error("symmDev have not been prepared.");
-        }
-    }
-
-    #pragma omp parallel for private (iatom, ielem, ibase, nneigh, ndiff, idiff, ave, dev)
-    for (iatom = 0; iatom < natom; ++iatom)
-    {
-        ielem  = this->elements[iatom];
-        nneigh = this->numNeighbor[iatom] + 1;
-        ndiff  = nbase * 3 * nneigh;
-
-        ave = this->symmAve[ielem];
-        dev = this->symmDev[ielem];
-
-        #pragma omp simd
-        for (ibase = 0; ibase < nbase; ++ibase)
-        {
-            this->symmData[iatom][ibase] -= ave;
-            this->symmData[iatom][ibase] /= dev;
-        }
-
-        #pragma omp simd
-        for (idiff = 0; idiff < ndiff; ++idiff)
-        {
-            this->symmDiff[iatom][idiff] /= dev;
-        }
-    }
-}
-
 void NNArch::initLayers()
 {
     int ielem;
@@ -1370,18 +1318,24 @@ void NNArch::goForwardOnEnergy()
 
     int jbatch;
 
+    nnpreal ave;
+    nnpreal dev;
+
     // input symmetry functions to the first layer
-    #pragma omp parallel for private(iatom, ielem, jbatch, ibase)
+    #pragma omp parallel for private(iatom, ielem, jbatch, ibase, ave, dev)
     for (iatom = 0; iatom < natom; ++iatom)
     {
         ielem  = this->elements[iatom];
         jbatch = this->ibatch[iatom];
 
+        ave = this->symmAve[ielem];
+        dev = this->symmDev[ielem];
+
         #pragma omp simd
         for (ibase = 0; ibase < nbase; ++ibase)
         {
             this->interLayersEnergy[ielem][0]->getData()[ibase + jbatch * nbase]
-            = this->symmData[iatom][ibase];
+            = (this->symmData[iatom][ibase] - ave) / dev;
         }
     }
 
@@ -1435,11 +1389,12 @@ void NNArch::goBackwardOnForce()
 
     int jbatch;
 
+    nnpreal  dev;
+    nnpreal  symmScale;
     nnpreal* symmGrad;
 
     const int     i1 = 1;
     const nnpreal a0 = ZERO;
-    const nnpreal a1 = -ONE;
 
     // derive energies by itselves, to be units
     for (ielem = 0; ielem < nelem; ++ielem)
@@ -1482,7 +1437,7 @@ void NNArch::goBackwardOnForce()
     }
 
     // calculate forces w/ derivatives of symmetry functions
-    #pragma omp parallel private(iatom, ielem, jbatch, ibase, nneigh, nneigh3, symmGrad)
+    #pragma omp parallel private(iatom, ielem, jbatch, ibase, nneigh, nneigh3, dev, symmScale, symmGrad)
     {
         symmGrad = new nnpreal[nbase];
 
@@ -1495,6 +1450,9 @@ void NNArch::goBackwardOnForce()
             nneigh = this->numNeighbor[iatom] + 1;
             nneigh3 = 3 * nneigh;
 
+            dev = this->symmDev[ielem];
+            symmScale = ONE / dev;
+
             #pragma omp simd
             for (ibase = 0; ibase < nbase; ++ibase)
             {
@@ -1503,7 +1461,7 @@ void NNArch::goBackwardOnForce()
             }
 
             xgemv_("T", &nbase, &nneigh3,
-                   &a1, &(this->symmDiff[iatom][0]), &nbase,
+                   &symmScale, &(this->symmDiff[iatom][0]), &nbase,
                    &(symmGrad[0]), &i1,
                    &a0, &(this->forceData[iatom][0]), &i1);
         }
@@ -1533,18 +1491,24 @@ void NNArch::goForwardOnCharge()
 
     int jbatch;
 
+    nnpreal ave;
+    nnpreal dev;
+
     // input symmetry functions to the first layer
-    #pragma omp parallel for private(iatom, ielem, jbatch, ibase)
+    #pragma omp parallel for private(iatom, ielem, jbatch, ibase, ave, dev)
     for (iatom = 0; iatom < natom; ++iatom)
     {
         ielem  = this->elements[iatom];
         jbatch = this->ibatch[iatom];
 
+        ave = this->symmAve[ielem];
+        dev = this->symmDev[ielem];
+
         #pragma omp simd
         for (ibase = 0; ibase < nbase; ++ibase)
         {
             this->interLayersCharge[ielem][0]->getData()[ibase + jbatch * nbase]
-            = this->symmData[iatom][ibase];
+            = (this->symmData[iatom][ibase] - ave) / dev;
         }
     }
 

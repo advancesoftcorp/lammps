@@ -404,8 +404,6 @@ void PairNNP::performNN(int eflag)
     {
         this->arch->calculateSymmFuncs();
 
-        this->arch->renormalizeSymmFuncs();
-
         this->arch->goForwardOnEnergy();
         this->arch->obtainEnergies(energies);
 

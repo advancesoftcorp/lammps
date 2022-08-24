@@ -42,8 +42,6 @@ public:
 
     void calculateSymmFuncs();
 
-    void renormalizeSymmFuncs();
-
     void initLayers();
 
     void goForwardOnEnergy();
