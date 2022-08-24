@@ -148,6 +148,7 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
     int totNeigh;
 
     int idxData;
+    int idxData0;
     int idxDiff;
 
     int numDiffs;
@@ -158,6 +159,11 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
     int numModeBatchs;
     int modesPerBatch;
     int dimBasis;
+
+    nnpreal symmData0;
+    nnpreal symmDiffX;
+    nnpreal symmDiffY;
+    nnpreal symmDiffZ;
 
     dim3 grid;
     dim3 block;
@@ -256,11 +262,6 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
         numNeigh = this->numNeighs[iatom];
         idxNeigh = this->idxNeighs[iatom];
 
-        if (numNeigh < 1 || idxNeigh < 0)
-        {
-            continue;
-        }
-
         // element / atomnum of neighbor atoms
         for (ineigh = 0; ineigh < numNeigh; ++ineigh)
         {
@@ -347,7 +348,8 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
     // >>> TODO
     // >>> TODO this is the bottleneck
     // >>> TODO
-    #pragma omp parallel for private (iatom, ineigh, numNeigh, idxNeigh, ibase, idxData, idxDiff)
+    #pragma omp parallel for private (iatom, ibase, ineigh, numNeigh, idxNeigh, \
+                                      idxData, idxData0, idxDiff, symmData0, symmDiffX, symmDiffY, symmDiffZ)
     for (iatom = 0; iatom < lenAtoms; ++iatom)
     {
         numNeigh = this->numNeighs[iatom];
@@ -355,33 +357,47 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int** elemNeighbor, 
 
         for (ibase = 0; ibase < this->numBasis; ++ibase)
         {
-            symmData[iatom][ibase] = ZERO;
-        }
+            idxData0  = ibase * numNeigh + numBasis * idxNeigh;
+            symmData0 = ZERO;
 
-        for (ibase = 0; ibase < this->numBasis; ++ibase)
-        {
-            symmDiff[iatom][ibase * (numNeigh + 1) * 3 + 0] = ZERO;
-            symmDiff[iatom][ibase * (numNeigh + 1) * 3 + 1] = ZERO;
-            symmDiff[iatom][ibase * (numNeigh + 1) * 3 + 2] = ZERO;
-        }
-
-        if (numNeigh < 1 || idxNeigh < 0)
-        {
-            continue;
-        }
-
-        for (ibase = 0; ibase < this->numBasis; ++ibase)
-        {
             for (ineigh = 0; ineigh < numNeigh; ++ineigh)
             {
-                idxData = ineigh + ibase * numNeigh + numBasis * idxNeigh;
+                idxData = ineigh + idxData0;
+                symmData0 += this->symmDataAll[idxData];
+            }
+
+            symmData[iatom][ibase] = symmData0;
+        }
+
+        for (ibase = 0; ibase < this->numBasis; ++ibase)
+        {
+            idxData0  = ibase * numNeigh + numBasis * idxNeigh;
+            symmDiffX = ZERO;
+            symmDiffY = ZERO;
+            symmDiffZ = ZERO;
+
+            for (ineigh = 0; ineigh < numNeigh; ++ineigh)
+            {
+                idxData = ineigh + idxData0;
                 idxDiff = 3 * idxData;
+                symmDiffX -= this->symmDiffAll[idxDiff + 0];
+                symmDiffY -= this->symmDiffAll[idxDiff + 1];
+                symmDiffZ -= this->symmDiffAll[idxDiff + 2];
+            }
 
-                symmData[iatom][ibase] += this->symmDataAll[idxData];
+            symmDiff[iatom][ibase * (numNeigh + 1) * 3 + 0] = symmDiffX;
+            symmDiff[iatom][ibase * (numNeigh + 1) * 3 + 1] = symmDiffY;
+            symmDiff[iatom][ibase * (numNeigh + 1) * 3 + 2] = symmDiffZ;
+        }
 
-                symmDiff[iatom][ibase * (numNeigh + 1) * 3 + 0] -= this->symmDiffAll[idxDiff + 0];
-                symmDiff[iatom][ibase * (numNeigh + 1) * 3 + 1] -= this->symmDiffAll[idxDiff + 1];
-                symmDiff[iatom][ibase * (numNeigh + 1) * 3 + 2] -= this->symmDiffAll[idxDiff + 2];
+        for (ibase = 0; ibase < this->numBasis; ++ibase)
+        {
+            idxData0  = ibase * numNeigh + numBasis * idxNeigh;
+
+            for (ineigh = 0; ineigh < numNeigh; ++ineigh)
+            {
+                idxData = ineigh + idxData0;
+                idxDiff = 3 * idxData;
 
                 symmDiff[iatom][(ibase * (numNeigh + 1) + ineigh + 1) * 3 + 0] = this->symmDiffAll[idxDiff + 0];
                 symmDiff[iatom][(ibase * (numNeigh + 1) + ineigh + 1) * 3 + 1] = this->symmDiffAll[idxDiff + 1];
