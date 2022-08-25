@@ -1354,7 +1354,6 @@ void NNArch::goForwardOnEnergy()
     int ielem;
     int nelem = this->numElems;
 
-    int ibase;
     int nbase = this->getSymmFunc()->getNumBasis();
 
     int ilayer;
@@ -1366,7 +1365,7 @@ void NNArch::goForwardOnEnergy()
     nnpreal dev;
 
     // input symmetry functions to the first layer
-    #pragma omp parallel for private(iatom, ielem, jbatch, ibase, ave, dev)
+    #pragma omp parallel for private(iatom, ielem, jbatch, ave, dev)
     for (iatom = 0; iatom < natom; ++iatom)
     {
         ielem  = this->elements[iatom];
@@ -1376,7 +1375,7 @@ void NNArch::goForwardOnEnergy()
         dev = this->symmDev[ielem];
 
         #pragma omp simd
-        for (ibase = 0; ibase < nbase; ++ibase)
+        for (int ibase = 0; ibase < nbase; ++ibase)
         {
             this->interLayersEnergy[ielem][0]->getData()[ibase + jbatch * nbase]
             = (this->symmData[ibase + iatom * nbase] - ave) / dev;
@@ -1427,15 +1426,10 @@ void NNArch::goBackwardOnForce()
     int nneigh;
     int mneigh;
     int nneigh3;
-#ifdef _NNP_GPU
-    int ineigh;
-    int jneigh;
-#endif
 
     int ielem;
     int nelem = this->numElems;
 
-    int ibase;
     int nbase = this->getSymmFunc()->getNumBasis();
 
     int ilayer;
@@ -1498,56 +1492,65 @@ void NNArch::goBackwardOnForce()
 #ifdef _NNP_GPU
         symmGrad = this->getSymmFunc()->getSymmGrad();
 
-        if (symmGrad != nullptr)
+        if (symmGrad == nullptr)
         {
-            for (iatom = 0; iatom < natom; iatom += iatomBlock)
+            if ((this->idxNeighbor[natom - 1] + this->numNeighbor[natom - 1]) > 0)
             {
-                lenAtoms = min(iatom + iatomBlock, natom) - iatom;
-
-                mneigh = this->idxNeighbor[iatom];
-
-                #pragma omp parallel for private(jatom, ielem, jbatch, ibase)
-                for (jatom = 0; jatom < lenAtoms; ++jatom)
-                {
-                    ielem  = this->elements[iatom + jatom];
-                    jbatch = this->ibatch  [iatom + jatom];
-
-                    #pragma omp simd
-                    for (ibase = 0; ibase < nbase; ++ibase)
-                    {
-                        symmGrad[ibase + jatom * nbase] =
-                        this->interLayersEnergy[ielem][0]->getGrad()[ibase + jbatch * nbase];
-                    }
-                }
-
-                this->symmFunc->driveHiddenDiff(lenAtoms, &(this->numNeighbor[iatom]), &(this->idxNeighbor[iatom]),
-                                                &(this->forceData[3 * mneigh]));
+                stop_by_error("symmGrad is not allocated.");
             }
-
-            #pragma omp parallel for private (iatom, ielem, ineigh, jneigh, nneigh, mneigh, dev, symmScale)
-            for (iatom = 0; iatom < natom; ++iatom)
+            else
             {
-                ielem  = this->elements[iatom];
+                return;
+            }
+        }
 
-                nneigh = this->numNeighbor[iatom];
-                mneigh = this->idxNeighbor[iatom];
+        for (iatom = 0; iatom < natom; iatom += iatomBlock)
+        {
+            lenAtoms = min(iatom + iatomBlock, natom) - iatom;
 
-                if (nneigh < 1)
-                {
-                    continue;
-                }
+            mneigh = this->idxNeighbor[iatom];
 
-                dev = this->symmDev[ielem];
-                symmScale = -ONE / dev;
+            #pragma omp parallel for private(jatom, ielem, jbatch)
+            for (jatom = 0; jatom < lenAtoms; ++jatom)
+            {
+                ielem  = this->elements[iatom + jatom];
+                jbatch = this->ibatch  [iatom + jatom];
 
                 #pragma omp simd
-                for (ineigh = 0; ineigh < nneigh; ++ineigh)
+                for (int ibase = 0; ibase < nbase; ++ibase)
                 {
-                    jneigh = ineigh + mneigh;
-                    this->forceData[3 * jneigh + 0] *= symmScale;
-                    this->forceData[3 * jneigh + 1] *= symmScale;
-                    this->forceData[3 * jneigh + 2] *= symmScale;
+                    symmGrad[ibase + jatom * nbase] =
+                    this->interLayersEnergy[ielem][0]->getGrad()[ibase + jbatch * nbase];
                 }
+            }
+
+            this->symmFunc->driveHiddenDiff(lenAtoms, &(this->numNeighbor[iatom]), &(this->idxNeighbor[iatom]),
+                                            &(this->forceData[3 * mneigh]));
+        }
+
+        #pragma omp parallel for private (iatom, ielem, nneigh, mneigh, dev, symmScale)
+        for (iatom = 0; iatom < natom; ++iatom)
+        {
+            ielem  = this->elements[iatom];
+
+            nneigh = this->numNeighbor[iatom];
+            mneigh = this->idxNeighbor[iatom];
+
+            if (nneigh < 1)
+            {
+                continue;
+            }
+
+            dev = this->symmDev[ielem];
+            symmScale = -ONE / dev;
+
+            #pragma omp simd
+            for (int ineigh = 0; ineigh < nneigh; ++ineigh)
+            {
+                const int jneigh = ineigh + mneigh;
+                this->forceData[3 * jneigh + 0] *= symmScale;
+                this->forceData[3 * jneigh + 1] *= symmScale;
+                this->forceData[3 * jneigh + 2] *= symmScale;
             }
         }
 #else
@@ -1556,7 +1559,7 @@ void NNArch::goBackwardOnForce()
     }
     else
     {
-        #pragma omp parallel for private(iatom, ielem, jbatch, ibase, nneigh, mneigh, nneigh3, \
+        #pragma omp parallel for private(iatom, ielem, jbatch, nneigh, mneigh, nneigh3, \
                                          dev, symmScale, symmGrad)
         for (iatom = 0; iatom < natom; ++iatom)
         {
@@ -1607,7 +1610,6 @@ void NNArch::goForwardOnCharge()
     int ielem;
     int nelem = this->numElems;
 
-    int ibase;
     int nbase = this->getSymmFunc()->getNumBasis();
 
     int ilayer;
@@ -1619,7 +1621,7 @@ void NNArch::goForwardOnCharge()
     nnpreal dev;
 
     // input symmetry functions to the first layer
-    #pragma omp parallel for private(iatom, ielem, jbatch, ibase, ave, dev)
+    #pragma omp parallel for private(iatom, ielem, jbatch, ave, dev)
     for (iatom = 0; iatom < natom; ++iatom)
     {
         ielem  = this->elements[iatom];
@@ -1629,7 +1631,7 @@ void NNArch::goForwardOnCharge()
         dev = this->symmDev[ielem];
 
         #pragma omp simd
-        for (ibase = 0; ibase < nbase; ++ibase)
+        for (int ibase = 0; ibase < nbase; ++ibase)
         {
             this->interLayersCharge[ielem][0]->getData()[ibase + jbatch * nbase]
             = (this->symmData[ibase + iatom * nbase] - ave) / dev;
@@ -1706,12 +1708,10 @@ void NNArch::obtainForces(nnpreal*** forces) const
     int iatom;
     int natom = this->numAtoms;
 
-    int ineigh;
-    int jneigh;
     int nneigh;
     int mneigh;
 
-    #pragma omp parallel for private (iatom, ineigh, jneigh, nneigh, mneigh)
+    #pragma omp parallel for private (iatom, nneigh, mneigh)
     for (iatom = 0; iatom < natom; ++iatom)
     {
         nneigh = this->numNeighbor[iatom];
@@ -1723,9 +1723,9 @@ void NNArch::obtainForces(nnpreal*** forces) const
         }
 
         #pragma omp simd
-        for (ineigh = 0; ineigh < nneigh; ++ineigh)
+        for (int ineigh = 0; ineigh < nneigh; ++ineigh)
         {
-            jneigh = ineigh + mneigh;
+            const int jneigh = ineigh + mneigh;
             forces[iatom][ineigh][0] = this->forceData[3 * jneigh + 0];
             forces[iatom][ineigh][1] = this->forceData[3 * jneigh + 1];
             forces[iatom][ineigh][2] = this->forceData[3 * jneigh + 2];

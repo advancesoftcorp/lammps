@@ -84,8 +84,7 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, nnpreal** 
     int jelem1, jelem2;
     int ifree1, ifree2;
 
-    int imode;
-    int ibase, jbase;
+    int jbase;
 
     nnpreal x1, x2;
     nnpreal y1, y2;
@@ -103,21 +102,10 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, nnpreal** 
     nnpreal dfc0dy1, dfc0dy2;
     nnpreal dfc0dz1, dfc0dz2;
 
-    nnpreal phi;
-    nnpreal dphidth;
-    nnpreal dphidx1, dphidx2;
-    nnpreal dphidy1, dphidy2;
-    nnpreal dphidz1, dphidz2;
-
     nnpreal tht;
     nnpreal dthtdx1, dthtdx2;
     nnpreal dthtdy1, dthtdy2;
     nnpreal dthtdz1, dthtdz2;
-
-    nnpreal g;
-    nnpreal dgdx1, dgdx2;
-    nnpreal dgdy1, dgdy2;
-    nnpreal dgdz1, dgdz2;
 
     nnpreal zanum1, zanum2;
     nnpreal zscale;
@@ -134,14 +122,14 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, nnpreal** 
 #endif
 
     // initialize symmetry functions
-    for (ibase = 0; ibase < this->numBasis; ++ibase)
+    for (int ibase = 0; ibase < this->numBasis; ++ibase)
     {
         symmData[ibase] = ZERO;
     }
 
     for (ifree1 = 0; ifree1 < numFree; ++ifree1)
     {
-        for (ibase = 0; ibase < this->numBasis; ++ibase)
+        for (int ibase = 0; ibase < this->numBasis; ++ibase)
         {
             symmDiff[ibase + ifree1 * this->numBasis] = ZERO;
         }
@@ -197,25 +185,27 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, nnpreal** 
 #endif
 
         #pragma omp simd
-        for (imode = 0; imode < this->sizeRad; ++imode)
+        for (int imode = 0; imode < this->sizeRad; ++imode)
         {
 #ifdef CHEBYSHEV_TRIGONO
-            this->chebyshevTrigonometric(&phi, &coef1, scheby, imode);
-            coef1  *= coef0;
+            nnpreal phi;
+            nnpreal dphi;
+            this->chebyshevTrigonometric(&phi, &dphi, scheby, imode);
+            dphi *= coef0;
 #else
-            phi     = tcheby[imode];
-            coef1   = dcheby[imode] * coef0;
+            const nnpreal phi  = tcheby[imode];
+            const nnpreal dphi = dcheby[imode] * coef0;
 #endif
-            dphidx1 = x1 * coef1;
-            dphidy1 = y1 * coef1;
-            dphidz1 = z1 * coef1;
+            const nnpreal dphidx1 = x1 * dphi;
+            const nnpreal dphidy1 = y1 * dphi;
+            const nnpreal dphidz1 = z1 * dphi;
 
-            g     = zscale * phi * fc1;
-            dgdx1 = zscale * (dphidx1 * fc1 + phi * dfc1dx1);
-            dgdy1 = zscale * (dphidy1 * fc1 + phi * dfc1dy1);
-            dgdz1 = zscale * (dphidz1 * fc1 + phi * dfc1dz1);
+            const nnpreal g     = zscale * phi * fc1;
+            const nnpreal dgdx1 = zscale * (dphidx1 * fc1 + phi * dfc1dx1);
+            const nnpreal dgdy1 = zscale * (dphidy1 * fc1 + phi * dfc1dy1);
+            const nnpreal dgdz1 = zscale * (dphidz1 * fc1 + phi * dfc1dz1);
 
-            ibase = imode + jbase;
+            const int ibase = imode + jbase;
 
             symmData[ibase] += g;
 
@@ -340,31 +330,33 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, nnpreal** 
 #endif
 
             #pragma omp simd
-            for (imode = 0; imode < this->sizeAng; ++imode)
+            for (int imode = 0; imode < this->sizeAng; ++imode)
             {
 #ifdef CHEBYSHEV_TRIGONO
+                nnpreal phi;
+                nnpreal dphidth;
                 this->chebyshevTrigonometric(&phi, &dphidth, scheby, imode);
                 dphidth *= coef0;
 #else
-                phi     = tcheby[imode];
-                dphidth = dcheby[imode] * coef0;
+                const nnpreal phi     = tcheby[imode];
+                const nnpreal dphidth = dcheby[imode] * coef0;
 #endif
-                dphidx1 = dphidth * dthtdx1;
-                dphidy1 = dphidth * dthtdy1;
-                dphidz1 = dphidth * dthtdz1;
-                dphidx2 = dphidth * dthtdx2;
-                dphidy2 = dphidth * dthtdy2;
-                dphidz2 = dphidth * dthtdz2;
+                const nnpreal dphidx1 = dphidth * dthtdx1;
+                const nnpreal dphidy1 = dphidth * dthtdy1;
+                const nnpreal dphidz1 = dphidth * dthtdz1;
+                const nnpreal dphidx2 = dphidth * dthtdx2;
+                const nnpreal dphidy2 = dphidth * dthtdy2;
+                const nnpreal dphidz2 = dphidth * dthtdz2;
 
-                g     = zscale * phi * fc0;
-                dgdx1 = zscale * (dphidx1 * fc0 + phi * dfc0dx1);
-                dgdy1 = zscale * (dphidy1 * fc0 + phi * dfc0dy1);
-                dgdz1 = zscale * (dphidz1 * fc0 + phi * dfc0dz1);
-                dgdx2 = zscale * (dphidx2 * fc0 + phi * dfc0dx2);
-                dgdy2 = zscale * (dphidy2 * fc0 + phi * dfc0dy2);
-                dgdz2 = zscale * (dphidz2 * fc0 + phi * dfc0dz2);
+                const nnpreal g     = zscale * phi * fc0;
+                const nnpreal dgdx1 = zscale * (dphidx1 * fc0 + phi * dfc0dx1);
+                const nnpreal dgdy1 = zscale * (dphidy1 * fc0 + phi * dfc0dy1);
+                const nnpreal dgdz1 = zscale * (dphidz1 * fc0 + phi * dfc0dz1);
+                const nnpreal dgdx2 = zscale * (dphidx2 * fc0 + phi * dfc0dx2);
+                const nnpreal dgdy2 = zscale * (dphidy2 * fc0 + phi * dfc0dy2);
+                const nnpreal dgdz2 = zscale * (dphidz2 * fc0 + phi * dfc0dz2);
 
-                ibase = this->numRadBasis + imode + jbase;
+                const int ibase = this->numRadBasis + imode + jbase;
 
                 symmData[ibase] += g;
 

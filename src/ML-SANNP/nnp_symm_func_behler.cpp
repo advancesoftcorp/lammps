@@ -92,16 +92,13 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, nnpreal** pos
     int jelem1, jelem2;
     int ifree1, ifree2;
 
-    int imode;
-    int ibase, jbase, kbase;
+    int jbase, kbase;
 
     nnpreal x1, x2, x3;
     nnpreal y1, y2, y3;
     nnpreal z1, z2, z3;
-    nnpreal r1, r2, r3, dr, rr;
+    nnpreal r1, r2, r3;
 
-    nnpreal rs, eta;
-    nnpreal zeta, zeta0;
     nnpreal zeta1[this->sizeAng];
 
     int     ilambda;
@@ -118,39 +115,27 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, nnpreal** pos
     nnpreal dfc0dy1, dfc0dy2, dfc0dy3;
     nnpreal dfc0dz1, dfc0dz2, dfc0dz3;
 
-    nnpreal gau;
-    nnpreal dgaudx1, dgaudx2, dgaudx3;
-    nnpreal dgaudy1, dgaudy2, dgaudy3;
-    nnpreal dgaudz1, dgaudz2, dgaudz3;
-
     nnpreal psi;
     nnpreal dpsidx1, dpsidx2;
     nnpreal dpsidy1, dpsidy2;
     nnpreal dpsidz1, dpsidz2;
 
-    nnpreal chi;
     nnpreal chi0;
-    nnpreal dchidpsi;
-
-    nnpreal g;
-    nnpreal dgdx1, dgdx2, dgdx3;
-    nnpreal dgdy1, dgdy2, dgdy3;
-    nnpreal dgdz1, dgdz2, dgdz3;
 
     nnpreal zanum1, zanum2;
     nnpreal zscale;
 
-    nnpreal coef0, coef1, coef2, coef3;
+    nnpreal fact0, fact1, fact2;
 
     // initialize symmetry functions
-    for (ibase = 0; ibase < this->numBasis; ++ibase)
+    for (int ibase = 0; ibase < this->numBasis; ++ibase)
     {
         symmData[ibase] = ZERO;
     }
 
     for (ifree1 = 0; ifree1 < numFree; ++ifree1)
     {
-        for (ibase = 0; ibase < this->numBasis; ++ibase)
+        for (int ibase = 0; ibase < this->numBasis; ++ibase)
         {
             symmDiff[ibase + ifree1 * this->numBasis] = ZERO;
         }
@@ -197,26 +182,26 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, nnpreal** pos
         dfc1dz1 = z1 / r1 * dfc1dr1;
 
         #pragma omp simd
-        for (imode = 0; imode < this->sizeRad; ++imode)
+        for (int imode = 0; imode < this->sizeRad; ++imode)
         {
-            eta = this->radiusEta[imode];
-            rs  = this->radiusShift[imode];
+            const nnpreal eta = this->radiusEta[imode];
+            const nnpreal rs  = this->radiusShift[imode];
 
-            dr  = r1 - rs;
-            rr  = dr * dr;
+            const nnpreal dr  = r1 - rs;
+            const nnpreal rr  = dr * dr;
 
-            gau     = exp(-eta * rr);
-            coef0   = -NNPREAL(2.0) * eta * dr / r1 * gau;
-            dgaudx1 = x1 * coef0;
-            dgaudy1 = y1 * coef0;
-            dgaudz1 = z1 * coef0;
+            const nnpreal gau     = exp(-eta * rr);
+            const nnpreal coef0   = -NNPREAL(2.0) * eta * dr / r1 * gau;
+            const nnpreal dgaudx1 = x1 * coef0;
+            const nnpreal dgaudy1 = y1 * coef0;
+            const nnpreal dgaudz1 = z1 * coef0;
 
-            g     = zscale * gau * fc1;
-            dgdx1 = zscale * (dgaudx1 * fc1 + gau * dfc1dx1);
-            dgdy1 = zscale * (dgaudy1 * fc1 + gau * dfc1dy1);
-            dgdz1 = zscale * (dgaudz1 * fc1 + gau * dfc1dz1);
+            const nnpreal g     = zscale * gau * fc1;
+            const nnpreal dgdx1 = zscale * (dgaudx1 * fc1 + gau * dfc1dx1);
+            const nnpreal dgdy1 = zscale * (dgaudy1 * fc1 + gau * dfc1dy1);
+            const nnpreal dgdz1 = zscale * (dgaudz1 * fc1 + gau * dfc1dz1);
 
-            ibase = imode + jbase;
+            const int ibase = imode + jbase;
 
             symmData[ibase] += g;
 
@@ -232,9 +217,9 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, nnpreal** pos
     }
 
     // angular part
-    for (imode = 0; imode < this->sizeAng; ++imode)
+    for (int imode = 0; imode < this->sizeAng; ++imode)
     {
-        zeta = this->angleZeta[imode];
+        const nnpreal zeta = this->angleZeta[imode];
         zeta1[imode] = pow(NNPREAL(2.0), ONE - zeta);
     }
 
@@ -354,15 +339,15 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, nnpreal** pos
             }
 
             psi     = (x1 * x2 + y1 * y2 + z1 * z2) / r1 / r2;
-            coef0   = ONE / r1 / r2;
-            coef1   = psi / r1 / r1;
-            coef2   = psi / r2 / r2;
-            dpsidx1 = coef0 * x2 - coef1 * x1;
-            dpsidy1 = coef0 * y2 - coef1 * y1;
-            dpsidz1 = coef0 * z2 - coef1 * z1;
-            dpsidx2 = coef0 * x1 - coef2 * x2;
-            dpsidy2 = coef0 * y1 - coef2 * y2;
-            dpsidz2 = coef0 * z1 - coef2 * z2;
+            fact0   = ONE / r1 / r2;
+            fact1   = psi / r1 / r1;
+            fact2   = psi / r2 / r2;
+            dpsidx1 = fact0 * x2 - fact1 * x1;
+            dpsidy1 = fact0 * y2 - fact1 * y1;
+            dpsidz1 = fact0 * z2 - fact1 * z1;
+            dpsidx2 = fact0 * x1 - fact2 * x2;
+            dpsidy2 = fact0 * y1 - fact2 * y2;
+            dpsidz2 = fact0 * z1 - fact2 * z2;
 
             for (ilambda = 0; ilambda < 2; ++ilambda)
             {
@@ -379,38 +364,38 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, nnpreal** pos
                 if (this->angleMod)
                 {
                     #pragma omp simd
-                    for (imode = 0; imode < this->sizeAng; ++imode)
+                    for (int imode = 0; imode < this->sizeAng; ++imode)
                     {
-                        eta   = this->angleEta[imode];
-                        rs    = this->angleShift[imode];
-                        zeta  = this->angleZeta[imode];
-                        zeta0 = zeta1[imode];
+                        const nnpreal eta   = this->angleEta[imode];
+                        const nnpreal rs    = this->angleShift[imode];
+                        const nnpreal zeta  = this->angleZeta[imode];
+                        const nnpreal zeta0 = zeta1[imode];
 
-                        chi      = zeta0 * pow(chi0, zeta);
-                        dchidpsi = zeta * lambda * chi / chi0;
+                        const nnpreal chi      = zeta0 * pow(chi0, zeta);
+                        const nnpreal dchidpsi = zeta * lambda * chi / chi0;
 
-                        rr = (r1 - rs) * (r1 - rs) + (r2 - rs) * (r2 - rs);
+                        const nnpreal rr = (r1 - rs) * (r1 - rs) + (r2 - rs) * (r2 - rs);
 
-                        gau     = exp(-eta * rr);
-                        coef0   = -NNPREAL(2.0) * eta * gau;
-                        coef1   = coef0 * (r1 - rs) / r1;
-                        coef2   = coef0 * (r2 - rs) / r2;
-                        dgaudx1 = coef1 * x1;
-                        dgaudy1 = coef1 * y1;
-                        dgaudz1 = coef1 * z1;
-                        dgaudx2 = coef2 * x2;
-                        dgaudy2 = coef2 * y2;
-                        dgaudz2 = coef2 * z2;
+                        const nnpreal gau     = exp(-eta * rr);
+                        const nnpreal coef0   = -NNPREAL(2.0) * eta * gau;
+                        const nnpreal coef1   = coef0 * (r1 - rs) / r1;
+                        const nnpreal coef2   = coef0 * (r2 - rs) / r2;
+                        const nnpreal dgaudx1 = coef1 * x1;
+                        const nnpreal dgaudy1 = coef1 * y1;
+                        const nnpreal dgaudz1 = coef1 * z1;
+                        const nnpreal dgaudx2 = coef2 * x2;
+                        const nnpreal dgaudy2 = coef2 * y2;
+                        const nnpreal dgaudz2 = coef2 * z2;
 
-                        g     = zscale * chi * gau * fc0;
-                        dgdx1 = zscale * (dchidpsi * dpsidx1 * gau * fc0 + chi * dgaudx1 * fc0 + chi * gau * dfc0dx1);
-                        dgdy1 = zscale * (dchidpsi * dpsidy1 * gau * fc0 + chi * dgaudy1 * fc0 + chi * gau * dfc0dy1);
-                        dgdz1 = zscale * (dchidpsi * dpsidz1 * gau * fc0 + chi * dgaudz1 * fc0 + chi * gau * dfc0dz1);
-                        dgdx2 = zscale * (dchidpsi * dpsidx2 * gau * fc0 + chi * dgaudx2 * fc0 + chi * gau * dfc0dx2);
-                        dgdy2 = zscale * (dchidpsi * dpsidy2 * gau * fc0 + chi * dgaudy2 * fc0 + chi * gau * dfc0dy2);
-                        dgdz2 = zscale * (dchidpsi * dpsidz2 * gau * fc0 + chi * dgaudz2 * fc0 + chi * gau * dfc0dz2);
+                        const nnpreal g     = zscale * chi * gau * fc0;
+                        const nnpreal dgdx1 = zscale * (dchidpsi * dpsidx1 * gau * fc0 + chi * dgaudx1 * fc0 + chi * gau * dfc0dx1);
+                        const nnpreal dgdy1 = zscale * (dchidpsi * dpsidy1 * gau * fc0 + chi * dgaudy1 * fc0 + chi * gau * dfc0dy1);
+                        const nnpreal dgdz1 = zscale * (dchidpsi * dpsidz1 * gau * fc0 + chi * dgaudz1 * fc0 + chi * gau * dfc0dz1);
+                        const nnpreal dgdx2 = zscale * (dchidpsi * dpsidx2 * gau * fc0 + chi * dgaudx2 * fc0 + chi * gau * dfc0dx2);
+                        const nnpreal dgdy2 = zscale * (dchidpsi * dpsidy2 * gau * fc0 + chi * dgaudy2 * fc0 + chi * gau * dfc0dy2);
+                        const nnpreal dgdz2 = zscale * (dchidpsi * dpsidz2 * gau * fc0 + chi * dgaudz2 * fc0 + chi * gau * dfc0dz2);
 
-                        ibase = this->numRadBasis + imode + jbase + kbase;
+                        const int ibase = this->numRadBasis + imode + jbase + kbase;
 
                         symmData[ibase] += g;
 
@@ -427,45 +412,45 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, nnpreal** pos
                 else
                 {
                     #pragma omp simd
-                    for (imode = 0; imode < this->sizeAng; ++imode)
+                    for (int imode = 0; imode < this->sizeAng; ++imode)
                     {
-                        eta   = this->angleEta[imode];
-                        rs    = this->angleShift[imode];
-                        zeta  = this->angleZeta[imode];
-                        zeta0 = zeta1[imode];
+                        const nnpreal eta   = this->angleEta[imode];
+                        const nnpreal rs    = this->angleShift[imode];
+                        const nnpreal zeta  = this->angleZeta[imode];
+                        const nnpreal zeta0 = zeta1[imode];
 
-                        chi      = zeta0 * pow(chi0, zeta);
-                        dchidpsi = zeta * lambda * chi / chi0;
+                        const nnpreal chi      = zeta0 * pow(chi0, zeta);
+                        const nnpreal dchidpsi = zeta * lambda * chi / chi0;
 
-                        rr = (r1 - rs) * (r1 - rs) + (r2 - rs) * (r2 - rs) + (r3 - rs) * (r3 - rs);
+                        const nnpreal rr = (r1 - rs) * (r1 - rs) + (r2 - rs) * (r2 - rs) + (r3 - rs) * (r3 - rs);
 
-                        gau     = exp(-eta * rr);
-                        coef0   = -NNPREAL(2.0) * eta * gau;
-                        coef1   = coef0 * (r1 - rs) / r1;
-                        coef2   = coef0 * (r2 - rs) / r2;
-                        coef3   = coef0 * (r3 - rs) / r3;
-                        dgaudx1 = coef1 * x1;
-                        dgaudy1 = coef1 * y1;
-                        dgaudz1 = coef1 * z1;
-                        dgaudx2 = coef2 * x2;
-                        dgaudy2 = coef2 * y2;
-                        dgaudz2 = coef2 * z2;
-                        dgaudx3 = coef3 * x3;
-                        dgaudy3 = coef3 * y3;
-                        dgaudz3 = coef3 * z3;
+                        const nnpreal gau     = exp(-eta * rr);
+                        const nnpreal coef0   = -NNPREAL(2.0) * eta * gau;
+                        const nnpreal coef1   = coef0 * (r1 - rs) / r1;
+                        const nnpreal coef2   = coef0 * (r2 - rs) / r2;
+                        const nnpreal coef3   = coef0 * (r3 - rs) / r3;
+                        const nnpreal dgaudx1 = coef1 * x1;
+                        const nnpreal dgaudy1 = coef1 * y1;
+                        const nnpreal dgaudz1 = coef1 * z1;
+                        const nnpreal dgaudx2 = coef2 * x2;
+                        const nnpreal dgaudy2 = coef2 * y2;
+                        const nnpreal dgaudz2 = coef2 * z2;
+                        const nnpreal dgaudx3 = coef3 * x3;
+                        const nnpreal dgaudy3 = coef3 * y3;
+                        const nnpreal dgaudz3 = coef3 * z3;
 
-                        g     = zscale * (chi * gau * fc0);
-                        dgdx1 = zscale * (dchidpsi * dpsidx1 * gau * fc0 + chi * dgaudx1 * fc0 + chi * gau * dfc0dx1);
-                        dgdy1 = zscale * (dchidpsi * dpsidy1 * gau * fc0 + chi * dgaudy1 * fc0 + chi * gau * dfc0dy1);
-                        dgdz1 = zscale * (dchidpsi * dpsidz1 * gau * fc0 + chi * dgaudz1 * fc0 + chi * gau * dfc0dz1);
-                        dgdx2 = zscale * (dchidpsi * dpsidx2 * gau * fc0 + chi * dgaudx2 * fc0 + chi * gau * dfc0dx2);
-                        dgdy2 = zscale * (dchidpsi * dpsidy2 * gau * fc0 + chi * dgaudy2 * fc0 + chi * gau * dfc0dy2);
-                        dgdz2 = zscale * (dchidpsi * dpsidz2 * gau * fc0 + chi * dgaudz2 * fc0 + chi * gau * dfc0dz2);
-                        dgdx3 = zscale * (chi * dgaudx3 * fc0 + chi * gau * dfc0dx3);
-                        dgdy3 = zscale * (chi * dgaudy3 * fc0 + chi * gau * dfc0dy3);
-                        dgdz3 = zscale * (chi * dgaudz3 * fc0 + chi * gau * dfc0dz3);
+                        const nnpreal g     = zscale * (chi * gau * fc0);
+                        const nnpreal dgdx1 = zscale * (dchidpsi * dpsidx1 * gau * fc0 + chi * dgaudx1 * fc0 + chi * gau * dfc0dx1);
+                        const nnpreal dgdy1 = zscale * (dchidpsi * dpsidy1 * gau * fc0 + chi * dgaudy1 * fc0 + chi * gau * dfc0dy1);
+                        const nnpreal dgdz1 = zscale * (dchidpsi * dpsidz1 * gau * fc0 + chi * dgaudz1 * fc0 + chi * gau * dfc0dz1);
+                        const nnpreal dgdx2 = zscale * (dchidpsi * dpsidx2 * gau * fc0 + chi * dgaudx2 * fc0 + chi * gau * dfc0dx2);
+                        const nnpreal dgdy2 = zscale * (dchidpsi * dpsidy2 * gau * fc0 + chi * dgaudy2 * fc0 + chi * gau * dfc0dy2);
+                        const nnpreal dgdz2 = zscale * (dchidpsi * dpsidz2 * gau * fc0 + chi * dgaudz2 * fc0 + chi * gau * dfc0dz2);
+                        const nnpreal dgdx3 = zscale * (chi * dgaudx3 * fc0 + chi * gau * dfc0dx3);
+                        const nnpreal dgdy3 = zscale * (chi * dgaudy3 * fc0 + chi * gau * dfc0dy3);
+                        const nnpreal dgdz3 = zscale * (chi * dgaudz3 * fc0 + chi * gau * dfc0dz3);
 
-                        ibase = this->numRadBasis + imode + jbase + kbase;
+                        const int ibase = this->numRadBasis + imode + jbase + kbase;
 
                         symmData[ibase] += g;
 
