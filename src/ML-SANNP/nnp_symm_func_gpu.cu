@@ -489,6 +489,16 @@ void SymmFuncGPU::allocHiddenDiff(int maxAtoms, int fullNeigh)
 
         this->sizeFullNeigh = fullNeigh;
     }
+
+    // check error of cuda
+    cudaError_t error = cudaGetLastError();
+
+    if (error != cudaSuccess)
+    {
+        char message[512];
+        sprintf(message, "cudaError: %s\n", cudaGetErrorString(error));
+        stop_by_error(message);
+    }
 #endif
 }
 
