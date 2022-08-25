@@ -157,11 +157,44 @@ __global__ void sumupSymmData(int* numNeighs, int* idxNeighs, nnpreal* symmData,
 __global__ void multSymmDiff(int* numNeighs, int* idxNeighs,
                              nnpreal* symmDiff, nnpreal* symmGrad, nnpreal** forceData, int numBasis)
 {
+    const int iatom    = blockIdx.x;
+    const int ineigh   = threadIdx.x;
+    const int numNeigh = numNeighs[iatom];
+    const int idxNeigh = idxNeighs[iatom];
+    const int idxData0 = ineigh + numBasis * idxNeigh;
+    const int idxBasis = iatom * numBasis;
+    const int idxForce = (ineigh + idxNeigh) * 3;
 
-    // TODO
-    // TODO
-    // TODO
+    if (ineigh >= numNeigh)
+    {
+        return;
+    }
 
+    int ibase;
+    int idxData;
+    int idxDiff;
+
+    nnpreal symmGrad0;
+
+    nnpreal forceX = ZERO;
+    nnpreal forceY = ZERO;
+    nnpreal forceZ = ZERO;
+
+    for (ibase = 0; ibase < numBasis; ++ibase)
+    {
+        idxData = ibase * numNeigh + idxData0;
+        idxDiff = idxData * 3;
+
+        symmGrad0 = symmGrad[ibase + idxBasis];
+
+        forceX += symmDiff[idxDiff + 0] * symmGrad0;
+        forceY += symmDiff[idxDiff + 1] * symmGrad0;
+        forceZ += symmDiff[idxDiff + 2] * symmGrad0;
+    }
+
+    forceData[idxForce + 0] = forceX;
+    forceData[idxForce + 1] = forceY;
+    forceData[idxForce + 2] = forceZ;
 }
 
 void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int* idxNeighbor, int** elemNeighbor, nnpreal*** posNeighbor,
