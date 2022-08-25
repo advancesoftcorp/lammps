@@ -469,8 +469,8 @@ void SymmFuncGPU::allocHiddenDiff(int maxAtoms, int fullNeigh)
         if (this->symmGrad   != nullptr) cudaFreeHost(this->symmGrad);
         if (this->symmGrad_d != nullptr) cudaFree    (this->symmGrad_d);
 
-        cudaMallocHost(&(this->symmGrad),   sizeof(int) * maxAtoms * this->numBasis);
-        cudaMalloc    (&(this->symmGrad_d), sizeof(int) * maxAtoms * this->numBasis);
+        cudaMallocHost(&(this->symmGrad),   sizeof(nnpreal) * maxAtoms * this->numBasis);
+        cudaMalloc    (&(this->symmGrad_d), sizeof(nnpreal) * maxAtoms * this->numBasis);
 
         this->sizeMaxAtoms = maxAtoms;
     }
