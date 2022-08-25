@@ -468,32 +468,15 @@ void SymmFuncGPU::driveHiddenDiff(int lenAtoms, int* numNeighbor, int* idxNeighb
     }
 
     // define varialbes
-    // TODO
-    // TODO check variables, that is not used.
-    // TODO
     int iatom;
-    int ineigh, jneigh;
-    int idata;
-    int ipos;
 
     int numNeigh;
     int idxNeigh;
     int maxNeigh;
     int totNeigh;
 
-    int numData;
-
-    int numPos;
-    int idxPos;
-
-    int numModeBatchs;
-    int modesPerBatch;
-    int dimBasis;
-
     dim3 grid;
     dim3 block;
-
-    size_t sizeShared;
 
     // check sizeLenAtoms
     if (this->sizeLenAtoms < lenAtoms)
