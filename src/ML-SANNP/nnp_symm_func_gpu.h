@@ -34,10 +34,12 @@ public:
     void calculate(int numNeighbor, int* elemNeighbor, nnpreal** posNeighbor,
                    nnpreal* symmData, nnpreal* symmDiff) override
     {
-        this->calculate(1, &numNeighbor, &elemNeighbor, &posNeighbor, symmData, symmDiff);
+        int idxNeighbor = 0;
+
+        this->calculate(1, &numNeighbor, &idxNeighbor, &elemNeighbor, &posNeighbor, symmData, symmDiff);
     }
 
-    void calculate(int lenAtoms, int* numNeighbor, int idxNeighbor, int** elemNeighbor, nnpreal*** posNeighbor,
+    void calculate(int lenAtoms, int* numNeighbor, int* idxNeighbor, int** elemNeighbor, nnpreal*** posNeighbor,
                    nnpreal* symmData, nnpreal* symmDiff) override;
 
     void setMaxThreadsPerBlock(int maxThreadsPerBlock)
