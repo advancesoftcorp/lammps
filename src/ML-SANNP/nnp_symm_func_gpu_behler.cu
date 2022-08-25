@@ -984,7 +984,7 @@ void SymmFuncGPUBehler::calculateRadial(dim3 grid, dim3 block, int idxNeigh)
 {
     nnpreal* symmDiffAll_d;
 #ifdef SYMMDIFF_HIDDEN
-    symmDiffAll_d = this->symmDiffFull_d[3 * idxNeigh * this->numBasis];
+    symmDiffAll_d = &(this->symmDiffFull_d[3 * idxNeigh * this->numBasis]);
 #else
     symmDiffAll_d = this->symmDiffAll_d;
 #endif
@@ -1000,7 +1000,7 @@ void SymmFuncGPUBehler::calculateAnglarElemWeight(dim3 grid, dim3 block, size_t 
 {
     nnpreal* symmDiffAll_d;
 #ifdef SYMMDIFF_HIDDEN
-    symmDiffAll_d = this->symmDiffFull_d[3 * idxNeigh * this->numBasis];
+    symmDiffAll_d = &(this->symmDiffFull_d[3 * idxNeigh * this->numBasis]);
 #else
     symmDiffAll_d = this->symmDiffAll_d;
 #endif
@@ -1027,7 +1027,7 @@ void SymmFuncGPUBehler::calculateAnglarNotElemWeight(dim3 grid, dim3 block, size
 {
     nnpreal* symmDiffAll_d;
 #ifdef SYMMDIFF_HIDDEN
-    symmDiffAll_d = this->symmDiffFull_d[3 * idxNeigh * this->numBasis];
+    symmDiffAll_d = &(this->symmDiffFull_d[3 * idxNeigh * this->numBasis]);
 #else
     symmDiffAll_d = this->symmDiffAll_d;
 #endif

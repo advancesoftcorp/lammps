@@ -541,11 +541,14 @@ void SymmFuncGPU::driveHiddenDiff(int lenAtoms, int* numNeighbor, int* idxNeighb
     cudaMemcpy(this->symmGrad_d,  this->symmGrad,  sizeof(nnpreal) * lenAtoms * this->numBasis, cudaMemcpyHostToDevice);
 
     // forceData = symmDiff * symmGrad
+    idxNeigh = idxNeighbor[0];
+    idxDiff  = 3 * idxNeigh * this->numBasis;
+
     block = dim3(maxNeigh, 1, 1);
     grid  = dim3(lenAtoms, 1, 1);
 
-    multSymmDiff<<<grid, block>>>(
-                this->numNeighs_d, this->idxNeighs_d, this->symmDiffFull_d, this->forceData_d, this->numBasis);
+    multSymmDiff<<<grid, block>>>(this->numNeighs_d, this->idxNeighs_d,
+                                  &(this->symmDiffFull_d[idxDiff]), this->forceData_d, this->numBasis);
 
     // copy memory gpu -> host
 #ifdef SYMMFUNC_DIRECT_COPY
