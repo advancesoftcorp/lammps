@@ -154,6 +154,16 @@ __global__ void sumupSymmData(int* numNeighs, int* idxNeighs, nnpreal* symmData,
     symmDataSum[ibase + iatom * numBasis] = symmData0;
 }
 
+__global__ void multSymmDiff(int* numNeighs, int* idxNeighs,
+                             nnpreal* symmDiff, nnpreal* symmGrad, nnpreal** forceData, int numBasis)
+{
+
+    // TODO
+    // TODO
+    // TODO
+
+}
+
 void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int* idxNeighbor, int** elemNeighbor, nnpreal*** posNeighbor,
                             nnpreal* symmData, nnpreal* symmDiff)
 {
@@ -534,9 +544,8 @@ void SymmFuncGPU::driveHiddenDiff(int lenAtoms, int* numNeighbor, int* idxNeighb
     block = dim3(maxNeigh, 1, 1);
     grid  = dim3(lenAtoms, 1, 1);
 
-    // TODO
-    // TODO call kernel
-    // TODO
+    multSymmDiff<<<grid, block>>>(
+                this->numNeighs_d, this->idxNeighs_d, this->symmDiffFull_d, this->forceData_d, this->numBasis);
 
     // copy memory gpu -> host
 #ifdef SYMMFUNC_DIRECT_COPY
