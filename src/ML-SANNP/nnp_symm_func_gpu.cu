@@ -255,15 +255,21 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int* idxNeighbor, in
     // allocate memory about lenAtoms
     if (this->sizeLenAtoms < lenAtoms)
     {
-        if (this->numNeighs   != nullptr) cudaFreeHost(this->numNeighs);
-        if (this->numNeighs_d != nullptr) cudaFree    (this->numNeighs_d);
-        if (this->idxNeighs   != nullptr) cudaFreeHost(this->idxNeighs);
-        if (this->idxNeighs_d != nullptr) cudaFree    (this->idxNeighs_d);
+        if (this->numNeighs     != nullptr) cudaFreeHost(this->numNeighs);
+        if (this->numNeighs_d   != nullptr) cudaFree    (this->numNeighs_d);
+        if (this->idxNeighs     != nullptr) cudaFreeHost(this->idxNeighs);
+        if (this->idxNeighs_d   != nullptr) cudaFree    (this->idxNeighs_d);
+        if (this->symmDataSum   != nullptr) cudaFreeHost(this->symmDataSum);
+        if (this->symmDataSum_d != nullptr) cudaFree    (this->symmDataSum_d);
 
-        cudaMallocHost(&(this->numNeighs),   sizeof(int) * lenAtoms);
-        cudaMalloc    (&(this->numNeighs_d), sizeof(int) * lenAtoms);
-        cudaMallocHost(&(this->idxNeighs),   sizeof(int) * lenAtoms);
-        cudaMalloc    (&(this->idxNeighs_d), sizeof(int) * lenAtoms);
+        cudaMallocHost(&(this->numNeighs),     sizeof(int) * lenAtoms);
+        cudaMalloc    (&(this->numNeighs_d),   sizeof(int) * lenAtoms);
+        cudaMallocHost(&(this->idxNeighs),     sizeof(int) * lenAtoms);
+        cudaMalloc    (&(this->idxNeighs_d),   sizeof(int) * lenAtoms);
+#ifndef SYMMFUNC_DIRECT_COPY
+        cudaMallocHost(&(this->symmDataSum),   sizeof(nnpreal) * lenAtoms * this->numBasis);
+#endif
+        cudaMalloc    (&(this->symmDataSum_d), sizeof(nnpreal) * lenAtoms * this->numBasis);
 
         this->sizeLenAtoms = lenAtoms;
     }
@@ -311,25 +317,19 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int* idxNeighbor, in
         if (this->elementAll_d     != nullptr) cudaFree    (this->elementAll_d);
         if (this->posNeighborAll   != nullptr) cudaFreeHost(this->posNeighborAll);
         if (this->posNeighborAll_d != nullptr) cudaFree    (this->posNeighborAll_d);
-        if (this->symmDataSum      != nullptr) cudaFreeHost(this->symmDataSum);
-        if (this->symmDiffAll      != nullptr) cudaFreeHost(this->symmDiffAll);
-        if (this->symmDataSum_d    != nullptr) cudaFree    (this->symmDataSum_d);
         if (this->symmDataAll_d    != nullptr) cudaFree    (this->symmDataAll_d);
+        if (this->symmDiffAll      != nullptr) cudaFreeHost(this->symmDiffAll);
         if (this->symmDiffAll_d    != nullptr) cudaFree    (this->symmDiffAll_d);
 
         cudaMallocHost(&(this->elementAll),       sizeof(gint)    * totNeigh);
         cudaMalloc    (&(this->elementAll_d),     sizeof(gint)    * totNeigh);
         cudaMallocHost(&(this->posNeighborAll),   sizeof(nnpreal) * this->sizePosNeighbor * totNeigh);
         cudaMalloc    (&(this->posNeighborAll_d), sizeof(nnpreal) * this->sizePosNeighbor * totNeigh);
-#ifndef SYMMFUNC_DIRECT_COPY
-        cudaMallocHost(&(this->symmDataSum),      sizeof(nnpreal)     * lenAtoms * this->numBasis);
+        cudaMalloc    (&(this->symmDataAll_d),    sizeof(nnpreal) * totNeigh * this->numBasis);
 #ifndef SYMMDIFF_HIDDEN
+#ifndef SYMMFUNC_DIRECT_COPY
         cudaMallocHost(&(this->symmDiffAll),      sizeof(nnpreal) * 3 * totNeigh * this->numBasis);
 #endif
-#endif
-        cudaMalloc    (&(this->symmDataSum_d),    sizeof(nnpreal)     * lenAtoms * this->numBasis);
-        cudaMalloc    (&(this->symmDataAll_d),    sizeof(nnpreal)     * totNeigh * this->numBasis);
-#ifndef SYMMDIFF_HIDDEN
         cudaMalloc    (&(this->symmDiffAll_d),    sizeof(nnpreal) * 3 * totNeigh * this->numBasis);
 #endif
 
@@ -534,7 +534,7 @@ void SymmFuncGPU::driveHiddenDiff(int lenAtoms, int* numNeighbor, int* idxNeighb
     dim3 block;
 
     // check sizeLenAtoms
-    if (this->sizeLenAtoms < lenAtoms)
+    if (this->sizeLenAtoms < lenAtoms || this->sizeMaxAtoms < lenAtoms)
     {
         stop_by_error("size of atoms is not correct.");
     }
