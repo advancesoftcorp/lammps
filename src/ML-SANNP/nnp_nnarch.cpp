@@ -1239,19 +1239,19 @@ void NNArch::calculateSymmFuncs()
 #ifdef _NNP_GPU
     nnpreal* symmDiff;
 
-    if (this->getSymmFunc()->isHiddenDiff())
-    {
-        symmDiff = nullptr;
-    }
-    else
-    {
-        symmDiff = &(this->symmDiff[idiff]);
-    }
-
     for (iatom = 0; iatom < natom; iatom += iatomBlock)
     {
         idata = iatom * nbase;
         idiff = 3 * this->idxNeighbor[iatom] * nbase;
+
+        if (this->getSymmFunc()->isHiddenDiff())
+        {
+            symmDiff = nullptr;
+        }
+        else
+        {
+            symmDiff = &(this->symmDiff[idiff]);
+        }
 
         lenAtoms = min(iatom + iatomBlock, natom) - iatom;
 
