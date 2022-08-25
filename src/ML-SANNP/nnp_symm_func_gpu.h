@@ -48,7 +48,7 @@ public:
         return this->symmGrad;
     }
 
-    void allocHiddenDiff(int lenAtoms, int fullNeigh) override;
+    void allocHiddenDiff(int maxAtoms, int fullNeigh) override;
 
     void driveHiddenDiff(int lenAtoms, int* numNeighbor, int* idxNeighbor, nnpreal* forceData) override;
 
@@ -111,7 +111,10 @@ private:
     int maxThreadsPerBlock;
 
     int sizeLenAtoms;
-    int sizeTotNeigh;
+    int sizeMaxAtoms;
+    int sizeTotNeigh1;
+    int sizeTotNeigh2;
+    int sizeFullNeigh;
 
     void getSizeOfModeBatchs(int* numModeBatchs, int* modesPerBatch, int sizeMode, int maxNeigh);
 };

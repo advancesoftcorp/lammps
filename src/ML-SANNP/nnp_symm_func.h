@@ -38,7 +38,7 @@ public:
         return nullptr;
     }
 
-    virtual void allocHiddenDiff(int lenAtoms, int fullNeigh)
+    virtual void allocHiddenDiff(int maxAtoms, int fullNeigh)
     {
         // NOP
     }

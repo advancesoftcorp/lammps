@@ -59,8 +59,11 @@ SymmFuncGPU::SymmFuncGPU(int numElems, bool tanhCutFunc, bool elemWeight, int si
     this->rcutRad = rcutRad;
     this->rcutAng = rcutAng;
 
-    this->sizeLenAtoms = 0;
-    this->sizeTotNeigh = 0;
+    this->sizeLenAtoms  = 0;
+    this->sizeMaxAtoms  = 0;
+    this->sizeTotNeigh1 = 0;
+    this->sizeTotNeigh2 = 0;
+    this->sizeFullNeigh = 0;
 
     if (cutoffMode == CUTOFF_MODE_SINGLE)
     {
@@ -259,16 +262,16 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int* idxNeighbor, in
     }
 
     // allocate memory about totNeigh
-    if (this->sizeTotNeigh < totNeigh)
+    if (this->sizeTotNeigh1 < totNeigh)
     {
         if (this->elementAll       != nullptr) cudaFreeHost(this->elementAll);
         if (this->elementAll_d     != nullptr) cudaFree    (this->elementAll_d);
         if (this->posNeighborAll   != nullptr) cudaFreeHost(this->posNeighborAll);
         if (this->posNeighborAll_d != nullptr) cudaFree    (this->posNeighborAll_d);
         if (this->symmDataSum      != nullptr) cudaFreeHost(this->symmDataSum);
+        if (this->symmDiffAll      != nullptr) cudaFreeHost(this->symmDiffAll);
         if (this->symmDataSum_d    != nullptr) cudaFree    (this->symmDataSum_d);
         if (this->symmDataAll_d    != nullptr) cudaFree    (this->symmDataAll_d);
-        if (this->symmDiffAll      != nullptr) cudaFreeHost(this->symmDiffAll);
         if (this->symmDiffAll_d    != nullptr) cudaFree    (this->symmDiffAll_d);
 
         cudaMallocHost(&(this->elementAll),       sizeof(gint)    * totNeigh);
@@ -287,7 +290,7 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int* idxNeighbor, in
         cudaMalloc    (&(this->symmDiffAll_d),    sizeof(nnpreal) * 3 * totNeigh * this->numBasis);
 #endif
 
-        this->sizeTotNeigh = totNeigh;
+        this->sizeTotNeigh1 = totNeigh;
     }
 
     // serialize all data of neighbors
@@ -391,10 +394,10 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int* idxNeighbor, in
 #endif
 #else
     cudaMemcpy(this->symmDataSum, this->symmDataSum_d, sizeof(nnpreal)     * lenAtoms * this->numBasis, cudaMemcpyDeviceToHost);
-    memcpy   (&(symmData[0]), &(this->symmDataSum[0]), sizeof(nnpreal)     * lenAtoms * this->numBasis);
+    memcpy    (      symmData,    this->symmDataSum,   sizeof(nnpreal)     * lenAtoms * this->numBasis);
 #ifndef SYMMDIFF_HIDDEN
     cudaMemcpy(this->symmDiffAll, this->symmDiffAll_d, sizeof(nnpreal) * 3 * totNeigh * this->numBasis, cudaMemcpyDeviceToHost);
-    memcpy   (&(symmDiff[0]), &(this->symmDiffAll[0]), sizeof(nnpreal) * 3 * totNeigh * this->numBasis);
+    memcpy    (      symmDiff,    this->symmDiffAll,   sizeof(nnpreal) * 3 * totNeigh * this->numBasis);
 #endif
 #endif
 
@@ -409,23 +412,39 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int* idxNeighbor, in
     }
 }
 
-void SymmFuncGPU::allocHiddenDiff(int lenAtoms, int fullNeigh)
+void SymmFuncGPU::allocHiddenDiff(int maxAtoms, int fullNeigh)
 {
 #ifdef SYMMDIFF_HIDDEN
-    if (lenAtoms > 0)
+    if (maxAtoms < 0)
     {
-        if (this->symmGrad   == nullptr)
-        cudaMallocHost(&(this->symmGrad),   sizeof(nnpreal) * lenAtoms * this->numBasis);
-
-        if (this->symmGrad_d == nullptr)
-        cudaMalloc    (&(this->symmGrad_d), sizeof(nnpreal) * lenAtoms * this->numBasis);
+        stop_by_error("max of atoms is not positive.");
     }
 
-    if (fullNeigh > 0)
+    // allocate memory about maxAtoms
+    if (this->sizeMaxAtoms < maxAtoms)
+    {
+        if (this->symmGrad   != nullptr) cudaFreeHost(this->symmGrad);
+        if (this->symmGrad_d != nullptr) cudaFree    (this->symmGrad_d);
+
+        cudaMallocHost(&(this->symmGrad),   sizeof(int) * maxAtoms * this->numBasis);
+        cudaMalloc    (&(this->symmGrad_d), sizeof(int) * maxAtoms * this->numBasis);
+
+        this->sizeMaxAtoms = maxAtoms;
+    }
+
+    if (fullNeigh < 1)
+    {
+        return;
+    }
+
+    // allocate memory about fullNeigh
+    if (this->sizeFullNeigh < fullNeigh)
     {
         if (this->symmDiffFull_d != nullptr) cudaFree(this->symmDiffFull_d);
 
         cudaMalloc(&(this->symmDiffFull_d), sizeof(nnpreal) * 3 * fullNeigh * this->numBasis);
+
+        this->sizeFullNeigh = fullNeigh;
     }
 #endif
 }
@@ -433,11 +452,123 @@ void SymmFuncGPU::allocHiddenDiff(int lenAtoms, int fullNeigh)
 void SymmFuncGPU::driveHiddenDiff(int lenAtoms, int* numNeighbor, int* idxNeighbor, nnpreal* forceData)
 {
 #ifdef SYMMDIFF_HIDDEN
+    if (lenAtoms < 0)
+    {
+        stop_by_error("#atoms is not positive.");
+    }
 
+    if (numNeighbor == nullptr || idxNeighbor == nullptr)
+    {
+        stop_by_error("neighbor is null.");
+    }
+
+    if (forceData == nullptr)
+    {
+        stop_by_error("forceData is null.");
+    }
+
+    // define varialbes
     // TODO
+    // TODO check variables, that is not used.
     // TODO
+    int iatom;
+    int ineigh, jneigh;
+    int idata;
+    int ipos;
+
+    int numNeigh;
+    int idxNeigh;
+    int maxNeigh;
+    int totNeigh;
+
+    int numData;
+
+    int numPos;
+    int idxPos;
+
+    int numModeBatchs;
+    int modesPerBatch;
+    int dimBasis;
+
+    dim3 grid;
+    dim3 block;
+
+    size_t sizeShared;
+
+    // check sizeLenAtoms
+    if (this->sizeLenAtoms < lenAtoms)
+    {
+        stop_by_error("size of atoms is not correct.");
+    }
+
+    // count neighbors
+    maxNeigh = 0;
+    totNeigh = numNeighbor[lenAtoms - 1] + idxNeighbor[lenAtoms - 1] - idxNeighbor[0];
+
+    #pragma omp parallel for private(iatom, numNeigh, idxNeigh) reduction(max:maxNeigh)
+    for (iatom = 0; iatom < lenAtoms; ++iatom)
+    {
+        numNeigh = numNeighbor[iatom];
+        idxNeigh = idxNeighbor[iatom] - idxNeighbor[0];
+        this->numNeighs[iatom] = numNeigh;
+        this->idxNeighs[iatom] = idxNeigh;
+
+        maxNeigh  = max(maxNeigh, numNeigh);
+    }
+
+    if (maxNeigh > this->maxThreadsPerBlock)
+    {
+        stop_by_error("too less #threads a block for GPU (#threads < maxNeigh).");
+    }
+
+    if (maxNeigh < 1 || totNeigh < 1)
+    {
+        // because this->numNeighs[iatom] is always 0,
+        // there is no need to do forceData = ZERO.
+        return;
+    }
+
+    // allocate memory about totNeigh
+    if (this->sizeTotNeigh2 < totNeigh)
+    {
+        if (this->forceData   != nullptr) cudaFreeHost(this->forceData);
+        if (this->forceData_d != nullptr) cudaFree    (this->forceData_d);
+
+#ifndef SYMMFUNC_DIRECT_COPY
+        cudaMallocHost(&(this->forceData),   sizeof(nnpreal) * 3 * totNeigh);
+#endif
+        cudaMalloc    (&(this->forceData_d), sizeof(nnpreal) * 3 * totNeigh);
+
+        this->sizeTotNeigh2 = totNeigh;
+    }
+
+    // copy memory host -> gpu
+    cudaMemcpy(this->numNeighs_d, this->numNeighs, sizeof(int)     * lenAtoms,                  cudaMemcpyHostToDevice);
+    cudaMemcpy(this->idxNeighs_d, this->idxNeighs, sizeof(int)     * lenAtoms,                  cudaMemcpyHostToDevice);
+    cudaMemcpy(this->symmGrad_d,  this->symmGrad,  sizeof(nnpreal) * lenAtoms * this->numBasis, cudaMemcpyHostToDevice);
+
+    // forceData = symmDiff * symmGrad
+    // TODO
+    // TODO call kernel
     // TODO
 
+    // copy memory gpu -> host
+#ifdef SYMMFUNC_DIRECT_COPY
+    cudaMemcpy(      forceData, this->forceData_d, sizeof(nnpreal) * 3 * totNeigh, cudaMemcpyDeviceToHost);
+#else
+    cudaMemcpy(this->forceData, this->forceData_d, sizeof(nnpreal) * 3 * totNeigh, cudaMemcpyDeviceToHost);
+    memcpy    (      forceData, this->forceData,   sizeof(nnpreal) * 3 * totNeigh);
+#endif
+
+    // check error of cuda
+    cudaError_t error = cudaGetLastError();
+
+    if (error != cudaSuccess)
+    {
+        char message[512];
+        sprintf(message, "cudaError: %s\n", cudaGetErrorString(error));
+        stop_by_error(message);
+    }
 #endif
 }
 
