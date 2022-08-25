@@ -531,6 +531,9 @@ void SymmFuncGPU::driveHiddenDiff(int lenAtoms, int* numNeighbor, int* idxNeighb
     cudaMemcpy(this->symmGrad_d,  this->symmGrad,  sizeof(nnpreal) * lenAtoms * this->numBasis, cudaMemcpyHostToDevice);
 
     // forceData = symmDiff * symmGrad
+    block = dim3(maxNeigh, 1, 1);
+    grid  = dim3(lenAtoms, 1, 1);
+
     // TODO
     // TODO call kernel
     // TODO
