@@ -158,6 +158,11 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int* idxNeighbor, in
         stop_by_error("symmDiff is null.");
     }
 
+    if (this->numBasis > this->maxThreadsPerBlock)
+    {
+        stop_by_error("too less #threads a block for GPU (#threads < numBasis).");
+    }
+
     // define varialbes
     int iatom;
     int ineigh, jneigh;
@@ -216,7 +221,7 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int* idxNeighbor, in
 
     if (maxNeigh > this->maxThreadsPerBlock)
     {
-        stop_by_error("too less #threads a block for GPU.");
+        stop_by_error("too less #threads a block for GPU (#threads < maxNeigh).");
     }
 
     if (maxNeigh < 1 || totNeigh < 1)
