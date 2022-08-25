@@ -46,7 +46,7 @@ Property::Property()
 
 #ifdef _NNP_GPU
     this->gpuThreads    = 256;
-    this->gpuAtomBlock  = 512;
+    this->gpuAtomBlock  = 4096;
 #endif
 }
 
