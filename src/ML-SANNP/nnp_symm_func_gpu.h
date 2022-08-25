@@ -21,7 +21,7 @@
 #define MAX_ELEMENT_PAIRS   10
 #define MAX_ELEMENT_PAIRS3  30
 
-#define SYMMDIFF_DIRECT_COPY
+#define SYMMFUNC_DIRECT_COPY
 
 class SymmFuncGPU : public SymmFunc
 {
@@ -78,7 +78,8 @@ protected:
     gint*    elementAll_d;
     nnpreal* posNeighborAll;
     nnpreal* posNeighborAll_d;
-    nnpreal* symmDataAll;
+    nnpreal* symmDataSum;
+    nnpreal* symmDataSum_d;
     nnpreal* symmDataAll_d;
     nnpreal* symmDiffAll;
     nnpreal* symmDiffAll_d;
