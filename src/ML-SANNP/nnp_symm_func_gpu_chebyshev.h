@@ -20,11 +20,11 @@ public:
     virtual ~SymmFuncGPUChebyshev() override;
 
 protected:
-    void calculateRadial(dim3 grid, dim3 block);
+    void calculateRadial(dim3 grid, dim3 block, int idxNeigh) override;
 
-    void calculateAnglarElemWeight(dim3 grid, dim3 block, size_t sizeShared);
+    void calculateAnglarElemWeight(dim3 grid, dim3 block, size_t sizeShared, int idxNeigh) override;
 
-    void calculateAnglarNotElemWeight(dim3 grid, dim3 block, size_t sizeShared, int dimBasis);
+    void calculateAnglarNotElemWeight(dim3 grid, dim3 block, size_t sizeShared, int idxNeigh, int dimBasis) override;
 };
 
 #endif /* NNP_SYMM_FUNC_GPU_CHEBYSHEV_H_ */

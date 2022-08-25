@@ -980,22 +980,36 @@ __global__ void calculateBehlerG4NotEW(
     }
 }
 
-void SymmFuncGPUBehler::calculateRadial(dim3 grid, dim3 block)
+void SymmFuncGPUBehler::calculateRadial(dim3 grid, dim3 block, int idxNeigh)
 {
+    nnpreal* symmDiffAll_d;
+#ifdef SYMMDIFF_HIDDEN
+    symmDiffAll_d = this->symmDiffFull_d[3 * idxNeigh * this->numBasis];
+#else
+    symmDiffAll_d = this->symmDiffAll_d;
+#endif
+
     calculateBehlerG2<<<grid, block>>>(
     this->numNeighs_d, this->idxNeighs_d, this->elementAll_d, this->posNeighborAll_d, this->sizePosNeighbor,
-    this->symmDataAll_d, this->symmDiffAll_d, this->sizeRad, this->rcutRad,
+    this->symmDataAll_d, symmDiffAll_d, this->sizeRad, this->rcutRad,
     this->radiusEta, this->radiusShift,
     this->numBasis, this->elemWeight);
 }
 
-void SymmFuncGPUBehler::calculateAnglarElemWeight(dim3 grid, dim3 block, size_t sizeShared)
+void SymmFuncGPUBehler::calculateAnglarElemWeight(dim3 grid, dim3 block, size_t sizeShared, int idxNeigh)
 {
+    nnpreal* symmDiffAll_d;
+#ifdef SYMMDIFF_HIDDEN
+    symmDiffAll_d = this->symmDiffFull_d[3 * idxNeigh * this->numBasis];
+#else
+    symmDiffAll_d = this->symmDiffAll_d;
+#endif
+
     if (this->angleMod)
     {
         calculateBehlerG4EW<<<grid, block, sizeShared>>>(
         this->numNeighs_d, this->idxNeighs_d, this->elementAll_d, this->posNeighborAll_d, this->sizePosNeighbor,
-        this->symmDataAll_d, this->symmDiffAll_d, this->sizeAng, this->rcutAng,
+        this->symmDataAll_d, symmDiffAll_d, this->sizeAng, this->rcutAng,
         this->angleEta, this->angleZeta, this->angleShift,
         this->numBasis, this->numRadBasis);
     }
@@ -1003,19 +1017,26 @@ void SymmFuncGPUBehler::calculateAnglarElemWeight(dim3 grid, dim3 block, size_t 
     {
         calculateBehlerG3EW<<<grid, block, sizeShared>>>(
         this->numNeighs_d, this->idxNeighs_d, this->elementAll_d, this->posNeighborAll_d, this->sizePosNeighbor,
-        this->symmDataAll_d, this->symmDiffAll_d, this->sizeAng, this->rcutAng,
+        this->symmDataAll_d, symmDiffAll_d, this->sizeAng, this->rcutAng,
         this->angleEta, this->angleZeta, this->angleShift,
         this->tanhCutFunc, this->numBasis, this->numRadBasis);
     }
 }
 
-void SymmFuncGPUBehler::calculateAnglarNotElemWeight(dim3 grid, dim3 block, size_t sizeShared, int dimBasis)
+void SymmFuncGPUBehler::calculateAnglarNotElemWeight(dim3 grid, dim3 block, size_t sizeShared, int idxNeigh, int dimBasis)
 {
+    nnpreal* symmDiffAll_d;
+#ifdef SYMMDIFF_HIDDEN
+    symmDiffAll_d = this->symmDiffFull_d[3 * idxNeigh * this->numBasis];
+#else
+    symmDiffAll_d = this->symmDiffAll_d;
+#endif
+
     if (this->angleMod)
     {
         calculateBehlerG4NotEW<<<grid, block, sizeShared>>>(
         this->numNeighs_d, this->idxNeighs_d, this->elementAll_d, this->posNeighborAll_d, this->sizePosNeighbor,
-        this->symmDataAll_d, this->symmDiffAll_d, this->sizeAng, this->rcutAng,
+        this->symmDataAll_d, symmDiffAll_d, this->sizeAng, this->rcutAng,
         this->angleEta, this->angleZeta, this->angleShift,
         this->numBasis, this->numRadBasis, dimBasis);
     }
@@ -1023,7 +1044,7 @@ void SymmFuncGPUBehler::calculateAnglarNotElemWeight(dim3 grid, dim3 block, size
     {
         calculateBehlerG3NotEW<<<grid, block, sizeShared>>>(
         this->numNeighs_d, this->idxNeighs_d, this->elementAll_d, this->posNeighborAll_d, this->sizePosNeighbor,
-        this->symmDataAll_d, this->symmDiffAll_d, this->sizeAng, this->rcutAng,
+        this->symmDataAll_d, symmDiffAll_d, this->sizeAng, this->rcutAng,
         this->angleEta, this->angleZeta, this->angleShift,
         this->tanhCutFunc, this->numBasis, this->numRadBasis, dimBasis);
     }

@@ -42,8 +42,7 @@ NNArch::NNArch(int mode, int numElems, const Property* property, LAMMPS_NS::Memo
     this->elemNeighbor = nullptr;
     this->posNeighbor  = nullptr;
 
-    this->sizeNatom    = 0;
-    this->sizeNbase    = 0;
+    this->sizeNumAtom  = 0;
     this->sizeTotNeigh = 0;
     this->sizeNbatch   = new int[this->numElems];
 
@@ -237,19 +236,19 @@ NNArch::~NNArch()
 
     if (this->ljlikeA1 != nullptr)
     {
-    	delete[] this->ljlikeA1;
+        delete[] this->ljlikeA1;
     }
     if (this->ljlikeA2 != nullptr)
     {
-    	delete[] this->ljlikeA2;
+        delete[] this->ljlikeA2;
     }
     if (this->ljlikeA3 != nullptr)
     {
-    	delete[] this->ljlikeA3;
+        delete[] this->ljlikeA3;
     }
     if (this->ljlikeA4 != nullptr)
     {
-    	delete[] this->ljlikeA4;
+        delete[] this->ljlikeA4;
     }
 }
 
@@ -512,8 +511,8 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, bool zeroEatom,
 
                 if (sscanf(line, IFORM_S2_F4, elemName1, elemName2, &A1, &A2, &A3, &A4) != 6)
                 {
-                	ierr = 1;
-            	    break;
+                    ierr = 1;
+                    break;
                 }
 
                 ielem1 = -1;
@@ -843,7 +842,7 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, bool zeroEatom,
                 }
                 else
                 {
-                	interLayersCharge[kelem][0]->scanWeight(fp, rank, world);
+                    interLayersCharge[kelem][0]->scanWeight(fp, rank, world);
                 }
             }
 
@@ -920,7 +919,7 @@ void NNArch::initGeometry(int numAtoms, int* elements,
     this->posNeighbor  = posNeighbor;
 
     // count index of neighbor
-    if (this->sizeNatom < natom)
+    if (this->sizeNumAtom < natom)
     {
         if (this->idxNeighbor == nullptr)
         {
@@ -947,7 +946,7 @@ void NNArch::initGeometry(int numAtoms, int* elements,
         this->nbatch[ielem] = 0;
     }
 
-    if (this->sizeNatom < natom)
+    if (this->sizeNumAtom < natom)
     {
         if (this->ibatch == nullptr)
         {
@@ -1080,39 +1079,43 @@ void NNArch::initGeometry(int numAtoms, int* elements,
     }
 
     // (re)allocate memory of symmetry functions
-    if (this->sizeNatom < natom || this->sizeNbase < nbase)
+    if (this->sizeNumAtom < natom)
     {
-        int natom_ = max(natom, this->sizeNatom);
-        int nbase_ = max(nbase, this->sizeNbase);
-
         if (this->symmData == nullptr)
         {
-            this->memory->create(this->symmData, natom_ * nbase_, "nnp:symmData");
+            this->memory->create(this->symmData, natom * nbase, "nnp:symmData");
         }
         else
         {
-            this->memory->grow  (this->symmData, natom_ * nbase_, "nnp:symmData");
+            this->memory->grow  (this->symmData, natom * nbase, "nnp:symmData");
         }
     }
 
-    if (this->sizeTotNeigh < totNeigh || this->sizeNbase < nbase)
+    if (this->sizeTotNeigh < totNeigh)
     {
-        int totNeigh_ = max(totNeigh, this->sizeTotNeigh);
-        int nbase_    = max(nbase,    this->sizeNbase);
-
-        if (this->symmDiff == nullptr)
+        if (this->getSymmFunc()->isHiddenDiff())
         {
-            this->memory->create(this->symmDiff, 3 * totNeigh_ * nbase_, "nnp:symmDiff");
+#ifdef _NNP_GPU
+            this->getSymmFunc()->allocHiddenDiff(this->property->getGpuAtomBlock(), totNeigh);
+#else
+            stop_by_error("hiddenDiff is only for GPU.");
+#endif
         }
         else
         {
-            this->memory->grow  (this->symmDiff, 3 * totNeigh_ * nbase_, "nnp:symmDiff");
+            if (this->symmDiff == nullptr)
+            {
+                this->memory->create(this->symmDiff, 3 * totNeigh * nbase, "nnp:symmDiff");
+            }
+            else
+            {
+                this->memory->grow  (this->symmDiff, 3 * totNeigh * nbase, "nnp:symmDiff");
+            }
         }
     }
 
     // save size of memory
-    this->sizeNatom    = max(natom,    this->sizeNatom);
-    this->sizeNbase    = max(nbase,    this->sizeNbase);
+    this->sizeNumAtom  = max(natom,    this->sizeNumAtom);
     this->sizeTotNeigh = max(totNeigh, this->sizeTotNeigh);
 
     for (ielem = 0; ielem < nelem; ++ielem)
@@ -1133,16 +1136,6 @@ SymmFunc* NNArch::getSymmFunc()
 {
     if (this->symmFunc == nullptr)
     {
-        if (this->numElems < 1)
-        {
-            stop_by_error("#elements is not positive.");
-        }
-
-        if (this->property == nullptr)
-        {
-            stop_by_error("property is null.");
-        }
-
         if (this->property->getSymmFunc() == SYMM_FUNC_MANYBODY)
         {
             int  m2 = this->property->getM2();
@@ -1240,6 +1233,17 @@ void NNArch::calculateSymmFuncs()
     int nbase = this->getSymmFunc()->getNumBasis();
 
 #ifdef _NNP_GPU
+    nnpreal* symmDiff;
+
+    if (this->getSymmFunc()->isHiddenDiff())
+    {
+        symmDiff = nullptr;
+    }
+    else
+    {
+        symmDiff = &(this->symmDiff[idiff]);
+    }
+
     for (iatom = 0; iatom < natom; iatom += iatomBlock)
     {
         idata = iatom * nbase;
@@ -1249,7 +1253,7 @@ void NNArch::calculateSymmFuncs()
 
         this->symmFunc->calculate(lenAtoms, &(this->numNeighbor[iatom]), &(this->idxNeighbor[iatom]),
                                   &(this->elemNeighbor[iatom]), &(this->posNeighbor[iatom]),
-                                  &(this->symmData[idata]), &(this->symmDiff[idiff]));
+                                  &(this->symmData[idata]), symmDiff);
     }
 #else
     #pragma omp parallel for private(iatom, idata, idiff)
@@ -1410,10 +1414,19 @@ void NNArch::goBackwardOnForce()
 
     int iatom;
     int natom = this->numAtoms;
+#ifdef _NNP_GPU
+    int jatom;
+    int lenAtoms;
+    int iatomBlock = this->property->getGpuAtomBlock();
+#endif
 
     int nneigh;
     int mneigh;
     int nneigh3;
+#ifdef _NNP_GPU
+    int ineigh;
+    int jneigh;
+#endif
 
     int ielem;
     int nelem = this->numElems;
@@ -1476,30 +1489,80 @@ void NNArch::goBackwardOnForce()
     }
 
     // calculate forces w/ derivatives of symmetry functions
-    #pragma omp parallel private(iatom, ielem, jbatch, ibase, nneigh, mneigh, nneigh3, \
-                                 dev, symmScale, symmGrad)
+    if (this->getSymmFunc()->isHiddenDiff())
     {
-        symmGrad = new nnpreal[nbase];
+#ifdef _NNP_GPU
+        symmGrad = this->getSymmFunc()->getSymmGrad();
 
-        #pragma omp for
+        for (iatom = 0; iatom < natom; iatom += iatomBlock)
+        {
+            lenAtoms = min(iatom + iatomBlock, natom) - iatom;
+
+            mneigh = this->idxNeighbor[iatom];
+
+            #pragma omp parallel for private(jatom, ielem, jbatch, ibase)
+            for (jatom = 0; jatom < lenAtoms; ++jatom)
+            {
+                ielem  = this->elements[iatom + jatom];
+                jbatch = this->ibatch  [iatom + jatom];
+
+                #pragma omp simd
+                for (ibase = 0; ibase < nbase; ++ibase)
+                {
+                    symmGrad[ibase + jatom * nbase] =
+                    this->interLayersEnergy[ielem][0]->getGrad()[ibase + jbatch * nbase];
+                }
+            }
+
+            this->symmFunc->driveHiddenDiff(lenAtoms, &(this->numNeighbor[iatom]), &(this->idxNeighbor[iatom]),
+                                            &(this->forceData[3 * mneigh]));
+        }
+
+        #pragma omp parallel for private (iatom, ielem, dev, symmScale, ineigh, jneigh, nneigh, mneigh)
         for (iatom = 0; iatom < natom; ++iatom)
         {
             ielem  = this->elements[iatom];
-            jbatch = this->ibatch[iatom];
+
+            dev = this->symmDev[ielem];
+            symmScale = -ONE / dev;
+
+            nneigh = this->numNeighbor[iatom];
+            mneigh = this->idxNeighbor[iatom];
+
+            #pragma omp simd
+            for (ineigh = 0; ineigh < nneigh; ++ineigh)
+            {
+                jneigh = ineigh + mneigh;
+                this->forceData[3 * jneigh + 0] *= symmScale;
+                this->forceData[3 * jneigh + 1] *= symmScale;
+                this->forceData[3 * jneigh + 2] *= symmScale;
+            }
+        }
+#else
+        stop_by_error("hiddenDiff is only for GPU.");
+#endif
+    }
+    else
+    {
+        #pragma omp parallel for private(iatom, ielem, jbatch, ibase, nneigh, mneigh, nneigh3, \
+                                         dev, symmScale, symmGrad)
+        for (iatom = 0; iatom < natom; ++iatom)
+        {
+            ielem  = this->elements[iatom];
+            jbatch = this->ibatch  [iatom];
 
             nneigh = this->numNeighbor[iatom];
             mneigh = this->idxNeighbor[iatom];
             nneigh3 = 3 * nneigh;
 
+            if (nneigh < 1)
+            {
+                continue;
+            }
+
             dev = this->symmDev[ielem];
             symmScale = -ONE / dev;
-
-            #pragma omp simd
-            for (ibase = 0; ibase < nbase; ++ibase)
-            {
-                symmGrad[ibase] =
-                this->interLayersEnergy[ielem][0]->getGrad()[ibase + jbatch * nbase];
-            }
+            symmGrad  = &(this->interLayersEnergy[ielem][0]->getGrad()[jbatch * nbase]);
 
             if (transDiff)
             {
@@ -1516,8 +1579,6 @@ void NNArch::goBackwardOnForce()
                        &a0, &(this->forceData[3 * mneigh]), &i1);
             }
         }
-
-        delete[] symmGrad;
     }
 }
 

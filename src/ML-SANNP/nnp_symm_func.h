@@ -31,6 +31,22 @@ public:
                             symmData, symmDiff);
         }
     }
+
+    virtual nnpreal* getSymmGrad()
+    {
+        // NOP
+        return nullptr;
+    }
+
+    virtual void allocHiddenDiff(int lenAtoms, int fullNeigh)
+    {
+        // NOP
+    }
+
+    virtual void driveHiddenDiff(int lenAtoms, int* numNeighbor, int* idxNeighbor, nnpreal* forceData)
+    {
+        // NOP
+    }
 #endif
 
     int getNumBasis() const
@@ -41,6 +57,11 @@ public:
     bool isTransDiff() const
     {
         return this->transDiff;
+    }
+
+    bool isHiddenDiff() const
+    {
+        return this->hiddenDiff;
     }
 
     void cutoffFunction(nnpreal* fc, nnpreal* dfcdr, nnpreal r, nnpreal rc) const;
@@ -55,6 +76,8 @@ protected:
     bool elemWeight;
 
     bool transDiff;
+
+    bool hiddenDiff;
 };
 
 inline void SymmFunc::cutoffFunction(nnpreal* fc, nnpreal* dfcdr, nnpreal r, nnpreal rc) const

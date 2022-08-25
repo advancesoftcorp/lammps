@@ -58,22 +58,22 @@ public:
 
     const nnpreal* getLJLikeA1() const
     {
-    	return this->ljlikeA1;
+        return this->ljlikeA1;
     }
 
     const nnpreal* getLJLikeA2() const
     {
-    	return this->ljlikeA2;
+        return this->ljlikeA2;
     }
 
     const nnpreal* getLJLikeA3() const
     {
-    	return this->ljlikeA3;
+        return this->ljlikeA3;
     }
 
     const nnpreal* getLJLikeA4() const
     {
-    	return this->ljlikeA4;
+        return this->ljlikeA4;
     }
 
 private:
@@ -93,8 +93,7 @@ private:
     int**      elemNeighbor;
     nnpreal*** posNeighbor;
 
-    int  sizeNatom;
-    int  sizeNbase;
+    int  sizeNumAtom;
     int  sizeTotNeigh;
     int* sizeNbatch;
 

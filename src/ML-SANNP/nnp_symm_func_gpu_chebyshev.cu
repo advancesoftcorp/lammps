@@ -461,24 +461,45 @@ __global__ void calculateChebyshevAngNotEW(
     }
 }
 
-void SymmFuncGPUChebyshev::calculateRadial(dim3 grid, dim3 block)
+void SymmFuncGPUChebyshev::calculateRadial(dim3 grid, dim3 block, int idxNeigh)
 {
+    nnpreal* symmDiffAll_d;
+#ifdef SYMMDIFF_HIDDEN
+    symmDiffAll_d = this->symmDiffFull_d[3 * idxNeigh * this->numBasis];
+#else
+    symmDiffAll_d = this->symmDiffAll_d;
+#endif
+
     calculateChebyshevRad<<<grid, block>>>(
     this->numNeighs_d, this->idxNeighs_d, this->elementAll_d, this->posNeighborAll_d, this->sizePosNeighbor,
-    this->symmDataAll_d, this->symmDiffAll_d, this->sizeRad, this->rcutRad, this->numBasis, this->elemWeight);
+    this->symmDataAll_d, symmDiffAll_d, this->sizeRad, this->rcutRad, this->numBasis, this->elemWeight);
 }
 
-void SymmFuncGPUChebyshev::calculateAnglarElemWeight(dim3 grid, dim3 block, size_t sizeShared)
+void SymmFuncGPUChebyshev::calculateAnglarElemWeight(dim3 grid, dim3 block, size_t sizeShared, int idxNeigh)
 {
+    nnpreal* symmDiffAll_d;
+#ifdef SYMMDIFF_HIDDEN
+    symmDiffAll_d = this->symmDiffFull_d[3 * idxNeigh * this->numBasis];
+#else
+    symmDiffAll_d = this->symmDiffAll_d;
+#endif
+
     calculateChebyshevAngEW<<<grid, block, sizeShared>>>(
     this->numNeighs_d, this->idxNeighs_d, this->elementAll_d, this->posNeighborAll_d, this->sizePosNeighbor,
-    this->symmDataAll_d, this->symmDiffAll_d, this->sizeAng, this->rcutAng, this->numBasis, this->numRadBasis);
+    this->symmDataAll_d, symmDiffAll_d, this->sizeAng, this->rcutAng, this->numBasis, this->numRadBasis);
 }
 
-void SymmFuncGPUChebyshev::calculateAnglarNotElemWeight(dim3 grid, dim3 block, size_t sizeShared, int dimBasis)
+void SymmFuncGPUChebyshev::calculateAnglarNotElemWeight(dim3 grid, dim3 block, size_t sizeShared, int idxNeigh, int dimBasis)
 {
+    nnpreal* symmDiffAll_d;
+#ifdef SYMMDIFF_HIDDEN
+    symmDiffAll_d = this->symmDiffFull_d[3 * idxNeigh * this->numBasis];
+#else
+    symmDiffAll_d = this->symmDiffAll_d;
+#endif
+
     calculateChebyshevAngNotEW<<<grid, block, sizeShared>>>(
     this->numNeighs_d, this->idxNeighs_d, this->elementAll_d, this->posNeighborAll_d, this->sizePosNeighbor,
-    this->symmDataAll_d, this->symmDiffAll_d, this->sizeAng, this->rcutAng, this->numBasis, this->numRadBasis, dimBasis);
+    this->symmDataAll_d, symmDiffAll_d, this->sizeAng, this->rcutAng, this->numBasis, this->numRadBasis, dimBasis);
 }
 

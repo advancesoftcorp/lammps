@@ -22,6 +22,7 @@
 #define MAX_ELEMENT_PAIRS3  30
 
 #define SYMMFUNC_DIRECT_COPY
+#define SYMMDIFF_HIDDEN
 
 class SymmFuncGPU : public SymmFunc
 {
@@ -41,6 +42,15 @@ public:
 
     void calculate(int lenAtoms, int* numNeighbor, int* idxNeighbor, int** elemNeighbor, nnpreal*** posNeighbor,
                    nnpreal* symmData, nnpreal* symmDiff) override;
+
+    nnpreal* getSymmGrad() override
+    {
+        return this->symmGrad;
+    }
+
+    void allocHiddenDiff(int lenAtoms, int fullNeigh) override;
+
+    void driveHiddenDiff(int lenAtoms, int* numNeighbor, int* idxNeighbor, nnpreal* forceData) override;
 
     void setMaxThreadsPerBlock(int maxThreadsPerBlock)
     {
@@ -85,12 +95,17 @@ protected:
     nnpreal* symmDataAll_d;
     nnpreal* symmDiffAll;
     nnpreal* symmDiffAll_d;
+    nnpreal* symmDiffFull_d;
+    nnpreal* symmGrad;
+    nnpreal* symmGrad_d;
+    nnpreal* forceData;
+    nnpreal* forceData_d;
 
-    virtual void calculateRadial(dim3 grid, dim3 block) = 0;
+    virtual void calculateRadial(dim3 grid, dim3 block, int idxNeigh) = 0;
 
-    virtual void calculateAnglarElemWeight(dim3 grid, dim3 block, size_t sizeShared) = 0;
+    virtual void calculateAnglarElemWeight(dim3 grid, dim3 block, size_t sizeShared, int idxNeigh) = 0;
 
-    virtual void calculateAnglarNotElemWeight(dim3 grid, dim3 block, size_t sizeShared, int dimBasis) = 0;
+    virtual void calculateAnglarNotElemWeight(dim3 grid, dim3 block, size_t sizeShared, int idxNeigh, int dimBasis) = 0;
 
 private:
     int maxThreadsPerBlock;

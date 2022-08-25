@@ -30,7 +30,13 @@ SymmFuncGPU::SymmFuncGPU(int numElems, bool tanhCutFunc, bool elemWeight, int si
         stop_by_error("cutoff for angle is not positive.");
     }
 
-    this->transDiff = true;
+    this->transDiff  = true;
+
+#ifdef SYMMDIFF_HIDDEN
+    this->hiddenDiff = true;
+#else
+    this->hiddenDiff = false;
+#endif
 
     this->maxThreadsPerBlock = 1;
 
@@ -82,6 +88,11 @@ SymmFuncGPU::SymmFuncGPU(int numElems, bool tanhCutFunc, bool elemWeight, int si
     this->symmDataAll_d    = nullptr;
     this->symmDiffAll      = nullptr;
     this->symmDiffAll_d    = nullptr;
+    this->symmDiffFull_d   = nullptr;
+    this->symmGrad         = nullptr;
+    this->symmGrad_d       = nullptr;
+    this->forceData        = nullptr;
+    this->forceData_d      = nullptr;
 
 #ifdef _NNP_SINGLE
     cudaError_t error = cudaDeviceSetSharedMemConfig(cudaSharedMemBankSizeFourByte);
@@ -112,6 +123,11 @@ SymmFuncGPU::~SymmFuncGPU()
     if (this->symmDataAll_d    != nullptr) cudaFree    (this->symmDataAll_d);
     if (this->symmDiffAll      != nullptr) cudaFreeHost(this->symmDiffAll);
     if (this->symmDiffAll_d    != nullptr) cudaFree    (this->symmDiffAll_d);
+    if (this->symmDiffFull_d   != nullptr) cudaFree    (this->symmDiffFull_d);
+    if (this->symmGrad         != nullptr) cudaFreeHost(this->symmGrad);
+    if (this->symmGrad_d       != nullptr) cudaFree    (this->symmGrad);
+    if (this->forceData        != nullptr) cudaFreeHost(this->forceData);
+    if (this->forceData_d      != nullptr) cudaFree    (this->forceData_d);
 }
 
 __global__ void sumupSymmData(int* numNeighs, int* idxNeighs, nnpreal* symmData, nnpreal* symmDataSum)
@@ -153,10 +169,12 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int* idxNeighbor, in
         stop_by_error("symmData is null.");
     }
 
+#ifndef SYMMDIFF_HIDDEN
     if (symmDiff == nullptr)
     {
         stop_by_error("symmDiff is null.");
     }
+#endif
 
     if (this->numBasis > this->maxThreadsPerBlock)
     {
@@ -259,11 +277,15 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int* idxNeighbor, in
         cudaMalloc    (&(this->posNeighborAll_d), sizeof(nnpreal) * this->sizePosNeighbor * totNeigh);
 #ifndef SYMMFUNC_DIRECT_COPY
         cudaMallocHost(&(this->symmDataSum),      sizeof(nnpreal)     * lenAtoms * this->numBasis);
+#ifndef SYMMDIFF_HIDDEN
         cudaMallocHost(&(this->symmDiffAll),      sizeof(nnpreal) * 3 * totNeigh * this->numBasis);
+#endif
 #endif
         cudaMalloc    (&(this->symmDataSum_d),    sizeof(nnpreal)     * lenAtoms * this->numBasis);
         cudaMalloc    (&(this->symmDataAll_d),    sizeof(nnpreal)     * totNeigh * this->numBasis);
+#ifndef SYMMDIFF_HIDDEN
         cudaMalloc    (&(this->symmDiffAll_d),    sizeof(nnpreal) * 3 * totNeigh * this->numBasis);
+#endif
 
         this->sizeTotNeigh = totNeigh;
     }
@@ -316,7 +338,7 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int* idxNeighbor, in
         block = dim3(modesPerBatch, maxNeigh, 1);
         grid  = dim3(lenAtoms, numModeBatchs, 1);
 
-        this->calculateRadial(grid, block);
+        this->calculateRadial(grid, block, idxNeighbor[0]);
     }
 
     /*
@@ -339,7 +361,7 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int* idxNeighbor, in
 
         if (this->elemWeight)
         {
-            this->calculateAnglarElemWeight(grid, block, sizeShared);
+            this->calculateAnglarElemWeight(grid, block, sizeShared, idxNeighbor[0]);
         }
         else
         {
@@ -350,7 +372,7 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int* idxNeighbor, in
                 stop_by_error("too much elements for symmetry functions on GPU, please use CPU.");
             }
 
-            this->calculateAnglarNotElemWeight(grid, block, sizeShared, dimBasis);
+            this->calculateAnglarNotElemWeight(grid, block, sizeShared, idxNeighbor[0], dimBasis);
         }
     }
 
@@ -364,12 +386,16 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int* idxNeighbor, in
     // copy memory gpu -> host
 #ifdef SYMMFUNC_DIRECT_COPY
     cudaMemcpy(symmData, this->symmDataSum_d, sizeof(nnpreal)     * lenAtoms * this->numBasis, cudaMemcpyDeviceToHost);
+#ifndef SYMMDIFF_HIDDEN
     cudaMemcpy(symmDiff, this->symmDiffAll_d, sizeof(nnpreal) * 3 * totNeigh * this->numBasis, cudaMemcpyDeviceToHost);
+#endif
 #else
     cudaMemcpy(this->symmDataSum, this->symmDataSum_d, sizeof(nnpreal)     * lenAtoms * this->numBasis, cudaMemcpyDeviceToHost);
-    cudaMemcpy(this->symmDiffAll, this->symmDiffAll_d, sizeof(nnpreal) * 3 * totNeigh * this->numBasis, cudaMemcpyDeviceToHost);
     memcpy   (&(symmData[0]), &(this->symmDataSum[0]), sizeof(nnpreal)     * lenAtoms * this->numBasis);
+#ifndef SYMMDIFF_HIDDEN
+    cudaMemcpy(this->symmDiffAll, this->symmDiffAll_d, sizeof(nnpreal) * 3 * totNeigh * this->numBasis, cudaMemcpyDeviceToHost);
     memcpy   (&(symmDiff[0]), &(this->symmDiffAll[0]), sizeof(nnpreal) * 3 * totNeigh * this->numBasis);
+#endif
 #endif
 
     // check error of cuda
@@ -382,3 +408,36 @@ void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int* idxNeighbor, in
         stop_by_error(message);
     }
 }
+
+void SymmFuncGPU::allocHiddenDiff(int lenAtoms, int fullNeigh)
+{
+#ifdef SYMMDIFF_HIDDEN
+    if (lenAtoms > 0)
+    {
+        if (this->symmGrad   == nullptr)
+        cudaMallocHost(&(this->symmGrad),   sizeof(nnpreal) * lenAtoms * this->numBasis);
+
+        if (this->symmGrad_d == nullptr)
+        cudaMalloc    (&(this->symmGrad_d), sizeof(nnpreal) * lenAtoms * this->numBasis);
+    }
+
+    if (fullNeigh > 0)
+    {
+        if (this->symmDiffFull_d != nullptr) cudaFree(this->symmDiffFull_d);
+
+        cudaMalloc(&(this->symmDiffFull_d), sizeof(nnpreal) * 3 * fullNeigh * this->numBasis);
+    }
+#endif
+}
+
+void SymmFuncGPU::driveHiddenDiff(int lenAtoms, int* numNeighbor, int* idxNeighbor, nnpreal* forceData)
+{
+#ifdef SYMMDIFF_HIDDEN
+
+    // TODO
+    // TODO
+    // TODO
+
+#endif
+}
+

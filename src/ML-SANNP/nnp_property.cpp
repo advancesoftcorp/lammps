@@ -182,7 +182,7 @@ void Property::readProperty(FILE* fp, int rank, int nproc, MPI_Comm world)
                 {
                     if (sscanf(line, IFORM_D2_F1, &(this->numRadius), &(this->numAngle), &(this->rcutRadius)) != 3)
                     {
-                    	ierr = 1;
+                        ierr = 1;
                     }
                     else
                     {
@@ -282,8 +282,8 @@ void Property::readProperty(FILE* fp, int rank, int nproc, MPI_Comm world)
                     {
                         if (sscanf(line, IFORM_F2, &(this->behlerEta2[i]), &(this->behlerZeta[i])) != 2)
                         {
-                        	ierr = 1;
-                        	break;
+                            ierr = 1;
+                            break;
                         }
                         else
                         {
@@ -751,7 +751,7 @@ void Property::readGpuProperty(int rank, int nproc, MPI_Comm world)
                     iproc++;
                     if (iproc >= nproc)
                     {
-                    	nowMpi2Device = false;
+                        nowMpi2Device = false;
                     }
 
                     continue;
@@ -788,8 +788,8 @@ void Property::readGpuProperty(int rank, int nproc, MPI_Comm world)
                 }
                 else
                 {
-                	ierr = 1;
-                	break;
+                    ierr = 1;
+                    break;
                 }
             }
 
