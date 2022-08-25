@@ -154,6 +154,7 @@ __global__ void sumupSymmData(int* numNeighs, int* idxNeighs, nnpreal* symmData,
     symmDataSum[ibase + iatom * numBasis] = symmData0;
 }
 
+#ifdef SYMMDIFF_HIDDEN
 __global__ void multSymmDiff(int* numNeighs, int* idxNeighs,
                              nnpreal* symmDiff, nnpreal* symmGrad, nnpreal* forceData, int numBasis)
 {
@@ -196,6 +197,7 @@ __global__ void multSymmDiff(int* numNeighs, int* idxNeighs,
     forceData[idxForce + 1] = forceY;
     forceData[idxForce + 2] = forceZ;
 }
+#endif
 
 void SymmFuncGPU::calculate(int lenAtoms, int* numNeighbor, int* idxNeighbor, int** elemNeighbor, nnpreal*** posNeighbor,
                             nnpreal* symmData, nnpreal* symmDiff)
