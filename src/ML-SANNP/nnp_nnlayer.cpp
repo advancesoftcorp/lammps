@@ -83,34 +83,34 @@ void NNLayer::setSizeOfBatch(int sizeBatch)
         sprintf(nameInpGrad, "nnp:inpGrad%d", this->imemory);
         sprintf(nameOutDrv1, "nnp:outDrv1%d", this->imemory);
 
+        this->sizeBatchMax = good_memory_size(this->sizeBatch);
+
         if (this->inpData == nullptr)
         {
-            this->memory->create(this->inpData, this->numInpNodes * this->sizeBatch, nameInpData);
+            this->memory->create(this->inpData, this->numInpNodes * this->sizeBatchMax, nameInpData);
         }
         else
         {
-            this->memory->grow  (this->inpData, this->numInpNodes * this->sizeBatch, nameInpData);
+            this->memory->grow  (this->inpData, this->numInpNodes * this->sizeBatchMax, nameInpData);
         }
 
         if (this->inpGrad == nullptr)
         {
-            this->memory->create(this->inpGrad, this->numInpNodes * this->sizeBatch, nameInpGrad);
+            this->memory->create(this->inpGrad, this->numInpNodes * this->sizeBatchMax, nameInpGrad);
         }
         else
         {
-            this->memory->grow  (this->inpGrad, this->numInpNodes * this->sizeBatch, nameInpGrad);
+            this->memory->grow  (this->inpGrad, this->numInpNodes * this->sizeBatchMax, nameInpGrad);
         }
 
         if (this->outDrv1 == nullptr)
         {
-            this->memory->create(this->outDrv1, this->numOutNodes * this->sizeBatch, nameOutDrv1);
+            this->memory->create(this->outDrv1, this->numOutNodes * this->sizeBatchMax, nameOutDrv1);
         }
         else
         {
-            this->memory->grow  (this->outDrv1, this->numOutNodes * this->sizeBatch, nameOutDrv1);
+            this->memory->grow  (this->outDrv1, this->numOutNodes * this->sizeBatchMax, nameOutDrv1);
         }
-
-        this->sizeBatchMax = this->sizeBatch;
     }
 }
 

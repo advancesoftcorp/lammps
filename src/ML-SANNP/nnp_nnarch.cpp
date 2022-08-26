@@ -919,16 +919,31 @@ void NNArch::initGeometry(int numAtoms, int* elements,
     this->elemNeighbor = elemNeighbor;
     this->posNeighbor  = posNeighbor;
 
-    // count index of neighbor
+    int natomNew    = -1;
+    int totNeighNew = -1;
+    int jbatchNew;
+    int nbatchNew[nelem];
+
+    for (ielem = 0; ielem < nelem; ++ielem)
+    {
+        nbatchNew[ielem] = -1;
+    }
+
     if (this->sizeNumAtom < natom)
+    {
+        natomNew = good_memory_size(natom);
+    }
+
+    // count index of neighbor
+    if (natomNew > 0)
     {
         if (this->idxNeighbor == nullptr)
         {
-            this->memory->create(this->idxNeighbor, natom, "nnp:idxNeighbor");
+            this->memory->create(this->idxNeighbor, natomNew, "nnp:idxNeighbor");
         }
         else
         {
-            this->memory->grow  (this->idxNeighbor, natom, "nnp:idxNeighbor");
+            this->memory->grow  (this->idxNeighbor, natomNew, "nnp:idxNeighbor");
         }
     }
 
@@ -944,21 +959,26 @@ void NNArch::initGeometry(int numAtoms, int* elements,
         totNeigh = max(totNeigh, natom * MIN_NEIGHBOR);
     }
 
+    if (this->sizeTotNeigh < totNeigh)
+    {
+        totNeighNew = good_memory_size(totNeigh);
+    }
+
     // count size of batch
     for (ielem = 0; ielem < nelem; ++ielem)
     {
         this->nbatch[ielem] = 0;
     }
 
-    if (this->sizeNumAtom < natom)
+    if (natomNew > 0)
     {
         if (this->ibatch == nullptr)
         {
-            this->memory->create(this->ibatch, natom, "nnp:ibatch");
+            this->memory->create(this->ibatch, natomNew, "nnp:ibatch");
         }
         else
         {
-            this->memory->grow  (this->ibatch, natom, "nnp:ibatch");
+            this->memory->grow  (this->ibatch, natomNew, "nnp:ibatch");
         }
     }
 
@@ -980,6 +1000,22 @@ void NNArch::initGeometry(int numAtoms, int* elements,
         return;
     }
 
+    for (ielem = 0; ielem < nelem; ++ielem)
+    {
+        if (this->nbatch[ielem] < 1)
+        {
+            continue;
+        }
+
+        jbatch     = this->nbatch    [ielem];
+        sizeJbatch = this->sizeNbatch[ielem];
+
+        if (sizeJbatch < jbatch)
+        {
+            nbatchNew[ielem] = good_memory_size(jbatch);
+        }
+    }
+
     if (this->isEnergyMode())
     {
         // (re)allocate memory of energies
@@ -992,10 +1028,9 @@ void NNArch::initGeometry(int numAtoms, int* elements,
                 continue;
             }
 
-            jbatch     = this->nbatch    [ielem];
-            sizeJbatch = this->sizeNbatch[ielem];
+            jbatchNew = nbatchNew[ielem];
 
-            if (sizeJbatch < jbatch)
+            if (jbatchNew > 0)
             {
                 char nameData[64];
                 char nameGrad[64];
@@ -1004,20 +1039,20 @@ void NNArch::initGeometry(int numAtoms, int* elements,
 
                 if (this->energyData[ielem] == nullptr)
                 {
-                    this->memory->create(this->energyData[ielem], jbatch, nameData);
+                    this->memory->create(this->energyData[ielem], jbatchNew, nameData);
                 }
                 else
                 {
-                    this->memory->grow  (this->energyData[ielem], jbatch, nameData);
+                    this->memory->grow  (this->energyData[ielem], jbatchNew, nameData);
                 }
 
                 if (this->energyGrad[ielem] == nullptr)
                 {
-                    this->memory->create(this->energyGrad[ielem], jbatch, nameGrad);
+                    this->memory->create(this->energyGrad[ielem], jbatchNew, nameGrad);
                 }
                 else
                 {
-                    this->memory->grow  (this->energyGrad[ielem], jbatch, nameGrad);
+                    this->memory->grow  (this->energyGrad[ielem], jbatchNew, nameGrad);
                 }
             }
 
@@ -1030,15 +1065,15 @@ void NNArch::initGeometry(int numAtoms, int* elements,
         }
 
         // (re)allocate memory of forces
-        if (this->sizeTotNeigh < totNeigh)
+        if (totNeighNew > 0)
         {
             if (this->forceData == nullptr)
             {
-                this->memory->create(this->forceData, 3 * totNeigh, "nnp:forceData");
+                this->memory->create(this->forceData, 3 * totNeighNew, "nnp:forceData");
             }
             else
             {
-                this->memory->grow  (this->forceData, 3 * totNeigh, "nnp:forceData");
+                this->memory->grow  (this->forceData, 3 * totNeighNew, "nnp:forceData");
             }
         }
     }
@@ -1055,21 +1090,20 @@ void NNArch::initGeometry(int numAtoms, int* elements,
                 continue;
             }
 
-            jbatch     = this->nbatch    [ielem];
-            sizeJbatch = this->sizeNbatch[ielem];
+            jbatchNew = nbatchNew[ielem];
 
-            if (sizeJbatch < jbatch)
+            if (jbatchNew > 0)
             {
                 char nameData[64];
                 sprintf(nameData, "nnp:chargeData%d", ielem);
 
                 if (this->chargeData[ielem] == nullptr)
                 {
-                    this->memory->create(this->chargeData[ielem], jbatch, nameData);
+                    this->memory->create(this->chargeData[ielem], jbatchNew, nameData);
                 }
                 else
                 {
-                    this->memory->grow  (this->chargeData[ielem], jbatch, nameData);
+                    this->memory->grow  (this->chargeData[ielem], jbatchNew, nameData);
                 }
             }
 
@@ -1083,24 +1117,24 @@ void NNArch::initGeometry(int numAtoms, int* elements,
     }
 
     // (re)allocate memory of symmetry functions
-    if (this->sizeNumAtom < natom)
+    if (natomNew > 0)
     {
         if (this->symmData == nullptr)
         {
-            this->memory->create(this->symmData, natom * nbase, "nnp:symmData");
+            this->memory->create(this->symmData, natomNew * nbase, "nnp:symmData");
         }
         else
         {
-            this->memory->grow  (this->symmData, natom * nbase, "nnp:symmData");
+            this->memory->grow  (this->symmData, natomNew * nbase, "nnp:symmData");
         }
     }
 
-    if (this->sizeTotNeigh < totNeigh)
+    if (totNeighNew > 0)
     {
         if (this->getSymmFunc()->isHiddenDiff())
         {
 #ifdef _NNP_GPU
-            this->getSymmFunc()->allocHiddenDiff(this->property->getGpuAtomBlock(), totNeigh);
+            this->getSymmFunc()->allocHiddenDiff(this->property->getGpuAtomBlock(), totNeighNew);
 #else
             stop_by_error("hiddenDiff is only for GPU.");
 #endif
@@ -1109,18 +1143,25 @@ void NNArch::initGeometry(int numAtoms, int* elements,
         {
             if (this->symmDiff == nullptr)
             {
-                this->memory->create(this->symmDiff, 3 * totNeigh * nbase, "nnp:symmDiff");
+                this->memory->create(this->symmDiff, 3 * totNeighNew * nbase, "nnp:symmDiff");
             }
             else
             {
-                this->memory->grow  (this->symmDiff, 3 * totNeigh * nbase, "nnp:symmDiff");
+                this->memory->grow  (this->symmDiff, 3 * totNeighNew * nbase, "nnp:symmDiff");
             }
         }
     }
 
     // save size of memory
-    this->sizeNumAtom  = max(natom,    this->sizeNumAtom);
-    this->sizeTotNeigh = max(totNeigh, this->sizeTotNeigh);
+    if (natomNew > 0)
+    {
+        this->sizeNumAtom = natomNew;
+    }
+
+    if (totNeighNew > 0)
+    {
+        this->sizeTotNeigh = totNeighNew;
+    }
 
     for (ielem = 0; ielem < nelem; ++ielem)
     {
@@ -1129,10 +1170,12 @@ void NNArch::initGeometry(int numAtoms, int* elements,
             continue;
         }
 
-        jbatch     = this->nbatch    [ielem];
-        sizeJbatch = this->sizeNbatch[ielem];
+        jbatchNew = nbatchNew[ielem];
 
-        this->sizeNbatch[ielem] = max(jbatch, sizeJbatch);
+        if (jbatchNew > 0)
+        {
+            this->sizeNbatch[ielem] = jbatchNew);
+        }
     }
 }
 

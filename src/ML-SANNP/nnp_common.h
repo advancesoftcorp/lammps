@@ -106,6 +106,11 @@ int xgemv_(const char* trans, const int* m, const int* n,
 #define NNARCH_MODE_ENERGY   1
 #define NNARCH_MODE_CHARGE   2
 
+inline int good_memory_size(const int n)
+{
+    return max(4, (int) (((double) n) * 1.25));
+}
+
 inline void stop_by_error(const char* message)
 {
     printf("[STOP] %s\n", message);
