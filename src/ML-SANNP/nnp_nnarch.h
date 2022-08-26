@@ -97,7 +97,6 @@ private:
     int  sizeTotNeigh;
     int* sizeNbatch;
 
-    int  mbatch;
     int* nbatch;
     int* ibatch;
 

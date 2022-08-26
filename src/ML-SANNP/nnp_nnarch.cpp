@@ -51,7 +51,6 @@ NNArch::NNArch(int mode, int numElems, const Property* property, LAMMPS_NS::Memo
         this->sizeNbatch[ielem] = 0;
     }
 
-    this->mbatch = 0;
     this->nbatch = new int[this->numElems];
     this->ibatch = nullptr;
 
@@ -909,6 +908,7 @@ void NNArch::initGeometry(int numAtoms, int* elements,
     int ilayer;
     int nlayer;
 
+    int mbatch;
     int jbatch;
     int sizeJbatch;
 
@@ -989,13 +989,13 @@ void NNArch::initGeometry(int numAtoms, int* elements,
         this->nbatch[ielem]++;
     }
 
-    this->mbatch = 0;
+    mbatch = 0;
     for (ielem = 0; ielem < nelem; ++ielem)
     {
-        this->mbatch += this->nbatch[ielem];
+        mbatch += this->nbatch[ielem];
     }
 
-    if (this->mbatch < 1)
+    if (mbatch < 1)
     {
         return;
     }
