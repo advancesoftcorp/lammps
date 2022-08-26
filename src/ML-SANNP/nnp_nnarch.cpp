@@ -1028,6 +1028,7 @@ void NNArch::initGeometry(int numAtoms, int* elements,
                 continue;
             }
 
+            jbatch    = nbatch   [ielem];
             jbatchNew = nbatchNew[ielem];
 
             if (jbatchNew > 0)
@@ -1058,10 +1059,10 @@ void NNArch::initGeometry(int numAtoms, int* elements,
 
             for (ilayer = 0; ilayer < nlayer; ++ilayer)
             {
-                this->interLayersEnergy[ielem][ilayer]->setSizeOfBatch(jbatchNew);
+                this->interLayersEnergy[ielem][ilayer]->setSizeOfBatch(jbatch);
             }
 
-            this->lastLayersEnergy[ielem]->setSizeOfBatch(jbatchNew);
+            this->lastLayersEnergy[ielem]->setSizeOfBatch(jbatch);
         }
 
         // (re)allocate memory of forces
@@ -1090,6 +1091,7 @@ void NNArch::initGeometry(int numAtoms, int* elements,
                 continue;
             }
 
+            jbatch    = nbatch   [ielem];
             jbatchNew = nbatchNew[ielem];
 
             if (jbatchNew > 0)
@@ -1109,10 +1111,10 @@ void NNArch::initGeometry(int numAtoms, int* elements,
 
             for (ilayer = 0; ilayer < nlayer; ++ilayer)
             {
-                this->interLayersCharge[ielem][ilayer]->setSizeOfBatch(jbatchNew);
+                this->interLayersCharge[ielem][ilayer]->setSizeOfBatch(jbatch);
             }
 
-            this->lastLayersCharge[ielem]->setSizeOfBatch(jbatchNew);
+            this->lastLayersCharge[ielem]->setSizeOfBatch(jbatch);
         }
     }
 
