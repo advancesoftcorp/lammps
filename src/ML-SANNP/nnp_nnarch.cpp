@@ -1174,7 +1174,7 @@ void NNArch::initGeometry(int numAtoms, int* elements,
 
         if (jbatchNew > 0)
         {
-            this->sizeNbatch[ielem] = jbatchNew);
+            this->sizeNbatch[ielem] = jbatchNew;
         }
     }
 }
