@@ -535,7 +535,7 @@ void SymmFuncGPU::driveHiddenDiff(int lenAtoms, int* numNeighbor, int* idxNeighb
     dim3 grid;
     dim3 block;
 
-    // check sizeLenAtoms
+    // check sizeLenAtoms and sizeMaxAtoms
     if (this->sizeLenAtoms < lenAtoms || this->sizeMaxAtoms < lenAtoms)
     {
         stop_by_error("size of atoms is not correct.");
