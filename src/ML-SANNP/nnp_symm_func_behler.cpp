@@ -97,7 +97,7 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, nnpreal** pos
     nnpreal x1, x2, x3;
     nnpreal y1, y2, y3;
     nnpreal z1, z2, z3;
-    nnpreal r1, r2, r3;
+    nnpreal r1, r2, r3, rr3;
 
     nnpreal zeta1[this->sizeAng];
 
@@ -184,7 +184,7 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, nnpreal** pos
         #pragma omp simd
         for (int imode = 0; imode < this->sizeRad; ++imode)
         {
-            const nnpreal eta = this->radiusEta[imode];
+            const nnpreal eta = this->radiusEta  [imode];
             const nnpreal rs  = this->radiusShift[imode];
 
             const nnpreal dr  = r1 - rs;
@@ -309,17 +309,17 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, nnpreal** pos
 
             else
             {
-                x3 = x1 - x2;
-                y3 = y1 - y2;
-                z3 = z1 - z2;
-                rr = x3 * x3 + y3 * y3 + z3 * z3;
+                x3  = x1 - x2;
+                y3  = y1 - y2;
+                z3  = z1 - z2;
+                rr3 = x3 * x3 + y3 * y3 + z3 * z3;
 
-                if (rr >= this->rcutAng * this->rcutAng)
+                if (rr3 >= this->rcutAng * this->rcutAng)
                 {
                     continue;
                 }
 
-                r3 = sqrt(rr);
+                r3 = sqrt(rr3);
 
                 this->cutoffFunction(&fc3, &dfc3dr3, r3, this->rcutAng);
                 dfc3dx3 = x3 / r3 * dfc3dr3;
@@ -366,9 +366,9 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, nnpreal** pos
                     #pragma omp simd
                     for (int imode = 0; imode < this->sizeAng; ++imode)
                     {
-                        const nnpreal eta   = this->angleEta[imode];
+                        const nnpreal eta   = this->angleEta  [imode];
                         const nnpreal rs    = this->angleShift[imode];
-                        const nnpreal zeta  = this->angleZeta[imode];
+                        const nnpreal zeta  = this->angleZeta [imode];
                         const nnpreal zeta0 = zeta1[imode];
 
                         const nnpreal chi      = zeta0 * pow(chi0, zeta);
@@ -414,9 +414,9 @@ void SymmFuncBehler::calculate(int numNeighbor, int* elemNeighbor, nnpreal** pos
                     #pragma omp simd
                     for (int imode = 0; imode < this->sizeAng; ++imode)
                     {
-                        const nnpreal eta   = this->angleEta[imode];
+                        const nnpreal eta   = this->angleEta  [imode];
                         const nnpreal rs    = this->angleShift[imode];
-                        const nnpreal zeta  = this->angleZeta[imode];
+                        const nnpreal zeta  = this->angleZeta [imode];
                         const nnpreal zeta0 = zeta1[imode];
 
                         const nnpreal chi      = zeta0 * pow(chi0, zeta);
