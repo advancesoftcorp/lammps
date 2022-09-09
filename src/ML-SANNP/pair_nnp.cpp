@@ -118,7 +118,7 @@ void PairNNP::compute(int eflag, int vflag)
 void PairNNP::prepareNN(bool* hasGrown)
 {
     int i, j;
-    int iatom, jatom;
+    int iatom;
     int ineigh, nneigh, nneighAll;
 
     int itype, jtype;
