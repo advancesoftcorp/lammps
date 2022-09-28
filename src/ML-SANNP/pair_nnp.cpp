@@ -471,7 +471,6 @@ void PairNNP::computeLJLike(int eflag)
 
     int inum = list->inum;
     int* ilist = list->ilist;
-    int* numneigh = list->numneigh;
     int** firstneigh = list->firstneigh;
 
     double r, r2, r6, r8, r10, r12;
