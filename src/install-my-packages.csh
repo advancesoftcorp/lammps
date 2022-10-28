@@ -2,6 +2,7 @@
 
 set packages = ( \
 CLASS2 \
+EXTRA-COMPUTE \
 KSPACE \
 MANYBODY \
 MISC \
