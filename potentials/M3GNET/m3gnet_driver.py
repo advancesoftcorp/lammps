@@ -74,9 +74,9 @@ def m3gnet_get_energy_forces_stress(cell, atomic_numbers, positions):
         myAtoms.set_positions(positions)
 
     # Predicting energy, forces and stress
-    energy = myAtoms.get_potential_energy()
-    forces = myAtoms.get_forces()
-    stress = myAtoms.get_stress()
+    energy = myAtoms.get_potential_energy().item()
+    forces = myAtoms.get_forces().tolist()
+    stress = myAtoms.get_stress().tolist()
 
     return energy, forces, stress
 
