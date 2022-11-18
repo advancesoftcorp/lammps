@@ -53,7 +53,7 @@ private:
     double**  cell;
     double**  positions;
     double**  forces;
-    double**  stress;
+    double*   stress;
 
     int       maxinum;
     int       initializedPython;
@@ -73,7 +73,7 @@ private:
 
     void finalizePython();
 
-    double initializePython(const char *name, int gpu);
+    double initializePython(const char *name);
 
     double calculatePython();
 

@@ -96,16 +96,6 @@ void PairOC20::compute(int eflag, int vflag)
         error->all(FLERR, "Pair style OC20 does not support atomic virial pressure");
     }
 
-    if (vflag_global)
-    {
-        virial[0] = 0.0;
-        virial[1] = 0.0;
-        virial[2] = 0.0;
-        virial[3] = 0.0;
-        virial[4] = 0.0;
-        virial[5] = 0.0;
-    }
-
     if (vflag)
     {
         if (this->virialWarning == 0)
@@ -119,6 +109,16 @@ void PairOC20::compute(int eflag, int vflag)
     this->prepareGNN();
 
     this->performGNN();
+
+    if (vflag_global)
+    {
+        virial[0] = 0.0;
+        virial[1] = 0.0;
+        virial[2] = 0.0;
+        virial[3] = 0.0;
+        virial[4] = 0.0;
+        virial[5] = 0.0;
+    }
 }
 
 void PairOC20::prepareGNN()
@@ -195,9 +195,9 @@ void PairOC20::performGNN()
     {
         i = ilist[iatom];
 
-        f[i][0] += forces[iatom][0];
-        f[i][1] += forces[iatom][1];
-        f[i][2] += forces[iatom][2];
+        f[i][0] += this->forces[iatom][0];
+        f[i][1] += this->forces[iatom][1];
+        f[i][2] += this->forces[iatom][2];
     }
 }
 
@@ -338,7 +338,7 @@ void PairOC20::init_style()
         error->all(FLERR, "Pair style OC20 requires periodic boundary condition");
     }
 
-    neighbor->request(this, instance_me);
+    neighbor->add_request(this, NeighConst::REQ_FULL);
 }
 
 int PairOC20::withGPU()

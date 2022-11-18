@@ -5,7 +5,7 @@
  * found in the LICENSE file in the root directory of this source tree.
  */
 
-#include "pair_oc20.h"
+#include "pair_m3gnet.h"
 
 using namespace LAMMPS_NS;
 
@@ -80,7 +80,7 @@ void PairM3GNet::allocate()
     memory->create(this->atomNums,  this->maxinum,    "pair:atomNums");
     memory->create(this->positions, this->maxinum, 3, "pair:positions");
     memory->create(this->forces,    this->maxinum, 3, "pair:forces");
-    memory->create(this->stress,    3, 3,             "pair:stress");
+    memory->create(this->stress,    6,                "pair:stress");
 }
 
 void PairM3GNet::compute(int eflag, int vflag)
@@ -103,15 +103,12 @@ void PairM3GNet::compute(int eflag, int vflag)
 
     if (vflag_global)
     {
-        // TODO
-        // TODO this->stress to virial
-        // TODO
-        virial[0] = 0.0;
-        virial[1] = 0.0;
-        virial[2] = 0.0;
-        virial[3] = 0.0;
-        virial[4] = 0.0;
-        virial[5] = 0.0;
+        virial[0] = this->stress[0]; // xx
+        virial[1] = this->stress[1]; // yy
+        virial[2] = this->stress[2]; // zz
+        virial[3] = this->stress[3]; // yz
+        virial[4] = this->stress[4]; // xz
+        virial[5] = this->stress[5]; // xy
     }
 }
 
@@ -175,7 +172,7 @@ void PairM3GNet::performGNN()
 
     double evdwl = 0.0;
 
-    // perform Graph Neural Network Potential of OC20
+    // perform Graph Neural Network Potential of M3GNet
     evdwl = this->calculatePython();
 
     // set total energy
@@ -189,9 +186,9 @@ void PairM3GNet::performGNN()
     {
         i = ilist[iatom];
 
-        f[i][0] += forces[iatom][0];
-        f[i][1] += forces[iatom][1];
-        f[i][2] += forces[iatom][2];
+        f[i][0] += this->forces[iatom][0];
+        f[i][1] += this->forces[iatom][1];
+        f[i][2] += this->forces[iatom][2];
     }
 }
 
@@ -226,8 +223,6 @@ void PairM3GNet::coeff(int narg, char **arg)
     int ntypes = atom->ntypes;
     int ntypesEff;
 
-    int gpu = withGPU();
-
     if (narg != (3 + ntypes))
     {
         error->all(FLERR, "Incorrect number of arguments for pair_coeff.");
@@ -261,7 +256,7 @@ void PairM3GNet::coeff(int narg, char **arg)
 
     if (ntypesEff < 1)
     {
-        error->all(FLERR, "There are no elements for pair_coeff of OC20.");
+        error->all(FLERR, "There are no elements for pair_coeff of M3GNet.");
     }
 
     if (!allocated)
@@ -274,11 +269,11 @@ void PairM3GNet::coeff(int narg, char **arg)
         this->finalizePython();
     }
 
-    this->cutoff = this->initializePython(arg[2], gpu);
+    this->cutoff = this->initializePython(arg[2]);
 
     if (this->cutoff <= 0.0)
     {
-        error->all(FLERR, "Cutoff is not positive for pair_coeff of OC20.");
+        error->all(FLERR, "Cutoff is not positive for pair_coeff of M3GNet.");
     }
 
     count = 0;
@@ -332,7 +327,7 @@ void PairM3GNet::init_style()
         error->all(FLERR, "Pair style M3GNet requires periodic boundary condition");
     }
 
-    neighbor->request(this, instance_me);
+    neighbor->add_request(this, NeighConst::REQ_FULL);
 }
 
 void PairM3GNet::finalizePython()
@@ -348,7 +343,7 @@ void PairM3GNet::finalizePython()
     Py_Finalize();
 }
 
-double PairM3GNet::initializePython(const char *name, int gpu)
+double PairM3GNet::initializePython(const char *name)
 {
     if (this->initializedPython != 0)
     {
@@ -364,7 +359,6 @@ double PairM3GNet::initializePython(const char *name, int gpu)
     PyObject* pyFunc   = nullptr;
     PyObject* pyArgs   = nullptr;
     PyObject* pyArg1   = nullptr;
-    PyObject* pyArg2   = nullptr;
     PyObject* pyValue  = nullptr;
 
     Py_Initialize();
@@ -392,7 +386,7 @@ double PairM3GNet::initializePython(const char *name, int gpu)
         }
     }
 
-    pyName = PyUnicode_DecodeFSDefault("oc20_driver");
+    pyName = PyUnicode_DecodeFSDefault("m3gnet_driver");
     if (pyName != nullptr)
     {
         pyModule = PyImport_Import(pyName);
@@ -401,16 +395,14 @@ double PairM3GNet::initializePython(const char *name, int gpu)
 
     if (pyModule != nullptr)
     {
-        pyFunc = PyObject_GetAttrString(pyModule, "oc20_initialize");
+        pyFunc = PyObject_GetAttrString(pyModule, "m3gnet_initialize");
 
         if (pyFunc != nullptr && PyCallable_Check(pyFunc))
         {
             pyArg1 = PyUnicode_FromString(name);
-            pyArg2 = PyBool_FromLong(gpu);
 
-            pyArgs = PyTuple_New(2);
+            pyArgs = PyTuple_New(1);
             PyTuple_SetItem(pyArgs, 0, pyArg1);
-            PyTuple_SetItem(pyArgs, 1, pyArg2);
 
             pyValue = PyObject_CallObject(pyFunc, pyArgs);
 
@@ -436,7 +428,7 @@ double PairM3GNet::initializePython(const char *name, int gpu)
 
         Py_XDECREF(pyFunc);
 
-        pyFunc = PyObject_GetAttrString(pyModule, "oc20_get_energy_and_forces");
+        pyFunc = PyObject_GetAttrString(pyModule, "m3gnet_get_energy_forces_stress");
 
         if (pyFunc != nullptr && PyCallable_Check(pyFunc))
         {
@@ -464,7 +456,7 @@ double PairM3GNet::initializePython(const char *name, int gpu)
 
         Py_Finalize();
 
-        error->all(FLERR, "Cannot initialize python for pair_coeff of OC20.");
+        error->all(FLERR, "Cannot initialize python for pair_coeff of M3GNet.");
     }
 
     this->pyModule = pyModule;
@@ -475,6 +467,10 @@ double PairM3GNet::initializePython(const char *name, int gpu)
 
 double PairM3GNet::calculatePython()
 {
+	// TODO
+	// TODO
+	// TODO
+
     int i;
     int iatom;
     int natom = list->inum;
@@ -605,7 +601,7 @@ double PairM3GNet::calculatePython()
 
     if (hasEnergy == 0 || hasForces == 0)
     {
-        error->all(FLERR, "Cannot calculate energy and forces by python of OC20.");
+        error->all(FLERR, "Cannot calculate energy and forces by python of M3GNet.");
     }
 
     return energy;

@@ -30,6 +30,8 @@ def oc20_initialize(model_name, gpu = True):
         model_name (str): name of model for GNNP. One can use the followings,
             - "DimeNet++"
             - "GemNet-dT"
+            - "GemNet-dT_OC20"
+            - "GemNet-dT_OC22"
             - "CGCNN"
             - "SchNet"
             - "SpinConv"
@@ -54,8 +56,16 @@ def oc20_initialize(model_name, gpu = True):
         checkpoint = "dimenetpp_all.pt"
 
     elif model_name == "GemNet-dT".lower():
-        config_yml = "gemnet.yml"
+        config_yml = "gemnet-dT_oc20.yml"
         checkpoint = "gemnet_t_direct_h512_all.pt"
+
+    elif model_name == "GemNet-dT_OC20".lower():
+        config_yml = "gemnet-dT_oc20.yml"
+        checkpoint = "gemnet_t_direct_h512_all.pt"
+
+    elif model_name == "GemNet-dT_OC22".lower():
+        config_yml = "gemnet-dT_oc22.yml"
+        checkpoint = "gndt_oc22_all_s2ef.pt"
 
     elif model_name == "CGCNN".lower():
         config_yml = "cgcnn.yml"
