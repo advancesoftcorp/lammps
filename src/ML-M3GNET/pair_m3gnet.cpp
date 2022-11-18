@@ -103,15 +103,13 @@ void PairM3GNet::compute(int eflag, int vflag)
 
     if (vflag_global)
     {
-        // TODO
-        // TODO convert unit
-        // TODO
-        virial[0] += this->stress[0]; // xx
-        virial[1] += this->stress[1]; // yy
-        virial[2] += this->stress[2]; // zz
-        virial[3] += this->stress[3]; // yz
-        virial[4] += this->stress[4]; // xz
-        virial[5] += this->stress[5]; // xy
+        // GPa -> bar
+        virial[0] += 10000.0 * this->stress[0]; // xx
+        virial[1] += 10000.0 * this->stress[1]; // yy
+        virial[2] += 10000.0 * this->stress[2]; // zz
+        virial[3] += 10000.0 * this->stress[3]; // yz
+        virial[4] += 10000.0 * this->stress[4]; // xz
+        virial[5] += 10000.0 * this->stress[5]; // xy
     }
 }
 
