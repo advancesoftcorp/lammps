@@ -467,10 +467,6 @@ double PairM3GNet::initializePython(const char *name)
 
 double PairM3GNet::calculatePython()
 {
-	// TODO
-	// TODO
-	// TODO
-
     int i;
     int iatom;
     int natom = list->inum;
@@ -478,6 +474,7 @@ double PairM3GNet::calculatePython()
     double energy = 0.0;
     int hasEnergy = 0;
     int hasForces = 0;
+    int hasStress = 0;
 
     PyObject* pyFunc  = this->pyFunc;
     PyObject* pyArgs  = nullptr;
@@ -488,6 +485,7 @@ double PairM3GNet::calculatePython()
     PyObject* pyValue = nullptr;
     PyObject* pyVal1  = nullptr;
     PyObject* pyVal2  = nullptr;
+    PyObject* pyVal3  = nullptr;
     PyObject* pyVsub  = nullptr;
     PyObject* pyVobj  = nullptr;
 
@@ -533,7 +531,7 @@ double PairM3GNet::calculatePython()
 
     Py_DECREF(pyArgs);
 
-    if (pyValue != nullptr && PyTuple_Check(pyValue) && PyTuple_Size(pyValue) >= 2)
+    if (pyValue != nullptr && PyTuple_Check(pyValue) && PyTuple_Size(pyValue) >= 3)
     {
         // get energy <- pyValue
         pyVal1 = PyTuple_GetItem(pyValue, 0);
@@ -590,6 +588,32 @@ double PairM3GNet::calculatePython()
         {
             if (PyErr_Occurred()) PyErr_Print();
         }
+
+        // get stress <- pyValue
+        pyVal3 = PyTuple_GetItem(pyValue, 2);
+        if (pyVal3 != nullptr && PyList_Check(pyVal3) && PyList_Size(pyVal3) >= 6)
+        {
+            hasStress = 1;
+
+            for (i = 0; i < 6; ++i)
+            {
+                pyVobj = PyList_GetItem(pyVal3, i);
+                if (pyVobj != nullptr && PyFloat_Check(pyVobj))
+                {
+                    this->stress[i] = PyFloat_AsDouble(pyVobj);
+                }
+                else
+                {
+                    if (PyErr_Occurred()) PyErr_Print();
+                    hasStress = 0;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            if (PyErr_Occurred()) PyErr_Print();
+        }
     }
 
     else
@@ -599,9 +623,9 @@ double PairM3GNet::calculatePython()
 
     Py_XDECREF(pyValue);
 
-    if (hasEnergy == 0 || hasForces == 0)
+    if (hasEnergy == 0 || hasForces == 0 || hasStress == 0)
     {
-        error->all(FLERR, "Cannot calculate energy and forces by python of M3GNet.");
+        error->all(FLERR, "Cannot calculate energy, forces and stress by python of M3GNet.");
     }
 
     return energy;
