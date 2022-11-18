@@ -28,7 +28,7 @@ def m3gnet_initialize(model_name = None):
 
     if model_name is not None:
         myM3GNet = M3GNet.load(model_name)
-    elif
+    else:
         myM3GNet = M3GNet.load()
 
     myPotential  = Potential(myM3GNet)

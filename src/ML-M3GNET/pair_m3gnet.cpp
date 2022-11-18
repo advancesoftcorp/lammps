@@ -631,9 +631,9 @@ double PairM3GNet::calculatePython()
     return energy;
 }
 
-const int NUM_ELEMENTS = 118;
+static const int NUM_ELEMENTS = 118;
 
-const char* ALL_ELEMENTS[] = {
+static const char* ALL_ELEMENTS[] = {
     "H",  "He", "Li", "Be", "B",  "C",  "N",  "O",  "F",  "Ne", "Na", "Mg", "Al", "Si", "P",  "S",
     "Cl", "Ar", "K",  "Ca", "Sc", "Ti", "V",  "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn", "Ga", "Ge",
     "As", "Se", "Br", "Kr", "Rb", "Sr", "Y",  "Zr", "Nb", "Mo", "Tc", "Ru", "Rh", "Pd", "Ag", "Cd",
