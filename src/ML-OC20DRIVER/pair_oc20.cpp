@@ -11,10 +11,12 @@ using namespace LAMMPS_NS;
 
 PairOC20::PairOC20(LAMMPS *lmp) : Pair(lmp)
 {
-    single_enable   = 0;
-    restartinfo     = 0;
-    one_coeff       = 1;
-    manybody_flag   = 1;
+    single_enable           = 0;
+    restartinfo             = 0;
+    one_coeff               = 1;
+    manybody_flag           = 1;
+    no_virial_fdotr_compute = 1;
+    centroidstressflag      = CENTROID_NOTAVAIL;
 
     this->atomNumMap        = nullptr;
     this->maxinum           = 10;
@@ -96,10 +98,12 @@ void PairOC20::compute(int eflag, int vflag)
 
     if (vflag_global)
     {
-        if (vflag_fdotr == 0)
-        {
-            error->all(FLERR, "Pair style OC20 does not support explicit virial pressure");
-        }
+        virial[0] = 0.0;
+        virial[1] = 0.0;
+        virial[2] = 0.0;
+        virial[3] = 0.0;
+        virial[4] = 0.0;
+        virial[5] = 0.0;
     }
 
     if (vflag)
@@ -115,11 +119,6 @@ void PairOC20::compute(int eflag, int vflag)
     this->prepareGNN();
 
     this->performGNN();
-
-    if (vflag_fdotr)
-    {
-        virial_fdotr_compute();
-    }
 }
 
 void PairOC20::prepareGNN()
