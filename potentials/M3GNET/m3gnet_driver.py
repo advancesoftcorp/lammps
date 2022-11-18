@@ -5,11 +5,6 @@ This source code is licensed under the GNU General Public License Version 2
 found in the LICENSE file in the root directory of this source tree.
 """
 
-import os
-import pprint
-import torch
-import yaml
-
 from ase import Atoms
 
 from m3gnet.models import M3GNet, M3GNetCalculator, Potential
