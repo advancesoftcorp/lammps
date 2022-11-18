@@ -103,6 +103,7 @@ PACKAGE = \
 	ml-snap \
 	ml-sannp \
 	ml-oc20driver \
+	ml-m3gnet \
 	mofff \
 	molecule \
 	molfile \
@@ -182,6 +183,7 @@ PACKMOST = \
 	ml-snap \
 	ml-sannp \
 	ml-oc20driver \
+	ml-m3gnet \
 	mofff \
 	molecule \
 	openmp \
