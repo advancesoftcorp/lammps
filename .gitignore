@@ -2,7 +2,9 @@ bench/
 doc/
 examples/
 !examples/OC20DRIVER/
+!examples/M3GNET/
 potentials/
 !potentials/OC20DRIVER/
+!potentials/M3GNET/
 python/
 tools/
