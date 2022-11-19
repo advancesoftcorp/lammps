@@ -14,7 +14,7 @@ units         metal
 boundary      p p p
 atom_style    atomic
 
-pair_style    m3gnet
+pair_style    m3gnet ../../potentials/M3GNET
 
 read_data     ./dat.lammps
 
