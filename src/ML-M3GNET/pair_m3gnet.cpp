@@ -9,6 +9,8 @@
 
 using namespace LAMMPS_NS;
 
+#define GPA_TO_EVA3  160.21766208
+
 PairM3GNet::PairM3GNet(LAMMPS *lmp) : Pair(lmp)
 {
     single_enable           = 0;
@@ -85,6 +87,9 @@ void PairM3GNet::allocate()
 
 void PairM3GNet::compute(int eflag, int vflag)
 {
+    double volume;
+    double factor;
+
     ev_init(eflag, vflag);
 
     if (eflag_atom)
@@ -103,13 +108,16 @@ void PairM3GNet::compute(int eflag, int vflag)
 
     if (vflag_global)
     {
-        // GPa -> bar
-        virial[0] += 10000.0 * this->stress[0]; // xx
-        virial[1] += 10000.0 * this->stress[1]; // yy
-        virial[2] += 10000.0 * this->stress[2]; // zz
-        virial[3] += 10000.0 * this->stress[3]; // yz
-        virial[4] += 10000.0 * this->stress[4]; // xz
-        virial[5] += 10000.0 * this->stress[5]; // xy
+        // GPa -> eV/A^3
+        volume = domain->xprd * domain->yprd * domain->zprd;
+    	factor = volume / GPA_TO_EVA3;
+
+        virial[0] -= factor * this->stress[0]; // xx
+        virial[1] -= factor * this->stress[1]; // yy
+        virial[2] -= factor * this->stress[2]; // zz
+        virial[3] -= factor * this->stress[3]; // yz
+        virial[4] -= factor * this->stress[4]; // xz
+        virial[5] -= factor * this->stress[5]; // xy
     }
 }
 
