@@ -518,7 +518,7 @@ void PairNNP::computeLJLike(int eflag)
 
     #pragma omp parallel for private(i, j, ii, jj, jnum, jlist, itag, jtag, xtmp, ytmp, ztmp, \
                                      ielem1, jelem1, ielem2, jelem2, kelem, r, r2, r6, r8, r10, r12, \
-                                     A1, A2, A3, A4, B1, B2, B3, B4, evdwl, fpair)
+                                     A1, A2, A3, A4, B1, B2, B3, B4, evdwl, ecorr, fpair, fcorr)
     for (ii = 0; ii < inum; ii++)
     {
         i = ilist[ii];
