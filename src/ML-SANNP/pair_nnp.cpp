@@ -474,6 +474,7 @@ void PairNNP::computeLJLike(int eflag)
     int** firstneigh = list->firstneigh;
 
     double r, r2, r6, r8, r10, r12;
+    const double rcut = this->property->getRcutoff();
 
     double delx, dely, delz;
     double fx, fy, fz;
@@ -486,7 +487,8 @@ void PairNNP::computeLJLike(int eflag)
     int *jlist;
     tagint itag, jtag;
     double xtmp, ytmp, ztmp;
-    double evdwl, fpair;
+    double evdwl, ecorr;
+    double fpair, fcorr;
 
     const double* ljlikeA1 = this->arch->getLJLikeA1();
     const double* ljlikeA2 = this->arch->getLJLikeA2();
@@ -494,6 +496,25 @@ void PairNNP::computeLJLike(int eflag)
     const double* ljlikeA4 = this->arch->getLJLikeA4();
     double A1, A2, A3, A4;
     double B1, B2, B3, B4;
+    double C1, C2, C3, C4;
+    double D1, D2, D3, D4;
+
+    r   = rcut;
+    r2  = r * r;
+    r6  = r2 * r2 * r2;
+    r8  = r2 * r6;
+    r10 = r2 * r8;
+    r12 = r2 * r10;
+
+    C1 = 1.0 / r12;
+    C2 = 1.0 / r10;
+    C3 = 1.0 / r8;
+    C4 = 1.0 / r6;
+
+    D1 = -12.0 * C1 / r;
+    D2 = -10.0 * C2 / r;
+    D3 =  -8.0 * C3 / r;
+    D4 =  -6.0 * C4 / r;
 
     #pragma omp parallel for private(i, j, ii, jj, jnum, jlist, itag, jtag, xtmp, ytmp, ztmp, \
                                      ielem1, jelem1, ielem2, jelem2, kelem, r, r2, r6, r8, r10, r12, \
@@ -554,9 +575,21 @@ void PairNNP::computeLJLike(int eflag)
             B3 = A3 / r8;
             B4 = A4 / r6;
 
-            evdwl = eflag ? (B1 + B2 + B3 + B4) : 0.0;
+            ecorr = A1 * (C1 + (r - rcut) * D1)
+                  + A2 * (C2 + (r - rcut) * D2)
+                  + A3 * (C3 + (r - rcut) * D3)
+                  + A4 * (C4 + (r - rcut) * D4);
+
+            fcorr = A1 * D1
+                  + A2 * D2
+                  + A3 * D3
+                  + A4 * D4;
+            fcorr /= r;
+
+            evdwl = eflag ? (B1 + B2 + B3 + B4 - ecorr) : 0.0;
             fpair = 12.0 * B1 + 10.0 * B2 + 8.0 * B3 + 6.0 * B4;
             fpair /= r2;
+            fpair += fcorr;
 
             forces[ii][jj][0] = 1.0;
             forces[ii][jj][1] = evdwl;
