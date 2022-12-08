@@ -7,7 +7,9 @@ found in the LICENSE file in the root directory of this source tree.
 
 from ase import Atoms
 from ase.calculators.mixing import SumCalculator
+
 from dftd3.ase import DFTD3
+#from torch_dftd.torch_dftd3_calculator import TorchDFTD3Calculator
 
 from m3gnet.models import M3GNet, M3GNetCalculator, Potential
 
@@ -50,6 +52,11 @@ def m3gnet_initialize(model_name = None, dftd3 = False):
             damping = "d3zero",
             s9      = 0.0
         )
+        #dftd3Calculator = TorchDFTD3Calculator(
+        #    xc      = "pbe",
+        #    damping = "zero",
+        #    abc     = False
+        #)
 
         myCalculator = SumCalculator([m3gnetCalculator, dftd3Calculator])
 
