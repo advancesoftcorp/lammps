@@ -47,6 +47,9 @@ public:
 
     void init_style() override;
 
+protected:
+    virtual int withDFTD3();
+
 private:
     int*      atomNumMap;
     int*      atomNums;
@@ -73,7 +76,7 @@ private:
 
     void finalizePython();
 
-    double initializePython(const char *name);
+    double initializePython(const char *name, int dftd3);
 
     double calculatePython();
 
