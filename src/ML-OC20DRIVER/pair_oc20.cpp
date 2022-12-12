@@ -109,16 +109,6 @@ void PairOC20::compute(int eflag, int vflag)
     this->prepareGNN();
 
     this->performGNN();
-
-    if (vflag_global)
-    {
-        virial[0] = 0.0;
-        virial[1] = 0.0;
-        virial[2] = 0.0;
-        virial[3] = 0.0;
-        virial[4] = 0.0;
-        virial[5] = 0.0;
-    }
 }
 
 void PairOC20::prepareGNN()

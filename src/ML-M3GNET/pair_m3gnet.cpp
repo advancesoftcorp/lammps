@@ -105,20 +105,6 @@ void PairM3GNet::compute(int eflag, int vflag)
     this->prepareGNN();
 
     this->performGNN();
-
-    if (vflag_global)
-    {
-        // GPa -> eV/A^3
-        volume = domain->xprd * domain->yprd * domain->zprd;
-    	factor = volume / GPA_TO_EVA3;
-
-        virial[0] -= factor * this->stress[0]; // xx
-        virial[1] -= factor * this->stress[1]; // yy
-        virial[2] -= factor * this->stress[2]; // zz
-        virial[3] -= factor * this->stress[3]; // yz
-        virial[4] -= factor * this->stress[4]; // xz
-        virial[5] -= factor * this->stress[5]; // xy
-    }
 }
 
 void PairM3GNet::prepareGNN()
@@ -198,6 +184,21 @@ void PairM3GNet::performGNN()
         f[i][0] += this->forces[iatom][0];
         f[i][1] += this->forces[iatom][1];
         f[i][2] += this->forces[iatom][2];
+    }
+
+    // set virial pressure
+    if (vflag_global)
+    {
+        // GPa -> eV/A^3
+        volume = domain->xprd * domain->yprd * domain->zprd;
+        factor = volume / GPA_TO_EVA3;
+
+        virial[0] -= factor * this->stress[0]; // xx
+        virial[1] -= factor * this->stress[1]; // yy
+        virial[2] -= factor * this->stress[2]; // zz
+        virial[3] -= factor * this->stress[3]; // yz
+        virial[4] -= factor * this->stress[4]; // xz
+        virial[5] -= factor * this->stress[5]; // xy
     }
 }
 
