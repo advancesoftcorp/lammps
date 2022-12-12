@@ -130,7 +130,7 @@ void PairNNP::prepareNN(bool* hasGrown)
     int* numneigh = list->numneigh;
     int** firstneigh = list->firstneigh;
 
-    nnpreal x0, y0, z0, dx, dy, dz, r, rr, fc, dfcdr;
+    double x0, y0, z0, dx, dy, dz, r, rr, fc, dfcdr;
 
     const int elemWeight  = this->property->getElemWeight();
     const int cutoffMode  = this->property->getCutoffMode();
@@ -405,10 +405,10 @@ void PairNNP::performNN(int eflag)
         this->arch->calculateSymmFuncs();
 
         this->arch->goForwardOnEnergy();
-        this->arch->obtainEnergies(energies);
+        this->arch->obtainEnergies(this->energies);
 
         this->arch->goBackwardOnForce();
-        this->arch->obtainForces(forces);
+        this->arch->obtainForces(this->forces);
     }
 
     for (iatom = 0; iatom < inum; ++iatom)
@@ -417,7 +417,7 @@ void PairNNP::performNN(int eflag)
 
         if (eflag)
         {
-            evdwl = energies[iatom];
+            evdwl = this->energies[iatom];
             if (eflag_global) eng_vdwl += evdwl;
             if (eflag_atom)   eatom[i] += evdwl;
         }
@@ -430,9 +430,9 @@ void PairNNP::performNN(int eflag)
             j = firstneigh[i][j];
             j &= NEIGHMASK;
 
-            fx = forces[iatom][ineigh][0];
-            fy = forces[iatom][ineigh][1];
-            fz = forces[iatom][ineigh][2];
+            fx = this->forces[iatom][ineigh][0];
+            fy = this->forces[iatom][ineigh][1];
+            fz = this->forces[iatom][ineigh][2];
 
             f[i][0] -= fx;
             f[i][1] -= fy;
@@ -534,7 +534,7 @@ void PairNNP::computeLJLike(int eflag)
 
         for (jj = 0; jj < jnum; jj++)
         {
-            forces[ii][jj][0] = -1.0;
+            this->forces[ii][jj][0] = -1.0;
 
             j = this->idxNeighbor[ii][jj];
             j = jlist[j];
@@ -591,9 +591,9 @@ void PairNNP::computeLJLike(int eflag)
             fpair /= r2;
             fpair += fcorr;
 
-            forces[ii][jj][0] = 1.0;
-            forces[ii][jj][1] = evdwl;
-            forces[ii][jj][2] = fpair;
+            this->forces[ii][jj][0] = 1.0;
+            this->forces[ii][jj][1] = evdwl;
+            this->forces[ii][jj][2] = fpair;
         }
     }
 
@@ -606,7 +606,7 @@ void PairNNP::computeLJLike(int eflag)
 
         for (jj = 0; jj < jnum; jj++)
         {
-            if (forces[ii][jj][0] > 0.0)
+            if (this->forces[ii][jj][0] > 0.0)
             {
                 j = this->idxNeighbor[ii][jj];
                 j = jlist[j];
@@ -616,8 +616,8 @@ void PairNNP::computeLJLike(int eflag)
                 dely = -this->posNeighbor[ii][jj][2];
                 delz = -this->posNeighbor[ii][jj][3];
 
-                evdwl = forces[ii][jj][1];
-                fpair = forces[ii][jj][2];
+                evdwl = this->forces[ii][jj][1];
+                fpair = this->forces[ii][jj][2];
 
                 fx = delx * fpair;
                 fy = dely * fpair;
