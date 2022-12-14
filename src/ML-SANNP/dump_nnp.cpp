@@ -21,9 +21,9 @@ using namespace LAMMPS_NS;
 #define ONELINE 128
 #define DELTA 1048576
 
-#define COEF_LENGTH 1.88972612
-#define COEF_ENERGY 6.33363068e-6
-#define COEF_FORCE 3.35161302e-6
+#define BOHR    0.52917720859
+#define RYDBERG 13.605691930242388
+#define BOLTZ   8.617343e-5
 
 #define FOR_SANNP 0
 
@@ -31,9 +31,9 @@ DumpNNP::DumpNNP(LAMMPS *lmp, int narg, char **arg) : Dump(lmp, narg, arg)
 {
     size_one = 13;
 
-    x2ryd = COEF_LENGTH / force->angstrom;
-    e2ryd = COEF_ENERGY / force->boltz;
-    f2ryd = COEF_FORCE * force->angstrom / force->boltz;
+    x2ryd = 1.0 / (BOHR * force->angstrom);
+    e2ryd = BOLTZ / (RYDBERG * force->boltz);
+    f2ryd = e2ryd / x2ryd;
     q2ryd = 1.0 / force->qelectron;
 
     nevery = utils::inumeric(FLERR, arg[3], false, lmp);
@@ -166,7 +166,7 @@ int DumpNNP::convert_string(int n, double *mybuf)
 
     for (int i = 0; i < n; i++)
     {
-        if (offset + ONELINE > maxsbuf) 
+        if (offset + ONELINE > maxsbuf)
         {
             if ((bigint) maxsbuf + DELTA > MAXSMALLINT) return -1;
             maxsbuf += DELTA;
@@ -180,7 +180,7 @@ int DumpNNP::convert_string(int n, double *mybuf)
                           mybuf[m +  5], mybuf[m +  6], mybuf[m +  7],
                           mybuf[m +  8], mybuf[m +  9],
                           mybuf[m + 10], mybuf[m + 11], mybuf[m + 12]);
-        
+
         offset += sprintf(&sbuf[offset],"\n");
 
         m += size_one;
