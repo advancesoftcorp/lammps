@@ -107,15 +107,11 @@ int DumpNNP::count()
     }
     else
     {
-        if (!(pe->invoked_flag & Compute::INVOKED_SCALAR))
-        {
+        if (pe->invoked_peratom != update->ntimestep)
             pe->compute_scalar();
-        }
 
-        if(!(peatom->invoked_flag & Compute::INVOKED_PERATOM))
-        {
+        if (peatom->invoked_peratom != update->ntimestep)
             peatom->compute_peratom();
-        }
     }
 
     pe->addstep(update->ntimestep + nevery);
