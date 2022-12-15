@@ -70,15 +70,15 @@ void DumpNNP::write_header(bigint n)
     {
         std::string header = fmt::format("{:8}{:8}    {:8}\n", n, FOR_SANNP, pe->scalar);
 
-        xdim = (domain->boxhi[0] - domain->boxlo[0]) * x2ryd;
-        ydim = (domain->boxhi[1] - domain->boxlo[1]) * x2ryd;
-        zdim = (domain->boxhi[2] - domain->boxlo[2]) * x2ryd;
+        double xdim = (domain->boxhi[0] - domain->boxlo[0]) * x2ryd;
+        double ydim = (domain->boxhi[1] - domain->boxlo[1]) * x2ryd;
+        double zdim = (domain->boxhi[2] - domain->boxlo[2]) * x2ryd;
 
         if (domain->triclinic)
         {
-            xy = domain->xy * x2ryd;
-            xz = domain->xz * x2ryd;
-            yz = domain->yz * x2ryd;
+            double xy = domain->xy * x2ryd;
+            double xz = domain->xz * x2ryd;
+            double yz = domain->yz * x2ryd;
 
             header += fmt::format("{:20.12E}{:20.12E}{:20.12E}\n", xdim, 0.0,  0.0 );
             header += fmt::format("{:20.12E}{:20.12E}{:20.12E}\n", xy,   ydim, 0.0 );

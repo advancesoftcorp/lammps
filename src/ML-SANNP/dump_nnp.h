@@ -35,9 +35,6 @@ protected:
 
 private:
     double x2ryd, e2ryd, f2ryd, q2ryd;
-    double xdim, ydim, zdim;
-    double xy, xz, yz;
-
     int nevery;
     class Compute *pe;
     class Compute *peatom;
