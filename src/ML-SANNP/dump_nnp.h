@@ -27,6 +27,7 @@ public:
 
 protected:
     void init_style() override;
+    int modify_param(int, char **) override;
     void write_header(bigint) override;
     int count() override;
     void pack(tagint *) override;
@@ -36,8 +37,17 @@ protected:
 private:
     double x2ryd, e2ryd, f2ryd, q2ryd;
     int nevery;
+    int ntypes;
+    char **typenames;
+
+    static const char *elemname[];
+    static const double elemmass[];
+    static const int nelem;
+
     class Compute *pe;
     class Compute *peatom;
+
+    static const char *detectElementByMass(double);
 };
 
 } // namespace LAMMPS_NS
