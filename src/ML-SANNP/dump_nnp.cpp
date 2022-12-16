@@ -29,7 +29,9 @@ using namespace LAMMPS_NS;
 
 DumpNNP::DumpNNP(LAMMPS *lmp, int narg, char **arg) : Dump(lmp, narg, arg)
 {
-    size_one = 13;
+    sort_flag = 1;
+    sortcol = 0;
+    size_one = 14;
 
     x2ryd = 1.0 / (BOHR * force->angstrom);
     e2ryd = BOLTZ / (RYDBERG * force->boltz);
@@ -120,10 +122,11 @@ int DumpNNP::count()
     return Dump::count();
 }
 
-void DumpNNP::pack(tagint */*ids*/)
+void DumpNNP::pack(tagint *ids)
 {
-    int m;
+    int m, n;
 
+    tagint *tag = atom->tag;
     int *type = atom->type;
     int *mask = atom->mask;
     double **x = atom->x;
@@ -134,10 +137,12 @@ void DumpNNP::pack(tagint */*ids*/)
     double *eatom = peatom->vector_atom;
 
     m = 0;
+    n = 0;
     for (int i = 0; i < nlocal; i++)
     {
         if (mask[i] & groupbit)
         {
+            buf[m++] = tag[i];
             buf[m++] = type[i];
             buf[m++] = x[i][0] * x2ryd;
             buf[m++] = x[i][1] * x2ryd;
@@ -151,6 +156,7 @@ void DumpNNP::pack(tagint */*ids*/)
             buf[m++] = 0.0; // coulomb force x
             buf[m++] = 0.0; // coulomb force y
             buf[m++] = 0.0; // coulomb force z
+            if (ids) ids[n++] = tag[i];
         }
     }
 }
@@ -170,12 +176,12 @@ int DumpNNP::convert_string(int n, double *mybuf)
         }
 
         offset += sprintf(&sbuf[offset], format,
-                          static_cast<int> (mybuf[m     ]), // TODO: map to element name
-                          mybuf[m +  1], mybuf[m +  2], mybuf[m +  3],
-                          mybuf[m +  4],
-                          mybuf[m +  5], mybuf[m +  6], mybuf[m +  7],
-                          mybuf[m +  8], mybuf[m +  9],
-                          mybuf[m + 10], mybuf[m + 11], mybuf[m + 12]);
+                          static_cast<int> (mybuf[m +  1]), // TODO: map to element name
+                          mybuf[m +  2], mybuf[m +  3], mybuf[m +  4],
+                          mybuf[m +  5],
+                          mybuf[m +  6], mybuf[m +  7], mybuf[m +  8],
+                          mybuf[m +  9], mybuf[m + 10],
+                          mybuf[m + 11], mybuf[m + 12], mybuf[m + 13]);
 
         offset += sprintf(&sbuf[offset],"\n");
 
@@ -198,12 +204,12 @@ void DumpNNP::write_data(int n, double *mybuf)
         for (int i = 0; i < n; i++)
         {
             fprintf(fp, format,
-                    static_cast<int> (mybuf[m     ]),
-                    mybuf[m +  1], mybuf[m +  2], mybuf[m +  3],
-                    mybuf[m +  4],
-                    mybuf[m +  5], mybuf[m +  6], mybuf[m +  7],
-                    mybuf[m +  8], mybuf[m +  9],
-                    mybuf[m + 10], mybuf[m + 11], mybuf[m + 12]);
+                    static_cast<int> (mybuf[m +  1]),
+                    mybuf[m +  2], mybuf[m +  3], mybuf[m +  4],
+                    mybuf[m +  5],
+                    mybuf[m +  6], mybuf[m +  7], mybuf[m +  8],
+                    mybuf[m +  9], mybuf[m + 10],
+                    mybuf[m + 11], mybuf[m + 12], mybuf[m + 13]);
 
             m += size_one;
         }
