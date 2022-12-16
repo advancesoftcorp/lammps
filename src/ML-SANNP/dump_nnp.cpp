@@ -58,6 +58,9 @@ const int DumpNNP::nelem = sizeof(elemmass) / sizeof(double);
 
 DumpNNP::DumpNNP(LAMMPS *lmp, int narg, char **arg) : Dump(lmp, narg, arg), typenames(nullptr)
 {
+    if (narg != 5) error->all(FLERR, "Illegal dump nnp command");
+    if (binary || multiproc) error->all(FLERR, "Invalid dump nnp filename");
+
     sort_flag = 1;
     sortcol = 0;
     size_one = 14;
