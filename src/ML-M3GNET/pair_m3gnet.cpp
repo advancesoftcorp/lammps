@@ -87,9 +87,6 @@ void PairM3GNet::allocate()
 
 void PairM3GNet::compute(int eflag, int vflag)
 {
-    double volume;
-    double factor;
-
     ev_init(eflag, vflag);
 
     if (eflag_atom)
@@ -165,6 +162,8 @@ void PairM3GNet::performGNN()
     int  inum  = list->inum;
     int* ilist = list->ilist;
 
+    double volume;
+    double factor;
     double evdwl = 0.0;
 
     // perform Graph Neural Network Potential of M3GNet
