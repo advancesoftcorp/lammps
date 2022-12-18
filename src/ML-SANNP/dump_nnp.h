@@ -7,7 +7,7 @@
 
 #ifdef DUMP_CLASS
 // clang-format off
-DumpStyle(nnp,DumpNNP);
+DumpStyle(nnp, DumpNNP);
 // clang-format on
 #else
 
@@ -35,7 +35,7 @@ protected:
     void write_data(int, double *) override;
 
 private:
-    double x2ryd, e2ryd, f2ryd, q2ryd;
+    double x2ryd, e2ryd, f2ryd;
     int nevery;
     int ntypes;
     char **typenames;
@@ -45,7 +45,6 @@ private:
     static const int nelem;
 
     class Compute *pe;
-    class Compute *peatom;
 
     static const char *detectElementByMass(double);
 };
