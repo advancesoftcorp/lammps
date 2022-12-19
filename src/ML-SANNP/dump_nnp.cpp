@@ -26,8 +26,6 @@ using namespace LAMMPS_NS;
 #define RYDBERG 13.605691930242388
 #define BOLTZ   8.617343e-5
 
-#define FOR_SANNP 0
-
 const char *DumpNNP::elemname[] = {
     "H",  "He",
     "Li", "Be", "B",  "C",  "N",  "O",  "F",  "Ne",
@@ -169,7 +167,7 @@ void DumpNNP::write_header(bigint n)
             yz = domain->yz * x2ryd;
         }
 
-        std::string header = fmt::format("{:8} {:8}     {:20.12e}\n", n, FOR_SANNP, etot);
+        std::string header = fmt::format("{:8} {:8}     {:20.12e}\n", n, 0, etot);
 
         header += fmt::format(" {:20.12e} {:20.12e} {:20.12e}\n", xdim, 0.0,  0.0 );
         header += fmt::format(" {:20.12e} {:20.12e} {:20.12e}\n", xy,   ydim, 0.0 );
