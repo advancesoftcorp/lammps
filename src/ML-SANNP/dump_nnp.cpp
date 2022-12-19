@@ -257,8 +257,6 @@ int DumpNNP::convert_string(int n, double *mybuf)
                           mybuf[m +  9], mybuf[m + 10],
                           mybuf[m + 11], mybuf[m + 12], mybuf[m + 13]);
 
-        offset += sprintf(&sbuf[offset],"\n");
-
         m += size_one;
     }
 
