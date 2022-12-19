@@ -152,7 +152,7 @@ void DumpNNP::write_header(bigint n)
 
     if (me == 0)
     {
-        std::string header = fmt::format("{:8} {:8}     {:20.12e}\n", n, FOR_SANNP, pe->scalar);
+        double etot = pe->scalar * e2ryd;
 
         double xdim = (domain->boxhi[0] - domain->boxlo[0]) * x2ryd;
         double ydim = (domain->boxhi[1] - domain->boxlo[1]) * x2ryd;
@@ -168,6 +168,8 @@ void DumpNNP::write_header(bigint n)
             xz = domain->xz * x2ryd;
             yz = domain->yz * x2ryd;
         }
+
+        std::string header = fmt::format("{:8} {:8}     {:20.12e}\n", n, FOR_SANNP, etot);
 
         header += fmt::format(" {:20.12e} {:20.12e} {:20.12e}\n", xdim, 0.0,  0.0 );
         header += fmt::format(" {:20.12e} {:20.12e} {:20.12e}\n", xy,   ydim, 0.0 );
