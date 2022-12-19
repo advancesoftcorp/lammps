@@ -74,7 +74,8 @@ DumpNNP::DumpNNP(LAMMPS *lmp, int narg, char **arg) : Dump(lmp, narg, arg), type
 
     delete[] format_default;
 
-    format_default = utils::strdup("%5s%20.12E%20.12E%20.12E%20.12E%20.12E%20.12E%20.12E%20.12E%20.12E%20.12E%20.12E%20.12E");
+    format_default = utils::strdup(
+    "  %-3s %19.12E %19.12E %19.12E %19.12E %19.12E %19.12E %19.12E %19.12E %19.12E %19.12E %19.12E %19.12E");
 
     ntypes = atom->ntypes;
     typenames = nullptr;
@@ -151,28 +152,26 @@ void DumpNNP::write_header(bigint n)
 
     if (me == 0)
     {
-        std::string header = fmt::format("{:8}{:8}    {:8}\n", n, FOR_SANNP, pe->scalar);
+        std::string header = fmt::format("{:8}{:8}     {:19.12E}\n", n, FOR_SANNP, pe->scalar);
 
         double xdim = (domain->boxhi[0] - domain->boxlo[0]) * x2ryd;
         double ydim = (domain->boxhi[1] - domain->boxlo[1]) * x2ryd;
         double zdim = (domain->boxhi[2] - domain->boxlo[2]) * x2ryd;
 
+        double xy = 0.0;
+        double xz = 0.0;
+        double yz = 0.0;
+
         if (domain->triclinic)
         {
-            double xy = domain->xy * x2ryd;
-            double xz = domain->xz * x2ryd;
-            double yz = domain->yz * x2ryd;
+            xy = domain->xy * x2ryd;
+            xz = domain->xz * x2ryd;
+            yz = domain->yz * x2ryd;
+        }
 
-            header += fmt::format("{:20.12E}{:20.12E}{:20.12E}\n", xdim, 0.0,  0.0 );
-            header += fmt::format("{:20.12E}{:20.12E}{:20.12E}\n", xy,   ydim, 0.0 );
-            header += fmt::format("{:20.12E}{:20.12E}{:20.12E}\n", xz,   yz,   zdim);
-        }
-        else
-        {
-            header += fmt::format("{:20.12E}{:20.12E}{:20.12E}\n", xdim, 0.0,  0.0 );
-            header += fmt::format("{:20.12E}{:20.12E}{:20.12E}\n", 0.0,  ydim, 0.0 );
-            header += fmt::format("{:20.12E}{:20.12E}{:20.12E}\n", 0.0,  0.0,  zdim);
-        }
+        header += fmt::format(" {:19.12E} {:19.12E} {:19.12E}\n", xdim, 0.0,  0.0 );
+        header += fmt::format(" {:19.12E} {:19.12E} {:19.12E}\n", xy,   ydim, 0.0 );
+        header += fmt::format(" {:19.12E} {:19.12E} {:19.12E}\n", xz,   yz,   zdim);
 
         fmt::print(fp, header);
     }
