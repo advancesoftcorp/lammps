@@ -33,11 +33,6 @@ public:
         return this->tanhCutoff;
     }
 
-    int getWithClassical() const
-    {
-        return this->withClassical;
-    }
-
     nnpreal getRcutoff() const
     {
         if (this->symmFunc == SYMM_FUNC_MANYBODY)
@@ -171,6 +166,26 @@ public:
         return this->withCharge;
     }
 
+    int getWithClassical() const
+    {
+        return this->withClassical;
+    }
+
+    int getWithReaxFF() const
+    {
+        return this->withReaxFF;
+    }
+
+    nnpreal getRcutReaxFF() const
+    {
+        return this->rcutReaxFF;
+    }
+
+    nnpreal getRateReaxFF() const
+    {
+        return this->rateReaxFF;
+    }
+
 #ifdef _NNP_GPU
     int getGpuThreads() const
     {
@@ -188,7 +203,6 @@ private:
     int symmFunc;
     int elemWeight;
     int tanhCutoff;
-    int withClassical;
 
     int m2;
     int m3;
@@ -218,7 +232,11 @@ private:
     int nodesCharge;
     int activCharge;
 
-    int withCharge;
+    int     withCharge;
+    int     withClassical;
+    int     withReaxFF;
+    nnpreal rcutReaxFF;
+    nnpreal rateReaxFF;
 
     void printProperty();
 

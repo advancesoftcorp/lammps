@@ -15,7 +15,6 @@ Property::Property()
     this->symmFunc      = SYMM_FUNC_NULL;
     this->elemWeight    = 0;
     this->tanhCutoff    = 0;
-    this->withClassical = 0;
 
     this->m2            = 0;
     this->m3            = 0;
@@ -43,6 +42,10 @@ Property::Property()
     this->activCharge   = ACTIVATION_NULL;
 
     this->withCharge    = 0;
+    this->withClassical = 0;
+    this->withReaxFF    = 0;
+    this->rcutReaxFF    = ZERO;
+    this->rateReaxFF    = ZERO;
 
 #ifdef _NNP_GPU
     this->gpuThreads    = 256;
@@ -136,6 +139,42 @@ void Property::readProperty(FILE* fp, int rank, int nproc, MPI_Comm world)
     MPI_Bcast(&(this->elemWeight),    1, MPI_INT, 0, world);
     MPI_Bcast(&(this->tanhCutoff),    1, MPI_INT, 0, world);
     MPI_Bcast(&(this->withClassical), 1, MPI_INT, 0, world);
+
+    if (this->withClassical >= 2)
+    {
+        this->withClassical = 0;
+        this->withReaxFF    = 1;
+    }
+    else
+    {
+        this->withReaxFF = 0;
+    }
+
+    if (this->withReaxFF != 0)
+    {
+        ierr = 0;
+        if (rank == 0)
+        {
+            if (fgets(line, lenLine, fp) == nullptr)
+            {
+                ierr = 1;
+            }
+
+            if (ierr == 0)
+            {
+                if (sscanf(line, IFORM_F2, &(this->rcutReaxFF), &(this->rateReaxFF)) != 2)
+                {
+                    ierr = 1;
+                }
+            }
+        }
+
+        MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
+        if (ierr != 0) stop_by_error("cannot read ffield file, at ReaxFF");
+
+        MPI_Bcast(&(this->rcutReaxFF), 1, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->rateReaxFF), 1, MPI_NNPREAL, 0, world);
+    }
 
     if (this->symmFunc == SYMM_FUNC_MANYBODY)
     {
