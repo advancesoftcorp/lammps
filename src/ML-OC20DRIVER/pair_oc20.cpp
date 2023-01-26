@@ -217,7 +217,6 @@ void PairOC20::coeff(int narg, char **arg)
 {
     int i, j;
     int count;
-    double r, rr;
 
     int ntypes = atom->ntypes;
     int ntypesEff;
@@ -278,8 +277,6 @@ void PairOC20::coeff(int narg, char **arg)
     }
 
     count = 0;
-    r = this->cutoff;
-    rr = r * r;
 
     for (i = 1; i <= ntypes; ++i)
     {
@@ -287,7 +284,6 @@ void PairOC20::coeff(int narg, char **arg)
         {
             if (this->atomNumMap[i] > 0 && this->atomNumMap[j] > 0)
             {
-                cutsq[i][j] = rr;
                 setflag[i][j] = 1;
                 count++;
             }
@@ -311,7 +307,14 @@ double PairOC20::init_one(int i, int j)
         error->all(FLERR, "All pair coeffs are not set");
     }
 
-    return this->cutoff;
+    double r, rr;
+
+    r = this->cutoff;
+    rr = r * r;
+
+    cutsq[i][j] = rr;
+
+    return r;
 }
 
 void PairOC20::init_style()

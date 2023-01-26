@@ -17,11 +17,21 @@ public:
     ReaxPot(nnpreal rcut, nnpreal mixingRate, const char* fileName);
     virtual ~ReaxPot();
 
+    nnpreal getRcutBond() const
+    {
+        return this->param->rcut_bond;
+    }
+
+    nnpreal getRcutVDW() const
+    {
+        return this->param->rcut_vdw;
+    }
+
     void removePotentialFrom(Geometry* geometry);
 
     nnpreal totalEnergyOfPotential(const Geometry* geometry);
 
-    nnpreal energyAndForceOfPotential(const Geometry* geometry, real* energy, real* force);
+    nnpreal energyAndForceOfPotential(const Geometry* geometry, nnpreal* energy, nnpreal* force);
 
 private:
     ReaxParam* param;
@@ -31,33 +41,33 @@ private:
 
     real mixingRate;
 
-    int**   elemNeighs;
-    real*** rxyzNeighs;
+    int**      elemNeighs;
+    nnpreal*** rxyzNeighs;
 
     int*  numBonds;
     int** idxBonds;
 
-    real*** BOs_raw;  // 0:sigma, 1:pi, 2:pipi
-    real*** BOs_corr; // 0:total, 1:pi, 2:pipi, where sigma = total - pi - pipi
-    real*   Deltas_raw;
-    real*   Deltas_corr;
-    real*   Deltas_e;
-    real*   n0lps;
-    real*   nlps;
-    real*   Slps;
-    real*   Tlps;
+    nnpreal*** BOs_raw;  // 0:sigma, 1:pi, 2:pipi
+    nnpreal*** BOs_corr; // 0:total, 1:pi, 2:pipi, where sigma = total - pi - pipi
+    nnpreal*   Deltas_raw;
+    nnpreal*   Deltas_corr;
+    nnpreal*   Deltas_e;
+    nnpreal*   n0lps;
+    nnpreal*   nlps;
+    nnpreal*   Slps;
+    nnpreal*   Tlps;
 
-    real*** dBOdrs_raw;
-    real*** dBOdBOs;
-    real*** dBOdDeltas;
-    real*** dEdBOs_raw;
-    real*** dEdBOs_corr;
-    real*   dEdDeltas_raw;
-    real*   dEdDeltas_corr;
-    real*   dEdSlps;
-    real*   dn0lpdDeltas;
-    real*   dnlpdDeltas;
-    real*   dTlpdDeltas;
+    nnpreal*** dBOdrs_raw;
+    nnpreal*** dBOdBOs;
+    nnpreal*** dBOdDeltas;
+    nnpreal*** dEdBOs_raw;
+    nnpreal*** dEdBOs_corr;
+    nnpreal*   dEdDeltas_raw;
+    nnpreal*   dEdDeltas_corr;
+    nnpreal*   dEdSlps;
+    nnpreal*   dn0lpdDeltas;
+    nnpreal*   dnlpdDeltas;
+    nnpreal*   dTlpdDeltas;
 
     void clearAtomData();
 
@@ -69,7 +79,7 @@ private:
 
     void calculatePotential(bool withForce);
 
-    void createNeighbors(real rcut);
+    void createNeighbors(nnpreal rcut);
 
     void calculateBondOrder();
     void calculateBondOrderRaw();

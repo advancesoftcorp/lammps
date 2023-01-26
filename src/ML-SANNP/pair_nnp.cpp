@@ -16,6 +16,7 @@ PairNNP::PairNNP(LAMMPS *lmp) : Pair(lmp)
     one_coeff          = 1;
     manybody_flag      = 1;
     centroidstressflag = CENTROID_NOTAVAIL;
+    ghostneigh         = 0;
 
     this->typeMap   = nullptr;
     this->zeroEatom = 0;
@@ -62,8 +63,9 @@ PairNNP::~PairNNP()
 
     if (allocated)
     {
-        memory->destroy(cutsq);
         memory->destroy(setflag);
+        memory->destroy(cutsq);
+        memory->destroy(cutghost);
         memory->destroy(this->elements);
         memory->destroy(this->energies);
         memory->destroy(this->forces);
@@ -83,8 +85,9 @@ void PairNNP::allocate()
 
     const int dim = this->dimensionPosNeighbor();
 
-    memory->create(cutsq,   ntypes + 1, ntypes + 1, "pair:cutsq");
-    memory->create(setflag, ntypes + 1, ntypes + 1, "pair:setflag");
+    memory->create(setflag,  ntypes + 1, ntypes + 1, "pair:setflag");
+    memory->create(cutsq,    ntypes + 1, ntypes + 1, "pair:cutsq");
+    memory->create(cutghost, ntypes + 1, ntypes + 1, "pair:cutghost");
 
     memory->create(this->elements, this->maxinum,                     "pair:elements");
     memory->create(this->energies, this->maxinum,                     "pair:energies");
@@ -654,7 +657,6 @@ void PairNNP::coeff(int narg, char **arg)
 {
     int i, j;
     int count;
-    double r, rr;
     FILE* fp;
 
     int argOffset;
@@ -662,6 +664,9 @@ void PairNNP::coeff(int narg, char **arg)
     int ntypes = atom->ntypes;
     int ntypesEff;
     char** typeNames;
+
+    double rcut;
+    double rcutReaxFF;
 
     if (narg != (3 + ntypes) && narg != (5 + ntypes))
     {
@@ -752,11 +757,9 @@ void PairNNP::coeff(int narg, char **arg)
         delete this->arch;
     }
 
-    bool withCharge = (this->property->getWithCharge() != 0);
-    this->arch = new NNArch(withCharge ? NNARCH_MODE_BOTH : NNARCH_MODE_ENERGY, ntypesEff, this->property, memory);
-
+    this->arch = new NNArch(ntypesEff, this->property, memory);
     this->arch->initLayers();
-    this->arch->restoreNN(fp, ntypesEff, typeNames, this->zeroEatom != 0, comm->me, world);
+    this->arch->restoreNN(fp, typeNames, this->zeroEatom != 0, comm->me, world);
 
     if (comm->me == 0) {
         fclose(fp);
@@ -769,9 +772,20 @@ void PairNNP::coeff(int narg, char **arg)
         allocate();
     }
 
+    if (this->property->getWithReaxFF() != 0)
+    {
+        ghostneigh = 1;
+
+        rcut = get_cutoff();
+        rcutReaxFF = this->arch->getReaxPot()->getRcutBond();
+
+        if ((rcut < 2.0 * rcutReaxFF) && (comm->me == 0))
+        {
+            error->warning(FLERR, "Total cutoff < 2*bond cutoff of ReaxFF. Use an increased neighbor list skin.");
+        }
+    }
+
     count = 0;
-    r = get_cutoff();
-    rr = r * r;
 
     for (i = 1; i <= ntypes; ++i)
     {
@@ -779,7 +793,6 @@ void PairNNP::coeff(int narg, char **arg)
         {
             if (this->typeMap[i] > 0 && this->typeMap[j] > 0)
             {
-                cutsq[i][j] = rr;
                 setflag[i][j] = 1;
                 count++;
             }
@@ -803,7 +816,19 @@ double PairNNP::init_one(int i, int j)
         error->all(FLERR, "All pair coeffs are not set");
     }
 
-    return get_cutoff();
+    double rcut;
+    double rcutReaxFF;
+
+    rcut = get_cutoff();
+    cutsq[i][j] = rcut * rcut;
+
+    if (this->property->getWithReaxFF() != 0)
+    {
+        rcutReaxFF = this->arch->getReaxPot()->getRcutBond();
+        cutghost[i][j] = rcutReaxFF * rcutReaxFF;
+    }
+
+    return rcut;
 }
 
 void PairNNP::init_style()
@@ -823,12 +848,28 @@ void PairNNP::init_style()
         error->all(FLERR, "Pair style NNP requires 'units metal'");
     }
 
-    neighbor->add_request(this, NeighConst::REQ_FULL);
+    // ghost is defined for ReaxFF
+    neighbor->add_request(this, NeighConst::REQ_FULL | NeighConst::REQ_GHOST);
+    //neighbor->add_request(this, NeighConst::REQ_FULL);
 }
 
 double PairNNP::get_cutoff()
 {
-    return this->property->getRcutoff();
+    double rcut;
+    double rcutReaxFF;
+    double rcutReaxVDW;
+
+    rcut = this->property->getRcutoff();
+
+    if (this->property->getWithReaxFF() != 0)
+    {
+        rcutReaxFF  = this->arch->getReaxPot()->getRcutBond();
+        rcutReaxVDW = this->arch->getReaxPot()->getRcutVDW();
+        rcut = max(rcut, rcutReaxFF);
+        rcut = max(rcut, rcutReaxVDW);
+    }
+
+    return rcut;
 }
 
 int PairNNP::dimensionPosNeighbor()

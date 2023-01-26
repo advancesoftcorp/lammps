@@ -162,7 +162,7 @@ void PairNNPCharge::init_style()
 
 double PairNNPCharge::get_cutoff()
 {
-    double rcut = this->property->getRcutoff();
+    double rcut = PairNN::get_cutoff();
     return max(this->cutcoul, rcut);
 }
 

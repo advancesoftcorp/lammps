@@ -9,7 +9,7 @@
 
 #define MIN_NEIGHBOR  10
 
-NNArch::NNArch(int mode, int numElems, const Property* property, LAMMPS_NS::Memory* memory)
+NNArch::NNArch(int numElems, const Property* property, LAMMPS_NS::Memory* memory)
 {
     if (numElems < 1)
     {
@@ -28,13 +28,13 @@ NNArch::NNArch(int mode, int numElems, const Property* property, LAMMPS_NS::Memo
 
     int ielem;
 
-    this->mode     = mode;
+    this->mode     = (property->getWithCharge() != 0) ? NNARCH_MODE_BOTH : NNARCH_MODE_ENERGY;
     this->numElems = numElems;
     this->numAtoms = 0;
     this->property = property;
     this->memory   = memory;
 
-    this->atomNum = new int[numElems];
+    this->atomNum = new int[this->numElems];
 
     this->elements     = nullptr;
     this->numNeighbor  = nullptr;
@@ -103,6 +103,8 @@ NNArch::NNArch(int mode, int numElems, const Property* property, LAMMPS_NS::Memo
     this->ljlikeA2 = nullptr;
     this->ljlikeA3 = nullptr;
     this->ljlikeA4 = nullptr;
+
+    this->reaxPot = nullptr;
 }
 
 NNArch::~NNArch()
@@ -249,9 +251,14 @@ NNArch::~NNArch()
     {
         delete[] this->ljlikeA4;
     }
+
+    if (this->reaxPot != nullptr)
+    {
+        delete[] this->reaxPot;
+    }
 }
 
-void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, bool zeroEatom, int rank, MPI_Comm world)
+void NNArch::restoreNN(FILE* fp, char** elemNames, bool zeroEatom, int rank, MPI_Comm world)
 {
     int  symmFunc = this->property->getSymmFunc();
     int  m2 = this->property->getM2();
@@ -284,7 +291,7 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, bool zeroEatom,
     int jelem1, jelem2;
     int kelem1, kelem2;
     int nelemOld;
-    int nelemNew = numElems;
+    int nelemNew = this->numElems;
     int melemOld;
     int melemNew;
 
@@ -301,6 +308,9 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, bool zeroEatom,
     int*     atomNumOld;
 
     nnpreal A1, A2, A3, A4;
+
+    nnpreal rcutReaxFF;
+    nnpreal rateReaxFF;
 
     int* mapSymmFunc;
 
@@ -585,6 +595,15 @@ void NNArch::restoreNN(FILE* fp, int numElems, char** elemNames, bool zeroEatom,
     delete[] symmAveOld;
     delete[] symmDevOld;
     delete[] atomNumOld;
+
+    // read parameters of ReaxFF
+    if (this->property->getWithReaxFF() != 0)
+    {
+        rcutReaxFF = this->property->getRcutReaxFF();
+        rateReaxFF = this->property->getRateReaxFF();
+
+        this->reaxPot = new ReaxPot(rcutReaxFF, rateReaxFF, fp);
+    }
 
     // map of symmetry functions
     if (this->property->getElemWeight() != 0)

@@ -20,12 +20,13 @@
 #include "nnp_symm_func_chebyshev.h"
 #endif
 #include "nnp_nnlayer.h"
+#include "nnp_reax_pot.h"
 #include "memory.h"
 
 class NNArch
 {
 public:
-    NNArch(int mode, int numElems, const Property* property, LAMMPS_NS::Memory* memory);
+    NNArch(int numElems, const Property* property, LAMMPS_NS::Memory* memory);
     virtual ~NNArch();
 
     int getAtomNum(int ielem) const
@@ -33,7 +34,7 @@ public:
         return this->atomNum[ielem];
     }
 
-    void restoreNN(FILE* fp, int numElems, char** elemNames, bool zeroEatom, int rank, MPI_Comm world);
+    void restoreNN(FILE* fp, char** elemNames, bool zeroEatom, int rank, MPI_Comm world);
 
     void initGeometry(int numAtoms, int* elements,
                       int* numNeighbor, int** elemNeighbor, nnpreal*** posNeighbor);
@@ -74,6 +75,11 @@ public:
     const nnpreal* getLJLikeA4() const
     {
         return this->ljlikeA4;
+    }
+
+    const ReaxPot* getReaxPot() const
+    {
+        return this->reaxPot;
     }
 
 private:
@@ -123,6 +129,8 @@ private:
     nnpreal* ljlikeA2;
     nnpreal* ljlikeA3;
     nnpreal* ljlikeA4;
+
+    ReaxPot* readPot;
 
     bool isEnergyMode() const
     {
