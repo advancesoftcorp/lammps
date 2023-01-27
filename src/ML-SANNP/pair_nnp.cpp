@@ -27,10 +27,10 @@ PairNNP::PairNNP(LAMMPS *lmp) : Pair(lmp)
     this->energies  = nullptr;
     this->forces    = nullptr;
 
-    const int max      = 10;
-    this->maxinum      = max;
-    this->maxnneigh    = max;
-    this->maxnneighAll = max;
+    const int imax     = 10;
+    this->maxinum      = imax;
+    this->maxnneigh    = imax;
+    this->maxnneighAll = imax;
 
     this->numNeighbor    = nullptr;
     this->idxNeighbor    = nullptr;
@@ -130,6 +130,8 @@ void PairNNP::prepareNN(bool* hasGrown)
     double** x = atom->x;
 
     int inum = list->inum;
+    int gnum = list->gnum;
+    int numall;
     int* ilist = list->ilist;
     int* numneigh = list->numneigh;
     int** firstneigh = list->firstneigh;
@@ -150,19 +152,28 @@ void PairNNP::prepareNN(bool* hasGrown)
     hasGrown[1] = false;
     hasGrown[2] = false;
 
+    if (this->property->getWithReaxFF() != 0)
+    {
+        numall = inum + gnum;
+    }
+    else
+    {
+        numall = inum;
+    }
+
     // grow with inum and nneighAll
     nneighAll = 0;
     #pragma omp parallel for private(iatom) reduction(max:nneighAll)
-    for (iatom = 0; iatom < inum; ++iatom)
+    for (iatom = 0; iatom < numall; ++iatom)
     {
         nneighAll = max(nneighAll, numneigh[ilist[iatom]]);
     }
 
-    if (inum > this->maxinum)
+    if (numall > this->maxinum)
     {
         hasGrown[0] = true;
 
-        this->maxinum = inum + this->maxinum / 2;
+        this->maxinum = numall + this->maxinum / 2;
 
         memory->grow(this->elements,    this->maxinum, "pair:elements");
         memory->grow(this->energies,    this->maxinum, "pair:energies");
@@ -184,7 +195,7 @@ void PairNNP::prepareNN(bool* hasGrown)
 
     // generate elements, numNeighbor, idxNeighbor and posNeighborAll
     #pragma omp parallel for private(iatom, i, j, itype, ineigh, nneigh, x0, y0, z0, dx, dy, dz, r, rr)
-    for (iatom = 0; iatom < inum; ++iatom)
+    for (iatom = 0; iatom < numall; ++iatom)
     {
         i = ilist[iatom];
 
@@ -382,6 +393,12 @@ void PairNNP::prepareNN(bool* hasGrown)
     {
         this->arch->initGeometry(inum, this->elements,
                                  this->numNeighbor, this->elemNeighbor, this->posNeighbor);
+
+        if (this->property->getWithReaxFF() != 0)
+        {
+            this->arch->getReaxPot()->initGeometry(inum, inum + gnum, type, ilist,
+                                                   numneigh, firstneigh, this->posNeighborAll);
+        }
     }
 }
 
@@ -455,6 +472,14 @@ void PairNNP::performNN(int eflag)
                 ev_tally_xyz(i, j, nlocal, newton_pair,
                              0.0, 0.0, -fx, -fy, -fz, delx, dely, delz);
             }
+        }
+    }
+
+    if (inum > 0)
+    {
+        if (this->property->getWithReaxFF() != 0)
+        {
+            this->arch->getReaxPot()->calculatePotential(eflag, this, atom);
         }
     }
 }
@@ -567,7 +592,7 @@ void PairNNP::computeLJLike(int eflag)
             A3 = ljlikeA3[kelem];
             A4 = ljlikeA4[kelem];
 
-            r   =  this->posNeighbor[ii][jj][0];
+            r   = this->posNeighbor[ii][jj][0];
             r2  = r * r;
             r6  = r2 * r2 * r2;
             r8  = r2 * r6;
@@ -664,10 +689,18 @@ void PairNNP::coeff(int narg, char **arg)
     int ntypes = atom->ntypes;
     int ntypesEff;
     char** typeNames;
+    int* atomNums;
 
     double rcut;
     double rcutReaxFF;
 
+    // pair_coeff has to be called only once, because neighbor-request is defined here.
+    if (allocated)
+    {
+        error->all(FLERR, "Pair coeff is already called.");
+    }
+
+    // check arguments
     if (narg != (3 + ntypes) && narg != (5 + ntypes))
     {
         error->all(FLERR, "Incorrect number of arguments for pair_coeff.");
@@ -694,6 +727,7 @@ void PairNNP::coeff(int narg, char **arg)
         }
     }
 
+    // check atomic types
     if (this->typeMap != nullptr)
     {
         delete this->typeMap;
@@ -735,7 +769,9 @@ void PairNNP::coeff(int narg, char **arg)
         error->all(FLERR, "There are no elements for pair_coeff of NNP.");
     }
 
-    if (comm->me == 0) {
+    // read force field file, and allocate memory
+    if (comm->me == 0)
+    {
         fp = fopen(arg[2], "r");
 
         if (fp == nullptr)
@@ -761,7 +797,8 @@ void PairNNP::coeff(int narg, char **arg)
     this->arch->initLayers();
     this->arch->restoreNN(fp, typeNames, this->zeroEatom != 0, comm->me, world);
 
-    if (comm->me == 0) {
+    if (comm->me == 0)
+    {
         fclose(fp);
     }
 
@@ -772,10 +809,20 @@ void PairNNP::coeff(int narg, char **arg)
         allocate();
     }
 
-    if (this->property->getWithReaxFF() != 0)
+    // define neighbor-request
+    if (this->property->getWithReaxFF() == 0)
     {
+        neighbor->add_request(this, NeighConst::REQ_FULL);
+
+        ghostneigh = 0;
+    }
+    else
+    {
+        neighbor->add_request(this, NeighConst::REQ_FULL | NeighConst::REQ_GHOST);
+
         ghostneigh = 1;
 
+        // check and initialize ReaxFF
         rcut = get_cutoff();
         rcutReaxFF = this->arch->getReaxPot()->getRcutBond();
 
@@ -783,8 +830,21 @@ void PairNNP::coeff(int narg, char **arg)
         {
             error->warning(FLERR, "Total cutoff < 2*bond cutoff of ReaxFF. Use an increased neighbor list skin.");
         }
+
+        atomNums = new int[ntypes];
+
+        for (i = 1; i <= ntypes; ++i)
+        {
+            j = this->typeMap[i];
+            atomNums[i - 1] = j > 0 ? this->arch->getAtomNum(j - 1) : 0;
+        }
+
+        this->arch->getReaxPot()->initElements(ntypes, atomNums);
+
+        delete[] atomNums;
     }
 
+    // set pair flags
     count = 0;
 
     for (i = 1; i <= ntypes; ++i)
@@ -821,11 +881,13 @@ double PairNNP::init_one(int i, int j)
 
     rcut = get_cutoff();
     cutsq[i][j] = rcut * rcut;
+    cutsq[j][i] = rcut * rcut;
 
     if (this->property->getWithReaxFF() != 0)
     {
         rcutReaxFF = this->arch->getReaxPot()->getRcutBond();
-        cutghost[i][j] = rcutReaxFF * rcutReaxFF;
+        cutghost[i][j] = rcutReaxFF;
+        cutghost[j][i] = rcutReaxFF;
     }
 
     return rcut;
@@ -848,9 +910,18 @@ void PairNNP::init_style()
         error->all(FLERR, "Pair style NNP requires 'units metal'");
     }
 
-    // ghost is defined for ReaxFF
-    neighbor->add_request(this, NeighConst::REQ_FULL | NeighConst::REQ_GHOST);
-    //neighbor->add_request(this, NeighConst::REQ_FULL);
+    // define neighbor-request, for 2nd running
+    if (allocated)
+    {
+        if (this->property->getWithReaxFF() == 0)
+        {
+            neighbor->add_request(this, NeighConst::REQ_FULL);
+        }
+        else
+        {
+            neighbor->add_request(this, NeighConst::REQ_FULL | NeighConst::REQ_GHOST);
+        }
+    }
 }
 
 double PairNNP::get_cutoff()

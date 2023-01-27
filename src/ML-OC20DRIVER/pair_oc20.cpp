@@ -313,6 +313,7 @@ double PairOC20::init_one(int i, int j)
     rr = r * r;
 
     cutsq[i][j] = rr;
+    cutsq[j][i] = rr;
 
     return r;
 }

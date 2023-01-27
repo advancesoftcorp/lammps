@@ -5,13 +5,11 @@
  * http://opensource.org/licenses/mit-license.php
  */
 
-#include "ReaxPot.h"
-#include <cmath>
-using namespace std;
+#include "nnp_reax_pot.h"
 
-#define OVC_THR REAL(0.001)
-#define V13_THR REAL(0.001)
-#define BO_THR  REAL(1.0e-10)
+#define OVC_THR NNPREAL(0.001)
+#define V13_THR NNPREAL(0.001)
+#define BO_THR  NNPREAL(1.0e-10)
 
 void ReaxPot::calculateBondOrder()
 {
@@ -23,77 +21,177 @@ void ReaxPot::calculateBondOrder()
 void ReaxPot::calculateBondOrderRaw()
 {
     int iatom;
-    int natom = this->geometry->getNumAtoms();
+    int jatom;
+    int natom = this->numAtoms;
 
+    int       ineigh;
+    int       nneigh;
+    int*      idxNeigh;
+    nnpreal** posNeigh;
+
+    int  ibond;
     int  nbond;
-    int  ineigh;
-    int  nneigh;
+    int  mbond;
     int* idxBond;
 
     int ielem;
     int jelem;
 
-    int*   elemNeigh;
-    real** rxyzNeigh;
+    int maxAtoms;
+    int maxNeighs;
+    int maxBonds;
+    int maxBondsAll;
 
-    real r;
-    real ri_sigma, rj_sigma, r_sigma;
-    real ri_pi,    rj_pi,    r_pi;
-    real ri_pipi,  rj_pipi,  r_pipi;
+    nnpreal r;
+    nnpreal ri_sigma, rj_sigma, r_sigma;
+    nnpreal ri_pi,    rj_pi,    r_pi;
+    nnpreal ri_pipi,  rj_pipi,  r_pipi;
+    nnpreal rcut = this->param->rcut_bond;
 
-    real pbo1, pbo2;
-    real pbo3, pbo4;
-    real pbo5, pbo6;
+    nnpreal pbo1, pbo2;
+    nnpreal pbo3, pbo4;
+    nnpreal pbo5, pbo6;
 
-    real BO;
-    real BO_sigma;
-    real BO_pi;
-    real BO_pipi;
-    real BO_cut = this->param->BO_cut;
+    nnpreal BO;
+    nnpreal BO_sigma;
+    nnpreal BO_pi;
+    nnpreal BO_pipi;
+    nnpreal BO_cut = this->param->BO_cut;
 
-    real logBO_sigma;
-    real logBO_pi;
-    real logBO_pipi;
+    nnpreal logBO_sigma;
+    nnpreal logBO_pi;
+    nnpreal logBO_pipi;
 
-    real dBOdr_sigma;
-    real dBOdr_pi;
-    real dBOdr_pipi;
+    nnpreal dBOdr_sigma;
+    nnpreal dBOdr_pi;
+    nnpreal dBOdr_pipi;
 
-    real** BO_raw;
-    real** dBOdr_raw;
-    real   Delta_raw;
+    nnpreal** BO_raw;
+    nnpreal** dBOdr_raw;
+    nnpreal   Delta_raw;
 
-    this->numBonds = new int [natom];
-    this->idxBonds = new int*[natom];
+    // grow memory with maxAtoms
+    if (this->maxAtoms < this->numAtoms)
+    {
+        maxAtoms = good_memory_size(this->numAtoms);
 
-    this->BOs_raw    = new real**[natom];
-    this->dBOdrs_raw = new real**[natom];
-    this->Deltas_raw = new real  [natom];
+        this->memory->grow(this->numBonds,       maxAtoms, "nnpReax:numBonds");
+
+        this->memory->grow(this->Deltas_raw,     maxAtoms, "nnpReax:Deltas_raw");
+        this->memory->grow(this->Deltas_corr,    maxAtoms, "nnpReax:Deltas_corr");
+        this->memory->grow(this->Deltas_e,       maxAtoms, "nnpReax:Deltas_e");
+        this->memory->grow(this->exp1Deltas,     maxAtoms, "nnpReax:exp1Deltas");
+        this->memory->grow(this->exp2Deltas,     maxAtoms, "nnpReax:exp2Deltas");
+        this->memory->grow(this->n0lps,          maxAtoms, "nnpReax:n0lps");
+        this->memory->grow(this->nlps,           maxAtoms, "nnpReax:nlps");
+        this->memory->grow(this->Slps,           maxAtoms, "nnpReax:Slps");
+        this->memory->grow(this->Tlps,           maxAtoms, "nnpReax:Tlps");
+
+        this->memory->grow(this->dEdDeltas_raw,  maxAtoms, "nnpReax:dEdDeltas_raw");
+        this->memory->grow(this->dEdDeltas_corr, maxAtoms, "nnpReax:dEdDeltas_corr");
+        this->memory->grow(this->dEdSlps,        maxAtoms, "nnpReax:dEdSlps");
+        this->memory->grow(this->dn0lpdDeltas,   maxAtoms, "nnpReax:dn0lpdDeltas");
+        this->memory->grow(this->dnlpdDeltas,    maxAtoms, "nnpReax:dnlpdDeltas");
+        this->memory->grow(this->dTlpdDeltas,    maxAtoms, "nnpReax:dTlpdDeltas");
+        this->memory->grow(this->dDeltadSlps,    maxAtoms, "nnpReax:dDeltadSlps");
+        this->memory->grow(this->dDeltadDeltas,  maxAtoms, "nnpReax:dDeltadDeltas");
+        this->memory->grow(this->coeff1Eovers,   maxAtoms, "nnpReax:coeff1Eovers");
+        this->memory->grow(this->coeff2Eovers,   maxAtoms, "nnpReax:coeff2Eovers");
+    }
+    else
+    {
+        maxAtoms = this->maxAtoms;
+    }
+
+    // estimate size of neighbors a atom
+    maxNeighs = 0;
 
     for (iatom = 0; iatom < natom; ++iatom)
     {
-        nneigh    = this->geometry->getNumNeighbors(iatom);
-        elemNeigh = this->elemNeighs[iatom];
-        rxyzNeigh = this->rxyzNeighs[iatom];
+        nneigh = this->numNeighbors(iatom);
+        maxNeighs = max(maxNeighs, nneigh);
+    }
+
+    // grow memory with maxNeighs
+    if (this->maxAtoms < this->numAtoms || this->maxNeighs < maxNeighs)
+    {
+        if (this->maxNeighs < maxNeighs)
+        {
+            this->maxNeighs = good_memory_size(maxNeighs);
+        }
+
+        this->memory->create(this->idxBonds, maxAtoms, this->maxNeighs, "nnpReax:idxBonds");
+    }
+
+    // estimate size of bonds a atom
+    maxBondsAll = 0;
+
+    for (iatom = 0; iatom < natom; ++iatom)
+    {
+        nneigh   = this->numNeighbors(iatom);
+        idxNeigh = this->getNeighbors(iatom);
+        posNeigh = this->getPositions(iatom);
 
         nbond   = 0;
-        idxBond = new int[nneigh];
+        idxBond = this->idxBonds[iatom];
 
-        BO_raw    = new real*[nneigh];
-        dBOdr_raw = new real*[nneigh];
+        for (ineigh = 0; ineigh < nneigh; ++ineigh)
+        {
+            r = posNeigh[ineigh][0];
+            if (r <= ZERO || rcut <= r) continue;
 
-        ielem = elemNeigh[0];
+            jatom = this->getNeighbor(idxNeigh, ineigh);
+            jelem = this->getElement(jatom);
+            if (jelem < 0) continue;
 
+            idxBond[nbond] = ineigh;
+            nbond++;
+        }
+
+        maxBondsAll = max(maxBondsAll, nbond);
+
+        this->numBonds[iatom] = nbond;
+    }
+
+    // grow memory with maxBondsAll
+    if (this->maxAtoms < this->numAtoms || this->maxBondsAll < maxBondsAll)
+    {
+        if (this->maxBondsAll < maxBondsAll)
+        {
+            this->maxBondsAll = good_memory_size(maxBondsAll);
+        }
+
+        this->memory->grow(this->BOs_raw,    maxAtoms, this->maxBondsAll, 3, "nnpReax:BOs_raw");
+        this->memory->grow(this->dBOdrs_raw, maxAtoms, this->maxBondsAll, 3, "nnpReax:dBOdrs_raw");
+    }
+
+    // calculate bond-orders
+    maxBonds = 0;
+
+    for (iatom = 0; iatom < natom; ++iatom)
+    {
+        ielem    = this->getElement(iatom);
+        idxNeigh = this->getNeighbors(iatom);
+        posNeigh = this->getPositions(iatom);
+
+        mbond   = 0;
+        nbond   = this->numBonds[iatom];
+        idxBond = this->idxBonds[iatom];
+
+        BO_raw    =  this->BOs_raw   [iatom];
+        dBOdr_raw =  this->dBOdrs_raw[iatom];
         Delta_raw = -this->param->Val[ielem];
 
         ri_sigma = this->param->r_atom_sigma[ielem];
         ri_pi    = this->param->r_atom_pi   [ielem];
         ri_pipi  = this->param->r_atom_pipi [ielem];
 
-        for (ineigh = 0; ineigh < nneigh; ++ineigh)
+        for (ibond = 0; ibond < nbond; ++ibond)
         {
-            jelem = elemNeigh[ineigh + 1];
-            r     = rxyzNeigh[ineigh][0];
+            ineigh = idxBond[ibond];
+            r      = posNeigh[ineigh][0];
+            jatom  = this->getNeighbor(idxNeigh, ineigh);
+            jelem  = this->getElement(jatom);
 
             rj_sigma = this->param->r_atom_sigma[jelem];
             rj_pi    = this->param->r_atom_pi   [jelem];
@@ -151,29 +249,46 @@ void ReaxPot::calculateBondOrderRaw()
                 BO       -= BO_cut;
                 BO_sigma -= BO_cut;
 
-                BO_raw[nbond] = new real[3];
-                BO_raw[nbond][0] = BO_sigma;
-                BO_raw[nbond][1] = BO_pi;
-                BO_raw[nbond][2] = BO_pipi;
+                BO_raw[mbond][0] = BO_sigma;
+                BO_raw[mbond][1] = BO_pi;
+                BO_raw[mbond][2] = BO_pipi;
 
-                dBOdr_raw[nbond] = new real[3];
-                dBOdr_raw[nbond][0] = dBOdr_sigma;
-                dBOdr_raw[nbond][1] = dBOdr_pi;
-                dBOdr_raw[nbond][2] = dBOdr_pipi;
+                dBOdr_raw[mbond][0] = dBOdr_sigma;
+                dBOdr_raw[mbond][1] = dBOdr_pi;
+                dBOdr_raw[mbond][2] = dBOdr_pipi;
 
-                idxBond[nbond] = ineigh;
-                nbond++;
+                idxBond[mbond] = ineigh;
+                mbond++;
 
                 Delta_raw += BO;
             }
         }
 
-        this->numBonds[iatom] = nbond;
-        this->idxBonds[iatom] = idxBond;
+        maxBonds = max(maxBonds, mbond);
 
-        this->BOs_raw   [iatom] = BO_raw;
-        this->dBOdrs_raw[iatom] = dBOdr_raw;
+        this->numBonds  [iatom] = mbond;
         this->Deltas_raw[iatom] = Delta_raw;
+    }
+
+    // grow memory with maxBonds
+    if (this->maxAtoms < this->numAtoms || this->maxBonds < maxBonds)
+    {
+        if (this->maxBonds < maxBonds)
+        {
+            this->maxBonds = good_memory_size(maxBonds);
+        }
+
+        this->memory->grow(this->BOs_corr,    maxAtoms, this->maxBonds, 3, "nnpReax:BOs_corr");
+        this->memory->grow(this->dBOdBOs,     maxAtoms, this->maxBonds, 5, "nnpReax:dBOdBOs");
+        this->memory->grow(this->dBOdDeltas,  maxAtoms, this->maxBonds, 3, "nnpReax:dBOdDeltas");
+        this->memory->grow(this->dEdBOs_raw,  maxAtoms, this->maxBonds, 3, "nnpReax:dEdBOs_raw");
+        this->memory->grow(this->dEdBOs_corr, maxAtoms, this->maxBonds, 3, "nnpReax:dEdBOs_corr");
+    }
+
+    // store maxAtoms, if grown
+    if (this->maxAtoms < this->numAtoms)
+    {
+        this->maxAtoms = maxAtoms;
     }
 }
 
@@ -181,23 +296,22 @@ void ReaxPot::calculateBondOrderCorr()
 {
     int iatom;
     int jatom;
-    int natom = this->geometry->getNumAtoms();
+    int natom = this->numAtoms;
+
+    int  ineigh;
+    int* idxNeigh;
 
     int  ibond;
     int  nbond;
-    int  ineigh;
     int* idxBond;
-    const int** neighbor;
 
     int ielem;
     int jelem;
 
-    int* elemNeigh;
+    nnpreal fac1, fac2, fac3, fac4;
 
-    real fac1, fac2, fac3, fac4;
-
-    real ovc_corr;
-    real v13_corr;
+    nnpreal ovc_corr;
+    nnpreal v13_corr;
 
     // to keep accuracy of f1, f4, f5, some variables are defined as double
     double pboc1 = (double) this->param->p_boc1;
@@ -235,63 +349,46 @@ void ReaxPot::calculateBondOrderCorr()
     double BOr_pi;
     double BOr_pipi;
 
-    real BOc_tot;
-    real BOc_pi;
-    real BOc_pipi;
+    nnpreal BOc_tot;
+    nnpreal BOc_pi;
+    nnpreal BOc_pipi;
 
-    real dBOdBO_tot;
-    real dBOdBO_pi1;
-    real dBOdBO_pipi1;
-    real dBOdBO_pi2;
-    real dBOdBO_pipi2;
+    nnpreal dBOdBO_tot;
+    nnpreal dBOdBO_pi1;
+    nnpreal dBOdBO_pipi1;
+    nnpreal dBOdBO_pi2;
+    nnpreal dBOdBO_pipi2;
 
-    real dBOdDelta_tot;
-    real dBOdDelta_pi;
-    real dBOdDelta_pipi;
+    nnpreal dBOdDelta_tot;
+    nnpreal dBOdDelta_pi;
+    nnpreal dBOdDelta_pipi;
 
-    real** BO_raw;
-    real** BO_corr;
-    real** dBOdBO;
-    real** dBOdDelta;
-    real   Delta_corr;
-    real   Delta_e;
-
-    double* exp1Deltas = new double[natom];
-    double* exp2Deltas = new double[natom];
-
-    this->BOs_corr    = new real**[natom];
-    this->dBOdBOs     = new real**[natom];
-    this->dBOdDeltas  = new real**[natom];
-    this->Deltas_corr = new real  [natom];
-    this->Deltas_e    = new real  [natom];
+    nnpreal** BO_raw;
+    nnpreal** BO_corr;
+    nnpreal** dBOdBO;
+    nnpreal** dBOdDelta;
+    nnpreal   Delta_corr;
+    nnpreal   Delta_e;
 
     for (iatom = 0; iatom < natom; ++iatom)
     {
         Deltai = this->Deltas_raw[iatom];
-        exp1Deltas[iatom] = exp(-pboc1 * Deltai);
-        exp2Deltas[iatom] = exp(-pboc2 * Deltai);
+        this->exp1Deltas[iatom] = exp(-pboc1 * Deltai);
+        this->exp2Deltas[iatom] = exp(-pboc2 * Deltai);
     }
 
     for (iatom = 0; iatom < natom; ++iatom)
     {
-        nbond     = this->numBonds[iatom];
-        idxBond   = this->idxBonds[iatom];
-        neighbor  = this->geometry->getNeighbors(iatom);
-        elemNeigh = this->elemNeighs[iatom];
+        ielem    = this->getElement(iatom);
+        idxNeigh = this->getNeighbors(iatom);
 
-        BO_raw    = this->BOs_raw[iatom];
-        BO_corr   = new real*[nbond];
-        dBOdBO    = new real*[nbond];
-        dBOdDelta = new real*[nbond];
+        nbond   = this->numBonds[iatom];
+        idxBond = this->idxBonds[iatom];
 
-        for (ibond = 0; ibond < nbond; ++ibond)
-        {
-            BO_corr  [ibond] = new real[3];
-            dBOdBO   [ibond] = new real[5];
-            dBOdDelta[ibond] = new real[3];
-        }
-
-        ielem = elemNeigh[0];
+        BO_raw    = this->BOs_raw   [iatom];
+        BO_corr   = this->BOs_corr  [iatom];
+        dBOdBO    = this->dBOdBOs   [iatom];
+        dBOdDelta = this->dBOdDeltas[iatom];
 
         Delta_corr = -this->param->Val  [ielem];
         Delta_e    = -this->param->Val_e[ielem];
@@ -300,14 +397,14 @@ void ReaxPot::calculateBondOrderCorr()
         Vali_boc   = (double) this->param->Val_boc[ielem];
         Deltai     = (double) this->Deltas_raw    [iatom];
         Deltai_boc = Deltai + Vali - Vali_boc;
-        exp1Deltai = exp1Deltas          [iatom];
-        exp2Deltai = exp2Deltas          [iatom];
+        exp1Deltai = this->exp1Deltas[iatom];
+        exp2Deltai = this->exp2Deltas[iatom];
 
         for (ibond = 0; ibond < nbond; ++ibond)
         {
             ineigh = idxBond[ibond];
-            jatom  = neighbor[ineigh][0];
-            jelem  = elemNeigh[ineigh + 1];
+            jatom  = this->getNeighbor(idxNeigh, ineigh);
+            jelem  = this->getElement(jatom);
 
             BOr_sigma = (double) BO_raw[ibond][0];
             BOr_pi    = (double) BO_raw[ibond][1];
@@ -319,8 +416,8 @@ void ReaxPot::calculateBondOrderCorr()
             Valj_boc   = (double) this->param->Val_boc [jelem];
             Deltaj     = (double) this->Deltas_raw     [jatom];
             Deltaj_boc = Deltaj + Valj - Valj_boc;
-            exp1Deltaj = exp1Deltas           [jatom];
-            exp2Deltaj = exp2Deltas           [jatom];
+            exp1Deltaj = this->exp1Deltas[jatom];
+            exp2Deltaj = this->exp2Deltas[jatom];
             pboc3      = (double) this->param->p_boc3  [ielem][jelem];
             pboc4      = (double) this->param->p_boc4  [ielem][jelem];
             pboc5      = (double) this->param->p_boc5  [ielem][jelem];
@@ -381,25 +478,25 @@ void ReaxPot::calculateBondOrderCorr()
             }
 
             // correct BO
-            fac1     = (real) (f1 * f4 * f5);
-            fac2     = ((real) f1) * fac1;
-            BOc_tot  = ((real) BOr_tot)  * fac1;
-            BOc_pi   = ((real) BOr_pi)   * fac2;
-            BOc_pipi = ((real) BOr_pipi) * fac2;
+            fac1     = (nnpreal) (f1 * f4 * f5);
+            fac2     = ((nnpreal) f1) * fac1;
+            BOc_tot  = ((nnpreal) BOr_tot)  * fac1;
+            BOc_pi   = ((nnpreal) BOr_pi)   * fac2;
+            BOc_pipi = ((nnpreal) BOr_pipi) * fac2;
 
-            fac3         = (real) (f1 * (df4dBO * f5 + f4 * df5dBO));
-            fac4         = ((real) f1) * fac3;
-            dBOdBO_tot   = fac1 + ((real) BOr_tot) * fac3;
+            fac3         = (nnpreal) (f1 * (df4dBO * f5 + f4 * df5dBO));
+            fac4         = ((nnpreal) f1) * fac3;
+            dBOdBO_tot   = fac1 + ((nnpreal) BOr_tot) * fac3;
             dBOdBO_pi1   = fac2;
             dBOdBO_pipi1 = fac2;
-            dBOdBO_pi2   = ((real) BOr_pi)   * fac4;
-            dBOdBO_pipi2 = ((real) BOr_pipi) * fac4;
+            dBOdBO_pi2   = ((nnpreal) BOr_pi)   * fac4;
+            dBOdBO_pipi2 = ((nnpreal) BOr_pipi) * fac4;
 
-            fac1           = ((real) (df1dDelta * f4 + f1 * df4dDelta) * f5);
-            fac2           = ((real) f1 * (2.0 * df1dDelta * f4 + f1 * df4dDelta) * f5);
-            dBOdDelta_tot  = ((real) BOr_tot)  * fac1;
-            dBOdDelta_pi   = ((real) BOr_pi)   * fac2;
-            dBOdDelta_pipi = ((real) BOr_pipi) * fac2;
+            fac1           = ((nnpreal) (df1dDelta * f4 + f1 * df4dDelta) * f5);
+            fac2           = ((nnpreal) f1 * (2.0 * df1dDelta * f4 + f1 * df4dDelta) * f5);
+            dBOdDelta_tot  = ((nnpreal) BOr_tot)  * fac1;
+            dBOdDelta_pi   = ((nnpreal) BOr_pi)   * fac2;
+            dBOdDelta_pipi = ((nnpreal) BOr_pipi) * fac2;
 
             if (BOc_tot < BO_THR)
             {
@@ -448,8 +545,5 @@ void ReaxPot::calculateBondOrderCorr()
         this->Deltas_corr[iatom] = Delta_corr;
         this->Deltas_e   [iatom] = Delta_e;
     }
-
-    delete[] exp1Deltas;
-    delete[] exp2Deltas;
 }
 

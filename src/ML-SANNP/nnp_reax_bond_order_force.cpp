@@ -5,9 +5,9 @@
  * http://opensource.org/licenses/mit-license.php
  */
 
-#include "ReaxPot.h"
+#include "nnp_reax_pot.h"
 
-void ReaxPot::calculateBondOrderForce()
+void ReaxPot::calculateBondOrderForce(LAMMPS_NS::Pair* pair, LAMMPS_NS::Atom* atom)
 {
     this->calculateBondOrderForce0();
 
@@ -17,7 +17,7 @@ void ReaxPot::calculateBondOrderForce()
 
     this->calculateBondOrderForce3();
 
-    this->calculateBondOrderForce4();
+    this->calculateBondOrderForce4(pair, atom);
 }
 
 // dE/dBO    = dE/dSlp * dSlp/dBO
@@ -26,51 +26,54 @@ void ReaxPot::calculateBondOrderForce0()
 {
     int iatom;
     int jatom;
-    int natom = this->geometry->getNumAtoms();
+    int latom = this->locAtoms;
+    int natom = this->numAtoms;
+
+    int  ineigh;
+    int* idxNeigh;
 
     int  ibond;
     int  nbond;
-    int  ineigh;
     int* idxBond;
-    const int** neighbor;
 
-    real** BO_corr;
-    real   BO_pi;
-    real   BO_pipi;
+    nnpreal** BO_corr;
+    nnpreal   BO_pi;
+    nnpreal   BO_pipi;
 
-    real** dEdBO_corr;
-    real   dEdBO_pi;
+    nnpreal** dEdBO_corr;
+    nnpreal   dEdBO_pi;
 
-    real dEdSlpi;
-    real dEdSlpj;
-    real dEdTlp;
-    real dEdDelta;
+    nnpreal dEdSlpi;
+    nnpreal dEdSlpj;
+    nnpreal dEdTlp;
+    nnpreal dEdDelta;
 
-    real Tlpi;
-    real Tlpj;
-    real dTdDelta;
+    nnpreal Tlpi;
+    nnpreal Tlpj;
+    nnpreal dTdDelta;
 
     for (iatom = 0; iatom < natom; ++iatom)
     {
-        nbond    = this->numBonds[iatom];
-        idxBond  = this->idxBonds[iatom];
-        neighbor = this->geometry->getNeighbors(iatom);
+        idxNeigh = this->getNeighbors(iatom);
+
+        nbond   = this->numBonds[iatom];
+        idxBond = this->idxBonds[iatom];
 
         BO_corr    = this->BOs_corr[iatom];
         dEdBO_corr = this->dEdBOs_corr[iatom];
-        dEdSlpi    = this->dEdSlps[iatom];
+        dEdSlpi    = iatom < latom ? this->dEdSlps[iatom] : ZERO;
         Tlpi       = this->Tlps[iatom];
-        dTdDelta   = this->dTlpdDeltas[iatom];
-
-        dEdTlp = ZERO;
 
         for (ibond = 0; ibond < nbond; ++ibond)
         {
             ineigh = idxBond[ibond];
-            jatom  = neighbor[ineigh][0];
+            jatom  = this->getNeighbor(idxNeigh, ineigh);
 
-            dEdSlpj = this->dEdSlps[jatom];
-            Tlpj    = this->Tlps[jatom];
+            if (iatom >= latom && jatom >= latom) continue;
+
+            dEdSlpj  = jatom < latom ? this->dEdSlps[jatom] : ZERO;
+            Tlpj     = this->Tlps[jatom];
+            dTdDelta = this->dTlpdDeltas[jatom];
 
             BO_pi   = BO_corr[ibond][1];
             BO_pipi = BO_corr[ibond][2];
@@ -80,12 +83,11 @@ void ReaxPot::calculateBondOrderForce0()
             dEdBO_corr[ibond][1] += dEdBO_pi;
             dEdBO_corr[ibond][2] += dEdBO_pi;
 
-            dEdTlp += dEdSlpj * (BO_pi + BO_pipi);
+            dEdTlp   = dEdSlpi * (BO_pi + BO_pipi);
+            dEdDelta = dEdTlp * dTdDelta;
+
+            this->dEdDeltas_corr[jatom] += dEdDelta;
         }
-
-        dEdDelta = dEdTlp * dTdDelta;
-
-        this->dEdDeltas_corr[iatom] += dEdDelta;
     }
 }
 
@@ -94,24 +96,26 @@ void ReaxPot::calculateBondOrderForce1()
 {
     int iatom;
     int jatom;
-    int natom = this->geometry->getNumAtoms();
+    int natom = this->numAtoms;
+
+    int  ineigh;
+    int* idxNeigh;
 
     int  ibond;
     int  nbond;
-    int  ineigh;
     int* idxBond;
-    const int** neighbor;
 
-    real** dEdBO_corr;
+    nnpreal** dEdBO_corr;
 
-    real dEdDeltai;
-    real dEdDeltaj;
+    nnpreal dEdDeltai;
+    nnpreal dEdDeltaj;
 
     for (iatom = 0; iatom < natom; ++iatom)
     {
-        nbond    = this->numBonds[iatom];
-        idxBond  = this->idxBonds[iatom];
-        neighbor = this->geometry->getNeighbors(iatom);
+        idxNeigh = this->getNeighbors(iatom);
+
+        nbond   = this->numBonds[iatom];
+        idxBond = this->idxBonds[iatom];
 
         dEdBO_corr = this->dEdBOs_corr[iatom];
         dEdDeltai  = this->dEdDeltas_corr[iatom];
@@ -119,7 +123,7 @@ void ReaxPot::calculateBondOrderForce1()
         for (ibond = 0; ibond < nbond; ++ibond)
         {
             ineigh = idxBond[ibond];
-            jatom  = neighbor[ineigh][0];
+            jatom  = this->getNeighbor(idxNeigh, ineigh);
 
             dEdDeltaj = this->dEdDeltas_corr[jatom];
 
@@ -133,37 +137,34 @@ void ReaxPot::calculateBondOrderForce1()
 void ReaxPot::calculateBondOrderForce2()
 {
     int iatom;
-    int natom = this->geometry->getNumAtoms();
+    int natom = this->numAtoms;
 
     int ibond;
     int nbond;
 
-    real** dBOdBO;
-    real** dBOdDelta;
+    nnpreal** dBOdBO;
+    nnpreal** dBOdDelta;
 
-    real dBOdBO_tot;
-    real dBOdBO_pi1;
-    real dBOdBO_pipi1;
-    real dBOdBO_pi2;
-    real dBOdBO_pipi2;
+    nnpreal dBOdBO_tot;
+    nnpreal dBOdBO_pi1;
+    nnpreal dBOdBO_pipi1;
+    nnpreal dBOdBO_pi2;
+    nnpreal dBOdBO_pipi2;
 
-    real dBOdDelta_tot;
-    real dBOdDelta_pi;
-    real dBOdDelta_pipi;
+    nnpreal dBOdDelta_tot;
+    nnpreal dBOdDelta_pi;
+    nnpreal dBOdDelta_pipi;
 
-    real** dEdBO_raw;
-    real** dEdBO_corr;
-    real   dEdDelta;
+    nnpreal** dEdBO_raw;
+    nnpreal** dEdBO_corr;
+    nnpreal   dEdDelta;
 
-    real dEdBOr_tot;
-    real dEdBOr_pi;
-    real dEdBOr_pipi;
-    real dEdBOc_tot;
-    real dEdBOc_pi;
-    real dEdBOc_pipi;
-
-    this->dEdBOs_raw    = new real**[natom];
-    this->dEdDeltas_raw = new real  [natom];
+    nnpreal dEdBOr_tot;
+    nnpreal dEdBOr_pi;
+    nnpreal dEdBOr_pipi;
+    nnpreal dEdBOc_tot;
+    nnpreal dEdBOc_pi;
+    nnpreal dEdBOc_pipi;
 
     for (iatom = 0; iatom < natom; ++iatom)
     {
@@ -172,13 +173,8 @@ void ReaxPot::calculateBondOrderForce2()
         dBOdBO     = this->dBOdBOs[iatom];
         dBOdDelta  = this->dBOdDeltas[iatom];
 
-        dEdBO_raw  = new real*[nbond];
+        dEdBO_raw  = this->dEdBOs_raw[iatom];
         dEdBO_corr = this->dEdBOs_corr[iatom];
-
-        for (ibond = 0; ibond < nbond; ++ibond)
-        {
-            dEdBO_raw[ibond] = new real[3];
-        }
 
         dEdDelta = ZERO;
 
@@ -214,7 +210,6 @@ void ReaxPot::calculateBondOrderForce2()
                      +  dEdBOc_pipi * dBOdDelta_pipi;  //            + dE/dBO(pipi) * dBO(pipi)/dDelta'
         }
 
-        this->dEdBOs_raw   [iatom] = dEdBO_raw;
         this->dEdDeltas_raw[iatom] = dEdDelta;
     }
 }
@@ -224,25 +219,27 @@ void ReaxPot::calculateBondOrderForce3()
 {
     int iatom;
     int jatom;
-    int natom = this->geometry->getNumAtoms();
+    int natom = this->numAtoms;
+
+    int  ineigh;
+    int* idxNeigh;
 
     int  ibond;
     int  nbond;
-    int  ineigh;
     int* idxBond;
-    const int** neighbor;
 
-    real** dEdBO_raw;
+    nnpreal** dEdBO_raw;
 
-    real dEdDeltai;
-    real dEdDeltaj;
-    real dEdDelta;
+    nnpreal dEdDeltai;
+    nnpreal dEdDeltaj;
+    nnpreal dEdDelta;
 
     for (iatom = 0; iatom < natom; ++iatom)
     {
-        nbond    = this->numBonds[iatom];
-        idxBond  = this->idxBonds[iatom];
-        neighbor = this->geometry->getNeighbors(iatom);
+        idxNeigh = this->getNeighbors(iatom);
+
+        nbond   = this->numBonds[iatom];
+        idxBond = this->idxBonds[iatom];
 
         dEdBO_raw = this->dEdBOs_raw[iatom];
         dEdDeltai = this->dEdDeltas_raw[iatom];
@@ -250,7 +247,7 @@ void ReaxPot::calculateBondOrderForce3()
         for (ibond = 0; ibond < nbond; ++ibond)
         {
             ineigh = idxBond[ibond];
-            jatom  = neighbor[ineigh][0];
+            jatom  = this->getNeighbor(idxNeigh, ineigh);
 
             dEdDeltaj = this->dEdDeltas_raw[jatom];
 
@@ -264,54 +261,61 @@ void ReaxPot::calculateBondOrderForce3()
 }
 
 // dE/dr = dE/dBO' * dBO'/dr
-void ReaxPot::calculateBondOrderForce4()
+void ReaxPot::calculateBondOrderForce4(LAMMPS_NS::Pair* pair, LAMMPS_NS::Atom* atom)
 {
-    int iatom;
-    int natom = this->geometry->getNumAtoms();
+    int iatom, Iatom;
+    int jatom, Jatom;
+    int natom = this->numAtoms;
+
+    int       ineigh;
+    int*      idxNeigh;
+    nnpreal** posNeigh;
 
     int  ibond;
     int  nbond;
-    int  ineigh;
     int* idxBond;
 
-    real** rxyzNeigh;
+    nnpreal** dBOdr_raw;
+    nnpreal** dEdBO_raw;
 
-    real** dBOdr_raw;
-    real** dEdBO_raw;
+    nnpreal dBOdr_sigma;
+    nnpreal dBOdr_pi;
+    nnpreal dBOdr_pipi;
 
-    real dBOdr_sigma;
-    real dBOdr_pi;
-    real dBOdr_pipi;
+    nnpreal dEdBO_sigma;
+    nnpreal dEdBO_pi;
+    nnpreal dEdBO_pipi;
+    nnpreal dEdr;
 
-    real dEdBO_sigma;
-    real dEdBO_pi;
-    real dEdBO_pipi;
+    double r,  dx, dy, dz;
+    double Fr, Fx, Fy, Fz;
 
-    real r, dEdr;
-    real dx, dy, dz;
-    real Fx, Fy, Fz;
+    double escale = (double) (this->mixingRate * KCAL2EV);
 
     for (iatom = 0; iatom < natom; ++iatom)
     {
-        nbond     = this->numBonds[iatom];
-        idxBond   = this->idxBonds[iatom];
-        rxyzNeigh = this->rxyzNeighs[iatom];
+        idxNeigh = this->getNeighbors(iatom);
+        posNeigh = this->getPositions(iatom);
+        Iatom    = this->indexOfLAMMPS(iatom);
+
+        nbond   = this->numBonds[iatom];
+        idxBond = this->idxBonds[iatom];
 
         dBOdr_raw = this->dBOdrs_raw[iatom];
         dEdBO_raw = this->dEdBOs_raw[iatom];
 
-        Fx = ZERO;
-        Fy = ZERO;
-        Fz = ZERO;
-
         for (ibond = 0; ibond < nbond; ++ibond)
         {
             ineigh = idxBond[ibond];
+            jatom  = this->getNeighbor(idxNeigh, ineigh);
+            Jatom  = this->indexOfLAMMPS(jatom);
 
-            r  = rxyzNeigh[ineigh][0];
-            dx = rxyzNeigh[ineigh][1];
-            dy = rxyzNeigh[ineigh][2];
-            dz = rxyzNeigh[ineigh][3];
+            if (Iatom >= Jatom) continue;
+
+            r  = (double)   posNeigh[ineigh][0];
+            dx = (double) (-posNeigh[ineigh][1]);
+            dy = (double) (-posNeigh[ineigh][2]);
+            dz = (double) (-posNeigh[ineigh][3]);
 
             dBOdr_sigma = dBOdr_raw[ibond][0];
             dBOdr_pi    = dBOdr_raw[ibond][1];
@@ -325,12 +329,25 @@ void ReaxPot::calculateBondOrderForce4()
                  + dEdBO_pi    * dBOdr_pi
                  + dEdBO_pipi  * dBOdr_pipi;
 
-            Fx += dEdr * dx / r;
-            Fy += dEdr * dy / r;
-            Fz += dEdr * dz / r;
-        }
+            Fr = -escale * ((double) dEdr) / r;
+            Fx = Fr * dx;
+            Fy = Fr * dy;
+            Fz = Fr * dz;
 
-        this->geometry->addForce(iatom, Fx, Fy, Fz);
+            atom->f[Iatom][0] += Fx;
+            atom->f[Iatom][1] += Fy;
+            atom->f[Iatom][2] += Fz;
+
+            atom->f[Jatom][0] -= Fx;
+            atom->f[Jatom][1] -= Fy;
+            atom->f[Jatom][2] -= Fz;
+
+            if (pair->evflag)
+            {
+                pair->ev_tally(Iatom, Jatom, atom->nlocal, 1, // newton_pair has to be ON
+                               0.0, 0.0, Fr, dx, dy, dz);
+            }
+        }
     }
 }
 

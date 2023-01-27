@@ -28,12 +28,16 @@ using namespace std;
 #define IFORM_F1        "%f"
 #define IFORM_F2        "%f %f"
 #define IFORM_F3        "%f %f %f"
+#define IFORM_F8        "%f %f %f %f %f %f %f %f"
 #define IFORM_S1_F2     "%s %f %f"
 #define IFORM_S1_F2_D1  "%s %f %f %d"
+#define IFORM_S1_F8     "%s %f %f %f %f %f %f %f %f"
 #define IFORM_S2_F4     "%s %s %f %f %f %f"
 #define IFORM_D2_F1     "%d %d %f"
 #define IFORM_D2_F2     "%d %d %f %f"
 #define IFORM_D2_F2_D1  "%d %d %f %f %d"
+#define IFORM_D2_F6     "%d %d %f %f %f %f %f %f"
+#define IFORM_D2_F8     "%d %d %f %f %f %f %f %f %f %f"
 
 #define xgemv_  sgemv_
 #define xgemm_  sgemm_
@@ -48,12 +52,16 @@ using namespace std;
 #define IFORM_F1        "%lf"
 #define IFORM_F2        "%lf %lf"
 #define IFORM_F3        "%lf %lf %lf"
+#define IFORM_F8        "%lf %lf %lf %lf %lf %lf %lf %lf"
 #define IFORM_S1_F2     "%s %lf %lf"
 #define IFORM_S1_F2_D1  "%s %lf %lf %d"
+#define IFORM_S1_F8     "%s %lf %lf %lf %lf %lf %lf %lf %lf"
 #define IFORM_S2_F4     "%s %s %lf %lf %lf %lf"
 #define IFORM_D2_F1     "%d %d %lf"
 #define IFORM_D2_F2     "%d %d %lf %lf"
 #define IFORM_D2_F2_D1  "%d %d %lf %lf %d"
+#define IFORM_D2_F6     "%d %d %lf %lf %lf %lf %lf %lf"
+#define IFORM_D2_F8     "%d %d %lf %lf %lf %lf %lf %lf %lf %lf"
 
 #define xgemm_  dgemm_
 #define xgemv_  dgemv_
@@ -68,6 +76,7 @@ using namespace std;
 #define PId     3.14159265358979324
 #define ROOT2   NNPREAL(1.41421356237309505)
 #define ROOTPI  NNPREAL(1.77245385090551603)
+#define KCAL2EV NNPREAL(0.0433641)
 
 extern "C"
 {

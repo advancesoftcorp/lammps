@@ -20,6 +20,8 @@
 #include "nnp_symm_func_behler.h"
 #include "nnp_symm_func_chebyshev.h"
 #endif
+#include "nnp_reax_param.h"
+#include "nnp_reax_pot.h"
 #include "nnp_nnlayer.h"
 #include "nnp_nnarch.h"
 

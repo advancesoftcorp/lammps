@@ -5,9 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 
-#include "ReaxPot.h"
-#include <cmath>
-using namespace std;
+#include "nnp_reax_pot.h"
 
 void ReaxPot::calculateLonePairNumber()
 {
@@ -19,51 +17,46 @@ void ReaxPot::calculateLonePairNumber()
 void ReaxPot::calculateLonePairNumberN()
 {
     int iatom;
-    int natom = this->geometry->getNumAtoms();
+    int natom = this->numAtoms;
 
     int ielem;
 
-    real mass;
+    nnpreal mass;
 
-    real r1      = this->param->r1_lp;
-    real r2      = this->param->r2_lp;
-    real l1      = -r2;
-    real l2      = -r1;
-    real lambda  = this->param->lambda_lp;
-    real lambda2 = lambda * lambda;
-    real lamCosD;
+    nnpreal r1      = this->param->r1_lp;
+    nnpreal r2      = this->param->r2_lp;
+    nnpreal l1      = -r2;
+    nnpreal l2      = -r1;
+    nnpreal lambda  = this->param->lambda_lp;
+    nnpreal lambda2 = lambda * lambda;
+    nnpreal lamCosD;
 
-    real xr  = r2 - r1;
-    real xr2 = xr  * xr;
-    real xr3 = xr2 * xr;
-    real xr4 = xr3 * xr;
-    real xr5 = xr4 * xr;
-    real xr6 = xr5 * xr;
-    real xr7 = xr6 * xr;
+    nnpreal xr  = r2 - r1;
+    nnpreal xr2 = xr  * xr;
+    nnpreal xr3 = xr2 * xr;
+    nnpreal xr4 = xr3 * xr;
+    nnpreal xr5 = xr4 * xr;
+    nnpreal xr6 = xr5 * xr;
+    nnpreal xr7 = xr6 * xr;
 
-    real T4 = -REAL(35.0) / xr4;
-    real T5 =  REAL(84.0) / xr5;
-    real T6 = -REAL(70.0) / xr6;
-    real T7 =  REAL(20.0) / xr7;
+    nnpreal T4 = -NNPREAL(35.0) / xr4;
+    nnpreal T5 =  NNPREAL(84.0) / xr5;
+    nnpreal T6 = -NNPREAL(70.0) / xr6;
+    nnpreal T7 =  NNPREAL(20.0) / xr7;
 
-    real Tap;
-    real dTapdDelta;
+    nnpreal Tap;
+    nnpreal dTapdDelta;
 
-    real f;
-    real dfdDelta;
+    nnpreal f;
+    nnpreal dfdDelta;
 
-    real Delta_e;
-    real nlp;
-    real dnlpdDelta;
-
-    this->n0lps        = new real[natom];
-    this->nlps         = new real[natom];
-    this->dn0lpdDeltas = new real[natom];
-    this->dnlpdDeltas  = new real[natom];
+    nnpreal Delta_e;
+    nnpreal nlp;
+    nnpreal dnlpdDelta;
 
     for (iatom = 0; iatom < natom; ++iatom)
     {
-        ielem = this->elemNeighs[iatom][0];
+        ielem = this->getElement(iatom);
 
         Delta_e = this->Deltas_e[iatom];
 
@@ -76,8 +69,8 @@ void ReaxPot::calculateLonePairNumberN()
         {
             lamCosD  = lambda * cos(PI * Delta_e);
             f        = lambda * sin(-PI * Delta_e) / (lamCosD - ONE);
-            f        = -REAL(0.5) * Delta_e - REAL(0.5) - atan(f) / PI;
-            dfdDelta = REAL(2.0) * lambda2 - REAL(4.0) * lamCosD + REAL(2.0);
+            f        = -NNPREAL(0.5) * Delta_e - NNPREAL(0.5) - atan(f) / PI;
+            dfdDelta = NNPREAL(2.0) * lambda2 - NNPREAL(4.0) * lamCosD + NNPREAL(2.0);
             dfdDelta = (lambda2 - ONE) / dfdDelta;
 
             if (Delta_e < l2)
@@ -101,10 +94,10 @@ void ReaxPot::calculateLonePairNumberN()
                     Tap += T6 * xr6;
                     Tap += T7 * xr7;
 
-                    dTapdDelta =  REAL(4.0) * T4 * xr3;
-                    dTapdDelta += REAL(5.0) * T5 * xr4;
-                    dTapdDelta += REAL(6.0) * T6 * xr5;
-                    dTapdDelta += REAL(7.0) * T7 * xr6;
+                    dTapdDelta =  NNPREAL(4.0) * T4 * xr3;
+                    dTapdDelta += NNPREAL(5.0) * T5 * xr4;
+                    dTapdDelta += NNPREAL(6.0) * T6 * xr5;
+                    dTapdDelta += NNPREAL(7.0) * T7 * xr6;
 
                     nlp        *= Tap;
                     dnlpdDelta *= Tap;
@@ -132,10 +125,10 @@ void ReaxPot::calculateLonePairNumberN()
                     Tap += T6 * xr6;
                     Tap += T7 * xr7;
 
-                    dTapdDelta =  REAL(4.0) * T4 * xr3;
-                    dTapdDelta += REAL(5.0) * T5 * xr4;
-                    dTapdDelta += REAL(6.0) * T6 * xr5;
-                    dTapdDelta += REAL(7.0) * T7 * xr6;
+                    dTapdDelta =  NNPREAL(4.0) * T4 * xr3;
+                    dTapdDelta += NNPREAL(5.0) * T5 * xr4;
+                    dTapdDelta += NNPREAL(6.0) * T6 * xr5;
+                    dTapdDelta += NNPREAL(7.0) * T7 * xr6;
 
                     nlp        *= Tap;
                     dnlpdDelta *= Tap;
@@ -149,7 +142,7 @@ void ReaxPot::calculateLonePairNumberN()
 
         mass = this->param->mass[ielem];
 
-        if (mass > REAL(21.0))
+        if (mass > NNPREAL(21.0))
         {
             this->nlps       [iatom] = this->param->n_lp_opt[ielem];
             this->dnlpdDeltas[iatom] = ZERO;
@@ -166,35 +159,33 @@ void ReaxPot::calculateLonePairNumberS()
 {
     int iatom;
     int jatom;
-    int natom = this->geometry->getNumAtoms();
+    int natom = this->numAtoms;
+    int latom = this->locAtoms;
+
+    int  ineigh;
+    int* idxNeigh;
 
     int  ibond;
     int  nbond;
-    int  ineigh;
     int* idxBond;
-    const int** neighbor;
 
     int ielem;
 
-    real** BO_corr;
-    real   BO_pi;
-    real   BO_pipi;
+    nnpreal** BO_corr;
+    nnpreal   BO_pi;
+    nnpreal   BO_pipi;
 
-    real Delta;
-    real nlpopt;
-    real nlp;
-    real dndDelta;
-    real Slp;
-    real Tlp;
-    real dTdDelta;
-
-    this->Slps        = new real[natom];
-    this->Tlps        = new real[natom];
-    this->dTlpdDeltas = new real[natom];
+    nnpreal Delta;
+    nnpreal nlpopt;
+    nnpreal nlp;
+    nnpreal dndDelta;
+    nnpreal Slp;
+    nnpreal Tlp;
+    nnpreal dTdDelta;
 
     for (iatom = 0; iatom < natom; ++iatom)
     {
-        ielem = this->elemNeighs[iatom][0];
+        ielem = this->getElement(iatom);
 
         Delta    = this->Deltas_corr    [iatom];
         nlpopt   = this->param->n_lp_opt[ielem];
@@ -208,11 +199,12 @@ void ReaxPot::calculateLonePairNumberS()
         this->dTlpdDeltas[iatom] = dTdDelta;
     }
 
-    for (iatom = 0; iatom < natom; ++iatom)
+    for (iatom = 0; iatom < latom; ++iatom)
     {
+        idxNeigh = this->getNeighbors(iatom);
+
         nbond     = this->numBonds[iatom];
         idxBond   = this->idxBonds[iatom];
-        neighbor  = this->geometry->getNeighbors(iatom);
 
         BO_corr = this->BOs_corr[iatom];
 
@@ -221,7 +213,7 @@ void ReaxPot::calculateLonePairNumberS()
         for (ibond = 0; ibond < nbond; ++ibond)
         {
             ineigh = idxBond[ibond];
-            jatom  = neighbor[ineigh][0];
+            jatom  = this->getNeighbor(idxNeigh, ineigh);
 
             Tlp     = this->Tlps[jatom];
             BO_pi   = BO_corr[ibond][1];

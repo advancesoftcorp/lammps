@@ -653,7 +653,15 @@ void Property::printProperty()
     fprintf(fp, "  %s%d\n", "  Number of Nodes     = ", this->nodesEnergy);
     fprintf(fp, "  %s%s\n", "  Activation Func.    = ", strActivEnergy);
     fprintf(fp, "  %s%s\n", "  With Atomic Charge  = ", this->withCharge    != 0 ? "Yes" : "No");
-    fprintf(fp, "  %s%s\n", "  Classical Potential = ", this->withClassical != 0 ? "Yes" : "No");
+    fprintf(fp, "  %s%s\n", "  LJ-like Potential   = ", this->withClassical != 0 ? "Yes" : "No");
+    fprintf(fp, "  %s%s\n", "  ReaxFF Potential    = ", this->withReaxFF    != 0 ? "Yes" : "No");
+
+    if (this->withReaxFF != 0)
+    {
+        fprintf(fp, "  %s%.3f%s\n", "  Rcut for ReaxFF     = ", this->rcutReaxFF, " Angstrom");
+        fprintf(fp, "  %s%.3f\n",   "  Rate of ReaxFF      = ", this->rateReaxFF);
+    }
+
     fprintf(fp, "\n");
 
     if (this->withCharge != 0)

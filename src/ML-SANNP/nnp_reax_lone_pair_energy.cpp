@@ -5,33 +5,32 @@
  * http://opensource.org/licenses/mit-license.php
  */
 
-#include "ReaxPot.h"
-#include <cmath>
-using namespace std;
+#include "nnp_reax_pot.h"
 
-void ReaxPot::calculateLonePairEnergy()
+void ReaxPot::calculateLonePairEnergy(int eflag, LAMMPS_NS::Pair* pair)
 {
-    int iatom;
-    int natom = this->geometry->getNumAtoms();
+    int iatom, Iatom;
+    int latom = this->locAtoms;
+    int natom = this->numAtoms;
 
     int ielem;
 
-    real plp2;
-    real nlpopt;
-    real nlp;
-    real dnlp;
-    real expNlp;
-    real facNlp;
+    nnpreal plp2;
+    nnpreal nlpopt;
+    nnpreal nlp;
+    nnpreal dnlp;
+    nnpreal expNlp;
+    nnpreal facNlp;
 
-    real Elp;
-    real dEdnlp;
-    real dnlpdDelta;
+    nnpreal Elp;
+    nnpreal dEdnlp;
+    nnpreal dnlpdDelta;
 
-    this->dEdDeltas_corr = new real[natom];
+    double escale = (double) (this->mixingRate * KCAL2EV);
 
-    for (iatom = 0; iatom < natom; ++iatom)
+    for (iatom = 0; iatom < latom; ++iatom)
     {
-        ielem = this->elemNeighs[iatom][0];
+        ielem = this->getElement(iatom);
 
         plp2       = this->param->p_lp2   [ielem];
         nlpopt     = this->param->n_lp_opt[ielem];
@@ -39,15 +38,25 @@ void ReaxPot::calculateLonePairEnergy()
         dnlpdDelta = this->dn0lpdDeltas   [iatom];
 
         dnlp   = nlpopt - nlp;
-        expNlp = exp(-REAL(75.0) * dnlp);
+        expNlp = exp(-NNPREAL(75.0) * dnlp);
         facNlp = ONE / (ONE + expNlp);
 
         Elp    =  plp2 * dnlp * facNlp;
-        dEdnlp = -plp2 * (ONE + (ONE + REAL(75.0) * dnlp) * expNlp) * facNlp * facNlp;
+        dEdnlp = -plp2 * (ONE + (ONE + NNPREAL(75.0) * dnlp) * expNlp) * facNlp * facNlp;
 
         this->dEdDeltas_corr[iatom] = dEdnlp * dnlpdDelta;
 
-        this->geometry->addEnergy(iatom, (double) Elp);
+        if (eflag)
+        {
+            Iatom = this->indexOfLAMMPS(iatom);
+            if (pair->eflag_global) pair->eng_vdwl     += escale * ((double) Elp);
+            if (pair->eflag_atom)   pair->eatom[Iatom] += escale * ((double) Elp);
+        }
+    }
+
+    for (iatom = latom; iatom < natom; ++iatom)
+    {
+        this->dEdDeltas_corr[iatom] = ZERO;
     }
 }
 

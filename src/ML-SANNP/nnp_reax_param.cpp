@@ -8,7 +8,6 @@
 #include "nnp_reax_param.h"
 
 #define OFFDIAG_THR   NNPREAL(1.0e-16)
-#define MAX_ATOM_NUM  256
 
 ReaxParam::ReaxParam(nnpreal rcut, FILE* fp, int rank, MPI_Comm world)
 {
@@ -147,18 +146,6 @@ void ReaxParam::createAtomNumMap()
         {
             this->atomNumMap[atomNum - 1] = ielem;
         }
-    }
-}
-
-int ReaxParam::atomNumToElement(int atomNum)
-{
-    if (1 <= atomNum && atomNum <= MAX_ATOM_NUM)
-    {
-        return this->atomNumMap[atomNum - 1];
-    }
-    else
-    {
-        return -1;
     }
 }
 
@@ -456,7 +443,7 @@ int ReaxParam::readFFieldReax(FILE* fp)
     }
     if (fgets(line, lenLine, fp) == nullptr)
     {
-        print("[NNP-ReaxFF] cannot read the header(4th-line) of atomic parameters.\n");
+        printf("[NNP-ReaxFF] cannot read the header(4th-line) of atomic parameters.\n");
         return 1;
     }
 
@@ -500,7 +487,7 @@ int ReaxParam::readFFieldReax(FILE* fp)
 
         iatom = i - 1;
 
-        this->atomNums[iatom] = GeometrySet::elementToAtomNum(elem);
+        this->atomNums[iatom] = this->elementToAtomNum(elem);
 
         if (this->atomNums[iatom] < 1)
         {
@@ -654,6 +641,65 @@ int ReaxParam::readFFieldReax(FILE* fp)
     }
 
     return 0;
+}
+
+static const int NUM_ELEMENTS = 118;
+
+static const char* ALL_ELEMENTS[] = {
+    "H",  "He", "Li", "Be", "B",  "C",  "N",  "O",  "F",  "Ne", "Na", "Mg", "Al", "Si", "P",  "S",
+    "Cl", "Ar", "K",  "Ca", "Sc", "Ti", "V",  "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn", "Ga", "Ge",
+    "As", "Se", "Br", "Kr", "Rb", "Sr", "Y",  "Zr", "Nb", "Mo", "Tc", "Ru", "Rh", "Pd", "Ag", "Cd",
+    "In", "Sn", "Sb", "Te", "I",  "Xe", "Cs", "Ba", "La", "Ce", "Pr", "Nd", "Rm", "Sm", "Eu", "Gd",
+    "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu", "Hf", "Ta", "W",  "Re", "Os", "Ir", "Pt", "Au", "Hg",
+    "Tl", "Pb", "Bi", "Po", "At", "Rn", "Fr", "Ra", "Ac", "Th", "Pa", "U",  "Np", "Pu", "Am", "Cm",
+    "Bk", "Cf", "Es", "Fm", "Md", "No", "Lr", "Rf", "Db", "Sg", "Bh", "Hs", "Mt", "Ds", "Rg", "Cn",
+    "Nh", "Fl", "Mc", "Lv", "Ts", "Og"
+};
+
+int ReaxParam::elementToAtomNum(const char *elem)
+{
+    char elem1[16];
+
+    strcpy(elem1, elem);
+
+    this->toRealElement(elem1);
+
+    if (strlen(elem1) > 0)
+    {
+        for (int i = 0; i < NUM_ELEMENTS; ++i)
+        {
+            if (strcasecmp(elem1, ALL_ELEMENTS[i]) == 0)
+            {
+                return (i + 1);
+            }
+        }
+    }
+
+    return 0;
+}
+
+void ReaxParam::toRealElement(char *elem)
+{
+    int n = strlen(elem);
+    n = n > 2 ? 2 : n;
+
+    int m = n;
+
+    for (int i = 0; i < n; ++i)
+    {
+        char c = elem[i];
+        if (c == '0' || c == '1' || c == '2' || c == '3' || c == '4' ||
+            c == '5' || c == '6' || c == '7' || c == '8' || c == '9' || c == ' ' ||
+            c == '_' || c == '-' || c == '+' || c == '*' || c == '~' || c == ':' || c == '#')
+        {
+            m = i;
+            break;
+        }
+
+        elem[i] = c;
+    }
+
+    elem[m] = '\0';
 }
 
 int ReaxParam::modifyParameters()

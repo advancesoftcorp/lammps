@@ -5,69 +5,77 @@
  * http://opensource.org/licenses/mit-license.php
  */
 
-#include "ReaxPot.h"
-#include <cmath>
-using namespace std;
+#include "nnp_reax_pot.h"
 
-void ReaxPot::calculateBondEnergy()
+void ReaxPot::calculateBondEnergy(int eflag, LAMMPS_NS::Pair* pair)
 {
-    int iatom;
-    int natom = this->geometry->getNumAtoms();
+    int iatom, Iatom;
+    int jatom;
+    int latom = this->locAtoms;
+    int natom = this->numAtoms;
+
+    int  ineigh;
+    int* idxNeigh;
 
     int  ibond;
     int  nbond;
-    int  ineigh;
     int* idxBond;
 
     int ielem;
     int jelem;
 
-    int* elemNeigh;
+    nnpreal** BO_corr;
+    nnpreal   BO_sigma;
+    nnpreal   BO_pi;
+    nnpreal   BO_pipi;
 
-    real** BO_corr;
-    real   BO_sigma;
-    real   BO_pi;
-    real   BO_pipi;
+    nnpreal De_sigma;
+    nnpreal De_pi;
+    nnpreal De_pipi;
+    nnpreal pbe1, pbe2;
+    nnpreal coeff, coeffi, coeffj;
 
-    real De_sigma;
-    real De_pi;
-    real De_pipi;
-    real pbe1, pbe2;
+    nnpreal powBO_sigma;
+    nnpreal expBO_sigma;
+    nnpreal Ebond_sigma;
+    nnpreal Ebond_pi;
+    nnpreal Ebond_pipi;
+    nnpreal Ebond;
 
-    real powBO_sigma;
-    real expBO_sigma;
-    real Ebond_sigma;
-    real Ebond_pi;
-    real Ebond_pipi;
-    real Ebond;
+    nnpreal** dEdBO_corr;
+    nnpreal   dEdBO_sigma;
 
-    real** dEdBO_corr;
-    real   dEdBO_sigma;
-
-    this->dEdBOs_corr= new real**[natom];
+    double escale = (double) (this->mixingRate * KCAL2EV);
 
     for (iatom = 0; iatom < natom; ++iatom)
     {
-        nbond     = this->numBonds[iatom];
-        idxBond   = this->idxBonds[iatom];
-        elemNeigh = this->elemNeighs[iatom];
+        ielem    = this->getElement(iatom);
+        idxNeigh = this->getNeighbors(iatom);
 
-        ielem = elemNeigh[0];
+        nbond   = this->numBonds[iatom];
+        idxBond = this->idxBonds[iatom];
 
         BO_corr    = this->BOs_corr[iatom];
-        dEdBO_corr = new real*[natom];
-
-        for (ibond = 0; ibond < nbond; ++ibond)
-        {
-            dEdBO_corr[ibond] = new real[3];
-        }
+        dEdBO_corr = this->dEdBOs_corr[iatom];
 
         Ebond = ZERO;
+
+        coeffi = (iatom < latom) ? NNPREAL(0.5) : ZERO;
 
         for (ibond = 0; ibond < nbond; ++ibond)
         {
             ineigh = idxBond[ibond];
-            jelem  = elemNeigh[ineigh + 1];
+            jatom  = this->getNeighbor(idxNeigh, ineigh);
+
+            if (iatom >= latom && jatom >= latom)
+            {
+                dEdBO_corr[ibond][0] = ZERO;
+                dEdBO_corr[ibond][1] = ZERO;
+                dEdBO_corr[ibond][2] = ZERO;
+                continue;
+            }
+
+            jelem = this->getElement(jatom);
 
             BO_pi    = BO_corr[ibond][1];
             BO_pipi  = BO_corr[ibond][2];
@@ -85,21 +93,28 @@ void ReaxPot::calculateBondEnergy()
             Ebond_pi    = -De_pi    * BO_pi;
             Ebond_pipi  = -De_pipi  * BO_pipi;
 
-            Ebond += Ebond_sigma + Ebond_pi + Ebond_pipi;
+            Ebond += coeffi * (Ebond_sigma + Ebond_pi + Ebond_pipi);
+
+            coeffj = (jatom < latom) ? NNPREAL(0.5) : ZERO;
+            coeff  = coeffi + coeffj;
 
             dEdBO_sigma = De_sigma * (pbe1 * pbe2 * powBO_sigma - ONE) * expBO_sigma;
 
             // [BO'(sigma), BO'(pi), BO'(pipi)] -> [BO', BO'(pi), BO'(pipi)]
-            dEdBO_corr[ibond][0] = dEdBO_sigma;
-            dEdBO_corr[ibond][1] = -De_pi   - dEdBO_sigma;
-            dEdBO_corr[ibond][2] = -De_pipi - dEdBO_sigma;
+            dEdBO_corr[ibond][0] = coeff * dEdBO_sigma;
+            dEdBO_corr[ibond][1] = coeff * (-De_pi   - dEdBO_sigma);
+            dEdBO_corr[ibond][2] = coeff * (-De_pipi - dEdBO_sigma);
         }
 
-        Ebond *= REAL(0.5);
-
-        this->dEdBOs_corr[iatom] = dEdBO_corr;
-
-        this->geometry->addEnergy(iatom, (double) Ebond);
+        if (eflag)
+        {
+            if (iatom < latom)
+            {
+                Iatom = this->indexOfLAMMPS(iatom);
+                if (pair->eflag_global) pair->eng_vdwl     += escale * ((double) Ebond);
+                if (pair->eflag_atom)   pair->eatom[Iatom] += escale * ((double) Ebond);
+            }
+        }
     }
 }
 

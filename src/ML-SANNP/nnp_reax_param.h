@@ -10,6 +10,8 @@
 
 #include "nnp_common.h"
 
+#define MAX_ATOM_NUM  256
+
 class ReaxParam
 {
 public:
@@ -99,7 +101,17 @@ public:
     nnpreal** p_core2;
     nnpreal** p_core3;
 
-    int atomNumToElement(int atomNum);
+    int atomNumToElement(int atomNum) const
+    {
+        if (1 <= atomNum && atomNum <= MAX_ATOM_NUM)
+        {
+            return this->atomNumMap[atomNum - 1];
+        }
+        else
+        {
+            return -1;
+        }
+    }
 
 private:
     int* atomNumMap;
@@ -118,6 +130,10 @@ private:
     void setPairData(nnpreal** data, int i, int j, nnpreal value);
 
     int  readFFieldReax(FILE* fp);
+
+    int  elementToAtomNum(const char *elem);
+
+    void toRealElement(char *elem);
 
     int  modifyParameters();
 

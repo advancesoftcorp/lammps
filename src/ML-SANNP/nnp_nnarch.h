@@ -77,7 +77,7 @@ public:
         return this->ljlikeA4;
     }
 
-    const ReaxPot* getReaxPot() const
+    ReaxPot* getReaxPot() const
     {
         return this->reaxPot;
     }
@@ -130,7 +130,7 @@ private:
     nnpreal* ljlikeA3;
     nnpreal* ljlikeA4;
 
-    ReaxPot* readPot;
+    ReaxPot* reaxPot;
 
     bool isEnergyMode() const
     {

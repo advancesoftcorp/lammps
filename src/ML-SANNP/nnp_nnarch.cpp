@@ -254,7 +254,7 @@ NNArch::~NNArch()
 
     if (this->reaxPot != nullptr)
     {
-        delete[] this->reaxPot;
+        delete this->reaxPot;
     }
 }
 
@@ -395,9 +395,12 @@ void NNArch::restoreNN(FILE* fp, char** elemNames, bool zeroEatom, int rank, MPI
                     ierr = 1;
                 }
 
-                if (this->property->getElemWeight() != 0 && atomNumOld[ielem] < 1)
+                if (this->property->getElemWeight() != 0 || this->property->getWithReaxFF() != 0)
                 {
-                    ierr = 1;
+                    if (atomNumOld[ielem] < 1)
+                    {
+                        ierr = 1;
+                    }
                 }
             }
         }
@@ -602,7 +605,7 @@ void NNArch::restoreNN(FILE* fp, char** elemNames, bool zeroEatom, int rank, MPI
         rcutReaxFF = this->property->getRcutReaxFF();
         rateReaxFF = this->property->getRateReaxFF();
 
-        this->reaxPot = new ReaxPot(rcutReaxFF, rateReaxFF, fp, rank, world);
+        this->reaxPot = new ReaxPot(rcutReaxFF, rateReaxFF, this->memory, fp, rank, world);
     }
 
     // map of symmetry functions
