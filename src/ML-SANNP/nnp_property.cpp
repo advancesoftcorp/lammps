@@ -711,7 +711,7 @@ void Property::readGpuProperty(int rank, int nproc, MPI_Comm world)
     {
         FILE* fp = fopen("gpu.conf", "r");
 
-        if (fp != NULL)
+        if (fp != nullptr)
         {
             hasFile = 1;
 
@@ -732,7 +732,7 @@ void Property::readGpuProperty(int rank, int nproc, MPI_Comm world)
             const int nline = 256;
             char line[nline];
 
-            while (fgets(line, nline, fp) != NULL)
+            while (fgets(line, nline, fp) != nullptr)
             {
                 // reading threads
                 if (nowThreads)

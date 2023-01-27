@@ -10,69 +10,69 @@
 #define OFFDIAG_THR   NNPREAL(1.0e-16)
 #define MAX_ATOM_NUM  256
 
-ReaxParam::ReaxParam(nnpreal rcut, FILE* fp)
+ReaxParam::ReaxParam(nnpreal rcut, FILE* fp, int rank, MPI_Comm world)
 {
     this->numElems = 0;
-    this->atomNums = NULL;
+    this->atomNums = nullptr;
 
     this->rcut_bond = rcut;
     this->rcut_vdw  = ZERO;
     this->BO_cut    = ZERO;
 
-    this->mass = NULL;
+    this->mass = nullptr;
 
-    this->r_atom_sigma = NULL;
-    this->r_atom_pi    = NULL;
-    this->r_atom_pipi  = NULL;
+    this->r_atom_sigma = nullptr;
+    this->r_atom_pi    = nullptr;
+    this->r_atom_pipi  = nullptr;
 
-    this->r_pair_sigma = NULL;
-    this->r_pair_pi    = NULL;
-    this->r_pair_pipi  = NULL;
+    this->r_pair_sigma = nullptr;
+    this->r_pair_pi    = nullptr;
+    this->r_pair_pipi  = nullptr;
 
-    this->p_bo1 = NULL;
-    this->p_bo2 = NULL;
-    this->p_bo3 = NULL;
-    this->p_bo4 = NULL;
-    this->p_bo5 = NULL;
-    this->p_bo6 = NULL;
+    this->p_bo1 = nullptr;
+    this->p_bo2 = nullptr;
+    this->p_bo3 = nullptr;
+    this->p_bo4 = nullptr;
+    this->p_bo5 = nullptr;
+    this->p_bo6 = nullptr;
 
-    this->De_sigma = NULL;
-    this->De_pi    = NULL;
-    this->De_pipi  = NULL;
-    this->p_be1    = NULL;
-    this->p_be2    = NULL;
+    this->De_sigma = nullptr;
+    this->De_pi    = nullptr;
+    this->De_pipi  = nullptr;
+    this->p_be1    = nullptr;
+    this->p_be2    = nullptr;
 
-    this->ovc_corr = NULL;
-    this->v13_corr = NULL;
+    this->ovc_corr = nullptr;
+    this->v13_corr = nullptr;
 
     this->p_boc1      = ZERO;
     this->p_boc2      = ZERO;
-    this->p_boc3_atom = NULL;
-    this->p_boc4_atom = NULL;
-    this->p_boc5_atom = NULL;
-    this->p_boc3      = NULL;
-    this->p_boc4      = NULL;
-    this->p_boc5      = NULL;
+    this->p_boc3_atom = nullptr;
+    this->p_boc4_atom = nullptr;
+    this->p_boc5_atom = nullptr;
+    this->p_boc3      = nullptr;
+    this->p_boc4      = nullptr;
+    this->p_boc5      = nullptr;
 
-    this->p_over1 = NULL;
-    this->p_over2 = NULL;
+    this->p_over1 = nullptr;
+    this->p_over2 = nullptr;
     this->p_over3 = ZERO;
     this->p_over4 = ZERO;
 
-    this->Val     = NULL;
-    this->Val_e   = NULL;
-    this->Val_boc = NULL;
-    this->Val_ang = NULL;
+    this->Val     = nullptr;
+    this->Val_e   = nullptr;
+    this->Val_boc = nullptr;
+    this->Val_ang = nullptr;
 
-    this->p_lp2    = NULL;
-    this->n_lp_opt = NULL;
+    this->p_lp2    = nullptr;
+    this->n_lp_opt = nullptr;
 
     this->r1_lp     = ZERO;
     this->r2_lp     = ZERO;
     this->lambda_lp = ZERO;
 
-    this->shielding = false;
-    this->innerWall = false;
+    this->shielding = 0;
+    this->innerWall = 0;
 
     this->swa_vdw    = ZERO;
     this->swb_vdw    = ZERO;
@@ -85,28 +85,41 @@ ReaxParam::ReaxParam(nnpreal rcut, FILE* fp)
     this->Tap_vdw[6] = ZERO;
     this->Tap_vdw[7] = ZERO;
 
-    this->D_vdw_atom     = NULL;
-    this->alpha_vdw_atom = NULL;
-    this->gammaw_atom    = NULL;
-    this->r_vdw_atom     = NULL;
-    this->p_core1_atom   = NULL;
-    this->p_core2_atom   = NULL;
-    this->p_core3_atom   = NULL;
+    this->D_vdw_atom     = nullptr;
+    this->alpha_vdw_atom = nullptr;
+    this->gammaw_atom    = nullptr;
+    this->r_vdw_atom     = nullptr;
+    this->p_core1_atom   = nullptr;
+    this->p_core2_atom   = nullptr;
+    this->p_core3_atom   = nullptr;
 
-    this->D_vdw     = NULL;
-    this->alpha_vdw = NULL;
-    this->gammaw    = NULL;
-    this->r_vdw     = NULL;
+    this->D_vdw     = nullptr;
+    this->alpha_vdw = nullptr;
+    this->gammaw    = nullptr;
+    this->r_vdw     = nullptr;
     this->p_vdw     = ZERO;
-    this->p_core1   = NULL;
-    this->p_core2   = NULL;
-    this->p_core3   = NULL;
+    this->p_core1   = nullptr;
+    this->p_core2   = nullptr;
+    this->p_core3   = nullptr;
 
-    this->readFFieldReax(fp);
+    int ierr = 0;
 
-    this->modifyParameters();
+    if (rank == 0)
+    {
+        ierr = this->readFFieldReax(fp);
 
-    this->atomNumMap = NULL;
+        if (ierr == 0)
+        {
+            ierr = this->modifyParameters();
+        }
+    }
+
+    MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
+    if (ierr != 0) stop_by_error("cannot read ffield file, at ReaxFF part");
+
+    this->shareParameters(rank, world);
+
+    this->atomNumMap = nullptr;
     this->createAtomNumMap();
 }
 
@@ -151,7 +164,7 @@ int ReaxParam::atomNumToElement(int atomNum)
 
 nnpreal* ReaxParam::allocateElemData()
 {
-    if (this->numElems < 1) return NULL;
+    if (this->numElems < 1) return nullptr;
 
     nnpreal* data = new nnpreal[this->numElems];
 
@@ -165,14 +178,14 @@ nnpreal* ReaxParam::allocateElemData()
 
 void ReaxParam::deallocateElemData(nnpreal*  data)
 {
-    if (data == NULL) return;
+    if (data == nullptr) return;
 
     delete[] data;
 }
 
 nnpreal** ReaxParam::allocatePairData()
 {
-    if (this->numElems < 1) return NULL;
+    if (this->numElems < 1) return nullptr;
 
     nnpreal** data = new nnpreal*[this->numElems];
 
@@ -191,7 +204,7 @@ nnpreal** ReaxParam::allocatePairData()
 
 void ReaxParam::deallocatePairData(nnpreal** data)
 {
-    if (data == NULL) return;
+    if (data == nullptr) return;
 
     for (int i = 0; i < this->numElems; ++i)
     {
@@ -276,7 +289,7 @@ void ReaxParam::allocateAllData()
 
 void ReaxParam::deallocateAllData()
 {
-    if (this->atomNums != NULL)
+    if (this->atomNums != nullptr)
     {
         delete[] this->atomNums;
     }
@@ -348,7 +361,7 @@ void ReaxParam::setPairData(nnpreal** data, int i, int j, nnpreal value)
     data[j][i] = value;
 }
 
-void ReaxParam::readFFieldReax(FILE* fp)
+int ReaxParam::readFFieldReax(FILE* fp)
 {
     int i;
     int iatom;
@@ -368,7 +381,7 @@ void ReaxParam::readFFieldReax(FILE* fp)
     char token[lenLine];
     char elem[5];
 
-    while (fgets(line, lenLine, fp) != NULL)
+    while (fgets(line, lenLine, fp) != nullptr)
     {
         if (sscanf(line, "%s", token) != 1)
         {
@@ -381,27 +394,31 @@ void ReaxParam::readFFieldReax(FILE* fp)
     }
 
     // 1) comment line
-    if (fgets(line, lenLine, fp) == NULL)
+    if (fgets(line, lenLine, fp) == nullptr)
     {
-        stop_by_error("cannot read the first comment line.");
+        printf("[NNP-ReaxFF] cannot read the first comment line.\n");
+        return 1;
     }
 
     // 2) general parameters
-    if (fgets(line, lenLine, fp) == NULL || sscanf(line, "%d", &numGens) != 1)
+    if (fgets(line, lenLine, fp) == nullptr || sscanf(line, "%d", &numGens) != 1)
     {
-        stop_by_error("cannot read #general parameters.");
+        printf("[NNP-ReaxFF] cannot read #general parameters.\n");
+        return 1;
     }
 
     if (numGens < 1)
     {
-        stop_by_error("#general parameters is not positive.");
+        printf("[NNP-ReaxFF] #general parameters is not positive.\n");
+        return 1;
     }
 
     for (i = 1; i <= numGens; ++i)
     {
-        if (fgets(line, lenLine, fp) == NULL || sscanf(line, IFORM_F1, &genValue) != 1)
+        if (fgets(line, lenLine, fp) == nullptr || sscanf(line, IFORM_F1, &genValue) != 1)
         {
-            stop_by_error("cannot read a general parameter.");
+            printf("[NNP-ReaxFF] cannot read a general parameter.\n");
+            return 1;
         }
 
         if      (i ==  1) {this->p_boc1  = genValue;}
@@ -415,27 +432,32 @@ void ReaxParam::readFFieldReax(FILE* fp)
     }
 
     // 3) atomic parameters
-    if (fgets(line, lenLine, fp) == NULL || sscanf(line, "%d", &numAtoms) != 1)
+    if (fgets(line, lenLine, fp) == nullptr || sscanf(line, "%d", &numAtoms) != 1)
     {
-        stop_by_error("cannot read #atomic parameters.");
+        printf("[NNP-ReaxFF] cannot read #atomic parameters.\n");
+        return 1;
     }
 
     if (numAtoms < 1)
     {
-        stop_by_error("#atomic parameters is not positive.");
+        printf("[NNP-ReaxFF] #atomic parameters is not positive.\n");
+        return 1;
     }
 
-    if (fgets(line, lenLine, fp) == NULL)
+    if (fgets(line, lenLine, fp) == nullptr)
     {
-        stop_by_error("cannot read the header(2nd-line) of atomic parameters.");
+        printf("[NNP-ReaxFF] cannot read the header(2nd-line) of atomic parameters.\n");
+        return 1;
     }
-    if (fgets(line, lenLine, fp) == NULL)
+    if (fgets(line, lenLine, fp) == nullptr)
     {
-        stop_by_error("cannot read the header(3rd-line) of atomic parameters.");
+        printf("[NNP-ReaxFF] cannot read the header(3rd-line) of atomic parameters.\n");
+        return 1;
     }
-    if (fgets(line, lenLine, fp) == NULL)
+    if (fgets(line, lenLine, fp) == nullptr)
     {
-        stop_by_error("cannot read the header(4th-line) of atomic parameters.");
+        print("[NNP-ReaxFF] cannot read the header(4th-line) of atomic parameters.\n");
+        return 1;
     }
 
     this->numElems = numAtoms;
@@ -444,40 +466,36 @@ void ReaxParam::readFFieldReax(FILE* fp)
 
     for (i = 1; i <= numAtoms; ++i)
     {
-        if (fgets(line, lenLine, fp) == NULL ||
+        if (fgets(line, lenLine, fp) == nullptr ||
            sscanf(line, IFORM_S1_F8, elem, &atomValue[1], &atomValue[2], &atomValue[3], &atomValue[4],
                                            &atomValue[5], &atomValue[6], &atomValue[7], &atomValue[8]) != 9)
         {
-            char message[256];
-            sprintf(message, "cannot read a atomic parameter @1st-line : iatom=%d", i);
-            stop_by_error(message);
+            printf("[NNP-ReaxFF] cannot read a atomic parameter @1st-line : iatom=%d\n", i);
+            return 1;
         }
 
-        if (fgets(line, lenLine, fp) == NULL ||
+        if (fgets(line, lenLine, fp) == nullptr ||
            sscanf(line, IFORM_F8, &atomValue[9],  &atomValue[10], &atomValue[11], &atomValue[12],
                                   &atomValue[13], &atomValue[14], &atomValue[15], &atomValue[16]) != 8)
         {
-            char message[256];
-            sprintf(message, "cannot read a atomic parameter @2nd-line : iatom=%d", i);
-            stop_by_error(message);
+            printf("[NNP-ReaxFF] cannot read a atomic parameter @2nd-line : iatom=%d\n", i);
+            return 1;
         }
 
-        if (fgets(line, lenLine, fp) == NULL ||
+        if (fgets(line, lenLine, fp) == nullptr ||
            sscanf(line, IFORM_F8, &atomValue[17], &atomValue[18], &atomValue[19], &atomValue[20],
                                   &atomValue[21], &atomValue[22], &atomValue[23], &atomValue[24]) != 8)
         {
-            char message[256];
-            sprintf(message, "cannot read a atomic parameter @3rd-line : iatom=%d", i);
-            stop_by_error(message);
+            printf("[NNP-ReaxFF] cannot read a atomic parameter @3rd-line : iatom=%d\n", i);
+            return 1;
         }
 
-        if (fgets(line, lenLine, fp) == NULL ||
+        if (fgets(line, lenLine, fp) == nullptr ||
            sscanf(line, IFORM_F8, &atomValue[25], &atomValue[26], &atomValue[27], &atomValue[28],
                                   &atomValue[29], &atomValue[30], &atomValue[31], &atomValue[32]) != 8)
         {
-            char message[256];
-            sprintf(message, "cannot read a atomic parameter @4th-line : iatom=%d", i);
-            stop_by_error(message);
+            printf("[NNP-ReaxFF] cannot read a atomic parameter @4th-line : iatom=%d\n", i);
+            return 1;
         }
 
         iatom = i - 1;
@@ -486,18 +504,16 @@ void ReaxParam::readFFieldReax(FILE* fp)
 
         if (this->atomNums[iatom] < 1)
         {
-            char message[256];
-            sprintf(message, "incorrect atomic number: iatom=%d", i);
-            stop_by_error(message);
+            printf("[NNP-ReaxFF] incorrect atomic number: iatom=%d\n", i);
+            return 1;
         }
 
         for (jatom = 0; jatom < iatom; ++jatom)
         {
             if (this->atomNums[iatom] == this->atomNums[jatom])
             {
-                char message[256];
-                sprintf(message, "duplex atomic number: iatom=%d", i);
-                stop_by_error(message);
+                printf("[NNP-ReaxFF] duplex atomic number: iatom=%d\n", i);
+                return 1;
             }
         }
 
@@ -524,39 +540,40 @@ void ReaxParam::readFFieldReax(FILE* fp)
     }
 
     // 4) bond's parameters
-    if (fgets(line, lenLine, fp) == NULL || sscanf(line, "%d", &numBonds) != 1)
+    if (fgets(line, lenLine, fp) == nullptr || sscanf(line, "%d", &numBonds) != 1)
     {
-        stop_by_error("cannot read #bond's parameters.");
+        printf("[NNP-ReaxFF] cannot read #bond's parameters.\n");
+        return 1;
     }
 
     if (numBonds < 0)
     {
-        stop_by_error("#bond's parameters is negative.");
+        printf("[NNP-ReaxFF] #bond's parameters is negative.\n");
+        return 1;
     }
 
-    if (fgets(line, lenLine, fp) == NULL)
+    if (fgets(line, lenLine, fp) == nullptr)
     {
-        stop_by_error("cannot read the header(2nd-line) of bond's parameters.");
+        printf("[NNP-ReaxFF] cannot read the header(2nd-line) of bond's parameters.\n");
+        return 1;
     }
 
     for (i = 1; i <= numBonds; ++i)
     {
-        if (fgets(line, lenLine, fp) == NULL ||
+        if (fgets(line, lenLine, fp) == nullptr ||
            sscanf(line, IFORM_D2_F8, &iatom, &jatom, &bondValue[1], &bondValue[2], &bondValue[3], &bondValue[4],
                                                      &bondValue[5], &bondValue[6], &bondValue[7], &bondValue[8]) != 10)
         {
-            char message[256];
-            sprintf(message, "cannot read a bond's parameter @1st-line : ibond=%d", i);
-            stop_by_error(message);
+            printf("[NNP-ReaxFF] cannot read a bond's parameter @1st-line : ibond=%d\n", i);
+            return 1;
         }
 
-        if (fgets(line, lenLine, fp) == NULL ||
+        if (fgets(line, lenLine, fp) == nullptr ||
            sscanf(line, IFORM_F8, &bondValue[9],  &bondValue[10], &bondValue[11], &bondValue[12],
                                   &bondValue[13], &bondValue[14], &bondValue[15], &bondValue[16]) != 8)
         {
-            char message[256];
-            sprintf(message, "cannot read a bond's parameter @2nd-line : ibond=%d", i);
-            stop_by_error(message);
+            printf("[NNP-ReaxFF] cannot read a bond's parameter @2nd-line : ibond=%d\n", i);
+            return 1;
         }
 
         iatom--;
@@ -564,9 +581,8 @@ void ReaxParam::readFFieldReax(FILE* fp)
 
         if (iatom < 0 || numAtoms <= iatom || jatom < 0 || numAtoms <= jatom)
         {
-            char message[256];
-            sprintf(message, "index of atom is out of range: ibond=%d", i);
-            stop_by_error(message);
+            printf("[NNP-ReaxFF] index of atom is out of range: ibond=%d\n", i);
+            return 1;
         }
 
         this->setPairData(this->p_bo1,    iatom, jatom, bondValue[13]);
@@ -586,25 +602,26 @@ void ReaxParam::readFFieldReax(FILE* fp)
     }
 
     // 5) off-diagonal parameters
-    if (fgets(line, lenLine, fp) == NULL || sscanf(line, "%d", &numOffDs) != 1)
+    if (fgets(line, lenLine, fp) == nullptr || sscanf(line, "%d", &numOffDs) != 1)
     {
-        stop_by_error("cannot read #off-diagonal parameters.");
+        printf("[NNP-ReaxFF] cannot read #off-diagonal parameters.\n");
+        return 1;
     }
 
     if (numOffDs < 0)
     {
-        stop_by_error("#off-diagonal parameters is negative.");
+        printf("[NNP-ReaxFF] #off-diagonal parameters is negative.\n");
+        return 1;
     }
 
     for (i = 1; i <= numOffDs; ++i)
     {
-        if (fgets(line, lenLine, fp) == NULL ||
+        if (fgets(line, lenLine, fp) == nullptr ||
            sscanf(line, IFORM_D2_F6, &iatom, &jatom, &offDValue[1], &offDValue[2], &offDValue[3],
                                                      &offDValue[4], &offDValue[5], &offDValue[6]) != 8)
         {
-            char message[256];
-            sprintf(message, "cannot read a off-diagonal parameter: ioffDiag=%d", i);
-            stop_by_error(message);
+            printf("[NNP-ReaxFF] cannot read a off-diagonal parameter: ioffDiag=%d\n", i);
+            return 1;
         }
 
         iatom--;
@@ -612,9 +629,8 @@ void ReaxParam::readFFieldReax(FILE* fp)
 
         if (iatom < 0 || numAtoms <= iatom || jatom < 0 || numAtoms <= jatom)
         {
-            char message[256];
-            sprintf(message, "index of atom is out of range: ioffDiag=%d", i);
-            stop_by_error(message);
+            printf("[NNP-ReaxFF] index of atom is out of range: ioffDiag=%d\n", i);
+            return 1;
         }
 
         this->setPairData(this->D_vdw,        iatom, jatom, offDValue[1]);
@@ -625,7 +641,7 @@ void ReaxParam::readFFieldReax(FILE* fp)
         this->setPairData(this->r_pair_pipi,  iatom, jatom, offDValue[6]);
     }
 
-    while (fgets(line, lenLine, fp) != NULL)
+    while (fgets(line, lenLine, fp) != nullptr)
     {
         if (sscanf(line, "%s", token) != 1)
         {
@@ -636,21 +652,26 @@ void ReaxParam::readFFieldReax(FILE* fp)
             break;
         }
     }
+
+    return 0;
 }
 
-void ReaxParam::modifyParameters()
+int ReaxParam::modifyParameters()
 {
     this->rcut_bond = this->rcut_bond > ZERO ? this->rcut_bond : NNPREAL(5.0);
     this->rcut_vdw  = this->swb_vdw;
 
     if (this->rcut_vdw <= ZERO)
     {
-        stop_by_error("rcut_vdw is not positive.");
+        printf("[NNP-ReaxFF] rcut_vdw is not positive.\n");
+        return 1;
     }
 
     this->modifyParametersBondOrder();
     this->modifyParametersLonePairNumber();
     this->modifyParametersVanDerWaalsEnergy();
+
+    return 0;
 }
 
 void ReaxParam::modifyParametersBondOrder()
@@ -733,17 +754,17 @@ void ReaxParam::modifyParametersVanDerWaalsEnergy()
     int jelem;
 
     // define shielding & innerWall
-    bool shielding;
-    bool innerWall;
+    int shielding;
+    int innerWall;
 
     for (ielem = 0; ielem < this->numElems; ++ielem)
     {
         if (this->gammaw_atom[ielem] > NNPREAL(0.5)){
-            shielding = true;
+            shielding = 1;
         }
         else
         {
-            shielding = false;
+            shielding = 0;
         }
 
         if (ielem == 0)
@@ -757,11 +778,11 @@ void ReaxParam::modifyParametersVanDerWaalsEnergy()
 
         if (this->p_core1_atom[ielem] > NNPREAL(0.01) && this->p_core3_atom[ielem] > NNPREAL(0.01))
         {
-            innerWall = true;
+            innerWall = 1;
         }
         else
         {
-            innerWall = false;
+            innerWall = 0;
         }
 
         if (ielem == 0)
@@ -775,23 +796,23 @@ void ReaxParam::modifyParametersVanDerWaalsEnergy()
     }
 
     // define coeff of Tap
-    real swa = this->swa_vdw;
-    real swb = this->swb_vdw;
-    real swd = swb - swa;
+    nnpreal swa = this->swa_vdw;
+    nnpreal swb = this->swb_vdw;
+    nnpreal swd = swb - swa;
 
-    real swa2 = swa * swa;
-    real swa3 = swa * swa2;
+    nnpreal swa2 = swa * swa;
+    nnpreal swa3 = swa * swa2;
 
-    real swb2 = swb * swb;
-    real swb3 = swb * swb2;
-    real swb4 = swb * swb3;
-    real swb5 = swb * swb4;
-    real swb6 = swb * swb5;
-    real swb7 = swb * swb6;
+    nnpreal swb2 = swb * swb;
+    nnpreal swb3 = swb * swb2;
+    nnpreal swb4 = swb * swb3;
+    nnpreal swb5 = swb * swb4;
+    nnpreal swb6 = swb * swb5;
+    nnpreal swb7 = swb * swb6;
 
-    real swd2 = swd  * swd;
-    real swd4 = swd2 * swd2;
-    real swd7 = swd  * swd2 * swd4;
+    nnpreal swd2 = swd  * swd;
+    nnpreal swd4 = swd2 * swd2;
+    nnpreal swd7 = swd  * swd2 * swd4;
 
     this->Tap_vdw[7] =  NNPREAL(20.0) / swd7;
     this->Tap_vdw[6] = -NNPREAL(70.0)  * (swa  + swb) / swd7;
@@ -849,6 +870,129 @@ void ReaxParam::modifyParametersVanDerWaalsEnergy()
                                   sqrt(this->p_core3_atom[ielem] * this->p_core3_atom[jelem]));
             }
         }
+    }
+}
+
+void ReaxParam::shareParameters(int rank, MPI_Comm world)
+{
+    MPI_Bcast(&(this->numElems), 1, MPI_INT, 0, world);
+
+    if (rank != 0)
+    {
+        this->allocateAllData();
+    }
+
+    int ielem;
+    int nelem = this->numElems;
+
+    MPI_Bcast(&(this->atomNums[0]), nelem, MPI_INT, 0, world);
+
+    MPI_Bcast(&(this->rcut_bond), 1, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->rcut_vdw),  1, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->BO_cut),    1, MPI_NNPREAL, 0, world);
+
+    MPI_Bcast(&(this->mass[0]), nelem, MPI_NNPREAL, 0, world);
+
+    MPI_Bcast(&(this->r_atom_sigma[0]), nelem, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->r_atom_pi   [0]), nelem, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->r_atom_pipi [0]), nelem, MPI_NNPREAL, 0, world);
+
+    for (ielem = 0; ielem < nelem; ++ielem)
+    {
+        MPI_Bcast(&(this->r_pair_sigma[ielem][0]), nelem, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->r_pair_pi   [ielem][0]), nelem, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->r_pair_pipi [ielem][0]), nelem, MPI_NNPREAL, 0, world);
+    }
+
+    for (ielem = 0; ielem < nelem; ++ielem)
+    {
+        MPI_Bcast(&(this->p_bo1[ielem][0]), nelem, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->p_bo2[ielem][0]), nelem, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->p_bo3[ielem][0]), nelem, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->p_bo4[ielem][0]), nelem, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->p_bo5[ielem][0]), nelem, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->p_bo6[ielem][0]), nelem, MPI_NNPREAL, 0, world);
+    }
+
+    for (ielem = 0; ielem < nelem; ++ielem)
+    {
+        MPI_Bcast(&(this->De_sigma[ielem][0]), nelem, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->De_pi   [ielem][0]), nelem, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->De_pipi [ielem][0]), nelem, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->p_be1   [ielem][0]), nelem, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->p_be2   [ielem][0]), nelem, MPI_NNPREAL, 0, world);
+    }
+
+    for (ielem = 0; ielem < nelem; ++ielem)
+    {
+        MPI_Bcast(&(this->ovc_corr[ielem][0]), nelem, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->v13_corr[ielem][0]), nelem, MPI_NNPREAL, 0, world);
+    }
+
+    MPI_Bcast(&(this->p_boc1),             1, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->p_boc2),             1, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->p_boc3_atom[0]), nelem, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->p_boc4_atom[0]), nelem, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->p_boc5_atom[0]), nelem, MPI_NNPREAL, 0, world);
+
+    for (ielem = 0; ielem < nelem; ++ielem)
+    {
+        MPI_Bcast(&(this->p_boc3[ielem][0]), nelem, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->p_boc4[ielem][0]), nelem, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->p_boc5[ielem][0]), nelem, MPI_NNPREAL, 0, world);
+    }
+
+    for (ielem = 0; ielem < nelem; ++ielem)
+    {
+        MPI_Bcast(&(this->p_over1[ielem][0]), nelem, MPI_NNPREAL, 0, world);
+    }
+
+    MPI_Bcast(&(this->p_over2[0]), nelem, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->p_over3),        1, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->p_over4),        1, MPI_NNPREAL, 0, world);
+
+    MPI_Bcast(&(this->Val    [0]), nelem, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->Val_e  [0]), nelem, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->Val_boc[0]), nelem, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->Val_ang[0]), nelem, MPI_NNPREAL, 0, world);
+
+    MPI_Bcast(&(this->p_lp2   [0]), nelem, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->n_lp_opt[0]), nelem, MPI_NNPREAL, 0, world);
+
+    MPI_Bcast(&(this->r1_lp),     1, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->r2_lp),     1, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->lambda_lp), 1, MPI_NNPREAL, 0, world);
+
+    MPI_Bcast(&(this->shielding), 1, MPI_INT, 0, world);
+    MPI_Bcast(&(this->innerWall), 1, MPI_INT, 0, world);
+
+    MPI_Bcast(&(this->swa_vdw),    1, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->swb_vdw),    1, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->Tap_vdw[0]), 8, MPI_NNPREAL, 0, world);
+
+    MPI_Bcast(&(this->D_vdw_atom    [0]), nelem, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->alpha_vdw_atom[0]), nelem, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->gammaw_atom   [0]), nelem, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->r_vdw_atom    [0]), nelem, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->p_core1_atom  [0]), nelem, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->p_core2_atom  [0]), nelem, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->p_core3_atom  [0]), nelem, MPI_NNPREAL, 0, world);
+
+    for (ielem = 0; ielem < nelem; ++ielem)
+    {
+        MPI_Bcast(&(this->D_vdw    [ielem][0]), nelem, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->alpha_vdw[ielem][0]), nelem, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->gammaw   [ielem][0]), nelem, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->r_vdw    [ielem][0]), nelem, MPI_NNPREAL, 0, world);
+    }
+
+    MPI_Bcast(&(this->p_vdw), 1, MPI_NNPREAL, 0, world);
+
+    for (ielem = 0; ielem < nelem; ++ielem)
+    {
+        MPI_Bcast(&(this->p_core1[ielem][0]), nelem, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->p_core2[ielem][0]), nelem, MPI_NNPREAL, 0, world);
+        MPI_Bcast(&(this->p_core3[ielem][0]), nelem, MPI_NNPREAL, 0, world);
     }
 }
 

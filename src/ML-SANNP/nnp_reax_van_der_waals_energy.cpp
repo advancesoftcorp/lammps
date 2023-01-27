@@ -87,7 +87,7 @@ void ReaxPot::calculateVanDerWaalsEnergy(bool withForce)
             pc2   = this->param->p_core2  [ielem][jelem];
             pc3   = this->param->p_core3  [ielem][jelem];
 
-            if (this->param->shielding)
+            if (this->param->shielding != 0)
             {
                 rp     = pow(r, pvdw);
                 gp     = pow(ONE / gamma, pvdw);
@@ -107,7 +107,7 @@ void ReaxPot::calculateVanDerWaalsEnergy(bool withForce)
             Evdw0    = D * (h13 - REAL(2.0) * i13);
             dEvdw0dr = D * alpha / rvdw * (i13 - h13) * df13dr;
 
-            if (this->param->innerWall)
+            if (this->param->innerWall != 0)
             {
                 Ecore    = pc2 * exp(pc3 * (ONE - r / pc1));
                 dEcoredr = -pc3 / pc1 * Ecore;

@@ -14,7 +14,7 @@
 class ReaxPot
 {
 public:
-    ReaxPot(nnpreal rcut, nnpreal mixingRate, const char* fileName);
+    ReaxPot(nnpreal rcut, nnpreal mixingRate, FILE* fp, int rank, MPI_Comm world);
     virtual ~ReaxPot();
 
     nnpreal getRcutBond() const

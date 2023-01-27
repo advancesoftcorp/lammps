@@ -13,7 +13,7 @@
 class ReaxParam
 {
 public:
-    ReaxParam(nnpreal rcut, FILE* fp);
+    ReaxParam(nnpreal rcut, FILE* fp, int rank, MPI_Comm world);
     virtual ~ReaxParam();
 
     int  numElems;
@@ -75,8 +75,8 @@ public:
     nnpreal   r2_lp;
     nnpreal   lambda_lp;
 
-    bool      shielding;
-    bool      innerWall;
+    int       shielding;
+    int       innerWall;
 
     nnpreal   swa_vdw;
     nnpreal   swb_vdw;
@@ -117,15 +117,17 @@ private:
 
     void setPairData(nnpreal** data, int i, int j, nnpreal value);
 
-    void readFFieldReax(FILE* fp);
+    int  readFFieldReax(FILE* fp);
 
-    void modifyParameters();
+    int  modifyParameters();
 
     void modifyParametersBondOrder();
 
     void modifyParametersLonePairNumber();
 
     void modifyParametersVanDerWaalsEnergy();
+
+    void shareParameters(int rank, MPI_Comm world);
 };
 
 #endif /* NNP_REAX_PARAM_H_ */

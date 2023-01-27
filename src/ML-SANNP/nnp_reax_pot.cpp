@@ -7,9 +7,9 @@
 
 #include "nnp_reax_pot.h"
 
-ReaxPot::ReaxPot(real rcut, real mixingRate, const char* fileName)
+ReaxPot::ReaxPot(real rcut, real mixingRate, FILE* fp, int rank, MPI_Comm world)
 {
-    this->param = new ReaxParam(rcut, fileName);
+    this->param = new ReaxParam(rcut, fp, rank, world);
 
     this->geometry    = NULL;
     this->geometryMap = NULL;

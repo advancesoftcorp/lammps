@@ -602,7 +602,7 @@ void NNArch::restoreNN(FILE* fp, char** elemNames, bool zeroEatom, int rank, MPI
         rcutReaxFF = this->property->getRcutReaxFF();
         rateReaxFF = this->property->getRateReaxFF();
 
-        this->reaxPot = new ReaxPot(rcutReaxFF, rateReaxFF, fp);
+        this->reaxPot = new ReaxPot(rcutReaxFF, rateReaxFF, fp, rank, world);
     }
 
     // map of symmetry functions
