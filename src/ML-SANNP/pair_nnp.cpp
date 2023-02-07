@@ -694,12 +694,6 @@ void PairNNP::coeff(int narg, char **arg)
     double rcut;
     double rcutReaxFF;
 
-    // pair_coeff has to be called only once, because neighbor-request is defined here.
-    if (allocated)
-    {
-        error->all(FLERR, "Pair coeff is already called.");
-    }
-
     // check arguments
     if (narg != (3 + ntypes) && narg != (5 + ntypes))
     {
@@ -809,20 +803,9 @@ void PairNNP::coeff(int narg, char **arg)
         allocate();
     }
 
-    // define neighbor-request
-    if (this->property->getWithReaxFF() == 0)
+    // check and initialize ReaxFF
+    if (this->property->getWithReaxFF() != 0)
     {
-        neighbor->add_request(this, NeighConst::REQ_FULL);
-
-        ghostneigh = 0;
-    }
-    else
-    {
-        neighbor->add_request(this, NeighConst::REQ_FULL | NeighConst::REQ_GHOST);
-
-        ghostneigh = 1;
-
-        // check and initialize ReaxFF
         rcut = get_cutoff();
         rcutReaxFF = this->arch->getReaxPot()->getRcutBond();
 
@@ -910,17 +893,15 @@ void PairNNP::init_style()
         error->all(FLERR, "Pair style NNP requires 'units metal'");
     }
 
-    // define neighbor-request, for 2nd running
-    if (allocated)
+    if (this->property->getWithReaxFF() == 0)
     {
-        if (this->property->getWithReaxFF() == 0)
-        {
-            neighbor->add_request(this, NeighConst::REQ_FULL);
-        }
-        else
-        {
-            neighbor->add_request(this, NeighConst::REQ_FULL | NeighConst::REQ_GHOST);
-        }
+        ghostneigh = 0;
+        neighbor->add_request(this, NeighConst::REQ_FULL);
+    }
+    else
+    {
+        ghostneigh = 1;
+        neighbor->add_request(this, NeighConst::REQ_FULL | NeighConst::REQ_GHOST);
     }
 }
 
