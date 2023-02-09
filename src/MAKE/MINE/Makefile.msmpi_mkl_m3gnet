@@ -9,7 +9,7 @@ SHELL = /bin/sh
 CC         =  g++
 CCFLAGS    =  -g -O3 -fopenmp -ffast-math -fstrict-aliasing -fno-trapping-math \
               -Wall -W -Wno-uninitialized \
-              -I"C:\Users\nishihara.satomichi\Miniconda3\envs\ocp-models\include"
+              -I"C:\Users\nishihara.satomichi\Miniconda3\include"
 
 SHFLAGS    =  # -fPIC (not needed on windows, all code is PIC)
 DEPFLAGS   =  -M
@@ -17,7 +17,7 @@ DEPFLAGS   =  -M
 LINK       =  g++ -static
 LINKFLAGS  =  -g -O2 -fopenmp -fno-trapping-math
 LIB        =  -lwsock32 -static-libgcc -lquadmath -lpsapi \
-              -L"C:\Users\nishihara.satomichi\Miniconda3\envs\ocp-models\libs" -lpython3 -lpython39
+              -L"C:\Users\nishihara.satomichi\Miniconda3\libs" -lpython3 -lpython39
 SIZE       =  size
 
 ARCHIVE    =  ar

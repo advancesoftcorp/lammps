@@ -11,14 +11,14 @@ OPTFLAGS   =  -O2 -fp-model precise -qoverride-limits
 CCFLAGS    =  -g -traceback -qopenmp -qno-offload \
               -fno-alias -ansi-alias -restrict \
               -DLAMMPS_MEMALIGN=64 $(OPTFLAGS) \
-              -I/home/s-nishihara/miniconda3/envs/ocp-models/include/python3.8
+              -I/home/nisihara/miniconda3/envs/ocp-models/include/python3.9
 SHFLAGS    =  -fPIC
 DEPFLAGS   =  -M
 
-LINK       =  mpicxx -std=c++11 -static-intel -static-libgcc
+LINK       =  mpicxx -std=c++11 -static-intel -static-libgcc -static-libstdc++
 LINKFLAGS  =  -g -qopenmp $(OPTFLAGS)
-LIB        =  /opt/app/oneapi/compiler/2021.4.0/linux/compiler/lib/intel64_lin/libifcore.a \
-              -L/home/s-nishihara/miniconda3/envs/ocp-models/lib -lpython3 -lpython3.8
+LIB        =  /opt/intel/oneapi/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libifcore.a \
+              -L/home/nisihara/miniconda3/envs/ocp-models/lib -lpython3 -lpython3.9
 SIZE       =  size
 
 ARCHIVE    =  ar
@@ -58,9 +58,9 @@ MPI_LIB  =
 FFT_INC  =  -DFFT_MKL
 FFT_PATH =
 FFT_LIB  =  -Wl,--start-group \
-            /opt/app/oneapi/mkl/2021.4.0/lib/intel64/libmkl_intel_lp64.a \
-            /opt/app/oneapi/mkl/2021.4.0/lib/intel64/libmkl_intel_thread.a \
-            /opt/app/oneapi/mkl/2021.4.0/lib/intel64/libmkl_core.a \
+            /opt/intel/oneapi/mkl/2022.1.0/lib/intel64/libmkl_intel_lp64.a \
+            /opt/intel/oneapi/mkl/2022.1.0/lib/intel64/libmkl_intel_thread.a \
+            /opt/intel/oneapi/mkl/2022.1.0/lib/intel64/libmkl_core.a \
             -Wl,--end-group
 
 # JPEG and/or PNG library
