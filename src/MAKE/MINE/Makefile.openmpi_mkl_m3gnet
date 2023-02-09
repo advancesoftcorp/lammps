@@ -1,4 +1,4 @@
-# openmpi_mkl_m3gnet = USER-INTEL package, OpenMPI, MKL FFT for M3GNETDRIVER
+# openmpi_mkl_m3gnet = USER-INTEL package, OpenMPI, MKL FFT for M3GNET
 
 SHELL = /bin/sh
 

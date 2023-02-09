@@ -1,4 +1,4 @@
-# msmpi_mkl_oc20 = Win 64-bit, gcc-7.3.0, MinGW, FFT_MKL, MS-MPI, OpenMP for OC20DRIVER
+# msmpi_mkl_m3gnet = Win 64-bit, gcc-7.3.0, MinGW, FFT_MKL, MS-MPI, OpenMP for M3GNET
 
 SHELL = /bin/sh
 
