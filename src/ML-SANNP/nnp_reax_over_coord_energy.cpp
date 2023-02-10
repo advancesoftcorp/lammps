@@ -136,13 +136,13 @@ void ReaxPot::calculateOverCoordEnergy(int eflag, LAMMPS_NS::Pair* pair)
         BO_corr    = this->BOs_corr[iatom];
         dEdBO_corr = this->dEdBOs_corr[iatom];
 
-        dDeltadSlp    = this->dDeltadSlps    [iatom];
-        dDeltadDelta  = this->dDeltadDeltas  [iatom];
-        Aoveri        = this->Aovers         [iatom];
-        Bover         = this->Bovers         [iatom];
-        Eunder        = this->Eunders        [iatom];
-        dEunderdSlp   = this->dEunderdSlps   [iatom];
-        dEunderdDelta = this->dEunderdDeltaps[iatom];
+        dDeltadSlp    = this->dDeltadSlps   [iatom];
+        dDeltadDelta  = this->dDeltadDeltas [iatom];
+        Aoveri        = this->Aovers        [iatom];
+        Bover         = this->Bovers        [iatom];
+        Eunder        = this->Eunders       [iatom];
+        dEunderdSlp   = this->dEunderdSlps  [iatom];
+        dEunderdDelta = this->dEunderdDeltas[iatom];
 
         DeBO = ZERO;
 
