@@ -30,6 +30,10 @@ void ReaxPot::calculateOverCoordEnergy(int eflag, LAMMPS_NS::Pair* pair)
     nnpreal pover2;
     nnpreal pover3 = this->param->p_over3;
     nnpreal pover4 = this->param->p_over4;
+    nnpreal pover5;
+    nnpreal pover6 = this->param->p_over6;
+    nnpreal pover7 = this->param->p_over7;
+    nnpreal pover8 = this->param->p_over8;
 
     nnpreal** BO_corr;
     nnpreal   BO;
@@ -49,14 +53,22 @@ void ReaxPot::calculateOverCoordEnergy(int eflag, LAMMPS_NS::Pair* pair)
     nnpreal dnlpdDelta;
     nnpreal Slp;
 
-    nnpreal expS;
-    nnpreal expDelta;
+    nnpreal exp34S;
+    nnpreal exp78S;
+    nnpreal exp2Delta;
+    nnpreal exp6Delta;
     nnpreal DeltaVal;
 
-    nnpreal coeff0;
-    nnpreal coeff1i;
-    nnpreal coeff1j;
-    nnpreal coeff2;
+    nnpreal coeff;
+    nnpreal Aoveri;
+    nnpreal Aoverj;
+    nnpreal Bover;
+
+    nnpreal Aunder, dAunder;
+    nnpreal Bunder, dBunder;
+    nnpreal Eunder;
+    nnpreal dEunderdSlp;
+    nnpreal dEunderdDelta;
 
     nnpreal   Eover;
     nnpreal** dEdBO_corr;
@@ -69,6 +81,7 @@ void ReaxPot::calculateOverCoordEnergy(int eflag, LAMMPS_NS::Pair* pair)
         ielem = this->getElement(iatom);
 
         pover2     = this->param->p_over2 [ielem];
+        pover5     = this->param->p_over5 [ielem];
         Val        = this->param->Val     [ielem];
         Delta      = this->Deltas_corr    [iatom];
         nlpopt     = this->param->n_lp_opt[ielem];
@@ -76,24 +89,40 @@ void ReaxPot::calculateOverCoordEnergy(int eflag, LAMMPS_NS::Pair* pair)
         dnlpdDelta = this->dnlpdDeltas    [iatom];
         Slp        = this->Slps           [iatom];
 
-        expS     = pover3 * exp(pover4 * Slp);
+        exp34S   = pover3 * exp(pover4 * Slp);
+        exp78S   = pover7 * exp(pover8 * Slp);
         dnlp     = nlpopt - nlp;
-        Delta_lp = Delta - dnlp / (ONE + expS);
+        Delta_lp = Delta - dnlp / (ONE + exp34S);
 
-        expDelta = exp(pover2 * Delta_lp);
-        DeltaVal = Delta_lp + Val + SMALL_VAL;
-        coeff0   = ONE / DeltaVal / (ONE + expDelta);
-        coeff1i  = Delta_lp * coeff0;
-        coeff2   = (Val * coeff0 / DeltaVal - pover2 * coeff1i * expDelta / (ONE + expDelta));
-
-        dDeltadnlp   = ONE / (ONE + expS);
-        dDeltadSlp   = dnlp * pover4 * expS * dDeltadnlp * dDeltadnlp;
+        dDeltadnlp   = ONE / (ONE + exp34S);
+        dDeltadSlp   = dnlp * pover4 * exp34S * dDeltadnlp * dDeltadnlp;
         dDeltadDelta = ONE + dDeltadnlp * dnlpdDelta;
 
-        this->dDeltadSlps  [iatom] = dDeltadSlp;
-        this->dDeltadDeltas[iatom] = dDeltadDelta;
-        this->coeff1Eovers [iatom] = coeff1i;
-        this->coeff2Eovers [iatom] = coeff2;
+        exp2Delta = exp(pover2 * Delta_lp);
+        exp6Delta = exp(pover2 * Delta_lp);
+        DeltaVal  = Delta_lp + Val + SMALL_VAL;
+
+        coeff  = ONE / DeltaVal / (ONE + exp2Delta);
+        Aoveri = Delta_lp * coeff;
+        Bover  = (Val * coeff / DeltaVal - pover2 * Aoveri * exp2Delta / (ONE + exp2Delta));
+
+        coeff   = ONE / (ONE + ONE / exp2Delta);
+        Aunder  = (ONE - exp6Delta) * coeff;
+        dAunder = pover2 / exp2Delta * (ONE - exp6Delta) * coeff * coeff - pover6 * exp6Delta * coeff;
+        Bunder  = ONE / (ONE + exp78S);
+        dBunder = -pover8 * exp78S * Bunder * Bunder;
+
+        Eunder        = -pover5 * Aunder  * Bunder;
+        dEunderdSlp   = -pover5 * Aunder  * dBunder;
+        dEunderdDelta = -pover5 * dAunder * Bunder;
+
+        this->dDeltadSlps   [iatom] = dDeltadSlp;
+        this->dDeltadDeltas [iatom] = dDeltadDelta;
+        this->Aovers        [iatom] = Aoveri;
+        this->Bovers        [iatom] = Bover;
+        this->Eunders       [iatom] = Eunder;
+        this->dEunderdSlps  [iatom] = dEunderdSlp;
+        this->dEunderdDeltas[iatom] = dEunderdDelta;
     }
 
     for (iatom = 0; iatom < latom; ++iatom)
@@ -107,10 +136,13 @@ void ReaxPot::calculateOverCoordEnergy(int eflag, LAMMPS_NS::Pair* pair)
         BO_corr    = this->BOs_corr[iatom];
         dEdBO_corr = this->dEdBOs_corr[iatom];
 
-        dDeltadSlp   = this->dDeltadSlps  [iatom];
-        dDeltadDelta = this->dDeltadDeltas[iatom];
-        coeff1i      = this->coeff1Eovers [iatom];
-        coeff2       = this->coeff2Eovers [iatom];
+        dDeltadSlp    = this->dDeltadSlps    [iatom];
+        dDeltadDelta  = this->dDeltadDeltas  [iatom];
+        Aoveri        = this->Aovers         [iatom];
+        Bover         = this->Bovers         [iatom];
+        Eunder        = this->Eunders        [iatom];
+        dEunderdSlp   = this->dEunderdSlps   [iatom];
+        dEunderdDelta = this->dEunderdDeltaps[iatom];
 
         DeBO = ZERO;
 
@@ -129,21 +161,21 @@ void ReaxPot::calculateOverCoordEnergy(int eflag, LAMMPS_NS::Pair* pair)
 
             if (jatom < latom)
             {
-                coeff1j = this->coeff1Eovers[jatom];
+                Aoverj = this->Aovers[jatom];
 
-                dEdBO_corr[ibond][0] += pover1 * De_sigma * (coeff1i + coeff1j);
+                dEdBO_corr[ibond][0] += pover1 * De_sigma * (Aoveri + Aoverj);
             }
             else
             {
-                dEdBO_corr[ibond][0] += pover1 * De_sigma * coeff1i;
+                dEdBO_corr[ibond][0] += pover1 * De_sigma * Aoveri;
             }
         }
 
-        Eover = DeBO * coeff1i;
+        Eover = DeBO * Aoveri + Eunder;
 
-        dEdDelta_lp = DeBO * coeff2;
+        dEdDelta_lp = DeBO * Bover + dEunderdDelta;
 
-        this->dEdSlps[iatom] = dEdDelta_lp * dDeltadSlp;
+        this->dEdSlps[iatom] = dEdDelta_lp * dDeltadSlp + dEunderdSlp;
 
         this->dEdDeltas_corr[iatom] += dEdDelta_lp * dDeltadDelta;
 
@@ -177,9 +209,9 @@ void ReaxPot::calculateOverCoordEnergy(int eflag, LAMMPS_NS::Pair* pair)
             pover1   = this->param->p_over1 [ielem][jelem];
             De_sigma = this->param->De_sigma[ielem][jelem];
 
-            coeff1j = this->coeff1Eovers[jatom];
+            Aoverj = this->Aovers[jatom];
 
-            dEdBO_corr[ibond][0] += pover1 * De_sigma * coeff1j;
+            dEdBO_corr[ibond][0] += pover1 * De_sigma * Aoverj;
         }
     }
 }

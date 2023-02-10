@@ -95,8 +95,11 @@ void ReaxPot::calculateBondOrderRaw()
         this->memory->grow(this->dTlpdDeltas,    maxAtoms, "nnpReax:dTlpdDeltas");
         this->memory->grow(this->dDeltadSlps,    maxAtoms, "nnpReax:dDeltadSlps");
         this->memory->grow(this->dDeltadDeltas,  maxAtoms, "nnpReax:dDeltadDeltas");
-        this->memory->grow(this->coeff1Eovers,   maxAtoms, "nnpReax:coeff1Eovers");
-        this->memory->grow(this->coeff2Eovers,   maxAtoms, "nnpReax:coeff2Eovers");
+        this->memory->grow(this->Aovers,         maxAtoms, "nnpReax:Aovers");
+        this->memory->grow(this->Bovers,         maxAtoms, "nnpReax:Bovers");
+        this->memory->grow(this->Eunders,        maxAtoms, "nnpReax:Eunders");
+        this->memory->grow(this->dEunderdSlps,   maxAtoms, "nnpReax:dEunderdSlps");
+        this->memory->grow(this->dEunderdDeltas, maxAtoms, "nnpReax:dEunderdDeltas");
     }
     else
     {

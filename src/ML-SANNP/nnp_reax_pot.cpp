@@ -70,8 +70,11 @@ ReaxPot::ReaxPot(nnpreal rcut, nnpreal mixingRate, LAMMPS_NS::Memory* memory, FI
     this->memory->create(this->dTlpdDeltas,    this->maxAtoms,                       "nnpReax:dTlpdDeltas");
     this->memory->create(this->dDeltadSlps,    this->maxAtoms,                       "nnpReax:dDeltadSlps");
     this->memory->create(this->dDeltadDeltas,  this->maxAtoms,                       "nnpReax:dDeltadDeltas");
-    this->memory->create(this->coeff1Eovers,   this->maxAtoms,                       "nnpReax:coeff1Eovers");
-    this->memory->create(this->coeff2Eovers,   this->maxAtoms,                       "nnpReax:coeff2Eovers");
+    this->memory->create(this->Aovers,         this->maxAtoms,                       "nnpReax:Aovers");
+    this->memory->create(this->Bovers,         this->maxAtoms,                       "nnpReax:Bovers");
+    this->memory->create(this->Eunders,        this->maxAtoms,                       "nnpReax:Eunders");
+    this->memory->create(this->dEunderdSlps,   this->maxAtoms,                       "nnpReax:dEunderdSlps");
+    this->memory->create(this->dEunderdDeltas, this->maxAtoms,                       "nnpReax:dEunderdDeltas");
 }
 
 ReaxPot::~ReaxPot()
@@ -115,8 +118,11 @@ ReaxPot::~ReaxPot()
     this->memory->destroy(this->dTlpdDeltas);
     this->memory->destroy(this->dDeltadSlps);
     this->memory->destroy(this->dDeltadDeltas);
-    this->memory->destroy(this->coeff1Eovers);
-    this->memory->destroy(this->coeff2Eovers);
+    this->memory->destroy(this->Aovers);
+    this->memory->destroy(this->Bovers);
+    this->memory->destroy(this->Eunders);
+    this->memory->destroy(this->dEunderdSlps);
+    this->memory->destroy(this->dEunderdDeltas);
 }
 
 void ReaxPot::initElements(int ntypes, int* atomNums)

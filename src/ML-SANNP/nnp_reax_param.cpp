@@ -57,6 +57,10 @@ ReaxParam::ReaxParam(nnpreal rcut, FILE* fp, int rank, MPI_Comm world)
     this->p_over2 = nullptr;
     this->p_over3 = ZERO;
     this->p_over4 = ZERO;
+    this->p_over5 = nullptr;
+    this->p_over6 = ZERO;
+    this->p_over7 = ZERO;
+    this->p_over8 = ZERO;
 
     this->Val     = nullptr;
     this->Val_e   = nullptr;
@@ -248,6 +252,7 @@ void ReaxParam::allocateAllData()
 
     this->p_over1 = this->allocatePairData();
     this->p_over2 = this->allocateElemData();
+    this->p_over5 = this->allocateElemData();
 
     this->Val     = this->allocateElemData();
     this->Val_e   = this->allocateElemData();
@@ -316,6 +321,7 @@ void ReaxParam::deallocateAllData()
 
     this->deallocatePairData(this->p_over1);
     this->deallocateElemData(this->p_over2);
+    this->deallocateElemData(this->p_over5);
 
     this->deallocateElemData(this->Val);
     this->deallocateElemData(this->Val_e);
@@ -414,8 +420,11 @@ int ReaxParam::readFFieldReax(FILE* fp)
         else if (i == 13) {this->swb_vdw = genValue;}
         else if (i == 29) {this->p_vdw   = genValue;}
         else if (i == 30) {this->BO_cut  = genValue / NNPREAL(100.0);}
-        else if (i == 32) {this->p_over4 = genValue;}
         else if (i == 33) {this->p_over3 = genValue;}
+        else if (i == 32) {this->p_over4 = genValue;}
+        else if (i ==  7) {this->p_over6 = genValue;}
+        else if (i ==  9) {this->p_over7 = genValue;}
+        else if (i == 10) {this->p_over8 = genValue;}
     }
 
     // 3) atomic parameters
@@ -512,6 +521,7 @@ int ReaxParam::readFFieldReax(FILE* fp)
         this->p_boc4_atom   [iatom] = atomValue[20];
         this->p_boc5_atom   [iatom] = atomValue[22];
         this->p_over2       [iatom] = atomValue[25];
+        this->p_over5       [iatom] = atomValue[12];
         this->Val           [iatom] = atomValue[2];
         this->Val_e         [iatom] = atomValue[8];
         this->Val_boc       [iatom] = atomValue[28];
@@ -996,6 +1006,10 @@ void ReaxParam::shareParameters(int rank, MPI_Comm world)
     MPI_Bcast(&(this->p_over2[0]), nelem, MPI_NNPREAL, 0, world);
     MPI_Bcast(&(this->p_over3),        1, MPI_NNPREAL, 0, world);
     MPI_Bcast(&(this->p_over4),        1, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->p_over5[0]), nelem, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->p_over6),        1, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->p_over7),        1, MPI_NNPREAL, 0, world);
+    MPI_Bcast(&(this->p_over8),        1, MPI_NNPREAL, 0, world);
 
     MPI_Bcast(&(this->Val    [0]), nelem, MPI_NNPREAL, 0, world);
     MPI_Bcast(&(this->Val_e  [0]), nelem, MPI_NNPREAL, 0, world);

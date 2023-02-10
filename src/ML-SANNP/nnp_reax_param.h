@@ -64,6 +64,10 @@ public:
     nnpreal*  p_over2;
     nnpreal   p_over3;
     nnpreal   p_over4;
+    nnpreal*  p_over5;
+    nnpreal   p_over6;
+    nnpreal   p_over7;
+    nnpreal   p_over8;
 
     nnpreal*  Val;
     nnpreal*  Val_e;

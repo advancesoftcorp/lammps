@@ -91,8 +91,11 @@ private:
     nnpreal*   dTlpdDeltas;
     nnpreal*   dDeltadSlps;
     nnpreal*   dDeltadDeltas;
-    nnpreal*   coeff1Eovers;
-    nnpreal*   coeff2Eovers;
+    nnpreal*   Aovers;
+    nnpreal*   Bovers;
+    nnpreal*   Eunders;
+    nnpreal*   dEunderdSlps;
+    nnpreal*   dEunderdDeltas;
 
     void calculateBondOrder();
     void calculateBondOrderRaw();
