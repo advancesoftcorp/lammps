@@ -188,7 +188,6 @@ void ReaxPot::initGeometry(int locAtoms, int numAtoms, int* type,
     int itype;
     int ielem;
     int nelem = this->param->numElems;
-    int atomNum;
 
     if (this->maxAtomsAll < this->numAtomsAll)
     {

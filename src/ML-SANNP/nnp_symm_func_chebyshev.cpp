@@ -115,7 +115,7 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, nnpreal** 
 
     nnpreal scheby;
 
-#ifndef CHEBYSHEV_TRIGON
+#ifndef CHEBYSHEV_TRIGONO
     const int ncheby = max(2, max(this->sizeRad, this->sizeAng));
     nnpreal tcheby[ncheby];
     nnpreal dcheby[ncheby];
