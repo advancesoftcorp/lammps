@@ -924,7 +924,6 @@ void NNArch::initGeometry(int numAtoms, int* elements,
     int ielem;
     int nelem = this->numElems;
 
-    int ineigh;
     int totNeigh;
 
     int ilayer;

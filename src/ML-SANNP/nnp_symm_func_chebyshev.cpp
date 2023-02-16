@@ -89,7 +89,7 @@ void SymmFuncChebyshev::calculate(int numNeighbor, int* elemNeighbor, nnpreal** 
     nnpreal x1, x2;
     nnpreal y1, y2;
     nnpreal z1, z2;
-    nnpreal r1, r2, rr;
+    nnpreal r1, r2;
 
     nnpreal fc1, fc2;
     nnpreal dfc1dr1, dfc2dr2;
