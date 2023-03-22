@@ -179,10 +179,10 @@ void ReaxPot::initGeometry(int locAtoms, int numAtoms, int* type,
     this->locAtomsAll = locAtoms;
     this->numAtomsAll = numAtoms;
 
-    this->typeAll       = type;
-    this->numNeighsAll  = numNeighbor;
-    this->idxNeighsAll  = idxNeighbor;
-    this->posNeighsAll  = posNeighbor;
+    this->typeAll      = type;
+    this->numNeighsAll = numNeighbor;
+    this->idxNeighsAll = idxNeighbor;
+    this->posNeighsAll = posNeighbor;
 
     int Iatom;
     int itype;
