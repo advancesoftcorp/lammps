@@ -214,7 +214,7 @@ void ReaxPot::initGeometry(int locAtoms, int numAtoms, int* type,
         }
         else
         {
-            this->mapForwardAtoms[Iatom] = -1;
+            this->mapForwardAtoms[ilist[Iatom]] = -1;
         }
     }
 
@@ -234,7 +234,7 @@ void ReaxPot::initGeometry(int locAtoms, int numAtoms, int* type,
         }
         else
         {
-            this->mapForwardAtoms[Iatom] = -1;
+            this->mapForwardAtoms[ilist[Iatom]] = -1;
         }
     }
 }
