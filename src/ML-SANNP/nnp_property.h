@@ -131,6 +131,11 @@ public:
         return this->cutoffMode;
     }
 
+    int getModelsEnergy() const
+    {
+        return this->modelsEnergy;
+    }
+
     int getLayersEnergy() const
     {
         return this->layersEnergy;
@@ -144,6 +149,11 @@ public:
     int getActivEnergy() const
     {
         return this->activEnergy;
+    }
+
+    int getModelsCharge() const
+    {
+        return this->modelsCharge;
     }
 
     int getLayersCharge() const
@@ -224,10 +234,12 @@ private:
     int cutoffMode;
 
     // about neural networks
+    int modelsEnergy;
     int layersEnergy;
     int nodesEnergy;
     int activEnergy;
 
+    int modelsCharge;
     int layersCharge;
     int nodesCharge;
     int activCharge;

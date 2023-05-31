@@ -106,24 +106,24 @@ private:
     int* nbatch;
     int* ibatch;
 
-    nnpreal**  energyData;
-    nnpreal**  energyGrad;
+    nnpreal***  energyData;
+    nnpreal***  energyGrad;
 
-    nnpreal*   forceData;
+    nnpreal*    forceData;
 
-    nnpreal**  chargeData;
+    nnpreal***  chargeData;
 
-    nnpreal*   symmData;
-    nnpreal*   symmDiff;
-    nnpreal*   symmAve;
-    nnpreal*   symmDev;
-    SymmFunc*  symmFunc;
+    nnpreal*    symmData;
+    nnpreal*    symmDiff;
+    nnpreal*    symmAve;
+    nnpreal*    symmDev;
+    SymmFunc*   symmFunc;
 
-    NNLayer*** interLayersEnergy;
-    NNLayer**  lastLayersEnergy;
+    NNLayer**** interLayersEnergy;
+    NNLayer***  lastLayersEnergy;
 
-    NNLayer*** interLayersCharge;
-    NNLayer**  lastLayersCharge;
+    NNLayer**** interLayersCharge;
+    NNLayer***  lastLayersCharge;
 
     nnpreal* ljlikeA1;
     nnpreal* ljlikeA2;

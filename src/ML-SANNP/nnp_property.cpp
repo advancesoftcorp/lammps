@@ -33,10 +33,12 @@ Property::Property()
     this->behlerRs2     = nullptr;
     this->behlerZeta    = nullptr;
 
+    this->modelsEnergy  = 0;
     this->layersEnergy  = 0;
     this->nodesEnergy   = 0;
     this->activEnergy   = ACTIVATION_NULL;
 
+    this->modelsCharge  = 0;
     this->layersCharge  = 0;
     this->nodesCharge   = 0;
     this->activCharge   = ACTIVATION_NULL;
@@ -436,10 +438,18 @@ void Property::readProperty(FILE* fp, int rank, int nproc, MPI_Comm world)
 
         if (ierr == 0)
         {
-            if (sscanf(line, "%d %d %d", &(this->layersEnergy),
-                                         &(this->nodesEnergy), &(this->activEnergy)) != 3)
+            if (sscanf(line, "%d %d %d %d", &(this->layersEnergy), &(this->nodesEnergy),
+                                            &(this->activEnergy),  &(this->modelsEnergy)) != 4)
             {
-                ierr = 1;
+                if (sscanf(line, "%d %d %d", &(this->layersEnergy),
+                                             &(this->nodesEnergy), &(this->activEnergy)) != 3)
+                {
+                    ierr = 1;
+                }
+                else
+                {
+                    this->modelsEnergy = 1;
+                }
             }
         }
     }
@@ -447,6 +457,7 @@ void Property::readProperty(FILE* fp, int rank, int nproc, MPI_Comm world)
     MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
     if (ierr != 0) stop_by_error("cannot read ffield file, at layersEnergy");
 
+    MPI_Bcast(&(this->modelsEnergy), 1, MPI_INT, 0, world);
     MPI_Bcast(&(this->layersEnergy), 1, MPI_INT, 0, world);
     MPI_Bcast(&(this->nodesEnergy),  1, MPI_INT, 0, world);
     MPI_Bcast(&(this->activEnergy),  1, MPI_INT, 0, world);
@@ -463,10 +474,18 @@ void Property::readProperty(FILE* fp, int rank, int nproc, MPI_Comm world)
 
             if (ierr == 0)
             {
-                if (sscanf(line, "%d %d %d", &(this->layersCharge),
-                                             &(this->nodesCharge), &(this->activCharge)) != 3)
+                if (sscanf(line, "%d %d %d %d", &(this->layersCharge), &(this->nodesCharge),
+                                                &(this->activCharge),  &(this->modelsCharge)) != 4)
                 {
-                    ierr = 1;
+                    if (sscanf(line, "%d %d %d", &(this->layersCharge),
+                                                 &(this->nodesCharge), &(this->activCharge)) != 3)
+                    {
+                        ierr = 1;
+                    }
+                    else
+                    {
+                        this->modelsCharge = 1;
+                    }
                 }
             }
         }
@@ -474,6 +493,7 @@ void Property::readProperty(FILE* fp, int rank, int nproc, MPI_Comm world)
         MPI_Bcast(&ierr, 1, MPI_INT, 0, world);
         if (ierr != 0) stop_by_error("cannot read ffield file, at layersCharge");
 
+        MPI_Bcast(&(this->modelsCharge), 1, MPI_INT, 0, world);
         MPI_Bcast(&(this->layersCharge), 1, MPI_INT, 0, world);
         MPI_Bcast(&(this->nodesCharge),  1, MPI_INT, 0, world);
         MPI_Bcast(&(this->activCharge),  1, MPI_INT, 0, world);
@@ -649,6 +669,7 @@ void Property::printProperty()
     this->activToString(strActivEnergy, this->activEnergy);
 
     fprintf(fp, "  %s\n", "Neural Network for Energy:");
+    fprintf(fp, "  %s%d\n", "  Number of Models    = ", this->modelsEnergy);
     fprintf(fp, "  %s%d\n", "  Number of Layers    = ", this->layersEnergy);
     fprintf(fp, "  %s%d\n", "  Number of Nodes     = ", this->nodesEnergy);
     fprintf(fp, "  %s%s\n", "  Activation Func.    = ", strActivEnergy);
@@ -670,6 +691,7 @@ void Property::printProperty()
         this->activToString(strActivCharge, this->activCharge);
 
         fprintf(fp, "  %s\n", "Neural Network for Charge:");
+        fprintf(fp, "  %s%d\n", "  Number of Models    = ", this->modelsCharge);
         fprintf(fp, "  %s%d\n", "  Number of Layers    = ", this->layersCharge);
         fprintf(fp, "  %s%d\n", "  Number of Nodes     = ", this->nodesCharge);
         fprintf(fp, "  %s%s\n", "  Activation Func.    = ", strActivCharge);
