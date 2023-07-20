@@ -86,7 +86,7 @@ NNArch::NNArch(int numElems, const Property* property, LAMMPS_NS::Memory* memory
 
     if (this->isChargeMode())
     {
-        this->chargeData = new nnpreal**[this->numElems];
+        this->chargeData = new nnpreal**[nelem];
 
         for (ielem = 0; ielem < this->numElems; ++ielem)
         {
@@ -105,8 +105,8 @@ NNArch::NNArch(int numElems, const Property* property, LAMMPS_NS::Memory* memory
 
     this->symmData = nullptr;
     this->symmDiff = nullptr;
-    this->symmAve  = new nnpreal[this->numElems];
-    this->symmDev  = new nnpreal[this->numElems];
+    this->symmAve  = new nnpreal[nelem];
+    this->symmDev  = new nnpreal[nelem];
     this->symmFunc = nullptr;
 
     this->interLayersEnergy = nullptr;
@@ -855,7 +855,6 @@ void NNArch::restoreNN(FILE* fp, char** elemNames, bool zeroEatom, int rank, MPI
                         interLayersEnergy[kelem][imodel][0]->scanWeight(fp, rank, world);
                     }
                 }
-
 
                 // the 2nd ~ last layers (dummy)
                 if (kelem < 0)
@@ -1784,7 +1783,7 @@ void NNArch::goBackwardOnForce()
                 }
                 else
                 {
-                    symmGrad = &(this->interLayersEnergy[ielem][imodel][0]->getGrad()[jbatch * nbase]);
+                    symmGrad = &(this->interLayersEnergy[ielem][0][0]->getGrad()[jbatch * nbase]);
                 }
 
                 dev = this->symmDev[ielem];
