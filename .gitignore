@@ -3,8 +3,10 @@ doc/
 examples/
 !examples/OC20DRIVER/
 !examples/M3GNET/
+!examples/CHGNET/
 potentials/
 !potentials/OC20DRIVER/
 !potentials/M3GNET/
+!potentials/CHGNET/
 python/
 tools/

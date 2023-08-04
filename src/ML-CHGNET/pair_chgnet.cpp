@@ -1,17 +1,15 @@
 /*
- * Copyright (C) 2022 AdvanceSoft Corporation
+ * Copyright (C) 2023 AdvanceSoft Corporation
  *
  * This source code is licensed under the GNU General Public License Version 2
  * found in the LICENSE file in the root directory of this source tree.
  */
 
-#include "pair_m3gnet.h"
+#include "pair_chgnet.h"
 
 using namespace LAMMPS_NS;
 
-#define GPA_TO_EVA3  160.21766208
-
-PairM3GNet::PairM3GNet(LAMMPS *lmp) : Pair(lmp)
+PairCHGNet::PairCHGNet(LAMMPS *lmp) : Pair(lmp)
 {
     single_enable           = 0;
     restartinfo             = 0;
@@ -30,7 +28,7 @@ PairM3GNet::PairM3GNet(LAMMPS *lmp) : Pair(lmp)
     this->pyFunc            = nullptr;
 }
 
-PairM3GNet::~PairM3GNet()
+PairCHGNet::~PairCHGNet()
 {
     if (copymode)
     {
@@ -69,7 +67,7 @@ PairM3GNet::~PairM3GNet()
     }
 }
 
-void PairM3GNet::allocate()
+void PairCHGNet::allocate()
 {
     allocated = 1;
 
@@ -85,18 +83,18 @@ void PairM3GNet::allocate()
     memory->create(this->stress,    6,                "pair:stress");
 }
 
-void PairM3GNet::compute(int eflag, int vflag)
+void PairCHGNet::compute(int eflag, int vflag)
 {
     ev_init(eflag, vflag);
 
     if (eflag_atom)
     {
-        error->all(FLERR, "Pair style M3GNet does not support atomic energy");
+        error->all(FLERR, "Pair style CHGNet does not support atomic energy");
     }
 
     if (vflag_atom)
     {
-        error->all(FLERR, "Pair style M3GNet does not support atomic virial pressure");
+        error->all(FLERR, "Pair style CHGNet does not support atomic virial pressure");
     }
 
     this->prepareGNN();
@@ -104,7 +102,7 @@ void PairM3GNet::compute(int eflag, int vflag)
     this->performGNN();
 }
 
-void PairM3GNet::prepareGNN()
+void PairCHGNet::prepareGNN()
 {
     int i;
     int iatom;
@@ -152,7 +150,7 @@ void PairM3GNet::prepareGNN()
     }
 }
 
-void PairM3GNet::performGNN()
+void PairCHGNet::performGNN()
 {
     int i;
     int iatom;
@@ -166,7 +164,7 @@ void PairM3GNet::performGNN()
     double factor;
     double evdwl = 0.0;
 
-    // perform Graph Neural Network Potential of M3GNet
+    // perform Graph Neural Network Potential of CHGNet
     evdwl = this->calculatePython();
 
     // set total energy
@@ -188,24 +186,22 @@ void PairM3GNet::performGNN()
     // set virial pressure
     if (vflag_global)
     {
-        // GPa -> eV/A^3
         volume = domain->xprd * domain->yprd * domain->zprd;
-        factor = volume / GPA_TO_EVA3;
 
-        virial[0] -= factor * this->stress[0]; // xx
-        virial[1] -= factor * this->stress[1]; // yy
-        virial[2] -= factor * this->stress[2]; // zz
-        virial[3] -= factor * this->stress[3]; // yz
-        virial[4] -= factor * this->stress[4]; // xz
-        virial[5] -= factor * this->stress[5]; // xy
+        virial[0] -= volume * this->stress[0]; // xx
+        virial[1] -= volume * this->stress[1]; // yy
+        virial[2] -= volume * this->stress[2]; // zz
+        virial[3] -= volume * this->stress[3]; // yz
+        virial[4] -= volume * this->stress[4]; // xz
+        virial[5] -= volume * this->stress[5]; // xy
     }
 }
 
-void PairM3GNet::settings(int narg, char **arg)
+void PairCHGNet::settings(int narg, char **arg)
 {
     if (comm->nprocs > 1)
     {
-        error->all(FLERR, "Pair style M3GNet does not support MPI parallelization");
+        error->all(FLERR, "Pair style CHGNet does not support MPI parallelization");
     }
 
     if (narg < 1)
@@ -223,7 +219,7 @@ void PairM3GNet::settings(int narg, char **arg)
     }
 }
 
-void PairM3GNet::coeff(int narg, char **arg)
+void PairCHGNet::coeff(int narg, char **arg)
 {
     int i, j;
     int count;
@@ -232,6 +228,8 @@ void PairM3GNet::coeff(int narg, char **arg)
     int ntypesEff;
 
     int dftd3 = withDFTD3();
+
+    int gpu = withGPU();
 
     if (narg != (3 + ntypes))
     {
@@ -266,7 +264,7 @@ void PairM3GNet::coeff(int narg, char **arg)
 
     if (ntypesEff < 1)
     {
-        error->all(FLERR, "There are no elements for pair_coeff of M3GNet.");
+        error->all(FLERR, "There are no elements for pair_coeff of CHGNet.");
     }
 
     if (!allocated)
@@ -279,11 +277,11 @@ void PairM3GNet::coeff(int narg, char **arg)
         this->finalizePython();
     }
 
-    this->cutoff = this->initializePython(arg[2], dftd3);
+    this->cutoff = this->initializePython(arg[2], dftd3, gpu);
 
     if (this->cutoff <= 0.0)
     {
-        error->all(FLERR, "Cutoff is not positive for pair_coeff of M3GNet.");
+        error->all(FLERR, "Cutoff is not positive for pair_coeff of CHGNet.");
     }
 
     count = 0;
@@ -310,7 +308,7 @@ void PairM3GNet::coeff(int narg, char **arg)
     }
 }
 
-double PairM3GNet::init_one(int i, int j)
+double PairCHGNet::init_one(int i, int j)
 {
     if (setflag[i][j] == 0)
     {
@@ -328,29 +326,34 @@ double PairM3GNet::init_one(int i, int j)
     return r;
 }
 
-void PairM3GNet::init_style()
+void PairCHGNet::init_style()
 {
     if (strcmp(update->unit_style, "metal") != 0)
     {
-        error->all(FLERR, "Pair style M3GNet requires 'units metal'");
+        error->all(FLERR, "Pair style CHGNet requires 'units metal'");
     }
 
     int* periodicity = domain->periodicity;
 
     if (!(periodicity[0] && periodicity[1] && periodicity[2]))
     {
-        error->all(FLERR, "Pair style M3GNet requires periodic boundary condition");
+        error->all(FLERR, "Pair style CHGNet requires periodic boundary condition");
     }
 
     neighbor->add_request(this, NeighConst::REQ_FULL);
 }
 
-int PairM3GNet::withDFTD3()
+int PairCHGNet::withDFTD3()
 {
     return 0;
 }
 
-void PairM3GNet::finalizePython()
+int PairCHGNet::withGPU()
+{
+    return 0;
+}
+
+void PairCHGNet::finalizePython()
 {
     if (this->initializedPython == 0)
     {
@@ -363,7 +366,7 @@ void PairM3GNet::finalizePython()
     Py_Finalize();
 }
 
-double PairM3GNet::initializePython(const char *name, int dftd3)
+double PairCHGNet::initializePython(const char *name, int dftd3, int gpu)
 {
     if (this->initializedPython != 0)
     {
@@ -380,6 +383,7 @@ double PairM3GNet::initializePython(const char *name, int dftd3)
     PyObject* pyArgs   = nullptr;
     PyObject* pyArg1   = nullptr;
     PyObject* pyArg2   = nullptr;
+    PyObject* pyArg3   = nullptr;
     PyObject* pyValue  = nullptr;
 
     Py_Initialize();
@@ -407,15 +411,7 @@ double PairM3GNet::initializePython(const char *name, int dftd3)
         }
     }
 
-    if (strcmp(name, "MP-2021.2.8-EFS") == 0)
-    {
-        pyName = PyUnicode_DecodeFSDefault("m3gnet_driver");
-    }
-    else
-    {
-        pyName = PyUnicode_DecodeFSDefault("matgl_driver");
-    }
-
+    pyName = PyUnicode_DecodeFSDefault("chgnet_driver");
     if (pyName != nullptr)
     {
         pyModule = PyImport_Import(pyName);
@@ -424,16 +420,18 @@ double PairM3GNet::initializePython(const char *name, int dftd3)
 
     if (pyModule != nullptr)
     {
-        pyFunc = PyObject_GetAttrString(pyModule, "m3gnet_initialize");
+        pyFunc = PyObject_GetAttrString(pyModule, "chgnet_initialize");
 
         if (pyFunc != nullptr && PyCallable_Check(pyFunc))
         {
             pyArg1 = PyUnicode_FromString(name);
             pyArg2 = PyBool_FromLong(dftd3);
+            pyArg3 = PyBool_FromLong(gpu);
 
-            pyArgs = PyTuple_New(2);
+            pyArgs = PyTuple_New(3);
             PyTuple_SetItem(pyArgs, 0, pyArg1);
             PyTuple_SetItem(pyArgs, 1, pyArg2);
+            PyTuple_SetItem(pyArgs, 2, pyArg3);
 
             pyValue = PyObject_CallObject(pyFunc, pyArgs);
 
@@ -459,7 +457,7 @@ double PairM3GNet::initializePython(const char *name, int dftd3)
 
         Py_XDECREF(pyFunc);
 
-        pyFunc = PyObject_GetAttrString(pyModule, "m3gnet_get_energy_forces_stress");
+        pyFunc = PyObject_GetAttrString(pyModule, "chgnet_get_energy_forces_stress");
 
         if (pyFunc != nullptr && PyCallable_Check(pyFunc))
         {
@@ -487,7 +485,7 @@ double PairM3GNet::initializePython(const char *name, int dftd3)
 
         Py_Finalize();
 
-        error->all(FLERR, "Cannot initialize python for pair_coeff of M3GNet.");
+        error->all(FLERR, "Cannot initialize python for pair_coeff of CHGNet.");
     }
 
     this->pyModule = pyModule;
@@ -496,7 +494,7 @@ double PairM3GNet::initializePython(const char *name, int dftd3)
     return cutoff;
 }
 
-double PairM3GNet::calculatePython()
+double PairCHGNet::calculatePython()
 {
     int i;
     int iatom;
@@ -656,7 +654,7 @@ double PairM3GNet::calculatePython()
 
     if (hasEnergy == 0 || hasForces == 0 || hasStress == 0)
     {
-        error->all(FLERR, "Cannot calculate energy, forces and stress by python of M3GNet.");
+        error->all(FLERR, "Cannot calculate energy, forces and stress by python of CHGNet.");
     }
 
     return energy;
@@ -675,7 +673,7 @@ static const char* ALL_ELEMENTS[] = {
     "Nh", "Fl", "Mc", "Lv", "Ts", "Og"
 };
 
-int PairM3GNet::elementToAtomNum(const char *elem)
+int PairCHGNet::elementToAtomNum(const char *elem)
 {
     char elem1[16];
 
@@ -701,7 +699,7 @@ int PairM3GNet::elementToAtomNum(const char *elem)
     return 0;
 }
 
-void PairM3GNet::toRealElement(char *elem)
+void PairCHGNet::toRealElement(char *elem)
 {
     int n = strlen(elem);
     n = n > 2 ? 2 : n;

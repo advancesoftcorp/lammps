@@ -22,7 +22,7 @@ namespace LAMMPS_NS
 class PairM3GNetD3: public PairM3GNet
 {
 public:
-	PairM3GNetD3(class LAMMPS*);
+    PairM3GNetD3(class LAMMPS*);
 
     virtual ~PairM3GNetD3() override;
 
