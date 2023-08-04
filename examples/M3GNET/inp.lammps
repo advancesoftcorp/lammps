@@ -1,8 +1,9 @@
 #
-# This is an example of the driver of `M3GNet' <https://github.com/materialsvirtuallab/m3gnet>,
-# which contains a state-of-the-art Graph Neural Network Potential trained with data of Materials Projects.
+# This is an example of the driver of `M3GNet' <https://github.com/materialsvirtuallab/m3gnet>
+# or `MatGL' <https://github.com/materialsvirtuallab/matgl>, which contains
+# a state-of-the-art Graph Neural Network Potential trained with data of Materials Projects.
 # This driver is developed by AdvanceSoft Corp <https://www.advancesoft.jp>.
-# Before you use this driver, you have to install python3 and m3gnet (pip install m3gnet).
+# Before you use this driver, you have to install python3 and m3gnet (pip install m3gnet) or matgl (pip install matgl).
 #
 # NOTE:
 #   1) the units must be metal
@@ -18,7 +19,9 @@ pair_style    m3gnet ../../potentials/M3GNET
 
 read_data     ./dat.lammps
 
-pair_coeff    * *  MP-2021.2.8-EFS  Zr O
+pair_coeff    * *  MP-2021.2.8-EFS  Zr O  # M3GNet <https://github.com/materialsvirtuallab/m3gnet> will be called
+#pair_coeff    * *  M3GNet-MP-2021.2.8-PES  Zr O  # MatGL <https://github.com/materialsvirtuallab/matgl> will be called
+#pair_coeff    * *  M3GNet-MP-2021.2.8-DIRECT-PES  Zr O  # MatGL <https://github.com/materialsvirtuallab/matgl> will be called
 
 dump          myDump all custom 10 xyz.lammpstrj id element x y z
 dump_modify   myDump sort id element Zr O

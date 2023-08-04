@@ -407,7 +407,15 @@ double PairM3GNet::initializePython(const char *name, int dftd3)
         }
     }
 
-    pyName = PyUnicode_DecodeFSDefault("m3gnet_driver");
+    if (strcmp(name, "MP-2021.2.8-EFS") == 0)
+    {
+        pyName = PyUnicode_DecodeFSDefault("m3gnet_driver");
+    }
+    else
+    {
+        pyName = PyUnicode_DecodeFSDefault("matgl_driver");
+    }
+
     if (pyName != nullptr)
     {
         pyModule = PyImport_Import(pyName);
