@@ -78,7 +78,7 @@ private:
 
     void finalizePython();
 
-    double initializePython(const char *name, int dftd3, int gpu);
+    double initializePython(const char *name, int as_path, int dftd3, int gpu);
 
     double calculatePython();
 
