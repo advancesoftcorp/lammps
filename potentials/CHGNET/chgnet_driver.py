@@ -5,8 +5,6 @@ This source code is licensed under the GNU General Public License Version 2
 found in the LICENSE file in the root directory of this source tree.
 """
 
-import torch
-
 from ase import Atoms
 from ase.calculators.mixing import SumCalculator
 
@@ -14,6 +12,8 @@ from dftd3.ase import DFTD3
 #from torch_dftd.torch_dftd3_calculator import TorchDFTD3Calculator
 
 from chgnet.model import CHGNet, CHGNetCalculator
+
+import torch
 
 def chgnet_initialize(model_name = None, dftd3 = False, gpu = True):
     """
@@ -68,7 +68,9 @@ def chgnet_initialize(model_name = None, dftd3 = False, gpu = True):
 
     myAtoms = None
 
-    return max(myCHGNet.atom_graph_cutoff, myCHGNet.bond_graph_cutoff)
+    ratom = float(myCHGNet.graph_converter.atom_graph_cutoff)
+    rbond = float(myCHGNet.graph_converter.bond_graph_cutoff)
+    return max(ratom, rbond)
 
 def chgnet_get_energy_forces_stress(cell, atomic_numbers, positions):
     """
