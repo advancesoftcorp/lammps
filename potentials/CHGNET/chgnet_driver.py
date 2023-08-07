@@ -15,11 +15,12 @@ from chgnet.model import CHGNet, CHGNetCalculator
 
 import torch
 
-def chgnet_initialize(model_name = None, dftd3 = False, gpu = True):
+def chgnet_initialize(model_name = None, as_path = False, dftd3 = False, gpu = True):
     """
     Initialize GNNP of CHGNet.
     Args:
         model_name (str): name of model for GNNP.
+        as_path (bool): if true, model_name is path of model file.
         dftd3 (bool): to add correction of DFT-D3.
         gpu (bool): using GPU, if possible.
     Returns:
@@ -32,10 +33,12 @@ def chgnet_initialize(model_name = None, dftd3 = False, gpu = True):
     # Create CHGNetCalculator, that is pre-trained
     global myCalculator
 
-    if model_name is not None:
+    if model_name is None:
+        myCHGNet = CHGNet.load()
+    elif not as_path:
         myCHGNet = CHGNet.load(model_name)
     else:
-        myCHGNet = CHGNet.load()
+        myCHGNet = CHGNet.from_file(model_name)
 
     myCalculator = CHGNetCalculator(
         model      = myCHGNet,

@@ -222,16 +222,17 @@ void PairCHGNet::settings(int narg, char **arg)
 void PairCHGNet::coeff(int narg, char **arg)
 {
     int i, j;
+    int iarg;
     int count;
 
     int ntypes = atom->ntypes;
     int ntypesEff;
 
-    int dftd3 = withDFTD3();
+    int as_path = 0;
+    int dftd3   = withDFTD3();
+    int gpu     = withGPU();
 
-    int gpu = withGPU();
-
-    if (narg != (3 + ntypes))
+    if (narg != (3 + ntypes) && narg != (4 + ntypes))
     {
         error->all(FLERR, "Incorrect number of arguments for pair_coeff.");
     }
@@ -239,6 +240,17 @@ void PairCHGNet::coeff(int narg, char **arg)
     if (strcmp(arg[0], "*") != 0 || strcmp(arg[1], "*") != 0)
     {
         error->all(FLERR, "Only wildcard asterisk is allowed in place of atom types for pair_coeff.");
+    }
+
+    if (strcmp(arg[2], "path") == 0)
+    {
+        iarg    = 4;
+        as_path = 1;
+    }
+    else
+    {
+        iarg    = 3;
+        as_path = 0;
     }
 
     if (this->atomNumMap != nullptr)
@@ -251,13 +263,13 @@ void PairCHGNet::coeff(int narg, char **arg)
     ntypesEff = 0;
     for (i = 0; i < ntypes; ++i)
     {
-        if (strcmp(arg[i + 3], "NULL") == 0)
+        if (strcmp(arg[i + iarg], "NULL") == 0)
         {
             this->atomNumMap[i + 1] = 0;
         }
         else
         {
-            this->atomNumMap[i + 1] = this->elementToAtomNum(arg[i + 3]);
+            this->atomNumMap[i + 1] = this->elementToAtomNum(arg[i + iarg]);
             ntypesEff++;
         }
     }
@@ -277,7 +289,7 @@ void PairCHGNet::coeff(int narg, char **arg)
         this->finalizePython();
     }
 
-    this->cutoff = this->initializePython(arg[2], dftd3, gpu);
+    this->cutoff = this->initializePython(arg[iarg - 1], as_path, dftd3, gpu);
 
     if (this->cutoff <= 0.0)
     {
@@ -366,7 +378,7 @@ void PairCHGNet::finalizePython()
     Py_Finalize();
 }
 
-double PairCHGNet::initializePython(const char *name, int dftd3, int gpu)
+double PairCHGNet::initializePython(const char *name, int as_path, int dftd3, int gpu)
 {
     if (this->initializedPython != 0)
     {
@@ -384,6 +396,7 @@ double PairCHGNet::initializePython(const char *name, int dftd3, int gpu)
     PyObject* pyArg1   = nullptr;
     PyObject* pyArg2   = nullptr;
     PyObject* pyArg3   = nullptr;
+    PyObject* pyArg4   = nullptr;
     PyObject* pyValue  = nullptr;
 
     Py_Initialize();
@@ -425,13 +438,15 @@ double PairCHGNet::initializePython(const char *name, int dftd3, int gpu)
         if (pyFunc != nullptr && PyCallable_Check(pyFunc))
         {
             pyArg1 = PyUnicode_FromString(name);
-            pyArg2 = PyBool_FromLong(dftd3);
-            pyArg3 = PyBool_FromLong(gpu);
+            pyArg2 = PyBool_FromLong(as_path);
+            pyArg3 = PyBool_FromLong(dftd3);
+            pyArg4 = PyBool_FromLong(gpu);
 
-            pyArgs = PyTuple_New(3);
+            pyArgs = PyTuple_New(4);
             PyTuple_SetItem(pyArgs, 0, pyArg1);
             PyTuple_SetItem(pyArgs, 1, pyArg2);
             PyTuple_SetItem(pyArgs, 2, pyArg3);
+            PyTuple_SetItem(pyArgs, 3, pyArg4);
 
             pyValue = PyObject_CallObject(pyFunc, pyArgs);
 
