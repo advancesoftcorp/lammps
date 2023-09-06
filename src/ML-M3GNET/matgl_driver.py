@@ -8,9 +8,6 @@ found in the LICENSE file in the root directory of this source tree.
 from ase import Atoms
 from ase.calculators.mixing import SumCalculator
 
-from dftd3.ase import DFTD3
-#from torch_dftd.torch_dftd3_calculator import TorchDFTD3Calculator
-
 import matgl
 from matgl.ext.ase import M3GNetCalculator
 
@@ -46,6 +43,9 @@ def m3gnet_initialize(model_name = None, dftd3 = False):
     dftd3Calculator  = None
 
     if dftd3:
+        from dftd3.ase import DFTD3
+        #from torch_dftd.torch_dftd3_calculator import TorchDFTD3Calculator
+
         dftd3Calculator = DFTD3(
             method  = "PBE",
             damping = "d3zero",

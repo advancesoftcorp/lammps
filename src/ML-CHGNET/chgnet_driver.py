@@ -8,9 +8,6 @@ found in the LICENSE file in the root directory of this source tree.
 from ase import Atoms
 from ase.calculators.mixing import SumCalculator
 
-from dftd3.ase import DFTD3
-#from torch_dftd.torch_dftd3_calculator import TorchDFTD3Calculator
-
 from chgnet.model import CHGNet, CHGNetCalculator
 
 import torch
@@ -53,6 +50,9 @@ def chgnet_initialize(model_name = None, as_path = False, dftd3 = False, gpu = T
     dftd3Calculator  = None
 
     if dftd3:
+        from dftd3.ase import DFTD3
+        #from torch_dftd.torch_dftd3_calculator import TorchDFTD3Calculator
+
         dftd3Calculator = DFTD3(
             method  = "PBE",
             damping = "d3zero",
