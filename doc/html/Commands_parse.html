@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>5.2. Parsing rules for input scripts &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Commands_parse.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -66,7 +70,8 @@
 <li class="toctree-l2"><a class="reference internal" href="Commands_bond.html#dihedral-style-potentials">5.11. Dihedral_style potentials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Commands_bond.html#improper-style-potentials">5.12. Improper_style potentials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Commands_kspace.html">5.13. KSpace solvers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Commands_removed.html">5.14. Removed commands and packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Commands_dump.html">5.14. Dump commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Commands_removed.html">5.15. Removed commands and packages</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Packages.html">6. Optional packages</a></li>
@@ -93,6 +98,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -110,12 +116,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Commands.html"><span class="section-number">5. </span>Commands</a> &raquo;</li>
-      <li><span class="section-number">5.2. </span>Parsing rules for input scripts</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Commands.html"><span class="section-number">5. </span>Commands</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">5.2. </span>Parsing rules for input scripts</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="Commands_input.html" class="btn btn-neutral float-left" title="5.1. LAMMPS input scripts" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -126,8 +131,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="parsing-rules-for-input-scripts">
-<h1><span class="section-number">5.2. </span>Parsing rules for input scripts<a class="headerlink" href="#parsing-rules-for-input-scripts" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="parsing-rules-for-input-scripts">
+<h1><span class="section-number">5.2. </span>Parsing rules for input scripts<a class="headerlink" href="#parsing-rules-for-input-scripts" title="Permalink to this heading"></a></h1>
 <p>Each non-blank line in the input script is treated as a command.
 LAMMPS commands are case sensitive.  Command names are lower-case, as
 are specified command arguments.  Upper case letters may be used in
@@ -180,13 +186,13 @@ evaluated as an <a class="reference internal" href="variable.html"><span class="
 way to use numeric formulas in an input script without having to
 assign them to variable names.  For example, these 3 input script
 lines:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">variable </span><span class="nv nv-Identifier">X</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="nv">(xlo+xhi)</span><span class="o">/</span><span class="m">2</span><span class="o">+</span><span class="n">sqrt</span><span class="nv">(v_area)</span><span class="w"></span>
-<span class="k">region </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="n">block</span><span class="w"> </span><span class="nv">$X</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">INF</span><span class="w"> </span><span class="n">INF</span><span class="w"> </span><span class="n">EDGE</span><span class="w"> </span><span class="n">EDGE</span><span class="w"></span>
-<span class="k">variable </span><span class="nv nv-Identifier">X</span><span class="w"> </span><span class="n">delete</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">variable </span><span class="nv nv-Identifier">X</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="nv">(xlo+xhi)</span><span class="o">/</span><span class="m">2</span><span class="o">+</span><span class="n">sqrt</span><span class="nv">(v_area)</span>
+<span class="k">region </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="n">block</span><span class="w"> </span><span class="nv">$X</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">INF</span><span class="w"> </span><span class="n">INF</span><span class="w"> </span><span class="n">EDGE</span><span class="w"> </span><span class="n">EDGE</span>
+<span class="k">variable </span><span class="nv nv-Identifier">X</span><span class="w"> </span><span class="n">delete</span>
 </pre></div>
 </div>
 <p>can be replaced by:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">region </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="n">block</span><span class="w"> </span><span class="nv">$((xlo+xhi)/2+sqrt(v_area))</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">INF</span><span class="w"> </span><span class="n">INF</span><span class="w"> </span><span class="n">EDGE</span><span class="w"> </span><span class="n">EDGE</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">region </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="n">block</span><span class="w"> </span><span class="nv">$((xlo+xhi)/2+sqrt(v_area))</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">INF</span><span class="w"> </span><span class="n">INF</span><span class="w"> </span><span class="n">EDGE</span><span class="w"> </span><span class="n">EDGE</span>
 </pre></div>
 </div>
 <p>so that you do not have to define (or discard) a temporary variable,
@@ -199,15 +205,15 @@ to output the result of the variable expression evaluation.  If a
 format string is not specified, a high-precision “%.20g” is used as
 the default format.</p>
 <p>This can be useful for formatting print output to a desired precision:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="w"> </span><span class="s">&quot;Final energy per atom: $(v_ke_per_atom+v_pe_per_atom:%10.3f) eV/atom&quot;</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="w"> </span><span class="s">&quot;Final energy per atom: $(v_ke_per_atom+v_pe_per_atom:%10.3f) eV/atom&quot;</span>
 </pre></div>
 </div>
 <p>Note that neither the curly-bracket or immediate form of variables
 can contain nested $ characters for other variables to substitute
 for.  Thus you may <strong>NOT</strong> do this:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">variable        </span><span class="nv nv-Identifier">a</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="m">2</span><span class="w"></span>
-<span class="k">variable        </span><span class="nv nv-Identifier">b2</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="m">4</span><span class="w"></span>
-<span class="k">print</span><span class="w">           </span><span class="s">&quot;B2 = ${b$a}&quot;</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">variable        </span><span class="nv nv-Identifier">a</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="m">2</span>
+<span class="k">variable        </span><span class="nv nv-Identifier">b2</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="m">4</span>
+<span class="k">print</span><span class="w">           </span><span class="s">&quot;B2 = ${b$a}&quot;</span>
 </pre></div>
 </div>
 <p>Nor can you specify an expression like “$($x-1.0)” for an immediate
@@ -229,27 +235,29 @@ are arguments.</p></li>
 </ol>
 <ol class="arabic" id="six" start="6">
 <li><p>If you want text with spaces to be treated as a single argument, it
-can be enclosed in either single or double or triple quotes.  A long
-single argument enclosed in single or double quotes can span multiple
-lines if the “&amp;” character is used, as described above.  When the
-lines are concatenated together (and the “&amp;” characters and line
-breaks removed), the text will become a single line.  If you want
-multiple lines of an argument to retain their line breaks, the text
-can be enclosed in triple quotes, in which case “&amp;” characters are
-not needed.  For example:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="w"> </span><span class="s">&quot;Volume = $v&quot;</span><span class="w"></span>
-<span class="k">print</span><span class="w"> </span><span class="s">&#39;Volume = $v&#39;</span><span class="w"></span>
-<span class="k">if</span><span class="w"> </span><span class="s">&quot;${steps} &gt; 1000&quot;</span><span class="w"> </span><span class="n">then</span><span class="w"> </span><span class="n">quit</span><span class="w"></span>
+can be enclosed in either single (’) or double (”) or triple (“””)
+quotes.  A long single argument enclosed in single or double quotes
+can span multiple lines if the “&amp;” character is used, as described
+in <a class="reference internal" href="#one"><span class="std std-ref">1</span></a> above.  When the lines are concatenated together
+by LAMMPS (and the “&amp;” characters and line breaks removed), the
+combined text will become a single line.  If you want multiple lines
+of an argument to retain their line breaks, the text can be enclosed
+in triple quotes, in which case “&amp;” characters are not needed and do
+not function as line continuation character.  For example:</p>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="w"> </span><span class="s">&quot;Volume = $v&quot;</span>
+<span class="k">print</span><span class="w"> </span><span class="s">&#39;Volume = $v&#39;</span>
+<span class="k">if</span><span class="w"> </span><span class="s">&quot;${steps} &gt; 1000&quot;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="n">quit</span>
 <span class="k">variable </span><span class="nv nv-Identifier">a</span><span class="w"> </span><span class="n">string</span><span class="w"> </span><span class="s">&quot;red green blue &amp;</span>
-<span class="s">                purple orange cyan&quot;</span><span class="w"></span>
+<span class="s">                purple orange cyan&quot;</span>
 <span class="k">print</span><span class="w"> </span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">System volume = $v</span>
 <span class="s">System temperature = $t</span>
-<span class="s">&quot;&quot;&quot;</span><span class="w"></span>
+<span class="s">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
-<p>In each case, the single, double, or triple quotes are removed when
-the single argument they enclose is stored internally.</p>
+<p>In each of these cases, the single, double, or triple quotes are
+removed and the enclosed text stored internally as a single
+argument.</p>
 <p>See the <a class="reference internal" href="dump_modify.html"><span class="doc">dump modify format</span></a>, <a class="reference internal" href="print.html"><span class="doc">print</span></a>, <a class="reference internal" href="if.html"><span class="doc">if</span></a>, and <a class="reference internal" href="python.html"><span class="doc">python</span></a> commands for
 examples.</p>
 <p>A “#” or “$” character that is between quotes will not be treated as
@@ -301,7 +309,7 @@ characters.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -310,7 +318,6 @@ characters.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

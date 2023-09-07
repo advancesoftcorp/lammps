@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>1.1.8. Configuration information &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Library_config.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -95,6 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -112,12 +117,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Library.html"><span class="section-number">1. </span>LAMMPS Library Interfaces</a> &raquo;</li>
-      <li><span class="section-number">1.1.8. </span>Configuration information</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Library.html"><span class="section-number">1. </span>LAMMPS Library Interfaces</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">1.1.8. </span>Configuration information</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="Library_neighbor.html" class="btn btn-neutral float-left" title="1.1.7. Neighbor list access" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -128,8 +132,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="configuration-information">
-<h1><span class="section-number">1.1.8. </span>Configuration information<a class="headerlink" href="#configuration-information" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="configuration-information">
+<h1><span class="section-number">1.1.8. </span>Configuration information<a class="headerlink" href="#configuration-information" title="Permalink to this heading"></a></h1>
 <p>This section documents the following functions:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#_CPPv414lammps_versionPv" title="lammps_version"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_version()</span></code></a></p></li>
@@ -167,43 +172,43 @@ crashes within LAMMPS may be recovered from by enabling
 <a class="reference internal" href="Build_settings.html#exceptions"><span class="std std-ref">exceptions</span></a>, avoiding them proactively is a safer
 approach.</p>
 <div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text">Example for using configuration settings functions</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
-<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;library.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<div class="code-block-caption"><span class="caption-text">Example for using configuration settings functions</span><a class="headerlink" href="#id1" title="Permalink to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;library.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">handle</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">handle</span><span class="p">;</span>
 
-<span class="w">  </span><span class="n">handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lammps_open_no_mpi</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="n">lammps_file</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;in.missing&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">lammps_has_error</span><span class="p">(</span><span class="n">handle</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">errmsg</span><span class="p">[</span><span class="mi">256</span><span class="p">];</span><span class="w"></span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">errtype</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="n">errtype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lammps_get_last_error_message</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="n">errmsg</span><span class="p">,</span><span class="w"> </span><span class="mi">256</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;LAMMPS failed with error: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">errmsg</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="cm">/* write compressed dump file depending on available of options */</span><span class="w"></span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">lammps_has_style</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dump&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;atom/zstd&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">lammps_command</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dump d1 all atom/zstd 100 dump.zst&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">lammps_has_style</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dump&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;atom/gz&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">lammps_command</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dump d1 all atom/gz 100 dump.gz&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">lammps_config_has_gzip_support</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">lammps_command</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dump d1 all atom 100 dump.gz&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">lammps_command</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dump d1 all atom 100 dump&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="n">lammps_close</span><span class="p">(</span><span class="n">handle</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="n">handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lammps_open_no_mpi</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">  </span><span class="n">lammps_file</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;in.missing&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">lammps_has_error</span><span class="p">(</span><span class="n">handle</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">errmsg</span><span class="p">[</span><span class="mi">256</span><span class="p">];</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">errtype</span><span class="p">;</span>
+<span class="w">    </span><span class="n">errtype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lammps_get_last_error_message</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="n">errmsg</span><span class="p">,</span><span class="w"> </span><span class="mi">256</span><span class="p">);</span>
+<span class="w">    </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;LAMMPS failed with error: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">errmsg</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="cm">/* write compressed dump file depending on available of options */</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">lammps_has_style</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dump&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;atom/zstd&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">lammps_command</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dump d1 all atom/zstd 100 dump.zst&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">lammps_has_style</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dump&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;atom/gz&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">lammps_command</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dump d1 all atom/gz 100 dump.gz&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">lammps_config_has_gzip_support</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">lammps_command</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dump d1 all atom 100 dump.gz&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">lammps_command</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dump d1 all atom 100 dump&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">lammps_close</span><span class="p">(</span><span class="n">handle</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv414lammps_versionPv">
-<span id="_CPPv314lammps_versionPv"></span><span id="_CPPv214lammps_versionPv"></span><span id="lammps_version__voidP"></span><span class="target" id="library_8h_1a41f44a4eef975f8a189d3186259a8ef9"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_version</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414lammps_versionPv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv314lammps_versionPv"></span><span id="_CPPv214lammps_versionPv"></span><span id="lammps_version__voidP"></span><span class="target" id="library_8h_1a41f44a4eef975f8a189d3186259a8ef9"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_version</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414lammps_versionPv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Get numerical representation of the LAMMPS version date.</p>
 <p>The <a class="reference internal" href="#_CPPv414lammps_versionPv" title="lammps_version"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_version()</span></code></a> function returns an integer representing
 the version of the LAMMPS code in the format YYYYMMDD.  This can be used
@@ -211,10 +216,10 @@ to implement backward compatibility in software using the LAMMPS library
 interface.  The specific format guarantees, that this version number is
 growing with every new LAMMPS release.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>handle</strong> – pointer to a previously created LAMMPS instance </p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>an integer representing the version data in the format YYYYMMDD </p>
 </dd>
 </dl>
@@ -223,20 +228,20 @@ growing with every new LAMMPS release.</p>
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv418lammps_get_os_infoPci">
-<span id="_CPPv318lammps_get_os_infoPci"></span><span id="_CPPv218lammps_get_os_infoPci"></span><span id="lammps_get_os_info__cP.i"></span><span class="target" id="library_8h_1ae4b6178f693ff83002ee8a1559edd6ed"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_get_os_info</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">buffer</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">buf_size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lammps_get_os_infoPci" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv318lammps_get_os_infoPci"></span><span id="_CPPv218lammps_get_os_infoPci"></span><span id="lammps_get_os_info__cP.i"></span><span class="target" id="library_8h_1ae4b6178f693ff83002ee8a1559edd6ed"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_get_os_info</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">buffer</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">buf_size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lammps_get_os_infoPci" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Get operating system and architecture information</p>
-<p><p>The <a class="reference internal" href="#_CPPv418lammps_get_os_infoPci" title="lammps_get_os_info"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_get_os_info()</span></code></a> function can be used to retrieve
+<p><div class="versionadded">
+<p><span class="versionmodified added">New in version 9Oct2020.</span></p>
+</div>
+<p>The <a class="reference internal" href="#_CPPv418lammps_get_os_infoPci" title="lammps_get_os_info"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_get_os_info()</span></code></a> function can be used to retrieve
 detailed information about the hosting operating system and
 compiler/runtime.</p>
 <p>A suitable buffer for a C-style string has to be provided and its length.
 The assembled text will be truncated to not overflow this buffer. The
 string is typically a few hundred bytes long.</p>
-<div class="versionadded">
-<p><span class="versionmodified added">New in version 9Oct2020.</span></p>
-</div>
 </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>buffer</strong> – string buffer to copy the information to </p></li>
 <li><p><strong>buf_size</strong> – size of the provided string buffer </p></li>
@@ -248,10 +253,10 @@ string is typically a few hundred bytes long.</p>
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv429lammps_config_has_mpi_supportv">
-<span id="_CPPv329lammps_config_has_mpi_supportv"></span><span id="_CPPv229lammps_config_has_mpi_supportv"></span><span id="lammps_config_has_mpi_support"></span><span class="target" id="library_8h_1ada45e7d079fddf8400e31cc98710b5f8"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_config_has_mpi_support</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429lammps_config_has_mpi_supportv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv329lammps_config_has_mpi_supportv"></span><span id="_CPPv229lammps_config_has_mpi_supportv"></span><span id="lammps_config_has_mpi_support"></span><span class="target" id="library_8h_1ada45e7d079fddf8400e31cc98710b5f8"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_config_has_mpi_support</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429lammps_config_has_mpi_supportv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>This function is used to query whether LAMMPS was compiled with a real MPI library or in serial. For the real MPI library it reports the size of the MPI communicator in bytes (4 or 8), which allows to check for compatibility with a hosting code.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>0 when compiled with MPI STUBS, otherwise the MPI_Comm size in bytes </p>
 </dd>
 </dl>
@@ -260,16 +265,16 @@ string is typically a few hundred bytes long.</p>
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv430lammps_config_has_gzip_supportv">
-<span id="_CPPv330lammps_config_has_gzip_supportv"></span><span id="_CPPv230lammps_config_has_gzip_supportv"></span><span id="lammps_config_has_gzip_support"></span><span class="target" id="library_8h_1a0bd41d39a5dd5992d614e150b6d88a5f"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_config_has_gzip_support</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv430lammps_config_has_gzip_supportv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv330lammps_config_has_gzip_supportv"></span><span id="_CPPv230lammps_config_has_gzip_supportv"></span><span id="lammps_config_has_gzip_support"></span><span class="target" id="library_8h_1a0bd41d39a5dd5992d614e150b6d88a5f"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_config_has_gzip_support</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv430lammps_config_has_gzip_supportv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Check if the LAMMPS library supports reading or writing compressed files via a pipe to gzip or similar compression programs</p>
-<p>Several LAMMPS commands (e.g. <a class="reference internal" href="read_data.html"><span class="doc">read_data command</span></a>, <a class="reference internal" href="write_data.html"><span class="doc">write_data command</span></a>,
+<p>Several LAMMPS commands (e.g., <a class="reference internal" href="read_data.html"><span class="doc">read_data command</span></a>, <a class="reference internal" href="write_data.html"><span class="doc">write_data command</span></a>,
 <a class="reference internal" href="dump.html"><span class="doc">dump styles atom, custom, and xyz</span></a>) support reading and
 writing compressed files via creating a pipe to the <code class="docutils literal notranslate"><span class="pre">gzip</span></code> program.
 This function checks whether this feature was <a class="reference internal" href="Build_settings.html#gzip"><span class="std std-ref">enabled at compile
 time</span></a>. It does <strong>not</strong> check whether``gzip`` or any other
 supported compression programs themselves are installed and usable.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>1 if yes, otherwise 0 </p>
 </dd>
 </dl>
@@ -278,15 +283,15 @@ supported compression programs themselves are installed and usable.</p>
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv429lammps_config_has_png_supportv">
-<span id="_CPPv329lammps_config_has_png_supportv"></span><span id="_CPPv229lammps_config_has_png_supportv"></span><span id="lammps_config_has_png_support"></span><span class="target" id="library_8h_1a9de61d7686a3db2344fb94a4a22c67e4"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_config_has_png_support</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429lammps_config_has_png_supportv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv329lammps_config_has_png_supportv"></span><span id="_CPPv229lammps_config_has_png_supportv"></span><span id="lammps_config_has_png_support"></span><span class="target" id="library_8h_1a9de61d7686a3db2344fb94a4a22c67e4"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_config_has_png_support</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429lammps_config_has_png_supportv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Check if the LAMMPS library supports writing PNG format images</p>
 <p>The LAMMPS <a class="reference internal" href="dump_image.html"><span class="doc">dump style image</span></a> supports writing multiple
-image file formats.  Most of them need, however, support from an external
-library and using that has to be <a class="reference internal" href="Build_settings.html#graphics"><span class="std std-ref">enabled at compile time</span></a>.
+image file formats.  Most of them, however, need support from an external
+library, and using that has to be <a class="reference internal" href="Build_settings.html#graphics"><span class="std std-ref">enabled at compile time</span></a>.
 This function checks whether support for the <a class="reference external" href="https://en.wikipedia.org/wiki/Portable_Network_Graphics">PNG image file format</a> is available
 in the current LAMMPS library.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>1 if yes, otherwise 0 </p>
 </dd>
 </dl>
@@ -295,14 +300,14 @@ in the current LAMMPS library.</p>
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv430lammps_config_has_jpeg_supportv">
-<span id="_CPPv330lammps_config_has_jpeg_supportv"></span><span id="_CPPv230lammps_config_has_jpeg_supportv"></span><span id="lammps_config_has_jpeg_support"></span><span class="target" id="library_8h_1ac3835bbc1c6797e56f8aa47443d11af6"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_config_has_jpeg_support</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv430lammps_config_has_jpeg_supportv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv330lammps_config_has_jpeg_supportv"></span><span id="_CPPv230lammps_config_has_jpeg_supportv"></span><span id="lammps_config_has_jpeg_support"></span><span class="target" id="library_8h_1ac3835bbc1c6797e56f8aa47443d11af6"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_config_has_jpeg_support</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv430lammps_config_has_jpeg_supportv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Check if the LAMMPS library supports writing JPEG format images</p>
 <p>The LAMMPS <a class="reference internal" href="dump_image.html"><span class="doc">dump style image</span></a> supports writing multiple
-image file formats.  Most of them need, however, support from an external
-library and using that has to be <a class="reference internal" href="Build_settings.html#graphics"><span class="std std-ref">enabled at compile time</span></a>.
+image file formats.  Most of them, however, need support from an external
+library, and using that has to be <a class="reference internal" href="Build_settings.html#graphics"><span class="std std-ref">enabled at compile time</span></a>.
 This function checks whether support for the <a class="reference external" href="https://jpeg.org/jpeg/">JPEG image file format</a> is available in the current LAMMPS library.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>1 if yes, otherwise 0 </p>
 </dd>
 </dl>
@@ -311,15 +316,15 @@ This function checks whether support for the <a class="reference external" href=
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv432lammps_config_has_ffmpeg_supportv">
-<span id="_CPPv332lammps_config_has_ffmpeg_supportv"></span><span id="_CPPv232lammps_config_has_ffmpeg_supportv"></span><span id="lammps_config_has_ffmpeg_support"></span><span class="target" id="library_8h_1acbbc33bf81d78002a4ed94e2b7ff8f06"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_config_has_ffmpeg_support</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv432lammps_config_has_ffmpeg_supportv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv332lammps_config_has_ffmpeg_supportv"></span><span id="_CPPv232lammps_config_has_ffmpeg_supportv"></span><span id="lammps_config_has_ffmpeg_support"></span><span class="target" id="library_8h_1acbbc33bf81d78002a4ed94e2b7ff8f06"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_config_has_ffmpeg_support</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv432lammps_config_has_ffmpeg_supportv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Check if the LAMMPS library supports creating movie files via a pipe to ffmpeg</p>
 <p>The LAMMPS <a class="reference internal" href="dump_image.html"><span class="doc">dump style movie</span></a> supports generating movies
-from images on-the-fly  via creating a pipe to the
-<a class="reference external" href="https://ffmpeg.org/ffmpeg/">ffmpeg</a> program.
+from images on-the-fly via creating a pipe to the
+<a class="reference external" href="https://ffmpeg.org/">ffmpeg</a> program.
 This function checks whether this feature was <a class="reference internal" href="Build_settings.html#graphics"><span class="std std-ref">enabled at compile time</span></a>.
 It does <strong>not</strong> check whether the <code class="docutils literal notranslate"><span class="pre">ffmpeg</span></code> itself is installed and usable.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>1 if yes, otherwise 0 </p>
 </dd>
 </dl>
@@ -328,12 +333,12 @@ It does <strong>not</strong> check whether the <code class="docutils literal not
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv428lammps_config_has_exceptionsv">
-<span id="_CPPv328lammps_config_has_exceptionsv"></span><span id="_CPPv228lammps_config_has_exceptionsv"></span><span id="lammps_config_has_exceptions"></span><span class="target" id="library_8h_1ade5f1cc597079d8cb32a9765cbfff44c"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_config_has_exceptions</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428lammps_config_has_exceptionsv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Check whether LAMMPS errors will throw a C++ exception</p>
-<p><p><p>In case of errors LAMMPS will either abort or throw a C++ exception.
+<span id="_CPPv328lammps_config_has_exceptionsv"></span><span id="_CPPv228lammps_config_has_exceptionsv"></span><span id="lammps_config_has_exceptions"></span><span class="target" id="library_8h_1ade5f1cc597079d8cb32a9765cbfff44c"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_config_has_exceptions</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428lammps_config_has_exceptionsv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Check whether LAMMPS errors will throw C++ exceptions.</p>
+<p><p><p>In case of an error, LAMMPS will either abort or throw a C++ exception.
 The latter has to be <a class="reference internal" href="Build_settings.html#exceptions"><span class="std std-ref">enabled at compile time</span></a>.
 This function checks if exceptions were enabled.</p>
-<p>When using the library interface and C++ exceptions are enabled,
+<p>When using the library interface with C++ exceptions enabled,
 the library interface functions will “catch” them and the
 error status can then be checked by calling
 <a class="reference internal" href="Library_utility.html#_CPPv416lammps_has_errorPv" title="lammps_has_error"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_has_error()</span></code></a> and the most recent error message
@@ -346,7 +351,7 @@ LAMMPS, the application will terminate.</p>
 </p>
  </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>1 if yes, otherwise 0 </p>
 </dd>
 </dl>
@@ -355,15 +360,15 @@ LAMMPS, the application will terminate.</p>
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv425lammps_config_has_packagePKc">
-<span id="_CPPv325lammps_config_has_packagePKc"></span><span id="_CPPv225lammps_config_has_packagePKc"></span><span id="lammps_config_has_package__cCP"></span><span class="target" id="library_8h_1adca5959e5b824ab7413c74ee05eb9f0d"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_config_has_package</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425lammps_config_has_packagePKc" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Check if a specific package has been included in LAMMPS</p>
-<p>This function checks if the LAMMPS library in use includes the
+<span id="_CPPv325lammps_config_has_packagePKc"></span><span id="_CPPv225lammps_config_has_packagePKc"></span><span id="lammps_config_has_package__cCP"></span><span class="target" id="library_8h_1adca5959e5b824ab7413c74ee05eb9f0d"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_config_has_package</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425lammps_config_has_packagePKc" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Check whether a specific package has been included in LAMMPS</p>
+<p>This function checks whether the LAMMPS library in use includes the
 specific <a class="reference internal" href="Packages.html"><span class="doc">LAMMPS package</span></a> provided as argument.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>name</strong> – string with the name of the package </p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>1 if included, 0 if not. </p>
 </dd>
 </dl>
@@ -372,12 +377,12 @@ specific <a class="reference internal" href="Packages.html"><span class="doc">LA
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv427lammps_config_package_countv">
-<span id="_CPPv327lammps_config_package_countv"></span><span id="_CPPv227lammps_config_package_countv"></span><span id="lammps_config_package_count"></span><span class="target" id="library_8h_1a233aefab279fd9290f14fae1e4c16be4"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_config_package_count</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427lammps_config_package_countv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv327lammps_config_package_countv"></span><span id="_CPPv227lammps_config_package_countv"></span><span id="lammps_config_package_count"></span><span class="target" id="library_8h_1a233aefab279fd9290f14fae1e4c16be4"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_config_package_count</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427lammps_config_package_countv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Count the number of installed packages in the LAMMPS library.</p>
 <p>This function counts how many <a class="reference internal" href="Packages.html"><span class="doc">LAMMPS packages</span></a> are
 included in the LAMMPS library in use.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>number of packages included </p>
 </dd>
 </dl>
@@ -386,7 +391,7 @@ included in the LAMMPS library in use.</p>
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv426lammps_config_package_nameiPci">
-<span id="_CPPv326lammps_config_package_nameiPci"></span><span id="_CPPv226lammps_config_package_nameiPci"></span><span id="lammps_config_package_name__i.cP.i"></span><span class="target" id="library_8h_1aca1da31b8eb4342ee1eff02d721fa48d"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_config_package_name</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span>, <span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span>, <span class="kt"><span class="pre">int</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426lammps_config_package_nameiPci" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv326lammps_config_package_nameiPci"></span><span id="_CPPv226lammps_config_package_nameiPci"></span><span id="lammps_config_package_name__i.cP.i"></span><span class="target" id="library_8h_1aca1da31b8eb4342ee1eff02d721fa48d"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_config_package_name</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span>, <span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span>, <span class="kt"><span class="pre">int</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426lammps_config_package_nameiPci" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Get the name of a package in the list of installed packages in the LAMMPS library.</p>
 <p>This function copies the name of the package with the index <em>idx</em> into the
 provided C-style string buffer.  The length of the buffer must be provided
@@ -394,14 +399,14 @@ as <em>buf_size</em> argument.  If the name of the package exceeds the length of
 buffer, it will be truncated accordingly.  If the index is out of range,
 the function returns 0 and <em>buffer</em> is set to an empty string, otherwise 1;</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>idx</strong> – index of the package in the list of included packages (0 &lt;= idx &lt; package count) </p></li>
 <li><p><strong>buffer</strong> – string buffer to copy the name of the package to </p></li>
 <li><p><strong>buf_size</strong> – size of the provided string buffer </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>1 if successful, otherwise 0 </p>
 </dd>
 </dl>
@@ -410,7 +415,7 @@ the function returns 0 and <em>buffer</em> is set to an empty string, otherwise 
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv425lammps_config_acceleratorPKcPKcPKc">
-<span id="_CPPv325lammps_config_acceleratorPKcPKcPKc"></span><span id="_CPPv225lammps_config_acceleratorPKcPKcPKc"></span><span id="lammps_config_accelerator__cCP.cCP.cCP"></span><span class="target" id="library_8h_1a503c6feaadbab30ac00b978fcf199399"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_config_accelerator</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425lammps_config_acceleratorPKcPKcPKc" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv325lammps_config_acceleratorPKcPKcPKc"></span><span id="_CPPv225lammps_config_acceleratorPKcPKcPKc"></span><span id="lammps_config_accelerator__cCP.cCP.cCP"></span><span class="target" id="library_8h_1a503c6feaadbab30ac00b978fcf199399"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_config_accelerator</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425lammps_config_acceleratorPKcPKcPKc" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Check for compile time settings in accelerator packages included in LAMMPS.</p>
 <p>This function checks availability of compile time settings of included
 <a class="reference internal" href="Speed_packages.html"><span class="doc">accelerator packages</span></a> in LAMMPS.
@@ -421,14 +426,14 @@ possible settings “double”, “mixed”, and “single”.  If the combinati
 of package, category, and setting is available, the function returns 1,
 otherwise 0.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>package</strong> – string with the name of the accelerator package </p></li>
 <li><p><strong>category</strong> – string with the category name of the setting </p></li>
 <li><p><strong>setting</strong> – string with the name of the specific setting </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>1 if available, 0 if not. </p>
 </dd>
 </dl>
@@ -437,21 +442,21 @@ otherwise 0.</p>
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv421lammps_has_gpu_devicev">
-<span id="_CPPv321lammps_has_gpu_devicev"></span><span id="_CPPv221lammps_has_gpu_devicev"></span><span id="lammps_has_gpu_device"></span><span class="target" id="library_8h_1acd3fd9fa79e08b7fb530b51b9ca79c8e"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_has_gpu_device</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lammps_has_gpu_devicev" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv321lammps_has_gpu_devicev"></span><span id="_CPPv221lammps_has_gpu_devicev"></span><span id="lammps_has_gpu_device"></span><span class="target" id="library_8h_1acd3fd9fa79e08b7fb530b51b9ca79c8e"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_has_gpu_device</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lammps_has_gpu_devicev" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Check for presence of a viable GPU package device</p>
-<p><p>The <a class="reference internal" href="#_CPPv421lammps_has_gpu_devicev" title="lammps_has_gpu_device"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_has_gpu_device()</span></code></a> function checks at runtime if
+<p><div class="versionadded">
+<p><span class="versionmodified added">New in version 14May2021.</span></p>
+</div>
+<p>The <a class="reference internal" href="#_CPPv421lammps_has_gpu_devicev" title="lammps_has_gpu_device"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_has_gpu_device()</span></code></a> function checks at runtime if
 an accelerator device is present that can be used with the
 <a class="reference internal" href="Speed_gpu.html"><span class="doc">GPU package</span></a>. If at least one suitable device is
 present the function will return 1, otherwise 0.</p>
 <p>More detailed information about the available device or devices can
 be obtained by calling the
 <a class="reference internal" href="#_CPPv426lammps_get_gpu_device_infoPci" title="lammps_get_gpu_device_info"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_get_gpu_device_info()</span></code></a> function.</p>
-<div class="versionadded">
-<p><span class="versionmodified added">New in version 14May2021.</span></p>
-</div>
 </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>1 if viable device is available, 0 if not. </p>
 </dd>
 </dl>
@@ -460,9 +465,12 @@ be obtained by calling the
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv426lammps_get_gpu_device_infoPci">
-<span id="_CPPv326lammps_get_gpu_device_infoPci"></span><span id="_CPPv226lammps_get_gpu_device_infoPci"></span><span id="lammps_get_gpu_device_info__cP.i"></span><span class="target" id="library_8h_1a8439a498ff1b8117a45e705e2a636c18"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_get_gpu_device_info</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">buffer</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">buf_size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426lammps_get_gpu_device_infoPci" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv326lammps_get_gpu_device_infoPci"></span><span id="_CPPv226lammps_get_gpu_device_infoPci"></span><span id="lammps_get_gpu_device_info__cP.i"></span><span class="target" id="library_8h_1a8439a498ff1b8117a45e705e2a636c18"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_get_gpu_device_info</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">buffer</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">buf_size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426lammps_get_gpu_device_infoPci" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Get GPU package device information</p>
-<p><p>The <a class="reference internal" href="#_CPPv426lammps_get_gpu_device_infoPci" title="lammps_get_gpu_device_info"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_get_gpu_device_info()</span></code></a> function can be used to retrieve
+<p><div class="versionadded">
+<p><span class="versionmodified added">New in version 14May2021.</span></p>
+</div>
+<p>The <a class="reference internal" href="#_CPPv426lammps_get_gpu_device_infoPci" title="lammps_get_gpu_device_info"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_get_gpu_device_info()</span></code></a> function can be used to retrieve
 detailed information about any accelerator devices that are viable for use
 with the <a class="reference internal" href="Speed_gpu.html"><span class="doc">GPU package</span></a>.  It will produce a string that is
 equivalent to the output of the <code class="docutils literal notranslate"><span class="pre">nvc_get_device</span></code> or <code class="docutils literal notranslate"><span class="pre">ocl_get_device</span></code> or
@@ -471,12 +479,9 @@ package is enabled.</p>
 <p>A suitable buffer for a C-style string has to be provided and its length.
 The assembled text will be truncated to not overflow this buffer.  This
 string can be several kilobytes long, if multiple devices are present.</p>
-<div class="versionadded">
-<p><span class="versionmodified added">New in version 14May2021.</span></p>
-</div>
 </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>buffer</strong> – string buffer to copy the information to </p></li>
 <li><p><strong>buf_size</strong> – size of the provided string buffer </p></li>
@@ -488,7 +493,7 @@ string can be several kilobytes long, if multiple devices are present.</p>
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv416lammps_has_stylePvPKcPKc">
-<span id="_CPPv316lammps_has_stylePvPKcPKc"></span><span id="_CPPv216lammps_has_stylePvPKcPKc"></span><span id="lammps_has_style__voidP.cCP.cCP"></span><span class="target" id="library_8h_1a74aa598ce1e183ed70ce5eabf7202bec"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_has_style</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416lammps_has_stylePvPKcPKc" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv316lammps_has_stylePvPKcPKc"></span><span id="_CPPv216lammps_has_stylePvPKcPKc"></span><span id="lammps_has_style__voidP.cCP.cCP"></span><span class="target" id="library_8h_1a74aa598ce1e183ed70ce5eabf7202bec"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_has_style</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416lammps_has_stylePvPKcPKc" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Check if a specific style has been included in LAMMPS</p>
 <p>This function checks if the LAMMPS library in use includes the
 specific <em>style</em> of a specific <em>category</em> provided as an argument.
@@ -496,14 +501,14 @@ Valid categories are: <em>atom</em>, <em>integrate</em>, <em>minimize</em>,
 <em>pair</em>, <em>bond</em>, <em>angle</em>, <em>dihedral</em>, <em>improper</em>, <em>kspace</em>,
 <em>compute</em>, <em>fix</em>, <em>region</em>, <em>dump</em>, and <em>command</em>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>handle</strong> – pointer to a previously created LAMMPS instance cast to <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*</span></code>. </p></li>
 <li><p><strong>category</strong> – category of the style </p></li>
 <li><p><strong>name</strong> – name of the style </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>1 if included, 0 if not. </p>
 </dd>
 </dl>
@@ -512,20 +517,20 @@ Valid categories are: <em>atom</em>, <em>integrate</em>, <em>minimize</em>,
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv418lammps_style_countPvPKc">
-<span id="_CPPv318lammps_style_countPvPKc"></span><span id="_CPPv218lammps_style_countPvPKc"></span><span id="lammps_style_count__voidP.cCP"></span><span class="target" id="library_8h_1aef8b5d9f8c06dc22c55deb9088dbafd6"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_style_count</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lammps_style_countPvPKc" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv318lammps_style_countPvPKc"></span><span id="_CPPv218lammps_style_countPvPKc"></span><span id="lammps_style_count__voidP.cCP"></span><span class="target" id="library_8h_1aef8b5d9f8c06dc22c55deb9088dbafd6"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_style_count</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lammps_style_countPvPKc" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Count the number of styles of category in the LAMMPS library.</p>
 <p>This function counts how many styles in the provided <em>category</em>
 are included in the LAMMPS library in use.
 Please see <a class="reference internal" href="#_CPPv416lammps_has_stylePvPKcPKc" title="lammps_has_style"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_has_style()</span></code></a> for a list of valid
 categories.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>handle</strong> – pointer to a previously created LAMMPS instance cast to <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*</span></code>. </p></li>
 <li><p><strong>category</strong> – category of styles </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>number of styles in category </p>
 </dd>
 </dl>
@@ -534,11 +539,11 @@ categories.</p>
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv417lammps_style_namePvPKciPci">
-<span id="_CPPv317lammps_style_namePvPKciPci"></span><span id="_CPPv217lammps_style_namePvPKciPci"></span><span id="lammps_style_name__voidP.cCP.i.cP.i"></span><span class="target" id="library_8h_1ab91b5c7e97982f7a804d8d7cfa0f190a"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_style_name</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span>, <span class="kt"><span class="pre">int</span></span>, <span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span>, <span class="kt"><span class="pre">int</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417lammps_style_namePvPKciPci" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv317lammps_style_namePvPKciPci"></span><span id="_CPPv217lammps_style_namePvPKciPci"></span><span id="lammps_style_name__voidP.cCP.i.cP.i"></span><span class="target" id="library_8h_1ab91b5c7e97982f7a804d8d7cfa0f190a"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_style_name</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span>, <span class="kt"><span class="pre">int</span></span>, <span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span>, <span class="kt"><span class="pre">int</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417lammps_style_namePvPKciPci" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Look up the name of a style by index in the list of style of a given category in the LAMMPS library.</p>
 <p>This function copies the name of the <em>category</em> style with the index <em>idx</em> into the provided C-style string buffer. The length of the buffer must be provided as <em>buf_size</em> argument. If the name of the style exceeds the length of the buffer, it will be truncated accordingly. If the index is out of range, the function returns 0 and <em>buffer</em> is set to an empty string, otherwise 1.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>handle</strong> – pointer to a previously created LAMMPS instance cast to <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*</span></code>. </p></li>
 <li><p><strong>category</strong> – category of styles </p></li>
@@ -547,7 +552,7 @@ categories.</p>
 <li><p><strong>buf_size</strong> – size of the provided string buffer </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>1 if successful, otherwise 0 </p>
 </dd>
 </dl>
@@ -556,24 +561,24 @@ categories.</p>
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv413lammps_has_idPvPKcPKc">
-<span id="_CPPv313lammps_has_idPvPKcPKc"></span><span id="_CPPv213lammps_has_idPvPKcPKc"></span><span id="lammps_has_id__voidP.cCP.cCP"></span><span class="target" id="library_8h_1ad1ee62546d5d560747379cba84bea178"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_has_id</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413lammps_has_idPvPKcPKc" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv313lammps_has_idPvPKcPKc"></span><span id="_CPPv213lammps_has_idPvPKcPKc"></span><span id="lammps_has_id__voidP.cCP.cCP"></span><span class="target" id="library_8h_1ad1ee62546d5d560747379cba84bea178"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_has_id</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413lammps_has_idPvPKcPKc" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Check if a specific ID exists in the current LAMMPS instance</p>
-<p><p>This function checks if the current LAMMPS instance a <em>category</em> ID of
-the given <em>name</em> exists.  Valid categories are: <em>compute</em>, <em>dump</em>,
-<em>fix</em>, <em>group</em>, <em>molecule</em>, <em>region</em>, and <em>variable</em>.</p>
-<div class="versionadded">
+<p><div class="versionadded">
 <p><span class="versionmodified added">New in version 9Oct2020.</span></p>
 </div>
+<p>This function checks if the current LAMMPS instance a <em>category</em> ID of
+the given <em>name</em> exists.  Valid categories are: <em>compute</em>, <em>dump</em>,
+<em>fix</em>, <em>group</em>, <em>molecule</em>, <em>region</em>, and <em>variable</em>.</p>
 </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>handle</strong> – pointer to a previously created LAMMPS instance cast to <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*</span></code>. </p></li>
 <li><p><strong>category</strong> – category of the id </p></li>
 <li><p><strong>name</strong> – name of the id </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>1 if included, 0 if not. </p>
 </dd>
 </dl>
@@ -582,24 +587,24 @@ the given <em>name</em> exists.  Valid categories are: <em>compute</em>, <em>dum
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv415lammps_id_countPvPKc">
-<span id="_CPPv315lammps_id_countPvPKc"></span><span id="_CPPv215lammps_id_countPvPKc"></span><span id="lammps_id_count__voidP.cCP"></span><span class="target" id="library_8h_1aaa1311b9ce55c53bfae199c2ee9cb955"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_id_count</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415lammps_id_countPvPKc" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv315lammps_id_countPvPKc"></span><span id="_CPPv215lammps_id_countPvPKc"></span><span id="lammps_id_count__voidP.cCP"></span><span class="target" id="library_8h_1aaa1311b9ce55c53bfae199c2ee9cb955"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_id_count</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415lammps_id_countPvPKc" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Count the number of IDs of a category.</p>
-<p><p>This function counts how many IDs in the provided <em>category</em>
+<p><div class="versionadded">
+<p><span class="versionmodified added">New in version 9Oct2020.</span></p>
+</div>
+<p>This function counts how many IDs in the provided <em>category</em>
 are defined in the current LAMMPS instance.
 Please see <a class="reference internal" href="#_CPPv413lammps_has_idPvPKcPKc" title="lammps_has_id"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_has_id()</span></code></a> for a list of valid
 categories.</p>
-<div class="versionadded">
-<p><span class="versionmodified added">New in version 9Oct2020.</span></p>
-</div>
 </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>handle</strong> – pointer to a previously created LAMMPS instance cast to <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*</span></code>. </p></li>
 <li><p><strong>category</strong> – category of IDs </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>number of IDs in category </p>
 </dd>
 </dl>
@@ -608,20 +613,20 @@ categories.</p>
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv414lammps_id_namePvPKciPci">
-<span id="_CPPv314lammps_id_namePvPKciPci"></span><span id="_CPPv214lammps_id_namePvPKciPci"></span><span id="lammps_id_name__voidP.cCP.i.cP.i"></span><span class="target" id="library_8h_1a42ba710155bca355ba451fd45dcda0f9"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_id_name</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span>, <span class="kt"><span class="pre">int</span></span>, <span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span>, <span class="kt"><span class="pre">int</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414lammps_id_namePvPKciPci" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv314lammps_id_namePvPKciPci"></span><span id="_CPPv214lammps_id_namePvPKciPci"></span><span id="lammps_id_name__voidP.cCP.i.cP.i"></span><span class="target" id="library_8h_1a42ba710155bca355ba451fd45dcda0f9"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_id_name</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span>, <span class="kt"><span class="pre">int</span></span>, <span class="kt"><span class="pre">char</span></span><span class="p"><span class="pre">*</span></span>, <span class="kt"><span class="pre">int</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414lammps_id_namePvPKciPci" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Look up the name of an ID by index in the list of IDs of a given category.</p>
-<p><p>This function copies the name of the <em>category</em> ID with the index
+<p><div class="versionadded">
+<p><span class="versionmodified added">New in version 9Oct2020.</span></p>
+</div>
+<p>This function copies the name of the <em>category</em> ID with the index
 <em>idx</em> into the provided C-style string buffer.  The length of the buffer
 must be provided as <em>buf_size</em> argument.  If the name of the style
 exceeds the length of the buffer, it will be truncated accordingly.
 If the index is out of range, the function returns 0 and <em>buffer</em> is
 set to an empty string, otherwise 1.</p>
-<div class="versionadded">
-<p><span class="versionmodified added">New in version 9Oct2020.</span></p>
-</div>
 </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>handle</strong> – pointer to a previously created LAMMPS instance cast to <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*</span></code>. </p></li>
 <li><p><strong>category</strong> – category of IDs </p></li>
@@ -630,7 +635,7 @@ set to an empty string, otherwise 1.</p>
 <li><p><strong>buf_size</strong> – size of the provided string buffer </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>1 if successful, otherwise 0 </p>
 </dd>
 </dl>
@@ -649,7 +654,7 @@ set to an empty string, otherwise 1.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -658,7 +663,6 @@ set to an empty string, otherwise 1.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

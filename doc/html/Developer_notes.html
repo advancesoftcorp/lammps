@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>4.8. Notes for developers and code maintainers &mdash; LAMMPS documentation</title>
+  <title>4.9. Notes for developers and code maintainers &mdash; LAMMPS documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Developer_notes.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4.9. Writing plugins" href="Developer_plugins.html" />
-    <link rel="prev" title="4.7. Writing new styles" href="Developer_write.html" /> 
+    <link rel="next" title="4.10. Notes for updating code written for older LAMMPS versions" href="Developer_updating.html" />
+    <link rel="prev" title="4.8.6. Writing a new fix style" href="Developer_write_fix.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -70,28 +74,32 @@
 <li class="toctree-l2"><a class="reference internal" href="Developer_org.html#class-topology">4.2. Class topology</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Developer_code_design.html">4.3. Code design</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Developer_parallel.html">4.4. Parallel algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_comm_ops.html">4.5. Communication patterns</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_flow.html">4.6. How a timestep works</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_write.html">4.7. Writing new styles</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">4.8. Notes for developers and code maintainers</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#reading-and-parsing-of-text-and-text-files">4.8.1. Reading and parsing of text and text files</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#requesting-and-accessing-neighbor-lists">4.8.2. Requesting and accessing neighbor lists</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#fix-contributions-to-instantaneous-energy-virial-and-cumulative-energy">4.8.3. Fix contributions to instantaneous energy, virial, and cumulative energy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#kspace-pppm-fft-grids">4.8.4. KSpace PPPM FFT grids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_atom.html">4.5. Accessing per-atom data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_comm_ops.html">4.6. Communication patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_flow.html">4.7. How a timestep works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_write.html">4.8. Writing new styles</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4.9. Notes for developers and code maintainers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#reading-and-parsing-of-text-and-text-files">4.9.1. Reading and parsing of text and text files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#requesting-and-accessing-neighbor-lists">4.9.2. Requesting and accessing neighbor lists</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#choosing-between-a-custom-atom-style-fix-property-atom-and-fix-store-atom">4.9.3. Choosing between a custom atom style, fix property/atom, and fix STORE/ATOM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fix-contributions-to-instantaneous-energy-virial-and-cumulative-energy">4.9.4. Fix contributions to instantaneous energy, virial, and cumulative energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#kspace-pppm-fft-grids">4.9.5. KSpace PPPM FFT grids</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_plugins.html">4.9. Writing plugins</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_unittest.html">4.10. Adding tests for unit testing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Classes.html">4.11. C++ base classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_platform.html">4.12. Platform abstraction functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html">4.13. Utility functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#special-math-functions">4.14. Special Math functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#tokenizer-classes">4.15. Tokenizer classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#argument-parsing-classes">4.16. Argument parsing classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#file-reader-classes">4.17. File reader classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#memory-pool-classes">4.18. Memory pool classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#eigensolver-functions">4.19. Eigensolver functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#communication-buffer-coding-with-ubuf">4.20. Communication buffer coding with <em>ubuf</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_updating.html">4.10. Notes for updating code written for older LAMMPS versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_plugins.html">4.11. Writing plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_unittest.html">4.12. Adding tests for unit testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Classes.html">4.13. C++ base classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_platform.html">4.14. Platform abstraction functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html">4.15. Utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#special-math-functions">4.16. Special Math functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#tokenizer-classes">4.17. Tokenizer classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#argument-parsing-classes">4.18. Argument parsing classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#file-reader-classes">4.19. File reader classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#memory-pool-classes">4.20. Memory pool classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#eigensolver-functions">4.21. Eigensolver functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#communication-buffer-coding-with-ubuf">4.22. Communication buffer coding with <em>ubuf</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_grid.html">4.23. Use of distributed grids within style classes</a></li>
 </ul>
 </li>
 </ul>
@@ -105,6 +113,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -122,24 +131,24 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Developer.html"><span class="section-number">4. </span>Information for Developers</a> &raquo;</li>
-      <li><span class="section-number">4.8. </span>Notes for developers and code maintainers</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Developer.html"><span class="section-number">4. </span>Information for Developers</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">4.9. </span>Notes for developers and code maintainers</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
-        <a href="Developer_write.html" class="btn btn-neutral float-left" title="4.7. Writing new styles" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Developer_plugins.html" class="btn btn-neutral float-right" title="4.9. Writing plugins" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Developer_write_fix.html" class="btn btn-neutral float-left" title="4.8.6. Writing a new fix style" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Developer_updating.html" class="btn btn-neutral float-right" title="4.10. Notes for updating code written for older LAMMPS versions" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="notes-for-developers-and-code-maintainers">
-<h1><span class="section-number">4.8. </span>Notes for developers and code maintainers<a class="headerlink" href="#notes-for-developers-and-code-maintainers" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="notes-for-developers-and-code-maintainers">
+<h1><span class="section-number">4.9. </span>Notes for developers and code maintainers<a class="headerlink" href="#notes-for-developers-and-code-maintainers" title="Permalink to this heading"></a></h1>
 <p>This section documents how some of the code functionality within
 LAMMPS works at a conceptual level.  Comments on code in source files
 typically document what a variable stores, what a small section of
@@ -149,12 +158,13 @@ on this page are intended to document code functionality at a higher level.</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#reading-and-parsing-of-text-and-text-files">Reading and parsing of text and text files</a></p></li>
 <li><p><a class="reference internal" href="#requesting-and-accessing-neighbor-lists">Requesting and accessing neighbor lists</a></p></li>
+<li><p><a class="reference internal" href="#choosing-between-a-custom-atom-style-fix-property-atom-and-fix-store-atom">Choosing between a custom atom style, fix property/atom, and fix STORE/ATOM</a></p></li>
 <li><p><a class="reference internal" href="#fix-contributions-to-instantaneous-energy-virial-and-cumulative-energy">Fix contributions to instantaneous energy, virial, and cumulative energy</a></p></li>
 <li><p><a class="reference internal" href="#kspace-pppm-fft-grids">KSpace PPPM FFT grids</a></p></li>
 </ul>
 <hr class="docutils" />
 <section id="reading-and-parsing-of-text-and-text-files">
-<h2><span class="section-number">4.8.1. </span>Reading and parsing of text and text files<a class="headerlink" href="#reading-and-parsing-of-text-and-text-files" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.9.1. </span>Reading and parsing of text and text files<a class="headerlink" href="#reading-and-parsing-of-text-and-text-files" title="Permalink to this heading"></a></h2>
 <p>It is frequently required for a class in LAMMPS to read in additional
 data from a file, e.g. potential parameters from a potential file for
 manybody potentials.  LAMMPS provides several custom classes and
@@ -203,7 +213,7 @@ when converting “12.5”, while the ValueTokenizer class will throw an
 <a class="reference internal" href="Developer_utils.html#_CPPv4N9LAMMPS_NS14ValueTokenizer8next_intEv" title="LAMMPS_NS::ValueTokenizer::next_int"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ValueTokenizer::next_int()</span></code></a> is called on the same string.</p>
 </section>
 <section id="requesting-and-accessing-neighbor-lists">
-<h2><span class="section-number">4.8.2. </span>Requesting and accessing neighbor lists<a class="headerlink" href="#requesting-and-accessing-neighbor-lists" title="Permalink to this headline">¶</a></h2>
+<span id="request-neighbor-list"></span><h2><span class="section-number">4.9.2. </span>Requesting and accessing neighbor lists<a class="headerlink" href="#requesting-and-accessing-neighbor-lists" title="Permalink to this heading"></a></h2>
 <p>LAMMPS uses Verlet-style neighbor lists to avoid having to loop over
 <em>all</em> pairs of <em>all</em> atoms when computing pairwise properties with a
 cutoff (e.g. pairwise forces or radial distribution functions).  There
@@ -228,17 +238,17 @@ build is then <a class="reference internal" href="Developer_par_neigh.html"><spa
 <p>The most commonly required neighbor list is a so-called “half” neighbor
 list, where each pair of atoms is listed only once (except when the
 <a class="reference internal" href="newton.html"><span class="doc">newton command setting</span></a> for pair is off; in that case
-pairs straddling sub-domains or periodic boundaries will be listed twice).
+pairs straddling subdomains or periodic boundaries will be listed twice).
 Thus these are the default settings when a neighbor list request is created in:</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">Pair::init_style</span><span class="p">()</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">neighbor</span><span class="o">-&gt;</span><span class="n">add_request</span><span class="p">(</span><span class="k">this</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">Pair::init_style</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">neighbor</span><span class="o">-&gt;</span><span class="n">add_request</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">Pair::init_list</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="cm">/*id*/</span><span class="p">,</span><span class="w"> </span><span class="n">NeighList</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ptr</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">Pair::init_list</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="cm">/*id*/</span><span class="p">,</span><span class="w"> </span><span class="n">NeighList</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ptr</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">this</span></code> pointer argument is required so the neighbor list code can
@@ -251,69 +261,69 @@ used here asks for a perpetual “half” neighbor list.</p>
 neighbor list request to the specific needs of a style an additional
 request flag is needed.  The <a class="reference internal" href="pair_tersoff.html"><span class="doc">tersoff</span></a> pair style,
 for example, needs a “full” neighbor list:</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">PairTersoff::init_style</span><span class="p">()</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">PairTersoff::init_style</span><span class="p">()</span>
+<span class="p">{</span>
 <span class="w">  </span><span class="c1">// [...]</span>
-<span class="w">  </span><span class="n">neighbor</span><span class="o">-&gt;</span><span class="n">add_request</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">NeighConst</span><span class="o">::</span><span class="n">REQ_FULL</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="n">neighbor</span><span class="o">-&gt;</span><span class="n">add_request</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">NeighConst</span><span class="o">::</span><span class="n">REQ_FULL</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>When a pair style supports r-RESPA time integration with different cutoff regions,
 the request flag may depend on the corresponding r-RESPA settings. Here an example
 from pair style lj/cut:</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">PairLJCut::init_style</span><span class="p">()</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">list_style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NeighConst</span><span class="o">::</span><span class="n">REQ_DEFAULT</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">PairLJCut::init_style</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">list_style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NeighConst</span><span class="o">::</span><span class="n">REQ_DEFAULT</span><span class="p">;</span>
 
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">update</span><span class="o">-&gt;</span><span class="n">whichflag</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">utils</span><span class="o">::</span><span class="n">strmatch</span><span class="p">(</span><span class="n">update</span><span class="o">-&gt;</span><span class="n">integrate_style</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;^respa&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">respa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Respa</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">update</span><span class="o">-&gt;</span><span class="n">integrate</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">respa</span><span class="o">-&gt;</span><span class="n">level_inner</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">list_style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NeighConst</span><span class="o">::</span><span class="n">REQ_RESPA_INOUT</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">respa</span><span class="o">-&gt;</span><span class="n">level_middle</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">list_style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NeighConst</span><span class="o">::</span><span class="n">REQ_RESPA_ALL</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="n">neighbor</span><span class="o">-&gt;</span><span class="n">add_request</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">list_style</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">update</span><span class="o">-&gt;</span><span class="n">whichflag</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">utils</span><span class="o">::</span><span class="n">strmatch</span><span class="p">(</span><span class="n">update</span><span class="o">-&gt;</span><span class="n">integrate_style</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;^respa&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">respa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Respa</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">update</span><span class="o">-&gt;</span><span class="n">integrate</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">respa</span><span class="o">-&gt;</span><span class="n">level_inner</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">list_style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NeighConst</span><span class="o">::</span><span class="n">REQ_RESPA_INOUT</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">respa</span><span class="o">-&gt;</span><span class="n">level_middle</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">list_style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NeighConst</span><span class="o">::</span><span class="n">REQ_RESPA_ALL</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">neighbor</span><span class="o">-&gt;</span><span class="n">add_request</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">list_style</span><span class="p">);</span>
 <span class="w">  </span><span class="c1">// [...]</span>
-<span class="p">}</span><span class="w"></span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>Granular pair styles need neighbor lists based on particle sizes and not cutoff
 and also may require to have the list of previous neighbors available (“history”).
 For example with:</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">use_history</span><span class="p">)</span><span class="w"> </span><span class="n">neighbor</span><span class="o">-&gt;</span><span class="n">add_request</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">NeighConst</span><span class="o">::</span><span class="n">REQ_SIZE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">NeighConst</span><span class="o">::</span><span class="n">REQ_HISTORY</span><span class="p">);</span><span class="w"></span>
-<span class="k">else</span><span class="w"> </span><span class="n">neighbor</span><span class="o">-&gt;</span><span class="n">add_request</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">NeighConst</span><span class="o">::</span><span class="n">REQ_SIZE</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">use_history</span><span class="p">)</span><span class="w"> </span><span class="n">neighbor</span><span class="o">-&gt;</span><span class="n">add_request</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">NeighConst</span><span class="o">::</span><span class="n">REQ_SIZE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">NeighConst</span><span class="o">::</span><span class="n">REQ_HISTORY</span><span class="p">);</span>
+<span class="k">else</span><span class="w"> </span><span class="n">neighbor</span><span class="o">-&gt;</span><span class="n">add_request</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">NeighConst</span><span class="o">::</span><span class="n">REQ_SIZE</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>In case a class would need to make multiple neighbor list requests with different
 settings each request can set an id which is then used in the corresponding
 <code class="docutils literal notranslate"><span class="pre">init_list()</span></code> function to assign it to the suitable pointer variable. This is
 done for example by the <a class="reference internal" href="pair_meam.html"><span class="doc">pair style meam</span></a>:</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">PairMEAM::init_style</span><span class="p">()</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">PairMEAM::init_style</span><span class="p">()</span>
+<span class="p">{</span>
 <span class="c1">// [...]</span>
-<span class="w">  </span><span class="n">neighbor</span><span class="o">-&gt;</span><span class="n">add_request</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">NeighConst</span><span class="o">::</span><span class="n">REQ_FULL</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">set_id</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="n">neighbor</span><span class="o">-&gt;</span><span class="n">add_request</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">set_id</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">PairMEAM::init_list</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">NeighList</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">listfull</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ptr</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="n">listhalf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ptr</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="n">neighbor</span><span class="o">-&gt;</span><span class="n">add_request</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">NeighConst</span><span class="o">::</span><span class="n">REQ_FULL</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">set_id</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">  </span><span class="n">neighbor</span><span class="o">-&gt;</span><span class="n">add_request</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">set_id</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">PairMEAM::init_list</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">NeighList</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">listfull</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ptr</span><span class="p">;</span>
+<span class="w">  </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="n">listhalf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ptr</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>Fixes may require a neighbor list that is only build occasionally (or
 just once) and this can also be indicated by a flag.  As an example here
 is the request from the <code class="docutils literal notranslate"><span class="pre">FixPeriNeigh</span></code> class which is created
 internally by <a class="reference internal" href="pair_peri.html"><span class="doc">Peridynamics pair styles</span></a>:</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">neighbor</span><span class="o">-&gt;</span><span class="n">add_request</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">NeighConst</span><span class="o">::</span><span class="n">REQ_FULL</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">NeighConst</span><span class="o">::</span><span class="n">REQ_OCCASIONAL</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">neighbor</span><span class="o">-&gt;</span><span class="n">add_request</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">NeighConst</span><span class="o">::</span><span class="n">REQ_FULL</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">NeighConst</span><span class="o">::</span><span class="n">REQ_OCCASIONAL</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>It is also possible to request a neighbor list that uses a different cutoff
 than what is usually inferred from the pair style settings (largest cutoff of
 all pair styles plus neighbor list skin).  The following is used in the
 <a class="reference internal" href="compute_rdf.html"><span class="doc">compute rdf</span></a> command implementation:</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cutflag</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="n">neighbor</span><span class="o">-&gt;</span><span class="n">add_request</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">NeighConst</span><span class="o">::</span><span class="n">REQ_OCCASIONAL</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">set_cutoff</span><span class="p">(</span><span class="n">mycutneigh</span><span class="p">);</span><span class="w"></span>
-<span class="k">else</span><span class="w"></span>
-<span class="w">  </span><span class="n">neighbor</span><span class="o">-&gt;</span><span class="n">add_request</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">NeighConst</span><span class="o">::</span><span class="n">REQ_OCCASIONAL</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cutflag</span><span class="p">)</span>
+<span class="w">  </span><span class="n">neighbor</span><span class="o">-&gt;</span><span class="n">add_request</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">NeighConst</span><span class="o">::</span><span class="n">REQ_OCCASIONAL</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">set_cutoff</span><span class="p">(</span><span class="n">mycutneigh</span><span class="p">);</span>
+<span class="k">else</span>
+<span class="w">  </span><span class="n">neighbor</span><span class="o">-&gt;</span><span class="n">add_request</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">NeighConst</span><span class="o">::</span><span class="n">REQ_OCCASIONAL</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>The neighbor list request function has a slightly different set of arguments
@@ -322,12 +332,34 @@ when created by a command style.  In this case the neighbor list is
 for printing the neighbor list summary the name of the requesting command
 should be set.  Below is the request from the <a class="reference internal" href="delete_atoms.html"><span class="doc">delete atoms</span></a>
 command:</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">neighbor</span><span class="o">-&gt;</span><span class="n">add_request</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;delete_atoms&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">NeighConst</span><span class="o">::</span><span class="n">REQ_FULL</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">neighbor</span><span class="o">-&gt;</span><span class="n">add_request</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;delete_atoms&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">NeighConst</span><span class="o">::</span><span class="n">REQ_FULL</span><span class="p">);</span>
 </pre></div>
 </div>
 </section>
+<section id="choosing-between-a-custom-atom-style-fix-property-atom-and-fix-store-atom">
+<h2><span class="section-number">4.9.3. </span>Choosing between a custom atom style, fix property/atom, and fix STORE/ATOM<a class="headerlink" href="#choosing-between-a-custom-atom-style-fix-property-atom-and-fix-store-atom" title="Permalink to this heading"></a></h2>
+<p>There are multiple ways to manage per-atom data within LAMMPS.  Often
+the per-atom storage is only used locally and managed by the class that
+uses it.  If the data has to persist between multiple time steps and
+migrate with atoms when they move from sub-domain to sub-domain or
+across periodic boundaries, then using a custom atom style, or <a class="reference internal" href="fix_property_atom.html"><span class="doc">fix
+property/atom</span></a>, or the internal fix STORE/ATOM are
+possible options.</p>
+<ul class="simple">
+<li><p>Using the atom style is usually the most programming effort and mostly
+needed when the per-atom data is an integral part of the model like a
+per-atom charge or diameter and thus should be part of the Atoms
+section of a <a class="reference internal" href="read_data.html"><span class="doc">data file</span></a>.</p></li>
+<li><p>Fix property/atom is useful if the data is optional or should be
+entered by the user, or accessed as a (named) custom property. In this
+case the fix should be entered as part of the input (and not
+internally) which allows to enter and store its content with data files.</p></li>
+<li><p>Fix STORE/ATOM should be used when the data should be accessed internally
+only and thus the fix can be created internally.</p></li>
+</ul>
+</section>
 <section id="fix-contributions-to-instantaneous-energy-virial-and-cumulative-energy">
-<h2><span class="section-number">4.8.3. </span>Fix contributions to instantaneous energy, virial, and cumulative energy<a class="headerlink" href="#fix-contributions-to-instantaneous-energy-virial-and-cumulative-energy" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.9.4. </span>Fix contributions to instantaneous energy, virial, and cumulative energy<a class="headerlink" href="#fix-contributions-to-instantaneous-energy-virial-and-cumulative-energy" title="Permalink to this heading"></a></h2>
 <p>Fixes can calculate contributions to the instantaneous energy and/or
 virial of the system, both in a global and peratom sense.  Fixes that
 perform thermostatting or barostatting can calculate the cumulative
@@ -440,7 +472,7 @@ is used (by default) by <a class="reference internal" href="thermo_style.html"><
 calculate values for its <em>pe</em> and <em>press</em> keywords.</p>
 </section>
 <section id="kspace-pppm-fft-grids">
-<h2><span class="section-number">4.8.4. </span>KSpace PPPM FFT grids<a class="headerlink" href="#kspace-pppm-fft-grids" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.9.5. </span>KSpace PPPM FFT grids<a class="headerlink" href="#kspace-pppm-fft-grids" title="Permalink to this heading"></a></h2>
 <p>The various <a class="reference internal" href="kspace_style.html"><span class="doc">KSpace PPPM</span></a> styles in LAMMPS use
 FFTs to solve Poisson’s equation.  This subsection describes:</p>
 <ul class="simple">
@@ -459,7 +491,7 @@ brick-shaped.  Depending on how it is used, these subsets are
 allocated as a 1d vector or 3d array.  Either way, the ordering of
 values within contiguous memory x fastest, then y, z slowest.</p>
 <p>For the <code class="docutils literal notranslate"><span class="pre">3d</span> <span class="pre">decomposition</span></code> of the grid, the global grid is
-partitioned into bricks that correspond to the sub-domains of the
+partitioned into bricks that correspond to the subdomains of the
 simulation box that each processor owns.  Often, this is a regular 3d
 array (Px by Py by Pz) of bricks, where P = number of processors =
 Px * Py * Pz.  More generally it can be a tiled decomposition, where
@@ -524,14 +556,14 @@ atom’s charge is mapped to 125 grid points that surround the atom.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="Developer_write.html" class="btn btn-neutral float-left" title="4.7. Writing new styles" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Developer_plugins.html" class="btn btn-neutral float-right" title="4.9. Writing plugins" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Developer_write_fix.html" class="btn btn-neutral float-left" title="4.8.6. Writing a new fix style" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Developer_updating.html" class="btn btn-neutral float-right" title="4.10. Notes for updating code written for older LAMMPS versions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -540,7 +572,6 @@ atom’s charge is mapped to 125 grid points that surround the atom.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

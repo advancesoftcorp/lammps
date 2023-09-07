@@ -1,32 +1,31 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>8.5.7. Tutorial for Thermalized Drude oscillators in LAMMPS &mdash; LAMMPS documentation</title>
+  <title>8.5.8. Tutorial for Thermalized Drude oscillators in LAMMPS &mdash; LAMMPS documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Howto_drude2.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="8.5.8. Manifolds (surfaces)" href="Howto_manifold.html" />
-    <link rel="prev" title="8.5.6. Drude induced dipoles" href="Howto_drude.html" /> 
+    <link rel="next" title="8.5.9. Peridynamics with LAMMPS" href="Howto_peri.html" />
+    <link rel="prev" title="8.5.7. Drude induced dipoles" href="Howto_drude.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -34,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -65,12 +68,14 @@
 <li class="toctree-l3"><a class="reference internal" href="Howto_spherical.html">8.5.1. Finite-size spherical and aspherical particles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Howto_granular.html">8.5.2. Granular models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Howto_body.html">8.5.3. Body particles</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Howto_polarizable.html">8.5.4. Polarizable models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Howto_coreshell.html">8.5.5. Adiabatic core/shell model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Howto_drude.html">8.5.6. Drude induced dipoles</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">8.5.7. Tutorial for Thermalized Drude oscillators in LAMMPS</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Howto_manifold.html">8.5.8. Manifolds (surfaces)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Howto_spins.html">8.5.9. Magnetic spins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_bpm.html">8.5.4. Bonded particle models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_polarizable.html">8.5.5. Polarizable models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_coreshell.html">8.5.6. Adiabatic core/shell model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_drude.html">8.5.7. Drude induced dipoles</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">8.5.8. Tutorial for Thermalized Drude oscillators in LAMMPS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_peri.html">8.5.9. Peridynamics with LAMMPS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_manifold.html">8.5.10. Manifolds (surfaces)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_spins.html">8.5.11. Magnetic spins</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Howto.html#tutorials-howto">8.6. Tutorials howto</a></li>
@@ -97,6 +102,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -114,24 +120,24 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Howto.html"><span class="section-number">8. </span>Howto discussions</a> &raquo;</li>
-      <li><span class="section-number">8.5.7. </span>Tutorial for Thermalized Drude oscillators in LAMMPS</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Howto.html"><span class="section-number">8. </span>Howto discussions</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">8.5.8. </span>Tutorial for Thermalized Drude oscillators in LAMMPS</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
-        <a href="Howto_drude.html" class="btn btn-neutral float-left" title="8.5.6. Drude induced dipoles" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Howto_manifold.html" class="btn btn-neutral float-right" title="8.5.8. Manifolds (surfaces)" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Howto_drude.html" class="btn btn-neutral float-left" title="8.5.7. Drude induced dipoles" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Howto_peri.html" class="btn btn-neutral float-right" title="8.5.9. Peridynamics with LAMMPS" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="tutorial-for-thermalized-drude-oscillators-in-lammps">
-<h1><span class="section-number">8.5.7. </span>Tutorial for Thermalized Drude oscillators in LAMMPS<a class="headerlink" href="#tutorial-for-thermalized-drude-oscillators-in-lammps" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="tutorial-for-thermalized-drude-oscillators-in-lammps">
+<h1><span class="section-number">8.5.8. </span>Tutorial for Thermalized Drude oscillators in LAMMPS<a class="headerlink" href="#tutorial-for-thermalized-drude-oscillators-in-lammps" title="Permalink to this heading"></a></h1>
 <p>This tutorial explains how to use Drude oscillators in LAMMPS to
 simulate polarizable systems using the DRUDE package. As an
 illustration, the input files for a simulation of 250 phenol molecules
@@ -203,7 +209,7 @@ to their DC should appear in the data file as normal atoms and bonds.</p>
 <p>You can use the <em>polarizer</em> tool (Python script distributed with the
 DRUDE package) to convert a non-polarizable data file (here
 <em>data.102494.lmp</em>) to a polarizable data file (<em>data-p.lmp</em>)</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>polarizer -q -f phenol.dff data.102494.lmp data-p.lmp
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>polarizer<span class="w"> </span>-q<span class="w"> </span>-f<span class="w"> </span>phenol.dff<span class="w"> </span>data.102494.lmp<span class="w"> </span>data-p.lmp
 </pre></div>
 </div>
 <p>This will automatically insert the new atoms and bonds.
@@ -240,7 +246,7 @@ can define atomic charges and molecular bonds, angles, dihedrals…</p>
 script (the use of these lines will be explained below).  In order for
 LAMMPS to recognize that you are using Drude oscillators, you should
 use the fix <em>drude</em>. The command is</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">DRUDE</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">drude</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="n">D</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">DRUDE</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">drude</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="n">D</span>
 </pre></div>
 </div>
 <p>The N, C, D following the <em>drude</em> keyword have the following meaning:
@@ -257,7 +263,7 @@ the <a class="reference internal" href="read_data.html"><span class="doc">read_d
 command.  With our phenol, there is 1 more special neighbor for which
 space is required.  Otherwise LAMMPS crashes and gives the required
 value.</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">read_data</span><span class="w"> </span><span class="n">data</span><span class="o">-</span><span class="n">p.lmp</span><span class="w"> </span><span class="n">extra</span><span class="o">/</span><span class="n">special</span><span class="o">/</span><span class="n">per</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="m">1</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">read_data</span><span class="w"> </span><span class="n">data</span><span class="o">-</span><span class="n">p.lmp</span><span class="w"> </span><span class="n">extra</span><span class="o">/</span><span class="n">special</span><span class="o">/</span><span class="n">per</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="m">1</span>
 </pre></div>
 </div>
 <p>Let us assume we want to run a simple NVT simulation at 300 K.  Note
@@ -268,8 +274,8 @@ are approximated by a charged DC-DP pair, the <em>pair_style</em> must
 include Coulomb interactions, for instance <em>lj/cut/coul/long</em> with
 <em>kspace_style pppm</em>. For example, with a cutoff of 10. and a precision
 1.e-4:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">pair_style</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w"> </span><span class="m">10.0</span><span class="w"></span>
-<span class="k">kspace_style</span><span class="w"> </span><span class="n">pppm</span><span class="w"> </span><span class="m">1.0e-4</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">pair_style</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w"> </span><span class="m">10.0</span>
+<span class="k">kspace_style</span><span class="w"> </span><span class="n">pppm</span><span class="w"> </span><span class="m">1.0e-4</span>
 </pre></div>
 </div>
 <p>As compared to the non-polarizable input file, <em>pair_coeff</em> lines need
@@ -280,7 +286,7 @@ that needs to be added is</p>
 </pre></div>
 </div>
 <p>Now for the thermalization, the simplest choice is to use the <a class="reference internal" href="fix_langevin_drude.html"><span class="doc">fix langevin/drude</span></a>.</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">LANG</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">langevin</span><span class="o">/</span><span class="n">drude</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">12435</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">13977</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">LANG</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">langevin</span><span class="o">/</span><span class="n">drude</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">12435</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">13977</span>
 </pre></div>
 </div>
 <p>This applies a Langevin thermostat at temperature 300. to the centers
@@ -291,7 +297,7 @@ time 20 and random seed 13977.  Only the DCs and non-polarizable
 atoms need to be in this fix’s group.  LAMMPS will thermostat the DPs
 together with their DC.  For this, ghost atoms need to know their
 velocities. Thus you need to add the following command:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">comm_modify</span><span class="w"> </span><span class="n">vel</span><span class="w"> </span><span class="n">yes</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">comm_modify</span><span class="w"> </span><span class="n">vel</span><span class="w"> </span><span class="n">yes</span>
 </pre></div>
 </div>
 <p>In order to avoid that the center of mass of the whole system
@@ -299,7 +305,7 @@ drifts due to the random forces of the Langevin thermostat on DCs, you
 can add the <em>zero yes</em> option at the end of the fix line.</p>
 <p>If the fix <em>shake</em> is used to constrain the C-H bonds, it should be
 invoked after the fix <em>langevin/drude</em> for more accuracy.</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">SHAKE</span><span class="w"> </span><span class="nv nv-Identifier">ATOMS</span><span class="w"> </span><span class="n">shake</span><span class="w"> </span><span class="m">0.0001</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">5</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">SHAKE</span><span class="w"> </span><span class="nv nv-Identifier">ATOMS</span><span class="w"> </span><span class="n">shake</span><span class="w"> </span><span class="m">0.0001</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">5</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -310,20 +316,20 @@ group <em>ATOMS</em> is defined by non-DPs atom types, you could use</p>
 <p>Since the fix <em>langevin/drude</em> does not perform time integration (just
 modification of forces but no position/velocity updates), the fix
 <em>nve</em> should be used in conjunction.</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">NVE</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">nve</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">NVE</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">nve</span>
 </pre></div>
 </div>
 <p>To avoid the flying ice cube artifact, where the atoms progressively freeze and the
 center of mass of the whole system drifts faster and faster, the <em>fix momentum</em>
 can be used. For instance:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">MOMENTUM</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">momentum</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="n">linear</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">MOMENTUM</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">momentum</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="n">linear</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span>
 </pre></div>
 </div>
 <p>Finally, do not forget to update the atom type elements if you use
 them in a <em>dump_modify … element …</em> command, by adding the element
 type of the DPs. Here for instance</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">dump </span><span class="nv nv-Identifier">DUMP</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="n">dump.lammpstrj</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="n">mol</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="n">element</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="n">ix</span><span class="w"> </span><span class="n">iy</span><span class="w"> </span><span class="n">iz</span><span class="w"></span>
-<span class="k">dump_modify</span><span class="w"> </span><span class="n">DUMP</span><span class="w"> </span><span class="n">element</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">O</span><span class="w"> </span><span class="n">H</span><span class="w"> </span><span class="n">H</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="n">D</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">dump </span><span class="nv nv-Identifier">DUMP</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="n">dump.lammpstrj</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="n">mol</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="n">element</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="n">ix</span><span class="w"> </span><span class="n">iy</span><span class="w"> </span><span class="n">iz</span>
+<span class="k">dump_modify </span><span class="nv nv-Identifier">DUMP</span><span class="w"> </span><span class="n">element</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">O</span><span class="w"> </span><span class="n">H</span><span class="w"> </span><span class="n">H</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="n">D</span>
 </pre></div>
 </div>
 <p>The input file should now be ready for use!</p>
@@ -332,13 +338,13 @@ LAMMPS is not 300. K as wanted.  This is because LAMMPS treats DPs as
 standard atoms in his default compute.  If you want to output the
 temperatures of the DC-DP pair centers of mass and of the DPs relative
 to their DCs, you should use the <a class="reference internal" href="compute_temp_drude.html"><span class="doc">compute temp_drude</span></a></p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">TDRUDE</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">temp</span><span class="o">/</span><span class="n">drude</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">TDRUDE</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">temp</span><span class="o">/</span><span class="n">drude</span>
 </pre></div>
 </div>
 <p>And then output the correct temperatures of the Drude oscillators
 using <em>thermo_style custom</em> with respectively <em>c_TDRUDE[1]</em> and
 <em>c_TDRUDE[2]</em>. These should be close to 300.0 and 1.0 on average.</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">thermo_style</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">c_TDRUDE[1]</span><span class="w"> </span><span class="n">c_TDRUDE[2]</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">thermo_style</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">c_TDRUDE[1]</span><span class="w"> </span><span class="n">c_TDRUDE[2]</span>
 </pre></div>
 </div>
 <hr class="docutils" />
@@ -357,7 +363,7 @@ correction to the Coulomb pair_styles, which dampens at short distance
 the interactions between the charges representing the induced dipoles.
 It is to be used as <em>hybrid/overlay</em> with any standard <em>coul</em> pair
 style.  In our example, we would use</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">pair_style</span><span class="w"> </span><span class="n">hybrid</span><span class="o">/</span><span class="n">overlay</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w"> </span><span class="m">10.0</span><span class="w"> </span><span class="n">thole</span><span class="w"> </span><span class="m">2.6</span><span class="w"> </span><span class="m">10.0</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">pair_style</span><span class="w"> </span><span class="n">hybrid</span><span class="o">/</span><span class="n">overlay</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w"> </span><span class="m">10.0</span><span class="w"> </span><span class="n">thole</span><span class="w"> </span><span class="m">2.6</span><span class="w"> </span><span class="m">10.0</span>
 </pre></div>
 </div>
 <p>This tells LAMMPS that we are using two pair_styles.  The first one is
@@ -369,39 +375,39 @@ coefficients of all the pairs of atom types with i &lt; j should be
 explicitly defined.  The output of the <em>polarizer</em> script can be used
 to complete the <em>pair_coeff</em> section of the input file.  In our
 example, this will look like:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">pair_coeff</span><span class="w">    </span><span class="m">1</span><span class="w">    </span><span class="m">1</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w">    </span><span class="m">0.0700</span><span class="w">   </span><span class="m">3.550</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">1</span><span class="w">    </span><span class="m">2</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w">    </span><span class="m">0.0700</span><span class="w">   </span><span class="m">3.550</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">1</span><span class="w">    </span><span class="m">3</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w">    </span><span class="m">0.1091</span><span class="w">   </span><span class="m">3.310</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">1</span><span class="w">    </span><span class="m">4</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w">    </span><span class="m">0.0458</span><span class="w">   </span><span class="m">2.985</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">2</span><span class="w">    </span><span class="m">2</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w">    </span><span class="m">0.0700</span><span class="w">   </span><span class="m">3.550</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">2</span><span class="w">    </span><span class="m">3</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w">    </span><span class="m">0.1091</span><span class="w">   </span><span class="m">3.310</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">2</span><span class="w">    </span><span class="m">4</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w">    </span><span class="m">0.0458</span><span class="w">   </span><span class="m">2.985</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">3</span><span class="w">    </span><span class="m">3</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w">    </span><span class="m">0.1700</span><span class="w">   </span><span class="m">3.070</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">3</span><span class="w">    </span><span class="m">4</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w">    </span><span class="m">0.0714</span><span class="w">   </span><span class="m">2.745</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">4</span><span class="w">    </span><span class="m">4</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w">    </span><span class="m">0.0300</span><span class="w">   </span><span class="m">2.420</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="o">*</span><span class="w">    </span><span class="m">5</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w">    </span><span class="m">0.0000</span><span class="w">   </span><span class="m">0.000</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="o">*</span><span class="w">   </span><span class="m">6</span><span class="o">*</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w">    </span><span class="m">0.0000</span><span class="w">   </span><span class="m">0.000</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">1</span><span class="w">    </span><span class="m">1</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">1.090</span><span class="w">   </span><span class="m">2.510</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">1</span><span class="w">    </span><span class="m">2</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">1.218</span><span class="w">   </span><span class="m">2.510</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">1</span><span class="w">    </span><span class="m">3</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">0.829</span><span class="w">   </span><span class="m">1.590</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">1</span><span class="w">    </span><span class="m">6</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">1.090</span><span class="w">   </span><span class="m">2.510</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">1</span><span class="w">    </span><span class="m">7</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">1.218</span><span class="w">   </span><span class="m">2.510</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">1</span><span class="w">    </span><span class="m">8</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">0.829</span><span class="w">   </span><span class="m">1.590</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">2</span><span class="w">    </span><span class="m">2</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">1.360</span><span class="w">   </span><span class="m">2.510</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">2</span><span class="w">    </span><span class="m">3</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">0.926</span><span class="w">   </span><span class="m">1.590</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">2</span><span class="w">    </span><span class="m">6</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">1.218</span><span class="w">   </span><span class="m">2.510</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">2</span><span class="w">    </span><span class="m">7</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">1.360</span><span class="w">   </span><span class="m">2.510</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">2</span><span class="w">    </span><span class="m">8</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">0.926</span><span class="w">   </span><span class="m">1.590</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">3</span><span class="w">    </span><span class="m">3</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">0.630</span><span class="w">   </span><span class="m">0.670</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">3</span><span class="w">    </span><span class="m">6</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">0.829</span><span class="w">   </span><span class="m">1.590</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">3</span><span class="w">    </span><span class="m">7</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">0.926</span><span class="w">   </span><span class="m">1.590</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">3</span><span class="w">    </span><span class="m">8</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">0.630</span><span class="w">   </span><span class="m">0.670</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">6</span><span class="w">    </span><span class="m">6</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">1.090</span><span class="w">   </span><span class="m">2.510</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">6</span><span class="w">    </span><span class="m">7</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">1.218</span><span class="w">   </span><span class="m">2.510</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">6</span><span class="w">    </span><span class="m">8</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">0.829</span><span class="w">   </span><span class="m">1.590</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">7</span><span class="w">    </span><span class="m">7</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">1.360</span><span class="w">   </span><span class="m">2.510</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">7</span><span class="w">    </span><span class="m">8</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">0.926</span><span class="w">   </span><span class="m">1.590</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">    </span><span class="m">8</span><span class="w">    </span><span class="m">8</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">0.630</span><span class="w">   </span><span class="m">0.670</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">pair_coeff</span><span class="w">    </span><span class="m">1</span><span class="w">    </span><span class="m">1</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w">    </span><span class="m">0.0700</span><span class="w">   </span><span class="m">3.550</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">1</span><span class="w">    </span><span class="m">2</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w">    </span><span class="m">0.0700</span><span class="w">   </span><span class="m">3.550</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">1</span><span class="w">    </span><span class="m">3</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w">    </span><span class="m">0.1091</span><span class="w">   </span><span class="m">3.310</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">1</span><span class="w">    </span><span class="m">4</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w">    </span><span class="m">0.0458</span><span class="w">   </span><span class="m">2.985</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">2</span><span class="w">    </span><span class="m">2</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w">    </span><span class="m">0.0700</span><span class="w">   </span><span class="m">3.550</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">2</span><span class="w">    </span><span class="m">3</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w">    </span><span class="m">0.1091</span><span class="w">   </span><span class="m">3.310</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">2</span><span class="w">    </span><span class="m">4</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w">    </span><span class="m">0.0458</span><span class="w">   </span><span class="m">2.985</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">3</span><span class="w">    </span><span class="m">3</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w">    </span><span class="m">0.1700</span><span class="w">   </span><span class="m">3.070</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">3</span><span class="w">    </span><span class="m">4</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w">    </span><span class="m">0.0714</span><span class="w">   </span><span class="m">2.745</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">4</span><span class="w">    </span><span class="m">4</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w">    </span><span class="m">0.0300</span><span class="w">   </span><span class="m">2.420</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="o">*</span><span class="w">    </span><span class="m">5</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w">    </span><span class="m">0.0000</span><span class="w">   </span><span class="m">0.000</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="o">*</span><span class="w">   </span><span class="m">6</span><span class="o">*</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="w">    </span><span class="m">0.0000</span><span class="w">   </span><span class="m">0.000</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">1</span><span class="w">    </span><span class="m">1</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">1.090</span><span class="w">   </span><span class="m">2.510</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">1</span><span class="w">    </span><span class="m">2</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">1.218</span><span class="w">   </span><span class="m">2.510</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">1</span><span class="w">    </span><span class="m">3</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">0.829</span><span class="w">   </span><span class="m">1.590</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">1</span><span class="w">    </span><span class="m">6</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">1.090</span><span class="w">   </span><span class="m">2.510</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">1</span><span class="w">    </span><span class="m">7</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">1.218</span><span class="w">   </span><span class="m">2.510</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">1</span><span class="w">    </span><span class="m">8</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">0.829</span><span class="w">   </span><span class="m">1.590</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">2</span><span class="w">    </span><span class="m">2</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">1.360</span><span class="w">   </span><span class="m">2.510</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">2</span><span class="w">    </span><span class="m">3</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">0.926</span><span class="w">   </span><span class="m">1.590</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">2</span><span class="w">    </span><span class="m">6</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">1.218</span><span class="w">   </span><span class="m">2.510</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">2</span><span class="w">    </span><span class="m">7</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">1.360</span><span class="w">   </span><span class="m">2.510</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">2</span><span class="w">    </span><span class="m">8</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">0.926</span><span class="w">   </span><span class="m">1.590</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">3</span><span class="w">    </span><span class="m">3</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">0.630</span><span class="w">   </span><span class="m">0.670</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">3</span><span class="w">    </span><span class="m">6</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">0.829</span><span class="w">   </span><span class="m">1.590</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">3</span><span class="w">    </span><span class="m">7</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">0.926</span><span class="w">   </span><span class="m">1.590</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">3</span><span class="w">    </span><span class="m">8</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">0.630</span><span class="w">   </span><span class="m">0.670</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">6</span><span class="w">    </span><span class="m">6</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">1.090</span><span class="w">   </span><span class="m">2.510</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">6</span><span class="w">    </span><span class="m">7</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">1.218</span><span class="w">   </span><span class="m">2.510</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">6</span><span class="w">    </span><span class="m">8</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">0.829</span><span class="w">   </span><span class="m">1.590</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">7</span><span class="w">    </span><span class="m">7</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">1.360</span><span class="w">   </span><span class="m">2.510</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">7</span><span class="w">    </span><span class="m">8</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">0.926</span><span class="w">   </span><span class="m">1.590</span>
+<span class="k">pair_coeff</span><span class="w">    </span><span class="m">8</span><span class="w">    </span><span class="m">8</span><span class="w"> </span><span class="n">thole</span><span class="w">   </span><span class="m">0.630</span><span class="w">   </span><span class="m">0.670</span>
 </pre></div>
 </div>
 <p>For the <em>thole</em> pair style the coefficients are</p>
@@ -425,7 +431,7 @@ interactions between these dipoles will be damped by Thole’s function.</p>
 <p><strong>Thermostats and barostats</strong></p>
 <p>Using a Nose-Hoover barostat with the <em>langevin/drude</em> thermostat is
 straightforward using fix <em>nph</em> instead of <em>nve</em>.  For example:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">NPH</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">nph</span><span class="w"> </span><span class="n">iso</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">500</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">NPH</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">nph</span><span class="w"> </span><span class="n">iso</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">500</span>
 </pre></div>
 </div>
 <p>It is also possible to use a Nose-Hoover instead of a Langevin
@@ -437,10 +443,10 @@ the DC-DP pairs and the DPs transform into their relative position
 with respect to their DC. The <em>fix drude/transform/inverse</em> performs
 the reverse transformation.  For a NVT simulation, with the DCs and
 atoms at 300 K and the DPs at 1 K relative to their DC one would use</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">DIRECT</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">drude</span><span class="o">/</span><span class="n">transform</span><span class="o">/</span><span class="n">direct</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">NVT1</span><span class="w"> </span><span class="nv nv-Identifier">ATOMS</span><span class="w"> </span><span class="n">nvt</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">100</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">NVT2</span><span class="w"> </span><span class="nv nv-Identifier">DRUDES</span><span class="w"> </span><span class="n">nvt</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">20</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">INVERSE</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">drude</span><span class="o">/</span><span class="n">transform</span><span class="o">/</span><span class="n">inverse</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">DIRECT</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">drude</span><span class="o">/</span><span class="n">transform</span><span class="o">/</span><span class="n">direct</span>
+<span class="k">fix </span><span class="nv nv-Identifier">NVT1</span><span class="w"> </span><span class="nv nv-Identifier">ATOMS</span><span class="w"> </span><span class="n">nvt</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">100</span>
+<span class="k">fix </span><span class="nv nv-Identifier">NVT2</span><span class="w"> </span><span class="nv nv-Identifier">DRUDES</span><span class="w"> </span><span class="n">nvt</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">20</span>
+<span class="k">fix </span><span class="nv nv-Identifier">INVERSE</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">drude</span><span class="o">/</span><span class="n">transform</span><span class="o">/</span><span class="n">inverse</span>
 </pre></div>
 </div>
 <p>For our phenol example, the groups would be defined as</p>
@@ -461,12 +467,12 @@ We do want the pressure to correspond to the whole system, but we want
 the temperature to correspond to the fix group only.  We must then use
 the <em>fix_modify</em> command for this.  In the end, the block of
 instructions for thermostatting and barostatting will look like</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">TATOMS</span><span class="w"> </span><span class="nv nv-Identifier">ATOMS</span><span class="w"> </span><span class="n">temp</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">DIRECT</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">drude</span><span class="o">/</span><span class="n">transform</span><span class="o">/</span><span class="n">direct</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">NPT</span><span class="w"> </span><span class="nv nv-Identifier">ATOMS</span><span class="w"> </span><span class="n">npt</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="n">iso</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">500</span><span class="w"></span>
-<span class="k">fix_modify</span><span class="w"> </span><span class="n">NPT</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">TATOMS</span><span class="w"> </span><span class="n">press</span><span class="w"> </span><span class="n">thermo_press</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">NVT</span><span class="w"> </span><span class="nv nv-Identifier">DRUDES</span><span class="w"> </span><span class="n">nvt</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">20</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">INVERSE</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">drude</span><span class="o">/</span><span class="n">transform</span><span class="o">/</span><span class="n">inverse</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">TATOMS</span><span class="w"> </span><span class="nv nv-Identifier">ATOMS</span><span class="w"> </span><span class="n">temp</span>
+<span class="k">fix </span><span class="nv nv-Identifier">DIRECT</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">drude</span><span class="o">/</span><span class="n">transform</span><span class="o">/</span><span class="n">direct</span>
+<span class="k">fix </span><span class="nv nv-Identifier">NPT</span><span class="w"> </span><span class="nv nv-Identifier">ATOMS</span><span class="w"> </span><span class="n">npt</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="n">iso</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">500</span>
+<span class="k">fix_modify </span><span class="nv nv-Identifier">NPT</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">TATOMS</span><span class="w"> </span><span class="n">press</span><span class="w"> </span><span class="n">thermo_press</span>
+<span class="k">fix </span><span class="nv nv-Identifier">NVT</span><span class="w"> </span><span class="nv nv-Identifier">DRUDES</span><span class="w"> </span><span class="n">nvt</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">20</span>
+<span class="k">fix </span><span class="nv nv-Identifier">INVERSE</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">drude</span><span class="o">/</span><span class="n">transform</span><span class="o">/</span><span class="n">inverse</span>
 </pre></div>
 </div>
 <p>Another option for thermalizing the Drude model is to use the
@@ -478,15 +484,15 @@ and the relative motion of atom-Drude pairs.
 An independent Nose-Hoover chain is applied to each type of motion.
 When TGNH is used, the temperatures of molecular, atomic and Drude motion can be printed out with <a class="reference internal" href="thermo_style.html"><span class="doc">thermo_style command</span></a> command.</p>
 <p>NVT simulation with TGNH thermostat</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">comm_modify</span><span class="w"> </span><span class="n">vel</span><span class="w"> </span><span class="n">yes</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">TGNVT</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">tgnvt</span><span class="o">/</span><span class="n">drude</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">20</span><span class="w"></span>
-<span class="k">thermo_style</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">f_TGNVT[1]</span><span class="w"> </span><span class="n">f_TGNVT[2]</span><span class="w"> </span><span class="n">f_TGNVT[3]</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">comm_modify</span><span class="w"> </span><span class="n">vel</span><span class="w"> </span><span class="n">yes</span>
+<span class="k">fix </span><span class="nv nv-Identifier">TGNVT</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">tgnvt</span><span class="o">/</span><span class="n">drude</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">20</span>
+<span class="k">thermo_style</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">f_TGNVT[1]</span><span class="w"> </span><span class="n">f_TGNVT[2]</span><span class="w"> </span><span class="n">f_TGNVT[3]</span>
 </pre></div>
 </div>
 <p>NPT simulation with TGNH thermostat</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">comm_modify</span><span class="w"> </span><span class="n">vel</span><span class="w"> </span><span class="n">yes</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">TGNPT</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">tgnpt</span><span class="o">/</span><span class="n">drude</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="n">iso</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">500</span><span class="w"></span>
-<span class="k">thermo_style</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">f_TGNPT[1]</span><span class="w"> </span><span class="n">f_TGNPT[2]</span><span class="w"> </span><span class="n">f_TGNPT[3]</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">comm_modify</span><span class="w"> </span><span class="n">vel</span><span class="w"> </span><span class="n">yes</span>
+<span class="k">fix </span><span class="nv nv-Identifier">TGNPT</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">tgnpt</span><span class="o">/</span><span class="n">drude</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="n">iso</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">500</span>
+<span class="k">thermo_style</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">f_TGNPT[1]</span><span class="w"> </span><span class="n">f_TGNPT[2]</span><span class="w"> </span><span class="n">f_TGNPT[3]</span>
 </pre></div>
 </div>
 <hr class="docutils" />
@@ -497,33 +503,33 @@ kind of polarizable TIP4P water.  The rigid bodies and the DPs should
 be integrated separately, even with the Langevin thermostat.  Let us
 review the different thermostats and ensemble combinations.</p>
 <p>NVT ensemble using Langevin thermostat:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">comm_modify</span><span class="w"> </span><span class="n">vel</span><span class="w"> </span><span class="n">yes</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">LANG</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">langevin</span><span class="o">/</span><span class="n">drude</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">12435</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">13977</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">RIGID</span><span class="w"> </span><span class="nv nv-Identifier">ATOMS</span><span class="w"> </span><span class="n">rigid</span><span class="o">/</span><span class="n">nve</span><span class="o">/</span><span class="n">small</span><span class="w"> </span><span class="n">molecule</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">NVE</span><span class="w"> </span><span class="nv nv-Identifier">DRUDES</span><span class="w"> </span><span class="n">nve</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">comm_modify</span><span class="w"> </span><span class="n">vel</span><span class="w"> </span><span class="n">yes</span>
+<span class="k">fix </span><span class="nv nv-Identifier">LANG</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">langevin</span><span class="o">/</span><span class="n">drude</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">12435</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">13977</span>
+<span class="k">fix </span><span class="nv nv-Identifier">RIGID</span><span class="w"> </span><span class="nv nv-Identifier">ATOMS</span><span class="w"> </span><span class="n">rigid</span><span class="o">/</span><span class="n">nve</span><span class="o">/</span><span class="n">small</span><span class="w"> </span><span class="n">molecule</span>
+<span class="k">fix </span><span class="nv nv-Identifier">NVE</span><span class="w"> </span><span class="nv nv-Identifier">DRUDES</span><span class="w"> </span><span class="n">nve</span>
 </pre></div>
 </div>
 <p>NVT ensemble using Nose-Hoover thermostat:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">DIRECT</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">drude</span><span class="o">/</span><span class="n">transform</span><span class="o">/</span><span class="n">direct</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">RIGID</span><span class="w"> </span><span class="nv nv-Identifier">ATOMS</span><span class="w"> </span><span class="n">rigid</span><span class="o">/</span><span class="n">nvt</span><span class="o">/</span><span class="n">small</span><span class="w"> </span><span class="n">molecule</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">100</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">NVT</span><span class="w"> </span><span class="nv nv-Identifier">DRUDES</span><span class="w"> </span><span class="n">nvt</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">20</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">INVERSE</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">drude</span><span class="o">/</span><span class="n">transform</span><span class="o">/</span><span class="n">inverse</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">DIRECT</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">drude</span><span class="o">/</span><span class="n">transform</span><span class="o">/</span><span class="n">direct</span>
+<span class="k">fix </span><span class="nv nv-Identifier">RIGID</span><span class="w"> </span><span class="nv nv-Identifier">ATOMS</span><span class="w"> </span><span class="n">rigid</span><span class="o">/</span><span class="n">nvt</span><span class="o">/</span><span class="n">small</span><span class="w"> </span><span class="n">molecule</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">100</span>
+<span class="k">fix </span><span class="nv nv-Identifier">NVT</span><span class="w"> </span><span class="nv nv-Identifier">DRUDES</span><span class="w"> </span><span class="n">nvt</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">20</span>
+<span class="k">fix </span><span class="nv nv-Identifier">INVERSE</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">drude</span><span class="o">/</span><span class="n">transform</span><span class="o">/</span><span class="n">inverse</span>
 </pre></div>
 </div>
 <p>NPT ensemble with Langevin thermostat:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">comm_modify</span><span class="w"> </span><span class="n">vel</span><span class="w"> </span><span class="n">yes</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">LANG</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">langevin</span><span class="o">/</span><span class="n">drude</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">12435</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">13977</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">RIGID</span><span class="w"> </span><span class="nv nv-Identifier">ATOMS</span><span class="w"> </span><span class="n">rigid</span><span class="o">/</span><span class="n">nph</span><span class="o">/</span><span class="n">small</span><span class="w"> </span><span class="n">molecule</span><span class="w"> </span><span class="n">iso</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">500</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">NVE</span><span class="w"> </span><span class="nv nv-Identifier">DRUDES</span><span class="w"> </span><span class="n">nve</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">comm_modify</span><span class="w"> </span><span class="n">vel</span><span class="w"> </span><span class="n">yes</span>
+<span class="k">fix </span><span class="nv nv-Identifier">LANG</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">langevin</span><span class="o">/</span><span class="n">drude</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">12435</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">13977</span>
+<span class="k">fix </span><span class="nv nv-Identifier">RIGID</span><span class="w"> </span><span class="nv nv-Identifier">ATOMS</span><span class="w"> </span><span class="n">rigid</span><span class="o">/</span><span class="n">nph</span><span class="o">/</span><span class="n">small</span><span class="w"> </span><span class="n">molecule</span><span class="w"> </span><span class="n">iso</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">500</span>
+<span class="k">fix </span><span class="nv nv-Identifier">NVE</span><span class="w"> </span><span class="nv nv-Identifier">DRUDES</span><span class="w"> </span><span class="n">nve</span>
 </pre></div>
 </div>
 <p>NPT ensemble using Nose-Hoover thermostat:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">TATOM</span><span class="w"> </span><span class="nv nv-Identifier">ATOMS</span><span class="w"> </span><span class="n">temp</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">DIRECT</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">drude</span><span class="o">/</span><span class="n">transform</span><span class="o">/</span><span class="n">direct</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">RIGID</span><span class="w"> </span><span class="nv nv-Identifier">ATOMS</span><span class="w"> </span><span class="n">rigid</span><span class="o">/</span><span class="n">npt</span><span class="o">/</span><span class="n">small</span><span class="w"> </span><span class="n">molecule</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="n">iso</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">500</span><span class="w"></span>
-<span class="k">fix_modify</span><span class="w"> </span><span class="n">RIGID</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">TATOM</span><span class="w"> </span><span class="n">press</span><span class="w"> </span><span class="n">thermo_press</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">NVT</span><span class="w"> </span><span class="nv nv-Identifier">DRUDES</span><span class="w"> </span><span class="n">nvt</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">20</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">INVERSE</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">drude</span><span class="o">/</span><span class="n">transform</span><span class="o">/</span><span class="n">inverse</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">TATOM</span><span class="w"> </span><span class="nv nv-Identifier">ATOMS</span><span class="w"> </span><span class="n">temp</span>
+<span class="k">fix </span><span class="nv nv-Identifier">DIRECT</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">drude</span><span class="o">/</span><span class="n">transform</span><span class="o">/</span><span class="n">direct</span>
+<span class="k">fix </span><span class="nv nv-Identifier">RIGID</span><span class="w"> </span><span class="nv nv-Identifier">ATOMS</span><span class="w"> </span><span class="n">rigid</span><span class="o">/</span><span class="n">npt</span><span class="o">/</span><span class="n">small</span><span class="w"> </span><span class="n">molecule</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">300</span><span class="n">.</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="n">iso</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">500</span>
+<span class="k">fix_modify </span><span class="nv nv-Identifier">RIGID</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">TATOM</span><span class="w"> </span><span class="n">press</span><span class="w"> </span><span class="n">thermo_press</span>
+<span class="k">fix </span><span class="nv nv-Identifier">NVT</span><span class="w"> </span><span class="nv nv-Identifier">DRUDES</span><span class="w"> </span><span class="n">nvt</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">1</span><span class="n">.</span><span class="w"> </span><span class="m">20</span>
+<span class="k">fix </span><span class="nv nv-Identifier">INVERSE</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">drude</span><span class="o">/</span><span class="n">transform</span><span class="o">/</span><span class="n">inverse</span>
 </pre></div>
 </div>
 <hr class="docutils" />
@@ -541,14 +547,14 @@ Let, 418, 245-249 (2006)</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="Howto_drude.html" class="btn btn-neutral float-left" title="8.5.6. Drude induced dipoles" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Howto_manifold.html" class="btn btn-neutral float-right" title="8.5.8. Manifolds (surfaces)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Howto_drude.html" class="btn btn-neutral float-left" title="8.5.7. Drude induced dipoles" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Howto_peri.html" class="btn btn-neutral float-right" title="8.5.9. Peridynamics with LAMMPS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -557,7 +563,6 @@ Let, 418, 245-249 (2006)</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

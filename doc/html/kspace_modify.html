@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>kspace_modify command &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/kspace_modify.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -72,6 +76,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="commands_list.html">Commands</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="angle_coeff.html">angle_coeff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="angle_style.html">angle_style command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="angle_write.html">angle_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="atom_modify.html">atom_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="atom_style.html">atom_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="balance.html">balance command</a></li>
@@ -79,7 +84,6 @@
 <li class="toctree-l2"><a class="reference internal" href="bond_style.html">bond_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_write.html">bond_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="boundary.html">boundary command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="box.html">box command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="change_box.html">change_box command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="clear.html">clear command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="comm_modify.html">comm_modify command</a></li>
@@ -94,6 +98,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dielectric.html">dielectric command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_coeff.html">dihedral_coeff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_style.html">dihedral_style command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dihedral_write.html">dihedral_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dimension.html">dimension command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="displace_atoms.html">displace_atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html">dump command</a></li>
@@ -105,6 +110,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-movie-command"><span class="xref std std-doc">dump movie</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-atom-adios-command"><span class="xref std std-doc">dump atom/adios</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-custom-adios-command"><span class="xref std std-doc">dump custom/adios</span> command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dump.html#dump-cfg-uef-command"><span class="xref std std-doc">dump cfg/uef</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_adios.html">dump atom/adios  command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_adios.html#dump-custom-adios-command">dump custom/adios command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_cfg_uef.html">dump cfg/uef command</a></li>
@@ -122,6 +128,7 @@
 <li class="toctree-l2"><a class="reference internal" href="echo.html">echo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix.html">fix command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify.html">fix_modify command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitpod_command.html">fitpod command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group.html">group command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group2ndx.html">group2ndx command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group2ndx.html#ndx2group-command">ndx2group command</a></li>
@@ -144,6 +151,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="kspace_style.html">kspace_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="label.html">label command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labelmap.html">labelmap command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lattice.html">lattice command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="log.html">log command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mass.html">mass command</a></li>
@@ -157,12 +165,10 @@
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-sd-command">min_style sd command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-quickmin-command">min_style quickmin command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-fire-command">min_style fire command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-fire-old-command">min_style fire/old command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-command"><span class="xref std std-doc">min_style spin</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-cg-command"><span class="xref std std-doc">min_style spin/cg</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-lbfgs-command"><span class="xref std std-doc">min_style spin/lbfgs</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="minimize.html">minimize command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="minimize.html#minimize-kk-command">minimize/kk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="molecule.html">molecule command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neb.html">neb command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neb_spin.html">neb/spin command</a></li>
@@ -188,8 +194,7 @@
 <li class="toctree-l2"><a class="reference internal" href="region.html">region command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="replicate.html">replicate command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rerun.html">rerun command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset_atom_ids.html">reset_atom_ids command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset_mol_ids.html">reset_mol_ids command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reset_atoms.html">reset_atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reset_timestep.html">reset_timestep command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="restart.html">restart command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="run.html">run command</a></li>
@@ -227,6 +232,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -244,12 +250,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="commands_list.html">Commands</a> &raquo;</li>
-      <li>kspace_modify command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="commands_list.html">Commands</a></li>
+      <li class="breadcrumb-item active">kspace_modify command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="kim_commands.html" class="btn btn-neutral float-left" title="kim command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -260,16 +265,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="kspace-modify-command">
-<span id="index-0"></span><h1>kspace_modify command<a class="headerlink" href="#kspace-modify-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="kspace-modify-command">
+<span id="index-0"></span><h1>kspace_modify command<a class="headerlink" href="#kspace-modify-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kspace_modify</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">...</span><span class="w"></span>
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kspace_modify</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">...</span>
 </pre></div>
 </div>
 <ul>
 <li><p>one or more keyword/value pairs may be listed</p></li>
-<li><p>keyword = <em>collective</em> or <em>compute</em> or <em>cutoff/adjust</em> or <em>diff</em> or <em>disp/auto</em> or <em>fftbench</em> or <em>force/disp/kspace</em> or <em>force/disp/real</em> or <em>force</em> or <em>gewald/disp</em> or <em>gewald</em> or <em>kmax/ewald</em> or <em>mesh</em> or <em>minorder</em> or <em>mix/disp</em> or <em>order/disp</em> or <em>order</em> or <em>overlap</em> or <em>scafacos</em> or <em>slab</em> or <em>splittol</em></p>
+<li><p>keyword = <em>collective</em> or <em>compute</em> or <em>cutoff/adjust</em> or <em>diff</em> or <em>disp/auto</em> or <em>fftbench</em> or <em>force/disp/kspace</em> or <em>force/disp/real</em> or <em>force</em> or <em>gewald/disp</em> or <em>gewald</em> or <em>kmax/ewald</em> or <em>mesh</em> or <em>minorder</em> or <em>mix/disp</em> or <em>order/disp</em> or <em>order</em> or <em>overlap</em> or <em>scafacos</em> or <em>slab</em> or <em>splittol</em> or <em>wire</em></p>
 <pre class="literal-block"><em>collective</em> value = <em>yes</em> or <em>no</em>
 <em>compute</em> value = <em>yes</em> or <em>no</em>
 <em>cutoff/adjust</em> value = <em>yes</em> or <em>no</em>
@@ -306,7 +312,6 @@
 <em>slab</em> value = volfactor or <em>nozforce</em>
   volfactor = ratio of the total extended volume used in the
     2d approximation compared with the volume of the simulation domain
-  <em>ew2d</em> EW2D correction (available with ELECTRODE package)
   <em>nozforce</em> turns off kspace forces in the z direction
 <em>splittol</em> value = tol
   tol = relative size of two eigenvalues (see discussion below)
@@ -317,15 +322,15 @@
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kspace_modify</span><span class="w"> </span><span class="n">mesh</span><span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">30</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="m">6</span><span class="w"></span>
-<span class="k">kspace_modify</span><span class="w"> </span><span class="n">slab</span><span class="w"> </span><span class="m">3.0</span><span class="w"></span>
-<span class="k">kspace_modify</span><span class="w"> </span><span class="n">scafacos</span><span class="w"> </span><span class="n">tolerance</span><span class="w"> </span><span class="n">energy</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kspace_modify</span><span class="w"> </span><span class="n">mesh</span><span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">30</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="m">6</span>
+<span class="k">kspace_modify</span><span class="w"> </span><span class="n">slab</span><span class="w"> </span><span class="m">3.0</span>
+<span class="k">kspace_modify</span><span class="w"> </span><span class="n">scafacos</span><span class="w"> </span><span class="n">tolerance</span><span class="w"> </span><span class="n">energy</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <p>Set parameters used by the kspace solvers defined by the
 <a class="reference internal" href="kspace_style.html"><span class="doc">kspace_style</span></a> command.  Not all parameters are
 relevant to all kspace styles.</p>
@@ -387,7 +392,8 @@ the code will stop with an error message. When this option is set to
 For a typical application, using the automatic parameter generation
 will provide simulations that are either inaccurate or slow. Using this
 option is thus not recommended. For guidelines on how to obtain good
-parameters, see the <a class="reference internal" href="Howto_dispersion.html"><span class="doc">How-To</span></a> discussion.</p>
+parameters, see the <a class="reference internal" href="Howto_dispersion.html"><span class="doc">long-range dispersion howto</span></a>
+discussion.</p>
 <hr class="docutils" />
 <p>The <em>fftbench</em> keyword applies only to PPPM. It is off by default. If
 this option is turned on, LAMMPS will perform a short FFT benchmark
@@ -587,18 +593,20 @@ solver is set up.</p>
 <hr class="docutils" />
 <p>The <em>slab</em> keyword allows an Ewald or PPPM solver to be used for a
 systems that are periodic in x,y but non-periodic in z - a
-<a class="reference internal" href="boundary.html"><span class="doc">boundary</span></a> setting of “boundary p p f”.  This is done by
-treating the system as if it were periodic in z, but inserting empty
-volume between atom slabs and removing dipole inter-slab interactions
-so that slab-slab interactions are effectively turned off.  The
-volfactor value sets the ratio of the extended dimension in z divided
-by the actual dimension in z.  The recommended value is 3.0.  A larger
-value is inefficient; a smaller value introduces unwanted slab-slab
+<a class="reference internal" href="boundary.html"><span class="doc">boundary</span></a> setting of “boundary p p f”.  This is done
+by treating the system as if it were periodic in z, but inserting
+empty volume between atom slabs and removing dipole inter-slab
+interactions so that slab-slab interactions are effectively turned
+off.  The volfactor value sets the ratio of the extended dimension in
+z divided by the actual dimension in z.  It must be a value &gt;= 1.0.  A
+value of 1.0 (the default) means the slab approximation is not used.</p>
+<p>The recommended value for volfactor is 3.0.  A larger value is
+inefficient; a smaller value introduces unwanted slab-slab
 interactions.  The use of fixed boundaries in z means that the user
 must prevent particle migration beyond the initial z-bounds, typically
 by providing a wall-style fix.  The methodology behind the <em>slab</em>
-option is explained in the paper by <a class="reference internal" href="#yeh"><span class="std std-ref">(Yeh)</span></a>.  The <em>slab</em> option
-is also extended to non-neutral systems <a class="reference internal" href="#ballenegger"><span class="std std-ref">(Ballenegger)</span></a>.</p>
+option is explained in the paper by <a class="reference internal" href="#yeh"><span class="std std-ref">(Yeh)</span></a>.  The <em>slab</em>
+option is also extended to non-neutral systems <a class="reference internal" href="#ballenegger"><span class="std std-ref">(Ballenegger)</span></a>.</p>
 <p>An alternative slab option can be invoked with the <em>nozforce</em> keyword
 in lieu of the volfactor.  This turns off all kspace forces in the z
 direction.  The <em>nozforce</em> option is not supported by MSM. For MSM,
@@ -607,8 +615,8 @@ boundaries can be set using <a class="reference internal" href="boundary.html"><
 approximation in not needed).  The <em>slab</em> keyword is not currently
 supported by Ewald or PPPM when using a triclinic simulation cell. The
 slab correction has also been extended to point dipole interactions
-<a class="reference internal" href="#klapp"><span class="std std-ref">(Klapp)</span></a> in <a class="reference internal" href="kspace_style.html"><span class="doc">kspace_style</span></a> <em>ewald/disp</em>,
-<em>ewald/dipole</em>, and <em>pppm/dipole</em>.</p>
+<a class="reference internal" href="#klapp"><span class="std std-ref">(Klapp)</span></a> in <a class="reference internal" href="kspace_style.html"><span class="doc">kspace_style</span></a>
+<em>ewald/disp</em>, <em>ewald/dipole</em>, and <em>pppm/dipole</em>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you wish to apply an electric field in the Z-direction, in
@@ -637,24 +645,41 @@ parameters, see the <a class="reference internal" href="Howto_dispersion.html"><
 </section>
 <hr class="docutils" />
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <p>none</p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="kspace_style.html"><span class="doc">kspace_style</span></a>, <a class="reference internal" href="boundary.html"><span class="doc">boundary</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
-<p>The option defaults are mesh = mesh/disp = 0 0 0, order = order/disp =
-5 (PPPM), order = 10 (MSM), minorder = 2, overlap = yes, force = -1.0,
-gewald = gewald/disp = 0.0, slab = 1.0, compute = yes, cutoff/adjust =
-yes (MSM), pressure/scalar = yes (MSM), fftbench = no (PPPM), diff =
-ik (PPPM), mix/disp = pair, force/disp/real = -1.0, force/disp/kspace
-= -1.0, split = 0, tol = 1.0e-6, and disp/auto = no. For pppm/intel,
-order = order/disp = 7.  For scafacos settings, the scafacos tolerance
-option depends on the method chosen, as documented above.  The
-scafacos fmm_tuning default = 0.</p>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
+<p>The option defaults are as follows:</p>
+<ul class="simple">
+<li><p>compute = yes</p></li>
+<li><p>cutoff/adjust = yes (MSM)</p></li>
+<li><p>diff = ik (PPPM)</p></li>
+<li><p>disp/auto = no</p></li>
+<li><p>fftbench = no (PPPM)</p></li>
+<li><p>force = -1.0,</p></li>
+<li><p>force/disp/kspace = -1.0</p></li>
+<li><p>force/disp/real = -1.0</p></li>
+<li><p>gewald = gewald/disp = 0.0</p></li>
+<li><p>mesh = mesh/disp = 0 0 0</p></li>
+<li><p>minorder = 2</p></li>
+<li><p>mix/disp = pair</p></li>
+<li><p>order = 10 (MSM)</p></li>
+<li><p>order = order/disp = 5 (PPPM)</p></li>
+<li><p>order = order/disp = 7 (PPPM/intel)</p></li>
+<li><p>overlap = yes</p></li>
+<li><p>pressure/scalar = yes (MSM)</p></li>
+<li><p>slab = 1.0</p></li>
+<li><p>split = 0</p></li>
+<li><p>tol = 1.0e-6</p></li>
+</ul>
+<p>For scafacos settings, the scafacos tolerance option depends on the
+method chosen, as documented above.  The scafacos fmm_tuning default
+= 0.</p>
 <hr class="docutils" />
 <p id="hockney1"><strong>(Hockney)</strong> Hockney and Eastwood, Computer Simulation Using Particles,
 Adam Hilger, NY (1989).</p>
@@ -684,7 +709,7 @@ Chem Theory Comput, 9, 5412 (2013).</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -693,7 +718,6 @@ Chem Theory Comput, 9, 5412 (2013).</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>5.3. Input script structure &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Commands_structure.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -72,7 +76,8 @@
 <li class="toctree-l2"><a class="reference internal" href="Commands_bond.html#dihedral-style-potentials">5.11. Dihedral_style potentials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Commands_bond.html#improper-style-potentials">5.12. Improper_style potentials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Commands_kspace.html">5.13. KSpace solvers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Commands_removed.html">5.14. Removed commands and packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Commands_dump.html">5.14. Dump commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Commands_removed.html">5.15. Removed commands and packages</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Packages.html">6. Optional packages</a></li>
@@ -99,6 +104,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -116,12 +122,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Commands.html"><span class="section-number">5. </span>Commands</a> &raquo;</li>
-      <li><span class="section-number">5.3. </span>Input script structure</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Commands.html"><span class="section-number">5. </span>Commands</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">5.3. </span>Input script structure</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="Commands_parse.html" class="btn btn-neutral float-left" title="5.2. Parsing rules for input scripts" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -132,8 +137,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="input-script-structure">
-<h1><span class="section-number">5.3. </span>Input script structure<a class="headerlink" href="#input-script-structure" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="input-script-structure">
+<h1><span class="section-number">5.3. </span>Input script structure<a class="headerlink" href="#input-script-structure" title="Permalink to this heading"></a></h1>
 <p>This page describes the structure of a typical LAMMPS input script.
 The examples directory in the LAMMPS distribution contains many sample
 input scripts; it is discussed on the <a class="reference internal" href="Examples.html"><span class="doc">Examples</span></a> doc
@@ -150,7 +156,7 @@ simulation, change some settings, run some more, etc.  Each of the 4
 parts is now described in more detail.  Remember that almost all
 commands need only be used if a non-default value is desired.</p>
 <section id="initialization">
-<span id="init"></span><h2><span class="section-number">5.3.1. </span>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
+<span id="init"></span><h2><span class="section-number">5.3.1. </span>Initialization<a class="headerlink" href="#initialization" title="Permalink to this heading"></a></h2>
 <p>Set parameters that need to be defined before atoms are created or
 read-in from a file.</p>
 <p>The relevant commands are <a class="reference internal" href="units.html"><span class="doc">units</span></a>,
@@ -164,7 +170,7 @@ commands tell LAMMPS what kinds of force fields are being used:
 <a class="reference internal" href="improper_style.html"><span class="doc">improper_style</span></a>.</p>
 </section>
 <section id="system-definition">
-<span id="system"></span><h2><span class="section-number">5.3.2. </span>System definition<a class="headerlink" href="#system-definition" title="Permalink to this headline">¶</a></h2>
+<span id="system"></span><h2><span class="section-number">5.3.2. </span>System definition<a class="headerlink" href="#system-definition" title="Permalink to this heading"></a></h2>
 <p>There are 3 ways to define the simulation cell and reserve space for
 force field info and fill it with atoms in LAMMPS.  Read them in from
 (1) a data file or (2) a restart file via the <a class="reference internal" href="read_data.html"><span class="doc">read_data</span></a> or <a class="reference internal" href="read_restart.html"><span class="doc">read_restart</span></a> commands,
@@ -177,7 +183,7 @@ a lattice (with no molecular topology), using these commands:
 using the <a class="reference internal" href="replicate.html"><span class="doc">replicate</span></a> command.</p>
 </section>
 <section id="simulation-settings">
-<span id="settings"></span><h2><span class="section-number">5.3.3. </span>Simulation settings<a class="headerlink" href="#simulation-settings" title="Permalink to this headline">¶</a></h2>
+<span id="settings"></span><h2><span class="section-number">5.3.3. </span>Simulation settings<a class="headerlink" href="#simulation-settings" title="Permalink to this heading"></a></h2>
 <p>Once atoms and molecular topology are defined, a variety of settings
 can be specified: force field coefficients, simulation parameters,
 output options, and more.</p>
@@ -203,7 +209,7 @@ commands.</p>
 and <a class="reference internal" href="restart.html"><span class="doc">restart</span></a> commands.</p>
 </section>
 <section id="run-a-simulation">
-<span id="run"></span><h2><span class="section-number">5.3.4. </span>Run a simulation<a class="headerlink" href="#run-a-simulation" title="Permalink to this headline">¶</a></h2>
+<span id="run"></span><h2><span class="section-number">5.3.4. </span>Run a simulation<a class="headerlink" href="#run-a-simulation" title="Permalink to this heading"></a></h2>
 <p>A molecular dynamics simulation is run using the <a class="reference internal" href="run.html"><span class="doc">run</span></a>
 command.  Energy minimization (molecular statics) is performed using
 the <a class="reference internal" href="minimize.html"><span class="doc">minimize</span></a> command.  A parallel tempering
@@ -223,7 +229,7 @@ the <a class="reference internal" href="minimize.html"><span class="doc">minimiz
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -232,7 +238,6 @@ the <a class="reference internal" href="minimize.html"><span class="doc">minimiz
    
 
 </footer>
-
         </div>
       </div>
     </section>

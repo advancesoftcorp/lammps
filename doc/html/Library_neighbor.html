@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>1.1.7. Neighbor list access &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Library_neighbor.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -95,6 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -112,12 +117,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Library.html"><span class="section-number">1. </span>LAMMPS Library Interfaces</a> &raquo;</li>
-      <li><span class="section-number">1.1.7. </span>Neighbor list access</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Library.html"><span class="section-number">1. </span>LAMMPS Library Interfaces</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">1.1.7. </span>Neighbor list access</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="Library_scatter.html" class="btn btn-neutral float-left" title="1.1.6. Scatter/gather operations" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -128,8 +132,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="neighbor-list-access">
-<h1><span class="section-number">1.1.7. </span>Neighbor list access<a class="headerlink" href="#neighbor-list-access" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="neighbor-list-access">
+<h1><span class="section-number">1.1.7. </span>Neighbor list access<a class="headerlink" href="#neighbor-list-access" title="Permalink to this heading"></a></h1>
 <p>The following functions enable access to neighbor lists generated by
 LAMMPS or querying of their properties:</p>
 <ul class="simple">
@@ -142,21 +147,21 @@ LAMMPS or querying of their properties:</p>
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv429lammps_find_compute_neighlistPvPKci">
-<span id="_CPPv329lammps_find_compute_neighlistPvPKci"></span><span id="_CPPv229lammps_find_compute_neighlistPvPKci"></span><span id="lammps_find_compute_neighlist__voidP.cCP.i"></span><span class="target" id="library_8h_1a04b80d34fe95f6931d9f6906a2c7f869"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_find_compute_neighlist</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">id</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">request</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429lammps_find_compute_neighlistPvPKci" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv329lammps_find_compute_neighlistPvPKci"></span><span id="_CPPv229lammps_find_compute_neighlistPvPKci"></span><span id="lammps_find_compute_neighlist__voidP.cCP.i"></span><span class="target" id="library_8h_1a04b80d34fe95f6931d9f6906a2c7f869"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_find_compute_neighlist</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">id</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">request</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429lammps_find_compute_neighlistPvPKci" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Find index of a neighbor list requested by a compute</p>
 <p>The neighbor list request from a compute is identified by the compute ID and the request ID. The request ID is typically 0, but will be <blockquote>
 <div><p>0 in case a compute has multiple neighbor list requests. </p>
 </div></blockquote>
 </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>handle</strong> – pointer to a previously created LAMMPS instance cast to <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*</span></code>. </p></li>
 <li><p><strong>id</strong> – Identifier of compute instance </p></li>
 <li><p><strong>reqid</strong> – request id to identify neighbor list in case there are multiple requests from the same compute </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>return neighbor list index if found, otherwise -1 </p>
 </dd>
 </dl>
@@ -165,18 +170,18 @@ LAMMPS or querying of their properties:</p>
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv425lammps_find_fix_neighlistPvPKci">
-<span id="_CPPv325lammps_find_fix_neighlistPvPKci"></span><span id="_CPPv225lammps_find_fix_neighlistPvPKci"></span><span id="lammps_find_fix_neighlist__voidP.cCP.i"></span><span class="target" id="library_8h_1a51652806cc5a984712a87de083396a48"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_find_fix_neighlist</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">id</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">request</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425lammps_find_fix_neighlistPvPKci" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv325lammps_find_fix_neighlistPvPKci"></span><span id="_CPPv225lammps_find_fix_neighlistPvPKci"></span><span id="lammps_find_fix_neighlist__voidP.cCP.i"></span><span class="target" id="library_8h_1a51652806cc5a984712a87de083396a48"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_find_fix_neighlist</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">id</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">request</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425lammps_find_fix_neighlistPvPKci" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Find index of a neighbor list requested by a fix</p>
 <p>The neighbor list request from a fix is identified by the fix ID and the request ID. The request ID is typically 0, but will be &gt; 0 in case a fix has multiple neighbor list requests.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>handle</strong> – pointer to a previously created LAMMPS instance cast to <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*</span></code>. </p></li>
 <li><p><strong>id</strong> – Identifier of fix instance </p></li>
 <li><p><strong>reqid</strong> – request id to identify neighbor list in case there are multiple requests from the same fix </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>return neighbor list index if found, otherwise -1 </p>
 </dd>
 </dl>
@@ -185,12 +190,12 @@ LAMMPS or querying of their properties:</p>
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv426lammps_find_pair_neighlistPvPKciii">
-<span id="_CPPv326lammps_find_pair_neighlistPvPKciii"></span><span id="_CPPv226lammps_find_pair_neighlistPvPKciii"></span><span id="lammps_find_pair_neighlist__voidP.cCP.i.i.i"></span><span class="target" id="library_8h_1a859b206fea42bc2db03c992acc478cbc"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_find_pair_neighlist</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">style</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">exact</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">nsub</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">request</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426lammps_find_pair_neighlistPvPKciii" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv326lammps_find_pair_neighlistPvPKciii"></span><span id="_CPPv226lammps_find_pair_neighlistPvPKciii"></span><span id="lammps_find_pair_neighlist__voidP.cCP.i.i.i"></span><span class="target" id="library_8h_1a859b206fea42bc2db03c992acc478cbc"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_find_pair_neighlist</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">style</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">exact</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">nsub</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">request</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426lammps_find_pair_neighlistPvPKciii" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Find index of a neighbor list requested by a pair style</p>
 <p>This function determines which of the available neighbor lists for pair styles matches the given conditions. It first matches the style name. If exact is 1 the name must match exactly, if exact is 0, a regular expression or sub-string match is done. If the pair style is hybrid or hybrid/overlay the style is matched against the sub styles instead. If a the same pair style is used multiple times as a sub-style, the nsub argument must be &gt; 0 and represents the nth instance of the sub-style (same as for the pair_coeff command, for example). In that case nsub=0 will not produce a match and this function will return -1.</p>
 <p>The final condition to be checked is the request ID (reqid). This will normally be 0, but some pair styles request multiple neighbor lists and set the request ID to a value &gt; 0.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>handle</strong> – pointer to a previously created LAMMPS instance cast to <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*</span></code>. </p></li>
 <li><p><strong>style</strong> – String used to search for pair style instance </p></li>
@@ -199,7 +204,7 @@ LAMMPS or querying of their properties:</p>
 <li><p><strong>reqid</strong> – request id to identify neighbor list in case there are multiple requests from the same pair style instance </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>return neighbor list index if found, otherwise -1 </p>
 </dd>
 </dl>
@@ -208,16 +213,16 @@ LAMMPS or querying of their properties:</p>
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv429lammps_neighlist_num_elementsPvi">
-<span id="_CPPv329lammps_neighlist_num_elementsPvi"></span><span id="_CPPv229lammps_neighlist_num_elementsPvi"></span><span id="lammps_neighlist_num_elements__voidP.i"></span><span class="target" id="library_8h_1ab4cd0310c0638fad6352d0081194bdd8"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_neighlist_num_elements</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">idx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429lammps_neighlist_num_elementsPvi" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv329lammps_neighlist_num_elementsPvi"></span><span id="_CPPv229lammps_neighlist_num_elementsPvi"></span><span id="lammps_neighlist_num_elements__voidP.i"></span><span class="target" id="library_8h_1ab4cd0310c0638fad6352d0081194bdd8"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_neighlist_num_elements</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">idx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429lammps_neighlist_num_elementsPvi" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Return the number of entries in the neighbor list with given index</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>handle</strong> – pointer to a previously created LAMMPS instance cast to <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*</span></code>. </p></li>
 <li><p><strong>idx</strong> – neighbor list index </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>return number of entries in neighbor list, -1 if idx is not a valid index </p>
 </dd>
 </dl>
@@ -226,10 +231,10 @@ LAMMPS or querying of their properties:</p>
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv434lammps_neighlist_element_neighborsPviiPiPiPPi">
-<span id="_CPPv334lammps_neighlist_element_neighborsPviiPiPiPPi"></span><span id="_CPPv234lammps_neighlist_element_neighborsPviiPiPiPPi"></span><span id="lammps_neighlist_element_neighbors__voidP.i.i.iP.iP.iPP"></span><span class="target" id="library_8h_1a0bd03926cf3a3ebb93311dab400c792c"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_neighlist_element_neighbors</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">idx</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">element</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">iatom</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">numneigh</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">neighbors</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv434lammps_neighlist_element_neighborsPviiPiPiPPi" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv334lammps_neighlist_element_neighborsPviiPiPiPPi"></span><span id="_CPPv234lammps_neighlist_element_neighborsPviiPiPiPPi"></span><span id="lammps_neighlist_element_neighbors__voidP.i.i.iP.iP.iPP"></span><span class="target" id="library_8h_1a0bd03926cf3a3ebb93311dab400c792c"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_neighlist_element_neighbors</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">idx</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">element</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">iatom</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">numneigh</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">neighbors</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv434lammps_neighlist_element_neighborsPviiPiPiPPi" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Return atom local index, number of neighbors, and array of neighbor local atom indices of neighbor list entry</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>handle</strong> – pointer to a previously created LAMMPS instance cast to <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*</span></code>. </p></li>
 <li><p><strong>idx</strong> – index of this neighbor list in the list of all neighbor lists </p></li>
@@ -255,7 +260,7 @@ LAMMPS or querying of their properties:</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -264,7 +269,6 @@ LAMMPS or querying of their properties:</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

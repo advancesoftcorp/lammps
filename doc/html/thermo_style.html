@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>thermo_style command &mdash; LAMMPS documentation</title>
@@ -10,18 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/thermo_style.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -34,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -73,6 +76,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="commands_list.html">Commands</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="angle_coeff.html">angle_coeff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="angle_style.html">angle_style command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="angle_write.html">angle_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="atom_modify.html">atom_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="atom_style.html">atom_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="balance.html">balance command</a></li>
@@ -80,7 +84,6 @@
 <li class="toctree-l2"><a class="reference internal" href="bond_style.html">bond_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_write.html">bond_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="boundary.html">boundary command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="box.html">box command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="change_box.html">change_box command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="clear.html">clear command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="comm_modify.html">comm_modify command</a></li>
@@ -95,6 +98,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dielectric.html">dielectric command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_coeff.html">dihedral_coeff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_style.html">dihedral_style command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dihedral_write.html">dihedral_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dimension.html">dimension command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="displace_atoms.html">displace_atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html">dump command</a></li>
@@ -106,6 +110,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-movie-command"><span class="xref std std-doc">dump movie</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-atom-adios-command"><span class="xref std std-doc">dump atom/adios</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-custom-adios-command"><span class="xref std std-doc">dump custom/adios</span> command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dump.html#dump-cfg-uef-command"><span class="xref std std-doc">dump cfg/uef</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_adios.html">dump atom/adios  command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_adios.html#dump-custom-adios-command">dump custom/adios command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_cfg_uef.html">dump cfg/uef command</a></li>
@@ -123,6 +128,7 @@
 <li class="toctree-l2"><a class="reference internal" href="echo.html">echo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix.html">fix command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify.html">fix_modify command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitpod_command.html">fitpod command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group.html">group command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group2ndx.html">group2ndx command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group2ndx.html#ndx2group-command">ndx2group command</a></li>
@@ -137,6 +143,7 @@
 <li class="toctree-l2"><a class="reference internal" href="kspace_modify.html">kspace_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kspace_style.html">kspace_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="label.html">label command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labelmap.html">labelmap command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lattice.html">lattice command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="log.html">log command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mass.html">mass command</a></li>
@@ -150,12 +157,10 @@
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-sd-command">min_style sd command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-quickmin-command">min_style quickmin command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-fire-command">min_style fire command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-fire-old-command">min_style fire/old command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-command"><span class="xref std std-doc">min_style spin</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-cg-command"><span class="xref std std-doc">min_style spin/cg</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-lbfgs-command"><span class="xref std std-doc">min_style spin/lbfgs</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="minimize.html">minimize command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="minimize.html#minimize-kk-command">minimize/kk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="molecule.html">molecule command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neb.html">neb command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neb_spin.html">neb/spin command</a></li>
@@ -181,8 +186,7 @@
 <li class="toctree-l2"><a class="reference internal" href="region.html">region command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="replicate.html">replicate command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rerun.html">rerun command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset_atom_ids.html">reset_atom_ids command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset_mol_ids.html">reset_mol_ids command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reset_atoms.html">reset_atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reset_timestep.html">reset_timestep command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="restart.html">restart command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="run.html">run command</a></li>
@@ -228,6 +232,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -245,12 +250,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="commands_list.html">Commands</a> &raquo;</li>
-      <li>thermo_style command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="commands_list.html">Commands</a></li>
+      <li class="breadcrumb-item active">thermo_style command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="thermo_modify.html" class="btn btn-neutral float-left" title="thermo_modify command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -261,11 +265,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="thermo-style-command">
-<span id="index-0"></span><h1>thermo_style command<a class="headerlink" href="#thermo-style-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="thermo-style-command">
+<span id="index-0"></span><h1>thermo_style command<a class="headerlink" href="#thermo-style-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">thermo_style</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="n">args</span><span class="w"></span>
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">thermo_style</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="n">args</span>
 </pre></div>
 </div>
 <ul>
@@ -346,18 +351,18 @@
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">thermo_style</span><span class="w"> </span><span class="n">multi</span><span class="w"></span>
-<span class="k">thermo_style</span><span class="w"> </span><span class="n">yaml</span><span class="w"></span>
-<span class="k">thermo_style</span><span class="w"> </span><span class="n">one</span><span class="w"></span>
-<span class="k">thermo_style</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">pe</span><span class="w"> </span><span class="n">etotal</span><span class="w"> </span><span class="n">press</span><span class="w"> </span><span class="n">vol</span><span class="w"></span>
-<span class="k">thermo_style</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">etotal</span><span class="w"> </span><span class="n">c_myTemp</span><span class="w"> </span><span class="n">v_abc</span><span class="w"></span>
-<span class="k">thermo_style</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">etotal</span><span class="w"> </span><span class="n">c_myTemp[</span><span class="o">*</span><span class="n">]</span><span class="w"> </span><span class="n">v_abc</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">thermo_style</span><span class="w"> </span><span class="n">multi</span>
+<span class="k">thermo_style</span><span class="w"> </span><span class="n">yaml</span>
+<span class="k">thermo_style</span><span class="w"> </span><span class="n">one</span>
+<span class="k">thermo_style</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">pe</span><span class="w"> </span><span class="n">etotal</span><span class="w"> </span><span class="n">press</span><span class="w"> </span><span class="n">vol</span>
+<span class="k">thermo_style</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">etotal</span><span class="w"> </span><span class="n">c_myTemp</span><span class="w"> </span><span class="n">v_abc</span>
+<span class="k">thermo_style</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">etotal</span><span class="w"> </span><span class="n">c_myTemp[</span><span class="o">*</span><span class="n">]</span><span class="w"> </span><span class="n">v_abc</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <p>Set the style and content for printing thermodynamic data to the screen
 and log files.</p>
 <p>Style <em>one</em> prints a single line of thermodynamic info that is the
@@ -376,7 +381,7 @@ other output before, after, or in between thermodynamic output, the
 YAML format content needs to be separated from the rest.  All YAML
 format thermodynamic output can be matched with a regular expression
 and can thus be extracted with commands like <code class="docutils literal notranslate"><span class="pre">egrep</span></code> as follows:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>egrep  <span class="s1">&#39;^(keywords:|data:$|---$|\.\.\.$|  - \[)&#39;</span> log.lammps &gt; log.yaml
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>egrep<span class="w">  </span><span class="s1">&#39;^(keywords:|data:$|---$|\.\.\.$|  - \[)&#39;</span><span class="w"> </span>log.lammps<span class="w"> </span>&gt;<span class="w"> </span>log.yaml
 </pre></div>
 </div>
 <p>Information about processing such YAML files is in the <a class="reference internal" href="Howto_structured_data.html"><span class="doc">structured
@@ -415,7 +420,7 @@ the thermo_modify command after it.</p>
 computed: “temp”, “press”, “ke”, “etotal”, “enthalpy”, “pxx”, etc.  By
 default this is done by using a <em>temperature</em> compute which is created
 when LAMMPS starts up, as if this command had been issued:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">thermo_temp</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">temp</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">thermo_temp</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">temp</span>
 </pre></div>
 </div>
 <p>See the <a class="reference internal" href="compute_temp.html"><span class="doc">compute temp</span></a> command for details.  Note
@@ -430,7 +435,7 @@ This is done via the <a class="reference internal" href="thermo_modify.html"><sp
 computed: “press”, “enthalpy”, “pxx”, etc.  By default this is done by
 using a <em>pressure</em> compute which is created when LAMMPS starts up, as
 if this command had been issued:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">thermo_press</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">pressure</span><span class="w"> </span><span class="n">thermo_temp</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">thermo_press</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">pressure</span><span class="w"> </span><span class="n">thermo_temp</span>
 </pre></div>
 </div>
 <p>See the <a class="reference internal" href="compute_pressure.html"><span class="doc">compute pressure</span></a> command for details.
@@ -445,7 +450,7 @@ that requires a pressure.  This is done via the
 be computed: “pe”, “etotal”, “ebond”, etc.  This is done by using a
 <em>pe</em> compute which is created when LAMMPS starts up, as if this
 command had been issued:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">thermo_pe</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">pe</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">thermo_pe</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">pe</span>
 </pre></div>
 </div>
 <p>See the <a class="reference internal" href="compute_pe.html"><span class="doc">compute pe</span></a> command for details.  Note that
@@ -523,7 +528,7 @@ been configured via the <a class="reference internal" href="timer.html"><span cl
 timeout timer is inactive, the value of this keyword is 0.0 and if the
 timer is expired, it is negative. This allows for example to exit
 loops cleanly, if the timeout is expired with:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="s">&quot;$(timeremain) &lt; 0.0&quot;</span><span class="w"> </span><span class="n">then</span><span class="w"> </span><span class="s">&quot;quit 0&quot;</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="s">&quot;$(timeremain) &lt; 0.0&quot;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="s">&quot;quit 0&quot;</span>
 </pre></div>
 </div>
 <p>The <em>ecouple</em> keyword is cumulative energy change in the system due to
@@ -533,10 +538,10 @@ positive value means that energy has been subtracted from the system
 explanation of why this sign choice makes sense.</p>
 <p>The <em>econserve</em> keyword is the sum of the potential and kinetic energy
 of the system as well as the energy that has been transferred by
-thermostatting or barostatting to their coupling reservoirs.  I.e. it
-is <em>pe</em> + <em>ke</em> + <em>econserve</em>.  Ideally, for a simulation in the NVE,
-NPH, or NPT ensembles, the <em>econserve</em> quantity should remain constant
-over time.</p>
+thermostatting or barostatting to their coupling reservoirs – that is,
+<em>econserve</em> = <em>pe</em> + <em>ke</em> + <em>ecouple</em>.  Ideally, for a simulation in
+the NVT, NPH, or NPT ensembles, the <em>econserve</em> quantity should remain
+constant over time even though <em>etotal</em> may change.</p>
 <p>The <em>fmax</em> and <em>fnorm</em> keywords are useful for monitoring the progress
 of an <a class="reference internal" href="minimize.html"><span class="doc">energy minimization</span></a>.  The <em>fmax</em> keyword
 calculates the maximum force in any dimension on any atom in the
@@ -551,7 +556,7 @@ the number of re-builds that LAMMPS considered potentially
 the <a class="reference internal" href="neigh_modify.html"><span class="doc">neigh_modify</span></a> command), then dangerous
 reneighborings are those that were triggered on the first timestep
 atom movement was checked for.  If this count is non-zero you may wish
-to reduce the delay factor to insure no force interactions are missed
+to reduce the delay factor to ensure no force interactions are missed
 by atoms moving beyond the neighbor skin distance before a rebuild
 takes place.</p>
 <p>The keywords <em>cella</em>, <em>cellb</em>, <em>cellc</em>, <em>cellalpha</em>,
@@ -575,11 +580,11 @@ asterisk means all indices from m to n (inclusive).</p>
 vector had been listed one by one.  E.g. these 2 thermo_style commands
 are equivalent, since the <a class="reference internal" href="compute_temp.html"><span class="doc">compute temp</span></a> command
 creates a global vector with 6 values.</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">myTemp</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">temp</span><span class="w"></span>
-<span class="k">thermo_style</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">etotal</span><span class="w"> </span><span class="n">c_myTemp[</span><span class="o">*</span><span class="n">]</span><span class="w"></span>
-<span class="k">thermo_style</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">etotal</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">             </span><span class="n">c_myTemp[1]</span><span class="w"> </span><span class="n">c_myTemp[2]</span><span class="w"> </span><span class="n">c_myTemp[3]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">             </span><span class="n">c_myTemp[4]</span><span class="w"> </span><span class="n">c_myTemp[5]</span><span class="w"> </span><span class="n">c_myTemp[6]</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">myTemp</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">temp</span>
+<span class="k">thermo_style</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">etotal</span><span class="w"> </span><span class="n">c_myTemp[</span><span class="o">*</span><span class="n">]</span>
+<span class="k">thermo_style</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">etotal</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">             </span><span class="n">c_myTemp[1]</span><span class="w"> </span><span class="n">c_myTemp[2]</span><span class="w"> </span><span class="n">c_myTemp[3]</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">             </span><span class="n">c_myTemp[4]</span><span class="w"> </span><span class="n">c_myTemp[5]</span><span class="w"> </span><span class="n">c_myTemp[6]</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -654,20 +659,20 @@ division by “natoms” in the variable formula if this is not the case.</p>
 </section>
 <hr class="docutils" />
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <p>This command must come after the simulation box is defined by a
 <a class="reference internal" href="read_data.html"><span class="doc">read_data</span></a>, <a class="reference internal" href="read_restart.html"><span class="doc">read_restart</span></a>, or
 <a class="reference internal" href="create_box.html"><span class="doc">create_box</span></a> command.</p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="thermo.html"><span class="doc">thermo</span></a>, <a class="reference internal" href="thermo_modify.html"><span class="doc">thermo_modify</span></a>,
 <a class="reference internal" href="fix_modify.html"><span class="doc">fix_modify</span></a>, <a class="reference internal" href="compute_temp.html"><span class="doc">compute temp</span></a>,
 <a class="reference internal" href="compute_pressure.html"><span class="doc">compute pressure</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">thermo_style</span><span class="w"> </span><span class="n">one</span><span class="w"></span>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">thermo_style</span><span class="w"> </span><span class="n">one</span>
 </pre></div>
 </div>
 </section>
@@ -684,7 +689,7 @@ division by “natoms” in the variable formula if this is not the case.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -693,7 +698,6 @@ division by “natoms” in the variable formula if this is not the case.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

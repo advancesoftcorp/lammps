@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>bond_style bpm/rotational command &mdash; LAMMPS documentation</title>
@@ -10,18 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/bond_bpm_rotational.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -34,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -94,9 +97,12 @@
 <li class="toctree-l2"><a class="reference internal" href="bond_gaussian.html">bond_style gaussian command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_gromos.html">bond_style gromos command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_harmonic.html">bond_style harmonic command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bond_harmonic_restrain.html">bond_style harmonic/restrain command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_harmonic_shift.html">bond_style harmonic/shift command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_harmonic_shift_cut.html">bond_style harmonic/shift/cut command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_hybrid.html">bond_style hybrid command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bond_lepton.html">bond_style lepton command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bond_mesocnt.html">bond_style mesocnt command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_mm3.html">bond_style mm3 command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_morse.html">bond_style morse command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_none.html">bond_style none command</a></li>
@@ -115,6 +121,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -132,12 +139,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="bonds.html">Bond Styles</a> &raquo;</li>
-      <li>bond_style bpm/rotational command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="bonds.html">Bond Styles</a></li>
+      <li class="breadcrumb-item active">bond_style bpm/rotational command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="bonds.html" class="btn btn-neutral float-left" title="Bond Styles" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -148,15 +154,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="bond-style-bpm-rotational-command">
-<span id="index-0"></span><h1>bond_style bpm/rotational command<a class="headerlink" href="#bond-style-bpm-rotational-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="bond-style-bpm-rotational-command">
+<span id="index-0"></span><h1>bond_style bpm/rotational command<a class="headerlink" href="#bond-style-bpm-rotational-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">bond_style</span><span class="w"> </span><span class="n">bpm</span><span class="o">/</span><span class="n">rotational</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">attribute1</span><span class="w"> </span><span class="n">attribute2</span><span class="w"> </span><span class="n">...</span><span class="w"></span>
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">bond_style</span><span class="w"> </span><span class="n">bpm</span><span class="o">/</span><span class="n">rotational</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">attribute1</span><span class="w"> </span><span class="n">attribute2</span><span class="w"> </span><span class="n">...</span>
 </pre></div>
 </div>
 <ul>
-<li><p>optional keyword = <em>overlay/pair</em> or <em>store/local</em> or <em>smooth</em></p>
+<li><p>optional keyword = <em>overlay/pair</em> or <em>store/local</em> or <em>smooth</em> or <em>break</em></p>
 <pre class="literal-block"><em>store/local</em> values = fix_ID N attributes ...
    * fix_ID = ID of associated internal fix to store data
    * N = prepare data for output every this many timesteps
@@ -167,28 +174,36 @@
      <em>x, y, z</em> = the center of mass position of the 2 atoms when the bond broke (distance units)
      <em>x/ref, y/ref, z/ref</em> = the initial center of mass position of the 2 atoms (distance units)
 
-<em>overlay/pair</em> value = none
+<em>overlay/pair</em> value = <em>yes</em> or <em>no</em>
    bonded particles will still interact with pair forces
 
 <em>smooth</em> value = <em>yes</em> or <em>no</em>
-   smooths bond forces near the breaking point</pre>
+   smooths bond forces near the breaking point
+
+<em>normalize</em> value = <em>yes</em> or <em>no</em>
+   normalizes normal and shear forces by the reference length
+
+<em>break</em> value = <em>yes</em> or <em>no</em>
+   indicates whether bonds break during a run</pre>
 </li>
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">bond_style</span><span class="w"> </span><span class="n">bpm</span><span class="o">/</span><span class="n">rotational</span><span class="w"></span>
-<span class="k">bond_coeff</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">0.2</span><span class="w"> </span><span class="m">0.02</span><span class="w"> </span><span class="m">0.02</span><span class="w"> </span><span class="m">0.20</span><span class="w"> </span><span class="m">0.04</span><span class="w"> </span><span class="m">0.04</span><span class="w"> </span><span class="m">0.04</span><span class="w"> </span><span class="m">0.1</span><span class="w"> </span><span class="m">0.02</span><span class="w"> </span><span class="m">0.002</span><span class="w"> </span><span class="m">0.002</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">bond_style</span><span class="w"> </span><span class="n">bpm</span><span class="o">/</span><span class="n">rotational</span>
+<span class="k">bond_coeff</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">0.2</span><span class="w"> </span><span class="m">0.02</span><span class="w"> </span><span class="m">0.02</span><span class="w"> </span><span class="m">0.20</span><span class="w"> </span><span class="m">0.04</span><span class="w"> </span><span class="m">0.04</span><span class="w"> </span><span class="m">0.04</span><span class="w"> </span><span class="m">0.1</span><span class="w"> </span><span class="m">0.02</span><span class="w"> </span><span class="m">0.002</span><span class="w"> </span><span class="m">0.002</span>
 
-<span class="k">bond_style</span><span class="w"> </span><span class="n">bpm</span><span class="o">/</span><span class="n">rotational</span><span class="w"> </span><span class="n">myfix</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="n">id1</span><span class="w"> </span><span class="n">id2</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">myfix</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">store</span><span class="o">/</span><span class="n">local</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="m">3</span><span class="w"></span>
-<span class="k">dump </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">local</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="n">dump.broken</span><span class="w"> </span><span class="n">f_myfix[1]</span><span class="w"> </span><span class="n">f_myfix[2]</span><span class="w"> </span><span class="n">f_myfix[3]</span><span class="w"></span>
-<span class="k">dump_modify</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">write_header</span><span class="w"> </span><span class="n">no</span><span class="w"></span>
+<span class="k">bond_style</span><span class="w"> </span><span class="n">bpm</span><span class="o">/</span><span class="n">rotational</span><span class="w"> </span><span class="n">store</span><span class="o">/</span><span class="n">local</span><span class="w"> </span><span class="n">myfix</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="n">id1</span><span class="w"> </span><span class="n">id2</span>
+<span class="k">dump </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">local</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="n">dump.broken</span><span class="w"> </span><span class="n">f_myfix[1]</span><span class="w"> </span><span class="n">f_myfix[2]</span><span class="w"> </span><span class="n">f_myfix[3]</span>
+<span class="k">dump_modify </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="n">write_header</span><span class="w"> </span><span class="n">no</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 4May2022.</span></p>
+</div>
 <p>The <em>bpm/rotational</em> bond style computes forces and torques based on
 deviations from the initial reference state of the two atoms.  The
 reference state is stored by each bond when it is first computed in
@@ -206,39 +221,39 @@ which is proportional to the tangential shear displacement with a
 stiffness of <span class="math notranslate nohighlight">\(k_s\)</span>. This tangential force also induces a torque.
 In addition, bending and twisting torques are also applied to
 particles which are proportional to angular bending and twisting
-displacements with stiffnesses of :math`k_b` and <span class="math notranslate nohighlight">\(k_t',
+displacements with stiffnesses of <span class="math notranslate nohighlight">\(k_b\)</span> and <span class="math notranslate nohighlight">\(k_t\)</span>,
 respectively.  Details on the calculations of shear displacements and
-angular displacements can be found in :ref:\)</span> and
+angular displacements can be found in <a class="reference internal" href="#wang2009"><span class="std std-ref">(Wang)</span></a> and
 <a class="reference internal" href="#wang2009b"><span class="std std-ref">(Wang and Mora)</span></a>.</p>
-<p>Bonds will break under sufficient stress. A breaking criteria is calculated</p>
+<p>Bonds will break under sufficient stress. A breaking criterion is calculated</p>
 <div class="math notranslate nohighlight">
-\[B = \mathrm{max}\{0, \frac{f_r}{f_{r,c}} + \frac{|f_s|}{f_{s,c}} +
-    \frac{|\tau_b|}{\tau_{b,c}} + \frac{|\tau_t|}{\tau_{t,c}} \}\]</div>
+\[B = \mathrm{max}\left\{0, \frac{f_r}{f_{r,c}} + \frac{|f_s|}{f_{s,c}} +
+    \frac{|\tau_b|}{\tau_{b,c}} + \frac{|\tau_t|}{\tau_{t,c}} \right\}\]</div>
 <p>where <span class="math notranslate nohighlight">\(|f_s|\)</span> is the magnitude of the shear force and
 <span class="math notranslate nohighlight">\(|\tau_b|\)</span> and <span class="math notranslate nohighlight">\(|\tau_t|\)</span> are the magnitudes of the
-bending and twisting forces, respectively. The corresponding variables
+bending and twisting torques, respectively. The corresponding variables
 <span class="math notranslate nohighlight">\(f_{r,c}\)</span> <span class="math notranslate nohighlight">\(f_{s,c}\)</span>, <span class="math notranslate nohighlight">\(\tau_{b,c}\)</span>, and
 <span class="math notranslate nohighlight">\(\tau_{t,c}\)</span> are critical limits to each force or torque.  If
 <span class="math notranslate nohighlight">\(B\)</span> is ever equal to or exceeds one, the bond will break.  This
-is done by setting by setting its type to 0 such that forces and
+is done by setting the bond type to 0 such that forces and
 torques are no longer computed.</p>
 <p>After computing the base magnitudes of the forces and torques, they
 can be optionally multiplied by an extra factor <span class="math notranslate nohighlight">\(w\)</span> to smoothly
 interpolate forces and torques to zero as the bond breaks. This term
-is calculated as <span class="math notranslate nohighlight">\(w = (1.0 - B^4)\)</span>. This smoothing factor can be
-added or removed using the <em>smooth</em> keyword.</p>
+is calculated as <span class="math notranslate nohighlight">\(w = (1.0 - B^4)\)</span>. This smoothing factor can be added
+or removed by setting the <em>smooth</em> keyword to <em>yes</em> or <em>no</em>, respectively.</p>
 <p>Finally, additional damping forces and torques are applied to the two
 particles. A force is applied proportional to the difference in the
 normal velocity of particles using a similar construction as
-dissipative particle dynamics (<a class="reference internal" href="#groot3"><span class="std std-ref">(Groot)</span></a>):</p>
+dissipative particle dynamics <a class="reference internal" href="#groot3"><span class="std std-ref">(Groot)</span></a>:</p>
 <div class="math notranslate nohighlight">
 \[F_D = - \gamma_n w (\hat{r} \bullet \vec{v})\]</div>
 <p>where <span class="math notranslate nohighlight">\(\gamma_n\)</span> is the damping strength, <span class="math notranslate nohighlight">\(\hat{r}\)</span> is the
 radial normal vector, and <span class="math notranslate nohighlight">\(\vec{v}\)</span> is the velocity difference
 between the two particles. Similarly, tangential forces are applied to
 each atom proportional to the relative differences in sliding
-velocities with a constant prefactor <span class="math notranslate nohighlight">\(\gamma_s\)</span> (<a class="reference internal" href="#wang20152"><span class="std std-ref">(Wang et
-al.)</span></a>) along with their associated torques. The rolling and
+velocities with a constant prefactor <span class="math notranslate nohighlight">\(\gamma_s\)</span> <a class="reference internal" href="#wang20152"><span class="std std-ref">(Wang et
+al.)</span></a> along with their associated torques. The rolling and
 twisting components of the relative angular velocities of the two
 atoms are also damped by applying torques with prefactors of
 <span class="math notranslate nohighlight">\(\gamma_r\)</span> and <span class="math notranslate nohighlight">\(\gamma_t\)</span>, respectively.</p>
@@ -260,21 +275,29 @@ or <a class="reference internal" href="read_restart.html"><span class="doc">read
 <li><p><span class="math notranslate nohighlight">\(\gamma_r\)</span>      (force*distance/velocity units)</p></li>
 <li><p><span class="math notranslate nohighlight">\(\gamma_t\)</span>      (force*distance/velocity units)</p></li>
 </ul>
+<p>If the <em>normalize</em> keyword is set to <em>yes</em>, the radial and shear forces
+will be normalized by <span class="math notranslate nohighlight">\(r_0\)</span> such that <span class="math notranslate nohighlight">\(k_r\)</span> and <span class="math notranslate nohighlight">\(k_s\)</span>
+must be given in force units.</p>
 <p>By default, pair forces are not calculated between bonded particles.
-Pair forces can alternatively be overlaid on top of bond forces using
-the <em>overlay/pair</em> keyword. These settings require specific
+Pair forces can alternatively be overlaid on top of bond forces by setting
+the <em>overlay/pair</em> keyword to <em>yes</em>. These settings require specific
 <a class="reference internal" href="special_bonds.html"><span class="doc">special_bonds</span></a> settings described in the
-restrictions.  Further details can be found in the <cite>:doc: how to
-&lt;Howto_BPM&gt;</cite> page on BPMs.</p>
-<p>If the <em>store/local</em> keyword is used, this fix will track bonds that
+restrictions.  Further details can be found in the <a class="reference internal" href="Howto_bpm.html"><span class="doc">how to</span></a> page on BPMs.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 28Mar2023.</span></p>
+</div>
+<p>If the <em>break</em> keyword is set to <em>no</em>, LAMMPS assumes bonds should not break
+during a simulation run. This will prevent some unnecessary calculation.
+However, if a bond reaches a damage criterion greater than one,
+it will trigger an error.</p>
+<p>If the <em>store/local</em> keyword is used, an internal fix will track bonds that
 break during the simulation. Whenever a bond breaks, data is processed
 and transferred to an internal fix labeled <em>fix_ID</em>. This allows the
-local data to be accessed by other LAMMPS commands.
-Following any optional keyword/value arguments, a list of one or more
-attributes is specified.  These include the IDs of the two atoms in
-the bond. The other attributes for the two atoms include the timestep
-during which the bond broke and the current/initial center of mass
-position of the two atoms.</p>
+local data to be accessed by other LAMMPS commands. Following this optional
+keyword, a list of one or more attributes is specified.  These include the
+IDs of the two atoms in the bond. The other attributes for the two atoms
+include the timestep during which the bond broke and the current/initial
+center of mass position of the two atoms.</p>
 <p>Data is continuously accumulated over intervals of <em>N</em>
 timesteps. At the end of each interval, all of the saved accumulated
 data is deleted to make room for new data. Individual datum may
@@ -289,60 +312,67 @@ to regularly output a sample of the accumulated data.</p>
 are not included.
 The <a class="reference internal" href="delete_bonds.html"><span class="doc">delete_bonds</span></a> command can also be used to
 query the status of broken bonds or permanently delete them, e.g.:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">delete_bonds</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">stats</span><span class="w"></span>
-<span class="k">delete_bonds</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">bond</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="n">remove</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">delete_bonds </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">stats</span>
+<span class="k">delete_bonds </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">bond</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="n">remove</span>
 </pre></div>
 </div>
 </section>
 <hr class="docutils" />
 <section id="restart-and-other-info">
-<h2>Restart and other info<a class="headerlink" href="#restart-and-other-info" title="Permalink to this headline">¶</a></h2>
+<h2>Restart and other info<a class="headerlink" href="#restart-and-other-info" title="Permalink to this heading"></a></h2>
 <p>This bond style writes the reference state of each bond to
 <a class="reference internal" href="restart.html"><span class="doc">binary restart files</span></a>. Loading a restart file will
-properly resume bonds.</p>
-<p>The single() function of these pair styles returns 0.0 for the energy
-of a pairwise interaction, since energy is not conserved in these
-dissipative potentials.  It also returns only the normal component of
-the pairwise interaction force.</p>
-<p>The accumulated data is not written to restart files and should be
-output before a restart file is written to avoid missing data.</p>
-<p>The internal fix calculates a local vector or local array depending on the
-number of input values.  The length of the vector or number of rows in
-the array is the number of recorded, lost interactions.  If a single
-input is specified, a local vector is produced.  If two or more inputs
-are specified, a local array is produced where the number of columns =
-the number of inputs.  The vector or array can be accessed by any
-command that uses local values from a compute as input.  See the
-<a class="reference internal" href="Howto_output.html"><span class="doc">Howto output</span></a> page for an overview of LAMMPS
-output options.</p>
+properly resume bonds. However, the reference state is NOT
+written to data files. Therefore reading a data file will not
+restore bonds and will cause their reference states to be redefined.</p>
+<p>If the <em>store/local</em> option is used, an internal fix will calculate
+a local vector or local array depending on the number of input values.
+The length of the vector or number of rows in the array is the number
+of recorded, broken bonds.  If a single input is specified, a local
+vector is produced. If two or more inputs are specified, a local array
+is produced where the number of columns = the number of inputs.  The
+vector or array can be accessed by any command that uses local values
+from a compute as input. See the <a class="reference internal" href="Howto_output.html"><span class="doc">Howto output</span></a> page
+for an overview of LAMMPS output options.</p>
 <p>The vector or array will be floating point values that correspond to
 the specified attribute.</p>
+<p>The single() function of this bond style returns 0.0 for the energy
+of a bonded interaction, since energy is not conserved in these
+dissipative potentials.  It also returns only the normal component of
+the bonded interaction force.  However, the single() function also
+calculates 7 extra bond quantities.  The first 4 are data from the
+reference state of the bond including the initial distance between particles
+<span class="math notranslate nohighlight">\(r_0\)</span> followed by the <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>, and <span class="math notranslate nohighlight">\(z\)</span> components
+of the initial unit vector pointing to particle I from particle J. The next 3
+quantities (5-7) are the  <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>, and <span class="math notranslate nohighlight">\(z\)</span> components
+of the total force, including normal and tangential contributions, acting
+on particle I.</p>
+<p>These extra quantities can be accessed by the <a class="reference internal" href="compute_bond_local.html"><span class="doc">compute bond/local</span></a>
+command, as <em>b1</em>, <em>b2</em>, …, <em>b7</em>.</p>
 </section>
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
-<p>This bond style can only be used if LAMMPS was built with the BPM
-package. See the <a class="reference internal" href="Build_package.html"><span class="doc">Build package</span></a> doc page for
-more info.</p>
-<p>By default if pair interactions are to be disabled, this bond style
-requires setting</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">special_bonds</span><span class="w"> </span><span class="n">lj</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">coul</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"></span>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
+<p>This bond style is part of the BPM package.  It is only enabled if
+LAMMPS was built with that package.  See the <a class="reference internal" href="Build_package.html"><span class="doc">Build package</span></a> page for more info.</p>
+<p>By default if pair interactions between bonded atoms are to be disabled,
+this bond style requires setting</p>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">special_bonds</span><span class="w"> </span><span class="n">lj</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">coul</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span>
 </pre></div>
 </div>
-<p>and <a class="reference internal" href="newton.html"><span class="doc">newton</span></a> must be set to bond off.  If the
-<em>overlay/pair</em> option is used, this bond style alternatively requires
-setting</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">special_bonds</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">coul</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"></span>
+<p>and <a class="reference internal" href="newton.html"><span class="doc">newton</span></a> must be set to bond off.  If the <em>overlay/pair</em>
+keyword is set to <em>yes</em>, this bond style alternatively requires setting</p>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">special_bonds</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">coul</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span>
 </pre></div>
 </div>
 <p>The <em>bpm/rotational</em> style requires <a class="reference internal" href="atom_style.html"><span class="doc">atom style bpm/sphere</span></a>.</p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="bond_coeff.html"><span class="doc">bond_coeff</span></a>, <a class="reference internal" href="fix_nve_bpm_sphere.html"><span class="doc">fix nve/bpm/sphere</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
-<p>The option defaults are <em>smooth</em> = <em>yes</em></p>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
+<p>The option defaults are <em>overlay/pair</em> = <em>no</em>, <em>smooth</em> = <em>yes</em>, <em>normalize</em> = <em>no</em>, and <em>break</em> = <em>yes</em></p>
 <hr class="docutils" />
 <p id="wang2009"><strong>(Wang)</strong> Wang, Acta Geotechnica, 4,
 p 117-127 (2009).</p>
@@ -366,7 +396,7 @@ models. Particuology, 23, 49-55.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -375,7 +405,6 @@ models. Particuology, 23, 49-55.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

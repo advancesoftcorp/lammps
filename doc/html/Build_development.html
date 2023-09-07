@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>3.11. Development build options &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Build_development.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -69,6 +73,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#code-coverage-and-unit-testing-cmake-only">3.11.5. Code Coverage and Unit Testing (CMake only)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#coding-style-utilities">3.11.6. Coding style utilities</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#clang-format-support">3.11.7. Clang-format support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#github-command-line-interface">3.11.8. GitHub command line interface</a></li>
 </ul>
 </li>
 </ul>
@@ -99,6 +104,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -116,12 +122,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Build.html"><span class="section-number">3. </span>Build LAMMPS</a> &raquo;</li>
-      <li><span class="section-number">3.11. </span>Development build options</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Build.html"><span class="section-number">3. </span>Build LAMMPS</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">3.11. </span>Development build options</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="Build_diskspace.html" class="btn btn-neutral float-left" title="3.10. Notes for saving disk space when building LAMMPS from source" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -132,46 +137,47 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="development-build-options">
-<h1><span class="section-number">3.11. </span>Development build options<a class="headerlink" href="#development-build-options" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="development-build-options">
+<h1><span class="section-number">3.11. </span>Development build options<a class="headerlink" href="#development-build-options" title="Permalink to this heading"></a></h1>
 <p>The build procedures in LAMMPS offers a few extra options which are
 useful during development, testing or debugging.</p>
 <hr class="docutils" />
 <section id="monitor-compilation-flags-cmake-only">
-<span id="compilation"></span><h2><span class="section-number">3.11.1. </span>Monitor compilation flags (CMake only)<a class="headerlink" href="#monitor-compilation-flags-cmake-only" title="Permalink to this headline">¶</a></h2>
+<span id="compilation"></span><h2><span class="section-number">3.11.1. </span>Monitor compilation flags (CMake only)<a class="headerlink" href="#monitor-compilation-flags-cmake-only" title="Permalink to this heading"></a></h2>
 <p>Sometimes it is necessary to verify the complete sequence of compilation flags
 generated by the CMake build. To enable a more verbose output during
 compilation you can use the following option.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-D <span class="nv">CMAKE_VERBOSE_MAKEFILE</span><span class="o">=</span>value    <span class="c1"># value = no (default) or yes</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-D<span class="w"> </span><span class="nv">CMAKE_VERBOSE_MAKEFILE</span><span class="o">=</span>value<span class="w">    </span><span class="c1"># value = no (default) or yes</span>
 </pre></div>
 </div>
 <p>Another way of doing this without reconfiguration is calling make with
 variable VERBOSE set to 1:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make <span class="nv">VERBOSE</span><span class="o">=</span><span class="m">1</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span><span class="nv">VERBOSE</span><span class="o">=</span><span class="m">1</span>
 </pre></div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="enable-static-code-analysis-with-clang-tidy-cmake-only">
-<span id="clang-tidy"></span><h2><span class="section-number">3.11.2. </span>Enable static code analysis with clang-tidy (CMake only)<a class="headerlink" href="#enable-static-code-analysis-with-clang-tidy-cmake-only" title="Permalink to this headline">¶</a></h2>
+<span id="clang-tidy"></span><h2><span class="section-number">3.11.2. </span>Enable static code analysis with clang-tidy (CMake only)<a class="headerlink" href="#enable-static-code-analysis-with-clang-tidy-cmake-only" title="Permalink to this heading"></a></h2>
 <p>The <a class="reference external" href="https://clang.llvm.org/extra/clang-tidy/">clang-tidy tool</a> is a
 static code analysis tool to diagnose (and potentially fix) typical
 programming errors or coding style violations.  It has a modular framework
 of tests that can be adjusted to help identifying problems before they
 become bugs and also assist in modernizing large code bases (like LAMMPS).
 It can be enabled for all C++ code with the following CMake flag</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-D <span class="nv">ENABLE_CLANG_TIDY</span><span class="o">=</span>value    <span class="c1"># value = no (default) or yes</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-D<span class="w"> </span><span class="nv">ENABLE_CLANG_TIDY</span><span class="o">=</span>value<span class="w">    </span><span class="c1"># value = no (default) or yes</span>
 </pre></div>
 </div>
 <p>With this flag enabled all source files will be processed twice, first to
 be compiled and then to be analyzed. Please note that the analysis can be
-significantly more time consuming than the compilation itself.</p>
+significantly more time-consuming than the compilation itself.</p>
 <hr class="docutils" />
 </section>
 <section id="report-missing-and-unneeded-include-statements-cmake-only">
-<span id="iwyu-processing"></span><h2><span class="section-number">3.11.3. </span>Report missing and unneeded ‘#include’ statements (CMake only)<a class="headerlink" href="#report-missing-and-unneeded-include-statements-cmake-only" title="Permalink to this headline">¶</a></h2>
+<span id="iwyu-processing"></span><h2><span class="section-number">3.11.3. </span>Report missing and unneeded ‘#include’ statements (CMake only)<a class="headerlink" href="#report-missing-and-unneeded-include-statements-cmake-only" title="Permalink to this heading"></a></h2>
 <p>The conventions for how and when to use and order include statements in
-LAMMPS are documented in <a class="reference internal" href="Modify_style.html"><span class="doc">LAMMPS programming style and requirements for contributions</span></a>.  To assist with following
+LAMMPS are documented in <a class="reference internal" href="Modify_style.html"><span class="doc">LAMMPS programming style</span></a>.  To assist with following
 these conventions one can use the <a class="reference external" href="https://include-what-you-use.org/">Include What You Use tool</a>.
 This tool is still under development and for large and complex projects like LAMMPS
 there are some false positives, so suggested changes need to be verified manually.
@@ -182,13 +188,13 @@ version that matches the version of the clang compiler, configure, build, and
 install it.</p>
 <p>The necessary steps to generate the report can be enabled via a CMake variable
 during CMake configuration.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-D <span class="nv">ENABLE_IWYU</span><span class="o">=</span>value    <span class="c1"># value = no (default) or yes</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-D<span class="w"> </span><span class="nv">ENABLE_IWYU</span><span class="o">=</span>value<span class="w">    </span><span class="c1"># value = no (default) or yes</span>
 </pre></div>
 </div>
 <p>This will check if the required binary (include-what-you-use or iwyu)
 and python script script (iwyu-tool or iwyu_tool or iwyu_tool.py) can
 be found in the path.  The analysis can then be started with:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make iwyu
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>iwyu
 </pre></div>
 </div>
 <p>This may first run some compilation, as the analysis is dependent
@@ -196,7 +202,7 @@ on recording all commands required to do the compilation.</p>
 <hr class="docutils" />
 </section>
 <section id="address-undefined-behavior-and-thread-sanitizer-support-cmake-only">
-<span id="sanitizer"></span><h2><span class="section-number">3.11.4. </span>Address, Undefined Behavior, and Thread Sanitizer Support (CMake only)<a class="headerlink" href="#address-undefined-behavior-and-thread-sanitizer-support-cmake-only" title="Permalink to this headline">¶</a></h2>
+<span id="sanitizer"></span><h2><span class="section-number">3.11.4. </span>Address, Undefined Behavior, and Thread Sanitizer Support (CMake only)<a class="headerlink" href="#address-undefined-behavior-and-thread-sanitizer-support-cmake-only" title="Permalink to this heading"></a></h2>
 <p>Compilers such as GCC and Clang support generating instrumented binaries
 which use different sanitizer libraries to detect problems in the code
 during run-time. They can detect issues like:</p>
@@ -212,17 +218,17 @@ performance hit (but much less than using tools like <a class="reference externa
 these features, additional compiler flags need to be added to the
 compilation and linking stages.  This is done through setting the
 <code class="docutils literal notranslate"><span class="pre">ENABLE_SANITIZER</span></code> variable during configuration. Examples:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-D <span class="nv">ENABLE_SANITIZER</span><span class="o">=</span>none       <span class="c1"># no sanitizer active (default)</span>
--D <span class="nv">ENABLE_SANITIZER</span><span class="o">=</span>address    <span class="c1"># enable address sanitizer / memory leak checker</span>
--D <span class="nv">ENABLE_SANITIZER</span><span class="o">=</span>leak       <span class="c1"># enable memory leak checker (only)</span>
--D <span class="nv">ENABLE_SANITIZER</span><span class="o">=</span>undefined  <span class="c1"># enable undefined behavior sanitizer</span>
--D <span class="nv">ENABLE_SANITIZER</span><span class="o">=</span>thread     <span class="c1"># enable thread sanitizer</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-D<span class="w"> </span><span class="nv">ENABLE_SANITIZER</span><span class="o">=</span>none<span class="w">       </span><span class="c1"># no sanitizer active (default)</span>
+-D<span class="w"> </span><span class="nv">ENABLE_SANITIZER</span><span class="o">=</span>address<span class="w">    </span><span class="c1"># enable address sanitizer / memory leak checker</span>
+-D<span class="w"> </span><span class="nv">ENABLE_SANITIZER</span><span class="o">=</span>leak<span class="w">       </span><span class="c1"># enable memory leak checker (only)</span>
+-D<span class="w"> </span><span class="nv">ENABLE_SANITIZER</span><span class="o">=</span>undefined<span class="w">  </span><span class="c1"># enable undefined behavior sanitizer</span>
+-D<span class="w"> </span><span class="nv">ENABLE_SANITIZER</span><span class="o">=</span>thread<span class="w">     </span><span class="c1"># enable thread sanitizer</span>
 </pre></div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="code-coverage-and-unit-testing-cmake-only">
-<span id="testing"></span><h2><span class="section-number">3.11.5. </span>Code Coverage and Unit Testing (CMake only)<a class="headerlink" href="#code-coverage-and-unit-testing-cmake-only" title="Permalink to this headline">¶</a></h2>
+<span id="testing"></span><h2><span class="section-number">3.11.5. </span>Code Coverage and Unit Testing (CMake only)<a class="headerlink" href="#code-coverage-and-unit-testing-cmake-only" title="Permalink to this heading"></a></h2>
 <p>The LAMMPS code is subject to multiple levels of automated testing
 during development: integration testing (i.e. whether the code compiles
 on various platforms and with a variety of settings), unit testing
@@ -240,41 +246,61 @@ of the LAMMPS project on GitHub.</p>
 <p>The unit testing facility is integrated into the CMake build process
 of the LAMMPS source code distribution itself.  It can be enabled by
 setting <code class="docutils literal notranslate"><span class="pre">-D</span> <span class="pre">ENABLE_TESTING=on</span></code> during the CMake configuration step.
-It requires the <a class="reference external" href="http://pyyaml.org/">YAML</a> library and development
+It requires the <a class="reference external" href="https://pyyaml.org/">YAML</a> library and development
 headers (if those are not found locally a recent version will be
 downloaded and compiled along with LAMMPS and the test program) to
 compile and will download and compile a specific recent version of the
 <a class="reference external" href="https://github.com/google/googletest/">Googletest</a> C++ test framework
 for implementing the tests.</p>
+<div class="note admonition">
+<p class="admonition-title">Software version requirements for testing</p>
+<p>The compiler and library version requirements for the testing
+framework are more strict than for the main part of LAMMPS.  For
+example the default GNU C++ and Fortran compilers of RHEL/CentOS 7.x
+(version 4.8.x) are not sufficient.  The CMake configuration will try
+to detect incompatible versions and either skip incompatible tests or
+stop with an error.  Also the number of tests will depend on
+installed LAMMPS packages, development environment, operating system,
+and configuration settings.</p>
+</div>
 <p>After compilation is complete, the unit testing is started in the build
 folder using the <code class="docutils literal notranslate"><span class="pre">ctest</span></code> command, which is part of the CMake software.
 The output of this command will be looking something like this:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  [...]$ ctest
-  Test project /home/akohlmey/compile/lammps/build-testing
-        Start  1: MolPairStyle:hybrid-overlay
-  1/109 Test  #1: MolPairStyle:hybrid-overlay .........   Passed    0.02 sec
-        Start  2: MolPairStyle:hybrid
-  2/109 Test  #2: MolPairStyle:hybrid .................   Passed    0.01 sec
-        Start  3: MolPairStyle:lj_class2
-   [...]
-        Start 107: PotentialFileReader
-107/109 Test #107: PotentialFileReader ................   Passed    0.04 sec
-        Start 108: EIMPotentialFileReader
-108/109 Test #108: EIMPotentialFileReader .............   Passed    0.03 sec
-        Start 109: TestSimpleCommands
-109/109 Test #109: TestSimpleCommands .................   Passed    0.02 sec
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">   $ </span>ctest
+<span class="go">   Test project /home/akohlmey/compile/lammps/build-testing</span>
+<span class="go">        Start   1: RunLammps</span>
+<span class="go">  1/563 Test   #1: RunLammps ..........................................   Passed    0.28 sec</span>
+<span class="go">        Start   2: HelpMessage</span>
+<span class="go">  2/563 Test   #2: HelpMessage ........................................   Passed    0.06 sec</span>
+<span class="go">        Start   3: InvalidFlag</span>
+<span class="go">  3/563 Test   #3: InvalidFlag ........................................   Passed    0.06 sec</span>
+<span class="go">        Start   4: Tokenizer</span>
+<span class="go">  4/563 Test   #4: Tokenizer ..........................................   Passed    0.05 sec</span>
+<span class="go">        Start   5: MemPool</span>
+<span class="go">  5/563 Test   #5: MemPool ............................................   Passed    0.05 sec</span>
+<span class="go">        Start   6: ArgUtils</span>
+<span class="go">  6/563 Test   #6: ArgUtils ...........................................   Passed    0.05 sec</span>
+<span class="go">      [...]</span>
+<span class="go">        Start 561: ImproperStyle:zero</span>
+<span class="go">561/563 Test #561: ImproperStyle:zero .................................   Passed    0.07 sec</span>
+<span class="go">        Start 562: TestMliapPyUnified</span>
+<span class="go">562/563 Test #562: TestMliapPyUnified .................................   Passed    0.16 sec</span>
+<span class="go">        Start 563: TestPairList</span>
+<span class="go">563/563 Test #563: TestPairList .......................................   Passed    0.06 sec</span>
 
-  100% tests passed, 0 tests failed out of 26
+<span class="go">100% tests passed, 0 tests failed out of 563</span>
 
-  Total Test time (real) =  25.57 sec
+<span class="go">Label Time Summary:</span>
+<span class="go">generated    =   0.85 sec*proc (3 tests)</span>
+<span class="go">noWindows    =   4.16 sec*proc (2 tests)</span>
+<span class="go">slow         =  78.33 sec*proc (67 tests)</span>
+<span class="go">unstable     =  28.23 sec*proc (34 tests)</span>
+
+<span class="go">Total Test time (real) = 132.34 sec</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">ctest</span></code> command has many options, the most important ones are:</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p>Option</p></td>
 <td><p>Function</p></td>
@@ -310,11 +336,12 @@ kinds of tests implemented in different programming languages (C++, C, Python,
 Fortran) and testing different aspects of the LAMMPS software and its features.
 The tests will adapt to the compilation settings of LAMMPS, so that tests
 will be skipped if prerequisite features are not available in LAMMPS.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="note admonition">
+<p class="admonition-title">Work in Progress</p>
 <p>The unit test framework was added in spring 2020 and is under active
 development.  The coverage is not complete and will be expanded over
-time.</p>
+time.  Preference is given to parts of the code base that are easy to
+test or commonly used.</p>
 </div>
 <p>Tests for styles of the same kind of style (e.g. pair styles or bond
 styles) are performed with the same test executable using different
@@ -323,7 +350,7 @@ same kind it may be sufficient to add a suitable YAML file.
 <a class="reference internal" href="Developer_unittest.html"><span class="doc">Detailed instructions for adding tests</span></a> are
 provided in the Programmer Guide part of the manual.</p>
 <section id="unit-tests-for-force-styles">
-<h3>Unit tests for force styles<a class="headerlink" href="#unit-tests-for-force-styles" title="Permalink to this headline">¶</a></h3>
+<h3>Unit tests for force styles<a class="headerlink" href="#unit-tests-for-force-styles" title="Permalink to this heading"></a></h3>
 <p>A large part of LAMMPS are different “styles” for computing non-bonded
 and bonded interactions selected through the <a class="reference internal" href="pair_style.html"><span class="doc">pair_style command</span></a>,
 <a class="reference internal" href="bond_style.html"><span class="doc">bond_style command</span></a>, <a class="reference internal" href="angle_style.html"><span class="doc">angle_style command</span></a>, <a class="reference internal" href="dihedral_style.html"><span class="doc">dihedral_style command</span></a>,
@@ -345,29 +372,29 @@ skipped.  All tests will be executed on a single MPI process, so using
 the CMake option <code class="docutils literal notranslate"><span class="pre">-D</span> <span class="pre">BUILD_MPI=off</span></code> can significantly speed up testing,
 since this will skip the MPI initialization for each test run.
 Below is an example command and output:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[tests]$ test_pair_style mol-pair-lj_cut.yaml
-[==========] Running 6 tests from 1 test suite.
-[----------] Global test environment set-up.
-[----------] 6 tests from PairStyle
-[ RUN      ] PairStyle.plain
-[       OK ] PairStyle.plain (24 ms)
-[ RUN      ] PairStyle.omp
-[       OK ] PairStyle.omp (18 ms)
-[ RUN      ] PairStyle.intel
-[       OK ] PairStyle.intel (6 ms)
-[ RUN      ] PairStyle.opt
-[  SKIPPED ] PairStyle.opt (0 ms)
-[ RUN      ] PairStyle.single
-[       OK ] PairStyle.single (7 ms)
-[ RUN      ] PairStyle.extract
-[       OK ] PairStyle.extract (6 ms)
-[----------] 6 tests from PairStyle (62 ms total)
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>test_pair_style<span class="w"> </span>mol-pair-lj_cut.yaml
+<span class="go">[==========] Running 6 tests from 1 test suite.</span>
+<span class="go">[----------] Global test environment set-up.</span>
+<span class="go">[----------] 6 tests from PairStyle</span>
+<span class="go">[ RUN      ] PairStyle.plain</span>
+<span class="go">[       OK ] PairStyle.plain (24 ms)</span>
+<span class="go">[ RUN      ] PairStyle.omp</span>
+<span class="go">[       OK ] PairStyle.omp (18 ms)</span>
+<span class="go">[ RUN      ] PairStyle.intel</span>
+<span class="go">[       OK ] PairStyle.intel (6 ms)</span>
+<span class="go">[ RUN      ] PairStyle.opt</span>
+<span class="go">[  SKIPPED ] PairStyle.opt (0 ms)</span>
+<span class="go">[ RUN      ] PairStyle.single</span>
+<span class="go">[       OK ] PairStyle.single (7 ms)</span>
+<span class="go">[ RUN      ] PairStyle.extract</span>
+<span class="go">[       OK ] PairStyle.extract (6 ms)</span>
+<span class="go">[----------] 6 tests from PairStyle (62 ms total)</span>
 
-[----------] Global test environment tear-down
-[==========] 6 tests from 1 test suite ran. (63 ms total)
-[  PASSED  ] 5 tests.
-[  SKIPPED ] 1 test, listed below:
-[  SKIPPED ] PairStyle.opt
+<span class="go">[----------] Global test environment tear-down</span>
+<span class="go">[==========] 6 tests from 1 test suite ran. (63 ms total)</span>
+<span class="go">[  PASSED  ] 5 tests.</span>
+<span class="go">[  SKIPPED ] 1 test, listed below:</span>
+<span class="go">[  SKIPPED ] PairStyle.opt</span>
 </pre></div>
 </div>
 <p>In this particular case, 5 out of 6 sets of tests were conducted, the
@@ -378,10 +405,6 @@ recording (see next section) to confirm how well the tests cover the code
 paths in the individual source files.</p>
 <p>The force style test programs have a common set of options:</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p>Option</p></td>
 <td><p>Function</p></td>
@@ -403,7 +426,7 @@ paths in the individual source files.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">ctest</span></code> tool has no mechanism to directly pass flags to the individual
 test programs, but a workaround has been implemented where these flags can be
 set in an environment variable <code class="docutils literal notranslate"><span class="pre">TEST_ARGS</span></code>. Example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>env <span class="nv">TEST_ARGS</span><span class="o">=</span>-s ctest -V -R BondStyle
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>env<span class="w"> </span><span class="nv">TEST_ARGS</span><span class="o">=</span>-s<span class="w"> </span>ctest<span class="w"> </span>-V<span class="w"> </span>-R<span class="w"> </span>BondStyle
 </pre></div>
 </div>
 <p>To add a test for a style that is not yet covered, it is usually best
@@ -446,7 +469,7 @@ to significant reordering of operations and thus less error cancellation).</p></
 </div>
 </section>
 <section id="unit-tests-for-timestepping-related-fixes">
-<h3>Unit tests for timestepping related fixes<a class="headerlink" href="#unit-tests-for-timestepping-related-fixes" title="Permalink to this headline">¶</a></h3>
+<h3>Unit tests for timestepping related fixes<a class="headerlink" href="#unit-tests-for-timestepping-related-fixes" title="Permalink to this heading"></a></h3>
 <p>A substantial subset of <a class="reference internal" href="fix.html"><span class="doc">fix styles</span></a> are invoked regularly
 during MD timestepping and manipulate per-atom properties like
 positions, velocities, and forces.  For those fix styles, testing can be
@@ -491,7 +514,7 @@ check to avoid false positives.</p></li>
 </ul>
 </section>
 <section id="use-custom-linker-for-faster-link-times-when-enable-testing-is-active">
-<h3>Use custom linker for faster link times when ENABLE_TESTING is active<a class="headerlink" href="#use-custom-linker-for-faster-link-times-when-enable-testing-is-active" title="Permalink to this headline">¶</a></h3>
+<h3>Use custom linker for faster link times when ENABLE_TESTING is active<a class="headerlink" href="#use-custom-linker-for-faster-link-times-when-enable-testing-is-active" title="Permalink to this heading"></a></h3>
 <p>When compiling LAMMPS with enabled tests, most test executables will
 need to be linked against the LAMMPS library.  Since this can be a very
 large library with many C++ objects when many packages are enabled, link
@@ -507,7 +530,7 @@ linker is chosen explicitly.  This option is only available for the
 GNU or Clang C++ compiler.</p>
 </section>
 <section id="tests-for-other-components-and-utility-functions">
-<h3>Tests for other components and utility functions<a class="headerlink" href="#tests-for-other-components-and-utility-functions" title="Permalink to this headline">¶</a></h3>
+<h3>Tests for other components and utility functions<a class="headerlink" href="#tests-for-other-components-and-utility-functions" title="Permalink to this heading"></a></h3>
 <p>Additional tests that validate utility functions or specific components
 of LAMMPS are implemented as standalone executable which may, or may not
 require creating a suitable LAMMPS instance.  These tests are more specific
@@ -516,10 +539,10 @@ existing source file needs to be extended or a new file added, which in turn
 requires additions to the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file in the source folder.</p>
 </section>
 <section id="collect-and-visualize-code-coverage-metrics">
-<h3>Collect and visualize code coverage metrics<a class="headerlink" href="#collect-and-visualize-code-coverage-metrics" title="Permalink to this headline">¶</a></h3>
+<h3>Collect and visualize code coverage metrics<a class="headerlink" href="#collect-and-visualize-code-coverage-metrics" title="Permalink to this heading"></a></h3>
 <p>You can also collect code coverage metrics while running LAMMPS or the
 tests by enabling code coverage support during the CMake configuration:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-D <span class="nv">ENABLE_COVERAGE</span><span class="o">=</span>on  <span class="c1"># enable coverage measurements (off by default)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-D<span class="w"> </span><span class="nv">ENABLE_COVERAGE</span><span class="o">=</span>on<span class="w">  </span><span class="c1"># enable coverage measurements (off by default)</span>
 </pre></div>
 </div>
 <p>This will instrument all object files to write information about which
@@ -533,27 +556,21 @@ cumulative, i.e. new data is added with each new run.</p>
 <p>Enabling code coverage will also add the following build targets to
 generate coverage reports after running the LAMMPS executable or the
 unit tests:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make gen_coverage_html   <span class="c1"># generate coverage report in HTML format</span>
-make gen_coverage_xml    <span class="c1"># generate coverage report in XML format</span>
-make clean_coverage_html <span class="c1"># delete folder with HTML format coverage report</span>
-make reset_coverage      <span class="c1"># delete all collected coverage data and HTML output</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>gen_coverage_html<span class="w">   </span><span class="c1"># generate coverage report in HTML format</span>
+make<span class="w"> </span>gen_coverage_xml<span class="w">    </span><span class="c1"># generate coverage report in XML format</span>
+make<span class="w"> </span>clean_coverage_html<span class="w"> </span><span class="c1"># delete folder with HTML format coverage report</span>
+make<span class="w"> </span>reset_coverage<span class="w">      </span><span class="c1"># delete all collected coverage data and HTML output</span>
 </pre></div>
 </div>
 <p>These reports require <a class="reference external" href="https://gcovr.com/">GCOVR</a> to be installed. The easiest way
 to do this to install it via pip:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install git+https://github.com/gcovr/gcovr.git
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/gcovr/gcovr.git
 </pre></div>
 </div>
 <p>After post-processing with <code class="docutils literal notranslate"><span class="pre">gen_coverage_html</span></code> the results are in
 a folder <code class="docutils literal notranslate"><span class="pre">coverage_html</span></code> and can be viewed with a web browser.
 The images below illustrate how the data is presented.</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><figure class="align-default">
 <a class="reference internal image-reference" href="_images/coverage-overview-top.png"><img alt="_images/coverage-overview-top.png" src="_images/coverage-overview-top.png" style="width: 296.75px; height: 210.75px;" /></a>
@@ -581,27 +598,27 @@ The images below illustrate how the data is presented.</p>
 </section>
 </section>
 <section id="coding-style-utilities">
-<h2><span class="section-number">3.11.6. </span>Coding style utilities<a class="headerlink" href="#coding-style-utilities" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.11.6. </span>Coding style utilities<a class="headerlink" href="#coding-style-utilities" title="Permalink to this heading"></a></h2>
 <p>To aid with enforcing some of the coding style conventions in LAMMPS
 some additional build targets have been added. These require Python 3.5
 or later and will only work properly on Unix-like operating and file systems.</p>
 <p>The following options are available.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make check-whitespace    <span class="c1"># search for files with whitespace issues</span>
-make fix-whitespace      <span class="c1"># correct whitespace issues in files</span>
-make check-homepage      <span class="c1"># search for files with old LAMMPS homepage URLs</span>
-make fix-homepage        <span class="c1"># correct LAMMPS homepage URLs in files</span>
-make check-errordocs     <span class="c1"># search for deprecated error docs in header files</span>
-make fix-errordocs       <span class="c1"># remove error docs in header files</span>
-make check-permissions   <span class="c1"># search for files with permissions issues</span>
-make fix-permissions     <span class="c1"># correct permissions issues in files</span>
-make check               <span class="c1"># run all check targets from above</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>check-whitespace<span class="w">    </span><span class="c1"># search for files with whitespace issues</span>
+make<span class="w"> </span>fix-whitespace<span class="w">      </span><span class="c1"># correct whitespace issues in files</span>
+make<span class="w"> </span>check-homepage<span class="w">      </span><span class="c1"># search for files with old LAMMPS homepage URLs</span>
+make<span class="w"> </span>fix-homepage<span class="w">        </span><span class="c1"># correct LAMMPS homepage URLs in files</span>
+make<span class="w"> </span>check-errordocs<span class="w">     </span><span class="c1"># search for deprecated error docs in header files</span>
+make<span class="w"> </span>fix-errordocs<span class="w">       </span><span class="c1"># remove error docs in header files</span>
+make<span class="w"> </span>check-permissions<span class="w">   </span><span class="c1"># search for files with permissions issues</span>
+make<span class="w"> </span>fix-permissions<span class="w">     </span><span class="c1"># correct permissions issues in files</span>
+make<span class="w"> </span>check<span class="w">               </span><span class="c1"># run all check targets from above</span>
 </pre></div>
 </div>
 <p>These should help to make source and documentation files conforming
 to some the coding style preferences of the LAMMPS developers.</p>
 </section>
 <section id="clang-format-support">
-<h2><span class="section-number">3.11.7. </span>Clang-format support<a class="headerlink" href="#clang-format-support" title="Permalink to this headline">¶</a></h2>
+<span id="clang-format"></span><h2><span class="section-number">3.11.7. </span>Clang-format support<a class="headerlink" href="#clang-format-support" title="Permalink to this heading"></a></h2>
 <p>For the code in the <code class="docutils literal notranslate"><span class="pre">unittest</span></code> and <code class="docutils literal notranslate"><span class="pre">src</span></code> trees we are transitioning
 to use the <cite>clang-format</cite> tool to assist with having a consistent source
 code formatting style.  The <cite>clang-format</cite> command bundled with Clang
@@ -619,14 +636,24 @@ processing while writing the code or do the coding style processing
 (including the scripts mentioned in the previous paragraph)</p>
 <p>If <cite>clang-format</cite> is available, files can be updated individually with
 commands like the following:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ clang-format -i some_file.cpp
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>clang-format<span class="w"> </span>-i<span class="w"> </span>some_file.cpp
 </pre></div>
 </div>
 <p>The following target are available for both, GNU make and CMake:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make format-src       <span class="c1"># apply clang-format to all files in src and the package folders</span>
-make format-tests     <span class="c1"># apply clang-format to all files in the unittest tree</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>format-src<span class="w">       </span><span class="c1"># apply clang-format to all files in src and the package folders</span>
+make<span class="w"> </span>format-tests<span class="w">     </span><span class="c1"># apply clang-format to all files in the unittest tree</span>
 </pre></div>
 </div>
+<hr class="docutils" />
+</section>
+<section id="github-command-line-interface">
+<span id="gh-cli"></span><h2><span class="section-number">3.11.8. </span>GitHub command line interface<a class="headerlink" href="#github-command-line-interface" title="Permalink to this heading"></a></h2>
+<p>GitHub is developing a <a class="reference external" href="https://cli.github.com">tool for the command line</a> that interacts with the GitHub website via a
+command called <code class="docutils literal notranslate"><span class="pre">gh</span></code>.  This can be extremely convenient when working
+with a Git repository hosted on GitHub (like LAMMPS).  It is thus highly
+recommended to install it when doing LAMMPS development.</p>
+<p>The capabilities of the <code class="docutils literal notranslate"><span class="pre">gh</span></code> command is continually expanding, so
+please see the documentation at <a class="reference external" href="https://cli.github.com/manual/">https://cli.github.com/manual/</a></p>
 </section>
 </section>
 
@@ -641,7 +668,7 @@ make format-tests     <span class="c1"># apply clang-format to all files in the 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -650,7 +677,6 @@ make format-tests     <span class="c1"># apply clang-format to all files in the 
    
 
 </footer>
-
         </div>
       </div>
     </section>

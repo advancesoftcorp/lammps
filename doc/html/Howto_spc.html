@@ -1,32 +1,31 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>8.4.4. SPC water model &mdash; LAMMPS documentation</title>
+  <title>8.4.6. SPC water model &mdash; LAMMPS documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Howto_spc.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="8.5.1. Finite-size spherical and aspherical particles" href="Howto_spherical.html" />
-    <link rel="prev" title="8.4.3. TIP4P water model" href="Howto_tip4p.html" /> 
+    <link rel="prev" title="8.4.5. TIP5P water model" href="Howto_tip5p.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -34,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -62,9 +65,11 @@
 <li class="toctree-l2"><a class="reference internal" href="Howto.html#analysis-howto">8.3. Analysis howto</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="Howto.html#force-fields-howto">8.4. Force fields howto</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="Howto_bioFF.html">8.4.1. CHARMM, AMBER, COMPASS, and DREIDING force fields</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Howto_tip3p.html">8.4.2. TIP3P water model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Howto_tip4p.html">8.4.3. TIP4P water model</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">8.4.4. SPC water model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_amoeba.html">8.4.2. AMOEBA and HIPPO force fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_tip3p.html">8.4.3. TIP3P water model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_tip4p.html">8.4.4. TIP4P water model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_tip5p.html">8.4.5. TIP5P water model</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">8.4.6. SPC water model</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Howto.html#packages-howto">8.5. Packages howto</a></li>
@@ -92,6 +97,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -109,15 +115,14 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Howto.html"><span class="section-number">8. </span>Howto discussions</a> &raquo;</li>
-      <li><span class="section-number">8.4.4. </span>SPC water model</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Howto.html"><span class="section-number">8. </span>Howto discussions</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">8.4.6. </span>SPC water model</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
-        <a href="Howto_tip4p.html" class="btn btn-neutral float-left" title="8.4.3. TIP4P water model" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Howto_tip5p.html" class="btn btn-neutral float-left" title="8.4.5. TIP5P water model" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="Howto_spherical.html" class="btn btn-neutral float-right" title="8.5.1. Finite-size spherical and aspherical particles" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
@@ -125,8 +130,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="spc-water-model">
-<h1><span class="section-number">8.4.4. </span>SPC water model<a class="headerlink" href="#spc-water-model" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="spc-water-model">
+<h1><span class="section-number">8.4.6. </span>SPC water model<a class="headerlink" href="#spc-water-model" title="Permalink to this heading"></a></h1>
 <p>The SPC water model specifies a 3-site rigid water molecule with
 charges and Lennard-Jones parameters assigned to each of the 3 atoms.
 In LAMMPS the <a class="reference internal" href="fix_shake.html"><span class="doc">fix shake</span></a> command can be used to hold
@@ -145,7 +151,6 @@ atoms and the water molecule to run a rigid SPC model.</p>
 <div class="line">LJ <span class="math notranslate nohighlight">\(\epsilon\)</span>, <span class="math notranslate nohighlight">\(\sigma\)</span> of OH, HH = 0.0</div>
 <div class="line"><span class="math notranslate nohighlight">\(r_0\)</span> of OH bond = 1.0</div>
 <div class="line"><span class="math notranslate nohighlight">\(\theta_0\)</span> of HOH angle = 109.47<span class="math notranslate nohighlight">\(^{\circ}\)</span></div>
-<div class="line"><br /></div>
 </div>
 <p>Note that as originally proposed, the SPC model was run with a 9
 Angstrom cutoff for both LJ and Coulomb terms.  It can also be used
@@ -157,28 +162,128 @@ the partial charge assignments change:</p>
 <div class="line-block">
 <div class="line">O charge = -0.8476</div>
 <div class="line">H charge = 0.4238</div>
-<div class="line"><br /></div>
 </div>
 <p>See the <a class="reference internal" href="#howto-berendsen"><span class="std std-ref">(Berendsen)</span></a> reference for more details on both
 the SPC and SPC/E models.</p>
-<p>Wikipedia also has a nice article on <a class="reference external" href="http://en.wikipedia.org/wiki/Water_model">water models</a>.</p>
+<p>Below is the code for a LAMMPS input file and a molecule file
+(<code class="docutils literal notranslate"><span class="pre">spce.mol</span></code>) of SPC/E water for use with the <a class="reference internal" href="molecule.html"><span class="doc">molecule command</span></a> demonstrating how to set up a small bulk water system for
+SPC/E with rigid bonds.</p>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">units</span><span class="w"> </span><span class="n">real</span>
+<span class="k">atom_style</span><span class="w"> </span><span class="n">full</span>
+<span class="k">region </span><span class="nv nv-Identifier">box</span><span class="w"> </span><span class="n">block</span><span class="w"> </span><span class="o">-</span><span class="m">5</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="o">-</span><span class="m">5</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="o">-</span><span class="m">5</span><span class="w"> </span><span class="m">5</span>
+<span class="k">create_box </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">box</span><span class="w">  </span><span class="n">bond</span><span class="o">/</span><span class="n">types</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">angle</span><span class="o">/</span><span class="n">types</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">                </span><span class="n">extra</span><span class="o">/</span><span class="n">bond</span><span class="o">/</span><span class="n">per</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">extra</span><span class="o">/</span><span class="n">angle</span><span class="o">/</span><span class="n">per</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">extra</span><span class="o">/</span><span class="n">special</span><span class="o">/</span><span class="n">per</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="m">2</span>
+
+<span class="k">mass</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">15.9994</span>
+<span class="k">mass</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">1.008</span>
+
+<span class="k">pair_style</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">cut</span><span class="w"> </span><span class="m">10.0</span>
+<span class="k">pair_coeff</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0.1553</span><span class="w"> </span><span class="m">3.166</span>
+<span class="k">pair_coeff</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">0.0</span><span class="w">    </span><span class="m">1.0</span>
+<span class="k">pair_coeff</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">0.0</span><span class="w">    </span><span class="m">1.0</span>
+
+<span class="k">bond_style</span><span class="w"> </span><span class="n">zero</span>
+<span class="k">bond_coeff</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1.0</span>
+
+<span class="k">angle_style</span><span class="w"> </span><span class="n">zero</span>
+<span class="k">angle_coeff</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">109.47</span>
+
+<span class="k">molecule</span><span class="w"> </span><span class="n">water</span><span class="w"> </span><span class="n">spce.mol</span>
+<span class="k">create_atoms</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="n">random</span><span class="w"> </span><span class="m">33</span><span class="w"> </span><span class="m">34564</span><span class="w"> </span><span class="n">NULL</span><span class="w"> </span><span class="n">mol</span><span class="w"> </span><span class="n">water</span><span class="w"> </span><span class="m">25367</span><span class="w"> </span><span class="n">overlap</span><span class="w"> </span><span class="m">1.33</span>
+
+<span class="k">timestep</span><span class="w"> </span><span class="m">1.0</span>
+<span class="k">fix </span><span class="nv nv-Identifier">rigid</span><span class="w">     </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">shake</span><span class="w"> </span><span class="m">0.0001</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">10000</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="m">1</span>
+<span class="k">minimize</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="m">10000</span>
+<span class="k">velocity </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">300.0</span><span class="w"> </span><span class="m">5463576</span>
+<span class="k">fix </span><span class="nv nv-Identifier">integrate</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">nvt</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">300.0</span><span class="w"> </span><span class="m">300.0</span><span class="w"> </span><span class="m">100.0</span>
+
+<span class="k">thermo_style</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">press</span><span class="w"> </span><span class="n">etotal</span><span class="w"> </span><span class="n">density</span><span class="w"> </span><span class="n">pe</span><span class="w"> </span><span class="n">ke</span>
+<span class="k">thermo</span><span class="w"> </span><span class="m">1000</span>
+<span class="k">run</span><span class="w"> </span><span class="m">20000</span><span class="w"> </span><span class="n">upto</span>
+<span class="k">write_data </span><span class="nv nv-Identifier">spce.data</span><span class="w"> </span><span class="n">nocoeff</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate" id="spce-molecule"><div class="highlight"><pre><span></span># Water molecule. SPC/E geometry
+
+3 atoms
+2 bonds
+1 angles
+
+Coords
+
+1    0.00000  -0.06461   0.00000
+2    0.81649   0.51275   0.00000
+3   -0.81649   0.51275   0.00000
+
+Types
+
+1        1   # O
+2        2   # H
+3        2   # H
+
+Charges
+
+1       -0.8476
+2        0.4238
+3        0.4238
+
+Bonds
+
+1   1      1      2
+2   1      1      3
+
+Angles
+
+1   1      2      1      3
+
+Shake Flags
+
+1 1
+2 1
+3 1
+
+Shake Atoms
+
+1 1 2 3
+2 1 2 3
+3 1 2 3
+
+Shake Bond Types
+
+1 1 1 1
+2 1 1 1
+3 1 1 1
+
+Special Bond Counts
+
+1 2 0 0
+2 1 1 0
+3 1 1 0
+
+Special Bonds
+
+1 2 3
+2 1 3
+3 1 2
+</pre></div>
+</div>
+<p>Wikipedia also has a nice article on <a class="reference external" href="https://en.wikipedia.org/wiki/Water_model">water models</a>.</p>
 <hr class="docutils" />
-<p id="howto-berendsen"><strong>(Berendsen)</strong> Berendsen, Grigera, Straatsma, J Phys Chem, 91,
-6269-6271 (1987).</p>
+<p id="howto-berendsen"><strong>(Berendsen)</strong> Berendsen, Grigera, Straatsma, J Phys Chem, 91, 6269-6271 (1987).</p>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="Howto_tip4p.html" class="btn btn-neutral float-left" title="8.4.3. TIP4P water model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Howto_tip5p.html" class="btn btn-neutral float-left" title="8.4.5. TIP5P water model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="Howto_spherical.html" class="btn btn-neutral float-right" title="8.5.1. Finite-size spherical and aspherical particles" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -187,7 +292,6 @@ the SPC and SPC/E models.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

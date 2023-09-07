@@ -2,7 +2,7 @@
 /* ----------------------------------------------------------------------
    LAMMPS - Large-scale Atomic/Molecular Massively Parallel Simulator
    https://www.lammps.org/, Sandia National Laboratories
-   Steve Plimpton, sjplimp@sandia.gov
+   LAMMPS development team: developers@lammps.org
 
    Copyright (2003) Sandia Corporation.  Under the terms of Contract
    DE-AC04-94AL85000 with Sandia Corporation, the U.S. Government retains
@@ -259,7 +259,7 @@ FixRigidSmall::FixRigidSmall(LAMMPS *lmp, int narg, char **arg) :
         utils::numeric(FLERR,arg[iarg+3],false,lmp);
       p_flag[0] = p_flag[1] = p_flag[2] = 1;
       if (domain->dimension == 2) {
-              p_start[2] = p_stop[2] = p_period[2] = 0.0;
+        p_start[2] = p_stop[2] = p_period[2] = 0.0;
         p_flag[2] = 0;
       }
       iarg += 4;
@@ -275,7 +275,7 @@ FixRigidSmall::FixRigidSmall(LAMMPS *lmp, int narg, char **arg) :
       p_flag[0] = p_flag[1] = p_flag[2] = 1;
       if (domain->dimension == 2) {
         p_start[2] = p_stop[2] = p_period[2] = 0.0;
-              p_flag[2] = 0;
+        p_flag[2] = 0;
       }
       iarg += 4;
 
@@ -432,9 +432,9 @@ FixRigidSmall::FixRigidSmall(LAMMPS *lmp, int narg, char **arg) :
 
   // atom style pointers to particles that store extra info
 
-  avec_ellipsoid = dynamic_cast<AtomVecEllipsoid *>( atom->style_match("ellipsoid"));
-  avec_line = dynamic_cast<AtomVecLine *>( atom->style_match("line"));
-  avec_tri = dynamic_cast<AtomVecTri *>( atom->style_match("tri"));
+  avec_ellipsoid = dynamic_cast<AtomVecEllipsoid *>(atom->style_match("ellipsoid"));
+  avec_line = dynamic_cast<AtomVecLine *>(atom->style_match("line"));
+  avec_tri = dynamic_cast<AtomVecTri *>(atom->style_match("tri"));
 
   // compute per body forces and torques inside final_integrate() by default
 
@@ -481,7 +481,7 @@ FixRigidSmall::~FixRigidSmall()
 {
   // unregister callbacks to this fix from Atom class
 
-  atom->delete_callback(id,Atom::GROW);
+  if (modify->get_fix_by_id(id)) atom->delete_callback(id,Atom::GROW);
 
   // delete locally stored arrays
 
@@ -529,13 +529,13 @@ void FixRigidSmall::init()
   // if earlyflag, warn if any post-force fixes come after a rigid fix
 
   int count = 0;
-  for (auto ifix : modify->get_fix_list())
+  for (auto &ifix : modify->get_fix_list())
     if (ifix->rigid_flag) count++;
   if (count > 1 && me == 0) error->warning(FLERR,"More than one fix rigid");
 
   if (earlyflag) {
     bool rflag = false;
-    for (auto ifix : modify->get_fix_list()) {
+    for (auto &ifix : modify->get_fix_list()) {
       if (ifix->rigid_flag) rflag = true;
       if ((comm->me == 0) && rflag && (ifix->setmask() & POST_FORCE) && !ifix->rigid_flag)
         error->warning(FLERR,"Fix {} with ID {} alters forces after fix rigid/small",
@@ -558,7 +558,7 @@ void FixRigidSmall::init()
   // error if a fix changing the box comes before rigid fix
 
   bool boxflag = false;
-  for (auto ifix : modify->get_fix_list()) {
+  for (auto &ifix : modify->get_fix_list()) {
     if (boxflag && utils::strmatch(ifix->style,"^rigid"))
         error->all(FLERR,"Rigid fixes must come before any box changing fix");
     if (ifix->box_change) boxflag = true;
@@ -582,7 +582,7 @@ void FixRigidSmall::init()
   dtq = 0.5 * update->dt;
 
   if (utils::strmatch(update->integrate_style,"^respa"))
-    step_respa = (dynamic_cast<Respa *>( update->integrate))->step;
+    step_respa = (dynamic_cast<Respa *>(update->integrate))->step;
 }
 
 /* ----------------------------------------------------------------------
@@ -595,7 +595,7 @@ void FixRigidSmall::init()
    be computable if contain overlapping particles setup_bodies_static()
    reads inpfile itself.
      cannot do this until now, b/c requires comm->setup() to have setup stencil
-   invoke pre_neighbor() to insure body xcmimage flags are reset
+   invoke pre_neighbor() to ensure body xcmimage flags are reset
      needed if Verlet::setup::pbc() has remapped/migrated atoms for 2nd run
      setup_bodies_static() invokes pre_neighbor itself
 ------------------------------------------------------------------------- */

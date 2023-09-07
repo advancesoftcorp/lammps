@@ -2,7 +2,7 @@
 /* ----------------------------------------------------------------------
    LAMMPS - Large-scale Atomic/Molecular Massively Parallel Simulator
    https://www.lammps.org/, Sandia National Laboratories
-   Steve Plimpton, sjplimp@sandia.gov
+   LAMMPS development team: developers@lammps.org
 
    Copyright (2003) Sandia Corporation.  Under the terms of Contract
    DE-AC04-94AL85000 with Sandia Corporation, the U.S. Government retains
@@ -38,9 +38,9 @@ NPairHalfRespaNsqNewton::NPairHalfRespaNsqNewton(LAMMPS *lmp) : NPair(lmp) {}
 
 void NPairHalfRespaNsqNewton::build(NeighList *list)
 {
-  int i,j,n,itype,jtype,itag,jtag,n_inner,n_middle,bitmask;
+  int i,j,n,itype,jtype,n_inner,n_middle,bitmask;
   int imol,iatom,moltemplate;
-  tagint tagprev;
+  tagint itag,jtag,tagprev;
   double xtmp,ytmp,ztmp,delx,dely,delz,rsq;
   int *neighptr,*neighptr_inner,*neighptr_middle;
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>11.5. Error messages &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Errors_messages.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -85,6 +89,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -102,12 +107,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Errors.html"><span class="section-number">11. </span>Errors</a> &raquo;</li>
-      <li><span class="section-number">11.5. </span>Error messages</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Errors.html"><span class="section-number">11. </span>Errors</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">11.5. </span>Error messages</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="Errors_debug.html" class="btn btn-neutral float-left" title="11.4. Debugging crashes" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -118,8 +122,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="error-messages">
-<h1><span class="section-number">11.5. </span>Error messages<a class="headerlink" href="#error-messages" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="error-messages">
+<h1><span class="section-number">11.5. </span>Error messages<a class="headerlink" href="#error-messages" title="Permalink to this heading"></a></h1>
 <p>This is an alphabetic list of the ERROR messages LAMMPS prints out and
 the reason why.  If the explanation here is not sufficient, the
 documentation for the offending command may help.  Error messages also
@@ -465,51 +470,6 @@ read_restart, or create_box command.</p>
 This means there is something invalid about the topology definitions.</p>
 </dd>
 <dt><em>Bonds defined but no bond types</em></dt><dd><p>The data file header lists bonds but no bond types.</p>
-</dd>
-<dt><em>Bond/react: Cannot use fix bond/react with non-molecular systems</em></dt><dd><p>Only systems with bonds that can be changed can be used. Atom_style
-template does not qualify.</p>
-</dd>
-<dt><em>Bond/react: Invalid template atom ID in map file</em></dt><dd><p>Atom IDs in molecule templates range from 1 to the number of atoms in the template.</p>
-</dd>
-<dt><em>Bond/react: Rmax cutoff is longer than pairwise cutoff</em></dt><dd><p>This is not allowed because bond creation is done using the pairwise
-neighbor list.</p>
-</dd>
-<dt><em>Bond/react: Molecule template ID for fix bond/react does not exist</em></dt><dd><p>A valid molecule template must have been created with the molecule
-command.</p>
-</dd>
-<dt><em>Bond/react: Reaction templates must contain the same number of atoms</em></dt><dd><p>There should be a one-to-one correspondence between atoms in the
-pre-reacted and post-reacted templates, as specified by the map file.</p>
-</dd>
-<dt><em>Bond/react: Unknown section in map file</em></dt><dd><p>Please ensure reaction map files are properly formatted.</p>
-</dd>
-<dt><em>Bond/react: Atom/Bond type affected by reaction too close to template edge</em></dt><dd><p>This means an atom which changes type or connectivity during the
-reaction is too close to an ‘edge’ atom defined in the map
-file.  This could cause incorrect assignment of bonds, angle, etc.
-Generally, this means you must include more atoms in your templates,
-such that there are at least two atoms between each atom involved in
-the reaction and an edge atom.</p>
-</dd>
-<dt><em>Bond/react: Fix bond/react needs ghost atoms from farther away</em></dt><dd><p>This is because a processor needs to map the entire unreacted
-molecule template onto simulation atoms it knows about. The
-comm_modify cutoff command can be used to extend the communication
-range.</p>
-</dd>
-<dt><em>Bond/react: A deleted atom cannot remain bonded to an atom that is not deleted</em></dt><dd><p>Self-explanatory.</p>
-</dd>
-<dt><em>Bond/react: First neighbors of chiral atoms must be of mutually different types</em></dt><dd><p>Self-explanatory.</p>
-</dd>
-<dt><em>Bond/react: Chiral atoms must have exactly four first neighbors</em></dt><dd><p>Self-explanatory.</p>
-</dd>
-<dt><em>Bond/react: Molecule template ‘Coords’ section required for chiralIDs keyword</em></dt><dd><p>The coordinates of atoms in the pre-reacted template are used to determine
-chirality.</p>
-</dd>
-<dt><em>Bond/react special bond generation overflow</em></dt><dd><p>The number of special bonds per-atom created by a reaction exceeds the
-system setting. See the read_data or create_box command for how to
-specify this value.</p>
-</dd>
-<dt><em>Bond/react topology/atom exceed system topology/atom</em></dt><dd><p>The number of bonds, angles etc per-atom created by a reaction exceeds
-the system setting. See the read_data or create_box command for how to
-specify this value.</p>
 </dd>
 <dt><em>Both restart files must use % or neither</em></dt><dd><p>Self-explanatory.</p>
 </dd>
@@ -1053,7 +1013,7 @@ type p (periodic).</p>
 </dd>
 <dt><em>Cannot use chosen neighbor list style with lj/gromacs/kk</em></dt><dd><p>Self-explanatory.</p>
 </dd>
-<dt><em>Cannot use chosen neighbor list style with lj/sdk/kk</em></dt><dd><p>That style is not supported by Kokkos.</p>
+<dt><em>Cannot use chosen neighbor list style with lj/spica/kk</em></dt><dd><p>That style is not supported by Kokkos.</p>
 </dd>
 <dt><em>Cannot use chosen neighbor list style with pair eam/kk</em></dt><dd><p>That style is not supported by Kokkos.</p>
 </dd>
@@ -1308,9 +1268,9 @@ neighbor cutoff.  Use the “nsq” style instead of “bin” style.</p>
 </dd>
 <dt><em>Cannot use newton pair with lj/gromacs/gpu pair style</em></dt><dd><p>Self-explanatory.</p>
 </dd>
-<dt><em>Cannot use newton pair with lj/sdk/coul/long/gpu pair style</em></dt><dd><p>Self-explanatory.</p>
+<dt><em>Cannot use newton pair with lj/spica/coul/long/gpu pair style</em></dt><dd><p>Self-explanatory.</p>
 </dd>
-<dt><em>Cannot use newton pair with lj/sdk/gpu pair style</em></dt><dd><p>Self-explanatory.</p>
+<dt><em>Cannot use newton pair with lj/spica/gpu pair style</em></dt><dd><p>Self-explanatory.</p>
 </dd>
 <dt><em>Cannot use newton pair with lj96/cut/gpu pair style</em></dt><dd><p>Self-explanatory.</p>
 </dd>
@@ -2599,6 +2559,51 @@ angles, dihedrals, and impropers to be formed.</p>
 <dt><em>Fix bond/create needs ghost atoms from further away</em></dt><dd><p>This is because the fix needs to walk bonds to a certain distance to
 acquire needed info, The comm_modify cutoff command can be used to
 extend the communication range.</p>
+</dd>
+<dt><em>Fix bond/react: Cannot use fix bond/react with non-molecular systems</em></dt><dd><p>Only systems with bonds that can be changed can be used. Atom_style
+template does not qualify.</p>
+</dd>
+<dt><em>Fix bond/react: Invalid template atom ID in map file</em></dt><dd><p>Atom IDs in molecule templates range from 1 to the number of atoms in the template.</p>
+</dd>
+<dt><em>Fix bond/react: Rmax cutoff is longer than pairwise cutoff</em></dt><dd><p>This is not allowed because bond creation is done using the pairwise
+neighbor list.</p>
+</dd>
+<dt><em>Fix bond/react: Molecule template ID for fix bond/react does not exist</em></dt><dd><p>A valid molecule template must have been created with the molecule
+command.</p>
+</dd>
+<dt><em>Fix bond/react: Reaction templates must contain the same number of atoms</em></dt><dd><p>There should be a one-to-one correspondence between atoms in the
+pre-reacted and post-reacted templates, as specified by the map file.</p>
+</dd>
+<dt><em>Fix bond/react: Unknown section in map file</em></dt><dd><p>Please ensure reaction map files are properly formatted.</p>
+</dd>
+<dt><em>Fix bond/react: Atom/Bond type affected by reaction too close to template edge</em></dt><dd><p>This means an atom which changes type or connectivity during the
+reaction is too close to an ‘edge’ atom defined in the map
+file.  This could cause incorrect assignment of bonds, angle, etc.
+Generally, this means you must include more atoms in your templates,
+such that there are at least two atoms between each atom involved in
+the reaction and an edge atom.</p>
+</dd>
+<dt><em>Fix bond/react: Fix bond/react needs ghost atoms from farther away</em></dt><dd><p>This is because a processor needs to map the entire unreacted
+molecule template onto simulation atoms it knows about. The
+comm_modify cutoff command can be used to extend the communication
+range.</p>
+</dd>
+<dt><em>Fix bond/react: A deleted atom cannot remain bonded to an atom that is not deleted</em></dt><dd><p>Self-explanatory.</p>
+</dd>
+<dt><em>Fix bond/react: First neighbors of chiral atoms must be of mutually different types</em></dt><dd><p>Self-explanatory.</p>
+</dd>
+<dt><em>Fix bond/react: Chiral atoms must have exactly four first neighbors</em></dt><dd><p>Self-explanatory.</p>
+</dd>
+<dt><em>Fix bond/react: Molecule template ‘Coords’ section required for chiralIDs keyword</em></dt><dd><p>The coordinates of atoms in the pre-reacted template are used to determine
+chirality.</p>
+</dd>
+<dt><em>Fix bond/react special bond generation overflow</em></dt><dd><p>The number of special bonds per-atom created by a reaction exceeds the
+system setting. See the read_data or create_box command for how to
+specify this value.</p>
+</dd>
+<dt><em>Fix bond/react topology/atom exceed system topology/atom</em></dt><dd><p>The number of bonds, angles etc per-atom created by a reaction exceeds
+the system setting. See the read_data or create_box command for how to
+specify this value.</p>
 </dd>
 <dt><em>Fix bond/swap cannot use dihedral or improper styles</em></dt><dd><p>These styles cannot be defined when using this fix.</p>
 </dd>
@@ -3946,6 +3951,10 @@ fix needs to process.</p>
 <dt><em>Invalid type for mass set</em></dt><dd><p>Mass command must set a type from 1-N where N is the number of atom
 types.</p>
 </dd>
+<dt><em>Invalid label2type() function syntax in variable formula</em></dt><dd><p>The first argument must be a label map kind (atom, bond, angle,
+dihedral, or improper) and the second argument must be a valid type
+label that has been assigned to a numeric type.</p>
+</dd>
 <dt><em>Invalid use of library file() function</em></dt><dd><p>This function is called through the library interface.  This
 error should not occur.  Contact the developers if it does.</p>
 </dd>
@@ -4039,7 +4048,14 @@ This is required to use python-style variables.</p>
 </dd>
 <dt><em>LJ6 off not supported in pair_style buck/long/coul/long</em></dt><dd><p>Self-explanatory.</p>
 </dd>
+<dt><em>Label map is incomplete: all types must be assigned a unique type label</em></dt><dd><p>For a given type-kind (atom types, bond types, etc.) to be written to
+the data file, all associated types must be assigned a type label, and
+each type label can be assigned to only one numeric type.</p>
+</dd>
 <dt><em>Label wasn’t found in input script</em></dt><dd><p>Self-explanatory.</p>
+</dd>
+<dt><em>Labelmap command before simulation box is defined</em></dt><dd><p>The labelmap command cannot be used before a read_data,
+read_restart, or create_box command.</p>
 </dd>
 <dt><em>Lattice orient vectors are not orthogonal</em></dt><dd><p>The three specified lattice orientation vectors must be mutually
 orthogonal.</p>
@@ -4065,7 +4081,7 @@ sc, bcc, or fcc lattice.</p>
 <dt><em>Lost atoms: original %ld current %ld</em></dt><dd><p>Lost atoms are checked for each time thermo output is done.  See the
 thermo_modify lost command for options.  Lost atoms usually indicate
 bad dynamics, e.g. atoms have been blown far out of the simulation
-box, or moved further than one processor’s sub-domain away before
+box, or moved further than one processor’s subdomain away before
 reneighboring.</p>
 </dd>
 <dt><em>MEAM library error %d</em></dt><dd><p>A call to the MEAM Fortran library returned an error.</p>
@@ -4238,6 +4254,10 @@ the -partition command-line option.</p>
 </dd>
 <dt><em>Must not have multiple fixes change box parameter …</em></dt><dd><p>Self-explanatory.</p>
 </dd>
+<dt><em>Must read Angle Type Labels before Angles</em></dt><dd><p>An Angle Type Labels section of a data file must come before the Angles section.</p>
+</dd>
+<dt><em>Must read Atom Type Labels before Atoms</em></dt><dd><p>An Atom Type Labels section of a data file must come before the Atoms section.</p>
+</dd>
 <dt><em>Must read Atoms before Angles</em></dt><dd><p>The Atoms section of a data file must come before an Angles section.</p>
 </dd>
 <dt><em>Must read Atoms before Bodies</em></dt><dd><p>The Atoms section of a data file must come before a Bodies section.</p>
@@ -4258,6 +4278,12 @@ section.</p>
 </dd>
 <dt><em>Must read Atoms before Velocities</em></dt><dd><p>The Atoms section of a data file must come before a Velocities
 section.</p>
+</dd>
+<dt><em>Must read Bond Type Labels before Bonds</em></dt><dd><p>A Bond Type Labels section of a data file must come before the Bonds section.</p>
+</dd>
+<dt><em>Must read Dihedral Type Labels before Dihedrals</em></dt><dd><p>An Dihedral Type Labels section of a data file must come before the Dihedrals section.</p>
+</dd>
+<dt><em>Must read Improper Type Labels before Impropers</em></dt><dd><p>An Improper Type Labels section of a data file must come before the Impropers section.</p>
 </dd>
 <dt><em>Must re-specify non-restarted pair style (xxx) after read_restart</em></dt><dd><p>For pair styles, that do not store their settings in a restart file,
 it must be defined with a new ‘pair_style’ command after read_restart.</p>
@@ -4381,7 +4407,7 @@ list to allow for additional bonds to be formed.</p>
 <dt><em>Newton bond change after simulation box is defined</em></dt><dd><p>The newton command cannot be used to change the newton bond value
 after a read_data, read_restart, or create_box command.</p>
 </dd>
-<dt><em>Next command must list all universe and uloop variables</em></dt><dd><p>This is to insure they stay in sync.</p>
+<dt><em>Next command must list all universe and uloop variables</em></dt><dd><p>This is to ensure they stay in sync.</p>
 </dd>
 <dt><em>No Kspace style defined for compute group/group</em></dt><dd><p>Self-explanatory.</p>
 </dd>
@@ -4502,42 +4528,42 @@ atoms.</p>
 <dt><em>Out of range atoms - cannot compute MSM</em></dt><dd><p>One or more atoms are attempting to map their charge to a MSM grid point
 that is not owned by a processor.  This is likely for one of two
 reasons, both of them bad.  First, it may mean that an atom near the
-boundary of a processor’s sub-domain has moved more than 1/2 the
+boundary of a processor’s subdomain has moved more than 1/2 the
 <a class="reference internal" href="neighbor.html"><span class="doc">neighbor skin distance</span></a> without neighbor lists being
 rebuilt and atoms being migrated to new processors.  This also means
 you may be missing pairwise interactions that need to be computed.
 The solution is to change the re-neighboring criteria via the
 <a class="reference internal" href="neigh_modify.html"><span class="doc">neigh_modify</span></a> command.  The safest settings are
 “delay 0 every 1 check yes”.  Second, it may mean that an atom has
-moved far outside a processor’s sub-domain or even the entire
+moved far outside a processor’s subdomain or even the entire
 simulation box. This indicates bad physics, e.g. due to highly
 overlapping atoms, too large a timestep, etc.</p>
 </dd>
 <dt><em>Out of range atoms - cannot compute PPPM</em></dt><dd><p>One or more atoms are attempting to map their charge to a PPPM grid
 point that is not owned by a processor.  This is likely for one of two
 reasons, both of them bad.  First, it may mean that an atom near the
-boundary of a processor’s sub-domain has moved more than 1/2 the
+boundary of a processor’s subdomain has moved more than 1/2 the
 <a class="reference internal" href="neighbor.html"><span class="doc">neighbor skin distance</span></a> without neighbor lists being
 rebuilt and atoms being migrated to new processors.  This also means
 you may be missing pairwise interactions that need to be computed.
 The solution is to change the re-neighboring criteria via the
 <a class="reference internal" href="neigh_modify.html"><span class="doc">neigh_modify</span></a> command.  The safest settings are
 “delay 0 every 1 check yes”.  Second, it may mean that an atom has
-moved far outside a processor’s sub-domain or even the entire
+moved far outside a processor’s subdomain or even the entire
 simulation box. This indicates bad physics, e.g. due to highly
 overlapping atoms, too large a timestep, etc.</p>
 </dd>
 <dt><em>Out of range atoms - cannot compute PPPMDisp</em></dt><dd><p>One or more atoms are attempting to map their charge to a PPPM grid
 point that is not owned by a processor.  This is likely for one of two
 reasons, both of them bad.  First, it may mean that an atom near the
-boundary of a processor’s sub-domain has moved more than 1/2 the
+boundary of a processor’s subdomain has moved more than 1/2 the
 <a class="reference internal" href="neighbor.html"><span class="doc">neighbor skin distance</span></a> without neighbor lists being
 rebuilt and atoms being migrated to new processors.  This also means
 you may be missing pairwise interactions that need to be computed.
 The solution is to change the re-neighboring criteria via the
 <a class="reference internal" href="neigh_modify.html"><span class="doc">neigh_modify</span></a> command.  The safest settings are
 “delay 0 every 1 check yes”.  Second, it may mean that an atom has
-moved far outside a processor’s sub-domain or even the entire
+moved far outside a processor’s subdomain or even the entire
 simulation box. This indicates bad physics, e.g. due to highly
 overlapping atoms, too large a timestep, etc.</p>
 </dd>
@@ -4893,7 +4919,7 @@ requires them to find O,H atoms with a water molecule.</p>
 <dt><em>Pair style lj/long/tip4p/long requires newton pair on</em></dt><dd><p>This is because the computation of constraint forces within a water
 molecule adds forces to atoms owned by other processors.</p>
 </dd>
-<dt><em>Pair style lj/sdk/coul/long/gpu requires atom attribute q</em></dt><dd><p>The atom style defined does not have this attribute.</p>
+<dt><em>Pair style lj/spica/coul/long/gpu requires atom attribute q</em></dt><dd><p>The atom style defined does not have this attribute.</p>
 </dd>
 <dt><em>Pair style nb3b/harmonic requires atom IDs</em></dt><dd><p>This is a requirement to use this potential.</p>
 </dd>
@@ -5186,7 +5212,7 @@ library and re-build LAMMPS.</p>
 does not exist.</p>
 </dd>
 <dt><em>Replacing a fix, but new style != old style</em></dt><dd><p>A fix ID can be used a second time, but only if the style matches the
-previous fix.  In this case it is assumed you with to reset a fix’s
+previous fix.  In this case it is assumed you want to reset a fix’s
 parameters.  This error may mean you are mistakenly re-using a fix ID
 when you do not intend to.</p>
 </dd>
@@ -5264,7 +5290,7 @@ atom has moved too far.</p>
 </dd>
 <dt><em>Rigid body atoms %d %d missing on proc %d at step %ld</em></dt><dd><p>This means that an atom cannot find the atom that owns the rigid body
 it is part of, or vice versa.  The solution is to use the communicate
-cutoff command to insure ghost atoms are acquired from far enough away
+cutoff command to ensure ghost atoms are acquired from far enough away
 to encompass the max distance printed when the fix rigid/small command
 was invoked.</p>
 </dd>
@@ -5653,6 +5679,9 @@ dump.</p>
 <dt><em>Too much per-proc info for dump</em></dt><dd><p>Number of local atoms times number of columns must fit in a 32-bit
 integer for dump.</p>
 </dd>
+<dt><em>Topology type exceeds system topology type</em></dt><dd><p>The number of bond, angle, etc types exceeds the system setting. See
+the create_box or read_data command for how to specify these values.</p>
+</dd>
 <dt><em>Tree structure in joint connections</em></dt><dd><p>Fix poems cannot (yet) work with coupled bodies whose joints connect
 the bodies in a tree structure.</p>
 </dd>
@@ -5670,6 +5699,11 @@ chunk assignments persist for some number of timesteps, but are doing
 it in different ways.</p>
 </dd>
 <dt><em>Two groups cannot be the same in fix spring couple</em></dt><dd><p>Self-explanatory.</p>
+</dd>
+<dt><em>The %s type label %s is already in use for type %s</em></dt><dd><p>For a given type-kind (atom types, bond types, etc.), a given type
+label can be assigned to only one numeric type.</p>
+</dd>
+<dt><em>Type label string %s for %s type %s is invalid</em></dt><dd><p>See the labelmap command documentation for valid type labels.</p>
 </dd>
 <dt><em>Unable to initialize accelerator for use</em></dt><dd><p>There was a problem initializing an accelerator for the gpu package</p>
 </dd>
@@ -6084,7 +6118,7 @@ read_restart, or create_box command.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -6093,7 +6127,6 @@ read_restart, or create_box command.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

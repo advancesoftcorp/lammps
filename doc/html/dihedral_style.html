@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>dihedral_style command &mdash; LAMMPS documentation</title>
@@ -10,21 +10,21 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/dihedral_style.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="dimension command" href="dimension.html" />
+    <link rel="next" title="dihedral_write command" href="dihedral_write.html" />
     <link rel="prev" title="dihedral_coeff command" href="dihedral_coeff.html" /> 
 </head>
 
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -85,6 +89,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dihedral_harmonic.html">dihedral_style harmonic command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_helix.html">dihedral_style helix command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_hybrid.html">dihedral_style hybrid command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dihedral_lepton.html">dihedral_style lepton command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_multi_harmonic.html">dihedral_style multi/harmonic command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_nharmonic.html">dihedral_style nharmonic command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_none.html">dihedral_style none command</a></li>
@@ -102,10 +107,12 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_table.html">dihedral_style table command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_table.html#dihedral-style-table-cut-command">dihedral_style table/cut command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dihedral_write.html">dihedral_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_zero.html">dihedral_style zero command</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -123,43 +130,43 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="commands_list.html">Commands</a> &raquo;</li>
-      <li>dihedral_style command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="commands_list.html">Commands</a></li>
+      <li class="breadcrumb-item active">dihedral_style command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="dihedral_coeff.html" class="btn btn-neutral float-left" title="dihedral_coeff command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="dimension.html" class="btn btn-neutral float-right" title="dimension command" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="dihedral_write.html" class="btn btn-neutral float-right" title="dihedral_write command" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="dihedral-style-command">
-<span id="index-0"></span><h1>dihedral_style command<a class="headerlink" href="#dihedral-style-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="dihedral-style-command">
+<span id="index-0"></span><h1>dihedral_style command<a class="headerlink" href="#dihedral-style-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">dihedral_style</span><span class="w"> </span><span class="n">style</span><span class="w"></span>
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">dihedral_style</span><span class="w"> </span><span class="n">style</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>style = <em>none</em> or <em>hybrid</em> or <em>charmm</em> or <em>class2</em> or <em>harmonic</em> or <em>helix</em> or         <em>multi/harmonic</em> or <em>opls</em></p></li>
+<li><p>style = <em>none</em> or <em>zero</em> or <em>hybrid</em> or <em>charmm</em> or <em>charmmfsw</em> or <em>class2</em> or <em>cosine/shift/exp</em> or <em>fourier</em> or <em>harmonic</em> or <em>helix</em> or <em>lepton</em> or <em>multi/harmonic</em> or <em>nharmonic</em> or <em>opls</em> or <em>spherical</em> or <em>table</em> or <em>table/cut</em></p></li>
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">dihedral_style</span><span class="w"> </span><span class="n">harmonic</span><span class="w"></span>
-<span class="k">dihedral_style</span><span class="w"> </span><span class="n">multi</span><span class="o">/</span><span class="n">harmonic</span><span class="w"></span>
-<span class="k">dihedral_style</span><span class="w"> </span><span class="n">hybrid</span><span class="w"> </span><span class="n">harmonic</span><span class="w"> </span><span class="n">charmm</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">dihedral_style</span><span class="w"> </span><span class="n">harmonic</span>
+<span class="k">dihedral_style</span><span class="w"> </span><span class="n">multi</span><span class="o">/</span><span class="n">harmonic</span>
+<span class="k">dihedral_style</span><span class="w"> </span><span class="n">hybrid</span><span class="w"> </span><span class="n">harmonic</span><span class="w"> </span><span class="n">charmm</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <p>Set the formula(s) LAMMPS uses to compute dihedral interactions
 between quadruplets of atoms, which remain in force for the duration
 of the simulation.  The list of dihedral quadruplets is read in by a
@@ -183,16 +190,16 @@ to be re-specified.</p>
 <p>When both a dihedral and pair style is defined, the
 <a class="reference internal" href="special_bonds.html"><span class="doc">special_bonds</span></a> command often needs to be used to
 turn off (or weight) the pairwise interaction that would otherwise
-exist between 4 bonded atoms.</p>
+exist between four bonded atoms.</p>
 </div>
 <p>In the formulas listed for each dihedral style, <em>phi</em> is the torsional
 angle defined by the quadruplet of atoms.  This angle has a sign
 convention as shown in this diagram:</p>
 <img alt="_images/dihedral_sign.jpg" class="align-center" src="_images/dihedral_sign.jpg" />
-<p>where the I,J,K,L ordering of the 4 atoms that define the dihedral
+<p>where the <span class="math notranslate nohighlight">\(I,J,K,L\)</span> ordering of the four atoms that define the dihedral
 is from left to right.</p>
 <p>This sign convention effects several of the dihedral styles listed
-below (e.g. charmm, helix) in the sense that the energy formula
+below (e.g., charmm, helix) in the sense that the energy formula
 depends on the sign of phi, which may be reflected in the value of the
 coefficients you specify.</p>
 <div class="admonition note">
@@ -200,10 +207,10 @@ coefficients you specify.</p>
 <p>When comparing the formulas and coefficients for various LAMMPS
 dihedral styles with dihedral equations defined by other force fields,
 note that some force field implementations divide/multiply the energy
-prefactor <em>K</em> by the multiple number of torsions that contain the J-K
-bond in an I-J-K-L torsion.  LAMMPS does not do this, i.e. the listed
-dihedral equation applies to each individual dihedral.  Thus you need
-to define <em>K</em> appropriately via the
+prefactor <em>K</em> by the multiple number of torsions that contain the
+<em>J</em>–<em>K</em> bond in an <em>I</em>–<em>J</em>–<em>K</em>–<em>L</em> torsion.  LAMMPS does
+not do this (i.e., the listed dihedral equation applies to each individual
+dihedral).  Thus, you need to define <em>K</em> appropriately via the
 <a class="reference internal" href="dihedral_coeff.html"><span class="doc">dihedral_coeff</span></a> command to account for this
 difference if necessary.</p>
 </div>
@@ -217,8 +224,9 @@ specified by the associated <a class="reference internal" href="dihedral_coeff.h
 command.</p>
 <p>There are also additional accelerated pair styles included in the
 LAMMPS distribution for faster performance on CPUs, GPUs, and KNLs.
-The individual style names on the <a class="reference internal" href="Commands_bond.html#dihedral"><span class="std std-ref">Commands dihedral</span></a> page are followed by one or
-more of (g,i,k,o,t) to indicate which accelerated styles exist.</p>
+The individual style names on the <a class="reference internal" href="Commands_bond.html#dihedral"><span class="std std-ref">Commands dihedral</span></a> page are
+followed by one or more of (g,i,k,o,t) to indicate which accelerated styles
+exist.</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="dihedral_none.html"><span class="doc">none</span></a> - turn off dihedral interactions</p></li>
 <li><p><a class="reference internal" href="dihedral_zero.html"><span class="doc">zero</span></a> - topology but no interactions</p></li>
@@ -230,6 +238,7 @@ more of (g,i,k,o,t) to indicate which accelerated styles exist.</p>
 <li><p><a class="reference internal" href="dihedral_fourier.html"><span class="doc">fourier</span></a> - dihedral with multiple cosine terms</p></li>
 <li><p><a class="reference internal" href="dihedral_harmonic.html"><span class="doc">harmonic</span></a> - harmonic dihedral</p></li>
 <li><p><a class="reference internal" href="dihedral_helix.html"><span class="doc">helix</span></a> - helix dihedral</p></li>
+<li><p><a class="reference internal" href="dihedral_lepton.html"><span class="doc">lepton</span></a> - dihedral potential from evaluating a string</p></li>
 <li><p><a class="reference internal" href="dihedral_multi_harmonic.html"><span class="doc">multi/harmonic</span></a> - dihedral with 5 harmonic terms</p></li>
 <li><p><a class="reference internal" href="dihedral_nharmonic.html"><span class="doc">nharmonic</span></a> - same as multi-harmonic with N terms</p></li>
 <li><p><a class="reference internal" href="dihedral_opls.html"><span class="doc">opls</span></a> - OPLS dihedral</p></li>
@@ -241,7 +250,7 @@ more of (g,i,k,o,t) to indicate which accelerated styles exist.</p>
 </section>
 <hr class="docutils" />
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <p>Dihedral styles can only be set for atom styles that allow dihedrals
 to be defined.</p>
 <p>Most dihedral styles are part of the MOLECULE package.  They are only
@@ -249,11 +258,11 @@ enabled if LAMMPS was built with that package.  See the <a class="reference inte
 individual dihedral potentials tell if it is part of a package.</p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="dihedral_coeff.html"><span class="doc">dihedral_coeff</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
 <p>dihedral_style none</p>
 </section>
 </section>
@@ -263,13 +272,13 @@ individual dihedral potentials tell if it is part of a package.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="dihedral_coeff.html" class="btn btn-neutral float-left" title="dihedral_coeff command" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="dimension.html" class="btn btn-neutral float-right" title="dimension command" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="dihedral_write.html" class="btn btn-neutral float-right" title="dihedral_write command" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -278,7 +287,6 @@ individual dihedral potentials tell if it is part of a package.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

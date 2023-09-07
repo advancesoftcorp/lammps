@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>4.4.4. Long-range interactions &mdash; LAMMPS documentation</title>
@@ -10,18 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Developer_par_long.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -34,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -78,22 +81,25 @@
 <li class="toctree-l3"><a class="reference internal" href="Developer_par_openmp.html">4.4.5. OpenMP Parallelism</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_comm_ops.html">4.5. Communication patterns</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_flow.html">4.6. How a timestep works</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_write.html">4.7. Writing new styles</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_notes.html">4.8. Notes for developers and code maintainers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_plugins.html">4.9. Writing plugins</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_unittest.html">4.10. Adding tests for unit testing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Classes.html">4.11. C++ base classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_platform.html">4.12. Platform abstraction functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html">4.13. Utility functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#special-math-functions">4.14. Special Math functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#tokenizer-classes">4.15. Tokenizer classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#argument-parsing-classes">4.16. Argument parsing classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#file-reader-classes">4.17. File reader classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#memory-pool-classes">4.18. Memory pool classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#eigensolver-functions">4.19. Eigensolver functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#communication-buffer-coding-with-ubuf">4.20. Communication buffer coding with <em>ubuf</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_atom.html">4.5. Accessing per-atom data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_comm_ops.html">4.6. Communication patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_flow.html">4.7. How a timestep works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_write.html">4.8. Writing new styles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_notes.html">4.9. Notes for developers and code maintainers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_updating.html">4.10. Notes for updating code written for older LAMMPS versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_plugins.html">4.11. Writing plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_unittest.html">4.12. Adding tests for unit testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Classes.html">4.13. C++ base classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_platform.html">4.14. Platform abstraction functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html">4.15. Utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#special-math-functions">4.16. Special Math functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#tokenizer-classes">4.17. Tokenizer classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#argument-parsing-classes">4.18. Argument parsing classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#file-reader-classes">4.19. File reader classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#memory-pool-classes">4.20. Memory pool classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#eigensolver-functions">4.21. Eigensolver functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#communication-buffer-coding-with-ubuf">4.22. Communication buffer coding with <em>ubuf</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_grid.html">4.23. Use of distributed grids within style classes</a></li>
 </ul>
 </li>
 </ul>
@@ -107,6 +113,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -124,13 +131,12 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Developer.html"><span class="section-number">4. </span>Information for Developers</a> &raquo;</li>
-          <li><a href="Developer_parallel.html"><span class="section-number">4.4. </span>Parallel algorithms</a> &raquo;</li>
-      <li><span class="section-number">4.4.4. </span>Long-range interactions</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Developer.html"><span class="section-number">4. </span>Information for Developers</a></li>
+          <li class="breadcrumb-item"><a href="Developer_parallel.html"><span class="section-number">4.4. </span>Parallel algorithms</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">4.4.4. </span>Long-range interactions</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="Developer_par_neigh.html" class="btn btn-neutral float-left" title="4.4.3. Neighbor lists" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -141,8 +147,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="long-range-interactions">
-<h1><span class="section-number">4.4.4. </span>Long-range interactions<a class="headerlink" href="#long-range-interactions" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="long-range-interactions">
+<h1><span class="section-number">4.4.4. </span>Long-range interactions<a class="headerlink" href="#long-range-interactions" title="Permalink to this heading"></a></h1>
 <p>For charged systems, LAMMPS can compute long-range Coulombic
 interactions via the FFT-based particle-particle/particle-mesh (PPPM)
 method implemented in <a class="reference internal" href="kspace_style.html"><span class="doc">kspace style pppm and its variants</span></a>.  For that Coulombic interactions are partitioned into
@@ -161,7 +168,7 @@ its forces.</p></li>
 </ol>
 <p>For any of the spatial-decomposition partitioning schemes each processor
 owns the brick-shaped portion of FFT grid points contained within its
-sub-domain.  The two interpolation operations use a stencil of grid
+subdomain.  The two interpolation operations use a stencil of grid
 points surrounding each atom.  To accommodate the stencil size, each
 processor also stores a few layers of ghost grid points surrounding its
 brick.  Forward and reverse communication of grid point values is
@@ -176,33 +183,36 @@ box is conceptually a unit cube, so that the stencil and FFT
 operations are unchanged.  However the FFT grid size required for a
 given accuracy is larger for triclinic domains than it is for
 orthogonal boxes.</p>
-<figure class="align-center" id="id1">
+<figure class="align-default" id="id1">
 <span id="fft-parallel"></span><img alt="_images/fft-decomp-parallel.png" src="_images/fft-decomp-parallel.png" />
 <figcaption>
-<p><span class="caption-text">parallel FFT in PPPM</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text">Parallel FFT in PPPM</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
 <div class="legend">
-<p>Stages of a parallel FFT for a simulation domain overlaid
-with an 8x8x8 3d FFT grid, partitioned across 64 processors.
-Within each of the 4 diagrams, grid cells of the same color are
-owned by a single processor; for simplicity only cells owned by 4
-or 8 of the 64 processors are colored.  The two images on the left
+<blockquote>
+<div><p>Stages of a parallel FFT for a simulation domain overlaid with an
+8x8x8 3d FFT grid, partitioned across 64 processors.  Within each
+of the 4 diagrams, grid cells of the same color are owned by a
+single processor; for simplicity, only cells owned by 4 or 8 of
+the 64 processors are colored.  The two images on the left
 illustrate brick-to-pencil communication.  The two images on the
 right illustrate pencil-to-pencil communication, which in this
 case transposes the <em>y</em> and <em>z</em> dimensions of the grid.</p>
+</div></blockquote>
 </div>
 </figcaption>
 </figure>
 <p>Parallel 3d FFTs require substantial communication relative to their
 computational cost.  A 3d FFT is implemented by a series of 1d FFTs
-along the <em>x-</em>, <em>y-</em>, and <em>z-</em>direction of the FFT grid.  Thus the FFT
-grid cannot be decomposed like atoms into 3 dimensions for parallel
+along the <em>x-</em>, <em>y-</em>, and <em>z-</em>direction of the FFT grid.  Thus, the
+FFT grid cannot be decomposed like atoms into 3 dimensions for parallel
 processing of the FFTs but only in 1 (as planes) or 2 (as pencils)
 dimensions and in between the steps the grid needs to be transposed to
 have the FFT grid portion “owned” by each MPI process complete in the
 direction of the 1d FFTs it has to perform. LAMMPS uses the
-pencil-decomposition algorithm as shown in the <a class="reference internal" href="#fft-parallel"><span class="std std-ref">parallel FFT in PPPM</span></a> figure.</p>
+pencil-decomposition algorithm as shown in the <a class="reference internal" href="#fft-parallel"><span class="std std-ref">Parallel FFT in PPPM</span></a>
+figure.</p>
 <p>Initially (far left), each processor owns a brick of same-color grid
-cells (actually grid points) contained within in its sub-domain.  A
+cells (actually grid points) contained within in its subdomain.  A
 brick-to-pencil communication operation converts this layout to 1d
 pencils in the <em>x</em>-dimension (center left).  Again, cells of the same
 color are owned by the same processor.  Each processor can then compute
@@ -230,9 +240,9 @@ handful of tiles in the final tiling.</p>
 <p>The transformations could also be done using collective communication
 across all $P$ processors with a single call to <code class="docutils literal notranslate"><span class="pre">MPI_Alltoall()</span></code>, but
 this is typically much slower.  However, for the specialized brick and
-pencil tiling illustrated in <a class="reference internal" href="#fft-parallel"><span class="std std-ref">parallel FFT in PPPM</span></a> figure, collective
+pencil tiling illustrated in <a class="reference internal" href="#fft-parallel"><span class="std std-ref">Parallel FFT in PPPM</span></a> figure, collective
 communication across the entire MPI communicator is not required.  In
-the example an <span class="math notranslate nohighlight">\(8^3\)</span> grid with 512 grid cells is partitioned
+the example, an <span class="math notranslate nohighlight">\(8^3\)</span> grid with 512 grid cells is partitioned
 across 64 processors; each processor owns a 2x2x2 3d brick of grid
 cells.  The initial brick-to-pencil communication (upper left to upper
 right) only requires collective communication within subgroups of 4
@@ -265,7 +275,7 @@ grid/particle operations that LAMMPS supports:</p>
 <li><p>The fftMPI library allows each grid dimension to be a multiple of
 small prime factors (2,3,5), and allows any number of processors to
 perform the FFT.  The resulting brick and pencil decompositions are
-thus not always as well-aligned but the size of subgroups of
+thus not always as well-aligned, but the size of subgroups of
 processors for the two modes of communication (brick/pencil and
 pencil/pencil) still scale as <span class="math notranslate nohighlight">\(O(P^{\frac{1}{3}})\)</span> and
 <span class="math notranslate nohighlight">\(O(P^{\frac{1}{2}})\)</span>.</p></li>
@@ -274,23 +284,25 @@ operations illustrated in Figure ref{fig:fft} also involve
 reordering the 3d data so that a different dimension is contiguous
 in memory.  This reordering can be done during the packing or
 unpacking of buffers for MPI communication.</p></li>
-<li><p>For large systems and particularly a large number of MPI processes,
-the dominant cost for parallel FFTs is often the communication, not
-the computation of 1d FFTs, even though the latter scales as <span class="math notranslate nohighlight">\(N
-\log(N)\)</span> in the number of grid points <em>N</em> per grid direction.  This is
-due to the fact that only a 2d decomposition into pencils is possible
-while atom data (and their corresponding short-range force and energy
-computations) can be decomposed efficiently in 3d.</p>
-<p>This can be addressed by reducing the number of MPI processes involved
-in the MPI communication by using <a class="reference internal" href="Speed_omp.html"><span class="doc">hybrid MPI + OpenMP
-parallelization</span></a>.  This will use OpenMP parallelization
-inside the MPI domains and while that may have a lower parallel
-efficiency, it reduces the communication overhead.</p>
-<p>As an alternative it is also possible to start a <a class="reference internal" href="Run_options.html#partition"><span class="std std-ref">multi-partition</span></a> calculation and then use the <a class="reference internal" href="run_style.html"><span class="doc">verlet/split
+<li><p>For large systems and particularly many MPI processes, the dominant
+cost for parallel FFTs is often the communication, not the computation
+of 1d FFTs, even though the latter scales as <span class="math notranslate nohighlight">\(N \log(N)\)</span> in the
+number of grid points <em>N</em> per grid direction.  This is due to the fact
+that only a 2d decomposition into pencils is possible while atom data
+(and their corresponding short-range force and energy computations)
+can be decomposed efficiently in 3d.</p>
+<p>Reducing the number of MPI processes involved in the MPI communication
+will reduce this kind of overhead.  By using a <a class="reference internal" href="Speed_omp.html"><span class="doc">hybrid MPI +
+OpenMP parallelization</span></a> it is still possible to use all
+processes for parallel computation.  It will use OpenMP
+parallelization inside the MPI domains. While that may have a lower
+parallel efficiency for some part of the computation, that can be less
+than the communication overhead in the 3d FFTs.</p>
+<p>As an alternative, it is also possible to start a <a class="reference internal" href="Run_options.html#partition"><span class="std std-ref">multi-partition</span></a> calculation and then use the <a class="reference internal" href="run_style.html"><span class="doc">verlet/split
 integrator</span></a> to perform the PPPM computation on a
 dedicated, separate partition of MPI processes.  This uses an integer
-“1:<em>p</em>” mapping of <em>p</em> sub-domains of the atom decomposition to one
-sub-domain of the FFT grid decomposition and where pairwise non-bonded
+“1:<em>p</em>” mapping of <em>p</em> subdomains of the atom decomposition to one
+subdomain of the FFT grid decomposition and where pairwise non-bonded
 and bonded forces and energies are computed on the larger partition
 and the PPPM kspace computation concurrently on the smaller partition.</p>
 </li>
@@ -299,10 +311,10 @@ interactions, dipole and dispersion (Lennard-Jones), which can be used
 in conjunction with long-range  Coulombics for point charges.</p></li>
 <li><p>LAMMPS implements a <code class="docutils literal notranslate"><span class="pre">GridComm</span></code> class which overlays the simulation
 domain with a regular grid, partitions it across processors in a
-manner consistent with processor sub-domains, and provides methods for
+manner consistent with processor subdomains, and provides methods for
 forward and reverse communication of owned and ghost grid point
 values.  It is used for PPPM as an FFT grid (as outlined above) and
-also for the MSM algorithm which uses a cascade of grid sizes from
+also for the MSM algorithm, which uses a cascade of grid sizes from
 fine to coarse to compute long-range Coulombic forces.  The GridComm
 class is also useful for models where continuum fields interact with
 particles.  For example, the two-temperature model (TTM) defines heat
@@ -327,7 +339,7 @@ replicated grid.</p></li>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -336,7 +348,6 @@ replicated grid.</p></li>
    
 
 </footer>
-
         </div>
       </div>
     </section>

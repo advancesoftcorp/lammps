@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>dihedral_coeff command &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/dihedral_coeff.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -93,6 +97,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dihedral_harmonic.html">dihedral_style harmonic command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_helix.html">dihedral_style helix command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_hybrid.html">dihedral_style hybrid command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dihedral_lepton.html">dihedral_style lepton command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_multi_harmonic.html">dihedral_style multi/harmonic command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_nharmonic.html">dihedral_style nharmonic command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_none.html">dihedral_style none command</a></li>
@@ -102,10 +107,12 @@
 <li class="toctree-l2"><a class="reference internal" href="dihedral_style.html">dihedral_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_table.html">dihedral_style table command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_table.html#dihedral-style-table-cut-command">dihedral_style table/cut command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dihedral_write.html">dihedral_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_zero.html">dihedral_style zero command</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -123,12 +130,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="commands_list.html">Commands</a> &raquo;</li>
-      <li>dihedral_coeff command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="commands_list.html">Commands</a></li>
+      <li class="breadcrumb-item active">dihedral_coeff command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="dielectric.html" class="btn btn-neutral float-left" title="dielectric command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -139,51 +145,60 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="dihedral-coeff-command">
-<span id="index-0"></span><h1>dihedral_coeff command<a class="headerlink" href="#dihedral-coeff-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="dihedral-coeff-command">
+<span id="index-0"></span><h1>dihedral_coeff command<a class="headerlink" href="#dihedral-coeff-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">dihedral_coeff</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="n">args</span><span class="w"></span>
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">dihedral_coeff</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="n">args</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>N = dihedral type (see asterisk form below)</p></li>
+<li><p>N = numeric dihedral type (see asterisk form below) or alphanumeric type label</p></li>
 <li><p>args = coefficients for one or more dihedral types</p></li>
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">dihedral_coeff</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">80.0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span><span class="w"></span>
-<span class="k">dihedral_coeff</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">80.0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">0.5</span><span class="w"></span>
-<span class="k">dihedral_coeff</span><span class="w"> </span><span class="m">2</span><span class="o">*</span><span class="w"> </span><span class="m">80.0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">0.5</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">dihedral_coeff</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">80.0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span>
+<span class="k">dihedral_coeff</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">80.0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">0.5</span>
+<span class="k">dihedral_coeff</span><span class="w"> </span><span class="m">2</span><span class="o">*</span><span class="w"> </span><span class="m">80.0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">0.5</span>
+
+<span class="k">labelmap</span><span class="w"> </span><span class="n">dihedral</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">backbone</span>
+<span class="k">dihedral_coeff</span><span class="w"> </span><span class="n">backbone</span><span class="w"> </span><span class="m">80.0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p>Specify the dihedral force field coefficients for one or more dihedral types.
-The number and meaning of the coefficients depends on the dihedral style.
-Dihedral coefficients can also be set in the data file read by the
-<a class="reference internal" href="read_data.html"><span class="doc">read_data</span></a> command or in a restart file.</p>
-<p>N can be specified in one of two ways.  An explicit numeric value can
-be used, as in the first example above.  Or a wild-card asterisk can be
-used to set the coefficients for multiple dihedral types.  This takes the
-form “*” or “*n” or “n*” or “m*n”.  If N = the number of dihedral types,
-then an asterisk with no numeric values means all types from 1 to N.  A
-leading asterisk means all types from 1 to n (inclusive).  A trailing
-asterisk means all types from n to N (inclusive).  A middle asterisk
-means all types from m to n (inclusive).</p>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
+<p>Specify the dihedral force field coefficients for one or more dihedral
+types.  The number and meaning of the coefficients depends on the
+dihedral style.  Dihedral coefficients can also be set in the data file
+read by the <a class="reference internal" href="read_data.html"><span class="doc">read_data</span></a> command or in a restart file.</p>
+<p><span class="math notranslate nohighlight">\(N\)</span> can be specified in one of two ways.  An explicit numeric
+value can be used, as in the first example above.  Or <span class="math notranslate nohighlight">\(N\)</span> can be
+an alphanumeric type label, which is a string defined by the
+<a class="reference internal" href="labelmap.html"><span class="doc">labelmap</span></a> command or in a corresponding section of a
+data file read by the <a class="reference internal" href="read_data.html"><span class="doc">read_data</span></a> command.</p>
+<p>For numeric values only, a wild-card asterisk can be used to set the
+coefficients for multiple dihedral types.  This takes the form “*” or
+“*n” or “n*” or “m*n”.  If <span class="math notranslate nohighlight">\(N\)</span> is the number of dihedral types,
+then an asterisk with no numeric values means all types from 1 to
+<span class="math notranslate nohighlight">\(N\)</span>.  A leading asterisk means all types from 1 to n (inclusive).
+A trailing asterisk means all types from n to <span class="math notranslate nohighlight">\(N\)</span> (inclusive).  A
+middle asterisk means all types from m to n (inclusive).</p>
 <p>Note that using a dihedral_coeff command can override a previous setting
 for the same dihedral type.  For example, these commands set the coeffs
-for all dihedral types, then overwrite the coeffs for just dihedral type 2:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">dihedral_coeff</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">80.0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span><span class="w"></span>
-<span class="k">dihedral_coeff</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">200.0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span><span class="w"></span>
+for all dihedral types, then overwrite the coeffs for just dihedral type
+2:</p>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">dihedral_coeff</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">80.0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span>
+<span class="k">dihedral_coeff</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">200.0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span>
 </pre></div>
 </div>
 <p>A line in a data file that specifies dihedral coefficients uses the exact
 same format as the arguments of the dihedral_coeff command in an input
 script, except that wild-card asterisks should not be used since
-coefficients for all N types must be listed in the file.  For example,
+coefficients for all <span class="math notranslate nohighlight">\(N\)</span> types must be listed in the file.  For example,
 under the “Dihedral Coeffs” section of a data file, the line that
 corresponds to the first example above would be listed as</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1 80.0 1 3
@@ -198,11 +213,11 @@ page for details.</p>
 <p>When comparing the formulas and coefficients for various LAMMPS
 dihedral styles with dihedral equations defined by other force fields,
 note that some force field implementations divide/multiply the energy
-prefactor <em>K</em> by the multiple number of torsions that contain the J-K
-bond in an I-J-K-L torsion.  LAMMPS does not do this, i.e. the listed
-dihedral equation applies to each individual dihedral.  Thus you need
-to define <em>K</em> appropriately to account for this difference if
-necessary.</p>
+prefactor <em>K</em> by the multiple number of torsions that contain the
+<em>J</em>–<em>K</em> bond in an <em>I</em>-<em>J</em>-<em>K</em>-<em>L</em> torsion.  LAMMPS does
+not do this (i.e., the listed dihedral equation applies to each individual
+dihedral).  Thus, you need to define <em>K</em> appropriately to account for this
+difference, if necessary.</p>
 </div>
 <hr class="docutils" />
 <p>The list of all dihedral styles defined in LAMMPS is given on the
@@ -214,7 +229,7 @@ dihedral_coeff command.</p>
 </section>
 <hr class="docutils" />
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <p>This command must come after the simulation box is defined by a
 <a class="reference internal" href="read_data.html"><span class="doc">read_data</span></a>, <a class="reference internal" href="read_restart.html"><span class="doc">read_restart</span></a>, or
 <a class="reference internal" href="create_box.html"><span class="doc">create_box</span></a> command.</p>
@@ -222,11 +237,11 @@ dihedral_coeff command.</p>
 set, either in the input script or in a data file.</p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="dihedral_style.html"><span class="doc">dihedral_style</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
 <p>none</p>
 </section>
 </section>
@@ -242,7 +257,7 @@ set, either in the input script or in a data file.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -251,7 +266,6 @@ set, either in the input script or in a data file.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

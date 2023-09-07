@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>4.6. How a timestep works &mdash; LAMMPS documentation</title>
+  <title>4.7. How a timestep works &mdash; LAMMPS documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Developer_flow.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4.7. Writing new styles" href="Developer_write.html" />
-    <link rel="prev" title="4.5. Communication patterns" href="Developer_comm_ops.html" /> 
+    <link rel="next" title="4.8. Writing new styles" href="Developer_write.html" />
+    <link rel="prev" title="4.6. Communication patterns" href="Developer_comm_ops.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -70,22 +74,25 @@
 <li class="toctree-l2"><a class="reference internal" href="Developer_org.html#class-topology">4.2. Class topology</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Developer_code_design.html">4.3. Code design</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Developer_parallel.html">4.4. Parallel algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_comm_ops.html">4.5. Communication patterns</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">4.6. How a timestep works</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_write.html">4.7. Writing new styles</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_notes.html">4.8. Notes for developers and code maintainers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_plugins.html">4.9. Writing plugins</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_unittest.html">4.10. Adding tests for unit testing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Classes.html">4.11. C++ base classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_platform.html">4.12. Platform abstraction functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html">4.13. Utility functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#special-math-functions">4.14. Special Math functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#tokenizer-classes">4.15. Tokenizer classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#argument-parsing-classes">4.16. Argument parsing classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#file-reader-classes">4.17. File reader classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#memory-pool-classes">4.18. Memory pool classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#eigensolver-functions">4.19. Eigensolver functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#communication-buffer-coding-with-ubuf">4.20. Communication buffer coding with <em>ubuf</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_atom.html">4.5. Accessing per-atom data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_comm_ops.html">4.6. Communication patterns</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4.7. How a timestep works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_write.html">4.8. Writing new styles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_notes.html">4.9. Notes for developers and code maintainers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_updating.html">4.10. Notes for updating code written for older LAMMPS versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_plugins.html">4.11. Writing plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_unittest.html">4.12. Adding tests for unit testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Classes.html">4.13. C++ base classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_platform.html">4.14. Platform abstraction functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html">4.15. Utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#special-math-functions">4.16. Special Math functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#tokenizer-classes">4.17. Tokenizer classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#argument-parsing-classes">4.18. Argument parsing classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#file-reader-classes">4.19. File reader classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#memory-pool-classes">4.20. Memory pool classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#eigensolver-functions">4.21. Eigensolver functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#communication-buffer-coding-with-ubuf">4.22. Communication buffer coding with <em>ubuf</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_grid.html">4.23. Use of distributed grids within style classes</a></li>
 </ul>
 </li>
 </ul>
@@ -99,6 +106,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -116,24 +124,24 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Developer.html"><span class="section-number">4. </span>Information for Developers</a> &raquo;</li>
-      <li><span class="section-number">4.6. </span>How a timestep works</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Developer.html"><span class="section-number">4. </span>Information for Developers</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">4.7. </span>How a timestep works</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
-        <a href="Developer_comm_ops.html" class="btn btn-neutral float-left" title="4.5. Communication patterns" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Developer_write.html" class="btn btn-neutral float-right" title="4.7. Writing new styles" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Developer_comm_ops.html" class="btn btn-neutral float-left" title="4.6. Communication patterns" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Developer_write.html" class="btn btn-neutral float-right" title="4.8. Writing new styles" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="how-a-timestep-works">
-<h1><span class="section-number">4.6. </span>How a timestep works<a class="headerlink" href="#how-a-timestep-works" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="how-a-timestep-works">
+<h1><span class="section-number">4.7. </span>How a timestep works<a class="headerlink" href="#how-a-timestep-works" title="Permalink to this heading"></a></h1>
 <p>The first and most fundamental operation within LAMMPS to understand is
 how a timestep is structured.  Timestepping is performed by calling
 methods of the Integrate class instance within the Update class.  Since
@@ -172,9 +180,9 @@ via the <em>pre no</em> and <em>every</em> options of the run command, the
 zero before each timestep, so that forces (torques, etc) can be
 accumulated.</p></li>
 </ul>
-<p>Now for the <code class="docutils literal notranslate"><span class="pre">Verlet::run()</span></code> method.  Its basic structure in hi-level pseudo
-code is shown below.  In the actual code in <code class="docutils literal notranslate"><span class="pre">src/verlet.cpp</span></code> some of
-these operations are conditionally invoked.</p>
+<p>Now for the <code class="docutils literal notranslate"><span class="pre">Verlet::run()</span></code> method.  Its basic structure in hi-level
+pseudocode is shown below.  In the actual code in <code class="docutils literal notranslate"><span class="pre">src/verlet.cpp</span></code>
+some of these operations are conditionally invoked.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">loop</span> <span class="n">over</span> <span class="n">N</span> <span class="n">timesteps</span><span class="p">:</span>
   <span class="k">if</span> <span class="n">timeout</span> <span class="n">condition</span><span class="p">:</span> <span class="k">break</span>
   <span class="n">ev_set</span><span class="p">()</span>
@@ -229,16 +237,16 @@ need it.  These flags are passed to the various methods that compute
 particle interactions, so that they either compute and tally the
 corresponding data or can skip the extra calculations if the energy and
 virial are not needed.  See the comments for the <code class="docutils literal notranslate"><span class="pre">Integrate::ev_set()</span></code>
-method which document the flag values.</p>
+method, which document the flag values.</p>
 <p>At various points of the timestep, fixes are invoked,
 e.g. <code class="docutils literal notranslate"><span class="pre">fix-&gt;initial_integrate()</span></code>.  In the code, this is actually done
-via the Modify class which stores all the Fix objects and lists of which
+via the Modify class, which stores all the Fix objects and lists of which
 should be invoked at what point in the timestep.  Fixes are the LAMMPS
 mechanism for tailoring the operations of a timestep for a particular
 simulation.  As described elsewhere, each fix has one or more methods,
 each of which is invoked at a specific stage of the timestep, as show in
-the timestep pseudo-code.  All the active fixes defined in an input
-script, that are flagged to have an <code class="docutils literal notranslate"><span class="pre">initial_integrate()</span></code> method are
+the timestep pseudocode.  All the active fixes defined in an input
+script, that are flagged to have an <code class="docutils literal notranslate"><span class="pre">initial_integrate()</span></code> method, are
 invoked at the beginning of each timestep.  Examples are <a class="reference internal" href="fix_nve.html"><span class="doc">fix nve</span></a> or <a class="reference internal" href="fix_nh.html"><span class="doc">fix nvt or fix npt</span></a> which perform the
 start-of-timestep velocity-Verlet integration operations to update
 velocities by a half-step, and coordinates by a full step.  The
@@ -250,14 +258,14 @@ neighbor lists need to be rebuilt on the current timestep (conditions
 can be changed using the <a class="reference internal" href="neigh_modify.html"><span class="doc">neigh_modify every/delay/check</span></a> command.  If not, coordinates of ghost atoms are
 acquired by each processor via the <code class="docutils literal notranslate"><span class="pre">forward_comm()</span></code> method of the Comm
 class.  If neighbor lists need to be built, several operations within
-the inner if clause of the pseudo-code are first invoked.  The
+the inner if clause of the pseudocode are first invoked.  The
 <code class="docutils literal notranslate"><span class="pre">pre_exchange()</span></code> method of any defined fixes is invoked first.
-Typically this inserts or deletes particles from the system.</p>
+Typically, this inserts or deletes particles from the system.</p>
 <p>Periodic boundary conditions are then applied by the Domain class via
 its <code class="docutils literal notranslate"><span class="pre">pbc()</span></code> method to remap particles that have moved outside the
 simulation box back into the box.  Note that this is not done every
 timestep, but only when neighbor lists are rebuilt.  This is so that
-each processor’s sub-domain will have consistent (nearby) atom
+each processor’s subdomain will have consistent (nearby) atom
 coordinates for its owned and ghost atoms.  It is also why dumped atom
 coordinates may be slightly outside the simulation box if not dumped
 on a step where the neighbor lists are rebuilt.</p>
@@ -265,14 +273,14 @@ on a step where the neighbor lists are rebuilt.</p>
 method of the Domain class, e.g. if box boundaries are shrink-wrapped to
 current particle coordinates.  A change in the box size or shape
 requires internal information for communicating ghost atoms (Comm class)
-and neighbor list bins (Neighbor class) be updated.  The <code class="docutils literal notranslate"><span class="pre">setup()</span></code>
+and neighbor list bins (Neighbor class) to be updated.  The <code class="docutils literal notranslate"><span class="pre">setup()</span></code>
 method of the Comm class and <code class="docutils literal notranslate"><span class="pre">setup_bins()</span></code> method of the Neighbor
 class perform the update.</p>
 <p>The code is now ready to migrate atoms that have left a processor’s
-geometric sub-domain to new processors.  The <code class="docutils literal notranslate"><span class="pre">exchange()</span></code> method of
+geometric subdomain to new processors.  The <code class="docutils literal notranslate"><span class="pre">exchange()</span></code> method of
 the Comm class performs this operation.  The <code class="docutils literal notranslate"><span class="pre">borders()</span></code> method of the
 Comm class then identifies ghost atoms surrounding each processor’s
-sub-domain and communicates ghost atom information to neighboring
+subdomain and communicates ghost atom information to neighboring
 processors.  It does this by looping over all the atoms owned by a
 processor to make lists of those to send to each neighbor processor.  On
 subsequent timesteps, the lists are used by the <code class="docutils literal notranslate"><span class="pre">Comm::forward_comm()</span></code>
@@ -324,21 +332,22 @@ output to the screen and log file, snapshots of atom data to a dump
 file, and restart files.  See the <a class="reference internal" href="thermo_style.html"><span class="doc">thermo_style</span></a>,
 <a class="reference internal" href="dump.html"><span class="doc">dump</span></a>, and <a class="reference internal" href="restart.html"><span class="doc">restart</span></a> commands for more
 details.</p>
-<p>The the flow of control during energy minimization iterations is
-similar to that of a molecular dynamics timestep.  Forces are computed,
-neighbor lists are built as needed, atoms migrate to new processors, and
-atom coordinates and forces are communicated to neighboring processors.
-The only difference is what Fix class operations are invoked when.  Only
-a subset of LAMMPS fixes are useful during energy minimization, as
+<p>The flow of control during energy minimization iterations is similar to
+that of a molecular dynamics timestep.  Forces are computed, neighbor
+lists are built as needed, atoms migrate to new processors, and atom
+coordinates and forces are communicated to neighboring processors.  The
+only difference is what Fix class operations are invoked when.  Only a
+subset of LAMMPS fixes are useful during energy minimization, as
 explained in their individual doc pages.  The relevant Fix class methods
-are <code class="docutils literal notranslate"><span class="pre">min_pre_exchange()</span></code>, <code class="docutils literal notranslate"><span class="pre">min_pre_force()</span></code>, and <code class="docutils literal notranslate"><span class="pre">min_post_force()</span></code>.
-Each fix is invoked at the appropriate place within the minimization
-iteration.  For example, the <code class="docutils literal notranslate"><span class="pre">min_post_force()</span></code> method is analogous to
-the <code class="docutils literal notranslate"><span class="pre">post_force()</span></code> method for dynamics; it is used to alter or constrain
-forces on each atom, which affects the minimization procedure.</p>
-<p>After all iterations are completed there is a <code class="docutils literal notranslate"><span class="pre">cleanup</span></code> step which
+are <code class="docutils literal notranslate"><span class="pre">min_pre_exchange()</span></code>, <code class="docutils literal notranslate"><span class="pre">min_pre_force()</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">min_post_force()</span></code>.  Each fix is invoked at the appropriate place
+within the minimization iteration.  For example, the
+<code class="docutils literal notranslate"><span class="pre">min_post_force()</span></code> method is analogous to the <code class="docutils literal notranslate"><span class="pre">post_force()</span></code> method
+for dynamics; it is used to alter or constrain forces on each atom,
+which affects the minimization procedure.</p>
+<p>After all iterations are completed, there is a <code class="docutils literal notranslate"><span class="pre">cleanup</span></code> step which
 calls the <code class="docutils literal notranslate"><span class="pre">post_run()</span></code> method of fixes to perform operations only required
-at the end of a calculations (like freeing temporary storage or creating
+at the end of a calculation (like freeing temporary storage or creating
 final outputs).</p>
 </section>
 
@@ -346,14 +355,14 @@ final outputs).</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="Developer_comm_ops.html" class="btn btn-neutral float-left" title="4.5. Communication patterns" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Developer_write.html" class="btn btn-neutral float-right" title="4.7. Writing new styles" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Developer_comm_ops.html" class="btn btn-neutral float-left" title="4.6. Communication patterns" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Developer_write.html" class="btn btn-neutral float-right" title="4.8. Writing new styles" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -362,7 +371,6 @@ final outputs).</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

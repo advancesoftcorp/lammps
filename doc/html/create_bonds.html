@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>create_bonds command &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/create_bonds.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -72,6 +76,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="commands_list.html">Commands</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="angle_coeff.html">angle_coeff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="angle_style.html">angle_style command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="angle_write.html">angle_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="atom_modify.html">atom_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="atom_style.html">atom_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="balance.html">balance command</a></li>
@@ -79,7 +84,6 @@
 <li class="toctree-l2"><a class="reference internal" href="bond_style.html">bond_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_write.html">bond_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="boundary.html">boundary command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="box.html">box command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="change_box.html">change_box command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="clear.html">clear command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="comm_modify.html">comm_modify command</a></li>
@@ -102,6 +106,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dielectric.html">dielectric command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_coeff.html">dihedral_coeff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_style.html">dihedral_style command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dihedral_write.html">dihedral_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dimension.html">dimension command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="displace_atoms.html">displace_atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html">dump command</a></li>
@@ -113,6 +118,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-movie-command"><span class="xref std std-doc">dump movie</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-atom-adios-command"><span class="xref std std-doc">dump atom/adios</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-custom-adios-command"><span class="xref std std-doc">dump custom/adios</span> command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dump.html#dump-cfg-uef-command"><span class="xref std std-doc">dump cfg/uef</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_adios.html">dump atom/adios  command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_adios.html#dump-custom-adios-command">dump custom/adios command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_cfg_uef.html">dump cfg/uef command</a></li>
@@ -130,6 +136,7 @@
 <li class="toctree-l2"><a class="reference internal" href="echo.html">echo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix.html">fix command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify.html">fix_modify command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitpod_command.html">fitpod command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group.html">group command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group2ndx.html">group2ndx command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group2ndx.html#ndx2group-command">ndx2group command</a></li>
@@ -144,6 +151,7 @@
 <li class="toctree-l2"><a class="reference internal" href="kspace_modify.html">kspace_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kspace_style.html">kspace_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="label.html">label command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labelmap.html">labelmap command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lattice.html">lattice command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="log.html">log command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mass.html">mass command</a></li>
@@ -157,12 +165,10 @@
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-sd-command">min_style sd command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-quickmin-command">min_style quickmin command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-fire-command">min_style fire command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-fire-old-command">min_style fire/old command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-command"><span class="xref std std-doc">min_style spin</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-cg-command"><span class="xref std std-doc">min_style spin/cg</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-lbfgs-command"><span class="xref std std-doc">min_style spin/lbfgs</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="minimize.html">minimize command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="minimize.html#minimize-kk-command">minimize/kk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="molecule.html">molecule command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neb.html">neb command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neb_spin.html">neb/spin command</a></li>
@@ -188,8 +194,7 @@
 <li class="toctree-l2"><a class="reference internal" href="region.html">region command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="replicate.html">replicate command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rerun.html">rerun command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset_atom_ids.html">reset_atom_ids command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset_mol_ids.html">reset_mol_ids command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reset_atoms.html">reset_atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reset_timestep.html">reset_timestep command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="restart.html">restart command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="run.html">run command</a></li>
@@ -227,6 +232,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -244,12 +250,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="commands_list.html">Commands</a> &raquo;</li>
-      <li>create_bonds command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="commands_list.html">Commands</a></li>
+      <li class="breadcrumb-item active">create_bonds command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="create_atoms.html" class="btn btn-neutral float-left" title="create_atoms command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -260,15 +265,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="create-bonds-command">
-<span id="index-0"></span><h1>create_bonds command<a class="headerlink" href="#create-bonds-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="create-bonds-command">
+<span id="index-0"></span><h1>create_bonds command<a class="headerlink" href="#create-bonds-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">create_bonds</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">...</span><span class="w"></span>
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">create_bonds</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">...</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>style = <em>many</em> or <em>single/bond</em> or <em>single/angle</em> or <em>single/dihedral</em></p></li>
+<li><p>style = <em>many</em> or <em>single/bond</em> or <em>single/angle</em> or <em>single/dihedral</em> or <em>single/improper</em></p></li>
 </ul>
 <pre class="literal-block"><em>many</em> args = group-ID group2-ID btype rmin rmax
   group-ID = ID of first group
@@ -295,18 +301,18 @@
 <pre class="literal-block"><em>special</em> value = <em>yes</em> or <em>no</em></pre>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">create_bonds</span><span class="w"> </span><span class="n">many</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.2</span><span class="w"></span>
-<span class="k">create_bonds</span><span class="w"> </span><span class="n">many</span><span class="w"> </span><span class="n">surf</span><span class="w"> </span><span class="n">solvent</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">2.0</span><span class="w"> </span><span class="m">2.4</span><span class="w"></span>
-<span class="k">create_bonds</span><span class="w"> </span><span class="n">single</span><span class="o">/</span><span class="n">bond</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"></span>
-<span class="k">create_bonds</span><span class="w"> </span><span class="n">single</span><span class="o">/</span><span class="n">angle</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">52</span><span class="w"> </span><span class="m">98</span><span class="w"> </span><span class="m">107</span><span class="w"> </span><span class="n">special</span><span class="w"> </span><span class="n">no</span><span class="w"></span>
-<span class="k">create_bonds</span><span class="w"> </span><span class="n">single</span><span class="o">/</span><span class="n">dihedral</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">19</span><span class="w"> </span><span class="m">27</span><span class="w"> </span><span class="m">101</span><span class="w"></span>
-<span class="k">create_bonds</span><span class="w"> </span><span class="n">single</span><span class="o">/</span><span class="n">improper</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">23</span><span class="w"> </span><span class="m">26</span><span class="w"> </span><span class="m">31</span><span class="w"> </span><span class="m">57</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">create_bonds</span><span class="w"> </span><span class="n">many</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.2</span>
+<span class="k">create_bonds</span><span class="w"> </span><span class="n">many</span><span class="w"> </span><span class="n">surf</span><span class="w"> </span><span class="n">solvent</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">2.0</span><span class="w"> </span><span class="m">2.4</span>
+<span class="k">create_bonds</span><span class="w"> </span><span class="n">single</span><span class="o">/</span><span class="n">bond</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span>
+<span class="k">create_bonds</span><span class="w"> </span><span class="n">single</span><span class="o">/</span><span class="n">angle</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">52</span><span class="w"> </span><span class="m">98</span><span class="w"> </span><span class="m">107</span><span class="w"> </span><span class="n">special</span><span class="w"> </span><span class="n">no</span>
+<span class="k">create_bonds</span><span class="w"> </span><span class="n">single</span><span class="o">/</span><span class="n">dihedral</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">19</span><span class="w"> </span><span class="m">27</span><span class="w"> </span><span class="m">101</span>
+<span class="k">create_bonds</span><span class="w"> </span><span class="n">single</span><span class="o">/</span><span class="n">improper</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">23</span><span class="w"> </span><span class="m">26</span><span class="w"> </span><span class="m">31</span><span class="w"> </span><span class="m">57</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <p>Create bonds between pairs of atoms that meet a specified distance
 criteria.  Or create a single bond, angle, dihedral or improper between 2, 3,
 or 4 specified atoms.</p>
@@ -317,65 +323,70 @@ the <a class="reference internal" href="bond_style.html"><span class="doc">bond_
 <a class="reference internal" href="dihedral_style.html"><span class="doc">dihedral_style</span></a>,
 <a class="reference internal" href="dihedral_coeff.html"><span class="doc">dihedral_coeff</span></a>, <a class="reference internal" href="improper_style.html"><span class="doc">improper_style</span></a>,
 <a class="reference internal" href="improper_coeff.html"><span class="doc">improper_coeff</span></a> commands.</p>
-<p>The <em>many</em> style is useful for adding bonds to a system, e.g. between
-nearest neighbors in a lattice of atoms, without having to enumerate
+<p>The <em>many</em> style is useful for adding bonds to a system (e.g., between
+nearest neighbors in a lattice of atoms) without having to enumerate
 all the bonds in the data file read by the <a class="reference internal" href="read_data.html"><span class="doc">read_data</span></a>
 command.</p>
-<p>The <em>single</em> styles are useful for adding bonds, angles, dihedrals, impropers
-to a system incrementally, then continuing a simulation.</p>
-<p>Note that this command does not auto-create any angle, dihedral or improper
-interactions when a bond is added.  Nor does it auto-create any bonds
-when an angle, dihedral or improper is added.  Or auto-create any angles when a
-dihedral or improper is added.  Thus the flexibility of this command is limited.
-It can be used several times to create different types of bond at
-different distances.  But it cannot typically auto-create all the
+<p>The <em>single</em> styles are useful for adding bonds, angles, dihedrals, and
+impropers to a system incrementally, then continuing a simulation.</p>
+<p>Note that this command does not auto-create any angle, dihedral, or improper
+interactions when a bond is added, nor does it auto-create any bonds
+when an angle, dihedral, or improper is added.  It also will not auto-create
+any angles when a dihedral or improper is added.  Thus, the flexibility of this
+command is limited.  It can be used several times to create different types of
+bond at different distances, but it cannot typically auto-create all the
 bonds or angles or dihedrals or impropers that would normally be defined in a
 data file for a complex system of molecules.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If the system has no bonds (angles, dihedrals, impropers) to begin with,
-or if more bonds per atom are being added than currently exist, then you
-must insure that the number of bond types and the maximum number of
-bonds per atom are set to large enough values.  And similarly for
-angles, dihedrals and impropers.  Otherwise an error may occur when too many
-bonds (angles, dihedrals, impropers) are added to an atom.  If the
-<a class="reference internal" href="read_data.html"><span class="doc">read_data</span></a> command is used to define the system, these
-parameters can be set via the “bond types” and “extra bond per atom”
-fields in the header section of the data file.  If the
-<a class="reference internal" href="create_box.html"><span class="doc">create_box</span></a> command is used to define the system,
-these 2 parameters can be set via its optional “bond/types” and
-“extra/bond/per/atom” arguments.  And similarly for angles, dihedrals and
-impropers.  See the doc pages for these 2 commands for details.</p>
+<p>If the system has no bonds (angles, dihedrals, impropers) to begin
+with, or if more bonds per atom are being added than currently exist,
+then you must ensure that the number of bond types and the maximum
+number of bonds per atom are set to large enough values, and
+similarly for angles, dihedrals, impropers, and special neighbors,
+otherwise an error may occur when too many bonds (angles, dihedrals,
+impropers) are added to an atom.  If the <a class="reference internal" href="read_data.html"><span class="doc">read_data</span></a>
+command is used to define the system, these parameters can be set via
+its optional <em>extra/bond/types</em>, <em>extra/bond/per/atom</em>, and similar
+keywords to the command.  If the <a class="reference internal" href="create_box.html"><span class="doc">create_box</span></a>
+command is used to define the system, these two parameters can be set
+via its optional <em>bond/types</em> and <em>extra/bond/per/atom</em> arguments,
+and similarly for angles, dihedrals, and impropers.  See the
+corresponding documentation pages for these two commands for details.</p>
 </div>
 <hr class="docutils" />
-<p>The <em>many</em> style will create bonds between pairs of atoms I,J where I
-is in one of the two specified groups, and J is in the other.  The two
-groups can be the same, e.g. group “all”.  The created bonds will be
-of bond type <em>btype</em>, where <em>btype</em> must be a value between 1 and the
+<p>The <em>many</em> style will create bonds between pairs of atoms <span class="math notranslate nohighlight">\(I,J\)</span>,
+where <span class="math notranslate nohighlight">\(I\)</span> is in one of the two specified groups and <span class="math notranslate nohighlight">\(J\)</span> is in the
+other.  The two groups can be the same (e.g., group “all”).  The created bonds
+will be of bond type <em>btype</em>, where <em>btype</em> must be a value between 1 and the
 number of bond types defined.</p>
-<p>For a bond to be created, an I,J pair of atoms must be a distance D
-apart such that <em>rmin</em> &lt;= D &lt;= <em>rmax</em>.</p>
+<p>For a bond to be created, an <span class="math notranslate nohighlight">\(I,J\)</span> pair of atoms must be a distance
+<span class="math notranslate nohighlight">\(D\)</span> apart such that <span class="math notranslate nohighlight">\(r_\text{min} \le D \le r_\text{max}\)</span>.</p>
 <p>The following settings must have been made in an input script before
-this style is used:</p>
+the <em>many</em> style is used:</p>
 <ul class="simple">
-<li><p>special_bonds weight for 1-2 interactions must be 0.0</p></li>
+<li><p>special_bonds weight for 1–2 interactions must be 0.0</p></li>
 <li><p>a <a class="reference internal" href="pair_style.html"><span class="doc">pair_style</span></a> must be defined</p></li>
 <li><p>no <a class="reference internal" href="kspace_style.html"><span class="doc">kspace_style</span></a> defined</p></li>
-<li><p>minimum <a class="reference internal" href="pair_style.html"><span class="doc">pair_style</span></a> cutoff + <a class="reference internal" href="neighbor.html"><span class="doc">neighbor</span></a> skin &gt;= <em>rmax</em></p></li>
+<li><p>minimum <a class="reference internal" href="pair_style.html"><span class="doc">pair_style</span></a> cutoff + <a class="reference internal" href="neighbor.html"><span class="doc">neighbor</span></a>
+skin <span class="math notranslate nohighlight">\(\ge r_\text{max}\)</span></p></li>
 </ul>
 <p>These settings are required so that a neighbor list can be created to
-search for nearby atoms.  Pairs of atoms that are already bonded
-cannot appear in the neighbor list, to avoid creation of duplicate
-bonds.  The neighbor list for all atom type pairs must also extend to
-a distance that encompasses the <em>rmax</em> for new bonds to create.</p>
+search for nearby atoms.  Pairs of atoms that are already bonded cannot
+appear in the neighbor list, to avoid creation of duplicate bonds.  The
+neighbor list for all atom type pairs must also extend to a distance
+that encompasses the <em>rmax</em> for new bonds to create.  When using
+periodic boundary conditions, the box length in each periodic dimension
+must be larger than <em>rmax</em>, so that no bonds are created between the
+system and its own periodic image.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you want to create bonds between pairs of 1-3 or 1-4 atoms in
+<p>If you want to create bonds between pairs of 1–3 or 1–4 atoms in
 the current bond topology, then you need to use <a class="reference internal" href="special_bonds.html"><span class="doc">special_bonds
-lj 0 1 1</span></a> to insure those pairs appear in the
+lj 0 1 1</span></a> to ensure those pairs appear in the
 neighbor list.  They will not appear with the default special_bonds
-settings which are zero for 1-2, 1-3, and 1-4 atoms.  1-3 or 1-4
-atoms are those which are 2 hops or 3 hops apart in the bond
+settings, which are zero for 1–2, 1–3, and 1–4 atoms.  1–3 or 1–4
+atoms are those which are two hops or three hops apart in the bond
 topology.</p>
 </div>
 <p>An additional requirement for this style is that your system must be
@@ -387,7 +398,7 @@ exist before this command is invoked.  This is because the building of
 neighbor list requires initialization and setup of a simulation,
 similar to what a <a class="reference internal" href="run.html"><span class="doc">run</span></a> command would require.</p>
 <p>Note that you can change any of these settings after this command
-executes, e.g. if you wish to use long-range Coulombic interactions
+executes (e.g., if you wish to use long-range Coulombic interactions)
 via the <a class="reference internal" href="kspace_style.html"><span class="doc">kspace_style</span></a> command for your subsequent
 simulation.</p>
 <hr class="docutils" />
@@ -397,8 +408,8 @@ between 1 and the number of bond types defined.</p>
 <p>The <em>single/angle</em> style creates a single angle of type <em>atype</em>
 between three atoms with IDs <em>aatom1</em>, <em>aatom2</em>, and <em>aatom3</em>.  The
 ordering of the atoms is the same as in the <em>Angles</em> section of a data
-file read by the <a class="reference internal" href="read_data.html"><span class="doc">read_data</span></a> command.  I.e. the 3 atoms are
-ordered linearly within the angle; the central atom is <em>aatom2</em>.
+file read by the <a class="reference internal" href="read_data.html"><span class="doc">read_data</span></a> command (i.e., the three atoms
+are ordered linearly within the angle; the central atom is <em>aatom2</em>).
 <em>Atype</em> must be a value between 1 and the number of angle types
 defined.</p>
 <p>The <em>single/dihedral</em> style creates a single dihedral of type <em>dtype</em>
@@ -415,43 +426,47 @@ linearly within the improper.  <em>itype</em> must be a value between 1 and
 the number of improper types defined.</p>
 <hr class="docutils" />
 <p>The keyword <em>special</em> controls whether an internal list of special
-bonds is created after one or more bonds, or a single angle, dihedral or
+bonds is created after one or more bonds, or a single angle, dihedral, or
 improper is added to the system.</p>
 <p>The default value is <em>yes</em>.  A value of <em>no</em> cannot be used
 with the <em>many</em> style.</p>
 <p>This is an expensive operation since the bond topology for the system
-must be walked to find all 1-2, 1-3, 1-4 interactions to store in an
+must be walked to find all 1–2, 1–3, and 1–4 interactions to store in an
 internal list, which is used when pairwise interactions are weighted;
 see the <a class="reference internal" href="special_bonds.html"><span class="doc">special_bonds</span></a> command for details.</p>
 <p>Thus if you are adding a few bonds or a large list of angles all at
 the same time, by using this command repeatedly, it is more efficient
 to only trigger the internal list to be created once, after the last
 bond (or angle, or dihedral, or improper) is added:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">create_bonds</span><span class="w"> </span><span class="n">single</span><span class="o">/</span><span class="n">bond</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">52</span><span class="w"> </span><span class="m">98</span><span class="w"> </span><span class="n">special</span><span class="w"> </span><span class="n">no</span><span class="w"></span>
-<span class="k">create_bonds</span><span class="w"> </span><span class="n">single</span><span class="o">/</span><span class="n">bond</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">73</span><span class="w"> </span><span class="m">74</span><span class="w"> </span><span class="n">special</span><span class="w"> </span><span class="n">no</span><span class="w"></span>
-<span class="n">...</span><span class="w"></span>
-<span class="k">create_bonds</span><span class="w"> </span><span class="n">single</span><span class="o">/</span><span class="n">bond</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">17</span><span class="w"> </span><span class="m">386</span><span class="w"> </span><span class="n">special</span><span class="w"> </span><span class="n">no</span><span class="w"></span>
-<span class="k">create_bonds</span><span class="w"> </span><span class="n">single</span><span class="o">/</span><span class="n">bond</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">112</span><span class="w"> </span><span class="m">183</span><span class="w"> </span><span class="n">special</span><span class="w"> </span><span class="n">yes</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">create_bonds</span><span class="w"> </span><span class="n">single</span><span class="o">/</span><span class="n">bond</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">52</span><span class="w"> </span><span class="m">98</span><span class="w"> </span><span class="n">special</span><span class="w"> </span><span class="n">no</span>
+<span class="k">create_bonds</span><span class="w"> </span><span class="n">single</span><span class="o">/</span><span class="n">bond</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">73</span><span class="w"> </span><span class="m">74</span><span class="w"> </span><span class="n">special</span><span class="w"> </span><span class="n">no</span>
+<span class="n">...</span>
+<span class="k">create_bonds</span><span class="w"> </span><span class="n">single</span><span class="o">/</span><span class="n">bond</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">17</span><span class="w"> </span><span class="m">386</span><span class="w"> </span><span class="n">special</span><span class="w"> </span><span class="n">no</span>
+<span class="k">create_bonds</span><span class="w"> </span><span class="n">single</span><span class="o">/</span><span class="n">bond</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">112</span><span class="w"> </span><span class="m">183</span><span class="w"> </span><span class="n">special</span><span class="w"> </span><span class="n">yes</span>
 </pre></div>
 </div>
-<p>Note that you MUST insure the internal list is re-built after the last
-bond (angle, dihedral, improper) is added, before performing a simulation.
-Otherwise pairwise interactions will not be properly excluded or
-weighted.  LAMMPS does NOT check that you have done this correctly.</p>
+<p>Note that you <strong>must</strong> ensure the internal list is rebuilt after the last
+bond (angle, dihedral, improper) is added, <em>before</em> performing a simulation.
+Otherwise, pairwise interactions will not be properly excluded or
+weighted.  LAMMPS does <strong>not</strong> check that you have done this correctly.</p>
 </section>
 <hr class="docutils" />
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <p>This command cannot be used with molecular systems defined using
 molecule template files via the <a class="reference internal" href="molecule.html"><span class="doc">molecule</span></a> and
 <a class="reference internal" href="atom_style.html"><span class="doc">atom_style template</span></a> commands.</p>
+<p>For style <em>many</em>, no <a class="reference internal" href="kspace_style.html"><span class="doc">kspace style</span></a> must be
+defined. Also, the <em>rmax</em> value must be smaller than any periodic box
+length and the neighbor list cutoff (largest pair cutoff plus neighbor
+skin).</p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="create_atoms.html"><span class="doc">create_atoms</span></a>, <a class="reference internal" href="delete_bonds.html"><span class="doc">delete_bonds</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
 <p>The keyword default is special = yes.</p>
 </section>
 </section>
@@ -467,7 +482,7 @@ molecule template files via the <a class="reference internal" href="molecule.htm
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -476,7 +491,6 @@ molecule template files via the <a class="reference internal" href="molecule.htm
    
 
 </footer>
-
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>fix atom/swap command &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/fix_atom_swap.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -77,6 +81,9 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_adapt_fep.html">fix adapt/fep command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_addforce.html">fix addforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_addtorque.html">fix addtorque command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_alchemy.html">fix alchemy command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_amoeba_bitorsion.html">fix amoeba/bitorsion command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_amoeba_pitorsion.html">fix amoeba/pitorsion command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_append_atoms.html">fix append/atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_atc.html">fix atc command</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">fix atom/swap command</a><ul>
@@ -93,8 +100,11 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_chunk.html">fix ave/chunk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_correlate.html">fix ave/correlate command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_correlate_long.html">fix ave/correlate/long command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_grid.html">fix ave/grid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_histo.html">fix ave/histo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_histo.html#fix-ave-histo-weight-command">fix ave/histo/weight command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_spatial.html">Fix ave/spatial command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_spatial_sphere.html">Fix ave/spatial command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_time.html">fix ave/time command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_aveforce.html">fix aveforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_balance.html">fix balance command</a></li>
@@ -124,10 +134,11 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_drude_transform.html#fix-drude-transform-inverse-command">fix drude/transform/inverse command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_dt_reset.html">fix dt/reset command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_efield.html">fix efield command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_efield.html#fix-efield-tip4p-command">fix efield/tip4p command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ehex.html">fix ehex command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html">fix electrode/conp command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html#fix-electrode-conq-command">fix electrode/conq command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html#fix-electrode-thermo-command">fix electrode/thermo command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html">fix electrode/conp command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html#fix-electrode-conq-command">fix electrode/conq command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html#fix-electrode-thermo-command">fix electrode/thermo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_electron_stopping.html">fix electron/stopping command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_electron_stopping.html#fix-electron-stopping-fit-command">fix electron/stopping/fit command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_enforce2d.html">fix enforce2d command</a></li>
@@ -147,6 +158,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_grem.html">fix grem command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_halt.html">fix halt command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_heat.html">fix heat command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_heat_flow.html">fix heat/flow command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_hyper_global.html">fix hyper/global command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_hyper_local.html">fix hyper/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_imd.html">fix imd command</a></li>
@@ -156,13 +168,13 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_drude.html">fix langevin/drude command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_eff.html">fix langevin/eff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_spin.html">fix langevin/spin command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_latte.html">fix latte command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_fluid.html">fix lb/fluid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_momentum.html">fix lb/momentum command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_viscous.html">fix lb/viscous command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lineforce.html">fix lineforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_manifoldforce.html">fix manifoldforce command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_mdi_aimd.html">fix mdi/aimd command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_mdi_qm.html">fix mdi/qm command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_mdi_qmmm.html">fix mdi/qmmm command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_meso_move.html">fix meso/move command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify.html">fix_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
@@ -223,8 +235,10 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_orient.html#fix-orient-bcc-command">fix orient/bcc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_orient_eco.html">fix orient/eco command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_pafi.html">fix pafi command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pair.html">fix pair command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_phonon.html">fix phonon command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html">fix pimd command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html">fix pimd/langevin command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html#fix-pimd-nvt-command">fix pimd/nvt command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_planeforce.html">fix planeforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_plumed.html">fix plumed command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_poems.html">fix poems command</a></li>
@@ -269,6 +283,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_saed_vtk.html">fix saed/vtk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_setforce.html">fix setforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_setforce.html#fix-setforce-spin-command">fix setforce/spin command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_sgcmc.html">fix sgcmc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shake.html">fix shake command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shake.html#fix-rattle-command">fix rattle command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shardlow.html">fix shardlow command</a></li>
@@ -312,7 +327,9 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-lj1043-command">fix wall/lj1043 command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-colloid-command">fix wall/colloid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-harmonic-command">fix wall/harmonic command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-lepton-command">fix wall/lepton command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-morse-command">fix wall/morse command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-table-command">fix wall/table command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_body_polygon.html">fix wall/body/polygon command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_body_polyhedron.html">fix wall/body/polyhedron command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_ees.html">fix wall/ees command</a></li>
@@ -333,6 +350,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -350,12 +368,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="fixes.html">Fixes</a> &raquo;</li>
-      <li>fix atom/swap command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="fixes.html">Fixes</a></li>
+      <li class="breadcrumb-item active">fix atom/swap command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="fix_atc.html" class="btn btn-neutral float-left" title="fix atc command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -366,11 +383,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="fix-atom-swap-command">
-<span id="index-0"></span><h1>fix atom/swap command<a class="headerlink" href="#fix-atom-swap-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="fix-atom-swap-command">
+<span id="index-0"></span><h1>fix atom/swap command<a class="headerlink" href="#fix-atom-swap-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fix ID group-ID atom/swap N X seed T keyword values ...
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">ID</span><span class="w"> </span><span class="nv nv-Identifier">group-ID</span><span class="w"> </span><span class="n">atom</span><span class="o">/</span><span class="n">swap</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="n">seed</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">values</span><span class="w"> </span><span class="n">...</span>
 </pre></div>
 </div>
 <ul>
@@ -396,61 +414,62 @@
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">atom</span><span class="o">/</span><span class="n">swap</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">29494</span><span class="w"> </span><span class="m">300.0</span><span class="w"> </span><span class="n">ke</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="n">types</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">myFix</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">atom</span><span class="o">/</span><span class="n">swap</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">12345</span><span class="w"> </span><span class="m">298.0</span><span class="w"> </span><span class="k">region </span><span class="nv nv-Identifier">my_swap_region</span><span class="w"> </span><span class="n">types</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">6</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">SGMC</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">atom</span><span class="o">/</span><span class="n">swap</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">345</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">semi</span><span class="o">-</span><span class="n">grand</span><span class="w"> </span><span class="n">yes</span><span class="w"> </span><span class="n">types</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="n">mu</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">4.3</span><span class="w"> </span><span class="o">-</span><span class="m">5.0</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">atom</span><span class="o">/</span><span class="n">swap</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">29494</span><span class="w"> </span><span class="m">300.0</span><span class="w"> </span><span class="n">ke</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="n">types</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span>
+<span class="k">fix </span><span class="nv nv-Identifier">myFix</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">atom</span><span class="o">/</span><span class="n">swap</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">12345</span><span class="w"> </span><span class="m">298.0</span><span class="w"> </span><span class="k">region </span><span class="nv nv-Identifier">my_swap_region</span><span class="w"> </span><span class="n">types</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">6</span>
+<span class="k">fix </span><span class="nv nv-Identifier">SGMC</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">atom</span><span class="o">/</span><span class="n">swap</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">345</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">semi</span><span class="o">-</span><span class="n">grand</span><span class="w"> </span><span class="n">yes</span><span class="w"> </span><span class="n">types</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="n">mu</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">4.3</span><span class="w"> </span><span class="o">-</span><span class="m">5.0</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p>This fix performs Monte Carlo swaps of atoms of one given atom type
-with atoms of the other given atom types. The specified T is used in
-the Metropolis criterion dictating swap probabilities.</p>
-<p>Perform X swaps of atoms of one type with atoms of another type
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
+<p>This fix performs Monte Carlo swaps of atoms of one given atom type with
+atoms of the other given atom types.  The specified scaling temperature
+<em>T</em> is used in the Metropolis criterion dictating swap probabilities.</p>
+<p>Perform <em>X</em> swaps of atoms of one type with atoms of another type
 according to a Monte Carlo probability. Swap candidates must be in the
 fix group, must be in the region (if specified), and must be of one of
-the listed types. Swaps are attempted between candidates that are
-chosen randomly with equal probability among the candidate
-atoms. Swaps are not attempted between atoms of the same type since
-nothing would happen.</p>
+the listed types. Swaps are attempted between candidates that are chosen
+randomly with equal probability among the candidate atoms. Swaps are not
+attempted between atoms of the same type since nothing would happen.</p>
 <p>All atoms in the simulation domain can be moved using regular time
-integration displacements, e.g. via <a class="reference internal" href="fix_nh.html"><span class="doc">fix nvt</span></a>, resulting
-in a hybrid MC+MD simulation. A smaller-than-usual timestep size may
-be needed when running such a hybrid simulation, especially if the
-swapped atoms are not well equilibrated.</p>
+integration displacements (e.g., via <a class="reference internal" href="fix_nh.html"><span class="doc">fix nvt</span></a>), resulting
+in a hybrid MC+MD simulation. A smaller-than-usual timestep size may be
+needed when running such a hybrid simulation, especially if the swapped
+atoms are not well equilibrated.</p>
 <p>The <em>types</em> keyword is required. At least two atom types must be
-specified.</p>
+specified. If not using <em>semi-grand</em>, exactly two atom types are
+required.</p>
 <p>The <em>ke</em> keyword can be set to <em>no</em> to turn off kinetic energy
 conservation for swaps. The default is <em>yes</em>, which means that swapped
 atoms have their velocities scaled by the ratio of the masses of the
-swapped atom types. This ensures that the kinetic energy of each atom
-is the same after the swap as it was before the swap, even though the
-atom masses have changed.</p>
-<p>The <em>semi-grand</em> keyword can be set to <em>yes</em> to switch to the
-semi-grand canonical ensemble as discussed in <a class="reference internal" href="#sadigh"><span class="std std-ref">(Sadigh)</span></a>. This means that the total number of each particle type does
-not need to be conserved. The default is <em>no</em>, which means that the
-only kind of swap allowed exchanges an atom of one type with an atom
-of a different given type. In other words, the relative mole fractions
-of the swapped atoms remains constant. Whereas in the semi-grand
-canonical ensemble, the composition of the system can change. Note
-that when using <em>semi-grand</em>, atoms in the fix group whose type is not
-listed in the <em>types</em> keyword are ineligible for attempted
-conversion. An attempt is made to switch the selected atom (if
-eligible) to one of the other listed types with equal
-probability. Acceptance of each attempt depends upon the Metropolis
-criterion.</p>
+swapped atom types. This ensures that the kinetic energy of each atom is
+the same after the swap as it was before the swap, even though the atom
+masses have changed.</p>
+<p>The <em>semi-grand</em> keyword can be set to <em>yes</em> to switch to the semi-grand
+canonical ensemble as discussed in <a class="reference internal" href="#sadigh"><span class="std std-ref">(Sadigh)</span></a>. This means
+that the total number of each particle type does not need to be
+conserved. The default is <em>no</em>, which means that the only kind of swap
+allowed exchanges an atom of one type with an atom of a different given
+type. In other words, the relative mole fractions of the swapped atoms
+remains constant. Whereas in the semi-grand canonical ensemble, the
+composition of the system can change. Note that when using <em>semi-grand</em>,
+atoms in the fix group whose type is not listed in the <em>types</em> keyword
+are ineligible for attempted conversion. An attempt is made to switch
+the selected atom (if eligible) to one of the other listed types with
+equal probability.  Acceptance of each attempt depends upon the
+Metropolis criterion.</p>
 <p>The <em>mu</em> keyword allows users to specify chemical potentials. This is
 required and allowed only when using <em>semi-grand</em>.  All chemical
 potentials are absolute, so there is one for each swap type listed
 following the <em>types</em> keyword.  In semi-grand canonical ensemble
-simulations the chemical composition of the system is controlled by
-the difference in these values. So shifting all values by a constant
-amount will have no effect on the simulation.</p>
+simulations the chemical composition of the system is controlled by the
+difference in these values. So shifting all values by a constant amount
+will have no effect on the simulation.</p>
 <p>This command may optionally use the <em>region</em> keyword to define swap
 volume.  The specified region must have been previously defined with a
-<a class="reference internal" href="region.html"><span class="doc">region</span></a> command.  It must be defined with side = <em>in</em>.  Swap attempts occur only between atoms that are both within the
+<a class="reference internal" href="region.html"><span class="doc">region</span></a> command.  It must be defined with side = <em>in</em>.
+Swap attempts occur only between atoms that are both within the
 specified region. Swaps are not otherwise attempted.</p>
 <p>You should ensure you do not swap atoms belonging to a molecule, or
 LAMMPS will eventually generate an error when it tries to find those
@@ -458,21 +477,21 @@ atoms.  LAMMPS will warn you if any of the atoms eligible for swapping
 have a non-zero molecule ID, but does not check for this at the time of
 swapping.</p>
 <p>If not using <em>semi-grand</em> this fix checks to ensure all atoms of the
-given types have the same atomic charge. LAMMPS does not enforce this
-in general, but it is needed for this fix to simplify the swapping
+given types have the same atomic charge. LAMMPS does not enforce this in
+general, but it is needed for this fix to simplify the swapping
 procedure. Successful swaps will swap the atom type and charge of the
 swapped atoms. Conversely, when using <em>semi-grand</em>, it is assumed that
-all the atom types involved in switches have the same
-charge. Otherwise, charge would not be conserved. As a consequence, no
-checks on atomic charges are performed, and successful switches update
-the atom type but not the atom charge. While it is possible to use
-<em>semi-grand</em> with groups of atoms that have different charges, these
-charges will not be changed when the atom types change.</p>
+all the atom types involved in switches have the same charge. Otherwise,
+charge would not be conserved. As a consequence, no checks on atomic
+charges are performed, and successful switches update the atom type but
+not the atom charge. While it is possible to use <em>semi-grand</em> with
+groups of atoms that have different charges, these charges will not be
+changed when the atom types change.</p>
 <p>Since this fix computes total potential energies before and after
 proposed swaps, so even complicated potential energy calculations are
 OK, including the following:</p>
 <ul class="simple">
-<li><p>long-range electrostatics (kspace)</p></li>
+<li><p>long-range electrostatics (<span class="math notranslate nohighlight">\(k\)</span>-space)</p></li>
 <li><p>many body pair styles</p></li>
 <li><p>hybrid pair styles</p></li>
 <li><p>eam pair styles</p></li>
@@ -485,21 +504,22 @@ include: <a class="reference internal" href="fix_efield.html"><span class="doc">
 <a class="reference internal" href="fix_restrain.html"><span class="doc">restrain</span></a>, <a class="reference internal" href="fix_temp_berendsen.html"><span class="doc">temp/berendsen</span></a>, <a class="reference internal" href="fix_temp_rescale.html"><span class="doc">temp/rescale</span></a>, and
 <a class="reference internal" href="fix_wall.html"><span class="doc">wall fixes</span></a>.  For that energy to be included in the
 total potential energy of the system (the quantity used when
-performing GCMC moves), you MUST enable the <a class="reference internal" href="fix_modify.html"><span class="doc">fix_modify</span></a> <em>energy</em> option for that fix.  The doc pages for
+performing GCMC moves), you <strong>must</strong> enable the <a class="reference internal" href="fix_modify.html"><span class="doc">fix_modify</span></a> <em>energy</em> option for that fix.  The doc pages for
 individual <a class="reference internal" href="fix.html"><span class="doc">fix</span></a> commands specify if this should be done.</p>
 </section>
 <section id="restart-fix-modify-output-run-start-stop-minimize-info">
-<h2>Restart, fix_modify, output, run start/stop, minimize info<a class="headerlink" href="#restart-fix-modify-output-run-start-stop-minimize-info" title="Permalink to this headline">¶</a></h2>
-<p>This fix writes the state of the fix to <a class="reference internal" href="restart.html"><span class="doc">binary restart files</span></a>.  This includes information about the random number
-generator seed, the next timestep for MC exchanges, the number of
-exchange attempts and successes etc.  See the <a class="reference internal" href="read_restart.html"><span class="doc">read_restart</span></a> command for info on how to re-specify a fix in an
-input script that reads a restart file, so that the operation of the
-fix continues in an uninterrupted fashion.</p>
+<h2>Restart, fix_modify, output, run start/stop, minimize info<a class="headerlink" href="#restart-fix-modify-output-run-start-stop-minimize-info" title="Permalink to this heading"></a></h2>
+<p>This fix writes the state of the fix to <a class="reference internal" href="restart.html"><span class="doc">binary restart files</span></a>.  This includes information about the random number generator
+seed, the next timestep for MC exchanges, the number of exchange
+attempts and successes, etc.  See the <a class="reference internal" href="read_restart.html"><span class="doc">read_restart</span></a>
+command for info on how to re-specify a fix in an input script that
+reads a restart file, so that the operation of the fix continues in an
+uninterrupted fashion.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For this to work correctly, the timestep must <strong>not</strong> be changed
-after reading the restart with <a class="reference internal" href="reset_timestep.html"><span class="doc">reset_timestep</span></a>.
-The fix will try to detect it and stop with an error.</p>
+after reading the restart with <a class="reference internal" href="reset_timestep.html"><span class="doc">reset_timestep</span></a>.  The fix will try to detect it and stop with an
+error.</p>
 </div>
 <p>None of the <a class="reference internal" href="fix_modify.html"><span class="doc">fix_modify</span></a> options are relevant to this
 fix.</p>
@@ -516,21 +536,21 @@ the <a class="reference internal" href="run.html"><span class="doc">run</span></
 <a class="reference internal" href="minimize.html"><span class="doc">energy minimization</span></a>.</p>
 </section>
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <p>This fix is part of the MC package.  It is only enabled if LAMMPS was
 built with that package.  See the <a class="reference internal" href="Build_package.html"><span class="doc">Build package</span></a>
 doc page for more info.</p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="fix_nh.html"><span class="doc">fix nvt</span></a>, <a class="reference internal" href="neighbor.html"><span class="doc">neighbor</span></a>,
 <a class="reference internal" href="fix_deposit.html"><span class="doc">fix deposit</span></a>, <a class="reference internal" href="fix_evaporate.html"><span class="doc">fix evaporate</span></a>,
 <a class="reference internal" href="delete_atoms.html"><span class="doc">delete_atoms</span></a>, <a class="reference internal" href="fix_gcmc.html"><span class="doc">fix gcmc</span></a>,
-<a class="reference internal" href="fix_mol_swap.html"><span class="doc">fix mol/swap</span></a></p>
+<a class="reference internal" href="fix_mol_swap.html"><span class="doc">fix mol/swap</span></a>, <a class="reference internal" href="fix_sgcmc.html"><span class="doc">fix sgcmc</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
-<p>The option defaults are ke = yes, semi-grand = no, mu = 0.0 for
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
+<p>The option defaults are <em>ke</em> = yes, <em>semi-grand</em> = no, <em>mu</em> = 0.0 for
 all atom types.</p>
 <hr class="docutils" />
 <p id="sadigh"><strong>(Sadigh)</strong> B Sadigh, P Erhart, A Stukowski, A Caro, E Martinez, and
@@ -549,7 +569,7 @@ L Zepeda-Ruiz, Phys. Rev. B, 85, 184203 (2012).</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -558,7 +578,6 @@ L Zepeda-Ruiz, Phys. Rev. B, 85, 184203 (2012).</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>fix shake command &mdash; LAMMPS documentation</title>
@@ -10,23 +10,22 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/fix_shake.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="fix shardlow command" href="fix_shardlow.html" />
-    <link rel="prev" title="fix setforce command" href="fix_setforce.html" /> 
+    <link rel="prev" title="fix sgcmc command" href="fix_sgcmc.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -34,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -78,6 +81,9 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_adapt_fep.html">fix adapt/fep command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_addforce.html">fix addforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_addtorque.html">fix addtorque command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_alchemy.html">fix alchemy command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_amoeba_bitorsion.html">fix amoeba/bitorsion command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_amoeba_pitorsion.html">fix amoeba/pitorsion command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_append_atoms.html">fix append/atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_atc.html">fix atc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_atom_swap.html">fix atom/swap command</a></li>
@@ -85,8 +91,11 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_chunk.html">fix ave/chunk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_correlate.html">fix ave/correlate command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_correlate_long.html">fix ave/correlate/long command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_grid.html">fix ave/grid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_histo.html">fix ave/histo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_histo.html#fix-ave-histo-weight-command">fix ave/histo/weight command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_spatial.html">Fix ave/spatial command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_spatial_sphere.html">Fix ave/spatial command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_time.html">fix ave/time command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_aveforce.html">fix aveforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_balance.html">fix balance command</a></li>
@@ -116,10 +125,11 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_drude_transform.html#fix-drude-transform-inverse-command">fix drude/transform/inverse command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_dt_reset.html">fix dt/reset command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_efield.html">fix efield command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_efield.html#fix-efield-tip4p-command">fix efield/tip4p command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ehex.html">fix ehex command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html">fix electrode/conp command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html#fix-electrode-conq-command">fix electrode/conq command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html#fix-electrode-thermo-command">fix electrode/thermo command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html">fix electrode/conp command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html#fix-electrode-conq-command">fix electrode/conq command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html#fix-electrode-thermo-command">fix electrode/thermo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_electron_stopping.html">fix electron/stopping command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_electron_stopping.html#fix-electron-stopping-fit-command">fix electron/stopping/fit command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_enforce2d.html">fix enforce2d command</a></li>
@@ -139,6 +149,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_grem.html">fix grem command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_halt.html">fix halt command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_heat.html">fix heat command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_heat_flow.html">fix heat/flow command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_hyper_global.html">fix hyper/global command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_hyper_local.html">fix hyper/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_imd.html">fix imd command</a></li>
@@ -148,13 +159,13 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_drude.html">fix langevin/drude command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_eff.html">fix langevin/eff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_spin.html">fix langevin/spin command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_latte.html">fix latte command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_fluid.html">fix lb/fluid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_momentum.html">fix lb/momentum command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_viscous.html">fix lb/viscous command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lineforce.html">fix lineforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_manifoldforce.html">fix manifoldforce command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_mdi_aimd.html">fix mdi/aimd command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_mdi_qm.html">fix mdi/qm command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_mdi_qmmm.html">fix mdi/qmmm command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_meso_move.html">fix meso/move command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify.html">fix_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
@@ -215,8 +226,10 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_orient.html#fix-orient-bcc-command">fix orient/bcc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_orient_eco.html">fix orient/eco command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_pafi.html">fix pafi command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pair.html">fix pair command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_phonon.html">fix phonon command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html">fix pimd command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html">fix pimd/langevin command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html#fix-pimd-nvt-command">fix pimd/nvt command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_planeforce.html">fix planeforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_plumed.html">fix plumed command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_poems.html">fix poems command</a></li>
@@ -261,6 +274,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_saed_vtk.html">fix saed/vtk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_setforce.html">fix setforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_setforce.html#fix-setforce-spin-command">fix setforce/spin command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_sgcmc.html">fix sgcmc command</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">fix shake command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#fix-rattle-command">fix rattle command</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#syntax">Syntax</a></li>
@@ -313,7 +327,9 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-lj1043-command">fix wall/lj1043 command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-colloid-command">fix wall/colloid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-harmonic-command">fix wall/harmonic command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-lepton-command">fix wall/lepton command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-morse-command">fix wall/morse command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-table-command">fix wall/table command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_body_polygon.html">fix wall/body/polygon command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_body_polyhedron.html">fix wall/body/polyhedron command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_ees.html">fix wall/ees command</a></li>
@@ -334,6 +350,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -351,15 +368,14 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="fixes.html">Fixes</a> &raquo;</li>
-      <li>fix shake command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="fixes.html">Fixes</a></li>
+      <li class="breadcrumb-item active">fix shake command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
-        <a href="fix_setforce.html" class="btn btn-neutral float-left" title="fix setforce command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fix_sgcmc.html" class="btn btn-neutral float-left" title="fix sgcmc command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="fix_shardlow.html" class="btn btn-neutral float-right" title="fix shardlow command" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
@@ -367,15 +383,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <span class="target" id="index-0"></span><span class="target" id="index-1"></span><section id="fix-shake-command">
-<span id="index-2"></span><h1>fix shake command<a class="headerlink" href="#fix-shake-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<span class="target" id="index-0"></span><span class="target" id="index-1"></span><section id="fix-shake-command">
+<span id="index-2"></span><h1>fix shake command<a class="headerlink" href="#fix-shake-command" title="Permalink to this heading"></a></h1>
 <p>Accelerator Variants: <em>shake/kk</em></p>
 </section>
 <section id="fix-rattle-command">
-<h1>fix rattle command<a class="headerlink" href="#fix-rattle-command" title="Permalink to this headline">¶</a></h1>
+<h1>fix rattle command<a class="headerlink" href="#fix-rattle-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fix ID group-ID style tol iter N constraint values ... keyword value ...
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">ID</span><span class="w"> </span><span class="nv nv-Identifier">group-ID</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="n">tol</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="n">constraint</span><span class="w"> </span><span class="n">values</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">...</span>
 </pre></div>
 </div>
 <ul>
@@ -392,27 +409,35 @@
 <em>m</em> value = one or more mass values</pre>
 </li>
 <li><p>zero or more keyword/value pairs may be appended</p></li>
-<li><p>keyword = <em>mol</em></p>
+<li><p>keyword = <em>mol</em> or <em>kbond</em></p>
 <pre class="literal-block"><em>mol</em> value = template-ID
-  template-ID = ID of molecule template specified in a separate <a class="reference internal" href="molecule.html"><span class="doc">molecule</span></a> command</pre>
+  template-ID = ID of molecule template specified in a separate <a class="reference internal" href="molecule.html"><span class="doc">molecule</span></a> command
+<em>kbond</em> value = force constant
+  force constant = force constant used to apply a restraint force when used during minimization</pre>
 </li>
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">sub</span><span class="w"> </span><span class="n">shake</span><span class="w"> </span><span class="m">0.0001</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">19</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">2</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">sub</span><span class="w"> </span><span class="n">shake</span><span class="w"> </span><span class="m">0.0001</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="m">31</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">sub</span><span class="w"> </span><span class="n">shake</span><span class="w"> </span><span class="m">0.0001</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="m">31</span><span class="w"> </span><span class="n">mol</span><span class="w"> </span><span class="n">myMol</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">sub</span><span class="w"> </span><span class="n">rattle</span><span class="w"> </span><span class="m">0.0001</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="m">31</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">sub</span><span class="w"> </span><span class="n">rattle</span><span class="w"> </span><span class="m">0.0001</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="m">31</span><span class="w"> </span><span class="n">mol</span><span class="w"> </span><span class="n">myMol</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">sub</span><span class="w"> </span><span class="n">shake</span><span class="w"> </span><span class="m">0.0001</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">19</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">2</span>
+<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">sub</span><span class="w"> </span><span class="n">shake</span><span class="w"> </span><span class="m">0.0001</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="m">31</span>
+<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">sub</span><span class="w"> </span><span class="n">shake</span><span class="w"> </span><span class="m">0.0001</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="m">31</span><span class="w"> </span><span class="n">mol</span><span class="w"> </span><span class="n">myMol</span>
+<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">sub</span><span class="w"> </span><span class="n">rattle</span><span class="w"> </span><span class="m">0.0001</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="m">31</span>
+<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">sub</span><span class="w"> </span><span class="n">rattle</span><span class="w"> </span><span class="m">0.0001</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="m">31</span><span class="w"> </span><span class="n">mol</span><span class="w"> </span><span class="n">myMol</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <p>Apply bond and angle constraints to specified bonds and angles in the
 simulation by either the SHAKE or RATTLE algorithms.  This typically
-enables a longer timestep.</p>
+enables a longer timestep.  The SHAKE or RATTLE constraint algorithms,
+however, can <em>only</em> be applied during molecular dynamics runs.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 15Sep2022.</span></p>
+</div>
+<p>These fixes may now also be used during minimization.  In that case the
+constraints are <em>approximated</em> by strong harmonic restraints.</p>
 <p><strong>SHAKE vs RATTLE:</strong></p>
 <p>The SHAKE algorithm was invented for schemes such as standard Verlet
 timestepping, where only the coordinates are integrated and the
@@ -437,7 +462,7 @@ molecule. The distance vector between sites <em>i</em> and <em>j</em> is given b
 time <em>n+1</em> will have the desired separations Dij immediately after the
 coordinates are integrated.  If we also enforce the second condition,
 the velocity components along the bonds will vanish.  RATTLE satisfies
-both conditions.  As implemented in LAMMPS, fix rattle uses fix shake
+both conditions.  As implemented in LAMMPS, <em>fix rattle</em> uses fix shake
 for satisfying the coordinate constraints. Therefore the settings and
 optional keywords are the same for both fixes, and all the information
 below about SHAKE is also relevant for RATTLE.</p>
@@ -468,9 +493,9 @@ constraint lists atom types.  All bonds connected to an atom of the
 specified type will be constrained.  The <em>m</em> constraint lists atom
 masses.  All bonds connected to atoms of the specified masses will be
 constrained (within a fudge factor of MASSDELTA specified in
-fix_shake.cpp).  The <em>a</em> constraint lists angle types.  If both bonds
-in the angle are constrained then the angle will also be constrained
-if its type is in the list.</p>
+<code class="docutils literal notranslate"><span class="pre">src/RIGID/fix_shake.cpp</span></code>).  The <em>a</em> constraint lists angle types.  If
+both bonds in the angle are constrained then the angle will also be
+constrained if its type is in the list.</p>
 <p>For all constraints, a particular bond is only constrained if both
 atoms in the bond are in the group specified with the SHAKE fix.</p>
 <p>The degrees-of-freedom removed by SHAKE bonds and angles are accounted
@@ -479,28 +504,44 @@ contribution to the pressure of the system (virial) is also accounted
 for.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This command works by using the current forces on atoms to
-calculate an additional constraint force which when added will leave
-the atoms in positions that satisfy the SHAKE constraints (e.g. bond
-length) after the next time integration step.  If you define fixes
-(e.g. <a class="reference internal" href="fix_efield.html"><span class="doc">fix efield</span></a>) that add additional force to the
-atoms after fix shake operates, then this fix will not take them into
-account and the time integration will typically not satisfy the SHAKE
-constraints.  The solution for this is to make sure that fix shake is
-defined in your input script after any other fixes which add or change
-forces (to atoms that fix shake operates on).</p>
+<p>This command works by using the current forces on atoms to calculate
+an additional constraint force which when added will leave the atoms
+in positions that satisfy the SHAKE constraints (e.g. bond length)
+after the next time integration step.  If you define fixes
+(e.g. <a class="reference internal" href="fix_efield.html"><span class="doc">fix efield</span></a>) that add additional force to
+the atoms after <em>fix shake</em> operates, then this fix will not take them
+into account and the time integration will typically not satisfy the
+SHAKE constraints.  The solution for this is to make sure that fix
+shake is defined in your input script after any other fixes which add
+or change forces (to atoms that <em>fix shake</em> operates on).</p>
 </div>
 <hr class="docutils" />
-<p>The <em>mol</em> keyword should be used when other commands, such as <a class="reference internal" href="fix_deposit.html"><span class="doc">fix deposit</span></a> or <a class="reference internal" href="fix_pour.html"><span class="doc">fix pour</span></a>, add molecules
+<p>The <em>mol</em> keyword should be used when other commands, such as <a class="reference internal" href="fix_deposit.html"><span class="doc">fix
+deposit</span></a> or <a class="reference internal" href="fix_pour.html"><span class="doc">fix pour</span></a>, add molecules
 on-the-fly during a simulation, and you wish to constrain the new
 molecules via SHAKE.  You specify a <em>template-ID</em> previously defined
 using the <a class="reference internal" href="molecule.html"><span class="doc">molecule</span></a> command, which reads a file that
 defines the molecule.  You must use the same <em>template-ID</em> that the
 command adding molecules uses.  The coordinates, atom types, special
-bond restrictions, and SHAKE info can be specified in the molecule
-file.  See the <a class="reference internal" href="molecule.html"><span class="doc">molecule</span></a> command for details.  The only
+bond restrictions, and SHAKE info can be specified in the molecule file.
+See the <a class="reference internal" href="molecule.html"><span class="doc">molecule</span></a> command for details.  The only
 settings required to be in this file (by this command) are the SHAKE
 info of atoms in the molecule.</p>
+<p>The <em>kbond</em> keyword sets the restraint force constant when <em>fix shake</em>
+or fix rattle are used during minimization.  In that case the constraint
+algorithms are <em>not</em> applied and restraint forces are used instead to
+maintain the geometries similar to the constraints.  How well the
+geometries are maintained and how quickly a minimization converges,
+depends largely on the force constant <em>kbond</em>: larger values will reduce
+the deviation from the desired geometry, but can also lead to slower
+convergence of the minimization or lead to instabilities depending on
+the minimization algorithm requiring to reduce the value of
+<a class="reference internal" href="timestep.html"><span class="doc">timestep</span></a>.  Even though the restraints will not
+preserve the bond lengths and angles as closely as the constraints
+during the MD, they are generally close enough so that the constraints
+will be fulfilled to the desired accuracy within a few MD steps
+following the minimization. The default value for <em>kbond</em> depends on the
+<a class="reference internal" href="units.html"><span class="doc">units</span></a> setting and is 1.0e6*k_B.</p>
 <hr class="docutils" />
 <p>Styles with a <em>gpu</em>, <em>intel</em>, <em>kk</em>, <em>omp</em>, or <em>opt</em> suffix are
 functionally the same as the corresponding style without the suffix.
@@ -509,7 +550,7 @@ hardware, as discussed on the <a class="reference internal" href="Speed_packages
 page.  The accelerated styles take the same arguments and should
 produce the same results, except for round-off and precision issues.</p>
 <p>These accelerated styles are part of the GPU, INTEL, KOKKOS,
-OPENMP and OPT packages, respectively.  They are only enabled if
+OPENMP, and OPT packages, respectively.  They are only enabled if
 LAMMPS was built with those packages.  See the <a class="reference internal" href="Build_package.html"><span class="doc">Build package</span></a> page for more info.</p>
 <p>You can specify the accelerated styles explicitly in your input script
 by including their suffix, or you can use the <a class="reference internal" href="Run_options.html"><span class="doc">-suffix command-line switch</span></a> when you invoke LAMMPS, or you can use the
@@ -523,36 +564,47 @@ can be solved analytically.  The implementation of the algorithm in
 LAMMPS closely follows (<a class="reference internal" href="#andersen3"><span class="std std-ref">Andersen (1983)</span></a>).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The fix rattle command modifies forces and velocities and thus
+<p>The <em>fix rattle</em> command modifies forces and velocities and thus
 should be defined after all other integration fixes in your input
 script.  If you define other fixes that modify velocities or forces
-after fix rattle operates, then fix rattle will not take them into
-account and the overall time integration will typically not satisfy
-the RATTLE constraints.  You can check whether the constraints work
-correctly by setting the value of RATTLE_DEBUG in src/fix_rattle.cpp
-to 1 and recompiling LAMMPS.</p>
+after <em>fix rattle</em> operates, then <em>fix rattle</em> will not take them
+into account and the overall time integration will typically not
+satisfy the RATTLE constraints.  You can check whether the
+constraints work correctly by setting the value of RATTLE_DEBUG in
+<code class="docutils literal notranslate"><span class="pre">src/RIGID/fix_rattle.cpp</span></code> to 1 and recompiling LAMMPS.</p>
 </div>
 </section>
 <hr class="docutils" />
 <section id="restart-fix-modify-output-run-start-stop-minimize-info">
-<h2>Restart, fix_modify, output, run start/stop, minimize info<a class="headerlink" href="#restart-fix-modify-output-run-start-stop-minimize-info" title="Permalink to this headline">¶</a></h2>
+<h2>Restart, fix_modify, output, run start/stop, minimize info<a class="headerlink" href="#restart-fix-modify-output-run-start-stop-minimize-info" title="Permalink to this heading"></a></h2>
 <p>No information about these fixes is written to <a class="reference internal" href="restart.html"><span class="doc">binary restart
 files</span></a>.</p>
+<p>Both fix <em>shake</em> and fix <em>rattle</em> behave differently during a minimization
+in comparison to a molecular dynamics run:</p>
+<ul>
+<li><p>When used during a minimization, the SHAKE or RATTLE constraint
+algorithms themselves are <strong>not</strong> applied.  Instead the constraints
+are replaced by harmonic restraint forces.  The energy and virial
+contributions due to the restraint forces are tallied into global and
+per-atom accumulators. The total restraint energy is also accessible
+as a global scalar property of the fix.</p></li>
+<li><p>During molecular dynamics runs, however, the fixes do apply the
+requested SHAKE or RATTLE constraint algorithms.</p>
 <p>The <a class="reference internal" href="fix_modify.html"><span class="doc">fix_modify</span></a> <em>virial</em> option is supported by
-these fixes to add the contribution due to the added forces on atoms
-to both the global pressure and per-atom stress of the system via the
-<a class="reference internal" href="compute_pressure.html"><span class="doc">compute pressure</span></a> and <a class="reference internal" href="compute_stress_atom.html"><span class="doc">compute
+these fixes to add the contribution due to the added constraint forces
+on atoms to both the global pressure and per-atom stress of the system
+via the <a class="reference internal" href="compute_pressure.html"><span class="doc">compute pressure</span></a> and <a class="reference internal" href="compute_stress_atom.html"><span class="doc">compute
 stress/atom</span></a> commands.  The former can be
-accessed by <a class="reference internal" href="thermo_style.html"><span class="doc">thermodynamic output</span></a>.  The default
-setting for this fix is <a class="reference internal" href="fix_modify.html"><span class="doc">fix_modify virial yes</span></a>.</p>
-<p>No global or per-atom quantities are stored by these fixes for access
-by various <a class="reference internal" href="Howto_output.html"><span class="doc">output commands</span></a>.  No parameter of
-these fixes can be used with the <em>start/stop</em> keywords of the
-<a class="reference internal" href="run.html"><span class="doc">run</span></a> command.  These fixes are not invoked during
-<a class="reference internal" href="minimize.html"><span class="doc">energy minimization</span></a>.</p>
+accessed by <a class="reference internal" href="thermo_style.html"><span class="doc">thermodynamic output</span></a>.</p>
+<p>The  default  setting  for  this  fix  is  <a class="reference internal" href="fix_modify.html"><span class="doc">fix_modify  virial  yes</span></a>.  No global  or per-atom  quantities are  stored by  these
+fixes for access by various <a class="reference internal" href="Howto_output.html"><span class="doc">output commands</span></a> during
+an  MD  run.   No  parameter  of  these  fixes  can  be  used  with  the
+<em>start/stop</em> keywords of the <a class="reference internal" href="run.html"><span class="doc">run</span></a> command.</p>
+</li>
+</ul>
 </section>
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <p>These fixes are part of the RIGID package.  They are only enabled if
 LAMMPS was built with that package.  See the <a class="reference internal" href="Build_package.html"><span class="doc">Build package</span></a> page for more info.</p>
 <p>For computational efficiency, there can only be one shake or rattle
@@ -562,18 +614,23 @@ is too small, the constraints will not be enforced very strongly,
 which can lead to poor energy conservation.  You can test for this in
 your system by running a constant NVE simulation with a particular set
 of SHAKE parameters and monitoring the energy versus time.</p>
-<p>SHAKE or RATTLE should not be used to constrain an angle at 180
-degrees (e.g. linear CO2 molecule).  This causes numeric difficulties.
-You can use <a class="reference internal" href="fix_rigid.html"><span class="doc">fix rigid or fix rigid/small</span></a> instead to
-make a linear molecule rigid.</p>
+<p>SHAKE or RATTLE should not be used to constrain an angle at 180 degrees
+(e.g. a linear CO2 molecule).  This causes a divergence when solving the
+constraint equations numerically.  You can use <a class="reference internal" href="fix_rigid.html"><span class="doc">fix rigid or fix
+rigid/small</span></a> instead to make a linear molecule rigid.</p>
+<p>When used during minimization choosing a too large value of the <em>kbond</em>
+can make minimization very inefficient and also cause stability problems
+with some minimization algorithms.  Sometimes those can be avoided by
+reducing the <a class="reference internal" href="timestep.html"><span class="doc">timestep</span></a>.</p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
-<p>none</p>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
+<p><a class="reference internal" href="fix_rigid.html"><span class="doc">fix rigid</span></a>, <a class="reference internal" href="fix_ehex.html"><span class="doc">fix ehex</span></a>,
+<a class="reference internal" href="fix_nve_manifold_rattle.html"><span class="doc">fix nve/manifold/rattle</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
-<p>none</p>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
+<p>kbond = 1.0e9*k_B</p>
 <hr class="docutils" />
 <p id="ryckaert"><strong>(Ryckaert)</strong> J.-P. Ryckaert, G. Ciccotti and H. J. C. Berendsen,
 J of Comp Phys, 23, 327-341 (1977).</p>
@@ -585,14 +642,14 @@ J of Comp Phys, 23, 327-341 (1977).</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="fix_setforce.html" class="btn btn-neutral float-left" title="fix setforce command" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fix_sgcmc.html" class="btn btn-neutral float-left" title="fix sgcmc command" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="fix_shardlow.html" class="btn btn-neutral float-right" title="fix shardlow command" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -601,7 +658,6 @@ J of Comp Phys, 23, 327-341 (1977).</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

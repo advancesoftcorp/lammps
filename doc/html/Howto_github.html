@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>8.6.2. LAMMPS GitHub tutorial &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Howto_github.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -91,6 +95,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -108,12 +113,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Howto.html"><span class="section-number">8. </span>Howto discussions</a> &raquo;</li>
-      <li><span class="section-number">8.6.2. </span>LAMMPS GitHub tutorial</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Howto.html"><span class="section-number">8. </span>Howto discussions</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">8.6.2. </span>LAMMPS GitHub tutorial</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="Howto_cmake.html" class="btn btn-neutral float-left" title="8.6.1. Using CMake with LAMMPS tutorial" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -124,15 +128,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="lammps-github-tutorial">
-<h1><span class="section-number">8.6.2. </span>LAMMPS GitHub tutorial<a class="headerlink" href="#lammps-github-tutorial" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="lammps-github-tutorial">
+<h1><span class="section-number">8.6.2. </span>LAMMPS GitHub tutorial<a class="headerlink" href="#lammps-github-tutorial" title="Permalink to this heading"></a></h1>
 <p><strong>written by Stefan Paquay</strong></p>
 <hr class="docutils" />
 <p>This document describes the process of how to use GitHub to integrate
 changes or additions you have made to LAMMPS into the official LAMMPS
 distribution.  It uses the process of updating this very tutorial as an
 example to describe the individual steps and options.  You need to be
-familiar with git and you may want to have a look at the <a class="reference external" href="http://git-scm.com/book/">git book</a> to familiarize yourself with some of the
+familiar with git and you may want to have a look at the <a class="reference external" href="https://git-scm.com/book/">git book</a> to familiarize yourself with some of the
 more advanced git features used below.</p>
 <p>As of fall 2016, submitting contributions to LAMMPS via pull requests
 on GitHub is the preferred option for integrating contributed features
@@ -178,11 +183,11 @@ explained in more detail here: <a class="reference external" href="https://www.a
 <p><strong>Feature branches</strong></p>
 <p>First of all, create a clone of your version on GitHub on your local
 machine via HTTPS:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/&lt;your user name&gt;/lammps.git &lt;some name&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/&lt;your<span class="w"> </span>user<span class="w"> </span>name&gt;/lammps.git<span class="w"> </span>&lt;some<span class="w"> </span>name&gt;
 </pre></div>
 </div>
 <p>or, if you have set up your GitHub account for using SSH keys, via SSH:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone git@github.com:&lt;your user name&gt;/lammps.git
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:&lt;your<span class="w"> </span>user<span class="w"> </span>name&gt;/lammps.git
 </pre></div>
 </div>
 <p>You can find the proper URL by clicking the “Clone or download”-button:</p>
@@ -194,17 +199,17 @@ default to “lammps”. Typical names are “mylammps” or something similar.<
 interfering with the repository on GitHub.</p>
 <p>To pull changes from upstream into this copy, you can go to the directory
 and use git pull:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> mylammps
-$ git checkout develop
-$ git pull https://github.com/lammps/lammps develop
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>mylammps
+git<span class="w"> </span>checkout<span class="w"> </span>develop
+git<span class="w"> </span>pull<span class="w"> </span>https://github.com/lammps/lammps<span class="w"> </span>develop
 </pre></div>
 </div>
 <p>You can also add this URL as a remote:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git remote add upstream https://www.github.com/lammps/lammps
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>upstream<span class="w"> </span>https://www.github.com/lammps/lammps
 </pre></div>
 </div>
 <p>From then on you can update your upstream branches with:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git fetch upstream
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>fetch<span class="w"> </span>upstream
 </pre></div>
 </div>
 <p>and then refer to the upstream repository branches with
@@ -213,8 +218,8 @@ $ git pull https://github.com/lammps/lammps develop
 branch for the feature you want to work on. This tutorial contains the
 workflow that updated this tutorial, and hence we will call the branch
 “github-tutorial-update”:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git fetch upstream
-$ git checkout -b github-tutorial-update upstream/develop
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>fetch<span class="w"> </span>upstream
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>github-tutorial-update<span class="w"> </span>upstream/develop
 </pre></div>
 </div>
 <p>Now that we have changed branches, we can make our changes to our local
@@ -230,8 +235,8 @@ branches instead.</p>
 </div>
 <p><strong>After changes are made</strong></p>
 <p>After everything is done, add the files to the branch and commit them:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git add doc/src/Howto_github.txt
-$ git add doc/src/JPG/tutorial*.png
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>doc/src/Howto_github.txt
+git<span class="w"> </span>add<span class="w"> </span>doc/src/JPG/tutorial*.png
 </pre></div>
 </div>
 <div class="admonition warning">
@@ -252,28 +257,28 @@ use it).</p>
 </div>
 <p>After adding all files, the change set can be committed with some
 useful message that explains the change.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git commit -m <span class="s1">&#39;Finally updated the GitHub tutorial&#39;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;Finally updated the GitHub tutorial&#39;</span>
 </pre></div>
 </div>
 <p>After the commit, the changes can be pushed to the same branch on GitHub:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git push
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push
 </pre></div>
 </div>
 <p>Git will ask you for your user name and password on GitHub if you have
 not configured anything. If your local branch is not present on GitHub yet,
 it will ask you to add it by running</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git push --set-upstream origin github-tutorial-update
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push<span class="w"> </span>--set-upstream<span class="w"> </span>origin<span class="w"> </span>github-tutorial-update
 </pre></div>
 </div>
 <p>If you correctly type your user name and
 password, the feature branch should be added to your fork on GitHub.</p>
 <p>If you want to make really sure you push to the right repository
 (which is good practice), you can provide it explicitly:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git push origin
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push<span class="w"> </span>origin
 </pre></div>
 </div>
 <p>or using an explicit URL:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git push git@github.com:Pakketeretet2/lammps.git
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push<span class="w"> </span>git@github.com:Pakketeretet2/lammps.git
 </pre></div>
 </div>
 <hr class="docutils" />
@@ -352,7 +357,7 @@ add changes. Please watch the comments to the pull requests. The two
 “test” labels are used to trigger extended tests before the code is
 merged. This is sometimes done by LAMMPS developers, if they suspect
 that there may be some subtle side effects from your changes. It is not
-done by default, because those tests are very time consuming.  The
+done by default, because those tests are very time-consuming.  The
 <em>ready_for_merge</em> label is usually attached when the LAMMPS developer
 assigned to the pull request considers this request complete and to
 trigger a final full test evaluation.</p>
@@ -417,10 +422,10 @@ Axel’s explanation of the “git gui” and “git add” commands.</p>
 <img alt="_images/tutorial_reverse_pull_request5.png" class="align-center" src="_images/tutorial_reverse_pull_request5.png" />
 <p>Now, since in the meantime our local text for the tutorial also changed,
 we need to pull Axel’s change back into our branch, and merge them:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git add Howto_github.txt
-$ git add JPG/tutorial_reverse_pull_request*.png
-$ git commit -m <span class="s2">&quot;Updated text and images on reverse pull requests&quot;</span>
-$ git pull
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>Howto_github.txt
+git<span class="w"> </span>add<span class="w"> </span>JPG/tutorial_reverse_pull_request*.png
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Updated text and images on reverse pull requests&quot;</span>
+git<span class="w"> </span>pull
 </pre></div>
 </div>
 <p>In this case, the merge was painless because git could auto-merge:</p>
@@ -428,10 +433,10 @@ $ git pull
 <p>With Axel’s changes merged in and some final text updates, our feature
 branch is now perfect as far as we are concerned, so we are going to
 commit and push again:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git add Howto_github.txt
-$ git add JPG/tutorial_reverse_pull_request6.png
-$ git commit -m <span class="s2">&quot;Merged Axel&#39;s suggestions and updated text&quot;</span>
-$ git push git@github.com:Pakketeretet2/lammps
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>Howto_github.txt
+git<span class="w"> </span>add<span class="w"> </span>JPG/tutorial_reverse_pull_request6.png
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Merged Axel&#39;s suggestions and updated text&quot;</span>
+git<span class="w"> </span>push<span class="w"> </span>git@github.com:Pakketeretet2/lammps
 </pre></div>
 </div>
 <p>This merge also shows up on the lammps GitHub page:</p>
@@ -445,9 +450,9 @@ merged into upstream?</p>
 <p>It is in principle safe to delete them from your own fork. This helps
 keep it a bit more tidy. Note that you first have to switch to another
 branch!</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git checkout develop
-$ git pull https://github.com/lammps/lammps develop
-$ git branch -d github-tutorial-update
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>checkout<span class="w"> </span>develop
+git<span class="w"> </span>pull<span class="w"> </span>https://github.com/lammps/lammps<span class="w"> </span>develop
+git<span class="w"> </span>branch<span class="w"> </span>-d<span class="w"> </span>github-tutorial-update
 </pre></div>
 </div>
 <p>If you do not pull first, it is not really a problem but git will warn
@@ -458,21 +463,29 @@ first delete and then pull, everything should still be fine.
 You can display all branches that are fully merged by:</p>
 <p>Finally, if you delete the branch locally, you might want to push this
 to your remote(s) as well:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git push origin :github-tutorial-update
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>:github-tutorial-update
 </pre></div>
 </div>
 <p><strong>Recent changes in the workflow</strong></p>
-<p>Some changes to the workflow are not captured in this tutorial.  For
-example, in addition to the <em>develop</em> branch, to which all new features
-should be submitted, there is also a <em>release</em> and a <em>stable</em> branch;
-these have the same content as <em>develop</em>, but are only updated after a
-patch release or stable release was made.  Furthermore, the naming of
-the patches now follow the pattern “patch_&lt;Day&gt;&lt;Month&gt;&lt;Year&gt;” to
-simplify comparisons between releases.  Finally, all patches and
+<p>Some recent changes to the workflow are not captured in this tutorial.
+For example, in addition to the <em>develop</em> branch, to which all new
+features should be submitted, there is also a <em>release</em>, a <em>stable</em>, and
+a <em>maintenance</em> branch; the <em>release</em> branch is updated from the
+<em>develop</em> as part of a feature release, and <em>stable</em> (together with
+<em>release</em>) are updated from <em>develop</em> when a stable release is made. In
+between stable releases, selected bug fixes and infrastructure updates
+are back-ported from the <em>develop</em> branch to the <em>maintenance</em> branch
+and occasionally merged to <em>stable</em> as an update release.</p>
+<p>Furthermore, the naming of the release tags now follow the pattern
+“patch_&lt;Day&gt;&lt;Month&gt;&lt;Year&gt;” to simplify comparisons between releases.
+For stable releases additional “stable_&lt;Day&gt;&lt;Month&gt;&lt;Year&gt;” tags are
+applied and update releases are tagged with
+“stable_&lt;Day&gt;&lt;Month&gt;&lt;Year&gt;_update&lt;Number&gt;”, Finally, all releases and
 submissions are subject to automatic testing and code checks to make
-sure they at the very least compile.</p>
-<p>A discussion of the LAMMPS developer GitHub workflow can be found in the file
-<a class="reference external" href="https://github.com/lammps/lammps/blob/develop/doc/github-development-workflow.md">doc/github-development-workflow.md</a></p>
+sure they compile with a variety of compilers and popular operating
+systems.  Some unit and regression testing is applied as well.</p>
+<p>A detailed discussion of the LAMMPS developer GitHub workflow can be
+found in the file <a class="reference external" href="https://github.com/lammps/lammps/blob/develop/doc/github-development-workflow.md">doc/github-development-workflow.md</a></p>
 </section>
 
 
@@ -486,7 +499,7 @@ sure they at the very least compile.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -495,7 +508,6 @@ sure they at the very least compile.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

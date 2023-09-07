@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>processors command &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/processors.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -72,6 +76,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="commands_list.html">Commands</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="angle_coeff.html">angle_coeff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="angle_style.html">angle_style command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="angle_write.html">angle_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="atom_modify.html">atom_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="atom_style.html">atom_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="balance.html">balance command</a></li>
@@ -79,7 +84,6 @@
 <li class="toctree-l2"><a class="reference internal" href="bond_style.html">bond_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_write.html">bond_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="boundary.html">boundary command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="box.html">box command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="change_box.html">change_box command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="clear.html">clear command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="comm_modify.html">comm_modify command</a></li>
@@ -94,6 +98,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dielectric.html">dielectric command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_coeff.html">dihedral_coeff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_style.html">dihedral_style command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dihedral_write.html">dihedral_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dimension.html">dimension command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="displace_atoms.html">displace_atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html">dump command</a></li>
@@ -105,6 +110,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-movie-command"><span class="xref std std-doc">dump movie</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-atom-adios-command"><span class="xref std std-doc">dump atom/adios</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-custom-adios-command"><span class="xref std std-doc">dump custom/adios</span> command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dump.html#dump-cfg-uef-command"><span class="xref std std-doc">dump cfg/uef</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_adios.html">dump atom/adios  command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_adios.html#dump-custom-adios-command">dump custom/adios command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_cfg_uef.html">dump cfg/uef command</a></li>
@@ -122,6 +128,7 @@
 <li class="toctree-l2"><a class="reference internal" href="echo.html">echo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix.html">fix command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify.html">fix_modify command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitpod_command.html">fitpod command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group.html">group command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group2ndx.html">group2ndx command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group2ndx.html#ndx2group-command">ndx2group command</a></li>
@@ -136,6 +143,7 @@
 <li class="toctree-l2"><a class="reference internal" href="kspace_modify.html">kspace_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kspace_style.html">kspace_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="label.html">label command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labelmap.html">labelmap command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lattice.html">lattice command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="log.html">log command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mass.html">mass command</a></li>
@@ -149,12 +157,10 @@
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-sd-command">min_style sd command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-quickmin-command">min_style quickmin command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-fire-command">min_style fire command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-fire-old-command">min_style fire/old command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-command"><span class="xref std std-doc">min_style spin</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-cg-command"><span class="xref std std-doc">min_style spin/cg</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-lbfgs-command"><span class="xref std std-doc">min_style spin/lbfgs</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="minimize.html">minimize command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="minimize.html#minimize-kk-command">minimize/kk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="molecule.html">molecule command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neb.html">neb command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neb_spin.html">neb/spin command</a></li>
@@ -188,8 +194,7 @@
 <li class="toctree-l2"><a class="reference internal" href="region.html">region command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="replicate.html">replicate command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rerun.html">rerun command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset_atom_ids.html">reset_atom_ids command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset_mol_ids.html">reset_mol_ids command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reset_atoms.html">reset_atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reset_timestep.html">reset_timestep command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="restart.html">restart command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="run.html">run command</a></li>
@@ -227,6 +232,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -244,12 +250,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="commands_list.html">Commands</a> &raquo;</li>
-      <li>processors command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="commands_list.html">Commands</a></li>
+      <li class="breadcrumb-item active">processors command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="print.html" class="btn btn-neutral float-left" title="print command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -260,11 +265,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="processors-command">
-<span id="index-0"></span><h1>processors command<a class="headerlink" href="#processors-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="processors-command">
+<span id="index-0"></span><h1>processors command<a class="headerlink" href="#processors-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>processors Px Py Pz keyword args ...
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">processors</span><span class="w"> </span><span class="n">Px</span><span class="w"> </span><span class="n">Py</span><span class="w"> </span><span class="n">Pz</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="n">...</span>
 </pre></div>
 </div>
 <ul>
@@ -273,18 +279,17 @@
 <li><p>keyword = <em>grid</em> or <em>map</em> or <em>part</em> or <em>file</em></p>
 <pre class="literal-block"><em>grid</em> arg = gstyle params ...
   gstyle = <em>onelevel</em> or <em>twolevel</em> or <em>numa</em> or <em>custom</em>
-    onelevel params = none
-    twolevel params = Nc Cx Cy Cz
+    <em>onelevel</em> params = none
+    <em>twolevel</em> params = Nc Cx Cy Cz
       Nc = number of cores per node
       Cx,Cy,Cz = # of cores in each dimension of 3d sub-grid assigned to each node
-    numa params = none
-    custom params = infile
+    <em>numa</em> params = none
+    <em>custom</em> params = infile
       infile = file containing grid layout
 <em>map</em> arg = <em>cart</em> or <em>cart/reorder</em> or <em>xyz</em> or <em>xzy</em> or <em>yxz</em> or <em>yzx</em> or <em>zxy</em> or <em>zyx</em>
    cart = use MPI_Cart() methods to map processors to 3d grid with reorder = 0
    cart/reorder = use MPI_Cart() methods to map processors to 3d grid with reorder = 1
    xyz,xzy,yxz,yzx,zxy,zyx = map processors to 3d grid in IJK ordering
-<em>numa</em> arg = none
 <em>part</em> args = Psend Precv cstyle
   Psend = partition # (1 to Np) which will send its processor layout
   Precv = partition # (1 to Np) which will recv the processor layout
@@ -296,19 +301,19 @@
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">processors</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">5</span><span class="w"></span>
-<span class="k">processors</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">4</span><span class="w"></span>
-<span class="k">processors</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="n">xyz</span><span class="w"></span>
-<span class="k">processors</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">grid</span><span class="w"> </span><span class="n">numa</span><span class="w"></span>
-<span class="k">processors</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">grid</span><span class="w"> </span><span class="n">twolevel</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1</span><span class="w"></span>
-<span class="k">processors</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">16</span><span class="w"> </span><span class="n">grid</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">myfile</span><span class="w"></span>
-<span class="k">processors</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">multiple</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">processors</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">5</span>
+<span class="k">processors</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">4</span>
+<span class="k">processors</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="n">xyz</span>
+<span class="k">processors</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">grid</span><span class="w"> </span><span class="n">numa</span>
+<span class="k">processors</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">grid</span><span class="w"> </span><span class="n">twolevel</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1</span>
+<span class="k">processors</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">16</span><span class="w"> </span><span class="n">grid</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">myfile</span>
+<span class="k">processors</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">multiple</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <p>Specify how processors are mapped as a regular 3d grid to the global
 simulation box.  The mapping involves 2 steps.  First if there are P
 processors it means choosing a factorization P = Px by Py by Pz so
@@ -321,7 +326,7 @@ parameters can be specified with an asterisk “*”, which means LAMMPS
 will choose the number of processors in that dimension of the grid.
 It will do this based on the size and shape of the global simulation
 box so as to minimize the surface-to-volume ratio of each processor’s
-sub-domain.</p>
+subdomain.</p>
 <p>Choosing explicit values for Px or Py or Pz can be used to override
 the default manner in which LAMMPS will create the regular 3d grid of
 processors, if it is known to be sub-optimal for a particular problem.
@@ -333,7 +338,7 @@ equal 1.</p>
 <p>Note that if you run on a prime number of processors P, then a grid
 such as 1 x P x 1 will be required, which may incur extra
 communication costs due to the high surface area of each processor’s
-sub-domain.</p>
+subdomain.</p>
 <p>Also note that if multiple partitions are being used then P is the
 number of processors in this partition; see the <a class="reference internal" href="Run_options.html"><span class="doc">-partition command-line switch</span></a> page for details.  Also note
 that you can prefix the processors command with the
@@ -341,8 +346,8 @@ that you can prefix the processors command with the
 Px,Py,Pz values for different partitions.</p>
 <p>You can use the <a class="reference internal" href="partition.html"><span class="doc">partition</span></a> command to specify
 different processor grids for different partitions, e.g.</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">partition</span><span class="w"> </span><span class="n">yes</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">processors</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">4</span><span class="w"></span>
-<span class="k">partition</span><span class="w"> </span><span class="n">yes</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">processors</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">2</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">partition</span><span class="w"> </span><span class="n">yes</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">processors</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">4</span>
+<span class="k">partition</span><span class="w"> </span><span class="n">yes</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">processors</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">2</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -361,10 +366,10 @@ will persist for all simulations.  If balancing is performed, some of
 the methods invoked by those commands retain the logical topology of
 the initial 3d grid, and the mapping of processors to the grid
 specified by the processors command.  However the grid spacings in
-different dimensions may change, so that processors own sub-domains of
+different dimensions may change, so that processors own subdomains of
 different sizes.  If the <a class="reference internal" href="comm_style.html"><span class="doc">comm_style tiled</span></a> command is
 used, methods invoked by the balancing commands may discard the 3d
-grid of processors and tile the simulation domain with sub-domains of
+grid of processors and tile the simulation domain with subdomains of
 different sizes and shapes which no longer have a logical 3d
 connectivity.  If that occurs, all the information specified by the
 processors command is ignored.</p>
@@ -374,12 +379,12 @@ can also affect how the P processor IDs are mapped to the 3d grid of
 processors.</p>
 <p>The <em>onelevel</em> style creates a 3d grid that is compatible with the
 Px,Py,Pz settings, and which minimizes the surface-to-volume ratio of
-each processor’s sub-domain, as described above.  The mapping of
+each processor’s subdomain, as described above.  The mapping of
 processors to the grid is determined by the <em>map</em> keyword setting.</p>
 <p>The <em>twolevel</em> style can be used on machines with multicore nodes to
-minimize off-node communication.  It insures that contiguous
-sub-sections of the 3d grid are assigned to all the cores of a node.
-For example if <em>Nc</em> is 4, then 2x2x1 or 2x1x2 or 1x2x2 sub-sections of
+minimize off-node communication.  It ensures that contiguous
+subsections of the 3d grid are assigned to all the cores of a node.
+For example if <em>Nc</em> is 4, then 2x2x1 or 2x1x2 or 1x2x2 subsections of
 the 3d grid will correspond to the cores of each node.  This affects
 both the factorization and mapping steps.</p>
 <p>The <em>Cx</em>, <em>Cy</em>, <em>Cz</em> settings are similar to the <em>Px</em>, <em>Py</em>, <em>Pz</em>
@@ -388,7 +393,7 @@ parameters can be specified with an asterisk “*”, which means LAMMPS
 will choose the number of cores in that dimension of the node’s
 sub-grid.  As with Px,Py,Pz, it will do this based on the size and
 shape of the global simulation box so as to minimize the
-surface-to-volume ratio of each processor’s sub-domain.</p>
+surface-to-volume ratio of each processor’s subdomain.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For the <em>twolevel</em> style to work correctly, it assumes the MPI
@@ -508,7 +513,7 @@ processors, it could create a 4x2x10 grid, but it will not create a
 <p class="admonition-title">Note</p>
 <p>If you use the <a class="reference internal" href="partition.html"><span class="doc">partition</span></a> command to invoke
 different “processors” commands on different partitions, and you also
-use the <em>part</em> keyword, then you must insure that both the sending and
+use the <em>part</em> keyword, then you must ensure that both the sending and
 receiving partitions invoke the “processors” command that connects the
 2 partitions via the <em>part</em> keyword.  LAMMPS cannot easily check for
 this, but your simulation will likely hang in its setup phase if this
@@ -523,7 +528,7 @@ out, especially when running on multiple partitions or on, a multicore
 machine or when the processor ranks were reordered by use of the
 <a class="reference internal" href="Run_options.html"><span class="doc">-reorder command-line switch</span></a> or due to use of
 MPI-specific launch options such as a config file.</p>
-<p>If you have multiple partitions you should insure that each one writes
+<p>If you have multiple partitions you should ensure that each one writes
 to a different file, e.g. using a <a class="reference internal" href="variable.html"><span class="doc">world-style variable</span></a>
 for the filename.  The file has a self-explanatory header, followed by
 one-line per processor in this format:</p>
@@ -547,7 +552,7 @@ multiple cores can have the same <em>name</em>.</p>
 </section>
 <hr class="docutils" />
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <p>This command cannot be used after the simulation box is defined by a
 <a class="reference internal" href="read_data.html"><span class="doc">read_data</span></a> or <a class="reference internal" href="create_box.html"><span class="doc">create_box</span></a> command.
 It can be used before a restart file is read to change the 3d
@@ -558,11 +563,11 @@ option.</p>
 <em>grid onelevel</em> or <em>grid twolevel</em> options.</p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="partition.html"><span class="doc">partition</span></a>, <a class="reference internal" href="Run_options.html"><span class="doc">-reorder command-line switch</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
 <p>The option defaults are Px Py Pz = * * *, grid = onelevel, and map =
 cart.</p>
 </section>
@@ -579,7 +584,7 @@ cart.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -588,7 +593,6 @@ cart.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

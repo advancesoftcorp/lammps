@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>8.1.1. Restart a simulation &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Howto_restart.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -64,8 +68,7 @@
 <li class="toctree-l3"><a class="reference internal" href="Howto_library.html">8.1.5. Library interface to LAMMPS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Howto_couple.html">8.1.6. Coupling LAMMPS to other codes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Howto_mdi.html">8.1.7. Using LAMMPS with the MDI library for code coupling</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Howto_bpm.html">8.1.8. Bonded particle models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Howto_broken_bonds.html">8.1.9. Broken Bonds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_broken_bonds.html">8.1.8. Broken Bonds</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Howto.html#settings-howto">8.2. Settings howto</a></li>
@@ -96,6 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -113,12 +117,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Howto.html"><span class="section-number">8. </span>Howto discussions</a> &raquo;</li>
-      <li><span class="section-number">8.1.1. </span>Restart a simulation</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Howto.html"><span class="section-number">8. </span>Howto discussions</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">8.1.1. </span>Restart a simulation</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="Howto.html" class="btn btn-neutral float-left" title="8. Howto discussions" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -129,16 +132,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="restart-a-simulation">
-<h1><span class="section-number">8.1.1. </span>Restart a simulation<a class="headerlink" href="#restart-a-simulation" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="restart-a-simulation">
+<h1><span class="section-number">8.1.1. </span>Restart a simulation<a class="headerlink" href="#restart-a-simulation" title="Permalink to this heading"></a></h1>
 <p>There are 3 ways to continue a long LAMMPS simulation.  Multiple
 <a class="reference internal" href="run.html"><span class="doc">run</span></a> commands can be used in the same input script.  Each
 run will continue from where the previous run left off.  Or binary
 restart files can be saved to disk using the <a class="reference internal" href="restart.html"><span class="doc">restart</span></a>
 command.  At a later time, these binary files can be read via a
 <a class="reference internal" href="read_restart.html"><span class="doc">read_restart</span></a> command in a new script.  Or they can
-be converted to text data files using the <a class="reference internal" href="Run_options.html"><span class="doc">-r command-line switch</span></a> and read by a <a class="reference internal" href="read_data.html"><span class="doc">read_data</span></a>
-command in a new script.</p>
+be converted to text data files using the <a class="reference internal" href="Run_options.html"><span class="doc">-r command-line switch</span></a> and read by a <a class="reference internal" href="read_data.html"><span class="doc">read_data</span></a> command in a
+new script.</p>
 <p>Here we give examples of 2 scripts that read either a binary restart
 file or a converted data file and then issue a new run command to
 continue where the previous run left off.  They illustrate what
@@ -148,29 +152,29 @@ documentation for the <a class="reference internal" href="read_restart.html"><sp
 <p>Look at the <em>in.chain</em> input script provided in the <em>bench</em> directory
 of the LAMMPS distribution to see the original script that these 2
 scripts are based on.  If that script had the line</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">restart</span><span class="w">         </span><span class="m">50</span><span class="w"> </span><span class="n">tmp.restart</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">restart</span><span class="w">         </span><span class="m">50</span><span class="w"> </span><span class="n">tmp.restart</span>
 </pre></div>
 </div>
 <p>added to it, it would produce 2 binary restart files (tmp.restart.50
 and tmp.restart.100) as it ran.</p>
 <p>This script could be used to read the first restart file and re-run the
 last 50 timesteps:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">read_restart</span><span class="w">    </span><span class="n">tmp.restart.50</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">read_restart</span><span class="w">    </span><span class="n">tmp.restart.50</span>
 
-<span class="k">neighbor</span><span class="w">        </span><span class="m">0.4</span><span class="w"> </span><span class="n">bin</span><span class="w"></span>
-<span class="k">neigh_modify</span><span class="w">    </span><span class="n">every</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">delay</span><span class="w"> </span><span class="m">1</span><span class="w"></span>
+<span class="k">neighbor</span><span class="w">        </span><span class="m">0.4</span><span class="w"> </span><span class="n">bin</span>
+<span class="k">neigh_modify</span><span class="w">    </span><span class="n">every</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">delay</span><span class="w"> </span><span class="m">1</span>
 
-<span class="k">fix             </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">nve</span><span class="w"></span>
-<span class="k">fix             </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">langevin</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">10.0</span><span class="w"> </span><span class="m">904297</span><span class="w"></span>
+<span class="k">fix             </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">nve</span>
+<span class="k">fix             </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">langevin</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">10.0</span><span class="w"> </span><span class="m">904297</span>
 
-<span class="k">timestep</span><span class="w">        </span><span class="m">0.012</span><span class="w"></span>
+<span class="k">timestep</span><span class="w">        </span><span class="m">0.012</span>
 
-<span class="k">run</span><span class="w">             </span><span class="m">50</span><span class="w"></span>
+<span class="k">run</span><span class="w">             </span><span class="m">50</span>
 </pre></div>
 </div>
 <p>Note that the following commands do not need to be repeated because
 their settings are included in the restart file: <em>units, atom_style,
-special_bonds, pair_style, bond_style</em>.  However these commands do
+special_bonds, pair_style, bond_style</em>.  However, these commands do
 need to be used, since their settings are not in the restart file:
 <em>neighbor, fix, timestep</em>.</p>
 <p>If you actually use this script to perform a restarted run, you will
@@ -180,37 +184,37 @@ notice that the thermodynamic data match at step 50 (if you also put a
 uses random numbers in a way that does not allow for perfect restarts.</p>
 <p>As an alternate approach, the restart file could be converted to a data
 file as follows:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="n">lmp_g</span><span class="o">++</span><span class="w"> </span><span class="o">-</span><span class="n">r</span><span class="w"> </span><span class="n">tmp.restart.50</span><span class="w"> </span><span class="n">tmp.restart.data</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="n">lmp_g</span><span class="o">++</span><span class="w"> </span><span class="o">-</span><span class="n">r</span><span class="w"> </span><span class="n">tmp.restart.50</span><span class="w"> </span><span class="n">tmp.restart.data</span>
 </pre></div>
 </div>
 <p>Then, this script could be used to re-run the last 50 steps:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">units</span><span class="w">           </span><span class="n">lj</span><span class="w"></span>
-<span class="k">atom_style</span><span class="w">      </span><span class="n">bond</span><span class="w"></span>
-<span class="k">pair_style</span><span class="w">      </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="w"> </span><span class="m">1.12</span><span class="w"></span>
-<span class="k">pair_modify</span><span class="w">     </span><span class="n">shift</span><span class="w"> </span><span class="n">yes</span><span class="w"></span>
-<span class="k">bond_style</span><span class="w">      </span><span class="n">fene</span><span class="w"></span>
-<span class="k">special_bonds</span><span class="w">   </span><span class="m">0.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">units</span><span class="w">           </span><span class="n">lj</span>
+<span class="k">atom_style</span><span class="w">      </span><span class="n">bond</span>
+<span class="k">pair_style</span><span class="w">      </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="w"> </span><span class="m">1.12</span>
+<span class="k">pair_modify</span><span class="w">     </span><span class="n">shift</span><span class="w"> </span><span class="n">yes</span>
+<span class="k">bond_style</span><span class="w">      </span><span class="n">fene</span>
+<span class="k">special_bonds</span><span class="w">   </span><span class="m">0.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span>
 
-<span class="k">read_data</span><span class="w">       </span><span class="n">tmp.restart.data</span><span class="w"></span>
+<span class="k">read_data</span><span class="w">       </span><span class="n">tmp.restart.data</span>
 
-<span class="k">neighbor</span><span class="w">        </span><span class="m">0.4</span><span class="w"> </span><span class="n">bin</span><span class="w"></span>
-<span class="k">neigh_modify</span><span class="w">    </span><span class="n">every</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">delay</span><span class="w"> </span><span class="m">1</span><span class="w"></span>
+<span class="k">neighbor</span><span class="w">        </span><span class="m">0.4</span><span class="w"> </span><span class="n">bin</span>
+<span class="k">neigh_modify</span><span class="w">    </span><span class="n">every</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">delay</span><span class="w"> </span><span class="m">1</span>
 
-<span class="k">fix             </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">nve</span><span class="w"></span>
-<span class="k">fix             </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">langevin</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">10.0</span><span class="w"> </span><span class="m">904297</span><span class="w"></span>
+<span class="k">fix             </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">nve</span>
+<span class="k">fix             </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">langevin</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">10.0</span><span class="w"> </span><span class="m">904297</span>
 
-<span class="k">timestep</span><span class="w">        </span><span class="m">0.012</span><span class="w"></span>
+<span class="k">timestep</span><span class="w">        </span><span class="m">0.012</span>
 
-<span class="k">reset_timestep</span><span class="w">  </span><span class="m">50</span><span class="w"></span>
-<span class="k">run</span><span class="w">             </span><span class="m">50</span><span class="w"></span>
+<span class="k">reset_timestep</span><span class="w">  </span><span class="m">50</span>
+<span class="k">run</span><span class="w">             </span><span class="m">50</span>
 </pre></div>
 </div>
 <p>Note that nearly all the settings specified in the original <em>in.chain</em>
 script must be repeated, except the <em>pair_coeff</em> and <em>bond_coeff</em>
-commands since the new data file lists the force field coefficients.
+commands, since the new data file lists the force field coefficients.
 Also, the <a class="reference internal" href="reset_timestep.html"><span class="doc">reset_timestep</span></a> command is used to tell
-LAMMPS the current timestep.  This value is stored in restart files,
-but not in data files.</p>
+LAMMPS the current timestep.  This value is stored in restart files, but
+not in data files.</p>
 </section>
 
 
@@ -224,7 +228,7 @@ but not in data files.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -233,7 +237,6 @@ but not in data files.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

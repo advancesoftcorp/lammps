@@ -2,7 +2,7 @@
 /* ----------------------------------------------------------------------
    LAMMPS - Large-scale Atomic/Molecular Massively Parallel Simulator
    https://www.lammps.org/, Sandia National Laboratories
-   Steve Plimpton, sjplimp@sandia.gov
+   LAMMPS development team: developers@lammps.org
 
    Copyright (2003) Sandia Corporation.  Under the terms of Contract
    DE-AC04-94AL85000 with Sandia Corporation, the U.S. Government retains
@@ -101,7 +101,7 @@ void FixReaxFFBonds::setup(int /*vflag*/)
 
 void FixReaxFFBonds::init()
 {
-  reaxff = dynamic_cast<PairReaxFF *>( force->pair_match("^reax..",0));
+  reaxff = dynamic_cast<PairReaxFF *>(force->pair_match("^reax..",0));
   if (reaxff == nullptr) error->all(FLERR,"Cannot use fix reaxff/bonds without "
                                 "pair_style reaxff, reaxff/kk, or reaxff/omp");
 }
@@ -295,7 +295,7 @@ void FixReaxFFBonds::RecvBuffer(double *buf, int nbuf, int nbuf_local,
     MPI_Isend(&buf[0],nbuf_local,MPI_DOUBLE,0,0,world,&irequest2);
     MPI_Wait(&irequest2,MPI_STATUS_IGNORE);
   }
-  if (me ==0) fputs("# \n",fp);
+  if (me == 0) fputs("# \n",fp);
 
 }
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>compute sna/atom command &mdash; LAMMPS documentation</title>
@@ -10,18 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/compute_sna_atom.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -34,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -96,17 +99,21 @@
 <li class="toctree-l2"><a class="reference internal" href="compute_com_chunk.html">compute com/chunk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_contact_atom.html">compute contact/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_coord_atom.html">compute coord/atom command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_count_type.html">compute count/type command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_damage_atom.html">compute damage/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dihedral.html">compute dihedral command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dihedral_local.html">compute dihedral/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dilatation_atom.html">compute dilatation/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dipole.html">compute dipole command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_dipole.html#compute-dipole-tip4p-command">compute dipole/tip4p command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dipole_chunk.html">compute dipole/chunk command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_dipole_chunk.html#compute-dipole-tip4p-chunk-command">compute dipole/tip4p/chunk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_displace_atom.html">compute displace/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dpd.html">compute dpd command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dpd_atom.html">compute dpd/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_edpd_temp_atom.html">compute edpd/temp/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_efield_atom.html">compute efield/atom command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_efield_wolf_atom.html">compute efield/wolf/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_entropy_atom.html">compute entropy/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_erotate_asphere.html">compute erotate/asphere command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_erotate_rigid.html">compute erotate/rigid command</a></li>
@@ -133,7 +140,6 @@
 <li class="toctree-l2"><a class="reference internal" href="compute_ke_atom_eff.html">compute ke/atom/eff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_ke_eff.html">compute ke/eff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_ke_rigid.html">compute ke/rigid command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute_mesont.html">compute mesont command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_mliap.html">compute mliap command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_modify.html">compute_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_momentum.html">compute momentum command</a></li>
@@ -149,9 +155,11 @@
 <li class="toctree-l2"><a class="reference internal" href="compute_pe_atom.html">compute pe/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_plasticity_atom.html">compute plasticity/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_pressure.html">compute pressure command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_pressure_alchemy.html">compute pressure/alchemy command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_pressure_uef.html">compute pressure/uef command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_property_atom.html">compute property/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_property_chunk.html">compute property/chunk command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_property_grid.html">compute property/grid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_property_local.html">compute property/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_ptm_atom.html">compute ptm/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_rdf.html">compute rdf command</a></li>
@@ -185,7 +193,9 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">compute sna/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#compute-snad-atom-command">compute snad/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#compute-snav-atom-command">compute snav/atom command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#compute-snap-command">compute snap command</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#compute-snap-command">compute snap command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compute-sna-grid-command">compute sna/grid command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compute-sna-grid-local-command">compute sna/grid/local command</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#syntax">Syntax</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#description">Description</a></li>
@@ -201,11 +211,11 @@
 <li class="toctree-l2"><a class="reference internal" href="compute_spin.html">compute spin command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_stress_atom.html">compute stress/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_stress_atom.html#compute-centroid-stress-atom-command">compute centroid/stress/atom command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_stress_cartesian.html">compute stress/cartesian command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_stress_curvilinear.html">compute stress/cylinder command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_stress_curvilinear.html#compute-stress-spherical-command">compute stress/spherical command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_stress_mop.html">compute stress/mop command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_stress_mop.html#compute-stress-mop-profile-command">compute stress/mop/profile command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute_stress_profile.html">compute stress/cartesian command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute_stress_profile.html#compute-stress-cylinder-command">compute stress/cylinder command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute_stress_profile.html#compute-stress-spherical-command">compute stress/spherical command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_tally.html">compute force/tally command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_tally.html#compute-heat-flux-tally-command">compute heat/flux/tally command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_tally.html#compute-heat-flux-virial-tally-command">compute heat/flux/virial/tally command</a></li>
@@ -245,6 +255,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -262,12 +273,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="computes.html">Computes</a> &raquo;</li>
-      <li>compute sna/atom command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="computes.html">Computes</a></li>
+      <li class="breadcrumb-item active">compute sna/atom command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="compute_smd_vol.html" class="btn btn-neutral float-left" title="compute smd/vol command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -278,23 +288,33 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><section id="compute-sna-atom-command">
-<span id="index-3"></span><h1>compute sna/atom command<a class="headerlink" href="#compute-sna-atom-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><span class="target" id="index-3"></span><span class="target" id="index-4"></span><section id="compute-sna-atom-command">
+<span id="index-5"></span><h1>compute sna/atom command<a class="headerlink" href="#compute-sna-atom-command" title="Permalink to this heading"></a></h1>
 </section>
 <section id="compute-snad-atom-command">
-<h1>compute snad/atom command<a class="headerlink" href="#compute-snad-atom-command" title="Permalink to this headline">¶</a></h1>
+<h1>compute snad/atom command<a class="headerlink" href="#compute-snad-atom-command" title="Permalink to this heading"></a></h1>
 </section>
 <section id="compute-snav-atom-command">
-<h1>compute snav/atom command<a class="headerlink" href="#compute-snav-atom-command" title="Permalink to this headline">¶</a></h1>
+<h1>compute snav/atom command<a class="headerlink" href="#compute-snav-atom-command" title="Permalink to this heading"></a></h1>
 </section>
 <section id="compute-snap-command">
-<h1>compute snap command<a class="headerlink" href="#compute-snap-command" title="Permalink to this headline">¶</a></h1>
+<h1>compute snap command<a class="headerlink" href="#compute-snap-command" title="Permalink to this heading"></a></h1>
+</section>
+<section id="compute-sna-grid-command">
+<h1>compute sna/grid command<a class="headerlink" href="#compute-sna-grid-command" title="Permalink to this heading"></a></h1>
+</section>
+<section id="compute-sna-grid-local-command">
+<h1>compute sna/grid/local command<a class="headerlink" href="#compute-sna-grid-local-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>compute ID group-ID sna/atom rcutfac rfac0 twojmax R_1 R_2 ... w_1 w_2 ... keyword values ...
-compute ID group-ID snad/atom rcutfac rfac0 twojmax R_1 R_2 ... w_1 w_2 ... keyword values ...
-compute ID group-ID snav/atom rcutfac rfac0 twojmax R_1 R_2 ... w_1 w_2 ... keyword values ...
-compute ID group-ID snap rcutfac rfac0 twojmax R_1 R_2 ... w_1 w_2 ... keyword values ...
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">ID</span><span class="w"> </span><span class="nv nv-Identifier">group-ID</span><span class="w"> </span><span class="n">sna</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">rcutfac</span><span class="w"> </span><span class="n">rfac0</span><span class="w"> </span><span class="n">twojmax</span><span class="w"> </span><span class="n">R_1</span><span class="w"> </span><span class="n">R_2</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="n">w_1</span><span class="w"> </span><span class="n">w_2</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">values</span><span class="w"> </span><span class="n">...</span>
+<span class="k">compute </span><span class="nv nv-Identifier">ID</span><span class="w"> </span><span class="nv nv-Identifier">group-ID</span><span class="w"> </span><span class="n">snad</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">rcutfac</span><span class="w"> </span><span class="n">rfac0</span><span class="w"> </span><span class="n">twojmax</span><span class="w"> </span><span class="n">R_1</span><span class="w"> </span><span class="n">R_2</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="n">w_1</span><span class="w"> </span><span class="n">w_2</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">values</span><span class="w"> </span><span class="n">...</span>
+<span class="k">compute </span><span class="nv nv-Identifier">ID</span><span class="w"> </span><span class="nv nv-Identifier">group-ID</span><span class="w"> </span><span class="n">snav</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">rcutfac</span><span class="w"> </span><span class="n">rfac0</span><span class="w"> </span><span class="n">twojmax</span><span class="w"> </span><span class="n">R_1</span><span class="w"> </span><span class="n">R_2</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="n">w_1</span><span class="w"> </span><span class="n">w_2</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">values</span><span class="w"> </span><span class="n">...</span>
+<span class="k">compute </span><span class="nv nv-Identifier">ID</span><span class="w"> </span><span class="nv nv-Identifier">group-ID</span><span class="w"> </span><span class="n">snap</span><span class="w"> </span><span class="n">rcutfac</span><span class="w"> </span><span class="n">rfac0</span><span class="w"> </span><span class="n">twojmax</span><span class="w"> </span><span class="n">R_1</span><span class="w"> </span><span class="n">R_2</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="n">w_1</span><span class="w"> </span><span class="n">w_2</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">values</span><span class="w"> </span><span class="n">...</span>
+<span class="k">compute </span><span class="nv nv-Identifier">ID</span><span class="w"> </span><span class="nv nv-Identifier">group-ID</span><span class="w"> </span><span class="n">snap</span><span class="w"> </span><span class="n">rcutfac</span><span class="w"> </span><span class="n">rfac0</span><span class="w"> </span><span class="n">twojmax</span><span class="w"> </span><span class="n">R_1</span><span class="w"> </span><span class="n">R_2</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="n">w_1</span><span class="w"> </span><span class="n">w_2</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">values</span><span class="w"> </span><span class="n">...</span>
+<span class="k">compute </span><span class="nv nv-Identifier">ID</span><span class="w"> </span><span class="nv nv-Identifier">group-ID</span><span class="w"> </span><span class="n">sna</span><span class="o">/</span><span class="n">grid</span><span class="w"> </span><span class="n">nx</span><span class="w"> </span><span class="n">ny</span><span class="w"> </span><span class="n">nz</span><span class="w"> </span><span class="n">rcutfac</span><span class="w"> </span><span class="n">rfac0</span><span class="w"> </span><span class="n">twojmax</span><span class="w"> </span><span class="n">R_1</span><span class="w"> </span><span class="n">R_2</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="n">w_1</span><span class="w"> </span><span class="n">w_2</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">values</span><span class="w"> </span><span class="n">...</span>
+<span class="k">compute </span><span class="nv nv-Identifier">ID</span><span class="w"> </span><span class="nv nv-Identifier">group-ID</span><span class="w"> </span><span class="n">sna</span><span class="o">/</span><span class="n">grid</span><span class="o">/</span><span class="n">local</span><span class="w"> </span><span class="n">nx</span><span class="w"> </span><span class="n">ny</span><span class="w"> </span><span class="n">nz</span><span class="w"> </span><span class="n">rcutfac</span><span class="w"> </span><span class="n">rfac0</span><span class="w"> </span><span class="n">twojmax</span><span class="w"> </span><span class="n">R_1</span><span class="w"> </span><span class="n">R_2</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="n">w_1</span><span class="w"> </span><span class="n">w_2</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">values</span><span class="w"> </span><span class="n">...</span>
 </pre></div>
 </div>
 <ul>
@@ -305,8 +325,9 @@ compute ID group-ID snap rcutfac rfac0 twojmax R_1 R_2 ... w_1 w_2 ... keyword v
 <li><p>twojmax = band limit for bispectrum components (non-negative integer)</p></li>
 <li><p>R_1, R_2,… = list of cutoff radii, one for each type (distance units)</p></li>
 <li><p>w_1, w_2,… = list of neighbor weights, one for each type</p></li>
+<li><p>nx, ny, nz = number of grid points in x, y, and z directions (positive integer)</p></li>
 <li><p>zero or more keyword/value pairs may be appended</p></li>
-<li><p>keyword = <em>rmin0</em> or <em>switchflag</em> or <em>bzeroflag</em> or <em>quadraticflag</em> or <em>chem</em> or <em>bnormflag</em> or <em>wselfallflag</em> or <em>bikflag</em> or <em>switchinnerflag</em> or <em>sinner</em> or <em>dinner</em></p>
+<li><p>keyword = <em>rmin0</em> or <em>switchflag</em> or <em>bzeroflag</em> or <em>quadraticflag</em> or <em>chem</em> or <em>bnormflag</em> or <em>wselfallflag</em> or <em>bikflag</em> or <em>switchinnerflag</em> or <em>sinner</em> or <em>dinner</em> or <em>dgradflag</em></p>
 <pre class="literal-block"><em>rmin0</em> value = parameter in distance to angle conversion (distance units)
 <em>switchflag</em> value = <em>0</em> or <em>1</em>
    <em>0</em> = do not use switching function
@@ -326,32 +347,36 @@ compute ID group-ID snap rcutfac rfac0 twojmax R_1 R_2 ... w_1 w_2 ... keyword v
 <em>wselfallflag</em> value = <em>0</em> or <em>1</em>
    <em>0</em> = self-contribution only for element of central atom
    <em>1</em> = self-contribution for all elements
-<em>bikflag</em> value = <em>0</em> or <em>1</em> (only implemented for compute snap)
-   <em>0</em> = per-atom bispectrum descriptors are summed over atoms
-   <em>1</em> = per-atom bispectrum descriptors are not summed over atoms
 <em>switchinnerflag</em> value = <em>0</em> or <em>1</em>
    <em>0</em> = do not use inner switching function
    <em>1</em> = use inner switching function
 <em>sinner</em> values = <em>sinnerlist</em>
    <em>sinnerlist</em> = <em>ntypes</em> values of <em>Sinner</em> (distance units)
 <em>dinner</em> values = <em>dinnerlist</em>
-   <em>dinnerlist</em> = <em>ntypes</em> values of <em>Dinner</em> (distance units)</pre>
+   <em>dinnerlist</em> = <em>ntypes</em> values of <em>Dinner</em> (distance units)
+<em>bikflag</em> value = <em>0</em> or <em>1</em> (only implemented for compute snap)
+   <em>0</em> = descriptors are summed over atoms of each type
+   <em>1</em> = descriptors are listed separately for each atom
+<em>dgradflag</em> value = <em>0</em> or <em>1</em> (only implemented for compute snap)
+   <em>0</em> = descriptor gradients are summed over atoms of each type
+   <em>1</em> = descriptor gradients are listed separately for each atom pair</pre>
 </li>
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">b</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">sna</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="m">1.4</span><span class="w"> </span><span class="m">0.99363</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">2.0</span><span class="w"> </span><span class="m">2.4</span><span class="w"> </span><span class="m">0.75</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">rmin0</span><span class="w"> </span><span class="m">0.0</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">db</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">sna</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="m">1.4</span><span class="w"> </span><span class="m">0.95</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">2.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">vb</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">sna</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="m">1.4</span><span class="w"> </span><span class="m">0.95</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">2.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">snap</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">snap</span><span class="w"> </span><span class="m">1.4</span><span class="w"> </span><span class="m">0.95</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">2.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">snap</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">snap</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">0.99363</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">3.81</span><span class="w"> </span><span class="m">3.83</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">0.93</span><span class="w"> </span><span class="n">chem</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">snap</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">snap</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">0.99363</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">3.81</span><span class="w"> </span><span class="m">3.83</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">0.93</span><span class="w"> </span><span class="n">switchinnerflag</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">sinner</span><span class="w"> </span><span class="m">1.35</span><span class="w"> </span><span class="m">1.6</span><span class="w"> </span><span class="n">dinner</span><span class="w"> </span><span class="m">0.25</span><span class="w"> </span><span class="m">0.3</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">b</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">sna</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="m">1.4</span><span class="w"> </span><span class="m">0.99363</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">2.0</span><span class="w"> </span><span class="m">2.4</span><span class="w"> </span><span class="m">0.75</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">rmin0</span><span class="w"> </span><span class="m">0.0</span>
+<span class="k">compute </span><span class="nv nv-Identifier">db</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">sna</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="m">1.4</span><span class="w"> </span><span class="m">0.95</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">2.0</span><span class="w"> </span><span class="m">1.0</span>
+<span class="k">compute </span><span class="nv nv-Identifier">vb</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">sna</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="m">1.4</span><span class="w"> </span><span class="m">0.95</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">2.0</span><span class="w"> </span><span class="m">1.0</span>
+<span class="k">compute </span><span class="nv nv-Identifier">snap</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">snap</span><span class="w"> </span><span class="m">1.4</span><span class="w"> </span><span class="m">0.95</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">2.0</span><span class="w"> </span><span class="m">1.0</span>
+<span class="k">compute </span><span class="nv nv-Identifier">snap</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">snap</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">0.99363</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">3.81</span><span class="w"> </span><span class="m">3.83</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">0.93</span><span class="w"> </span><span class="n">chem</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span>
+<span class="k">compute </span><span class="nv nv-Identifier">snap</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">snap</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">0.99363</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">3.81</span><span class="w"> </span><span class="m">3.83</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">0.93</span><span class="w"> </span><span class="n">switchinnerflag</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">sinner</span><span class="w"> </span><span class="m">1.35</span><span class="w"> </span><span class="m">1.6</span><span class="w"> </span><span class="n">dinner</span><span class="w"> </span><span class="m">0.25</span><span class="w"> </span><span class="m">0.3</span>
+<span class="k">compute </span><span class="nv nv-Identifier">bgrid</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">sna</span><span class="o">/</span><span class="n">grid</span><span class="o">/</span><span class="n">local</span><span class="w"> </span><span class="m">200</span><span class="w"> </span><span class="m">200</span><span class="w"> </span><span class="m">200</span><span class="w"> </span><span class="m">1.4</span><span class="w"> </span><span class="m">0.95</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">2.0</span><span class="w"> </span><span class="m">1.0</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <p>Define a computation that calculates a set of quantities related to the
 bispectrum components of the atoms in a group. These computes are used
 primarily for calculating the dependence of energy, force, and stress
@@ -445,10 +470,49 @@ potential energy calculation uses the built in compute <em>thermo_pe</em>.  The
 stress calculation uses a compute called <em>snap_press</em> that is
 automatically created behind the scenes, according to the following
 command:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">snap_press</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">pressure</span><span class="w"> </span><span class="n">NULL</span><span class="w"> </span><span class="n">virial</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">snap_press</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">pressure</span><span class="w"> </span><span class="n">NULL</span><span class="w"> </span><span class="n">virial</span>
 </pre></div>
 </div>
 <p>See section below on output for a detailed explanation of the data
+layout in the global array.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 3Aug2022.</span></p>
+</div>
+<p>The compute <em>sna/grid</em> and <em>sna/grid/local</em> commands calculate
+bispectrum components for a regular grid of points.  These are
+calculated from the local density of nearby atoms <em>i’</em> around each grid
+point, as if there was a central atom <em>i</em> at the grid point. This is
+useful for characterizing fine-scale structure in a configuration of
+atoms, and it is used in the <a class="reference external" href="https://github.com/casus/mala">MALA package</a> to build machine-learning surrogates
+for finite-temperature Kohn-Sham density functional theory (<a class="reference internal" href="#ellis2021"><span class="std std-ref">Ellis
+et al.</span></a>) Neighbor atoms not in the group do not contribute
+to the bispectrum components of the grid points. The distance cutoff
+<span class="math notranslate nohighlight">\(R_{ii'}\)</span> assumes that <em>i</em> has the same type as the neighbor atom
+<em>i’</em>.</p>
+<p>Compute <em>sna/grid</em> calculates a global array containing bispectrum
+components for a regular grid of points.
+The grid is aligned with the current box dimensions, with the
+first point at the box origin, and forming a regular 3d array with
+<em>nx</em>, <em>ny</em>, and <em>nz</em> points in the x, y, and z directions. For triclinic
+boxes, the array is congruent with the periodic lattice vectors
+a, b, and c. The array contains one row for each of the
+<span class="math notranslate nohighlight">\(nx \times ny \times nz\)</span> grid points, looping over the index for <em>ix</em> fastest,
+then <em>iy</em>, and <em>iz</em> slowest.  Each row of the array contains the <em>x</em>, <em>y</em>,
+and <em>z</em> coordinates of the grid point, followed by the bispectrum
+components. See section below on output for a detailed explanation of the data
+layout in the global array.</p>
+<p>Compute <em>sna/grid/local</em> calculates bispectrum components of a regular
+grid of points similarly to compute <em>sna/grid</em> described above.
+However, because the array is local, it contains only rows for grid points
+that are local to the processor subdomain. The global grid
+of <span class="math notranslate nohighlight">\(nx \times ny \times nz\)</span> points is still laid out in space the same as for <em>sna/grid</em>,
+but grid points are strictly partitioned, so that every grid point appears in
+one and only one local array.  The array contains one row for each of the
+local grid points, looping over the global index <em>ix</em> fastest,
+then <em>iy</em>, and <em>iz</em> slowest.  Each row of the array contains
+the global indexes <em>ix</em>, <em>iy</em>, and <em>iz</em> first, followed by the <em>x</em>, <em>y</em>,
+and <em>z</em> coordinates of the grid point, followed by the bispectrum
+components. See section below on output for a detailed explanation of the data
 layout in the global array.</p>
 <p>The value of all bispectrum components will be zero for atoms not in
 the group. Neighbor atoms not in the group do not contribute to the
@@ -524,14 +588,6 @@ following symmetry relation</p>
 <p>This option is typically used in conjunction with the <em>chem</em> keyword,
 and LAMMPS will generate a warning if both <em>chem</em> and <em>bnormflag</em>
 are not both set or not both unset.</p>
-<p>The keyword <em>bikflag</em> determines whether or not to expand the bispectrum
-rows of the global array returned by compute snap. If <em>bikflag</em> is set
-to <em>1</em> then the bispectrum row, which is typically the per-atom bispectrum
-descriptors <span class="math notranslate nohighlight">\(B_{i,k}\)</span> summed over all atoms <em>i</em> to produce
-<span class="math notranslate nohighlight">\(B_k\)</span>, becomes bispectrum rows equal to the number of atoms. Thus,
-the resulting bispectrum rows are <span class="math notranslate nohighlight">\(B_{i,k}\)</span> instead of just
-<span class="math notranslate nohighlight">\(B_k\)</span>. In this case, the entries in the final column for these rows
-are set to zero.</p>
 <p>The keyword <em>switchinnerflag</em> with value 1
 activates an additional radial switching
 function similar to <span class="math notranslate nohighlight">\(f_c(r)\)</span> above, but acting to switch off
@@ -552,6 +608,34 @@ values for <span class="math notranslate nohighlight">\(S_{inner}\)</span> and <
 When the central atom and the neighbor atom have different types,
 the values of <span class="math notranslate nohighlight">\(S_{inner}\)</span> and <span class="math notranslate nohighlight">\(D_{inner}\)</span> are
 the arithmetic means of the values for both types.</p>
+<p>The keywords <em>bikflag</em> and <em>dgradflag</em> are only used by compute <em>snap</em>.
+The keyword <em>bikflag</em> determines whether or not to list the descriptors
+of each atom separately, or sum them together and list in a single row.
+If <em>bikflag</em> is set
+to <em>0</em> then a single bispectrum row is used, which contains the per-atom bispectrum
+descriptors <span class="math notranslate nohighlight">\(B_{i,k}\)</span> summed over all atoms <em>i</em> to produce
+<span class="math notranslate nohighlight">\(B_k\)</span>.  If <em>bikflag</em> is set
+to <em>1</em> this is replaced by a separate per-atom bispectrum row for each atom.
+In this case, the entries in the final column for these rows
+are set to zero.</p>
+<p>The keyword <em>dgradflag</em> determines whether to sum atom gradients or list
+them separately. If <em>dgradflag</em> is set to 0, the bispectrum
+descriptor gradients w.r.t. atom <em>j</em> are summed over all atoms <em>i’</em>
+of type <em>I</em> (similar to <em>snad/atom</em> above).
+If <em>dgradflag</em> is set to 1, gradients are listed separately for each pair of atoms.
+Each row corresponds
+to a single term <span class="math notranslate nohighlight">\(\frac{\partial {B_{i,k}  }}{\partial {r}^a_j}\)</span>
+where <span class="math notranslate nohighlight">\({r}^a_j\)</span> is the <em>a-th</em> position coordinate of the atom with global
+index <em>j</em>. This also changes
+the number of columns to be equal to the number of bispectrum components, with 3
+additional columns representing the indices <span class="math notranslate nohighlight">\(i\)</span>, <span class="math notranslate nohighlight">\(j\)</span>, and <span class="math notranslate nohighlight">\(a\)</span>,
+as explained more in the Output info section below. The option <em>dgradflag=1</em>
+requires that <em>bikflag=1</em>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Using <em>dgradflag</em> = 1 produces a global array with <span class="math notranslate nohighlight">\(N + 3N^2 + 1\)</span> rows
+which becomes expensive for systems with more than 1000 atoms.</p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you have a bonded system, then the settings of <a class="reference internal" href="special_bonds.html"><span class="doc">special_bonds</span></a> command can remove pairwise interactions between
@@ -568,7 +652,7 @@ command that includes all pairs in the neighbor list.</p>
 </section>
 <hr class="docutils" />
 <section id="output-info">
-<h2>Output info<a class="headerlink" href="#output-info" title="Permalink to this headline">¶</a></h2>
+<h2>Output info<a class="headerlink" href="#output-info" title="Permalink to this heading"></a></h2>
 <p>Compute <em>sna/atom</em> calculates a per-atom array, each column
 corresponding to a particular bispectrum component.  The total number of
 columns and the identity of the bispectrum component contained in each
@@ -580,7 +664,10 @@ piece of python code:</p>
             if (j&gt;=j1): print j1/2.,j2/2.,j/2.
 </pre></div>
 </div>
-<p>For even twojmax = 2(<em>m</em>-1), <span class="math notranslate nohighlight">\(K = m(m+1)(2m+1)/6\)</span>, the <em>m</em>-th pyramidal number. For odd twojmax = 2 <em>m</em>-1, <span class="math notranslate nohighlight">\(K = m(m+1)(m+2)/3\)</span>, twice the <em>m</em>-th tetrahedral number.</p>
+<p>There are <span class="math notranslate nohighlight">\(m(m+1)/2\)</span> descriptors with last index <em>j</em>,
+where <em>m</em> = <span class="math notranslate nohighlight">\(\lfloor j \rfloor + 1\)</span>.
+Hence, for even <em>twojmax</em> = 2(<em>m</em>-1), <span class="math notranslate nohighlight">\(K = m(m+1)(2m+1)/6\)</span>, the <em>m</em>-th pyramidal number,
+and for odd <em>twojmax</em> = 2 <em>m</em>-1, <span class="math notranslate nohighlight">\(K = m(m+1)(m+2)/3\)</span>, twice the <em>m</em>-th tetrahedral number.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>the <em>diagonal</em> keyword allowing other possible choices
@@ -618,6 +705,19 @@ the numbers of columns are 930, 2790, and 5580, respectively.  The
 number of columns in the global array generated by <em>snap</em> are 31, and
 931, respectively, while the number of rows is 1+3*<em>N</em>+6, where <em>N</em>
 is the total number of atoms.</p>
+<p>Compute <em>sna/grid</em> evaluates a global array.
+The array contains one row for each of the
+<span class="math notranslate nohighlight">\(nx \times ny \times nz\)</span> grid points, looping over the index for <em>ix</em> fastest,
+then <em>iy</em>, and <em>iz</em> slowest.  Each row of the array contains the <em>x</em>, <em>y</em>,
+and <em>z</em> coordinates of the grid point, followed by the bispectrum
+components.</p>
+<p>Compute <em>sna/grid/local</em> evaluates a local array.
+The array contains one row for each of the
+local grid points, looping over the global index <em>ix</em> fastest,
+then <em>iy</em>, and <em>iz</em> slowest.  Each row of the array contains
+the global indexes <em>ix</em>, <em>iy</em>, and <em>iz</em> first, followed by the <em>x</em>, <em>y</em>,
+and <em>z</em> coordinates of the grid point, followed by the bispectrum
+components.</p>
 <p>If the <em>quadratic</em> keyword value is set to 1, then additional columns
 are generated, corresponding to the products of all distinct pairs of
 bispectrum components. If the number of bispectrum components is <em>K</em>,
@@ -636,6 +736,37 @@ label changing fastest.  Each sub-block contains <em>K</em> bispectrum
 components. For the purposes of handling contributions to force, virial,
 and quadratic combinations, these <span class="math notranslate nohighlight">\(N_{elem}^3\)</span> sub-blocks are
 treated as a single block of <span class="math notranslate nohighlight">\(K N_{elem}^3\)</span> columns.</p>
+<p>If the <em>bik</em> keyword is set to 1, the structure of the snap array is expanded.
+The first <span class="math notranslate nohighlight">\(N\)</span> rows of the snap array
+correspond to <span class="math notranslate nohighlight">\(B_{i,k}\)</span> instead of a single row summed over atoms <span class="math notranslate nohighlight">\(i\)</span>.
+In this case, the entries in the final column for these rows
+are set to zero. Also, each row contains only non-zero entries for the
+columns corresponding to the type of that atom. This is not true in the case
+of <em>dgradflag</em> keyword = 1 (see below).</p>
+<p>If the <em>dgradflag</em> keyword is set to 1, this changes the structure of the
+global array completely.
+Here the <em>snad/atom</em> quantities are replaced with rows corresponding to
+descriptor gradient components on single atoms:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial {B_{i,k}  }}{\partial {r}^a_j}\]</div>
+<p>where <span class="math notranslate nohighlight">\({r}^a_j\)</span> is the <em>a-th</em> position coordinate of the atom with global
+index <em>j</em>. The rows are
+organized in chunks, where each chunk corresponds to an atom with global index
+<span class="math notranslate nohighlight">\(j\)</span>. The rows in an atom <span class="math notranslate nohighlight">\(j\)</span> chunk correspond to
+atoms with global index <span class="math notranslate nohighlight">\(i\)</span>. The total number of rows for
+these descriptor gradients is therefore <span class="math notranslate nohighlight">\(3N^2\)</span>.
+The number of columns is equal to the number of bispectrum components,
+plus 3 additional left-most columns representing the global atom indices
+<span class="math notranslate nohighlight">\(i\)</span>, <span class="math notranslate nohighlight">\(j\)</span>,
+and Cartesian direction <span class="math notranslate nohighlight">\(a\)</span>  (0, 1, 2, for x, y, z).
+The first 3 columns of the first <span class="math notranslate nohighlight">\(N\)</span> rows belong to the reference
+potential force components. The remaining K columns contain the
+<span class="math notranslate nohighlight">\(B_{i,k}\)</span> per-atom descriptors corresponding to the non-zero entries
+obtained when <em>bikflag</em> = 1.
+The first column of the last row, after the first
+<span class="math notranslate nohighlight">\(N + 3N^2\)</span> rows, contains the reference potential
+energy. The virial components are not used with this option. The total number of
+rows is therefore <span class="math notranslate nohighlight">\(N + 3N^2 + 1\)</span> and the number of columns is <span class="math notranslate nohighlight">\(K + 3\)</span>.</p>
 <p>These values can be accessed by any command that uses per-atom values
 from a compute as input.  See the <a class="reference internal" href="Howto_output.html"><span class="doc">Howto output</span></a> doc
 page for an overview of LAMMPS output options. To see how this command
@@ -643,28 +774,28 @@ can be used within a Python workflow to train SNAP potentials, see the
 examples in <a class="reference external" href="https://github.com/FitSNAP/FitSNAP">FitSNAP</a>.</p>
 </section>
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <p>These computes are part of the ML-SNAP package.  They are only enabled
 if LAMMPS was built with that package.  See the <a class="reference internal" href="Build_package.html"><span class="doc">Build package</span></a> page for more info.</p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="pair_snap.html"><span class="doc">pair_style snap</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
 <p>The optional keyword defaults are <em>rmin0</em> = 0,
 <em>switchflag</em> = 1, <em>bzeroflag</em> = 1, <em>quadraticflag</em> = 0,
 <em>bnormflag</em> = 0, <em>wselfallflag</em> = 0, <em>switchinnerflag</em> = 0,</p>
 <hr class="docutils" />
-<p id="thompson20141"><strong>(Thompson)</strong> Thompson, Swiler, Trott, Foiles, Tucker, under review, preprint
-available at <a class="reference external" href="http://arxiv.org/abs/1409.3880">arXiv:1409.3880</a></p>
+<p id="thompson20141"><strong>(Thompson)</strong> Thompson, Swiler, Trott, Foiles, Tucker, J Comp Phys, 285, 316, (2015).</p>
 <p id="bartok20101"><strong>(Bartok)</strong> Bartok, Payne, Risi, Csanyi, Phys Rev Lett, 104, 136403 (2010).</p>
 <p id="meremianin2006"><strong>(Meremianin)</strong> Meremianin, J. Phys. A,  39, 3099 (2006).</p>
 <p id="varshalovich1987"><strong>(Varshalovich)</strong> Varshalovich, Moskalev, Khersonskii, Quantum Theory
 of Angular Momentum, World Scientific, Singapore (1987).</p>
 <p id="mason2009"><strong>(Mason)</strong> J. K. Mason, Acta Cryst A65, 259 (2009).</p>
-<p id="cusentino2020"><strong>(Cusentino)</strong> Cusentino, Wood, and Thompson, J Phys Chem A, xxx, xxxxx, (2020)</p>
+<p id="cusentino2020"><strong>(Cusentino)</strong> Cusentino, Wood, Thompson, J Phys Chem A, 124, 5456, (2020)</p>
+<p id="ellis2021"><strong>(Ellis)</strong> Ellis, Fiedler, Popoola, Modine, Stephens, Thompson, Cangi, Rajamanickam,  Phys Rev B, 104, 035120, (2021)</p>
 </section>
 </section>
 
@@ -679,7 +810,7 @@ of Angular Momentum, World Scientific, Singapore (1987).</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -688,7 +819,6 @@ of Angular Momentum, World Scientific, Singapore (1987).</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

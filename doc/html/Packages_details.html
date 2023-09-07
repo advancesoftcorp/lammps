@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>6.2. Package details &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Packages_details.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -57,95 +61,97 @@
 <li class="toctree-l2"><a class="reference internal" href="Packages_list.html">6.1. Available Packages</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">6.2. Package details</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#adios-package">6.2.1. ADIOS package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#asphere-package">6.2.2. ASPHERE package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#atc-package">6.2.3. ATC package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#awpmd-package">6.2.4. AWPMD package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#bocs-package">6.2.5. BOCS package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#body-package">6.2.6. BODY package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#bpm-package">6.2.7. BPM package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#brownian-package">6.2.8. BROWNIAN package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#cg-dna-package">6.2.9. CG-DNA package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#cg-sdk-package">6.2.10. CG-SDK package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#class2-package">6.2.11. CLASS2 package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#colloid-package">6.2.12. COLLOID package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#colvars-package">6.2.13. COLVARS package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#compress-package">6.2.14. COMPRESS package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#coreshell-package">6.2.15. CORESHELL package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#dielectric-package">6.2.16. DIELECTRIC package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#diffraction-package">6.2.17. DIFFRACTION package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#dipole-package">6.2.18. DIPOLE package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#dpd-basic-package">6.2.19. DPD-BASIC package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#dpd-meso-package">6.2.20. DPD-MESO package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#dpd-react-package">6.2.21. DPD-REACT package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#dpd-smooth-package">6.2.22. DPD-SMOOTH package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#drude-package">6.2.23. DRUDE package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#eff-package">6.2.24. EFF package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#electrode-package">6.2.25. ELECTRODE package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#extra-compute-package">6.2.26. EXTRA-COMPUTE package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#extra-dump-package">6.2.27. EXTRA-DUMP package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#extra-fix-package">6.2.28. EXTRA-FIX package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#extra-molecule-package">6.2.29. EXTRA-MOLECULE package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#extra-pair-package">6.2.30. EXTRA-PAIR package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#fep-package">6.2.31. FEP package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#gpu-package">6.2.32. GPU package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#granular-package">6.2.33. GRANULAR package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#h5md-package">6.2.34. H5MD package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#intel-package">6.2.35. INTEL package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#interlayer-package">6.2.36. INTERLAYER package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#kim-package">6.2.37. KIM package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#kokkos-package">6.2.38. KOKKOS package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#kspace-package">6.2.39. KSPACE package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#latboltz-package">6.2.40. LATBOLTZ package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#latte-package">6.2.41. LATTE package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#machdyn-package">6.2.42. MACHDYN package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#manifold-package">6.2.43. MANIFOLD package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#manybody-package">6.2.44. MANYBODY package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#mc-package">6.2.45. MC package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#mdi-package">6.2.46. MDI package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#meam-package">6.2.47. MEAM package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#mesont-package">6.2.48. MESONT package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#mgpt-package">6.2.49. MGPT package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#misc-package">6.2.50. MISC package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ml-hdnnp-package">6.2.51. ML-HDNNP package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ml-iap-package">6.2.52. ML-IAP package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ml-pace-package">6.2.53. ML-PACE package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ml-quip-package">6.2.54. ML-QUIP package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ml-rann-package">6.2.55. ML-RANN package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ml-snap-package">6.2.56. ML-SNAP package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#mofff-package">6.2.57. MOFFF package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#molecule-package">6.2.58. MOLECULE package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#molfile-package">6.2.59. MOLFILE package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#mpiio-package">6.2.60. MPIIO package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#mscg-package">6.2.61. MSCG package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#netcdf-package">6.2.62. NETCDF package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#openmp-package">6.2.63. OPENMP package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#opt-package">6.2.64. OPT package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#orient-package">6.2.65. ORIENT package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#peri-package">6.2.66. PERI package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#phonon-package">6.2.67. PHONON package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#plugin-package">6.2.68. PLUGIN package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#plumed-package">6.2.69. PLUMED package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#poems-package">6.2.70. POEMS package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ptm-package">6.2.71. PTM package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#python-package">6.2.72. PYTHON package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#qeq-package">6.2.73. QEQ package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#qmmm-package">6.2.74. QMMM package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#qtb-package">6.2.75. QTB package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#reaction-package">6.2.76. REACTION package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#reaxff-package">6.2.77. REAXFF package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#replica-package">6.2.78. REPLICA package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rigid-package">6.2.79. RIGID package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#scafacos-package">6.2.80. SCAFACOS package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#shock-package">6.2.81. SHOCK package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#smtbq-package">6.2.82. SMTBQ package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#sph-package">6.2.83. SPH package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#spin-package">6.2.84. SPIN package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#srd-package">6.2.85. SRD package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tally-package">6.2.86. TALLY package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#uef-package">6.2.87. UEF package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#voronoi-package">6.2.88. VORONOI package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#vtk-package">6.2.89. VTK package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#yaff-package">6.2.90. YAFF package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#amoeba-package">6.2.2. AMOEBA package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#asphere-package">6.2.3. ASPHERE package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#atc-package">6.2.4. ATC package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#awpmd-package">6.2.5. AWPMD package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bocs-package">6.2.6. BOCS package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#body-package">6.2.7. BODY package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpm-package">6.2.8. BPM package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#brownian-package">6.2.9. BROWNIAN package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cg-dna-package">6.2.10. CG-DNA package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cg-spica-package">6.2.11. CG-SPICA package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#class2-package">6.2.12. CLASS2 package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#colloid-package">6.2.13. COLLOID package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#colvars-package">6.2.14. COLVARS package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compress-package">6.2.15. COMPRESS package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#coreshell-package">6.2.16. CORESHELL package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dielectric-package">6.2.17. DIELECTRIC package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#diffraction-package">6.2.18. DIFFRACTION package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dipole-package">6.2.19. DIPOLE package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dpd-basic-package">6.2.20. DPD-BASIC package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dpd-meso-package">6.2.21. DPD-MESO package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dpd-react-package">6.2.22. DPD-REACT package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dpd-smooth-package">6.2.23. DPD-SMOOTH package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#drude-package">6.2.24. DRUDE package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#eff-package">6.2.25. EFF package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#electrode-package">6.2.26. ELECTRODE package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#extra-compute-package">6.2.27. EXTRA-COMPUTE package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#extra-dump-package">6.2.28. EXTRA-DUMP package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#extra-fix-package">6.2.29. EXTRA-FIX package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#extra-molecule-package">6.2.30. EXTRA-MOLECULE package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#extra-pair-package">6.2.31. EXTRA-PAIR package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fep-package">6.2.32. FEP package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpu-package">6.2.33. GPU package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#granular-package">6.2.34. GRANULAR package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#h5md-package">6.2.35. H5MD package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#intel-package">6.2.36. INTEL package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#interlayer-package">6.2.37. INTERLAYER package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#kim-package">6.2.38. KIM package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#kokkos-package">6.2.39. KOKKOS package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#kspace-package">6.2.40. KSPACE package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#latboltz-package">6.2.41. LATBOLTZ package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lepton-package">6.2.42. LEPTON package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#machdyn-package">6.2.43. MACHDYN package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manifold-package">6.2.44. MANIFOLD package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manybody-package">6.2.45. MANYBODY package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mc-package">6.2.46. MC package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mdi-package">6.2.47. MDI package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#meam-package">6.2.48. MEAM package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mesont-package">6.2.49. MESONT package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mgpt-package">6.2.50. MGPT package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#misc-package">6.2.51. MISC package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ml-hdnnp-package">6.2.52. ML-HDNNP package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ml-iap-package">6.2.53. ML-IAP package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ml-pace-package">6.2.54. ML-PACE package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ml-pod-package">6.2.55. ML-POD package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ml-quip-package">6.2.56. ML-QUIP package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ml-rann-package">6.2.57. ML-RANN package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ml-snap-package">6.2.58. ML-SNAP package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mofff-package">6.2.59. MOFFF package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#molecule-package">6.2.60. MOLECULE package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#molfile-package">6.2.61. MOLFILE package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mpiio-package">6.2.62. MPIIO package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mscg-package">6.2.63. MSCG package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#netcdf-package">6.2.64. NETCDF package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#openmp-package">6.2.65. OPENMP package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#opt-package">6.2.66. OPT package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#orient-package">6.2.67. ORIENT package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#peri-package">6.2.68. PERI package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#phonon-package">6.2.69. PHONON package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#plugin-package">6.2.70. PLUGIN package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#plumed-package">6.2.71. PLUMED package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#poems-package">6.2.72. POEMS package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ptm-package">6.2.73. PTM package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#python-package">6.2.74. PYTHON package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qeq-package">6.2.75. QEQ package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qmmm-package">6.2.76. QMMM package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qtb-package">6.2.77. QTB package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reaction-package">6.2.78. REACTION package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reaxff-package">6.2.79. REAXFF package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#replica-package">6.2.80. REPLICA package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rigid-package">6.2.81. RIGID package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scafacos-package">6.2.82. SCAFACOS package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#shock-package">6.2.83. SHOCK package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#smtbq-package">6.2.84. SMTBQ package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sph-package">6.2.85. SPH package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spin-package">6.2.86. SPIN package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#srd-package">6.2.87. SRD package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tally-package">6.2.88. TALLY package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uef-package">6.2.89. UEF package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#voronoi-package">6.2.90. VORONOI package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtk-package">6.2.91. VTK package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#yaff-package">6.2.92. YAFF package</a></li>
 </ul>
 </li>
 </ul>
@@ -173,6 +179,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -190,12 +197,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Packages.html"><span class="section-number">6. </span>Optional packages</a> &raquo;</li>
-      <li><span class="section-number">6.2. </span>Package details</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Packages.html"><span class="section-number">6. </span>Optional packages</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">6.2. </span>Package details</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="Packages_list.html" class="btn btn-neutral float-left" title="6.1. Available Packages" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -206,8 +212,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="package-details">
-<h1><span class="section-number">6.2. </span>Package details<a class="headerlink" href="#package-details" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="package-details">
+<h1><span class="section-number">6.2. </span>Package details<a class="headerlink" href="#package-details" title="Permalink to this heading"></a></h1>
 <p>Here is a brief description of all packages in LAMMPS.  It lists authors
 (if applicable) and summarizes the package contents.  It has specific
 instructions on how to install the package, including, if necessary,
@@ -229,131 +236,133 @@ pair, bond, angle, etc correspond to commands with the same style name
 as contained in the file name.</p>
 </div>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 17%" />
-<col style="width: 17%" />
-<col style="width: 17%" />
-<col style="width: 17%" />
-<col style="width: 17%" />
-<col style="width: 17%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#pkg-adios"><span class="std std-ref">ADIOS</span></a></p></td>
+<td><p><a class="reference internal" href="#pkg-amoeba"><span class="std std-ref">AMOEBA</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-asphere"><span class="std std-ref">ASPHERE</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-atc"><span class="std std-ref">ATC</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-awpmd"><span class="std std-ref">AWPMD</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-bocs"><span class="std std-ref">BOCS</span></a></p></td>
-<td><p><a class="reference internal" href="#pkg-body"><span class="std std-ref">BODY</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#pkg-bpm"><span class="std std-ref">BPM</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#pkg-body"><span class="std std-ref">BODY</span></a></p></td>
+<td><p><a class="reference internal" href="#pkg-bpm"><span class="std std-ref">BPM</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-brownian"><span class="std std-ref">BROWNIAN</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-cg-dna"><span class="std std-ref">CG-DNA</span></a></p></td>
-<td><p><a class="reference internal" href="#pkg-cg-sdk"><span class="std std-ref">CG-SDK</span></a></p></td>
+<td><p><a class="reference internal" href="#pkg-cg-spica"><span class="std std-ref">CG-SPICA</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-class2"><span class="std std-ref">CLASS2</span></a></p></td>
-<td><p><a class="reference internal" href="#pkg-colloid"><span class="std std-ref">COLLOID</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pkg-colvars"><span class="std std-ref">COLVARS</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pkg-colloid"><span class="std std-ref">COLLOID</span></a></p></td>
+<td><p><a class="reference internal" href="#pkg-colvars"><span class="std std-ref">COLVARS</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-compress"><span class="std std-ref">COMPRESS</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-coreshell"><span class="std std-ref">CORESHELL</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-dielectric"><span class="std std-ref">DIELECTRIC</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-diffraction"><span class="std std-ref">DIFFRACTION</span></a></p></td>
-<td><p><a class="reference internal" href="#pkg-dipole"><span class="std std-ref">DIPOLE</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#pkg-dpd-basic"><span class="std std-ref">DPD-BASIC</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#pkg-dipole"><span class="std std-ref">DIPOLE</span></a></p></td>
+<td><p><a class="reference internal" href="#pkg-dpd-basic"><span class="std std-ref">DPD-BASIC</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-dpd-meso"><span class="std std-ref">DPD-MESO</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-dpd-react"><span class="std std-ref">DPD-REACT</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-dpd-smooth"><span class="std std-ref">DPD-SMOOTH</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-drude"><span class="std std-ref">DRUDE</span></a></p></td>
-<td><p><a class="reference internal" href="#pkg-eff"><span class="std std-ref">EFF</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pkg-electrode"><span class="std std-ref">ELECTRODE</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pkg-eff"><span class="std std-ref">EFF</span></a></p></td>
+<td><p><a class="reference internal" href="#pkg-electrode"><span class="std std-ref">ELECTRODE</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-extra-compute"><span class="std std-ref">EXTRA-COMPUTE</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-extra-dump"><span class="std std-ref">EXTRA-DUMP</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-extra-fix"><span class="std std-ref">EXTRA-FIX</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-extra-molecule"><span class="std std-ref">EXTRA-MOLECULE</span></a></p></td>
-<td><p><a class="reference internal" href="#pkg-extra-pair"><span class="std std-ref">EXTRA-PAIR</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#pkg-fep"><span class="std std-ref">FEP</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#pkg-extra-pair"><span class="std std-ref">EXTRA-PAIR</span></a></p></td>
+<td><p><a class="reference internal" href="#pkg-fep"><span class="std std-ref">FEP</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-gpu"><span class="std std-ref">GPU</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-granular"><span class="std std-ref">GRANULAR</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-h5md"><span class="std std-ref">H5MD</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-intel"><span class="std std-ref">INTEL</span></a></p></td>
-<td><p><a class="reference internal" href="#pkg-interlayer"><span class="std std-ref">INTERLAYER</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pkg-kim"><span class="std std-ref">KIM</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pkg-interlayer"><span class="std std-ref">INTERLAYER</span></a></p></td>
+<td><p><a class="reference internal" href="#pkg-kim"><span class="std std-ref">KIM</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-kokkos"><span class="std std-ref">KOKKOS</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-kspace"><span class="std std-ref">KSPACE</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-latboltz"><span class="std std-ref">LATBOLTZ</span></a></p></td>
-<td><p><a class="reference internal" href="#pkg-latte"><span class="std std-ref">LATTE</span></a></p></td>
-<td><p><a class="reference internal" href="#pkg-machdyn"><span class="std std-ref">MACHDYN</span></a></p></td>
+<td><p><a class="reference internal" href="#pkg-lepton"><span class="std std-ref">LEPTON</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#pkg-manifold"><span class="std std-ref">MANIFOLD</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#pkg-machdyn"><span class="std std-ref">MACHDYN</span></a></p></td>
+<td><p><a class="reference internal" href="#pkg-manifold"><span class="std std-ref">MANIFOLD</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-manybody"><span class="std std-ref">MANYBODY</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-mc"><span class="std std-ref">MC</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-mdi"><span class="std std-ref">MDI</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-meam"><span class="std std-ref">MEAM</span></a></p></td>
-<td><p><a class="reference internal" href="#pkg-mesont"><span class="std std-ref">MESONT</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pkg-mgpt"><span class="std std-ref">MGPT</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pkg-mesont"><span class="std std-ref">MESONT</span></a></p></td>
+<td><p><a class="reference internal" href="#pkg-mgpt"><span class="std std-ref">MGPT</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-misc"><span class="std std-ref">MISC</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-ml-hdnnp"><span class="std std-ref">ML-HDNNP</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-ml-iap"><span class="std std-ref">ML-IAP</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-ml-pace"><span class="std std-ref">ML-PACE</span></a></p></td>
-<td><p><a class="reference internal" href="#pkg-ml-quip"><span class="std std-ref">ML-QUIP</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#pkg-ml-rann"><span class="std std-ref">ML-RANN</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#pkg-ml-pod"><span class="std std-ref">ML-POD</span></a></p></td>
+<td><p><a class="reference internal" href="#pkg-ml-quip"><span class="std std-ref">ML-QUIP</span></a></p></td>
+<td><p><a class="reference internal" href="#pkg-ml-rann"><span class="std std-ref">ML-RANN</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-ml-snap"><span class="std std-ref">ML-SNAP</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-mofff"><span class="std std-ref">MOFFF</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-molecule"><span class="std std-ref">MOLECULE</span></a></p></td>
-<td><p><a class="reference internal" href="#pkg-molfile"><span class="std std-ref">MOLFILE</span></a></p></td>
-<td><p><a class="reference internal" href="#pkg-mpiio"><span class="std std-ref">MPIIO</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pkg-mscg"><span class="std std-ref">MSCG</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pkg-molfile"><span class="std std-ref">MOLFILE</span></a></p></td>
+<td><p><a class="reference internal" href="#pkg-mpiio"><span class="std std-ref">MPIIO</span></a></p></td>
+<td><p><a class="reference internal" href="#pkg-mscg"><span class="std std-ref">MSCG</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-netcdf"><span class="std std-ref">NETCDF</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-openmp"><span class="std std-ref">OPENMP</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-opt"><span class="std std-ref">OPT</span></a></p></td>
-<td><p><a class="reference internal" href="#pkg-orient"><span class="std std-ref">ORIENT</span></a></p></td>
-<td><p><a class="reference internal" href="#pkg-peri"><span class="std std-ref">PERI</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#pkg-phonon"><span class="std std-ref">PHONON</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#pkg-orient"><span class="std std-ref">ORIENT</span></a></p></td>
+<td><p><a class="reference internal" href="#pkg-peri"><span class="std std-ref">PERI</span></a></p></td>
+<td><p><a class="reference internal" href="#pkg-phonon"><span class="std std-ref">PHONON</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-plugin"><span class="std std-ref">PLUGIN</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-plumed"><span class="std std-ref">PLUMED</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-poems"><span class="std std-ref">POEMS</span></a></p></td>
-<td><p><a class="reference internal" href="#pkg-ptm"><span class="std std-ref">PTM</span></a></p></td>
-<td><p><a class="reference internal" href="#pkg-python"><span class="std std-ref">PYTHON</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pkg-qeq"><span class="std std-ref">QEQ</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pkg-ptm"><span class="std std-ref">PTM</span></a></p></td>
+<td><p><a class="reference internal" href="#pkg-python"><span class="std std-ref">PYTHON</span></a></p></td>
+<td><p><a class="reference internal" href="#pkg-qeq"><span class="std std-ref">QEQ</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-qmmm"><span class="std std-ref">QMMM</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-qtb"><span class="std std-ref">QTB</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-reaction"><span class="std std-ref">REACTION</span></a></p></td>
-<td><p><a class="reference internal" href="#pkg-reaxff"><span class="std std-ref">REAXFF</span></a></p></td>
-<td><p><a class="reference internal" href="#pkg-replica"><span class="std std-ref">REPLICA</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#pkg-rigid"><span class="std std-ref">RIGID</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#pkg-reaxff"><span class="std std-ref">REAXFF</span></a></p></td>
+<td><p><a class="reference internal" href="#pkg-replica"><span class="std std-ref">REPLICA</span></a></p></td>
+<td><p><a class="reference internal" href="#pkg-rigid"><span class="std std-ref">RIGID</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-scafacos"><span class="std std-ref">SCAFACOS</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-shock"><span class="std std-ref">SHOCK</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-smtbq"><span class="std std-ref">SMTBQ</span></a></p></td>
-<td><p><a class="reference internal" href="#pkg-sph"><span class="std std-ref">SPH</span></a></p></td>
-<td><p><a class="reference internal" href="#pkg-spin"><span class="std std-ref">SPIN</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pkg-srd"><span class="std std-ref">SRD</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pkg-sph"><span class="std std-ref">SPH</span></a></p></td>
+<td><p><a class="reference internal" href="#pkg-spin"><span class="std std-ref">SPIN</span></a></p></td>
+<td><p><a class="reference internal" href="#pkg-srd"><span class="std std-ref">SRD</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-tally"><span class="std std-ref">TALLY</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-uef"><span class="std std-ref">UEF</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-voronoi"><span class="std std-ref">VORONOI</span></a></p></td>
-<td><p><a class="reference internal" href="#pkg-vtk"><span class="std std-ref">VTK</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pkg-vtk"><span class="std std-ref">VTK</span></a></p></td>
 <td><p><a class="reference internal" href="#pkg-yaff"><span class="std std-ref">YAFF</span></a></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
 <hr class="docutils" />
 <section id="adios-package">
-<span id="pkg-adios"></span><h2><span class="section-number">6.2.1. </span>ADIOS package<a class="headerlink" href="#adios-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-adios"></span><h2><span class="section-number">6.2.1. </span>ADIOS package<a class="headerlink" href="#adios-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>ADIOS is a high-performance I/O library. This package implements the
 <a class="reference internal" href="dump_adios.html"><span class="doc">dump atom/adios</span></a>, <a class="reference internal" href="dump_adios.html"><span class="doc">dump custom/adios</span></a> and
 <a class="reference internal" href="read_dump.html"><span class="doc">read_dump … format adios</span></a>
 commands to write and read data using the ADIOS library.</p>
 <p><strong>Authors:</strong> Norbert Podhorszki (ORNL) from the ADIOS developer team.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 28Feb2019.</span></p>
+</div>
 <p><strong>Install:</strong></p>
 <p>This package has <a class="reference internal" href="Build_extras.html#adios"><span class="std std-ref">specific installation instructions</span></a> on the <a class="reference internal" href="Build_extras.html"><span class="doc">Build extras</span></a> page.</p>
 <p><strong>Supporting info:</strong></p>
@@ -368,8 +377,36 @@ commands to write and read data using the ADIOS library.</p>
 </ul>
 <hr class="docutils" />
 </section>
+<section id="amoeba-package">
+<span id="pkg-amoeba"></span><h2><span class="section-number">6.2.2. </span>AMOEBA package<a class="headerlink" href="#amoeba-package" title="Permalink to this heading"></a></h2>
+<p><strong>Contents:</strong></p>
+<p>Implementation of the AMOEBA and HIPPO polarized force fields
+originally developed by Jay Ponder’s group at the U Washington at St
+Louis.  The LAMMPS implementation is based on Fortran 90 code
+provided by the Ponder group in their
+<a class="reference external" href="https://dasher.wustl.edu/tinker/">Tinker MD software</a>.</p>
+<dl class="simple">
+<dt><strong>Authors:</strong> Josh Rackers and Steve Plimpton (Sandia), Trung Nguyen (U</dt><dd><p>Chicago)</p>
+</dd>
+</dl>
+<p><strong>Supporting info:</strong></p>
+<ul class="simple">
+<li><p>src/AMOEBA: filenames -&gt; commands</p></li>
+<li><p><a class="reference internal" href="Howto_amoeba.html"><span class="doc">AMOEBA and HIPPO howto</span></a></p></li>
+<li><p><a class="reference internal" href="pair_amoeba.html"><span class="doc">pair_style amoeba</span></a></p></li>
+<li><p><a class="reference internal" href="pair_amoeba.html"><span class="doc">pair_style hippo</span></a></p></li>
+<li><p><a class="reference internal" href="atom_style.html"><span class="doc">atom_style amoeba</span></a></p></li>
+<li><p><a class="reference internal" href="angle_amoeba.html"><span class="doc">angle_style amoeba</span></a></p></li>
+<li><p><a class="reference internal" href="improper_amoeba.html"><span class="doc">improper_style amoeba</span></a></p></li>
+<li><p><a class="reference internal" href="fix_amoeba_bitorsion.html"><span class="doc">fix amoeba/bitorsion</span></a></p></li>
+<li><p><a class="reference internal" href="fix_amoeba_pitorsion.html"><span class="doc">fix amoeba/pitorsion</span></a></p></li>
+<li><p>tools/tinker/tinker2lmp.py</p></li>
+<li><p>examples/amoeba</p></li>
+</ul>
+<hr class="docutils" />
+</section>
 <section id="asphere-package">
-<span id="pkg-asphere"></span><h2><span class="section-number">6.2.2. </span>ASPHERE package<a class="headerlink" href="#asphere-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-asphere"></span><h2><span class="section-number">6.2.3. </span>ASPHERE package<a class="headerlink" href="#asphere-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Computes, time-integration fixes, and pair styles for aspherical
 particle models including ellipsoids, 2d lines, and 3d triangles.</p>
@@ -379,6 +416,7 @@ particle models including ellipsoids, 2d lines, and 3d triangles.</p>
 <li><p><a class="reference internal" href="Howto_spherical.html"><span class="doc">Howto spherical</span></a></p></li>
 <li><p><a class="reference internal" href="pair_gayberne.html"><span class="doc">pair_style gayberne</span></a></p></li>
 <li><p><a class="reference internal" href="pair_resquared.html"><span class="doc">pair_style resquared</span></a></p></li>
+<li><p><a class="reference internal" href="pair_ylz.html"><span class="doc">pair_style ylz</span></a></p></li>
 <li><p><a class="reference external" href="PDF/pair_gayberne_extra.pdf">doc/PDF/pair_gayberne_extra.pdf</a></p></li>
 <li><p><a class="reference external" href="PDF/pair_resquared_extra.pdf">doc/PDF/pair_resquared_extra.pdf</a></p></li>
 <li><p>examples/ASPHERE</p></li>
@@ -389,15 +427,17 @@ particle models including ellipsoids, 2d lines, and 3d triangles.</p>
 <hr class="docutils" />
 </section>
 <section id="atc-package">
-<span id="pkg-atc"></span><h2><span class="section-number">6.2.3. </span>ATC package<a class="headerlink" href="#atc-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-atc"></span><h2><span class="section-number">6.2.4. </span>ATC package<a class="headerlink" href="#atc-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
-<p>ATC stands for atoms-to-continuum.  This package implements a <a class="reference internal" href="fix_atc.html"><span class="doc">fix atc</span></a> command to either couple molecular dynamics with
-continuum finite element equations or perform on-the-fly conversion of
-atomic information to continuum fields.</p>
+<p>ATC stands for atoms-to-continuum.  This package implements a
+<a class="reference internal" href="fix_atc.html"><span class="doc">fix atc</span></a> command to either couple molecular dynamics
+with continuum finite element equations or perform on-the-fly
+conversion of atomic information to continuum fields.</p>
 <p><strong>Authors:</strong> Reese Jones, Jeremy Templeton, Jon Zimmerman (Sandia).</p>
 <p><strong>Install:</strong></p>
-<p>This package has <a class="reference internal" href="Build_extras.html#atc"><span class="std std-ref">specific installation instructions</span></a> on the <a class="reference internal" href="Build_extras.html"><span class="doc">Build extras</span></a> page.
-The ATC package requires that also the <a class="reference external" href="PKG-MANYBODY">MANYBODY</a> package is installed.</p>
+<p>This package has <a class="reference internal" href="Build_extras.html#atc"><span class="std std-ref">specific installation instructions</span></a> on the
+<a class="reference internal" href="Build_extras.html"><span class="doc">Build extras</span></a> page.  The ATC package requires that
+also the <a class="reference internal" href="#pkg-manybody"><span class="std std-ref">MANYBODY</span></a> package is installed.</p>
 <p><strong>Supporting info:</strong></p>
 <ul class="simple">
 <li><p>src/ATC: filenames -&gt; commands</p></li>
@@ -409,7 +449,7 @@ The ATC package requires that also the <a class="reference external" href="PKG-M
 <hr class="docutils" />
 </section>
 <section id="awpmd-package">
-<span id="pkg-awpmd"></span><h2><span class="section-number">6.2.4. </span>AWPMD package<a class="headerlink" href="#awpmd-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-awpmd"></span><h2><span class="section-number">6.2.5. </span>AWPMD package<a class="headerlink" href="#awpmd-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>AWPMD stands for Antisymmetrized Wave Packet Molecular Dynamics.  This
 package implements an atom, pair, and fix style which allows electrons
@@ -428,14 +468,14 @@ model.</p>
 <hr class="docutils" />
 </section>
 <section id="bocs-package">
-<span id="pkg-bocs"></span><h2><span class="section-number">6.2.5. </span>BOCS package<a class="headerlink" href="#bocs-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-bocs"></span><h2><span class="section-number">6.2.6. </span>BOCS package<a class="headerlink" href="#bocs-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>This package provides <a class="reference internal" href="fix_bocs.html"><span class="doc">fix bocs</span></a>, a modified version
 of <a class="reference internal" href="fix_nh.html"><span class="doc">fix npt</span></a> which includes the pressure correction to
 the barostat as outlined in:</p>
 <p>N. J. H. Dunn and W. G. Noid, “Bottom-up coarse-grained models that
 accurately describe the structure, pressure, and compressibility of
-molecular liquids,” J. Chem. Phys. 143, 243148 (2015).</p>
+molecular liquids”, J. Chem. Phys. 143, 243148 (2015).</p>
 <p><strong>Authors:</strong> Nicholas J. H. Dunn and Michael R. DeLyser (The
 Pennsylvania State University)</p>
 <p><strong>Supporting info:</strong></p>
@@ -449,7 +489,7 @@ J. Phys. Chem. B. 122, 13, 3363-3377 (2018).</p>
 <hr class="docutils" />
 </section>
 <section id="body-package">
-<span id="pkg-body"></span><h2><span class="section-number">6.2.6. </span>BODY package<a class="headerlink" href="#body-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-body"></span><h2><span class="section-number">6.2.7. </span>BODY package<a class="headerlink" href="#body-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Body-style particles with internal structure.  Computes,
 time-integration fixes, pair styles, as well as the body styles
@@ -467,12 +507,15 @@ overview.</p>
 <hr class="docutils" />
 </section>
 <section id="bpm-package">
-<span id="pkg-bpm"></span><h2><span class="section-number">6.2.7. </span>BPM package<a class="headerlink" href="#bpm-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-bpm"></span><h2><span class="section-number">6.2.8. </span>BPM package<a class="headerlink" href="#bpm-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Pair styles, bond styles, fixes, and computes for bonded particle
 models for mesoscale simulations of solids and fracture.  See the
 <a class="reference internal" href="Howto_bpm.html"><span class="doc">Howto bpm</span></a> page for an overview.</p>
 <p><strong>Authors:</strong> Joel T. Clemmer (Sandia National Labs)</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 4May2022.</span></p>
+</div>
 <p><strong>Supporting info:</strong></p>
 <ul class="simple">
 <li><p>src/BPM filenames -&gt; commands</p></li>
@@ -488,7 +531,7 @@ models for mesoscale simulations of solids and fracture.  See the
 <hr class="docutils" />
 </section>
 <section id="brownian-package">
-<span id="pkg-brownian"></span><h2><span class="section-number">6.2.8. </span>BROWNIAN package<a class="headerlink" href="#brownian-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-brownian"></span><h2><span class="section-number">6.2.9. </span>BROWNIAN package<a class="headerlink" href="#brownian-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>This package provides <a class="reference internal" href="fix_brownian.html"><span class="doc">fix brownian, fix brownian/sphere, and
 fix brownian/asphere</span></a> as well as
@@ -497,11 +540,14 @@ Dynamics time integration of point, spherical and aspherical particles
 and also support self-propelled particles.</p>
 <p><strong>Authors:</strong> Sam Cameron (University of Bristol),
 Stefan Paquay (while at Brandeis University) (initial version of fix propel/self)</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 14May2021.</span></p>
+</div>
 <p>Example inputs are in the examples/PACKAGES/brownian folder.</p>
 <hr class="docutils" />
 </section>
 <section id="cg-dna-package">
-<span id="pkg-cg-dna"></span><h2><span class="section-number">6.2.9. </span>CG-DNA package<a class="headerlink" href="#cg-dna-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-cg-dna"></span><h2><span class="section-number">6.2.10. </span>CG-DNA package<a class="headerlink" href="#cg-dna-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Several pair styles, bond styles, and integration fixes for coarse-grained
 modelling of single- and double-stranded DNA and RNA based on the oxDNA and
@@ -509,8 +555,8 @@ oxRNA model of Doye, Louis and Ouldridge. The package includes Langevin-type
 rigid-body integrators with improved stability.</p>
 <p><strong>Author:</strong> Oliver Henrich (University of Strathclyde, Glasgow).</p>
 <p><strong>Install:</strong></p>
-<p>The CG-DNA package requires that also the <a class="reference external" href="PKG-MOLECULE">MOLECULE</a> and
-<a class="reference external" href="PKG-ASPHERE">ASPHERE</a> packages are installed.</p>
+<p>The CG-DNA package requires that also the <a class="reference internal" href="#pkg-molecule"><span class="std std-ref">MOLECULE</span></a>
+and <a class="reference internal" href="#pkg-asphere"><span class="std std-ref">ASPHERE</span></a> packages are installed.</p>
 <p><strong>Supporting info:</strong></p>
 <ul class="simple">
 <li><p>src/CG-DNA: filenames -&gt; commands</p></li>
@@ -525,27 +571,28 @@ rigid-body integrators with improved stability.</p>
 </ul>
 <hr class="docutils" />
 </section>
-<section id="cg-sdk-package">
-<span id="pkg-cg-sdk"></span><h2><span class="section-number">6.2.10. </span>CG-SDK package<a class="headerlink" href="#cg-sdk-package" title="Permalink to this headline">¶</a></h2>
+<section id="cg-spica-package">
+<span id="pkg-cg-spica"></span><h2><span class="section-number">6.2.11. </span>CG-SPICA package<a class="headerlink" href="#cg-spica-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Several pair styles and an angle style which implement the
-coarse-grained SDK model of Shinoda, DeVane, and Klein which enables
-simulation of ionic liquids, electrolytes, lipids and charged amino
-acids.</p>
-<p><strong>Author:</strong> Axel Kohlmeyer (Temple U).</p>
+coarse-grained SPICA (formerly called SDK) model which enables
+simulation of biological or soft material systems.</p>
+<p><strong>Original Author:</strong> Axel Kohlmeyer (Temple U).</p>
+<p><strong>Maintainers:</strong> Yusuke Miyazaki and Wataru Shinoda (Okayama U).</p>
 <p><strong>Supporting info:</strong></p>
 <ul class="simple">
-<li><p>src/CG-SDK: filenames -&gt; commands</p></li>
-<li><p>src/CG-SDK/README</p></li>
-<li><p><a class="reference internal" href="pair_sdk.html"><span class="doc">pair_style lj/sdk/*</span></a></p></li>
-<li><p><a class="reference internal" href="angle_sdk.html"><span class="doc">angle_style sdk</span></a></p></li>
-<li><p>examples/PACKAGES/cgsdk</p></li>
+<li><p>src/CG-SPICA: filenames -&gt; commands</p></li>
+<li><p>src/CG-SPICA/README</p></li>
+<li><p><a class="reference internal" href="pair_spica.html"><span class="doc">pair_style lj/spica/*</span></a></p></li>
+<li><p><a class="reference internal" href="angle_spica.html"><span class="doc">angle_style spica</span></a></p></li>
+<li><p>examples/PACKAGES/cgspica</p></li>
 <li><p><a class="reference external" href="https://www.lammps.org/pictures.html#cg">https://www.lammps.org/pictures.html#cg</a></p></li>
+<li><p><a class="reference external" href="https://www.spica-ff.org/">https://www.spica-ff.org/</a></p></li>
 </ul>
 <hr class="docutils" />
 </section>
 <section id="class2-package">
-<span id="pkg-class2"></span><h2><span class="section-number">6.2.11. </span>CLASS2 package<a class="headerlink" href="#class2-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-class2"></span><h2><span class="section-number">6.2.12. </span>CLASS2 package<a class="headerlink" href="#class2-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Bond, angle, dihedral, improper, and pair styles for the COMPASS
 CLASS2 molecular force field.</p>
@@ -561,7 +608,7 @@ CLASS2 molecular force field.</p>
 <hr class="docutils" />
 </section>
 <section id="colloid-package">
-<span id="pkg-colloid"></span><h2><span class="section-number">6.2.12. </span>COLLOID package<a class="headerlink" href="#colloid-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-colloid"></span><h2><span class="section-number">6.2.13. </span>COLLOID package<a class="headerlink" href="#colloid-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Coarse-grained finite-size colloidal particles.  Pair styles and fix
 wall styles for colloidal interactions.  Includes the Fast Lubrication
@@ -585,21 +632,20 @@ Higdon’s group at UIUC.</p>
 <hr class="docutils" />
 </section>
 <section id="colvars-package">
-<span id="pkg-colvars"></span><h2><span class="section-number">6.2.13. </span>COLVARS package<a class="headerlink" href="#colvars-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-colvars"></span><h2><span class="section-number">6.2.14. </span>COLVARS package<a class="headerlink" href="#colvars-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
-<p>COLVARS stands for collective variables, which can be used to
-implement various enhanced sampling methods, including Adaptive
-Biasing Force, Metadynamics, Steered MD, Umbrella Sampling and
-Restraints.  A <a class="reference internal" href="fix_colvars.html"><span class="doc">fix colvars</span></a> command is implemented
-which wraps a COLVARS library, which implements these methods.
-simulations.</p>
-<p><strong>Authors:</strong> The COLVARS library is written and maintained by
-Giacomo Fiorin (ICMS, Temple University, Philadelphia, PA, USA)
-and Jerome Henin (LISM, CNRS, Marseille, France), originally for
-the NAMD MD code, but with portability in mind.  Axel Kohlmeyer
-(Temple U) provided the interface to LAMMPS.</p>
+<p>Colvars stands for collective variables, which can be used to implement
+various enhanced sampling methods, including Adaptive Biasing Force,
+Metadynamics, Steered MD, Umbrella Sampling and Restraints.  A <a class="reference internal" href="fix_colvars.html"><span class="doc">fix
+colvars</span></a> command is implemented which wraps a COLVARS
+library, which implements these methods.  simulations.</p>
+<p><strong>Authors:</strong> The COLVARS library is written and maintained by Giacomo
+Fiorin (NIH, Bethesda, MD, USA) and Jerome Henin (CNRS, Paris, France),
+originally for the NAMD MD code, but with portability in mind.  Axel
+Kohlmeyer (Temple U) provided the interface to LAMMPS.</p>
 <p><strong>Install:</strong></p>
-<p>This package has <a class="reference internal" href="Build_extras.html#colvars"><span class="std std-ref">specific installation instructions</span></a> on the <a class="reference internal" href="Build_extras.html"><span class="doc">Build extras</span></a> page.</p>
+<p>This package has <a class="reference internal" href="Build_extras.html#colvar"><span class="std std-ref">specific installation instructions</span></a> on
+the <a class="reference internal" href="Build_extras.html"><span class="doc">Build extras</span></a> page.</p>
 <p><strong>Supporting info:</strong></p>
 <ul class="simple">
 <li><p>src/COLVARS: filenames -&gt; commands</p></li>
@@ -607,12 +653,14 @@ the NAMD MD code, but with portability in mind.  Axel Kohlmeyer
 <li><p>src/COLVARS/README</p></li>
 <li><p>lib/colvars/README</p></li>
 <li><p><a class="reference internal" href="fix_colvars.html"><span class="doc">fix colvars</span></a></p></li>
+<li><p><a class="reference internal" href="group2ndx.html"><span class="doc">group2ndx</span></a></p></li>
+<li><p><a class="reference internal" href="group2ndx.html"><span class="doc">ndx2group</span></a></p></li>
 <li><p>examples/PACKAGES/colvars</p></li>
 </ul>
 <hr class="docutils" />
 </section>
 <section id="compress-package">
-<span id="pkg-compress"></span><h2><span class="section-number">6.2.14. </span>COMPRESS package<a class="headerlink" href="#compress-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-compress"></span><h2><span class="section-number">6.2.15. </span>COMPRESS package<a class="headerlink" href="#compress-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Compressed output of dump files via the zlib compression library,
 using dump styles with a “gz” in their style name.</p>
@@ -634,13 +682,13 @@ available on your system.</p>
 <hr class="docutils" />
 </section>
 <section id="coreshell-package">
-<span id="pkg-coreshell"></span><h2><span class="section-number">6.2.15. </span>CORESHELL package<a class="headerlink" href="#coreshell-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-coreshell"></span><h2><span class="section-number">6.2.16. </span>CORESHELL package<a class="headerlink" href="#coreshell-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Compute and pair styles that implement the adiabatic core/shell model
 for polarizability.  The pair styles augment Born, Buckingham, and
-Lennard-Jones styles with core/shell capabilities.  The <a class="reference internal" href="compute_temp_cs.html"><span class="doc">compute temp/cs</span></a> command calculates the temperature of a
-system with core/shell particles.  See the <a class="reference internal" href="Howto_coreshell.html"><span class="doc">Howto coreshell</span></a> page for an overview of how to use
-this package.</p>
+Lennard-Jones styles with core/shell capabilities.  The <a class="reference internal" href="compute_temp_cs.html"><span class="doc">compute
+temp/cs</span></a> command calculates the temperature of a
+system with core/shell particles.  See the <a class="reference internal" href="Howto_coreshell.html"><span class="doc">Howto coreshell</span></a> page for an overview of how to use this package.</p>
 <p><strong>Author:</strong> Hendrik Heenen (Technical U of Munich).</p>
 <p><strong>Supporting info:</strong></p>
 <ul class="simple">
@@ -656,7 +704,7 @@ this package.</p>
 <hr class="docutils" />
 </section>
 <section id="dielectric-package">
-<span id="pkg-dielectric"></span><h2><span class="section-number">6.2.16. </span>DIELECTRIC package<a class="headerlink" href="#dielectric-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-dielectric"></span><h2><span class="section-number">6.2.17. </span>DIELECTRIC package<a class="headerlink" href="#dielectric-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>An atom style, multiple pair styles, several fixes, Kspace styles and a
 compute for simulating systems using boundary element solvers for
@@ -666,6 +714,9 @@ different dielectric constants.</p>
 <p>To use this package, also the <a class="reference internal" href="#pkg-kspace"><span class="std std-ref">KSPACE</span></a> and
 <a class="reference internal" href="#pkg-extra-pair"><span class="std std-ref">EXTRA-PAIR</span></a> packages need to be installed.</p>
 <p><strong>Author:</strong> Trung Nguyen and Monica Olvera de la Cruz (Northwestern U)</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 2Jul2021.</span></p>
+</div>
 <p><strong>Supporting info:</strong></p>
 <ul class="simple">
 <li><p>src/DIELECTRIC: filenames -&gt; commands</p></li>
@@ -688,7 +739,7 @@ different dielectric constants.</p>
 <hr class="docutils" />
 </section>
 <section id="diffraction-package">
-<span id="pkg-diffraction"></span><h2><span class="section-number">6.2.17. </span>DIFFRACTION package<a class="headerlink" href="#diffraction-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-diffraction"></span><h2><span class="section-number">6.2.18. </span>DIFFRACTION package<a class="headerlink" href="#diffraction-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Two computes and a fix for calculating x-ray and electron diffraction
 intensities based on kinematic diffraction theory.</p>
@@ -704,7 +755,7 @@ intensities based on kinematic diffraction theory.</p>
 <hr class="docutils" />
 </section>
 <section id="dipole-package">
-<span id="pkg-dipole"></span><h2><span class="section-number">6.2.18. </span>DIPOLE package<a class="headerlink" href="#dipole-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-dipole"></span><h2><span class="section-number">6.2.19. </span>DIPOLE package<a class="headerlink" href="#dipole-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>An atom style and several pair styles for point dipole models with
 short-range or long-range interactions.</p>
@@ -715,18 +766,13 @@ short-range or long-range interactions.</p>
 <li><p><a class="reference internal" href="pair_dipole.html"><span class="doc">pair_style lj/cut/dipole/cut</span></a></p></li>
 <li><p><a class="reference internal" href="pair_dipole.html"><span class="doc">pair_style lj/cut/dipole/long</span></a></p></li>
 <li><p><a class="reference internal" href="pair_dipole.html"><span class="doc">pair_style lj/long/dipole/long</span></a></p></li>
-<li><dl class="field-list simple">
-<dt class="field-odd">doc</dt>
-<dd class="field-odd"><p><cite>angle_style dipole &lt;angle_dipole&gt;</cite></p>
-</dd>
-</dl>
-</li>
+<li><p><a class="reference internal" href="angle_dipole.html"><span class="doc">angle_style dipole</span></a></p></li>
 <li><p>examples/dipole</p></li>
 </ul>
 <hr class="docutils" />
 </section>
 <section id="dpd-basic-package">
-<span id="pkg-dpd-basic"></span><h2><span class="section-number">6.2.19. </span>DPD-BASIC package<a class="headerlink" href="#dpd-basic-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-dpd-basic"></span><h2><span class="section-number">6.2.20. </span>DPD-BASIC package<a class="headerlink" href="#dpd-basic-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Pair styles for the basic dissipative particle dynamics (DPD) method
 and DPD thermostatting.</p>
@@ -743,7 +789,7 @@ and DPD thermostatting.</p>
 <hr class="docutils" />
 </section>
 <section id="dpd-meso-package">
-<span id="pkg-dpd-meso"></span><h2><span class="section-number">6.2.20. </span>DPD-MESO package<a class="headerlink" href="#dpd-meso-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-dpd-meso"></span><h2><span class="section-number">6.2.21. </span>DPD-MESO package<a class="headerlink" href="#dpd-meso-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Several extensions of the dissipative particle dynamics (DPD)
 method.  Specifically, energy-conserving DPD (eDPD) that can model
@@ -752,7 +798,7 @@ vapor-liquid coexistence, and transport DPD (tDPD) for modeling
 advection-diffusion-reaction systems. The equations of motion of these
 DPD extensions are integrated through a modified velocity-Verlet (MVV)
 algorithm.</p>
-<p><strong>Author:</strong> Zhen Li (Division of Applied Mathematics, Brown University)</p>
+<p><strong>Author:</strong> Zhen Li (Department of Mechanical Engineering, Clemson University)</p>
 <p><strong>Supporting info:</strong></p>
 <ul class="simple">
 <li><p>src/DPD-MESO: filenames -&gt; commands</p></li>
@@ -768,7 +814,7 @@ algorithm.</p>
 <hr class="docutils" />
 </section>
 <section id="dpd-react-package">
-<span id="pkg-dpd-react"></span><h2><span class="section-number">6.2.21. </span>DPD-REACT package<a class="headerlink" href="#dpd-react-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-dpd-react"></span><h2><span class="section-number">6.2.22. </span>DPD-REACT package<a class="headerlink" href="#dpd-react-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>DPD stands for dissipative particle dynamics.  This package implements
 coarse-grained DPD-based models for energetic, reactive molecular
@@ -803,7 +849,7 @@ Brennan (ARL).</p>
 <hr class="docutils" />
 </section>
 <section id="dpd-smooth-package">
-<span id="pkg-dpd-smooth"></span><h2><span class="section-number">6.2.22. </span>DPD-SMOOTH package<a class="headerlink" href="#dpd-smooth-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-dpd-smooth"></span><h2><span class="section-number">6.2.23. </span>DPD-SMOOTH package<a class="headerlink" href="#dpd-smooth-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A pair style for smoothed dissipative particle dynamics (SDPD), which
 is an extension of smoothed particle hydrodynamics (SPH) to mesoscale
@@ -825,7 +871,7 @@ Sciences, Iran).</p>
 <hr class="docutils" />
 </section>
 <section id="drude-package">
-<span id="pkg-drude"></span><h2><span class="section-number">6.2.23. </span>DRUDE package<a class="headerlink" href="#drude-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-drude"></span><h2><span class="section-number">6.2.24. </span>DRUDE package<a class="headerlink" href="#drude-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Fixes, pair styles, and a compute to simulate thermalized Drude
 oscillators as a model of polarization.  See the <a class="reference internal" href="Howto_drude.html"><span class="doc">Howto drude</span></a> and <a class="reference internal" href="Howto_drude2.html"><span class="doc">Howto drude2</span></a> pages
@@ -851,7 +897,7 @@ Devemy (CNRS), and Agilio Padua (ENS de Lyon).</p>
 <hr class="docutils" />
 </section>
 <section id="eff-package">
-<span id="pkg-eff"></span><h2><span class="section-number">6.2.24. </span>EFF package<a class="headerlink" href="#eff-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-eff"></span><h2><span class="section-number">6.2.25. </span>EFF package<a class="headerlink" href="#eff-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>EFF stands for electron force field which allows a classical MD code
 to model electrons as particles of variable radius.  This package
@@ -881,24 +927,29 @@ tools/eff; see its README file.</p>
 <hr class="docutils" />
 </section>
 <section id="electrode-package">
-<span id="pkg-electrode"></span><h2><span class="section-number">6.2.25. </span>ELECTRODE package<a class="headerlink" href="#electrode-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-electrode"></span><h2><span class="section-number">6.2.26. </span>ELECTRODE package<a class="headerlink" href="#electrode-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>The ELECTRODE package allows the user to enforce a constant potential method for
 groups of atoms that interact with the remaining atoms as electrolyte.</p>
-<p><strong>Authors:</strong> The ELECTRODE library is written and maintained by Ludwig
+<p><strong>Authors:</strong> The ELECTRODE package is written and maintained by Ludwig
 Ahrens-Iwers (TUHH, Hamburg, Germany), Shern Tee (UQ, Brisbane, Australia) and
 Robert Meissner (TUHH, Hamburg, Germany).</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 4May2022.</span></p>
+</div>
 <p><strong>Install:</strong></p>
 <p>This package has <a class="reference internal" href="Build_extras.html#electrode"><span class="std std-ref">specific installation instructions</span></a> on the
 <a class="reference internal" href="Build_extras.html"><span class="doc">Build extras</span></a> page.</p>
 <p><strong>Supporting info:</strong></p>
 <ul class="simple">
-<li><p><a class="reference internal" href="fix_electrode_conp.html"><span class="doc">fix electrode/conp</span></a></p></li>
+<li><p><a class="reference internal" href="fix_electrode.html"><span class="doc">fix electrode/conp</span></a></p></li>
+<li><p><a class="reference internal" href="fix_electrode.html"><span class="doc">fix electrode/conq</span></a></p></li>
+<li><p><a class="reference internal" href="fix_electrode.html"><span class="doc">fix electrode/thermo</span></a></p></li>
 </ul>
 <hr class="docutils" />
 </section>
 <section id="extra-compute-package">
-<span id="pkg-extra-compute"></span><h2><span class="section-number">6.2.26. </span>EXTRA-COMPUTE package<a class="headerlink" href="#extra-compute-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-extra-compute"></span><h2><span class="section-number">6.2.27. </span>EXTRA-COMPUTE package<a class="headerlink" href="#extra-compute-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Additional compute styles that are less commonly used.</p>
 <p><strong>Supporting info:</strong></p>
@@ -909,7 +960,7 @@ Robert Meissner (TUHH, Hamburg, Germany).</p>
 <hr class="docutils" />
 </section>
 <section id="extra-dump-package">
-<span id="pkg-extra-dump"></span><h2><span class="section-number">6.2.27. </span>EXTRA-DUMP package<a class="headerlink" href="#extra-dump-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-extra-dump"></span><h2><span class="section-number">6.2.28. </span>EXTRA-DUMP package<a class="headerlink" href="#extra-dump-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Additional dump styles that are less commonly used.</p>
 <p><strong>Supporting info:</strong></p>
@@ -920,7 +971,7 @@ Robert Meissner (TUHH, Hamburg, Germany).</p>
 <hr class="docutils" />
 </section>
 <section id="extra-fix-package">
-<span id="pkg-extra-fix"></span><h2><span class="section-number">6.2.28. </span>EXTRA-FIX package<a class="headerlink" href="#extra-fix-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-extra-fix"></span><h2><span class="section-number">6.2.29. </span>EXTRA-FIX package<a class="headerlink" href="#extra-fix-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Additional fix styles that are less commonly used.</p>
 <p><strong>Supporting info:</strong></p>
@@ -931,9 +982,11 @@ Robert Meissner (TUHH, Hamburg, Germany).</p>
 <hr class="docutils" />
 </section>
 <section id="extra-molecule-package">
-<span id="pkg-extra-molecule"></span><h2><span class="section-number">6.2.29. </span>EXTRA-MOLECULE package<a class="headerlink" href="#extra-molecule-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-extra-molecule"></span><h2><span class="section-number">6.2.30. </span>EXTRA-MOLECULE package<a class="headerlink" href="#extra-molecule-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Additional bond, angle, dihedral, and improper styles that are less commonly used.</p>
+<p><strong>Install:</strong></p>
+<p>To use this package, also the <a class="reference internal" href="#pkg-molecule"><span class="std std-ref">MOLECULE</span></a> package needs to be installed.</p>
 <p><strong>Supporting info:</strong></p>
 <ul class="simple">
 <li><p>src/EXTRA-MOLECULE: filenames -&gt; commands</p></li>
@@ -942,7 +995,7 @@ Robert Meissner (TUHH, Hamburg, Germany).</p>
 <hr class="docutils" />
 </section>
 <section id="extra-pair-package">
-<span id="pkg-extra-pair"></span><h2><span class="section-number">6.2.30. </span>EXTRA-PAIR package<a class="headerlink" href="#extra-pair-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-extra-pair"></span><h2><span class="section-number">6.2.31. </span>EXTRA-PAIR package<a class="headerlink" href="#extra-pair-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Additional pair styles that are less commonly used.</p>
 <p><strong>Supporting info:</strong></p>
@@ -953,12 +1006,12 @@ Robert Meissner (TUHH, Hamburg, Germany).</p>
 <hr class="docutils" />
 </section>
 <section id="fep-package">
-<span id="pkg-fep"></span><h2><span class="section-number">6.2.31. </span>FEP package<a class="headerlink" href="#fep-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-fep"></span><h2><span class="section-number">6.2.32. </span>FEP package<a class="headerlink" href="#fep-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
-<p>FEP stands for free energy perturbation.  This package provides
-methods for performing FEP simulations by using a <a class="reference internal" href="fix_adapt_fep.html"><span class="doc">fix adapt/fep</span></a> command with soft-core pair potentials,
-which have a “soft” in their style name.  There are auxiliary tools
-for using this package in tools/fep; see its README file.</p>
+<p>FEP stands for free energy perturbation.  This package provides methods
+for performing FEP simulations by using a <a class="reference internal" href="fix_adapt_fep.html"><span class="doc">fix adapt/fep</span></a> command with soft-core pair potentials, which have a
+“soft” in their style name.  There are auxiliary tools for using this
+package in tools/fep; see its README file.</p>
 <p><strong>Author:</strong> Agilio Padua (ENS de Lyon)</p>
 <p><strong>Supporting info:</strong></p>
 <ul class="simple">
@@ -974,7 +1027,7 @@ for using this package in tools/fep; see its README file.</p>
 <hr class="docutils" />
 </section>
 <section id="gpu-package">
-<span id="pkg-gpu"></span><h2><span class="section-number">6.2.32. </span>GPU package<a class="headerlink" href="#gpu-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-gpu"></span><h2><span class="section-number">6.2.33. </span>GPU package<a class="headerlink" href="#gpu-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Dozens of pair styles and a version of the PPPM long-range Coulombic
 solver optimized for GPUs.  All such styles have a “gpu” as a suffix
@@ -990,7 +1043,8 @@ also the <a class="reference internal" href="#pkg-kokkos"><span class="std std-r
 (Northwestern U) while at ORNL and later. AMD HIP support by Evgeny
 Kuznetsov, Vladimir Stegailov, and Vsevolod Nikolskiy (HSE University).</p>
 <p><strong>Install:</strong></p>
-<p>This package has <a class="reference internal" href="Build_extras.html#gpu"><span class="std std-ref">specific installation instructions</span></a> on the <a class="reference internal" href="Build_extras.html"><span class="doc">Build extras</span></a> page.</p>
+<p>This package has <a class="reference internal" href="Build_extras.html#gpu"><span class="std std-ref">specific installation instructions</span></a> on the
+<a class="reference internal" href="Build_extras.html"><span class="doc">Build extras</span></a> page.</p>
 <p><strong>Supporting info:</strong></p>
 <ul class="simple">
 <li><p>src/GPU: filenames -&gt; commands</p></li>
@@ -1008,7 +1062,7 @@ for styles followed by (g)</p></li>
 <hr class="docutils" />
 </section>
 <section id="granular-package">
-<span id="pkg-granular"></span><h2><span class="section-number">6.2.33. </span>GRANULAR package<a class="headerlink" href="#granular-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-granular"></span><h2><span class="section-number">6.2.34. </span>GRANULAR package<a class="headerlink" href="#granular-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Pair styles and fixes for finite-size granular particles, which
 interact with each other and boundaries via frictional and dissipative
@@ -1033,9 +1087,9 @@ potentials.</p>
 <hr class="docutils" />
 </section>
 <section id="h5md-package">
-<span id="pkg-h5md"></span><h2><span class="section-number">6.2.34. </span>H5MD package<a class="headerlink" href="#h5md-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-h5md"></span><h2><span class="section-number">6.2.35. </span>H5MD package<a class="headerlink" href="#h5md-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
-<p>H5MD stands for HDF5 for MD.  <a class="reference external" href="http://www.hdfgroup.org/HDF5">HDF5</a> is a portable, binary,
+<p>H5MD stands for HDF5 for MD.  <a class="reference external" href="https://www.hdfgroup.org/solutions/hdf5">HDF5</a> is a portable, binary,
 self-describing file format, used by many scientific simulations.
 H5MD is a format for molecular simulations, built on top of HDF5.
 This package implements a <a class="reference internal" href="dump_h5md.html"><span class="doc">dump h5md</span></a> command to output
@@ -1056,17 +1110,15 @@ H5MD format.</p>
 <hr class="docutils" />
 </section>
 <section id="intel-package">
-<span id="pkg-intel"></span><h2><span class="section-number">6.2.35. </span>INTEL package<a class="headerlink" href="#intel-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-intel"></span><h2><span class="section-number">6.2.36. </span>INTEL package<a class="headerlink" href="#intel-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
-<p>Dozens of pair, fix, bond, angle, dihedral, improper, and kspace
-styles which are optimized for Intel CPUs and KNLs (Knights Landing).
-All of them have an “intel” in their style name.  The
-<a class="reference internal" href="Speed_intel.html"><span class="doc">INTEL package</span></a> page gives details of what hardware and
-compilers are required on your system, and how to build and use this
-package.  Its styles can be invoked at run time via the “-sf intel” or
-“-suffix intel” <a class="reference internal" href="Run_options.html"><span class="doc">command-line switches</span></a>.  Also see
-the <a class="reference internal" href="#pkg-kokkos"><span class="std std-ref">KOKKOS</span></a>, <a class="reference internal" href="#pkg-opt"><span class="std std-ref">OPT</span></a>, and <a class="reference internal" href="#pkg-openmp"><span class="std std-ref">OPENMP</span></a> packages,
-which have styles optimized for CPUs and KNLs.</p>
+<p>Dozens of pair, fix, bond, angle, dihedral, improper, and kspace styles
+which are optimized for Intel CPUs and KNLs (Knights Landing).  All of
+them have an “intel” in their style name.  The <a class="reference internal" href="Speed_intel.html"><span class="doc">INTEL package</span></a> page gives details of what hardware and compilers are
+required on your system, and how to build and use this package.  Its
+styles can be invoked at run time via the “-sf intel” or “-suffix intel”
+<a class="reference internal" href="Run_options.html"><span class="doc">command-line switches</span></a>.  Also see the <a class="reference internal" href="#pkg-kokkos"><span class="std std-ref">KOKKOS</span></a>, <a class="reference internal" href="#pkg-opt"><span class="std std-ref">OPT</span></a>, and <a class="reference internal" href="#pkg-openmp"><span class="std std-ref">OPENMP</span></a>
+packages, which have styles optimized for CPUs and KNLs.</p>
 <p>You need to have an Intel compiler, version 14 or higher to take full
 advantage of this package. While compilation with GNU compilers is
 supported, performance will be sub-optimal.</p>
@@ -1095,7 +1147,7 @@ supported, performance will be sub-optimal.</p>
 <hr class="docutils" />
 </section>
 <section id="interlayer-package">
-<span id="pkg-interlayer"></span><h2><span class="section-number">6.2.36. </span>INTERLAYER package<a class="headerlink" href="#interlayer-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-interlayer"></span><h2><span class="section-number">6.2.37. </span>INTERLAYER package<a class="headerlink" href="#interlayer-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A collection of pair styles specifically to be used for modeling layered
 materials, most commonly graphene sheets (or equivalents).</p>
@@ -1108,7 +1160,7 @@ materials, most commonly graphene sheets (or equivalents).</p>
 <hr class="docutils" />
 </section>
 <section id="kim-package">
-<span id="pkg-kim"></span><h2><span class="section-number">6.2.37. </span>KIM package<a class="headerlink" href="#kim-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-kim"></span><h2><span class="section-number">6.2.38. </span>KIM package<a class="headerlink" href="#kim-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>This package contains a command with a set of sub-commands that serve as a
 wrapper on the
@@ -1160,18 +1212,18 @@ Ryan Elliott.</p>
 <hr class="docutils" />
 </section>
 <section id="kokkos-package">
-<span id="pkg-kokkos"></span><h2><span class="section-number">6.2.38. </span>KOKKOS package<a class="headerlink" href="#kokkos-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-kokkos"></span><h2><span class="section-number">6.2.39. </span>KOKKOS package<a class="headerlink" href="#kokkos-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Dozens of atom, pair, bond, angle, dihedral, improper, fix, compute
 styles adapted to compile using the Kokkos library which can convert
 them to OpenMP or CUDA code so that they run efficiently on multicore
 CPUs, KNLs, or GPUs.  All the styles have a “kk” as a suffix in their
-style name.  The <a class="reference internal" href="Speed_kokkos.html"><span class="doc">KOKKOS package</span></a> page gives
-details of what hardware and software is required on your system, and
-how to build and use this package.  Its styles can be invoked at run
-time via the “-sf kk” or “-suffix kk” <a class="reference internal" href="Run_options.html"><span class="doc">command-line switches</span></a>.  Also see the <a class="reference internal" href="#pkg-gpu"><span class="std std-ref">GPU</span></a>, <a class="reference internal" href="#pkg-opt"><span class="std std-ref">OPT</span></a>,
-<a class="reference internal" href="#pkg-intel"><span class="std std-ref">INTEL</span></a>, and <a class="reference internal" href="#pkg-openmp"><span class="std std-ref">OPENMP</span></a> packages, which
-have styles optimized for CPUs, KNLs, and GPUs.</p>
+style name.  The <a class="reference internal" href="Speed_kokkos.html"><span class="doc">KOKKOS package</span></a> page gives details
+of what hardware and software is required on your system, and how to
+build and use this package.  Its styles can be invoked at run time via
+the “-sf kk” or “-suffix kk” <a class="reference internal" href="Run_options.html"><span class="doc">command-line switches</span></a>.
+Also see the <a class="reference internal" href="#pkg-gpu"><span class="std std-ref">GPU</span></a>, <a class="reference internal" href="#pkg-opt"><span class="std std-ref">OPT</span></a>, <a class="reference internal" href="#pkg-intel"><span class="std std-ref">INTEL</span></a>, and <a class="reference internal" href="#pkg-openmp"><span class="std std-ref">OPENMP</span></a> packages, which have styles
+optimized for CPUs, KNLs, and GPUs.</p>
 <p>You must have a C++14 compatible compiler to use this package.
 KOKKOS makes extensive use of advanced C++ features, which can
 expose compiler bugs, especially when compiling for maximum
@@ -1205,7 +1257,7 @@ lib/kokkos.</p>
 <hr class="docutils" />
 </section>
 <section id="kspace-package">
-<span id="pkg-kspace"></span><h2><span class="section-number">6.2.39. </span>KSPACE package<a class="headerlink" href="#kspace-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-kspace"></span><h2><span class="section-number">6.2.40. </span>KSPACE package<a class="headerlink" href="#kspace-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A variety of long-range Coulombic solvers, as well as pair styles
 which compute the corresponding short-range pairwise Coulombic
@@ -1233,7 +1285,7 @@ different FFT options for your LAMPMS build.</p>
 <hr class="docutils" />
 </section>
 <section id="latboltz-package">
-<span id="pkg-latboltz"></span><h2><span class="section-number">6.2.40. </span>LATBOLTZ package<a class="headerlink" href="#latboltz-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-latboltz"></span><h2><span class="section-number">6.2.41. </span>LATBOLTZ package<a class="headerlink" href="#latboltz-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Fixes which implement a background Lattice-Boltzmann (LB) fluid, which
 can be used to model MD particles influenced by hydrodynamic forces.</p>
@@ -1252,33 +1304,39 @@ Ontario).</p>
 </ul>
 <hr class="docutils" />
 </section>
-<section id="latte-package">
-<span id="pkg-latte"></span><h2><span class="section-number">6.2.41. </span>LATTE package<a class="headerlink" href="#latte-package" title="Permalink to this headline">¶</a></h2>
+<section id="lepton-package">
+<span id="pkg-lepton"></span><h2><span class="section-number">6.2.42. </span>LEPTON package<a class="headerlink" href="#lepton-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
-<p>A fix command which wraps the LATTE DFTB code, so that molecular
-dynamics can be run with LAMMPS using density-functional tight-binding
-quantum forces calculated by LATTE.</p>
-<p>More information on LATTE can be found at this website:
-<a class="reference external" href="https://github.com/lanl/LATTE">https://github.com/lanl/LATTE</a>.  A brief technical
-description is given with the <a class="reference internal" href="fix_latte.html"><span class="doc">fix latte</span></a> command.</p>
-<p><strong>Authors:</strong> Christian Negre (LANL) and Steve Plimpton (Sandia).  LATTE
-itself is developed at Los Alamos National Laboratory by Marc
-Cawkwell, Anders Niklasson, and Christian Negre.</p>
+<p>Styles for pair, bond, and angle forces that evaluate the potential
+function from a string using the <a class="reference external" href="https://simtk.org/projects/lepton">Lepton mathematical expression parser</a>.  Lepton is a C++ library that is
+bundled with <a class="reference external" href="https://openmm.org/">OpenMM</a> and can be used for
+parsing, evaluating, differentiating, and analyzing mathematical
+expressions.  This is a more lightweight and efficient alternative for
+evaluating custom potential function to an embedded Python interpreter
+as used in the <a class="reference internal" href="#pkg-python"><span class="std std-ref">PYTHON package</span></a>.  On the other hand,
+since the potentials are evaluated form analytical expressions, they are
+more precise than what can be done with <a class="reference internal" href="Tools.html#tabulate"><span class="std std-ref">tabulated potentials</span></a>.</p>
+<p><strong>Authors:</strong> Axel Kohlmeyer (Temple U).  Lepton itself is developed
+by Peter Eastman at Stanford University.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 8Feb2023.</span></p>
+</div>
 <p><strong>Install:</strong></p>
-<p>This package has <a class="reference internal" href="Build_extras.html#latte"><span class="std std-ref">specific installation instructions</span></a> on the <a class="reference internal" href="Build_extras.html"><span class="doc">Build extras</span></a> page.</p>
+<p>This package has <a class="reference internal" href="Build_extras.html#lepton"><span class="std std-ref">specific installation instructions</span></a> on
+the <a class="reference internal" href="Build_extras.html"><span class="doc">Build extras</span></a> page.</p>
 <p><strong>Supporting info:</strong></p>
 <ul class="simple">
-<li><p>src/LATTE: filenames -&gt; commands</p></li>
-<li><p>src/LATTE/README</p></li>
-<li><p>lib/latte/README</p></li>
-<li><p><a class="reference internal" href="fix_latte.html"><span class="doc">fix latte</span></a></p></li>
-<li><p>examples/latte</p></li>
-<li><p><a class="reference external" href="https://github.com/lanl/LATTE/wiki/Using-LATTE-through-LAMMPS">LAMMPS-LATTE tutorial</a></p></li>
+<li><p>src/LEPTON: filenames -&gt; commands</p></li>
+<li><p>lib/lepton/README.md</p></li>
+<li><p><a class="reference internal" href="pair_lepton.html"><span class="doc">pair_style lepton</span></a></p></li>
+<li><p><a class="reference internal" href="bond_lepton.html"><span class="doc">bond_style lepton</span></a></p></li>
+<li><p><a class="reference internal" href="angle_lepton.html"><span class="doc">angle_style lepton</span></a></p></li>
+<li><p><a class="reference internal" href="dihedral_lepton.html"><span class="doc">dihedral_style lepton</span></a></p></li>
 </ul>
 <hr class="docutils" />
 </section>
 <section id="machdyn-package">
-<span id="pkg-machdyn"></span><h2><span class="section-number">6.2.42. </span>MACHDYN package<a class="headerlink" href="#machdyn-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-machdyn"></span><h2><span class="section-number">6.2.43. </span>MACHDYN package<a class="headerlink" href="#machdyn-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>An atom style, fixes, computes, and several pair styles which
 implements smoothed Mach dynamics (SMD) for solids, which is a model
@@ -1300,14 +1358,14 @@ Dynamics, Ernst Mach Institute, Germany).</p>
 <ul class="simple">
 <li><p>src/MACHDYN: filenames -&gt; commands</p></li>
 <li><p>src/MACHDYN/README</p></li>
-<li><p>doc/PDF/MACHDYN_LAMMPS_userguide.pdf</p></li>
+<li><p><a class="reference external" href="PDF/MACHDYN_LAMMPS_userguide.pdf">doc/PDF/MACHDYN_LAMMPS_userguide.pdf</a></p></li>
 <li><p>examples/PACKAGES/machdyn</p></li>
 <li><p><a class="reference external" href="https://www.lammps.org/movies.html#smd">https://www.lammps.org/movies.html#smd</a></p></li>
 </ul>
 <hr class="docutils" />
 </section>
 <section id="manifold-package">
-<span id="pkg-manifold"></span><h2><span class="section-number">6.2.43. </span>MANIFOLD package<a class="headerlink" href="#manifold-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-manifold"></span><h2><span class="section-number">6.2.44. </span>MANIFOLD package<a class="headerlink" href="#manifold-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Several fixes and a “manifold” class which enable simulations of
 particles constrained to a manifold (a 2D surface within the 3D
@@ -1332,7 +1390,7 @@ Waltham, MA, USA)</p>
 <hr class="docutils" />
 </section>
 <section id="manybody-package">
-<span id="pkg-manybody"></span><h2><span class="section-number">6.2.44. </span>MANYBODY package<a class="headerlink" href="#manybody-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-manybody"></span><h2><span class="section-number">6.2.45. </span>MANYBODY package<a class="headerlink" href="#manybody-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A variety of many-body and bond-order potentials.  These include
 (AI)REBO, BOP, EAM, EIM, Stillinger-Weber, and Tersoff potentials.</p>
@@ -1351,12 +1409,13 @@ Waltham, MA, USA)</p>
 <hr class="docutils" />
 </section>
 <section id="mc-package">
-<span id="pkg-mc"></span><h2><span class="section-number">6.2.45. </span>MC package<a class="headerlink" href="#mc-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-mc"></span><h2><span class="section-number">6.2.46. </span>MC package<a class="headerlink" href="#mc-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Several fixes and a pair style that have Monte Carlo (MC) or MC-like
 attributes.  These include fixes for creating, breaking, and swapping
-bonds, for performing atomic swaps, and performing grand-canonical MC
-(GCMC) or similar processes in conjunction with dynamics.</p>
+bonds, for performing atomic swaps, and performing grand canonical
+MC (GCMC), semi-grand canonical MC (SGCMC), or similar processes in
+conjunction with molecular dynamics (MD).</p>
 <p><strong>Supporting info:</strong></p>
 <ul class="simple">
 <li><p>src/MC: filenames -&gt; commands</p></li>
@@ -1367,6 +1426,7 @@ bonds, for performing atomic swaps, and performing grand-canonical MC
 <li><p><a class="reference internal" href="fix_bond_swap.html"><span class="doc">fix bond/swap</span></a></p></li>
 <li><p><a class="reference internal" href="fix_charge_regulation.html"><span class="doc">fix charge/regulation</span></a></p></li>
 <li><p><a class="reference internal" href="fix_gcmc.html"><span class="doc">fix gcmc</span></a></p></li>
+<li><p><a class="reference internal" href="fix_sgcmc.html"><span class="doc">fix sgcmc</span></a></p></li>
 <li><p><a class="reference internal" href="fix_tfmc.html"><span class="doc">fix tfmc</span></a></p></li>
 <li><p><a class="reference internal" href="fix_widom.html"><span class="doc">fix widom</span></a></p></li>
 <li><p><a class="reference internal" href="pair_dsmc.html"><span class="doc">pair_style dsmc</span></a></p></li>
@@ -1375,13 +1435,16 @@ bonds, for performing atomic swaps, and performing grand-canonical MC
 <hr class="docutils" />
 </section>
 <section id="mdi-package">
-<span id="pkg-mdi"></span><h2><span class="section-number">6.2.46. </span>MDI package<a class="headerlink" href="#mdi-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-mdi"></span><h2><span class="section-number">6.2.47. </span>MDI package<a class="headerlink" href="#mdi-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A LAMMPS command and fixes to allow client-server coupling of LAMMPS
 to other atomic or molecular simulation codes or materials modeling
 workflows via the <a class="reference external" href="https://molssi-mdi.github.io/MDI_Library/html/index.html">MolSSI Driver Interface
 (MDI) library</a>.</p>
 <p><strong>Author:</strong> Taylor Barnes - MolSSI, taylor.a.barnes at gmail.com</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 14May2021.</span></p>
+</div>
 <p><strong>Install:</strong></p>
 <p>This package has <a class="reference internal" href="Build_extras.html#mdi"><span class="std std-ref">specific installation instructions</span></a> on
 the <a class="reference internal" href="Build_extras.html"><span class="doc">Build extras</span></a> page.</p>
@@ -1391,13 +1454,13 @@ the <a class="reference internal" href="Build_extras.html"><span class="doc">Bui
 <li><p>lib/mdi/README</p></li>
 <li><p><a class="reference internal" href="Howto_mdi.html"><span class="doc">Howto MDI</span></a></p></li>
 <li><p><a class="reference internal" href="mdi.html"><span class="doc">mdi</span></a></p></li>
-<li><p><a class="reference internal" href="fix_mdi_aimd.html"><span class="doc">fix mdi/aimd</span></a></p></li>
+<li><p><a class="reference internal" href="fix_mdi_qm.html"><span class="doc">fix mdi/qm</span></a></p></li>
 <li><p>examples/PACKAGES/mdi</p></li>
 </ul>
 <hr class="docutils" />
 </section>
 <section id="meam-package">
-<span id="pkg-meam"></span><h2><span class="section-number">6.2.47. </span>MEAM package<a class="headerlink" href="#meam-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-meam"></span><h2><span class="section-number">6.2.48. </span>MEAM package<a class="headerlink" href="#meam-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A pair style for the modified embedded atom (MEAM) potential
 translated from the Fortran version in the (obsolete) MEAM package
@@ -1416,43 +1479,54 @@ Sandia.</p>
 <hr class="docutils" />
 </section>
 <section id="mesont-package">
-<span id="pkg-mesont"></span><h2><span class="section-number">6.2.48. </span>MESONT package<a class="headerlink" href="#mesont-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-mesont"></span><h2><span class="section-number">6.2.49. </span>MESONT package<a class="headerlink" href="#mesont-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
-<p>MESONT is a LAMMPS package for simulation of nanomechanics of
-nanotubes (NTs). The model is based on a coarse-grained representation
-of NTs as “flexible cylinders” consisting of a variable number of
+<p>MESONT is a LAMMPS package for simulation of nanomechanics of nanotubes
+(NTs).  The model is based on a coarse-grained representation of NTs as
+“flexible cylinders” consisting of a variable number of
 segments. Internal interactions within a NT and the van der Waals
 interaction between the tubes are described by a mesoscopic force field
 designed and parameterized based on the results of atomic-level
 molecular dynamics simulations. The description of the force field is
-provided in the papers listed below. This package contains two
-independent implementations of this model: <a class="reference internal" href="pair_mesocnt.html"><span class="doc">pair_style mesocnt</span></a> is a (minimal) C++ implementation, and <a class="reference internal" href="pair_mesont_tpm.html"><span class="doc">pair_style
-mesont/tpm</span></a> is a more general and feature rich
-implementation based on a Fortran library in the <code class="docutils literal notranslate"><span class="pre">lib/mesont</span></code> folder.</p>
+provided in the papers listed in <code class="docutils literal notranslate"><span class="pre">src/MESONT/README</span></code>.</p>
+<p>This package used to have two independent implementations of this model:
+the original implementation using a Fortran library written by the
+developers of the model and a second implementation written in C++ by
+Philipp Kloza (U Cambridge).  Since the C++ implementation offers the
+same features as the original implementation with the addition of
+friction, is typically faster, and easier to compile/install, the
+Fortran library based implementation has since been obsoleted and
+removed from the distribution. You have to download and compile
+an older version of LAMMPS if you want to use those.</p>
 <p><strong>Download of potential files:</strong></p>
-<p>The potential files for these pair styles are <em>very</em> large and thus
-are not included in the regular downloaded packages of LAMMPS or the
-git repositories.  Instead, they will be automatically downloaded
-from a web server when the package is installed for the first time.</p>
-<p><strong>Authors of the *mesont* styles:</strong></p>
-<p>Maxim V. Shugaev (University of Virginia), Alexey N. Volkov (University of Alabama), Leonid V. Zhigilei (University of Virginia)</p>
-<p><strong>Author of the *mesocnt* pair style:</strong>
+<p>The potential files for these pair styles are <em>very</em> large and thus are
+not included in the regular downloaded packages of LAMMPS or the git
+repositories.  Instead, they will be automatically downloaded from a web
+server when the package is installed for the first time.</p>
+<p><strong>Authors of the obsoleted *mesont* styles:</strong></p>
+<p>Maxim V. Shugaev (University of Virginia), Alexey N. Volkov (University
+of Alabama), Leonid V. Zhigilei (University of Virginia)</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 8Feb2023.</span></p>
+</div>
+<p><strong>Author of the C++ styles:</strong>
 Philipp Kloza (U Cambridge)</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 15Jun2020.</span></p>
+</div>
 <p><strong>Supporting info:</strong></p>
 <ul class="simple">
 <li><p>src/MESONT: filenames -&gt; commands</p></li>
 <li><p>src/MESONT/README</p></li>
-<li><p><a class="reference internal" href="atom_style.html"><span class="doc">atom_style mesont</span></a></p></li>
-<li><p><a class="reference internal" href="pair_mesont_tpm.html"><span class="doc">pair_style mesont/tpm</span></a></p></li>
-<li><p><a class="reference internal" href="compute_mesont.html"><span class="doc">compute mesont</span></a></p></li>
+<li><p><a class="reference internal" href="bond_mesocnt.html"><span class="doc">bond_style mesocnt</span></a></p></li>
+<li><p><a class="reference internal" href="angle_mesocnt.html"><span class="doc">angle_style mesocnt</span></a></p></li>
 <li><p><a class="reference internal" href="pair_mesocnt.html"><span class="doc">pair_style mesocnt</span></a></p></li>
 <li><p>examples/PACKAGES/mesont</p></li>
-<li><p>tools/mesont</p></li>
 </ul>
 <hr class="docutils" />
 </section>
 <section id="mgpt-package">
-<span id="pkg-mgpt"></span><h2><span class="section-number">6.2.49. </span>MGPT package<a class="headerlink" href="#mgpt-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-mgpt"></span><h2><span class="section-number">6.2.50. </span>MGPT package<a class="headerlink" href="#mgpt-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A pair style which provides a fast implementation of the quantum-based
 MGPT multi-ion potentials.  The MGPT or model GPT method derives from
@@ -1473,7 +1547,7 @@ matrix-MGPT algorithm due to Tomas Oppelstrup at LLNL.</p>
 <hr class="docutils" />
 </section>
 <section id="misc-package">
-<span id="pkg-misc"></span><h2><span class="section-number">6.2.50. </span>MISC package<a class="headerlink" href="#misc-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-misc"></span><h2><span class="section-number">6.2.51. </span>MISC package<a class="headerlink" href="#misc-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A variety of compute, fix, pair, bond styles with specialized
 capabilities that don’t align with other packages.  Do a directory
@@ -1499,7 +1573,7 @@ listing, “ls src/MISC”, to see the list of commands.</p>
 <hr class="docutils" />
 </section>
 <section id="ml-hdnnp-package">
-<span id="pkg-ml-hdnnp"></span><h2><span class="section-number">6.2.51. </span>ML-HDNNP package<a class="headerlink" href="#ml-hdnnp-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-ml-hdnnp"></span><h2><span class="section-number">6.2.52. </span>ML-HDNNP package<a class="headerlink" href="#ml-hdnnp-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A <a class="reference internal" href="pair_hdnnp.html"><span class="doc">pair_style hdnnp</span></a> command which allows to use
 high-dimensional neural network potentials (HDNNPs), a form of machine learning
@@ -1508,6 +1582,9 @@ molecular dynamics simulation.</p>
 <p>To use this package you must have the <a class="reference external" href="https://github.com/CompPhysVienna/n2p2">n2p2</a> library installed and
 compiled on your system.</p>
 <p><strong>Author:</strong> Andreas Singraber</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 27May2021.</span></p>
+</div>
 <p><strong>Install:</strong></p>
 <p>This package has <a class="reference internal" href="Build_extras.html#ml-hdnnp"><span class="std std-ref">specific installation instructions</span></a> on the
 <a class="reference internal" href="Build_extras.html"><span class="doc">Build extras</span></a> page.</p>
@@ -1522,7 +1599,7 @@ compiled on your system.</p>
 <hr class="docutils" />
 </section>
 <section id="ml-iap-package">
-<span id="pkg-ml-iap"></span><h2><span class="section-number">6.2.52. </span>ML-IAP package<a class="headerlink" href="#ml-iap-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-ml-iap"></span><h2><span class="section-number">6.2.53. </span>ML-IAP package<a class="headerlink" href="#ml-iap-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A general interface for machine-learning interatomic potentials, including PyTorch.</p>
 <p><strong>Install:</strong></p>
@@ -1532,6 +1609,9 @@ to be installed.  To make the <em>mliappy</em> model available, also the
 of Python must be 3.6 or later, and the <a class="reference external" href="https://cython.org/">cython</a> software
 must be installed.</p>
 <p><strong>Author:</strong> Aidan Thompson (Sandia), Nicholas Lubbers (LANL).</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 30Jun2020.</span></p>
+</div>
 <p><strong>Supporting info:</strong></p>
 <ul class="simple">
 <li><p>src/ML-IAP: filenames -&gt; commands</p></li>
@@ -1548,7 +1628,7 @@ therefore also needs to be installed to run those examples.</p>
 <hr class="docutils" />
 </section>
 <section id="ml-pace-package">
-<span id="pkg-ml-pace"></span><h2><span class="section-number">6.2.53. </span>ML-PACE package<a class="headerlink" href="#ml-pace-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-ml-pace"></span><h2><span class="section-number">6.2.54. </span>ML-PACE package<a class="headerlink" href="#ml-pace-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A pair style for the Atomic Cluster Expansion potential (ACE).
 ACE is a methodology for deriving a highly accurate classical potential
@@ -1566,6 +1646,9 @@ Aidan Thompson^3, Gabor Csanyi^2, Christoph Ortner^4, Ralf Drautz^1.</p>
 <p>^3: Sandia National Laboratories, Albuquerque, New Mexico, USA</p>
 <p>^4: University of British Columbia, Vancouver, BC, Canada</p>
 </div></blockquote>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 14May2021.</span></p>
+</div>
 <p><strong>Install:</strong></p>
 <p>This package has <a class="reference internal" href="Build_extras.html#ml-pace"><span class="std std-ref">specific installation instructions</span></a> on the
 <a class="reference internal" href="Build_extras.html"><span class="doc">Build extras</span></a> page.</p>
@@ -1577,8 +1660,33 @@ Aidan Thompson^3, Gabor Csanyi^2, Christoph Ortner^4, Ralf Drautz^1.</p>
 </ul>
 <hr class="docutils" />
 </section>
+<section id="ml-pod-package">
+<span id="pkg-ml-pod"></span><h2><span class="section-number">6.2.55. </span>ML-POD package<a class="headerlink" href="#ml-pod-package" title="Permalink to this heading"></a></h2>
+<p><strong>Contents:</strong></p>
+<p>A pair style and fitpod style for Proper Orthogonal Descriptors
+(POD). POD is a methodology for deriving descriptors based on the proper
+orthogonal decomposition. The ML-POD package provides an efficient
+implementation for running simulations with POD potentials, along with
+fitting the potentials natively in LAMMPS.</p>
+<p><strong>Authors:</strong></p>
+<p>Ngoc Cuong Nguyen (MIT), Andrew Rohskopf (Sandia)</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 22Dec2022.</span></p>
+</div>
+<p><strong>Install:</strong></p>
+<p>This package has <a class="reference internal" href="Build_extras.html#ml-pod"><span class="std std-ref">specific installation instructions</span></a> on the
+<a class="reference internal" href="Build_extras.html"><span class="doc">Build extras</span></a> page.</p>
+<p><strong>Supporting info:</strong></p>
+<ul class="simple">
+<li><p>src/ML-POD: filenames -&gt; commands</p></li>
+<li><p><a class="reference internal" href="pair_pod.html"><span class="doc">pair_style pod</span></a></p></li>
+<li><p><a class="reference internal" href="fitpod_command.html"><span class="doc">command_style fitpod</span></a></p></li>
+<li><p>examples/PACKAGES/pod</p></li>
+</ul>
+<hr class="docutils" />
+</section>
 <section id="ml-quip-package">
-<span id="pkg-ml-quip"></span><h2><span class="section-number">6.2.54. </span>ML-QUIP package<a class="headerlink" href="#ml-quip-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-ml-quip"></span><h2><span class="section-number">6.2.56. </span>ML-QUIP package<a class="headerlink" href="#ml-quip-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A <a class="reference internal" href="pair_quip.html"><span class="doc">pair_style quip</span></a> command which wraps the <a class="reference external" href="https://github.com/libAtoms/QUIP">QUIP
 libAtoms library</a>, which includes a variety of interatomic
@@ -1600,7 +1708,7 @@ on your system.</p>
 <hr class="docutils" />
 </section>
 <section id="ml-rann-package">
-<span id="pkg-ml-rann"></span><h2><span class="section-number">6.2.55. </span>ML-RANN package<a class="headerlink" href="#ml-rann-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-ml-rann"></span><h2><span class="section-number">6.2.57. </span>ML-RANN package<a class="headerlink" href="#ml-rann-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A pair style for using rapid atomistic neural network (RANN) potentials.
 These neural network potentials work by first generating a series of symmetry
@@ -1609,6 +1717,9 @@ of a neural network.</p>
 <p><strong>Authors:</strong></p>
 <p>This package was written by Christopher Barrett
 with contributions by Doyl Dickel, Mississippi State University.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 27May2021.</span></p>
+</div>
 <p><strong>Supporting info:</strong></p>
 <ul class="simple">
 <li><p>src/ML-RANN: filenames -&gt; commands</p></li>
@@ -1618,7 +1729,7 @@ with contributions by Doyl Dickel, Mississippi State University.</p>
 <hr class="docutils" />
 </section>
 <section id="ml-snap-package">
-<span id="pkg-ml-snap"></span><h2><span class="section-number">6.2.56. </span>ML-SNAP package<a class="headerlink" href="#ml-snap-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-ml-snap"></span><h2><span class="section-number">6.2.58. </span>ML-SNAP package<a class="headerlink" href="#ml-snap-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A pair style for the spectral neighbor analysis potential (SNAP).
 SNAP is methodology for deriving a highly accurate classical potential
@@ -1630,6 +1741,8 @@ computes which analyze attributes of the potential.</p>
 <li><p>src/ML-SNAP: filenames -&gt; commands</p></li>
 <li><p><a class="reference internal" href="pair_snap.html"><span class="doc">pair_style snap</span></a></p></li>
 <li><p><a class="reference internal" href="compute_sna_atom.html"><span class="doc">compute sna/atom</span></a></p></li>
+<li><p><a class="reference internal" href="compute_sna_atom.html"><span class="doc">compute sna/grid</span></a></p></li>
+<li><p><a class="reference internal" href="compute_sna_atom.html"><span class="doc">compute sna/grid/local</span></a></p></li>
 <li><p><a class="reference internal" href="compute_sna_atom.html"><span class="doc">compute snad/atom</span></a></p></li>
 <li><p><a class="reference internal" href="compute_sna_atom.html"><span class="doc">compute snav/atom</span></a></p></li>
 <li><p>examples/snap</p></li>
@@ -1637,7 +1750,7 @@ computes which analyze attributes of the potential.</p>
 <hr class="docutils" />
 </section>
 <section id="mofff-package">
-<span id="pkg-mofff"></span><h2><span class="section-number">6.2.57. </span>MOFFF package<a class="headerlink" href="#mofff-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-mofff"></span><h2><span class="section-number">6.2.59. </span>MOFFF package<a class="headerlink" href="#mofff-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Pair, angle and improper styles needed to employ the MOF-FF
 force field by Schmid and coworkers with LAMMPS.
@@ -1662,7 +1775,7 @@ Rochus Schmid (Ruhr-University Bochum).</p>
 <hr class="docutils" />
 </section>
 <section id="molecule-package">
-<span id="pkg-molecule"></span><h2><span class="section-number">6.2.58. </span>MOLECULE package<a class="headerlink" href="#molecule-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-molecule"></span><h2><span class="section-number">6.2.60. </span>MOLECULE package<a class="headerlink" href="#molecule-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A large number of atom, pair, bond, angle, dihedral, improper styles
 that are used to model molecular systems with fixed covalent bonds.
@@ -1689,7 +1802,7 @@ force fields, and a TIP4P water model.</p>
 <hr class="docutils" />
 </section>
 <section id="molfile-package">
-<span id="pkg-molfile"></span><h2><span class="section-number">6.2.59. </span>MOLFILE package<a class="headerlink" href="#molfile-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-molfile"></span><h2><span class="section-number">6.2.61. </span>MOLFILE package<a class="headerlink" href="#molfile-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A <a class="reference internal" href="dump_molfile.html"><span class="doc">dump molfile</span></a> command which uses molfile plugins
 that are bundled with the <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/">VMD</a>
@@ -1707,7 +1820,7 @@ support for new file formats can be added to LAMMPS (or VMD or other
 programs that use them) without having to re-compile the application
 itself.  More information about the VMD molfile plugins can be found
 at
-<a class="reference external" href="http://www.ks.uiuc.edu/Research/vmd/plugins/molfile">http://www.ks.uiuc.edu/Research/vmd/plugins/molfile</a>.</p>
+<a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/plugins/molfile">https://www.ks.uiuc.edu/Research/vmd/plugins/molfile</a>.</p>
 <p><strong>Author:</strong> Axel Kohlmeyer (Temple U).</p>
 <p><strong>Install:</strong></p>
 <p>This package has <a class="reference internal" href="Build_extras.html#molfile"><span class="std std-ref">specific installation instructions</span></a> on the <a class="reference internal" href="Build_extras.html"><span class="doc">Build extras</span></a> page.</p>
@@ -1721,7 +1834,7 @@ at
 <hr class="docutils" />
 </section>
 <section id="mpiio-package">
-<span id="pkg-mpiio"></span><h2><span class="section-number">6.2.60. </span>MPIIO package<a class="headerlink" href="#mpiio-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-mpiio"></span><h2><span class="section-number">6.2.62. </span>MPIIO package<a class="headerlink" href="#mpiio-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Support for parallel output/input of dump and restart files via the
 MPIIO library.  It adds <a class="reference internal" href="dump.html"><span class="doc">dump styles</span></a> with a “mpiio” in
@@ -1745,7 +1858,7 @@ unreliable. Use with caution.</p>
 <hr class="docutils" />
 </section>
 <section id="mscg-package">
-<span id="pkg-mscg"></span><h2><span class="section-number">6.2.61. </span>MSCG package<a class="headerlink" href="#mscg-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-mscg"></span><h2><span class="section-number">6.2.63. </span>MSCG package<a class="headerlink" href="#mscg-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A <a class="reference internal" href="fix_mscg.html"><span class="doc">fix mscg</span></a> command which can parameterize a
 Multi-Scale Coarse-Graining (MSCG) model using the open-source <a class="reference external" href="https://github.com/uchicago-voth/MSCG-release">MS-CG library</a>.</p>
@@ -1766,18 +1879,18 @@ University of Chicago.</p>
 <hr class="docutils" />
 </section>
 <section id="netcdf-package">
-<span id="pkg-netcdf"></span><h2><span class="section-number">6.2.62. </span>NETCDF package<a class="headerlink" href="#netcdf-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-netcdf"></span><h2><span class="section-number">6.2.64. </span>NETCDF package<a class="headerlink" href="#netcdf-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Dump styles for writing NetCDF formatted dump files.  NetCDF is a
 portable, binary, self-describing file format developed on top of
 HDF5. The file contents follow the AMBER NetCDF trajectory conventions
-(<a class="reference external" href="http://ambermd.org/netcdf/nctraj.xhtml">http://ambermd.org/netcdf/nctraj.xhtml</a>), but include extensions.</p>
+(<a class="reference external" href="https://ambermd.org/netcdf/nctraj.xhtml">https://ambermd.org/netcdf/nctraj.xhtml</a>), but include extensions.</p>
 <p>To use this package you must have the NetCDF library available on your
 system.</p>
 <p>Note that NetCDF files can be directly visualized with the following
 tools:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="http://www.ovito.org">Ovito</a> (Ovito supports the AMBER convention and the extensions mentioned above)</p></li>
+<li><p><a class="reference external" href="https://www.ovito.org">Ovito</a> (Ovito supports the AMBER convention and the extensions mentioned above)</p></li>
 <li><p><a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/">VMD</a></p></li>
 </ul>
 <p><strong>Author:</strong> Lars Pastewka (Karlsruhe Institute of Technology).</p>
@@ -1793,7 +1906,7 @@ tools:</p>
 <hr class="docutils" />
 </section>
 <section id="openmp-package">
-<span id="pkg-openmp"></span><h2><span class="section-number">6.2.63. </span>OPENMP package<a class="headerlink" href="#openmp-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-openmp"></span><h2><span class="section-number">6.2.65. </span>OPENMP package<a class="headerlink" href="#openmp-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Hundreds of pair, fix, compute, bond, angle, dihedral, improper, and
 kspace styles which are altered to enable threading on many-core CPUs
@@ -1818,7 +1931,7 @@ be added to the CCFLAGS and LINKFLAGS lines of your Makefile.machine.
 See src/MAKE/OPTIONS/Makefile.omp for an example.</p>
 </div>
 <p>Once you have an appropriate Makefile.machine, you can
-install/un-install the package and build LAMMPS in the usual manner:</p>
+install/uninstall the package and build LAMMPS in the usual manner:</p>
 <p><strong>Install:</strong></p>
 <p>This package has <a class="reference internal" href="Build_extras.html#openmp"><span class="std std-ref">specific installation instructions</span></a> on
 the <a class="reference internal" href="Build_extras.html"><span class="doc">Build extras</span></a> page.</p>
@@ -1839,7 +1952,7 @@ the <a class="reference internal" href="Build_extras.html"><span class="doc">Bui
 <hr class="docutils" />
 </section>
 <section id="opt-package">
-<span id="pkg-opt"></span><h2><span class="section-number">6.2.64. </span>OPT package<a class="headerlink" href="#opt-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-opt"></span><h2><span class="section-number">6.2.66. </span>OPT package<a class="headerlink" href="#opt-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A handful of pair styles which are optimized for improved CPU
 performance on single or multiple cores.  These include EAM, LJ,
@@ -1864,7 +1977,7 @@ and Vincent Natoli (Stone Ridge Technology).</p>
 </ul>
 </section>
 <section id="orient-package">
-<span id="pkg-orient"></span><h2><span class="section-number">6.2.65. </span>ORIENT package<a class="headerlink" href="#orient-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-orient"></span><h2><span class="section-number">6.2.67. </span>ORIENT package<a class="headerlink" href="#orient-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A few fixes that apply orientation dependent forces for studying
 grain boundary migration.</p>
@@ -1878,7 +1991,7 @@ grain boundary migration.</p>
 <hr class="docutils" />
 </section>
 <section id="peri-package">
-<span id="pkg-peri"></span><h2><span class="section-number">6.2.66. </span>PERI package<a class="headerlink" href="#peri-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-peri"></span><h2><span class="section-number">6.2.68. </span>PERI package<a class="headerlink" href="#peri-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>An atom style, several pair styles which implement different
 Peridynamics materials models, and several computes which calculate
@@ -1890,6 +2003,7 @@ Foster (UTSA).</p>
 <p><strong>Supporting info:</strong></p>
 <ul class="simple">
 <li><p>src/PERI: filenames -&gt; commands</p></li>
+<li><p><a class="reference internal" href="Howto_peri.html"><span class="doc">Peridynamics Howto</span></a></p></li>
 <li><p><a class="reference external" href="PDF/PDLammps_overview.pdf">doc/PDF/PDLammps_overview.pdf</a></p></li>
 <li><p><a class="reference external" href="PDF/PDLammps_EPS.pdf">doc/PDF/PDLammps_EPS.pdf</a></p></li>
 <li><p><a class="reference external" href="PDF/PDLammps_VES.pdf">doc/PDF/PDLammps_VES.pdf</a></p></li>
@@ -1903,7 +2017,7 @@ Foster (UTSA).</p>
 <hr class="docutils" />
 </section>
 <section id="phonon-package">
-<span id="pkg-phonon"></span><h2><span class="section-number">6.2.67. </span>PHONON package<a class="headerlink" href="#phonon-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-phonon"></span><h2><span class="section-number">6.2.69. </span>PHONON package<a class="headerlink" href="#phonon-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A <a class="reference internal" href="fix_phonon.html"><span class="doc">fix phonon</span></a> command that calculates dynamical
 matrices, which can then be used to compute phonon dispersion
@@ -1912,7 +2026,7 @@ And a <a class="reference internal" href="dynamical_matrix.html"><span class="do
 <a class="reference internal" href="third_order.html"><span class="doc">third_order</span></a> command to compute the dynamical matrix
 and third order tensor from finite differences.</p>
 <p><strong>Install:</strong></p>
-<p>The PHONON package requires that also the <a class="reference external" href="PKG-KSPACE">KSPACE</a>
+<p>The PHONON package requires that also the <a class="reference internal" href="#pkg-kspace"><span class="std std-ref">KSPACE</span></a>
 package is installed.</p>
 <p><strong>Authors:</strong> Ling-Ti Kong (Shanghai Jiao Tong University) for “fix phonon”
 and Charlie Sievers (UC Davis) for “dynamical_matrix” and “third_order”</p>
@@ -1928,7 +2042,7 @@ and Charlie Sievers (UC Davis) for “dynamical_matrix” and “third_order”<
 <hr class="docutils" />
 </section>
 <section id="plugin-package">
-<span id="pkg-plugin"></span><h2><span class="section-number">6.2.68. </span>PLUGIN package<a class="headerlink" href="#plugin-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-plugin"></span><h2><span class="section-number">6.2.70. </span>PLUGIN package<a class="headerlink" href="#plugin-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A <a class="reference internal" href="plugin.html"><span class="doc">plugin</span></a> command that can load and unload several
 kind of styles in LAMMPS from shared object files at runtime without
@@ -1938,6 +2052,9 @@ will search the directory (or directories) listed in this path for files
 with names that end in <code class="docutils literal notranslate"><span class="pre">plugin.so</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">helloplugin.so</span></code>) and will
 try to load the contained plugins automatically at start-up.</p>
 <p><strong>Authors:</strong> Axel Kohlmeyer (Temple U)</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 8Apr2021.</span></p>
+</div>
 <p><strong>Supporting info:</strong></p>
 <ul class="simple">
 <li><p>src/PLUGIN: filenames -&gt; commands</p></li>
@@ -1948,7 +2065,7 @@ try to load the contained plugins automatically at start-up.</p>
 <hr class="docutils" />
 </section>
 <section id="plumed-package">
-<span id="pkg-plumed"></span><h2><span class="section-number">6.2.69. </span>PLUMED package<a class="headerlink" href="#plumed-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-plumed"></span><h2><span class="section-number">6.2.71. </span>PLUMED package<a class="headerlink" href="#plumed-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>The fix plumed command allows you to use the PLUMED free energy plugin
 for molecular dynamics to analyze and bias your LAMMPS trajectory on
@@ -1969,7 +2086,7 @@ and Gareth Tribello.</p>
 <hr class="docutils" />
 </section>
 <section id="poems-package">
-<span id="pkg-poems"></span><h2><span class="section-number">6.2.70. </span>POEMS package<a class="headerlink" href="#poems-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-poems"></span><h2><span class="section-number">6.2.72. </span>POEMS package<a class="headerlink" href="#poems-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A fix that wraps the Parallelizable Open source Efficient Multibody
 Software (POEMS) library, which is able to simulate the dynamics of
@@ -1990,7 +2107,7 @@ connections at hinge points.</p>
 <hr class="docutils" />
 </section>
 <section id="ptm-package">
-<span id="pkg-ptm"></span><h2><span class="section-number">6.2.71. </span>PTM package<a class="headerlink" href="#ptm-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-ptm"></span><h2><span class="section-number">6.2.73. </span>PTM package<a class="headerlink" href="#ptm-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A <a class="reference internal" href="compute_ptm_atom.html"><span class="doc">compute ptm/atom</span></a> command that calculates
 local structure characterization using the Polyhedral Template
@@ -2006,7 +2123,7 @@ Matching methodology.</p>
 <hr class="docutils" />
 </section>
 <section id="python-package">
-<span id="pkg-python"></span><h2><span class="section-number">6.2.72. </span>PYTHON package<a class="headerlink" href="#python-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-python"></span><h2><span class="section-number">6.2.74. </span>PYTHON package<a class="headerlink" href="#python-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A <a class="reference internal" href="python.html"><span class="doc">python</span></a> command which allow you to execute Python code
 from a LAMMPS input script.  The code can be in a separate file or
@@ -2031,7 +2148,7 @@ to be either Python version 2.7 or Python 3.5 and later.</p>
 <hr class="docutils" />
 </section>
 <section id="qeq-package">
-<span id="pkg-qeq"></span><h2><span class="section-number">6.2.73. </span>QEQ package<a class="headerlink" href="#qeq-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-qeq"></span><h2><span class="section-number">6.2.75. </span>QEQ package<a class="headerlink" href="#qeq-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Several fixes for performing charge equilibration (QEq) via different
 algorithms.  These can be used with pair styles that perform QEq as
@@ -2046,11 +2163,11 @@ part of their formulation.</p>
 <hr class="docutils" />
 </section>
 <section id="qmmm-package">
-<span id="pkg-qmmm"></span><h2><span class="section-number">6.2.74. </span>QMMM package<a class="headerlink" href="#qmmm-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-qmmm"></span><h2><span class="section-number">6.2.76. </span>QMMM package<a class="headerlink" href="#qmmm-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A <a class="reference internal" href="fix_qmmm.html"><span class="doc">fix qmmm</span></a> command which allows LAMMPS to be used as
 the MM code in a QM/MM simulation.  This is currently only available
-in combination with the <a class="reference external" href="http://www.quantum-espresso.org">Quantum ESPRESSO</a> package.</p>
+in combination with the <a class="reference external" href="https://www.quantum-espresso.org">Quantum ESPRESSO</a> package.</p>
 <p>To use this package you must have Quantum ESPRESSO (QE) available on
 your system and include its coupling library in the compilation and
 then compile LAMMPS as a library.  For QM/MM calculations you then
@@ -2079,7 +2196,7 @@ on the <a class="reference internal" href="Build_extras.html"><span class="doc">
 <hr class="docutils" />
 </section>
 <section id="qtb-package">
-<span id="pkg-qtb"></span><h2><span class="section-number">6.2.75. </span>QTB package<a class="headerlink" href="#qtb-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-qtb"></span><h2><span class="section-number">6.2.77. </span>QTB package<a class="headerlink" href="#qtb-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Two fixes which provide a self-consistent quantum treatment of
 vibrational modes in a classical molecular dynamics simulation.  By
@@ -2101,18 +2218,19 @@ simulation.</p>
 <hr class="docutils" />
 </section>
 <section id="reaction-package">
-<span id="pkg-reaction"></span><h2><span class="section-number">6.2.76. </span>REACTION package<a class="headerlink" href="#reaction-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-reaction"></span><h2><span class="section-number">6.2.78. </span>REACTION package<a class="headerlink" href="#reaction-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
-<p>This package allows for complex bond topology changes (reactions)
-during a running MD simulation, when using classical force fields.
-Topology changes are defined in pre- and post-reaction molecule
-templates and can include creation and deletion of bonds, angles,
-dihedrals, impropers, atom types, bond types, angle types, dihedral
-types, improper types, and/or atomic charges. Other options currently
-available include reaction constraints (e.g. angle and Arrhenius
-constraints), deletion of reaction byproducts or other small
-molecules, and chiral-sensitive reactions.</p>
-<p><strong>Author:</strong> Jacob R. Gissinger (CU Boulder) while at NASA Langley Research Center.</p>
+<p>This package implements the REACTER protocol, which allows for complex
+bond topology changes (reactions) during a running MD simulation when
+using classical force fields. Topology changes are defined in pre- and
+post-reaction molecule templates and can include creation and deletion
+of bonds, angles, dihedrals, impropers, atom types, bond types, angle
+types, dihedral types, improper types, and/or atomic charges. Other
+options currently available include reaction constraints (e.g., angle
+and Arrhenius constraints), deletion of reaction byproducts or other
+small molecules, creation of new atoms or molecules bonded to existing
+atoms, and using LAMMPS variables for input parameters.</p>
+<p><strong>Author:</strong> Jacob R. Gissinger (NASA Langley Research Center).</p>
 <p><strong>Supporting info:</strong></p>
 <ul class="simple">
 <li><p>src/REACTION: filenames -&gt; commands</p></li>
@@ -2121,12 +2239,13 @@ molecules, and chiral-sensitive reactions.</p>
 <li><p>examples/PACKAGES/reaction</p></li>
 <li><p><a class="reference external" href="https://www.lammps.org/workshops/Aug17/pdf/gissinger.pdf">2017 LAMMPS Workshop</a></p></li>
 <li><p><a class="reference external" href="https://www.lammps.org/workshops/Aug19/talk_gissinger.pdf">2019 LAMMPS Workshop</a></p></li>
-<li><p>reacter.org</p></li>
+<li><p><a class="reference external" href="https://www.lammps.org/workshops/Aug21/talk/jacob-gissinger/">2021 LAMMPS Workshop</a></p></li>
+<li><p><a class="reference external" href="https://www.reacter.org/">REACTER website (reacter.org)</a></p></li>
 </ul>
 <hr class="docutils" />
 </section>
 <section id="reaxff-package">
-<span id="pkg-reaxff"></span><h2><span class="section-number">6.2.77. </span>REAXFF package<a class="headerlink" href="#reaxff-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-reaxff"></span><h2><span class="section-number">6.2.79. </span>REAXFF package<a class="headerlink" href="#reaxff-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A pair style which implements the ReaxFF potential in C/C++.  ReaxFF
 is a universal reactive force field.  See the src/REAXFF/README file
@@ -2145,7 +2264,7 @@ for monitoring molecules as bonds are created and destroyed.</p>
 <hr class="docutils" />
 </section>
 <section id="replica-package">
-<span id="pkg-replica"></span><h2><span class="section-number">6.2.78. </span>REPLICA package<a class="headerlink" href="#replica-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-replica"></span><h2><span class="section-number">6.2.80. </span>REPLICA package<a class="headerlink" href="#replica-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A collection of multi-replica methods which can be used when running
 multiple LAMMPS simulations (replicas).  See the <a class="reference internal" href="Howto_replica.html"><span class="doc">Howto replica</span></a> page for an overview of how to run
@@ -2174,7 +2293,7 @@ another set.</p>
 <hr class="docutils" />
 </section>
 <section id="rigid-package">
-<span id="pkg-rigid"></span><h2><span class="section-number">6.2.79. </span>RIGID package<a class="headerlink" href="#rigid-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-rigid"></span><h2><span class="section-number">6.2.81. </span>RIGID package<a class="headerlink" href="#rigid-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Fixes which enforce rigid constraints on collections of atoms or
 particles.  This includes SHAKE and RATTLE, as well as various
@@ -2196,7 +2315,7 @@ Also several computes which calculate properties of rigid bodies.</p>
 <hr class="docutils" />
 </section>
 <section id="scafacos-package">
-<span id="pkg-scafacos"></span><h2><span class="section-number">6.2.80. </span>SCAFACOS package<a class="headerlink" href="#scafacos-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-scafacos"></span><h2><span class="section-number">6.2.82. </span>SCAFACOS package<a class="headerlink" href="#scafacos-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A KSpace style which wraps the <a class="reference external" href="http://www.scafacos.de">ScaFaCoS Coulomb solver library</a> to compute long-range Coulombic
 interactions.</p>
@@ -2222,7 +2341,7 @@ The SCAFACOS package requires that LAMMPS is build in <a class="reference intern
 <hr class="docutils" />
 </section>
 <section id="shock-package">
-<span id="pkg-shock"></span><h2><span class="section-number">6.2.81. </span>SHOCK package<a class="headerlink" href="#shock-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-shock"></span><h2><span class="section-number">6.2.83. </span>SHOCK package<a class="headerlink" href="#shock-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Fixes for running impact simulations where a shock-wave passes through
 a material.</p>
@@ -2239,7 +2358,7 @@ a material.</p>
 <hr class="docutils" />
 </section>
 <section id="smtbq-package">
-<span id="pkg-smtbq"></span><h2><span class="section-number">6.2.82. </span>SMTBQ package<a class="headerlink" href="#smtbq-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-smtbq"></span><h2><span class="section-number">6.2.84. </span>SMTBQ package<a class="headerlink" href="#smtbq-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Pair styles which implement Second Moment Tight Binding models.
 One with QEq charge equilibration (SMTBQ) for the description of
@@ -2258,7 +2377,7 @@ SMATB: Daniele Rapetti (Politecnico di Torino)</p>
 <hr class="docutils" />
 </section>
 <section id="sph-package">
-<span id="pkg-sph"></span><h2><span class="section-number">6.2.83. </span>SPH package<a class="headerlink" href="#sph-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-sph"></span><h2><span class="section-number">6.2.85. </span>SPH package<a class="headerlink" href="#sph-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>An atom style, fixes, computes, and several pair styles which
 implements smoothed particle hydrodynamics (SPH) for liquids.  See the
@@ -2278,14 +2397,14 @@ Dynamics, Ernst Mach Institute, Germany).</p>
 <ul class="simple">
 <li><p>src/SPH: filenames -&gt; commands</p></li>
 <li><p>src/SPH/README</p></li>
-<li><p>doc/PDF/SPH_LAMMPS_userguide.pdf</p></li>
+<li><p><a class="reference external" href="PDF/SPH_LAMMPS_userguide.pdf">doc/PDF/SPH_LAMMPS_userguide.pdf</a></p></li>
 <li><p>examples/PACKAGES/sph</p></li>
 <li><p><a class="reference external" href="https://www.lammps.org/movies.html#sph">https://www.lammps.org/movies.html#sph</a></p></li>
 </ul>
 <hr class="docutils" />
 </section>
 <section id="spin-package">
-<span id="pkg-spin"></span><h2><span class="section-number">6.2.84. </span>SPIN package<a class="headerlink" href="#spin-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-spin"></span><h2><span class="section-number">6.2.86. </span>SPIN package<a class="headerlink" href="#spin-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Model atomic magnetic spins classically, coupled to atoms moving in
 the usual manner via MD.  Various pair, fix, and compute styles.</p>
@@ -2311,7 +2430,7 @@ the usual manner via MD.  Various pair, fix, and compute styles.</p>
 <hr class="docutils" />
 </section>
 <section id="srd-package">
-<span id="pkg-srd"></span><h2><span class="section-number">6.2.85. </span>SRD package<a class="headerlink" href="#srd-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-srd"></span><h2><span class="section-number">6.2.87. </span>SRD package<a class="headerlink" href="#srd-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A pair of fixes which implement the Stochastic Rotation Dynamics (SRD)
 method for coarse-graining of a solvent, typically around large
@@ -2330,7 +2449,7 @@ colloidal particles.</p>
 <hr class="docutils" />
 </section>
 <section id="tally-package">
-<span id="pkg-tally"></span><h2><span class="section-number">6.2.86. </span>TALLY package<a class="headerlink" href="#tally-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-tally"></span><h2><span class="section-number">6.2.88. </span>TALLY package<a class="headerlink" href="#tally-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Several compute styles that can be called when pairwise interactions
 are calculated to tally information (forces, heat flux, energy,
@@ -2346,7 +2465,7 @@ stress, etc) about individual interactions.</p>
 <hr class="docutils" />
 </section>
 <section id="uef-package">
-<span id="pkg-uef"></span><h2><span class="section-number">6.2.87. </span>UEF package<a class="headerlink" href="#uef-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-uef"></span><h2><span class="section-number">6.2.89. </span>UEF package<a class="headerlink" href="#uef-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A fix style for the integration of the equations of motion under
 extensional flow with proper boundary conditions, as well as several
@@ -2366,12 +2485,11 @@ supporting compute styles and an output option.</p>
 <hr class="docutils" />
 </section>
 <section id="voronoi-package">
-<span id="pkg-voronoi"></span><h2><span class="section-number">6.2.88. </span>VORONOI package<a class="headerlink" href="#voronoi-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-voronoi"></span><h2><span class="section-number">6.2.90. </span>VORONOI package<a class="headerlink" href="#voronoi-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A compute command which calculates the Voronoi tesselation of a
-collection of atoms by wrapping the <a class="reference external" href="http://math.lbl.gov/voro++">Voro++ library</a>.  This
-can be used to calculate the local volume or each atoms or its near
-neighbors.</p>
+collection of atoms by wrapping the <a class="reference external" href="https://math.lbl.gov/voro++/">Voro++ library</a>.  This can be used to calculate the
+local volume or each atoms or its near neighbors.</p>
 <p>To use this package you must have the Voro++ library available on your
 system.</p>
 <p><strong>Author:</strong> Daniel Schwen (INL) while at LANL.  The open-source Voro++
@@ -2390,10 +2508,10 @@ and LBNL.</p>
 <hr class="docutils" />
 </section>
 <section id="vtk-package">
-<span id="pkg-vtk"></span><h2><span class="section-number">6.2.89. </span>VTK package<a class="headerlink" href="#vtk-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-vtk"></span><h2><span class="section-number">6.2.91. </span>VTK package<a class="headerlink" href="#vtk-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>A <a class="reference internal" href="dump_vtk.html"><span class="doc">dump vtk</span></a> command which outputs snapshot info in the
-<a class="reference external" href="http://www.vtk.org">VTK format</a>, enabling visualization by <a class="reference external" href="http://www.paraview.org">Paraview</a> or
+<a class="reference external" href="https://www.vtk.org">VTK format</a>, enabling visualization by <a class="reference external" href="https://www.paraview.org">Paraview</a> or
 other visualization packages.</p>
 <p>To use this package you must have VTK library available on your
 system.</p>
@@ -2410,7 +2528,7 @@ system.</p>
 <hr class="docutils" />
 </section>
 <section id="yaff-package">
-<span id="pkg-yaff"></span><h2><span class="section-number">6.2.90. </span>YAFF package<a class="headerlink" href="#yaff-package" title="Permalink to this headline">¶</a></h2>
+<span id="pkg-yaff"></span><h2><span class="section-number">6.2.92. </span>YAFF package<a class="headerlink" href="#yaff-package" title="Permalink to this heading"></a></h2>
 <p><strong>Contents:</strong></p>
 <p>Some potentials that are also implemented in the Yet Another Force Field (<a class="reference external" href="https://github.com/molmod/yaff">YAFF</a>) code.
 The expressions and their use are discussed in the following papers</p>
@@ -2418,8 +2536,11 @@ The expressions and their use are discussed in the following papers</p>
 <li><p>Vanduyfhuys et al., J. Comput. Chem., 36 (13), 1015-1027 (2015) <a class="reference external" href="https://doi.org/10.1002/jcc.23877">link</a></p></li>
 <li><p>Vanduyfhuys et al., J. Comput. Chem., 39 (16), 999-1011 (2018) <a class="reference external" href="https://doi.org/10.1002/jcc.25173">link</a></p></li>
 </ul>
-<p>which discuss the <a class="reference external" href="http://molmod.github.io/QuickFF">QuickFF</a> methodology.</p>
+<p>which discuss the <a class="reference external" href="https://molmod.github.io/QuickFF">QuickFF</a> methodology.</p>
 <p><strong>Author:</strong> Steven Vandenbrande.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1Feb2019.</span></p>
+</div>
 <p><strong>Supporting info:</strong></p>
 <ul class="simple">
 <li><p>src/YAFF/README</p></li>
@@ -2446,7 +2567,7 @@ The expressions and their use are discussed in the following papers</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -2455,7 +2576,6 @@ The expressions and their use are discussed in the following papers</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

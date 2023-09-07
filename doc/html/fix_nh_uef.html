@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>fix nvt/uef command &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/fix_nh_uef.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -77,6 +81,9 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_adapt_fep.html">fix adapt/fep command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_addforce.html">fix addforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_addtorque.html">fix addtorque command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_alchemy.html">fix alchemy command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_amoeba_bitorsion.html">fix amoeba/bitorsion command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_amoeba_pitorsion.html">fix amoeba/pitorsion command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_append_atoms.html">fix append/atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_atc.html">fix atc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_atom_swap.html">fix atom/swap command</a></li>
@@ -84,8 +91,11 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_chunk.html">fix ave/chunk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_correlate.html">fix ave/correlate command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_correlate_long.html">fix ave/correlate/long command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_grid.html">fix ave/grid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_histo.html">fix ave/histo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_histo.html#fix-ave-histo-weight-command">fix ave/histo/weight command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_spatial.html">Fix ave/spatial command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_spatial_sphere.html">Fix ave/spatial command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_time.html">fix ave/time command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_aveforce.html">fix aveforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_balance.html">fix balance command</a></li>
@@ -115,10 +125,11 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_drude_transform.html#fix-drude-transform-inverse-command">fix drude/transform/inverse command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_dt_reset.html">fix dt/reset command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_efield.html">fix efield command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_efield.html#fix-efield-tip4p-command">fix efield/tip4p command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ehex.html">fix ehex command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html">fix electrode/conp command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html#fix-electrode-conq-command">fix electrode/conq command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html#fix-electrode-thermo-command">fix electrode/thermo command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html">fix electrode/conp command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html#fix-electrode-conq-command">fix electrode/conq command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html#fix-electrode-thermo-command">fix electrode/thermo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_electron_stopping.html">fix electron/stopping command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_electron_stopping.html#fix-electron-stopping-fit-command">fix electron/stopping/fit command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_enforce2d.html">fix enforce2d command</a></li>
@@ -138,6 +149,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_grem.html">fix grem command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_halt.html">fix halt command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_heat.html">fix heat command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_heat_flow.html">fix heat/flow command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_hyper_global.html">fix hyper/global command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_hyper_local.html">fix hyper/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_imd.html">fix imd command</a></li>
@@ -147,13 +159,13 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_drude.html">fix langevin/drude command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_eff.html">fix langevin/eff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_spin.html">fix langevin/spin command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_latte.html">fix latte command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_fluid.html">fix lb/fluid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_momentum.html">fix lb/momentum command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_viscous.html">fix lb/viscous command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lineforce.html">fix lineforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_manifoldforce.html">fix manifoldforce command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_mdi_aimd.html">fix mdi/aimd command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_mdi_qm.html">fix mdi/qm command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_mdi_qmmm.html">fix mdi/qmmm command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_meso_move.html">fix meso/move command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify.html">fix_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
@@ -223,8 +235,10 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_orient.html#fix-orient-bcc-command">fix orient/bcc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_orient_eco.html">fix orient/eco command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_pafi.html">fix pafi command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pair.html">fix pair command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_phonon.html">fix phonon command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html">fix pimd command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html">fix pimd/langevin command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html#fix-pimd-nvt-command">fix pimd/nvt command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_planeforce.html">fix planeforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_plumed.html">fix plumed command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_poems.html">fix poems command</a></li>
@@ -269,6 +283,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_saed_vtk.html">fix saed/vtk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_setforce.html">fix setforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_setforce.html#fix-setforce-spin-command">fix setforce/spin command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_sgcmc.html">fix sgcmc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shake.html">fix shake command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shake.html#fix-rattle-command">fix rattle command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shardlow.html">fix shardlow command</a></li>
@@ -312,7 +327,9 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-lj1043-command">fix wall/lj1043 command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-colloid-command">fix wall/colloid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-harmonic-command">fix wall/harmonic command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-lepton-command">fix wall/lepton command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-morse-command">fix wall/morse command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-table-command">fix wall/table command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_body_polygon.html">fix wall/body/polygon command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_body_polyhedron.html">fix wall/body/polyhedron command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_ees.html">fix wall/ees command</a></li>
@@ -333,6 +350,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -350,12 +368,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="fixes.html">Fixes</a> &raquo;</li>
-      <li>fix nvt/uef command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="fixes.html">Fixes</a></li>
+      <li class="breadcrumb-item active">fix nvt/uef command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="fix_nh_eff.html" class="btn btn-neutral float-left" title="fix nvt/eff command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -366,14 +383,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <span class="target" id="index-0"></span><section id="fix-nvt-uef-command">
-<span id="index-1"></span><h1>fix nvt/uef command<a class="headerlink" href="#fix-nvt-uef-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<span class="target" id="index-0"></span><section id="fix-nvt-uef-command">
+<span id="index-1"></span><h1>fix nvt/uef command<a class="headerlink" href="#fix-nvt-uef-command" title="Permalink to this heading"></a></h1>
 </section>
 <section id="fix-npt-uef-command">
-<h1>fix npt/uef command<a class="headerlink" href="#fix-npt-uef-command" title="Permalink to this headline">¶</a></h1>
+<h1>fix npt/uef command<a class="headerlink" href="#fix-npt-uef-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fix ID group-ID style_name erate edot_x edot_y temp Tstart Tstop Tdamp keyword value ...
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">ID</span><span class="w"> </span><span class="nv nv-Identifier">group-ID</span><span class="w"> </span><span class="n">style_name</span><span class="w"> </span><span class="n">erate</span><span class="w"> </span><span class="n">edot_x</span><span class="w"> </span><span class="n">edot_y</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">Tstart</span><span class="w"> </span><span class="n">Tstop</span><span class="w"> </span><span class="n">Tdamp</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">...</span>
 </pre></div>
 </div>
 <ul>
@@ -382,39 +400,42 @@
 <li><p><em>Tstart</em>, <em>Tstop</em>, and <em>Tdamp</em> are documented in the <a class="reference internal" href="fix_nh.html"><span class="doc">fix npt</span></a> command</p></li>
 <li><p><em>edot_x</em> and <em>edot_y</em> are the strain rates in the x and y directions (1/(time units))</p></li>
 <li><p>one or more keyword/value pairs may be appended</p>
-<pre class="literal-block">keyword = <em>ext</em> or <em>strain</em> or <em>iso</em> or <em>x</em> or <em>y</em> or <em>z</em> or <em>tchain</em> or <em>pchain</em> or <em>tloop</em> or <em>ploop</em> or <em>mtk</em>
+<pre class="literal-block">keyword = <em>erate</em> or <em>ext</em> or <em>strain</em> or <em>temp</em> or <em>iso</em> or <em>x</em> or <em>y</em> or <em>z</em> or <em>tchain</em> or <em>pchain</em> or <em>tloop</em> or <em>ploop</em> or <em>mtk</em>
+  <em>erate</em> values = e_x e_y = engineering strain rates (required)
   <em>ext</em> value = <em>x</em> or <em>y</em> or <em>z</em> or <em>xy</em> or <em>yz</em> or <em>xz</em> = external dimensions
     sets the external dimensions used to calculate the scalar pressure
   <em>strain</em> values = e_x e_y = initial strain
     usually not needed, but may be needed to resume a run with a data file.
-  <em>iso</em>, <em>x</em>, <em>y</em>, <em>z</em>, <em>tchain</em>, <em>pchain</em>, <em>tloop</em>, <em>ploop</em>, <em>mtk</em> keywords
-    documented by the <a class="reference internal" href="fix_nh.html"><span class="doc">fix npt</span></a> command</pre>
+  <em>temp</em>, <em>iso</em>, <em>x</em>, <em>y</em>, <em>z</em>, <em>tchain</em>, <em>pchain</em>, <em>tloop</em>, <em>ploop</em>, <em>mtk</em>
+    keywords documented by the <a class="reference internal" href="fix_nh.html"><span class="doc">fix npt</span></a> command</pre>
 </li>
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">uniax_nvt</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">nvt</span><span class="o">/</span><span class="n">uef</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">400</span><span class="w"> </span><span class="m">400</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="n">erate</span><span class="w"> </span><span class="m">0.00001</span><span class="w"> </span><span class="o">-</span><span class="m">0.000005</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">biax_nvt</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">nvt</span><span class="o">/</span><span class="n">uef</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">400</span><span class="w"> </span><span class="m">400</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="n">erate</span><span class="w"> </span><span class="m">0.000005</span><span class="w"> </span><span class="m">0.000005</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">uniax_npt</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">npt</span><span class="o">/</span><span class="n">uef</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">400</span><span class="w"> </span><span class="m">400</span><span class="w"> </span><span class="m">300</span><span class="w"> </span><span class="n">iso</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3000</span><span class="w"> </span><span class="n">erate</span><span class="w"> </span><span class="m">0.00001</span><span class="w"> </span><span class="o">-</span><span class="m">0.000005</span><span class="w"> </span><span class="n">ext</span><span class="w"> </span><span class="n">yz</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">biax_npt</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">npt</span><span class="o">/</span><span class="n">uef</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">400</span><span class="w"> </span><span class="m">400</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="n">erate</span><span class="w"> </span><span class="o">-</span><span class="m">0.00001</span><span class="w"> </span><span class="m">0.000005</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3000</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">uniax_nvt</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">nvt</span><span class="o">/</span><span class="n">uef</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">400</span><span class="w"> </span><span class="m">400</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="n">erate</span><span class="w"> </span><span class="m">0.00001</span><span class="w"> </span><span class="o">-</span><span class="m">0.000005</span>
+<span class="k">fix </span><span class="nv nv-Identifier">biax_nvt</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">nvt</span><span class="o">/</span><span class="n">uef</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">400</span><span class="w"> </span><span class="m">400</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="n">erate</span><span class="w"> </span><span class="m">0.000005</span><span class="w"> </span><span class="m">0.000005</span>
+<span class="k">fix </span><span class="nv nv-Identifier">uniax_npt</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">npt</span><span class="o">/</span><span class="n">uef</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">400</span><span class="w"> </span><span class="m">400</span><span class="w"> </span><span class="m">300</span><span class="w"> </span><span class="n">iso</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3000</span><span class="w"> </span><span class="n">erate</span><span class="w"> </span><span class="m">0.00001</span><span class="w"> </span><span class="o">-</span><span class="m">0.000005</span><span class="w"> </span><span class="n">ext</span><span class="w"> </span><span class="n">yz</span>
+<span class="k">fix </span><span class="nv nv-Identifier">biax_npt</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">npt</span><span class="o">/</span><span class="n">uef</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">400</span><span class="w"> </span><span class="m">400</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="n">erate</span><span class="w"> </span><span class="o">-</span><span class="m">0.00001</span><span class="w"> </span><span class="m">0.000005</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3000</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p>This fix can be used to simulate non-equilibrium molecular dynamics
-(NEMD) under diagonal flow fields, including uniaxial and bi-axial
-flow.  Simulations under continuous extensional flow may be carried
-out for an indefinite amount of time.  It is an implementation of the
-boundary conditions from <a class="reference internal" href="#dobson"><span class="std std-ref">(Dobson)</span></a>, and also uses numerical
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
+<p>These fixes can be used to simulate non-equilibrium molecular dynamics
+(NEMD) under diagonal flow fields, including uniaxial and bi-axial flow.
+Simulations under continuous extensional flow may be carried out for an
+indefinite amount of time.  It is an implementation of the boundary
+conditions from <a class="reference internal" href="#dobson"><span class="std std-ref">(Dobson)</span></a>, and also uses numerical
 lattice reduction as was proposed by <a class="reference internal" href="#hunt"><span class="std std-ref">(Hunt)</span></a>. The lattice
-reduction algorithm is from <a class="reference internal" href="#semaev"><span class="std std-ref">(Semaev)</span></a>. The fix is intended for
-simulations of homogeneous flows, and integrates the SLLOD equations
-of motion, originally proposed by Hoover and Ladd (see <a class="reference internal" href="#sllod"><span class="std std-ref">(Evans and Morriss)</span></a>).  Additional detail about this implementation can be
-found in <a class="reference internal" href="#nicholson"><span class="std std-ref">(Nicholson and Rutledge)</span></a>.</p>
+reduction algorithm is from <a class="reference internal" href="#semaev"><span class="std std-ref">(Semaev)</span></a>. The fix is
+intended for simulations of homogeneous flows, and integrates the SLLOD
+equations of motion, originally proposed by Hoover and Ladd (see
+<a class="reference internal" href="#sllod"><span class="std std-ref">(Evans and Morriss)</span></a>).  Additional detail about this
+implementation can be found in <a class="reference internal" href="#nicholson"><span class="std std-ref">(Nicholson and Rutledge)</span></a>.</p>
 <p>Note that NEMD simulations of a continuously strained system can be
-performed using the <a class="reference internal" href="fix_deform.html"><span class="doc">fix deform</span></a>, <a class="reference internal" href="fix_nvt_sllod.html"><span class="doc">fix nvt/sllod</span></a>, and <a class="reference internal" href="compute_temp_deform.html"><span class="doc">compute temp/deform</span></a> commands.</p>
+performed using the <a class="reference internal" href="fix_deform.html"><span class="doc">fix deform</span></a>, <a class="reference internal" href="fix_nvt_sllod.html"><span class="doc">fix nvt/sllod</span></a>, and <a class="reference internal" href="compute_temp_deform.html"><span class="doc">compute temp/deform</span></a>
+commands.</p>
 <p>The applied flow field is set by the <em>eps</em> keyword. The values
 <em>edot_x</em> and <em>edot_y</em> correspond to the strain rates in the xx and yy
 directions.  It is implicitly assumed that the flow field is
@@ -429,11 +450,11 @@ linear momentum.</p>
 <p>The boundary conditions require a simulation box that does not have a
 consistent alignment relative to the applied flow field. Since LAMMPS
 utilizes an upper-triangular simulation box, it is not possible to
-express the evolving simulation box in the same coordinate system as
-the flow field.  This fix keeps track of two coordinate systems: the
-flow frame, and the upper triangular LAMMPS frame. The coordinate
-systems are related to each other through the QR decomposition, as is
-illustrated in the image below.</p>
+express the evolving simulation box in the same coordinate system as the
+flow field.  These fixes keep track of two coordinate systems: the flow
+frame, and the upper triangular LAMMPS frame. The coordinate systems are
+related to each other through the QR decomposition, as is illustrated in
+the image below.</p>
 <img alt="_images/uef_frames.jpg" class="align-center" src="_images/uef_frames.jpg" />
 <p>During most molecular dynamics operations, the system is represented
 in the LAMMPS frame. Only when the positions and velocities are
@@ -450,12 +471,12 @@ using the dump command will be in the LAMMPS frame unless the
 <a class="reference internal" href="dump_cfg_uef.html"><span class="doc">dump cfg/uef</span></a> command is used.</p>
 <hr class="docutils" />
 <p>Temperature control is achieved with the default Nose-Hoover style
-thermostat documented in <a class="reference internal" href="fix_nh.html"><span class="doc">fix npt</span></a>. When this fix is
+thermostat documented in <a class="reference internal" href="fix_nh.html"><span class="doc">fix nvt</span></a>.  When this fix is
 active, only the peculiar velocity of each atom is stored, defined as
-the velocity relative to the streaming velocity. This is in contrast
-to <a class="reference internal" href="fix_nvt_sllod.html"><span class="doc">fix nvt/sllod</span></a>, which uses a lab-frame
-velocity, and removes the contribution from the streaming velocity in
-order to compute the temperature.</p>
+the velocity relative to the streaming velocity. This is in contrast to
+<a class="reference internal" href="fix_nvt_sllod.html"><span class="doc">fix nvt/sllod</span></a>, which uses a lab-frame velocity,
+and removes the contribution from the streaming velocity in order to
+compute the temperature.</p>
 <p>Pressure control is achieved using the default Nose-Hoover barostat
 documented in <a class="reference internal" href="fix_nh.html"><span class="doc">fix npt</span></a>. There are two ways to control the
 pressure using this fix. The first method involves using the <em>ext</em>
@@ -466,13 +487,13 @@ achieve the average pressure only in the directions specified by
 pressure (Pxx+Pyy)/2 will be controlled.</p>
 <p>This example command will control the total hydrostatic pressure under
 uniaxial tension:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">f1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">npt</span><span class="o">/</span><span class="n">uef</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">0.7</span><span class="w"> </span><span class="m">0.7</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="n">iso</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="n">erate</span><span class="w"> </span><span class="o">-</span><span class="m">0.5</span><span class="w"> </span><span class="o">-</span><span class="m">0.5</span><span class="w"> </span><span class="n">ext</span><span class="w"> </span><span class="n">xyz</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">f1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">npt</span><span class="o">/</span><span class="n">uef</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">0.7</span><span class="w"> </span><span class="m">0.7</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="n">iso</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="n">erate</span><span class="w"> </span><span class="o">-</span><span class="m">0.5</span><span class="w"> </span><span class="o">-</span><span class="m">0.5</span><span class="w"> </span><span class="n">ext</span><span class="w"> </span><span class="n">xyz</span>
 </pre></div>
 </div>
 <p>This example command will control the average stress in compression
 directions, which would typically correspond to free surfaces under
 drawing with uniaxial tension:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">f2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">npt</span><span class="o">/</span><span class="n">uef</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">0.7</span><span class="w"> </span><span class="m">0.7</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="n">iso</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="n">erate</span><span class="w"> </span><span class="o">-</span><span class="m">0.5</span><span class="w"> </span><span class="o">-</span><span class="m">0.5</span><span class="w"> </span><span class="n">ext</span><span class="w"> </span><span class="n">xy</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">f2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">npt</span><span class="o">/</span><span class="n">uef</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">0.7</span><span class="w"> </span><span class="m">0.7</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="n">iso</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="n">erate</span><span class="w"> </span><span class="o">-</span><span class="m">0.5</span><span class="w"> </span><span class="o">-</span><span class="m">0.5</span><span class="w"> </span><span class="n">ext</span><span class="w"> </span><span class="n">xy</span>
 </pre></div>
 </div>
 <p>The second method for pressure control involves setting the normal
@@ -485,38 +506,38 @@ controlled stress must have the same applied strain rate. The <em>ext</em>
 keyword must be set to the default value (<em>xyz</em>) when using this
 method.</p>
 <p>For example, the following commands will work:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">f3</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">npt</span><span class="o">/</span><span class="n">uef</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">0.7</span><span class="w"> </span><span class="m">0.7</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="n">erate</span><span class="w"> </span><span class="o">-</span><span class="m">0.5</span><span class="w"> </span><span class="o">-</span><span class="m">0.5</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">f4</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">npt</span><span class="o">/</span><span class="n">uef</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">0.7</span><span class="w"> </span><span class="m">0.7</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="n">erate</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">f3</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">npt</span><span class="o">/</span><span class="n">uef</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">0.7</span><span class="w"> </span><span class="m">0.7</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="n">erate</span><span class="w"> </span><span class="o">-</span><span class="m">0.5</span><span class="w"> </span><span class="o">-</span><span class="m">0.5</span>
+<span class="k">fix </span><span class="nv nv-Identifier">f4</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">npt</span><span class="o">/</span><span class="n">uef</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">0.7</span><span class="w"> </span><span class="m">0.7</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="n">erate</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span>
 </pre></div>
 </div>
 <p>The following commands will not work:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">f5</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">npt</span><span class="o">/</span><span class="n">uef</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">0.7</span><span class="w"> </span><span class="m">0.7</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="n">erate</span><span class="w"> </span><span class="o">-</span><span class="m">0.5</span><span class="w"> </span><span class="o">-</span><span class="m">0.5</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">f6</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">npt</span><span class="o">/</span><span class="n">uef</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">0.7</span><span class="w"> </span><span class="m">0.7</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="n">erate</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">f5</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">npt</span><span class="o">/</span><span class="n">uef</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">0.7</span><span class="w"> </span><span class="m">0.7</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="n">erate</span><span class="w"> </span><span class="o">-</span><span class="m">0.5</span><span class="w"> </span><span class="o">-</span><span class="m">0.5</span>
+<span class="k">fix </span><span class="nv nv-Identifier">f6</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">npt</span><span class="o">/</span><span class="n">uef</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">0.7</span><span class="w"> </span><span class="m">0.7</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="n">erate</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span>
 </pre></div>
 </div>
 <hr class="docutils" />
-<p>These fix computes a temperature and pressure each timestep.  To do
-this, it creates its own computes of style “temp/uef” and
+<p>These fixes compute a temperature and pressure each timestep.  To do
+this, they create their own computes of style “temp/uef” and
 “pressure/uef”, as if one of these two sets of commands had been
 issued:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">fix-ID_temp</span><span class="w"> </span><span class="nv nv-Identifier">group-ID</span><span class="w"> </span><span class="n">temp</span><span class="o">/</span><span class="n">uef</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">fix-ID_press</span><span class="w"> </span><span class="nv nv-Identifier">group-ID</span><span class="w"> </span><span class="n">pressure</span><span class="o">/</span><span class="n">uef</span><span class="w"> </span><span class="n">fix</span><span class="o">-</span><span class="n">ID_temp</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">fix-ID_temp</span><span class="w"> </span><span class="nv nv-Identifier">group-ID</span><span class="w"> </span><span class="n">temp</span><span class="o">/</span><span class="n">uef</span>
+<span class="k">compute </span><span class="nv nv-Identifier">fix-ID_press</span><span class="w"> </span><span class="nv nv-Identifier">group-ID</span><span class="w"> </span><span class="n">pressure</span><span class="o">/</span><span class="n">uef</span><span class="w"> </span><span class="n">fix</span><span class="o">-</span><span class="n">ID_temp</span>
 
-<span class="k">compute </span><span class="nv nv-Identifier">fix-ID_temp</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">temp</span><span class="o">/</span><span class="n">uef</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">fix-ID_press</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">pressure</span><span class="o">/</span><span class="n">uef</span><span class="w"> </span><span class="n">fix</span><span class="o">-</span><span class="n">ID_temp</span><span class="w"></span>
+<span class="k">compute </span><span class="nv nv-Identifier">fix-ID_temp</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">temp</span><span class="o">/</span><span class="n">uef</span>
+<span class="k">compute </span><span class="nv nv-Identifier">fix-ID_press</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">pressure</span><span class="o">/</span><span class="n">uef</span><span class="w"> </span><span class="n">fix</span><span class="o">-</span><span class="n">ID_temp</span>
 </pre></div>
 </div>
-<p>See the <a class="reference internal" href="compute_temp_uef.html"><span class="doc">compute temp/uef</span></a> and <a class="reference internal" href="compute_pressure_uef.html"><span class="doc">compute pressure/uef</span></a> commands for details.  Note
-that the IDs of the new computes are the fix-ID + underscore + “temp”
-or fix_ID + underscore + “press”.</p>
+<p>See the <a class="reference internal" href="compute_temp_uef.html"><span class="doc">compute temp/uef</span></a> and <a class="reference internal" href="compute_pressure_uef.html"><span class="doc">compute
+pressure/uef</span></a> commands for details.  Note that
+the IDs of the new computes are the fix-ID + underscore + “temp” or
+fix_ID + underscore + “press”.</p>
 </section>
 <section id="restart-fix-modify-output-run-start-stop-minimize-info">
-<h2>Restart, fix_modify, output, run start/stop, minimize info<a class="headerlink" href="#restart-fix-modify-output-run-start-stop-minimize-info" title="Permalink to this headline">¶</a></h2>
+<h2>Restart, fix_modify, output, run start/stop, minimize info<a class="headerlink" href="#restart-fix-modify-output-run-start-stop-minimize-info" title="Permalink to this heading"></a></h2>
 <p>The fix writes the state of all the thermostat and barostat variables,
-as well as the cumulative strain applied, to <a class="reference internal" href="restart.html"><span class="doc">binary restart files</span></a>.  See the <a class="reference internal" href="read_restart.html"><span class="doc">read_restart</span></a> command
-for info on how to re-specify a fix in an input script that reads a
-restart file, so that the operation of the fix continues in an
-uninterrupted fashion.</p>
+as well as the cumulative strain applied, to <a class="reference internal" href="restart.html"><span class="doc">binary restart files</span></a>.  See the <a class="reference internal" href="read_restart.html"><span class="doc">read_restart</span></a> command for info
+on how to re-specify a fix in an input script that reads a restart file,
+so that the operation of the fix continues in an uninterrupted fashion.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>It is not necessary to set the <em>strain</em> keyword when resuming a
@@ -524,36 +545,34 @@ run from a restart file. Only for resuming from data files, which do
 not contain the cumulative applied strain, will this keyword be
 necessary.</p>
 </div>
-<p>This fix can be used with the <a class="reference internal" href="fix_modify.html"><span class="doc">fix_modify</span></a> <em>temp</em> and
-<em>press</em> options. The temperature and pressure computes used must be of
-type <em>temp/uef</em> and <em>pressure/uef</em>.</p>
-<p>This fix computes the same global scalar and vector quantities as <a class="reference internal" href="fix_nh.html"><span class="doc">fix npt</span></a>.</p>
-<p>The fix is not invoked during <a class="reference internal" href="minimize.html"><span class="doc">energy minimization</span></a>.</p>
+<p>These fixes can be used with the <a class="reference internal" href="fix_modify.html"><span class="doc">fix_modify</span></a> <em>temp</em>
+and <em>press</em> options. The temperature and pressure computes used must be
+of type <em>temp/uef</em> and <em>pressure/uef</em>.</p>
+<p>These fixes compute the same global scalar and vector quantities as
+<a class="reference internal" href="fix_nh.html"><span class="doc">fix nvt andnpt</span></a>.</p>
+<p>These fixes are not invoked during <a class="reference internal" href="minimize.html"><span class="doc">energy minimization</span></a>.</p>
 </section>
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
-<p>This fix is part of the UEF package. It is only enabled if LAMMPS
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
+<p>These fixes are part of the UEF package. They are only enabled if LAMMPS
 was built with that package. See the <a class="reference internal" href="Build_package.html"><span class="doc">Build package</span></a> page for more info.</p>
 <p>Due to requirements of the boundary conditions, when the <em>strain</em>
 keyword is set to zero (or unset), the initial simulation box must be
 cubic and have style triclinic. If the box is initially of type ortho,
 use <a class="reference internal" href="change_box.html"><span class="doc">change_box</span></a> before invoking the fix.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>When resuming from restart files, you may need to use <a class="reference internal" href="box.html"><span class="doc">box tilt large</span></a> since lammps has internal criteria from lattice
-reduction that are not the same as the criteria in the numerical
-lattice reduction algorithm.</p>
-</div>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="fix_nh.html"><span class="doc">fix nvt</span></a>, <a class="reference internal" href="fix_nvt_sllod.html"><span class="doc">fix nvt/sllod</span></a>, <a class="reference internal" href="compute_temp_uef.html"><span class="doc">compute temp/uef</span></a>, <a class="reference internal" href="compute_pressure_uef.html"><span class="doc">compute pressure/uef</span></a>, <a class="reference internal" href="dump_cfg_uef.html"><span class="doc">dump cfg/uef</span></a></p>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
+<p><a class="reference internal" href="fix_nh.html"><span class="doc">fix nvt</span></a>, <a class="reference internal" href="fix_nh.html"><span class="doc">fix npt</span></a>,
+<a class="reference internal" href="fix_nvt_sllod.html"><span class="doc">fix nvt/sllod</span></a>,
+<a class="reference internal" href="compute_temp_uef.html"><span class="doc">compute temp/uef</span></a>,
+<a class="reference internal" href="compute_pressure_uef.html"><span class="doc">compute pressure/uef</span></a>,
+<a class="reference internal" href="dump_cfg_uef.html"><span class="doc">dump cfg/uef</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
-<p>The default keyword values specific to this fix are exy = xyz, strain
-= 0 0.  The remaining defaults are the same as for <a class="reference internal" href="fix_nh.html"><span class="doc">fix npt</span></a>
-except tchain = 1.  The reason for this change is given in
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
+<p>The default keyword values specific to these fixes are exy = xyz, strain
+= 0 0.  The remaining defaults are the same as for <a class="reference internal" href="fix_nh.html"><span class="doc">fix nvt or npt</span></a> except tchain = 1.  The reason for this change is given in
 <a class="reference internal" href="fix_nvt_sllod.html"><span class="doc">fix nvt/sllod</span></a>.</p>
 <hr class="docutils" />
 <p id="dobson"><strong>(Dobson)</strong> Dobson, J Chem Phys, 141, 184103 (2014).</p>
@@ -576,7 +595,7 @@ except tchain = 1.  The reason for this change is given in
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -585,7 +604,6 @@ except tchain = 1.  The reason for this change is given in
    
 
 </footer>
-
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>read_dump command &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/read_dump.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -72,6 +76,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="commands_list.html">Commands</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="angle_coeff.html">angle_coeff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="angle_style.html">angle_style command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="angle_write.html">angle_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="atom_modify.html">atom_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="atom_style.html">atom_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="balance.html">balance command</a></li>
@@ -79,7 +84,6 @@
 <li class="toctree-l2"><a class="reference internal" href="bond_style.html">bond_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_write.html">bond_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="boundary.html">boundary command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="box.html">box command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="change_box.html">change_box command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="clear.html">clear command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="comm_modify.html">comm_modify command</a></li>
@@ -94,6 +98,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dielectric.html">dielectric command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_coeff.html">dihedral_coeff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_style.html">dihedral_style command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dihedral_write.html">dihedral_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dimension.html">dimension command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="displace_atoms.html">displace_atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html">dump command</a></li>
@@ -105,6 +110,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-movie-command"><span class="xref std std-doc">dump movie</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-atom-adios-command"><span class="xref std std-doc">dump atom/adios</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-custom-adios-command"><span class="xref std std-doc">dump custom/adios</span> command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dump.html#dump-cfg-uef-command"><span class="xref std std-doc">dump cfg/uef</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_adios.html">dump atom/adios  command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_adios.html#dump-custom-adios-command">dump custom/adios command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_cfg_uef.html">dump cfg/uef command</a></li>
@@ -122,6 +128,7 @@
 <li class="toctree-l2"><a class="reference internal" href="echo.html">echo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix.html">fix command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify.html">fix_modify command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitpod_command.html">fitpod command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group.html">group command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group2ndx.html">group2ndx command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group2ndx.html#ndx2group-command">ndx2group command</a></li>
@@ -136,6 +143,7 @@
 <li class="toctree-l2"><a class="reference internal" href="kspace_modify.html">kspace_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kspace_style.html">kspace_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="label.html">label command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labelmap.html">labelmap command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lattice.html">lattice command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="log.html">log command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mass.html">mass command</a></li>
@@ -149,12 +157,10 @@
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-sd-command">min_style sd command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-quickmin-command">min_style quickmin command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-fire-command">min_style fire command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-fire-old-command">min_style fire/old command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-command"><span class="xref std std-doc">min_style spin</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-cg-command"><span class="xref std std-doc">min_style spin/cg</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-lbfgs-command"><span class="xref std std-doc">min_style spin/lbfgs</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="minimize.html">minimize command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="minimize.html#minimize-kk-command">minimize/kk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="molecule.html">molecule command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neb.html">neb command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neb_spin.html">neb/spin command</a></li>
@@ -188,8 +194,7 @@
 <li class="toctree-l2"><a class="reference internal" href="region.html">region command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="replicate.html">replicate command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rerun.html">rerun command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset_atom_ids.html">reset_atom_ids command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset_mol_ids.html">reset_mol_ids command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reset_atoms.html">reset_atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reset_timestep.html">reset_timestep command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="restart.html">restart command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="run.html">run command</a></li>
@@ -227,6 +232,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -244,12 +250,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="commands_list.html">Commands</a> &raquo;</li>
-      <li>read_dump command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="commands_list.html">Commands</a></li>
+      <li class="breadcrumb-item active">read_dump command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="read_data.html" class="btn btn-neutral float-left" title="read_data command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -260,11 +265,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="read-dump-command">
-<span id="index-0"></span><h1>read_dump command<a class="headerlink" href="#read-dump-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="read-dump-command">
+<span id="index-0"></span><h1>read_dump command<a class="headerlink" href="#read-dump-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">read_dump</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">Nstep</span><span class="w"> </span><span class="n">field1</span><span class="w"> </span><span class="n">field2</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">values</span><span class="w"> </span><span class="n">...</span><span class="w"></span>
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">read_dump</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">Nstep</span><span class="w"> </span><span class="n">field1</span><span class="w"> </span><span class="n">field2</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">values</span><span class="w"> </span><span class="n">...</span>
 </pre></div>
 </div>
 <ul>
@@ -279,9 +285,10 @@
   <em>fx</em>,<em>fy</em>,<em>fz</em> = force components</pre>
 </li>
 <li><p>zero or more keyword/value pairs may be appended</p></li>
-<li><p>keyword = <em>nfile</em> or <em>box</em> or <em>replace</em> or <em>purge</em> or <em>trim</em> or <em>add</em> or <em>label</em> or <em>scaled</em> or <em>wrapped</em> or <em>format</em></p>
+<li><p>keyword = <em>nfile</em> or <em>box</em> or <em>timestep</em> or <em>replace</em> or <em>purge</em> or <em>trim</em> or <em>add</em> or <em>label</em> or <em>scaled</em> or <em>wrapped</em> or <em>format</em></p>
 <pre class="literal-block"><em>nfile</em> value = Nfiles = how many parallel dump files exist
 <em>box</em> value = <em>yes</em> or <em>no</em> = replace simulation box with dump box
+<em>timestep</em> value = <em>yes</em> or <em>no</em> = reset simulation timestep with dump timestep
 <em>replace</em> value = <em>yes</em> or <em>no</em> = overwrite atoms with dump atoms
 <em>purge</em> value = <em>yes</em> or <em>no</em> = delete all atoms before adding dump atoms
 <em>trim</em> value = <em>yes</em> or <em>no</em> = trim atoms not in dump snapshot
@@ -304,28 +311,29 @@
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">read_dump</span><span class="w"> </span><span class="n">dump.file</span><span class="w"> </span><span class="m">5000</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="w"></span>
-<span class="k">read_dump</span><span class="w"> </span><span class="n">dump.xyz</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="n">box</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="n">xyz</span><span class="w"></span>
-<span class="k">read_dump</span><span class="w"> </span><span class="n">dump.xyz</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="n">box</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="n">molfile</span><span class="w"> </span><span class="n">xyz</span><span class="w"> </span><span class="s">&quot;../plugins&quot;</span><span class="w"></span>
-<span class="k">read_dump</span><span class="w"> </span><span class="n">dump.dcd</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="n">box</span><span class="w"> </span><span class="n">yes</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="n">molfile</span><span class="w"> </span><span class="n">dcd</span><span class="w"></span>
-<span class="k">read_dump</span><span class="w"> </span><span class="n">dump.file</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="n">vx</span><span class="w"> </span><span class="n">vy</span><span class="w"> </span><span class="n">vz</span><span class="w"> </span><span class="n">box</span><span class="w"> </span><span class="n">yes</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="n">molfile</span><span class="w"> </span><span class="n">lammpstrj</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">vmd</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">LINUXAMD64</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">molfile</span><span class="w"></span>
-<span class="k">read_dump</span><span class="w"> </span><span class="n">dump.file</span><span class="w"> </span><span class="m">5000</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">vx</span><span class="w"> </span><span class="n">vy</span><span class="w"> </span><span class="n">trim</span><span class="w"> </span><span class="n">yes</span><span class="w"></span>
-<span class="k">read_dump</span><span class="w"> </span><span class="n">..</span><span class="o">/</span><span class="n">run7</span><span class="o">/</span><span class="n">dump.file.gz</span><span class="w"> </span><span class="m">10000</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="n">box</span><span class="w"> </span><span class="n">yes</span><span class="w"></span>
-<span class="k">read_dump</span><span class="w"> </span><span class="n">dump.xyz</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="n">box</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="n">molfile</span><span class="w"> </span><span class="n">xyz</span><span class="w"> </span><span class="n">..</span><span class="o">/</span><span class="n">plugins</span><span class="w"></span>
-<span class="k">read_dump</span><span class="w"> </span><span class="n">dump.dcd</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="n">molfile</span><span class="w"> </span><span class="n">dcd</span><span class="w"></span>
-<span class="k">read_dump</span><span class="w"> </span><span class="n">dump.file</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="n">vx</span><span class="w"> </span><span class="n">vy</span><span class="w"> </span><span class="n">vz</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="n">molfile</span><span class="w"> </span><span class="n">lammpstrj</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">vmd</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">LINUXAMD64</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">molfile</span><span class="w"></span>
-<span class="k">read_dump</span><span class="w"> </span><span class="n">dump.bp</span><span class="w"> </span><span class="m">5000</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="n">vx</span><span class="w"> </span><span class="n">vy</span><span class="w"> </span><span class="n">vz</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="n">adios</span><span class="w"></span>
-<span class="k">read_dump</span><span class="w"> </span><span class="n">dump.bp</span><span class="w"> </span><span class="m">5000</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="n">vx</span><span class="w"> </span><span class="n">vy</span><span class="w"> </span><span class="n">vz</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="n">adios</span><span class="w"> </span><span class="n">timeout</span><span class="w"> </span><span class="m">60.0</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">read_dump</span><span class="w"> </span><span class="n">dump.file</span><span class="w"> </span><span class="m">5000</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span>
+<span class="k">read_dump</span><span class="w"> </span><span class="n">dump.xyz</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="n">box</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="n">xyz</span>
+<span class="k">read_dump</span><span class="w"> </span><span class="n">dump.xyz</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="n">box</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="n">molfile</span><span class="w"> </span><span class="n">xyz</span><span class="w"> </span><span class="s">&quot;../plugins&quot;</span>
+<span class="k">read_dump</span><span class="w"> </span><span class="n">dump.dcd</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="n">box</span><span class="w"> </span><span class="n">yes</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="n">molfile</span><span class="w"> </span><span class="n">dcd</span>
+<span class="k">read_dump</span><span class="w"> </span><span class="n">dump.file</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="n">vx</span><span class="w"> </span><span class="n">vy</span><span class="w"> </span><span class="n">vz</span><span class="w"> </span><span class="n">box</span><span class="w"> </span><span class="n">yes</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="n">molfile</span><span class="w"> </span><span class="n">lammpstrj</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">vmd</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">LINUXAMD64</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">molfile</span>
+<span class="k">read_dump</span><span class="w"> </span><span class="n">dump.file</span><span class="w"> </span><span class="m">5000</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">vx</span><span class="w"> </span><span class="n">vy</span><span class="w"> </span><span class="n">trim</span><span class="w"> </span><span class="n">yes</span>
+<span class="k">read_dump</span><span class="w"> </span><span class="n">dump.file</span><span class="w"> </span><span class="m">5000</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">vx</span><span class="w"> </span><span class="n">vy</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">yes</span><span class="w"> </span><span class="n">box</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="n">timestep</span><span class="w"> </span><span class="n">no</span>
+<span class="k">read_dump</span><span class="w"> </span><span class="n">..</span><span class="o">/</span><span class="n">run7</span><span class="o">/</span><span class="n">dump.file.gz</span><span class="w"> </span><span class="m">10000</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="n">box</span><span class="w"> </span><span class="n">yes</span>
+<span class="k">read_dump</span><span class="w"> </span><span class="n">dump.xyz</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="n">box</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="n">molfile</span><span class="w"> </span><span class="n">xyz</span><span class="w"> </span><span class="n">..</span><span class="o">/</span><span class="n">plugins</span>
+<span class="k">read_dump</span><span class="w"> </span><span class="n">dump.dcd</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="n">molfile</span><span class="w"> </span><span class="n">dcd</span>
+<span class="k">read_dump</span><span class="w"> </span><span class="n">dump.file</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="n">vx</span><span class="w"> </span><span class="n">vy</span><span class="w"> </span><span class="n">vz</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="n">molfile</span><span class="w"> </span><span class="n">lammpstrj</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">vmd</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">LINUXAMD64</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">molfile</span>
+<span class="k">read_dump</span><span class="w"> </span><span class="n">dump.bp</span><span class="w"> </span><span class="m">5000</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="n">vx</span><span class="w"> </span><span class="n">vy</span><span class="w"> </span><span class="n">vz</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="n">adios</span>
+<span class="k">read_dump</span><span class="w"> </span><span class="n">dump.bp</span><span class="w"> </span><span class="m">5000</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="n">vx</span><span class="w"> </span><span class="n">vy</span><span class="w"> </span><span class="n">vz</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="n">adios</span><span class="w"> </span><span class="n">timeout</span><span class="w"> </span><span class="m">60.0</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <p>Read atom information from a dump file to overwrite the current atom
-coordinates, and optionally the atom velocities and image flags and
-the simulation box dimensions.  This is useful for restarting a run
-from a particular snapshot in a dump file.  See the
+coordinates, and optionally the atom velocities and image flags, the
+simulation timestep, and the simulation box dimensions.  This is useful
+for restarting a run from a particular snapshot in a dump file.  See the
 <a class="reference internal" href="read_restart.html"><span class="doc">read_restart</span></a> and <a class="reference internal" href="read_data.html"><span class="doc">read_data</span></a>
 commands for alternative methods to do this.  Also see the
 <a class="reference internal" href="rerun.html"><span class="doc">rerun</span></a> command for a means of reading multiple snapshots
@@ -339,9 +347,9 @@ reset the simulation box dimensions, as explained below.</p>
 limited to the atom coordinates, velocities and image flags, as
 explained below.  Other atom properties, which may be necessary to run
 a valid simulation, such as atom charge, or bond topology information
-for a molecular system, are not read from (or even contained in) dump
-files.  Thus this auxiliary information should be defined in the usual
-way, e.g. in a data file read in by a <a class="reference internal" href="read_data.html"><span class="doc">read_data</span></a>
+for a molecular system, are not read from (or may not even be contained
+in) dump files.  Thus this auxiliary information should be defined in
+the usual way, e.g. in a data file read in by a <a class="reference internal" href="read_data.html"><span class="doc">read_data</span></a>
 command, before using the read_dump command, or by the <a class="reference internal" href="set.html"><span class="doc">set</span></a>
 command, after the dump snapshot is read.</p>
 <hr class="docutils" />
@@ -362,7 +370,7 @@ arguments are passed on to the dump reader.  The <em>native</em> format is
 for native LAMMPS dump files, written with a <a class="reference internal" href="dump.html"><span class="doc">dump atom</span></a>
 or <a class="reference internal" href="dump.html"><span class="doc">dump custom</span></a> command.  The <em>xyz</em> format is for generic XYZ
 formatted dump files.  These formats take no additional values.</p>
-<p>The <em>molfile</em> format supports reading data through using the <a class="reference external" href="http://www.ks.uiuc.edu/Research/vmd">VMD</a>
+<p>The <em>molfile</em> format supports reading data through using the <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd">VMD</a>
 molfile plugin interface. This dump reader format is only available,
 if the MOLFILE package has been installed when compiling
 LAMMPS.</p>
@@ -373,7 +381,7 @@ files can be written by LAMMPS via the <a class="reference internal" href="dump.
 The <em>path</em> value specifies a list of directories which LAMMPS will
 search for the molfile plugins appropriate to the specified <em>style</em>.
 The syntax of the <em>path</em> value is like other search paths: it can
-contain multiple directories separated by a colon (or semi-colon on
+contain multiple directories separated by a colon (or semicolon on
 windows).  The <em>path</em> keyword is optional and defaults to “.”,
 i.e. the current directory.</p>
 <p>The <em>adios</em> format supports reading data that was written by the
@@ -395,16 +403,17 @@ the specified <em>Nstep</em>.  This means the LAMMPS timestep the dump file
 snapshot was written on for the <em>native</em> or <em>adios</em> formats.</p>
 <p>The list of timestamps available in an adios .bp file is stored in the
 variable <em>ntimestep</em>:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ bpls dump.bp -d ntimestep
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>console
+
+$ bpls dump.bp -d ntimestep
   uint64_t  ntimestep  5*scalar
     (0)    0 50 100 150 200
 </pre></div>
 </div>
-<p>Note that the <em>xyz</em>
-and <em>molfile</em> formats do not store the timestep.  For these formats,
-timesteps are numbered logically, in a sequential manner, starting
-from 0.  Thus to access the 10th snapshot in an <em>xyz</em> or <em>mofile</em>
-formatted dump file, use <em>Nstep</em> = 9.</p>
+<p>Note that the <em>xyz</em> and <em>molfile</em> formats do not store the timestep.
+For these formats, timesteps are numbered logically, in a sequential
+manner, starting from 0.  Thus to access the 10th snapshot in an <em>xyz</em>
+or <em>mofile</em> formatted dump file, use <em>Nstep</em> = 9.</p>
 <p>The dimensions of the simulation box for the selected snapshot are
 also read; see the <em>box</em> keyword discussion below.  For the <em>native</em>
 format, an error is generated if the snapshot is for a triclinic box
@@ -453,7 +462,7 @@ labels for fields <em>id</em> and <em>type</em>.</p>
 <p>For dump files in <em>xyz</em> format, only the <em>x</em>, <em>y</em>, and <em>z</em> fields are
 supported.  The dump file does not store atom IDs, so these are
 assigned consecutively to the atoms as they appear in the dump file,
-starting from 1.  Thus you should insure that order of atoms is
+starting from 1.  Thus you should ensure that order of atoms is
 consistent from snapshot to snapshot in the XYZ dump file.  See
 the <a class="reference internal" href="dump_modify.html"><span class="doc">dump_modify sort</span></a> command if the XYZ dump file
 was written by LAMMPS.</p>
@@ -462,7 +471,7 @@ was written by LAMMPS.</p>
 velocities, or their respective plugins may not support reading of
 velocities.  The molfile dump files do not store atom IDs, so these
 are assigned consecutively to the atoms as they appear in the dump
-file, starting from 1.  Thus you should insure that order of atoms are
+file, starting from 1.  Thus you should ensure that order of atoms are
 consistent from snapshot to snapshot in the molfile dump file.
 See the <a class="reference internal" href="dump_modify.html"><span class="doc">dump_modify sort</span></a> command if the dump file
 was written by LAMMPS.</p>
@@ -470,7 +479,9 @@ was written by LAMMPS.</p>
 except for the <em>q</em> charge field.
 The list of fields stored in an adios .bp file is recorded in the attributes
 <em>columns</em> (array of short strings) and <em>columnstr</em> (space-separated single string).</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ bpls -la dump.bp column*
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>console
+
+$ bpls -la dump.bp column*
   string    columns            attr   = {&quot;id&quot;, &quot;type&quot;, &quot;x&quot;, &quot;y&quot;, &quot;z&quot;, &quot;vx&quot;, &quot;vy&quot;, &quot;vz&quot;}
   string    columnstr          attr   = &quot;id type x y z vx vy vz &quot;
 </pre></div>
@@ -480,9 +491,14 @@ The list of fields stored in an adios .bp file is recorded in the attributes
 replace properties of the current system.  There are various options
 for how this is done, determined by the specified fields and optional
 keywords.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 3Aug2022.</span></p>
+</div>
 <p>The timestep of the snapshot becomes the current timestep for the
-simulation.  See the <a class="reference internal" href="reset_timestep.html"><span class="doc">reset_timestep</span></a> command if
-you wish to change this after the dump snapshot is read.</p>
+simulation unless the <em>timestep</em> keyword is specified with a <em>no</em> value
+(default setting is <em>yes</em>).  See the <a class="reference internal" href="reset_timestep.html"><span class="doc">reset_timestep</span></a>
+command if you wish to change this to a different value after the dump
+snapshot is read.</p>
 <p>If the <em>box</em> keyword is specified with a <em>yes</em> value, then the current
 simulation box dimensions are replaced by the dump snapshot box
 dimensions.  If the <em>box</em> keyword is specified with a <em>no</em> value, the
@@ -567,7 +583,7 @@ needed to generate absolute, unscaled coordinates.</p>
 </section>
 <hr class="docutils" />
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <p>To read gzipped dump files, you must compile LAMMPS with the
 -DLAMMPS_GZIP option.  See the <a class="reference internal" href="Build_settings.html"><span class="doc">Build settings</span></a>
 doc page for details.</p>
@@ -578,16 +594,16 @@ They are only enabled if LAMMPS was built with that packages.  See the
 <a class="reference internal" href="Packages_details.html#pkg-adios"><span class="std std-ref">ADIOS</span></a> package.</p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="dump.html"><span class="doc">dump</span></a>, <a class="reference internal" href="dump_molfile.html"><span class="doc">dump molfile</span></a>,
 <a class="reference internal" href="dump_adios.html"><span class="doc">dump adios</span></a>,
 <a class="reference internal" href="read_data.html"><span class="doc">read_data</span></a>, <a class="reference internal" href="read_restart.html"><span class="doc">read_restart</span></a>,
 <a class="reference internal" href="rerun.html"><span class="doc">rerun</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
-<p>The option defaults are box = yes, replace = yes, purge = no, trim =
-no, add = no, scaled = no, wrapped = yes, and format = native.</p>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
+<p>The option defaults are box = yes, timestep = yes, replace = yes, purge = no,
+trim = no, add = no, scaled = no, wrapped = yes, and format = native.</p>
 </section>
 </section>
 
@@ -602,7 +618,7 @@ no, add = no, scaled = no, wrapped = yes, and format = native.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -611,7 +627,6 @@ no, add = no, scaled = no, wrapped = yes, and format = native.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

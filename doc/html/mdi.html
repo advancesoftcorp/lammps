@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>mdi command &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/mdi.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -72,6 +76,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="commands_list.html">Commands</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="angle_coeff.html">angle_coeff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="angle_style.html">angle_style command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="angle_write.html">angle_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="atom_modify.html">atom_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="atom_style.html">atom_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="balance.html">balance command</a></li>
@@ -79,7 +84,6 @@
 <li class="toctree-l2"><a class="reference internal" href="bond_style.html">bond_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_write.html">bond_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="boundary.html">boundary command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="box.html">box command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="change_box.html">change_box command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="clear.html">clear command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="comm_modify.html">comm_modify command</a></li>
@@ -94,6 +98,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dielectric.html">dielectric command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_coeff.html">dihedral_coeff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_style.html">dihedral_style command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dihedral_write.html">dihedral_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dimension.html">dimension command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="displace_atoms.html">displace_atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html">dump command</a></li>
@@ -105,6 +110,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-movie-command"><span class="xref std std-doc">dump movie</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-atom-adios-command"><span class="xref std std-doc">dump atom/adios</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-custom-adios-command"><span class="xref std std-doc">dump custom/adios</span> command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dump.html#dump-cfg-uef-command"><span class="xref std std-doc">dump cfg/uef</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_adios.html">dump atom/adios  command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_adios.html#dump-custom-adios-command">dump custom/adios command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_cfg_uef.html">dump cfg/uef command</a></li>
@@ -122,6 +128,7 @@
 <li class="toctree-l2"><a class="reference internal" href="echo.html">echo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix.html">fix command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify.html">fix_modify command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitpod_command.html">fitpod command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group.html">group command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group2ndx.html">group2ndx command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group2ndx.html#ndx2group-command">ndx2group command</a></li>
@@ -136,6 +143,7 @@
 <li class="toctree-l2"><a class="reference internal" href="kspace_modify.html">kspace_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kspace_style.html">kspace_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="label.html">label command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labelmap.html">labelmap command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lattice.html">lattice command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="log.html">log command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mass.html">mass command</a></li>
@@ -157,12 +165,10 @@
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-sd-command">min_style sd command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-quickmin-command">min_style quickmin command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-fire-command">min_style fire command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-fire-old-command">min_style fire/old command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-command"><span class="xref std std-doc">min_style spin</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-cg-command"><span class="xref std std-doc">min_style spin/cg</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-lbfgs-command"><span class="xref std std-doc">min_style spin/lbfgs</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="minimize.html">minimize command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="minimize.html#minimize-kk-command">minimize/kk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="molecule.html">molecule command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neb.html">neb command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neb_spin.html">neb/spin command</a></li>
@@ -188,8 +194,7 @@
 <li class="toctree-l2"><a class="reference internal" href="region.html">region command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="replicate.html">replicate command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rerun.html">rerun command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset_atom_ids.html">reset_atom_ids command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset_mol_ids.html">reset_mol_ids command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reset_atoms.html">reset_atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reset_timestep.html">reset_timestep command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="restart.html">restart command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="run.html">run command</a></li>
@@ -227,6 +232,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -244,12 +250,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="commands_list.html">Commands</a> &raquo;</li>
-      <li>mdi command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="commands_list.html">Commands</a></li>
+      <li class="breadcrumb-item active">mdi command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="mass.html" class="btn btn-neutral float-left" title="mass command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -260,48 +265,50 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="mdi-command">
-<span id="index-0"></span><h1>mdi command<a class="headerlink" href="#mdi-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="mdi-command">
+<span id="index-0"></span><h1>mdi command<a class="headerlink" href="#mdi-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mdi mode args
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">mdi</span><span class="w"> </span><span class="n">option</span><span class="w"> </span><span class="n">args</span>
 </pre></div>
 </div>
 <ul>
-<li><p>mode = <em>engine</em> or <em>plugin</em></p>
-<pre class="literal-block"><em>engine</em> args = none
-<em>plugin</em> args = name keyword value keyword value
-  name = name of plugin library, e.g. lammps means a liblammps.so library will be loaded
+<li><p>option = <em>engine</em> or <em>plugin</em> or <em>connect</em> or <em>exit</em></p>
+<pre class="literal-block"><em>engine</em> args = zero or more keyword/args pairs
+  keywords = <em>elements</em>
+    <em>elements</em> args = N_1 N_2 ... N_ntypes
+      N_1,N_2,...N_ntypes = chemical symbol for each of ntypes LAMMPS atom types
+<em>plugin</em> args = name keyword value keyword value ...
+  name = name of plugin library (e.g., <em>lammps</em> means a liblammps.so library will be loaded)
+  keyword/value pairs in any order, some are required, some are optional
   keywords = <em>mdi</em> or <em>infile</em> or <em>extra</em> or <em>command</em>
-    <em>mdi</em> value = args passed to MDI for driver to operate with plugins
-    <em>infile</em> value = filename the engine will read at start-up
-    <em>extra</em> value = aditional command-line args to pass to engine library when loaded
-    <em>command</em> value = a LAMMPS input script command to execute</pre>
+    <em>mdi</em> value = args passed to MDI for driver to operate with plugins (required)
+    <em>infile</em> value = filename the engine will read at start-up (optional)
+    <em>extra</em> value = aditional command-line args to pass to engine library when loaded (optional)
+    <em>command</em> value = a LAMMPS input script command to execute (required)
+<em>connect</em> args = none
+<em>exit</em> args = none</pre>
 </li>
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="n">mdi</span><span class="w"> </span><span class="n">engine</span><span class="w"></span>
-<span class="n">mdi</span><span class="w"> </span><span class="n">plugin</span><span class="w"> </span><span class="n">lammps</span><span class="w"> </span><span class="n">mdi</span><span class="w"> </span><span class="s">&quot;-role ENGINE -name lammps -method LINK&quot;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">           </span><span class="n">infile</span><span class="w"> </span><span class="n">in.aimd.engine</span><span class="w"> </span><span class="n">extra</span><span class="w"> </span><span class="s">&quot;-log log.aimd.engine.plugin&quot;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">           </span><span class="n">command</span><span class="w"> </span><span class="s">&quot;run 5&quot;</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">mdi</span><span class="w"> </span><span class="n">engine</span>
+<span class="k">mdi</span><span class="w"> </span><span class="n">engine</span><span class="w"> </span><span class="n">elements</span><span class="w"> </span><span class="n">Al</span><span class="w"> </span><span class="n">Cu</span>
+<span class="k">mdi</span><span class="w"> </span><span class="n">plugin</span><span class="w"> </span><span class="n">lammps</span><span class="w"> </span><span class="n">mdi</span><span class="w"> </span><span class="s">&quot;-role ENGINE -name lammps -method LINK&quot;</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">           </span><span class="n">infile</span><span class="w"> </span><span class="n">in.aimd.engine</span><span class="w"> </span><span class="n">extra</span><span class="w"> </span><span class="s">&quot;-log log.aimd.engine.plugin&quot;</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">           </span><span class="n">command</span><span class="w"> </span><span class="s">&quot;run 5&quot;</span>
+<span class="k">mdi</span><span class="w"> </span><span class="n">connect</span>
+<span class="k">mdi</span><span class="w"> </span><span class="n">exit</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p>This command implements two high-level operations within LAMMPS to use
-the <cite>MDI Library
-&lt;https://molssi-mdi.github.io/MDI_Library/html/index.html&gt;</cite> for
-coupling to other codes in a client/server protocol.</p>
-<p>The <em>engine</em> mode enables LAMMPS to act as an MDI engine (server),
-responding to requests from an MDI driver (client) code.</p>
-<p>The <em>plugin</em> mode enables LAMMPS to act as an MDI driver (client), and
-load the MDI engine (server) code as a library plugin.  In this case
-the MDI engine is a library plugin.  It can also be a stand-alone
-code, launched separately from LAMMPS, in which case the mdi plugin
-command is not used.</p>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
+<p>This command implements operations within LAMMPS to use the <cite>MDI
+Library &lt;https://molssi-mdi.github.io/MDI_Library/html/index.html&gt;</cite>
+for coupling to other codes in a client/server protocol.</p>
 <p>See the Howto MDI doc page for a discussion of all the different ways
 2 or more codes can interact via MDI.</p>
 <p>The examples/mdi directory has examples which use LAMMPS in 4
@@ -310,6 +317,18 @@ code or as a plugin, and as an engine operating as either a
 stand-alone code or as a plugin.  The README file in that directory
 shows how to launch and couple codes for all the 4 usage modes, and so
 they communicate via the MDI library using either MPI or sockets.</p>
+<p>The scripts in that directory illustrate the use of all the options
+for this command.</p>
+<p>The <em>engine</em> option enables LAMMPS to act as an MDI engine (server),
+responding to requests from an MDI driver (client) code.</p>
+<p>The <em>plugin</em> option enables LAMMPS to act as an MDI driver (client),
+and load the MDI engine (server) code as a library plugin.  In this
+case the MDI engine is a library plugin.  An MDI engine can also be a
+stand-alone code, launched separately from LAMMPS, in which case the
+mdi plugin command is not used.</p>
+<p>The <em>connect</em> and <em>exit</em> options are only used when LAMMPS is acting
+as an MDI driver.  As explained below, these options are normally not
+needed, except for a specific kind of use case.</p>
 <hr class="docutils" />
 <p>The <em>mdi engine</em> command is used to make LAMMPS operate as an MDI
 engine.  It is typically used in an input script after LAMMPS has
@@ -330,7 +349,7 @@ LAMMPS.  Commands that start with “&lt;” are requests by the driver for
 LAMMPS to send it information.  Commands that start with an alphabetic
 letter perform actions.  Commands that start with “&#64;” are MDI “node”
 commands, which are described further below.</p>
-<table class="colwidths-given docutils align-default">
+<table class="docutils align-default">
 <colgroup>
 <col style="width: 20%" />
 <col style="width: 80%" />
@@ -353,52 +372,55 @@ commands, which are described further below.</p>
 <tr class="row-odd"><td><p>&gt;COORDS or &lt;COORDS</p></td>
 <td><p>Send/request coordinates of each atom (3N values)</p></td>
 </tr>
-<tr class="row-even"><td><p>&lt;ENERGY</p></td>
+<tr class="row-even"><td><p>&gt;ELEMENTS</p></td>
+<td><p>Send elements (atomic numbers) for each atom (N values)</p></td>
+</tr>
+<tr class="row-odd"><td><p>&lt;ENERGY</p></td>
 <td><p>Request total energy (potential + kinetic) of the system (1 value)</p></td>
 </tr>
-<tr class="row-odd"><td><p>&gt;FORCES or &lt;FORCES</p></td>
+<tr class="row-even"><td><p>&gt;FORCES or &lt;FORCES</p></td>
 <td><p>Send/request forces on each atom (3N values)</p></td>
 </tr>
-<tr class="row-even"><td><p>&gt;+FORCES</p></td>
+<tr class="row-odd"><td><p>&gt;+FORCES</p></td>
 <td><p>Send forces to add to each atom (3N values)</p></td>
 </tr>
-<tr class="row-odd"><td><p>&lt;LABELS</p></td>
+<tr class="row-even"><td><p>&lt;LABELS</p></td>
 <td><p>Request string label of each atom (N values)</p></td>
 </tr>
-<tr class="row-even"><td><p>&lt;MASSES</p></td>
+<tr class="row-odd"><td><p>&lt;MASSES</p></td>
 <td><p>Request mass of each atom (N values)</p></td>
 </tr>
-<tr class="row-odd"><td><p>MD</p></td>
+<tr class="row-even"><td><p>MD</p></td>
 <td><p>Perform an MD simulation for N timesteps (most recent &gt;NSTEPS value)</p></td>
 </tr>
-<tr class="row-even"><td><p>OPTG</p></td>
+<tr class="row-odd"><td><p>OPTG</p></td>
 <td><p>Perform an energy minimization to convergence (most recent &gt;TOLERANCE values)</p></td>
 </tr>
-<tr class="row-odd"><td><p>&gt;NATOMS or &lt;NATOMS</p></td>
+<tr class="row-even"><td><p>&gt;NATOMS or &lt;NATOMS</p></td>
 <td><p>Sends/request number of atoms in the system (1 value)</p></td>
 </tr>
-<tr class="row-even"><td><p>&gt;NSTEPS</p></td>
+<tr class="row-odd"><td><p>&gt;NSTEPS</p></td>
 <td><p>Send number of timesteps for next MD dynamics run via MD command</p></td>
 </tr>
-<tr class="row-odd"><td><p>&lt;PE</p></td>
+<tr class="row-even"><td><p>&lt;PE</p></td>
 <td><p>Request potential energy of the system (1 value)</p></td>
 </tr>
-<tr class="row-even"><td><p>&lt;STRESS</p></td>
-<td><p>Request stress tensor (virial) of the system (6 values)</p></td>
+<tr class="row-odd"><td><p>&lt;STRESS</p></td>
+<td><p>Request symmetric stress tensor (virial) of the system (9 values)</p></td>
 </tr>
-<tr class="row-odd"><td><p>&gt;TOLERANCE</p></td>
+<tr class="row-even"><td><p>&gt;TOLERANCE</p></td>
 <td><p>Send 4 tolerance parameters for next MD minimization via OPTG command</p></td>
 </tr>
-<tr class="row-even"><td><p>&gt;TYPES or &lt;TYPES</p></td>
-<td><p>Send/request the numeric type of each atom (N values)</p></td>
+<tr class="row-odd"><td><p>&gt;TYPES or &lt;TYPES</p></td>
+<td><p>Send/request the LAMMPS atom type for each atom (N values)</p></td>
 </tr>
-<tr class="row-odd"><td><p>&gt;VELOCITIES or &lt;VELOCITIES</p></td>
+<tr class="row-even"><td><p>&gt;VELOCITIES or &lt;VELOCITIES</p></td>
 <td><p>Send/request the velocity of each atom (3N values)</p></td>
 </tr>
-<tr class="row-even"><td><p>&#64;INIT_MD or &#64;INIT_OPTG</p></td>
+<tr class="row-odd"><td><p>&#64;INIT_MD or &#64;INIT_OPTG</p></td>
 <td><p>Driver tells LAMMPS to start single-step dynamics or minimization (see below)</p></td>
 </tr>
-<tr class="row-odd"><td><p>EXIT</p></td>
+<tr class="row-even"><td><p>EXIT</p></td>
 <td><p>Driver tells LAMMPS to exit engine mode</p></td>
 </tr>
 </tbody>
@@ -415,9 +437,27 @@ will do the same, and only occasionally trigger neighbor list
 builds.  If the change in atom positions is large (since the
 previous &gt;COORDS command), then LAMMPS will do a more expensive
 operation to migrate atoms to new processors as needed and
-re-neighbor.  If the &gt;NATOMS or &gt;TYPES commands have been sent
-(since the previous &gt;COORDS command), then LAMMPS assumes the
-system is new and re-initializes an entirely new simulation.</p>
+re-neighbor.  If the &gt;NATOMS or &gt;TYPES or &gt;ELEMENTS commands have
+been sent (since the previous &gt;COORDS command), then LAMMPS assumes
+the system is new and re-initializes an entirely new simulation.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The &gt;TYPES or &gt;ELEMENTS commands are how the MDI driver tells the
+LAMMPS engine which LAMMPS atom type to assign to each atom.  If
+both the MDI driver and the LAMMPS engine are initialized so that
+atom type values are consistent in both codes, then the &gt;TYPES
+command can be used.  If not, the optional <em>elements</em> keyword can
+be used to specify what element each LAMMPS atom type corresponds
+to.  This is specified by the chemical symbol of the element,
+e.g. C or Al or Si.  A symbol must be specified for each of the
+ntypes LAMMPS atom types.  Each LAMMPS type must map to a unique
+element; two or more types cannot map to the same element.  Ntypes
+is typically specified via the <a class="reference internal" href="create_box.html"><span class="doc">create_box</span></a>
+command or in the data file read by the <a class="reference internal" href="read_data.html"><span class="doc">read_data</span></a> command.  Once this has been done, the MDI driver can
+send an &gt;ELEMENTS command to the LAMMPS driver with the atomic
+number of each atom and the LAMMPS engine will be able to map it to
+a LAMMPS atom type.</p>
 </div>
 <p>The MD and OPTG commands perform an entire MD simulation or energy
 minimization (to convergence) with no communication from the driver
@@ -573,33 +613,51 @@ to the library when it is launched.  The -role and -method settings
 are required.  The -name setting can be anything you choose.  MDI
 drivers and engines can query their names to verify they are values
 they expect.</p>
-<p>The <em>infile</em> keyword is also required.  It is the name of an input
-script which the engine will open and process.  MDI will pass it as a
+<p>The <em>infile</em> keyword is optional.  It sets the name of an input script
+which the engine will open and process.  MDI will pass it as a
 command-line argument to the library when it is launched.  The file
 typically contains settings that an MD or QM code will use for its
-subsequent calculations.</p>
+calculations.</p>
 <p>The <em>extra</em> keyword is optional.  It contains additional command-line
 arguments which MDI will pass to the library when it is launched.</p>
 <p>The <em>command</em> keyword is required.  It specifies a LAMMPS input script
 command (as a single argument in quotes if it is multiple words).
 Once the plugin library is launched, LAMMPS will execute this command.
 Other previously-defined commands in the input script, such as the
-<a class="reference internal" href="fix_mdi_aimd.html"><span class="doc">fix mdi/aimd</span></a> command, should perform MDI
+<a class="reference internal" href="fix_mdi_qm.html"><span class="doc">fix mdi/qm</span></a> command, should perform MDI
 communication with the engine, while the specified <em>command</em> executes.
 Note that if <em>command</em> is an <a class="reference internal" href="include.html"><span class="doc">include</span></a> command, then it
 could specify a filename with multiple LAMMPS commands.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>When the single <em>command</em> is complete, LAMMPS will send an MDI
-EXIT command to the plugin engine and the plugin will be removed.
-The “mdi plugin” command will then exit and the next command
-(if any) in the LAMMPS input script will be processed.  A subsequent
-“mdi plugin” command could then load the same library plugin or
-a different one if desired.</p>
+<p>When the <em>command</em> is complete, LAMMPS will send an MDI EXIT
+command to the plugin engine and the plugin will be removed.  The
+“mdi plugin” command will then exit and the next command (if any)
+in the LAMMPS input script will be processed.  A subsequent “mdi
+plugin” command could then load the same or a different MDI
+plugin if desired.</p>
 </div>
+<hr class="docutils" />
+<p>The <em>mdi connect</em> and <em>mdi exit</em> commands are only used when LAMMPS is
+operating as an MDI driver.  And when other LAMMPS command(s) which
+send MDI commands and associated data to/from the MDI engine are not
+able to initiate and terminate the connection to the engine code.</p>
+<p>The only current MDI driver command in LAMMPS is the <a class="reference internal" href="fix_mdi_qm.html"><span class="doc">fix mdi/qm</span></a> command.  If it is only used once in an input script
+then it can initiate and terminate the connection, but if it is being
+issued multiple times (e.g., in a loop that issues a <a class="reference internal" href="clear.html"><span class="doc">clear</span></a> command), then it cannot initiate or terminate the connection
+multiple times.  Instead, the <em>mdi connect</em> and <em>mdi exit</em> commands
+should be used outside the loop to initiate or terminate the connection.</p>
+<p>See the examples/mdi/in.series.driver script for an example of how
+this is done.  The LOOP in that script is reading a series of data
+file configurations and passing them to an MDI engine (e.g., quantum
+code) for energy and force evaluation.  A <em>clear</em> command inside the
+loop wipes out the current system so a new one can be defined.  This
+operation also destroys all fixes.  So the <a class="reference internal" href="fix_mdi_qm.html"><span class="doc">fix mdi/qm</span></a> command is issued once per loop iteration.  Note that it
+includes a “connect no” option which disables the initiate/terminate
+logic within that fix.</p>
 </section>
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <p>This command is part of the MDI package.  It is only enabled if LAMMPS
 was built with that package.  See the <a class="reference internal" href="Build_package.html"><span class="doc">Build package</span></a> page for more info.</p>
 <p>To use LAMMPS in conjunction with other MDI-enabled atomistic codes,
@@ -608,14 +666,14 @@ the <a class="reference internal" href="units.html"><span class="doc">units</spa
 LAMMPS and MDI units, which the other codes will also perform in their
 preferred units.</p>
 <p>LAMMPS can also be used as an MDI engine in other unit choices it
-supports, e.g. <em>lj</em>, but then no unit conversion is performed.</p>
+supports (e.g., <em>lj</em>), but then no unit conversion is performed.</p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="fix_mdi_aimd.html"><span class="doc">fix mdi/aimd</span></a></p>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
+<p><a class="reference internal" href="fix_mdi_qm.html"><span class="doc">fix mdi/qm</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
 <p>None</p>
 </section>
 </section>
@@ -631,7 +689,7 @@ supports, e.g. <em>lj</em>, but then no unit conversion is performed.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -640,7 +698,6 @@ supports, e.g. <em>lj</em>, but then no unit conversion is performed.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

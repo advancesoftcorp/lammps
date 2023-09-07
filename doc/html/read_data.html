@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>read_data command &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/read_data.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -72,6 +76,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="commands_list.html">Commands</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="angle_coeff.html">angle_coeff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="angle_style.html">angle_style command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="angle_write.html">angle_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="atom_modify.html">atom_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="atom_style.html">atom_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="balance.html">balance command</a></li>
@@ -79,7 +84,6 @@
 <li class="toctree-l2"><a class="reference internal" href="bond_style.html">bond_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_write.html">bond_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="boundary.html">boundary command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="box.html">box command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="change_box.html">change_box command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="clear.html">clear command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="comm_modify.html">comm_modify command</a></li>
@@ -94,6 +98,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dielectric.html">dielectric command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_coeff.html">dihedral_coeff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_style.html">dihedral_style command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dihedral_write.html">dihedral_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dimension.html">dimension command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="displace_atoms.html">displace_atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html">dump command</a></li>
@@ -105,6 +110,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-movie-command"><span class="xref std std-doc">dump movie</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-atom-adios-command"><span class="xref std std-doc">dump atom/adios</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-custom-adios-command"><span class="xref std std-doc">dump custom/adios</span> command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dump.html#dump-cfg-uef-command"><span class="xref std std-doc">dump cfg/uef</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_adios.html">dump atom/adios  command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_adios.html#dump-custom-adios-command">dump custom/adios command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_cfg_uef.html">dump cfg/uef command</a></li>
@@ -122,6 +128,7 @@
 <li class="toctree-l2"><a class="reference internal" href="echo.html">echo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix.html">fix command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify.html">fix_modify command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitpod_command.html">fitpod command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group.html">group command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group2ndx.html">group2ndx command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group2ndx.html#ndx2group-command">ndx2group command</a></li>
@@ -136,6 +143,7 @@
 <li class="toctree-l2"><a class="reference internal" href="kspace_modify.html">kspace_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kspace_style.html">kspace_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="label.html">label command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labelmap.html">labelmap command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lattice.html">lattice command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="log.html">log command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mass.html">mass command</a></li>
@@ -149,12 +157,10 @@
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-sd-command">min_style sd command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-quickmin-command">min_style quickmin command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-fire-command">min_style fire command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-fire-old-command">min_style fire/old command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-command"><span class="xref std std-doc">min_style spin</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-cg-command"><span class="xref std std-doc">min_style spin/cg</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-lbfgs-command"><span class="xref std std-doc">min_style spin/lbfgs</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="minimize.html">minimize command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="minimize.html#minimize-kk-command">minimize/kk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="molecule.html">molecule command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neb.html">neb command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neb_spin.html">neb/spin command</a></li>
@@ -192,8 +198,7 @@
 <li class="toctree-l2"><a class="reference internal" href="region.html">region command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="replicate.html">replicate command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rerun.html">rerun command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset_atom_ids.html">reset_atom_ids command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset_mol_ids.html">reset_mol_ids command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reset_atoms.html">reset_atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reset_timestep.html">reset_timestep command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="restart.html">restart command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="run.html">run command</a></li>
@@ -231,6 +236,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -248,12 +254,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="commands_list.html">Commands</a> &raquo;</li>
-      <li>read_data command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="commands_list.html">Commands</a></li>
+      <li class="breadcrumb-item active">read_data command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="quit.html" class="btn btn-neutral float-left" title="quit command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -264,11 +269,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="read-data-command">
-<span id="index-0"></span><h1>read_data command<a class="headerlink" href="#read-data-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="read-data-command">
+<span id="index-0"></span><h1>read_data command<a class="headerlink" href="#read-data-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">read_data</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="n">...</span><span class="w"></span>
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">read_data</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="n">...</span>
 </pre></div>
 </div>
 <ul>
@@ -309,17 +315,17 @@
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">read_data</span><span class="w"> </span><span class="n">data.lj</span><span class="w"></span>
-<span class="k">read_data</span><span class="w"> </span><span class="n">..</span><span class="o">/</span><span class="n">run7</span><span class="o">/</span><span class="n">data.polymer.gz</span><span class="w"></span>
-<span class="k">read_data</span><span class="w"> </span><span class="n">data.protein</span><span class="w"> </span><span class="k">fix </span><span class="nv nv-Identifier">mycmap</span><span class="w"> </span><span class="nv nv-Identifier">crossterm</span><span class="w"> </span><span class="n">CMAP</span><span class="w"></span>
-<span class="k">read_data</span><span class="w"> </span><span class="n">data.water</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">append</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">50.0</span><span class="w"></span>
-<span class="k">read_data</span><span class="w"> </span><span class="n">data.water</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">merge</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="k">group </span><span class="nv nv-Identifier">solvent</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">read_data</span><span class="w"> </span><span class="n">data.lj</span>
+<span class="k">read_data</span><span class="w"> </span><span class="n">..</span><span class="o">/</span><span class="n">run7</span><span class="o">/</span><span class="n">data.polymer.gz</span>
+<span class="k">read_data</span><span class="w"> </span><span class="n">data.protein</span><span class="w"> </span><span class="k">fix </span><span class="nv nv-Identifier">mycmap</span><span class="w"> </span><span class="nv nv-Identifier">crossterm</span><span class="w"> </span><span class="n">CMAP</span>
+<span class="k">read_data</span><span class="w"> </span><span class="n">data.water</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">append</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">50.0</span>
+<span class="k">read_data</span><span class="w"> </span><span class="n">data.water</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">merge</span><span class="w"> </span><span class="k">group </span><span class="nv nv-Identifier">solvent</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <p>Read in a data file containing information LAMMPS needs to run a
 simulation.  The file can be ASCII text or a gzipped text file
 (detected by a .gz suffix).  This is one of 3 ways to specify initial
@@ -328,8 +334,14 @@ atom coordinates; see the <a class="reference internal" href="read_restart.html"
 Also see the explanation of the <a class="reference internal" href="Run_options.html"><span class="doc">-restart command-line switch</span></a> which can convert a restart file to a data file.</p>
 <p>This command can be used multiple times to add new atoms and their
 properties to an existing system by using the <em>add</em>, <em>offset</em>, and
-<em>shift</em> keywords.  See more details below, which includes the use case
-for the <em>extra</em> keywords.</p>
+<em>shift</em> keywords.  However, it is important to understand that several
+system parameters, like the number of types of different kinds and per
+atom settings are <strong>locked in</strong> after the first <em>read_data</em> command,
+which means that no type ID (including its offset) may have a larger
+value when processing additional data files than what is set by the
+first data file and the corresponding <em>read_data</em> command options.  See
+more details on this situation below, which includes the use case for
+the <em>extra</em> keywords.</p>
 <p>The <em>group</em> keyword adds all the atoms in the data file to the
 specified group-ID.  The group will be created if it does not already
 exist.  This is useful if you are reading multiple data files and wish
@@ -347,7 +359,7 @@ styles defined, or to read a data file for a different force field.</p>
 </section>
 <hr class="docutils" />
 <section id="reading-multiple-data-files">
-<h2>Reading multiple data files<a class="headerlink" href="#reading-multiple-data-files" title="Permalink to this headline">¶</a></h2>
+<h2>Reading multiple data files<a class="headerlink" href="#reading-multiple-data-files" title="Permalink to this heading"></a></h2>
 <p>The read_data command can be used multiple times with the same or
 different data files to build up a complex system from components
 contained in individual data files.  For example one data file could
@@ -391,9 +403,9 @@ is required representing the equivalent offset for molecule IDs.
 If <em>merge</em> is specified, the data file atoms
 are added to the current system without changing their IDs.  They are
 assumed to merge (without duplication) with the currently defined
-atoms.  It is up to you to insure there are no multiply defined atom
+atoms.  It is up to you to ensure there are no multiply defined atom
 IDs, as LAMMPS only performs an incomplete check that this is the case
-by insuring the resulting max atom-ID &gt;= the number of atoms. For
+by ensuring the resulting max atom-ID &gt;= the number of atoms. For
 molecule IDs, there is no check done at all.</p>
 <p>The <em>offset</em> and <em>shift</em> keywords can only be used if the <em>add</em>
 keyword is also specified.</p>
@@ -409,11 +421,17 @@ their types (atom, bond, angle, etc) to be different depending on what
 other types already exist.  All five offset values must be specified,
 but individual values will be ignored if the data file does not use
 that attribute (e.g. no bonds).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Offsets are <strong>ignored</strong> on lines using type labels, as the type
+labels will determine the actual types directly depending on the
+current <a class="reference internal" href="labelmap.html"><span class="doc">labelmap</span></a> settings.</p>
+</div>
 <p>The <em>shift</em> keyword can be used to specify an (Sx, Sy, Sz)
 displacement applied to the coordinates of each atom.  Sz must be 0.0
 for a 2d simulation.  This is a mechanism for adding structured
 collections of atoms at different locations within the simulation box,
-to build up a complex geometry.  It is up to you to insure atoms do
+to build up a complex geometry.  It is up to you to ensure atoms do
 not end up overlapping unphysically which would lead to bad dynamics.
 Note that the <a class="reference internal" href="displace_atoms.html"><span class="doc">displace_atoms</span></a> command can be used
 to move a subset of atoms after they have been read from a data file.
@@ -459,28 +477,32 @@ files you read.</p>
 </section>
 <hr class="docutils" />
 <section id="format-of-a-data-file">
-<h2>Format of a data file<a class="headerlink" href="#format-of-a-data-file" title="Permalink to this headline">¶</a></h2>
+<h2>Format of a data file<a class="headerlink" href="#format-of-a-data-file" title="Permalink to this heading"></a></h2>
 <p>The structure of the data file is important, though many settings and
 sections are optional or can come in any order.  See the examples
 directory for sample data files for different problems.</p>
 <p>The file will be read line by line, but there is a limit of 254
 characters per line and characters beyond that limit will be ignored.</p>
 <p>A data file has a header and a body.  The header appears first.  The
-first line of the header is always skipped; it typically contains a
-description of the file.  Then lines are read one at a time.  Lines
-can have a trailing comment starting with ‘#’ that is ignored.  If the
-line is blank (only white-space after comment is deleted), it is
+first line of the header and thus of the data file is <em>always</em> skipped;
+it typically contains a description of the file or a comment from the
+software that created the file.</p>
+<p>Then lines are read one line at a time.  Lines can have a trailing
+comment starting with ‘#’ that is ignored.  There <em>must</em> be at least one
+blank between any valid content and the comment. If a line is blank
+(i.e. contains only white-space after comments are deleted), it is
 skipped.  If the line contains a header keyword, the corresponding
-value(s) is read from the line.  If it does not contain a header
-keyword, the line begins the body of the file.</p>
-<p>The body of the file contains zero or more sections.  The first line
-of a section has only a keyword.  This line can have a trailing
-comment starting with ‘#’ that is either ignored or can be used to
-check for a style match, as described below.  The next line is
-skipped.  The remaining lines of the section contain values.  The
-number of lines depends on the section keyword as described below.
-Zero or more blank lines can be used between sections.  Sections can
-appear in any order, with a few exceptions as noted below.</p>
+value(s) is/are read from the line.  A line that is <em>not</em> blank and does
+<em>not</em> contain a header keyword begins the body of the file.</p>
+<p>The body of the file contains zero or more sections.  The first line of
+a section has only a keyword.  This line can have a trailing comment
+starting with ‘#’ that is either ignored or can be used to check for a
+style match, as described below.  There must be a blank between the
+keyword and any comment. The <em>next</em> line is <em>always</em> skipped.  The
+remaining lines of the section contain values.  The number of lines
+depends on the section keyword as described below.  Zero or more blank
+lines can be used <em>between</em> sections.  Sections can appear in any order,
+with a few exceptions as noted below.</p>
 <p>The keyword <em>fix</em> can be used one or more times.  Each usage specifies
 a fix that will be used to process a specific portion of the data
 file.  Any header line containing <em>header-string</em> and any section that
@@ -503,7 +525,7 @@ xhi” or the 2 words in “Bond Coeffs”, is not valid.</p>
 </section>
 <hr class="docutils" />
 <section id="format-of-the-header-of-a-data-file">
-<h2>Format of the header of a data file<a class="headerlink" href="#format-of-the-header-of-a-data-file" title="Permalink to this headline">¶</a></h2>
+<h2>Format of the header of a data file<a class="headerlink" href="#format-of-the-header-of-a-data-file" title="Permalink to this heading"></a></h2>
 <p>These are the recognized header keywords.  Header lines can come in
 any order.  The value(s) are read from the beginning of the line.
 Thus the keyword <em>atoms</em> should be in a line like “1000 atoms”; the
@@ -555,16 +577,20 @@ from the origin given by A = (xhi-xlo,0,0); B = (xy,yhi-ylo,0); C =
 and are called “tilt factors” because they are the amount of
 displacement applied to faces of an originally orthogonal box to
 transform it into the parallelepiped.</p>
-<p>By default, the tilt factors (xy,xz,yz) can not skew the box more than
-half the distance of the corresponding parallel box length.  For
-example, if xlo = 2 and xhi = 12, then the x box length is 10 and the
-xy tilt factor must be between -5 and 5.  Similarly, both xz and yz
-must be between -(xhi-xlo)/2 and +(yhi-ylo)/2.  Note that this is not
-a limitation, since if the maximum tilt factor is 5 (as in this
-example), then configurations with tilt = …, -15, -5, 5, 15, 25,
-… are all geometrically equivalent.  If you wish to define a box
-with tilt factors that exceed these limits, you can use the <a class="reference internal" href="box.html"><span class="doc">box tilt</span></a> command, with a setting of <em>large</em>; a setting of
-<em>small</em> is the default.</p>
+<p>The tilt factors (xy,xz,yz) should not skew the box more than half the
+distance of the corresponding parallel box length.  For example, if
+<span class="math notranslate nohighlight">\(x_\text{lo} = 2\)</span> and <span class="math notranslate nohighlight">\(x_\text{hi} = 12\)</span>, then the <span class="math notranslate nohighlight">\(x\)</span>
+box length is 10 and the <span class="math notranslate nohighlight">\(xy\)</span> tilt factor must be between
+<span class="math notranslate nohighlight">\(-5\)</span> and <span class="math notranslate nohighlight">\(5\)</span>.  Similarly, both <span class="math notranslate nohighlight">\(xz\)</span> and <span class="math notranslate nohighlight">\(yz\)</span>
+must be between <span class="math notranslate nohighlight">\(-(x_\text{hi}-x_\text{lo})/2\)</span> and
+<span class="math notranslate nohighlight">\(+(y_\text{hi}-y_\text{lo})/2\)</span>.  Note that this is not a
+limitation, since if the maximum tilt factor is 5 (as in this example),
+then configurations with tilt <span class="math notranslate nohighlight">\(= \dots, -15\)</span>, <span class="math notranslate nohighlight">\(-5\)</span>,
+<span class="math notranslate nohighlight">\(5\)</span>, <span class="math notranslate nohighlight">\(15\)</span>, <span class="math notranslate nohighlight">\(25, \dots\)</span> are all geometrically
+equivalent.  Simulations with large tilt factors will run inefficiently,
+since they require more ghost atoms and thus more communication.  With
+very large tilt factors, LAMMPS will eventually produce incorrect
+trajectories and stop with errors due to lost atoms or similar.</p>
 <p>See the <a class="reference internal" href="Howto_triclinic.html"><span class="doc">Howto triclinic</span></a> page for a
 geometric description of triclinic boxes, as defined by LAMMPS, and
 how to transform these parameters to and from other commonly used
@@ -690,11 +716,12 @@ the maximum values defined in any of the template molecules.</p>
 </section>
 <hr class="docutils" />
 <section id="format-of-the-body-of-a-data-file">
-<h2>Format of the body of a data file<a class="headerlink" href="#format-of-the-body-of-a-data-file" title="Permalink to this headline">¶</a></h2>
+<h2>Format of the body of a data file<a class="headerlink" href="#format-of-the-body-of-a-data-file" title="Permalink to this heading"></a></h2>
 <p>These are the section keywords for the body of the file.</p>
 <ul class="simple">
 <li><p><em>Atoms, Velocities, Masses, Ellipsoids, Lines, Triangles, Bodies</em> = atom-property sections</p></li>
 <li><p><em>Bonds, Angles, Dihedrals, Impropers</em> = molecular topology sections</p></li>
+<li><p><em>Atom Type Labels, Bond Type Labels, Angle Type Labels, Dihedral Type Labels, Improper Type Labels</em> = type label maps</p></li>
 <li><p><em>Pair Coeffs, PairIJ Coeffs, Bond Coeffs, Angle Coeffs, Dihedral Coeffs,    Improper Coeffs</em> = force field sections</p></li>
 <li><p><em>BondBond Coeffs, BondAngle Coeffs, MiddleBondTorsion Coeffs,    EndBondTorsion Coeffs, AngleTorsion Coeffs, AngleAngleTorsion Coeffs,    BondBond13 Coeffs, AngleAngle Coeffs</em> = class 2 force field sections</p></li>
 </ul>
@@ -717,7 +744,8 @@ parameters expected for the currently-defined style.</p>
 section is described including the number of lines it must contain and
 rules (if any) for where it can appear in the data file.</p>
 <p>Any individual line in the various sections can have a trailing
-comment starting with “#” for annotation purposes.  E.g. in the
+comment starting with “#” for annotation purposes. There must be at least
+one blank between valid content and the comment. E.g. in the
 Atoms section:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>10 1 17 -1.0 10.0 5.0 6.0   # salt ion
 </pre></div>
@@ -744,6 +772,23 @@ angle style.  See the <a class="reference internal" href="angle_style.html"><spa
 also be set via the <a class="reference internal" href="angle_coeff.html"><span class="doc">angle_coeff</span></a> command in the
 input script.</p>
 <hr class="docutils" />
+<p><em>Angle Type Labels</em> section:</p>
+<ul>
+<li><p>one line per angle type</p></li>
+<li><p>line syntax: ID label</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ID = angle type (1-N)
+label = alphanumeric type label
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Define alphanumeric type labels for each numeric angle type.  These
+can be used in the Angles section in place of a numeric type, but only
+if the this section appears before the Angles section.</p>
+<p>See the <a class="reference internal" href="Howto_type_labels.html"><span class="doc">Howto type labels</span></a> doc page for the
+allowed syntax of type labels and a general discussion of how type
+labels can be used.</p>
+<hr class="docutils" />
 <p><em>AngleAngle Coeffs</em> section:</p>
 <ul>
 <li><p>one line per improper type</p></li>
@@ -767,7 +812,7 @@ coeffs = list of coeffs (see <a class="reference internal" href="dihedral_coeff.
 <li><p>one line per angle</p></li>
 <li><p>line syntax: ID type atom1 atom2 atom3</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ID = number of angle (1-Nangles)
-type = angle type (1-Nangletype)
+type = angle type (1-Nangletype, or type label)
 atom1,atom2,atom3 = IDs of 1st,2nd,3rd atom in angle
 </pre></div>
 </div>
@@ -782,8 +827,13 @@ atom1,atom2,atom3 = IDs of 1st,2nd,3rd atom in angle
 <p>The 3 atoms are ordered linearly within the angle.  Thus the central
 atom (around which the angle is computed) is the atom2 in the list.
 E.g. H,O,H for a water molecule.  The <em>Angles</em> section must appear
-after the <em>Atoms</em> section.  All values in this section must be
-integers (1, not 1.0).</p>
+after the <em>Atoms</em> section.</p>
+<p>All values in this section must be integers (1, not 1.0).  However,
+the type can be a numeric value or an alphanumeric label.  The latter
+is only allowed if the type label has been defined by the
+<a class="reference internal" href="labelmap.html"><span class="doc">labelmap</span></a> command or an Angle Type Labels section
+earlier in the data file.  See the <a class="reference internal" href="Howto_type_labels.html"><span class="doc">Howto type labels</span></a> doc page for the allowed syntax of type labels
+and a general discussion of how type labels can be used.</p>
 <hr class="docutils" />
 <p><em>AngleTorsion Coeffs</em> section:</p>
 <ul>
@@ -793,6 +843,23 @@ integers (1, not 1.0).</p>
 coeffs = list of coeffs (see <a class="reference internal" href="dihedral_coeff.html"><span class="doc">dihedral_coeff</span></a>)</pre>
 </li>
 </ul>
+<hr class="docutils" />
+<p><em>Atom Type Labels</em> section:</p>
+<ul>
+<li><p>one line per atom type</p></li>
+<li><p>line syntax: ID label</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ID = numeric atom type (1-N)
+label = alphanumeric type label
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Define alphanumeric type labels for each numeric atom type.  These
+can be used in the Atoms section in place of a numeric type, but only
+if the Atom Type Labels section appears before the Atoms section.</p>
+<p>See the <a class="reference internal" href="Howto_type_labels.html"><span class="doc">Howto type labels</span></a> doc page for the
+allowed syntax of type labels and a general discussion of how type
+labels can be used.</p>
 <hr class="docutils" />
 <p><em>Atoms</em> section:</p>
 <ul class="simple">
@@ -807,10 +874,6 @@ appended to it, which indicate which image of a periodic simulation
 box the atom is in.  These may be important to include for some kinds
 of analysis.</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p>angle</p></td>
 <td><p>atom-ID molecule-ID atom-type x y z</p></td>
@@ -827,32 +890,32 @@ of analysis.</p>
 <tr class="row-odd"><td><p>charge</p></td>
 <td><p>atom-ID atom-type q x y z</p></td>
 </tr>
-<tr class="row-even"><td><p>dipole</p></td>
+<tr class="row-even"><td><p>dielectric</p></td>
+<td><p>atom-ID atom-type q x y z normx normy normz area ed em epsilon curvature</p></td>
+</tr>
+<tr class="row-odd"><td><p>dipole</p></td>
 <td><p>atom-ID atom-type q x y z mux muy muz</p></td>
 </tr>
-<tr class="row-odd"><td><p>dpd</p></td>
+<tr class="row-even"><td><p>dpd</p></td>
 <td><p>atom-ID atom-type theta x y z</p></td>
 </tr>
-<tr class="row-even"><td><p>edpd</p></td>
+<tr class="row-odd"><td><p>edpd</p></td>
 <td><p>atom-ID atom-type edpd_temp edpd_cv x y z</p></td>
 </tr>
-<tr class="row-odd"><td><p>electron</p></td>
-<td><p>atom-ID atom-type q spin eradius x y z</p></td>
+<tr class="row-even"><td><p>electron</p></td>
+<td><p>atom-ID atom-type q espin eradius x y z</p></td>
 </tr>
-<tr class="row-even"><td><p>ellipsoid</p></td>
+<tr class="row-odd"><td><p>ellipsoid</p></td>
 <td><p>atom-ID atom-type ellipsoidflag density x y z</p></td>
 </tr>
-<tr class="row-odd"><td><p>full</p></td>
+<tr class="row-even"><td><p>full</p></td>
 <td><p>atom-ID molecule-ID atom-type q x y z</p></td>
 </tr>
-<tr class="row-even"><td><p>line</p></td>
+<tr class="row-odd"><td><p>line</p></td>
 <td><p>atom-ID molecule-ID atom-type lineflag density x y z</p></td>
 </tr>
-<tr class="row-odd"><td><p>mdpd</p></td>
+<tr class="row-even"><td><p>mdpd</p></td>
 <td><p>atom-ID atom-type rho x y z</p></td>
-</tr>
-<tr class="row-even"><td><p>mesont</p></td>
-<td><p>atom-ID molecule-ID atom-type bond_nt mass mradius mlength buckling x y z</p></td>
 </tr>
 <tr class="row-odd"><td><p>molecular</p></td>
 <td><p>atom-ID molecule-ID atom-type x y z</p></td>
@@ -885,7 +948,7 @@ of analysis.</p>
 <td><p>atom-ID molecule-ID atom-type triangleflag density x y z</p></td>
 </tr>
 <tr class="row-odd"><td><p>wavepacket</p></td>
-<td><p>atom-ID atom-type charge spin eradius etag cs_re cs_im x y z</p></td>
+<td><p>atom-ID atom-type charge espin eradius etag cs_re cs_im x y z</p></td>
 </tr>
 <tr class="row-even"><td><p>hybrid</p></td>
 <td><p>atom-ID atom-type x y z sub-style1 sub-style2 …</p></td>
@@ -895,32 +958,28 @@ of analysis.</p>
 <p>The per-atom values have these meanings and units, listed alphabetically:</p>
 <ul class="simple">
 <li><p>atom-ID = integer ID of atom</p></li>
-<li><p>atom-type = type of atom (1-Ntype)</p></li>
+<li><p>atom-type = type of atom (1-Ntype, or type label)</p></li>
 <li><p>bodyflag = 1 for body particles, 0 for point particles</p></li>
-<li><p>bond_nt = bond NT factor for MESONT particles (?? units)</p></li>
-<li><p>buckling = buckling factor for MESONT particles (?? units)</p></li>
 <li><p>ccN = chemical concentration for tDPD particles for each species (mole/volume units)</p></li>
 <li><p>cradius = contact radius for SMD particles (distance units)</p></li>
 <li><p>cs_re,cs_im = real/imaginary parts of wave packet coefficients</p></li>
 <li><p>cv = heat capacity (need units) for SPH particles</p></li>
 <li><p>density = density of particle (mass/distance^3 or mass/distance^2 or mass/distance units, depending on dimensionality of particle)</p></li>
 <li><p>diameter = diameter of spherical atom (distance units)</p></li>
-<li><p>esph = energy (need units) for SPH particles</p></li>
 <li><p>edpd_temp = temperature for eDPD particles (temperature units)</p></li>
 <li><p>edpd_cv = volumetric heat capacity for eDPD particles (energy/temperature/volume units)</p></li>
 <li><p>ellipsoidflag = 1 for ellipsoidal particles, 0 for point particles</p></li>
 <li><p>eradius = electron radius (or fixed-core radius)</p></li>
+<li><p>esph = energy (need units) for SPH particles</p></li>
+<li><p>espin = electron spin (+1/-1), 0 = nuclei, 2 = fixed-core, 3 = pseudo-cores (i.e. ECP)</p></li>
 <li><p>etag = integer ID of electron that each wave packet belongs to</p></li>
 <li><p>kradius = kernel radius for SMD particles (distance units)</p></li>
 <li><p>lineflag = 1 for line segment particles, 0 for point or spherical particles</p></li>
 <li><p>mass = mass of particle (mass units)</p></li>
-<li><p>mlength = ?? length for MESONT particles (distance units)</p></li>
 <li><p>molecule-ID = integer ID of molecule the atom belongs to</p></li>
-<li><p>mradius = ?? radius for MESONT particles (distance units)</p></li>
 <li><p>mux,muy,muz = components of dipole moment of atom (dipole units)</p></li>
 <li><p>q = charge on atom (charge units)</p></li>
 <li><p>rho = density (need units) for SPH particles</p></li>
-<li><p>spin = electron spin (+1/-1), 0 = nuclei, 2 = fixed-core, 3 = pseudo-cores (i.e. ECP)</p></li>
 <li><p>sp = magnitude of magnetic spin of atom (Bohr magnetons)</p></li>
 <li><p>spx,spy,spz = components of magnetic spin of atom (unit vector)</p></li>
 <li><p>template-atom = which atom within a template molecule the atom is</p></li>
@@ -944,6 +1003,11 @@ map array is used, but not if an atom map hash is used; see the
 not used (e.g. an atomic system with no bonds), and you don’t care if
 unique atom IDs appear in dump files, then the atom-IDs can all be set
 to 0.</p>
+<p>The atom-type can be a numeric value or an alphanumeric label.  The
+latter is only allowed if the type label has been defined by the
+<a class="reference internal" href="labelmap.html"><span class="doc">labelmap</span></a> command or an Atom Type Labels section
+earlier in the data file.  See the <a class="reference internal" href="Howto_type_labels.html"><span class="doc">Howto type labels</span></a> doc page for the allowed syntax of type labels
+and a general discussion of how type labels can be used.</p>
 <p>The molecule ID is a second identifier attached to an atom.  Normally, it
 is a number from 1 to N, identifying which molecule the atom belongs
 to.  It can be 0 if it is a non-bonded atom or if you don’t care to
@@ -1126,6 +1190,23 @@ bond style.  See the <a class="reference internal" href="bond_style.html"><span 
 also be set via the <a class="reference internal" href="bond_coeff.html"><span class="doc">bond_coeff</span></a> command in the input
 script.</p>
 <hr class="docutils" />
+<p><em>Bond Type Labels</em> section:</p>
+<ul>
+<li><p>one line per bond type</p></li>
+<li><p>line syntax: ID label</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ID = bond type (1-N)
+label = alphanumeric type label
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Define alphanumeric type labels for each numeric bond type.  These can
+be used in the Bonds section in place of a numeric type, but only if
+the this section appears before the Angles section.</p>
+<p>See the <a class="reference internal" href="Howto_type_labels.html"><span class="doc">Howto type labels</span></a> doc page for the
+allowed syntax of type labels and a general discussion of how type
+labels can be used.</p>
+<hr class="docutils" />
 <p><em>BondAngle Coeffs</em> section:</p>
 <ul>
 <li><p>one line per angle type</p></li>
@@ -1158,7 +1239,7 @@ coeffs = list of coeffs (see class 2 section of <a class="reference internal" hr
 <li><p>one line per bond</p></li>
 <li><p>line syntax: ID type atom1 atom2</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ID = bond number (1-Nbonds)
-type = bond type (1-Nbondtype)
+type = bond type (1-Nbondtype, or type label)
 atom1,atom2 = IDs of 1st,2nd atom in bond
 </pre></div>
 </div>
@@ -1169,8 +1250,13 @@ atom1,atom2 = IDs of 1st,2nd atom in bond
 </div>
 </li>
 </ul>
-<p>The <em>Bonds</em> section must appear after the <em>Atoms</em> section.  All values
-in this section must be integers (1, not 1.0).</p>
+<p>The <em>Bonds</em> section must appear after the <em>Atoms</em> section.</p>
+<p>All values in this section must be integers (1, not 1.0).  However,
+the type can be a numeric value or an alphanumeric label.  The latter
+is only allowed if the type label has been defined by the
+<a class="reference internal" href="labelmap.html"><span class="doc">labelmap</span></a> command or a Bond Type Labels section
+earlier in the data file.  See the <a class="reference internal" href="Howto_type_labels.html"><span class="doc">Howto type labels</span></a> doc page for the allowed syntax of type labels
+and a general discussion of how type labels can be used.</p>
 <hr class="docutils" />
 <p><em>Dihedral Coeffs</em> section:</p>
 <ul>
@@ -1193,12 +1279,29 @@ dihedral style.  See the <a class="reference internal" href="dihedral_style.html
 Coefficients can also be set via the
 <a class="reference internal" href="dihedral_coeff.html"><span class="doc">dihedral_coeff</span></a> command in the input script.</p>
 <hr class="docutils" />
+<p><em>Dihedral Type Labels</em> section:</p>
+<ul>
+<li><p>one line per dihedral type</p></li>
+<li><p>line syntax: ID label</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ID = dihedral type (1-N)
+label = alphanumeric type label
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Define alphanumeric type labels for each numeric dihedral type.  These
+can be used in the Dihedrals section in place of a numeric type, but
+only if the this section appears before the Dihedrals section.</p>
+<p>See the <a class="reference internal" href="Howto_type_labels.html"><span class="doc">Howto type labels</span></a> doc page for the
+allowed syntax of type labels and a general discussion of how type
+labels can be used.</p>
+<hr class="docutils" />
 <p><em>Dihedrals</em> section:</p>
 <ul>
 <li><p>one line per dihedral</p></li>
 <li><p>line syntax: ID type atom1 atom2 atom3 atom4</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ID = number of dihedral (1-Ndihedrals)
-type = dihedral type (1-Ndihedraltype)
+type = dihedral type (1-Ndihedraltype, or type label)
 atom1,atom2,atom3,atom4 = IDs of 1st,2nd,3rd,4th atom in dihedral
 </pre></div>
 </div>
@@ -1210,8 +1313,13 @@ atom1,atom2,atom3,atom4 = IDs of 1st,2nd,3rd,4th atom in dihedral
 </li>
 </ul>
 <p>The 4 atoms are ordered linearly within the dihedral.  The <em>Dihedrals</em>
-section must appear after the <em>Atoms</em> section.  All values in this
-section must be integers (1, not 1.0).</p>
+section must appear after the <em>Atoms</em> section.</p>
+<p>All values in this section must be integers (1, not 1.0).  However,
+the type can be a numeric value or an alphanumeric label.  The latter
+is only allowed if the type label has been defined by the
+<a class="reference internal" href="labelmap.html"><span class="doc">labelmap</span></a> command or a Dihedral Type Labels section
+earlier in the data file.  See the <a class="reference internal" href="Howto_type_labels.html"><span class="doc">Howto type labels</span></a> doc page for the allowed syntax of type labels
+and a general discussion of how type labels can be used.</p>
 <hr class="docutils" />
 <p><em>Ellipsoids</em> section:</p>
 <ul>
@@ -1279,12 +1387,29 @@ improper style.  See the <a class="reference internal" href="improper_style.html
 Coefficients can also be set via the
 <a class="reference internal" href="improper_coeff.html"><span class="doc">improper_coeff</span></a> command in the input script.</p>
 <hr class="docutils" />
+<p><em>Improper Type Labels</em> section:</p>
+<ul>
+<li><p>one line per improper type</p></li>
+<li><p>line syntax: ID label</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ID = improper type (1-N)
+label = alphanumeric type label
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Define alphanumeric type labels for each numeric improper type.  These
+can be used in the Impropers section in place of a numeric type, but
+only if the this section appears before the Impropers section.</p>
+<p>See the <a class="reference internal" href="Howto_type_labels.html"><span class="doc">Howto type labels</span></a> doc page for the
+allowed syntax of type labels and a general discussion of how type
+labels can be used.</p>
+<hr class="docutils" />
 <p><em>Impropers</em> section:</p>
 <ul>
 <li><p>one line per improper</p></li>
 <li><p>line syntax: ID type atom1 atom2 atom3 atom4</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ID = number of improper (1-Nimpropers)
-type = improper type (1-Nimpropertype)
+type = improper type (1-Nimpropertype, or type label)
 atom1,atom2,atom3,atom4 = IDs of 1st,2nd,3rd,4th atom in improper
 </pre></div>
 </div>
@@ -1296,10 +1421,15 @@ atom1,atom2,atom3,atom4 = IDs of 1st,2nd,3rd,4th atom in improper
 </li>
 </ul>
 <p>The ordering of the 4 atoms determines the definition of the improper
-angle used in the formula for each <a class="reference internal" href="improper_style.html"><span class="doc">improper style</span></a>.  See the doc pages for individual styles
-for details.</p>
-<p>The <em>Impropers</em> section must appear after the <em>Atoms</em> section.  All
-values in this section must be integers (1, not 1.0).</p>
+angle used in the formula for each <a class="reference internal" href="improper_style.html"><span class="doc">improper style</span></a>.  See the doc pages for individual styles for
+details.</p>
+<p>The <em>Impropers</em> section must appear after the <em>Atoms</em> section.</p>
+<p>All values in this section must be integers (1, not 1.0).  However,
+the type can be a numeric value or an alphanumeric label.  The latter
+is only allowed if the type label has been defined by the
+<a class="reference internal" href="labelmap.html"><span class="doc">labelmap</span></a> command or a Improper Type Labels section
+earlier in the data file.  See the <a class="reference internal" href="Howto_type_labels.html"><span class="doc">Howto type labels</span></a> doc page for the allowed syntax of type labels
+and a general discussion of how type labels can be used.</p>
 <hr class="docutils" />
 <p><em>Lines</em> section:</p>
 <ul>
@@ -1333,7 +1463,7 @@ for defining some interactions.</p>
 <ul>
 <li><p>one line per atom type</p></li>
 <li><p>line syntax: ID mass</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ID = atom type (1-N)
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ID = atom type (1-N or atom type label)
 mass = mass value
 </pre></div>
 </div>
@@ -1348,6 +1478,12 @@ mass = mass value
 <a class="reference internal" href="mass.html"><span class="doc">mass</span></a> command in the input script.  This section cannot be
 used for atom styles that define a mass for individual atoms -
 e.g. <a class="reference internal" href="atom_style.html"><span class="doc">atom_style sphere</span></a>.</p>
+<p>Using type labels instead of atom type numbers is only allowed if the
+type label has been defined by the <a class="reference internal" href="labelmap.html"><span class="doc">labelmap</span></a> command or
+a Atom Type Labels section earlier in the data file.  See the
+<a class="reference internal" href="Howto_type_labels.html"><span class="doc">Howto type labels</span></a> doc page for the allowed
+syntax of type labels and a general discussion of how type labels can be
+used.</p>
 <hr class="docutils" />
 <p><em>MiddleBondTorsion Coeffs</em> section:</p>
 <ul>
@@ -1440,10 +1576,6 @@ orientation may be important for defining some interactions.</p>
 <li><p>line syntax: depends on atom style</p></li>
 </ul>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 42%" />
-<col style="width: 58%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p>all styles except those listed</p></td>
 <td><p>atom-ID vx vy vz</p></td>
@@ -1463,10 +1595,14 @@ orientation may be important for defining some interactions.</p>
 </tbody>
 </table>
 <p>where the keywords have these meanings:</p>
-<p>vx,vy,vz = translational velocity of atom
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>vx,vy,vz = translational velocity of atom
 lx,ly,lz = angular momentum of aspherical atom
 wx,wy,wz = angular velocity of spherical atom
-ervel = electron radial velocity (0 for fixed-core):ul</p>
+ervel = electron radial velocity (0 for fixed-core)
+</pre></div>
+</div>
+</div></blockquote>
 <p>The velocity lines can appear in any order.  This section can only be
 used after an <em>Atoms</em> section.  This is because the <em>Atoms</em> section
 must have assigned a unique atom ID to each atom so that velocities
@@ -1482,7 +1618,7 @@ are those that are not the 5 standard ones (ID,vx,vy,vz).  For
 example, for the “sphere” sub-style, “wx”, “wy”, “wz” values would
 appear.  These are listed in the same order they appear as listed
 above.  Thus if</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">atom_style</span><span class="w"> </span><span class="n">hybrid</span><span class="w"> </span><span class="n">electron</span><span class="w"> </span><span class="n">sphere</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">atom_style</span><span class="w"> </span><span class="n">hybrid</span><span class="w"> </span><span class="n">electron</span><span class="w"> </span><span class="n">sphere</span>
 </pre></div>
 </div>
 <p>were used in the input script, each velocity line would have these
@@ -1495,18 +1631,20 @@ fields:</p>
 </section>
 <hr class="docutils" />
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <p>To read gzipped data files, you must compile LAMMPS with the
 -DLAMMPS_GZIP option.  See the <a class="reference internal" href="Build_settings.html"><span class="doc">Build settings</span></a>
 doc page for details.</p>
+<p>Label maps are currently not supported when using the KOKKOS package.</p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="read_dump.html"><span class="doc">read_dump</span></a>, <a class="reference internal" href="read_restart.html"><span class="doc">read_restart</span></a>,
-<a class="reference internal" href="create_atoms.html"><span class="doc">create_atoms</span></a>, <a class="reference internal" href="write_data.html"><span class="doc">write_data</span></a></p>
+<a class="reference internal" href="create_atoms.html"><span class="doc">create_atoms</span></a>, <a class="reference internal" href="write_data.html"><span class="doc">write_data</span></a>,
+<a class="reference internal" href="labelmap.html"><span class="doc">labelmap</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
 <p>The default for all the <em>extra</em> keywords is 0.</p>
 </section>
 </section>
@@ -1522,7 +1660,7 @@ doc page for details.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -1531,7 +1669,6 @@ doc page for details.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

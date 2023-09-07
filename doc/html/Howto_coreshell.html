@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>8.5.5. Adiabatic core/shell model &mdash; LAMMPS documentation</title>
+  <title>8.5.6. Adiabatic core/shell model &mdash; LAMMPS documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Howto_coreshell.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="8.5.6. Drude induced dipoles" href="Howto_drude.html" />
-    <link rel="prev" title="8.5.4. Polarizable models" href="Howto_polarizable.html" /> 
+    <link rel="next" title="8.5.7. Drude induced dipoles" href="Howto_drude.html" />
+    <link rel="prev" title="8.5.5. Polarizable models" href="Howto_polarizable.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -64,12 +68,14 @@
 <li class="toctree-l3"><a class="reference internal" href="Howto_spherical.html">8.5.1. Finite-size spherical and aspherical particles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Howto_granular.html">8.5.2. Granular models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Howto_body.html">8.5.3. Body particles</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Howto_polarizable.html">8.5.4. Polarizable models</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">8.5.5. Adiabatic core/shell model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Howto_drude.html">8.5.6. Drude induced dipoles</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Howto_drude2.html">8.5.7. Tutorial for Thermalized Drude oscillators in LAMMPS</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Howto_manifold.html">8.5.8. Manifolds (surfaces)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Howto_spins.html">8.5.9. Magnetic spins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_bpm.html">8.5.4. Bonded particle models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_polarizable.html">8.5.5. Polarizable models</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">8.5.6. Adiabatic core/shell model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_drude.html">8.5.7. Drude induced dipoles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_drude2.html">8.5.8. Tutorial for Thermalized Drude oscillators in LAMMPS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_peri.html">8.5.9. Peridynamics with LAMMPS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_manifold.html">8.5.10. Manifolds (surfaces)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_spins.html">8.5.11. Magnetic spins</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Howto.html#tutorials-howto">8.6. Tutorials howto</a></li>
@@ -96,6 +102,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -113,24 +120,24 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Howto.html"><span class="section-number">8. </span>Howto discussions</a> &raquo;</li>
-      <li><span class="section-number">8.5.5. </span>Adiabatic core/shell model</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Howto.html"><span class="section-number">8. </span>Howto discussions</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">8.5.6. </span>Adiabatic core/shell model</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
-        <a href="Howto_polarizable.html" class="btn btn-neutral float-left" title="8.5.4. Polarizable models" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Howto_drude.html" class="btn btn-neutral float-right" title="8.5.6. Drude induced dipoles" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Howto_polarizable.html" class="btn btn-neutral float-left" title="8.5.5. Polarizable models" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Howto_drude.html" class="btn btn-neutral float-right" title="8.5.7. Drude induced dipoles" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="adiabatic-core-shell-model">
-<h1><span class="section-number">8.5.5. </span>Adiabatic core/shell model<a class="headerlink" href="#adiabatic-core-shell-model" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="adiabatic-core-shell-model">
+<h1><span class="section-number">8.5.6. </span>Adiabatic core/shell model<a class="headerlink" href="#adiabatic-core-shell-model" title="Permalink to this heading"></a></h1>
 <p>The adiabatic core-shell model by <a class="reference internal" href="#mitchellfincham"><span class="std std-ref">Mitchell and Fincham</span></a> is a simple method for adding polarizability
 to a system.  In order to mimic the electron shell of an ion, a
 satellite particle is attached to it. This way the ions are split into
@@ -207,15 +214,15 @@ by the <a class="reference internal" href="kspace_style.html"><span class="doc">
 Ewald solvers can be used.</p>
 <p>For the NaCL example problem, these pair style and bond style settings
 are used:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">pair_style</span><span class="w">      </span><span class="n">born</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="o">/</span><span class="n">cs</span><span class="w"> </span><span class="m">20.0</span><span class="w"> </span><span class="m">20.0</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w">      </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w">      </span><span class="m">0.0</span><span class="w"> </span><span class="m">1.000</span><span class="w">   </span><span class="m">0.00</span><span class="w">  </span><span class="m">0.00</span><span class="w">   </span><span class="m">0.00</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">pair_style</span><span class="w">      </span><span class="n">born</span><span class="o">/</span><span class="n">coul</span><span class="o">/</span><span class="n">long</span><span class="o">/</span><span class="n">cs</span><span class="w"> </span><span class="m">20.0</span><span class="w"> </span><span class="m">20.0</span>
+<span class="k">pair_coeff</span><span class="w">      </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w">      </span><span class="m">0.0</span><span class="w"> </span><span class="m">1.000</span><span class="w">   </span><span class="m">0.00</span><span class="w">  </span><span class="m">0.00</span><span class="w">   </span><span class="m">0.00</span>
 <span class="k">pair_coeff</span><span class="w">      </span><span class="m">3</span><span class="w"> </span><span class="m">3</span><span class="w">    </span><span class="m">487.0</span><span class="w"> </span><span class="m">0.23768</span><span class="w"> </span><span class="m">0.00</span><span class="w">  </span><span class="m">1.05</span><span class="w">   </span><span class="m">0.50</span><span class="w"> </span><span class="c">#Na-Na</span>
 <span class="k">pair_coeff</span><span class="w">      </span><span class="m">3</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">145134.0</span><span class="w"> </span><span class="m">0.23768</span><span class="w"> </span><span class="m">0.00</span><span class="w">  </span><span class="m">6.99</span><span class="w">   </span><span class="m">8.70</span><span class="w"> </span><span class="c">#Na-Cl</span>
 <span class="k">pair_coeff</span><span class="w">      </span><span class="m">4</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">405774.0</span><span class="w"> </span><span class="m">0.23768</span><span class="w"> </span><span class="m">0.00</span><span class="w"> </span><span class="m">72.40</span><span class="w"> </span><span class="m">145.40</span><span class="w"> </span><span class="c">#Cl-Cl</span>
 
-<span class="k">bond_style</span><span class="w">      </span><span class="n">harmonic</span><span class="w"></span>
-<span class="k">bond_coeff</span><span class="w">      </span><span class="m">1</span><span class="w"> </span><span class="m">63.014</span><span class="w"> </span><span class="m">0.0</span><span class="w"></span>
-<span class="k">bond_coeff</span><span class="w">      </span><span class="m">2</span><span class="w"> </span><span class="m">25.724</span><span class="w"> </span><span class="m">0.0</span><span class="w"></span>
+<span class="k">bond_style</span><span class="w">      </span><span class="n">harmonic</span>
+<span class="k">bond_coeff</span><span class="w">      </span><span class="m">1</span><span class="w"> </span><span class="m">63.014</span><span class="w"> </span><span class="m">0.0</span>
+<span class="k">bond_coeff</span><span class="w">      </span><span class="m">2</span><span class="w"> </span><span class="m">25.724</span><span class="w"> </span><span class="m">0.0</span>
 </pre></div>
 </div>
 <p>When running dynamics with the adiabatic core/shell model, the
@@ -231,7 +238,7 @@ Therefore it is typically desirable to decouple the relative motion of
 the core/shell pair, which is an imaginary degree of freedom, from the
 real physical system.  To do that, the <a class="reference internal" href="compute_temp_cs.html"><span class="doc">compute temp/cs</span></a> command can be used, in conjunction with
 any of the thermostat fixes, such as <a class="reference internal" href="fix_nh.html"><span class="doc">fix nvt</span></a> or <a class="reference internal" href="fix_langevin.html"><span class="doc">fix langevin</span></a>.  This compute uses the center-of-mass velocity
-of the core/shell pairs to calculate a temperature, and insures that
+of the core/shell pairs to calculate a temperature, and ensures that
 velocity is what is rescaled for thermostatting purposes.  This
 compute also works for a system with both core/shell pairs and
 non-polarized ions (ions without an attached satellite particle).  The
@@ -247,12 +254,12 @@ used to assign the compute to the thermostat fix.  Likewise the
 <a class="reference internal" href="thermo_modify.html"><span class="doc">thermo_modify temp</span></a> command can be used to make
 this temperature be output for the overall system.</p>
 <p>For the NaCl example, this can be done as follows:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">group </span><span class="nv nv-Identifier">cores</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"></span>
-<span class="k">group </span><span class="nv nv-Identifier">shells</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">4</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">CSequ</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">temp</span><span class="o">/</span><span class="n">cs</span><span class="w"> </span><span class="n">cores</span><span class="w"> </span><span class="n">shells</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">group </span><span class="nv nv-Identifier">cores</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span>
+<span class="k">group </span><span class="nv nv-Identifier">shells</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">4</span>
+<span class="k">compute </span><span class="nv nv-Identifier">CSequ</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">temp</span><span class="o">/</span><span class="n">cs</span><span class="w"> </span><span class="n">cores</span><span class="w"> </span><span class="n">shells</span>
 <span class="k">fix </span><span class="nv nv-Identifier">thermoberendsen</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">temp</span><span class="o">/</span><span class="n">berendsen</span><span class="w"> </span><span class="m">1427</span><span class="w"> </span><span class="m">1427</span><span class="w"> </span><span class="m">0.4</span><span class="w">    </span><span class="c"># thermostat for the true physical system</span>
 <span class="k">fix </span><span class="nv nv-Identifier">thermostatequ</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">nve</span><span class="w">                               </span><span class="c"># integrator as needed for the berendsen thermostat</span>
-<span class="k">fix_modify</span><span class="w"> </span><span class="n">thermoberendsen</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">CSequ</span><span class="w"></span>
+<span class="k">fix_modify </span><span class="nv nv-Identifier">thermoberendsen</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">CSequ</span>
 <span class="k">thermo_modify</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">CSequ</span><span class="w">                                </span><span class="c"># output of center-of-mass derived temperature</span>
 </pre></div>
 </div>
@@ -263,12 +270,12 @@ use an additional <a class="reference internal" href="compute_pressure.html"><sp
 the default <a class="reference internal" href="compute_temp.html"><span class="doc">temperature</span></a> and specifying it as a
 second argument in <a class="reference internal" href="fix_modify.html"><span class="doc">fix modify</span></a> and
 <a class="reference internal" href="thermo_modify.html"><span class="doc">thermo_modify</span></a> resulting in:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="nv">(...)</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">CSequ</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">temp</span><span class="o">/</span><span class="n">cs</span><span class="w"> </span><span class="n">cores</span><span class="w"> </span><span class="n">shells</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="nv">(...)</span>
+<span class="k">compute </span><span class="nv nv-Identifier">CSequ</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">temp</span><span class="o">/</span><span class="n">cs</span><span class="w"> </span><span class="n">cores</span><span class="w"> </span><span class="n">shells</span>
 <span class="k">compute </span><span class="nv nv-Identifier">thermo_press_lmp</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">pressure</span><span class="w"> </span><span class="n">thermo_temp</span><span class="w">       </span><span class="c"># pressure for individual particles</span>
 <span class="k">thermo_modify</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">CSequ</span><span class="w"> </span><span class="n">press</span><span class="w"> </span><span class="n">thermo_press_lmp</span><span class="w">         </span><span class="c"># modify thermo to regular pressure</span>
-<span class="k">fix </span><span class="nv nv-Identifier">press_bar</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">npt</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">300</span><span class="w"> </span><span class="m">300</span><span class="w"> </span><span class="m">0.04</span><span class="w"> </span><span class="n">iso</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0.4</span><span class="w"></span>
-<span class="k">fix_modify</span><span class="w"> </span><span class="n">press_bar</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">CSequ</span><span class="w"> </span><span class="n">press</span><span class="w"> </span><span class="n">thermo_press_lmp</span><span class="w">  </span><span class="c"># pressure modification for correct kinetic scalar</span>
+<span class="k">fix </span><span class="nv nv-Identifier">press_bar</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">npt</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">300</span><span class="w"> </span><span class="m">300</span><span class="w"> </span><span class="m">0.04</span><span class="w"> </span><span class="n">iso</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0.4</span>
+<span class="k">fix_modify </span><span class="nv nv-Identifier">press_bar</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">CSequ</span><span class="w"> </span><span class="n">press</span><span class="w"> </span><span class="n">thermo_press_lmp</span><span class="w">  </span><span class="c"># pressure modification for correct kinetic scalar</span>
 </pre></div>
 </div>
 <p>If <a class="reference internal" href="compute_temp_cs.html"><span class="doc">compute temp/cs</span></a> is used, the decoupled
@@ -283,8 +290,8 @@ the core/shell particles, but only assign a center-of-mass velocity to
 the pairs.  This can be done by using the <em>bias</em> keyword of the
 <a class="reference internal" href="velocity.html"><span class="doc">velocity create</span></a> command and assigning the <a class="reference internal" href="compute_temp_cs.html"><span class="doc">compute temp/cs</span></a> command to the <em>temp</em> keyword of the
 <a class="reference internal" href="velocity.html"><span class="doc">velocity</span></a> command, e.g.</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">velocity</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">1427</span><span class="w"> </span><span class="m">134</span><span class="w"> </span><span class="n">bias</span><span class="w"> </span><span class="n">yes</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">CSequ</span><span class="w"></span>
-<span class="k">velocity</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="m">1427</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">CSequ</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">velocity </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">1427</span><span class="w"> </span><span class="m">134</span><span class="w"> </span><span class="n">bias</span><span class="w"> </span><span class="n">yes</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">CSequ</span>
+<span class="k">velocity </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="m">1427</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">CSequ</span>
 </pre></div>
 </div>
 <p>To maintain the correct polarizability of the core/shell pairs, the
@@ -315,18 +322,18 @@ accessed by the <a class="reference internal" href="compute_property_atom.html">
 command, to use as input to the <a class="reference internal" href="compute_chunk_atom.html"><span class="doc">compute chunk/atom</span></a> command to define the core/shell
 pairs as chunks.</p>
 <p>For example if core/shell pairs are the only molecules:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">read_data</span><span class="w"> </span><span class="n">NaCl_CS_x0.1_prop.data</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">prop</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">property</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">molecule</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">cs_chunk</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">chunk</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">c_prop</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">read_data</span><span class="w"> </span><span class="n">NaCl_CS_x0.1_prop.data</span>
+<span class="k">compute </span><span class="nv nv-Identifier">prop</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">property</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">molecule</span>
+<span class="k">compute </span><span class="nv nv-Identifier">cs_chunk</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">chunk</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">c_prop</span>
 <span class="k">compute </span><span class="nv nv-Identifier">cstherm</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">temp</span><span class="o">/</span><span class="n">chunk</span><span class="w"> </span><span class="n">cs_chunk</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">internal</span><span class="w"> </span><span class="n">com</span><span class="w"> </span><span class="n">yes</span><span class="w"> </span><span class="n">cdof</span><span class="w"> </span><span class="m">3.0</span><span class="w">     </span><span class="c"># note the chosen degrees of freedom for the core/shell pairs</span>
-<span class="k">fix </span><span class="nv nv-Identifier">ave_chunk</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">ave</span><span class="o">/</span><span class="n">time</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="n">c_cstherm</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">chunk.dump</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="n">vector</span><span class="w"></span>
+<span class="k">fix </span><span class="nv nv-Identifier">ave_chunk</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">ave</span><span class="o">/</span><span class="n">time</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="n">c_cstherm</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">chunk.dump</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="n">vector</span>
 </pre></div>
 </div>
 <p>For example if core/shell pairs and other molecules are present:</p>
 <div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">csinfo</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">property</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">i_CSID</span><span class="w">                       </span><span class="c"># property/atom command</span>
 <span class="k">read_data</span><span class="w"> </span><span class="n">NaCl_CS_x0.1_prop.data</span><span class="w"> </span><span class="k">fix </span><span class="nv nv-Identifier">csinfo</span><span class="w"> </span><span class="nv nv-Identifier">NULL</span><span class="w"> </span><span class="n">CS</span><span class="o">-</span><span class="n">Info</span><span class="w">  </span><span class="c"># atom property added in the data-file</span>
-<span class="k">compute </span><span class="nv nv-Identifier">prop</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">property</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">i_CSID</span><span class="w"></span>
-<span class="nv">(...)</span><span class="w"></span>
+<span class="k">compute </span><span class="nv nv-Identifier">prop</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">property</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">i_CSID</span>
+<span class="nv">(...)</span>
 </pre></div>
 </div>
 <p>The additional section in the date file would be formatted like this:</p>
@@ -354,14 +361,14 @@ pairs as chunks.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="Howto_polarizable.html" class="btn btn-neutral float-left" title="8.5.4. Polarizable models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Howto_drude.html" class="btn btn-neutral float-right" title="8.5.6. Drude induced dipoles" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Howto_polarizable.html" class="btn btn-neutral float-left" title="8.5.5. Polarizable models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Howto_drude.html" class="btn btn-neutral float-right" title="8.5.7. Drude induced dipoles" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -370,7 +377,6 @@ pairs as chunks.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

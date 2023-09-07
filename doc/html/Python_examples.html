@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2.8. Example Python scripts &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Python_examples.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -89,6 +93,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -106,12 +111,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Python_head.html"><span class="section-number">2. </span>Use Python with LAMMPS</a> &raquo;</li>
-      <li><span class="section-number">2.8. </span>Example Python scripts</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Python_head.html"><span class="section-number">2. </span>Use Python with LAMMPS</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">2.8. </span>Example Python scripts</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="Python_formats.html" class="btn btn-neutral float-left" title="2.7. Output Readers" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -122,8 +126,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="example-python-scripts">
-<h1><span class="section-number">2.8. </span>Example Python scripts<a class="headerlink" href="#example-python-scripts" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="example-python-scripts">
+<h1><span class="section-number">2.8. </span>Example Python scripts<a class="headerlink" href="#example-python-scripts" title="Permalink to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">python/examples</span></code> directory has Python scripts which show how Python
 can run LAMMPS, grab data, change it, and put it back into LAMMPS.</p>
 <p>These are the Python scripts included as demos in the <code class="docutils literal notranslate"><span class="pre">python/examples</span></code>
@@ -132,10 +137,6 @@ things that are possible when Python wraps LAMMPS.  If you create your
 own scripts, send them to us and we can include them in the LAMMPS
 distribution.</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 26%" />
-<col style="width: 74%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">trivial.py</span></code></p></td>
 <td><p>read/run a LAMMPS input script through Python</p></td>
@@ -167,7 +168,7 @@ distribution.</p>
 with <code class="docutils literal notranslate"><span class="pre">gl</span></code> or <code class="docutils literal notranslate"><span class="pre">atomeye</span></code> or <code class="docutils literal notranslate"><span class="pre">pymol</span></code> or <code class="docutils literal notranslate"><span class="pre">vmd</span></code>, depending on what
 visualization package you have installed.</p>
 <p>Note that for GL, you need to be able to run the Pizza.py GL tool,
-which is included in the pizza sub-directory.  See the Pizza.py doc pages for more info:</p>
+which is included in the pizza subdirectory.  See the Pizza.py doc pages for more info:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://lammps.github.io/pizza">https://lammps.github.io/pizza</a></p></li>
 </ul>
@@ -178,8 +179,8 @@ AtomEye web pages for more details:</p>
 <li><p><a class="reference external" href="http://li.mit.edu/Archive/Graphics/A/">http://li.mit.edu/Archive/Graphics/A/</a></p></li>
 <li><p><a class="reference external" href="http://li.mit.edu/Archive/Graphics/A3/A3.html">http://li.mit.edu/Archive/Graphics/A3/A3.html</a></p></li>
 </ul>
-<p>The latter link is to AtomEye 3 which has the scripting
-capability needed by these Python scripts.</p>
+<p>The latter link is to AtomEye 3 which has the scripting capability
+needed by these Python scripts.</p>
 <p>Note that for PyMol, you need to have built and installed the
 open-source version of PyMol in your Python, so that you can import it
 from a Python script.  See the PyMol web pages for more details:</p>
@@ -212,7 +213,7 @@ Click to see larger versions of the images.</section>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -221,7 +222,6 @@ Click to see larger versions of the images.</section>
    
 
 </footer>
-
         </div>
       </div>
     </section>

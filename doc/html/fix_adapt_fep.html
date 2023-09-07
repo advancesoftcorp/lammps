@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>fix adapt/fep command &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/fix_adapt_fep.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -86,6 +90,9 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="fix_addforce.html">fix addforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_addtorque.html">fix addtorque command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_alchemy.html">fix alchemy command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_amoeba_bitorsion.html">fix amoeba/bitorsion command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_amoeba_pitorsion.html">fix amoeba/pitorsion command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_append_atoms.html">fix append/atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_atc.html">fix atc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_atom_swap.html">fix atom/swap command</a></li>
@@ -93,8 +100,11 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_chunk.html">fix ave/chunk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_correlate.html">fix ave/correlate command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_correlate_long.html">fix ave/correlate/long command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_grid.html">fix ave/grid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_histo.html">fix ave/histo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_histo.html#fix-ave-histo-weight-command">fix ave/histo/weight command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_spatial.html">Fix ave/spatial command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_spatial_sphere.html">Fix ave/spatial command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_time.html">fix ave/time command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_aveforce.html">fix aveforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_balance.html">fix balance command</a></li>
@@ -124,10 +134,11 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_drude_transform.html#fix-drude-transform-inverse-command">fix drude/transform/inverse command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_dt_reset.html">fix dt/reset command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_efield.html">fix efield command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_efield.html#fix-efield-tip4p-command">fix efield/tip4p command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ehex.html">fix ehex command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html">fix electrode/conp command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html#fix-electrode-conq-command">fix electrode/conq command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html#fix-electrode-thermo-command">fix electrode/thermo command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html">fix electrode/conp command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html#fix-electrode-conq-command">fix electrode/conq command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html#fix-electrode-thermo-command">fix electrode/thermo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_electron_stopping.html">fix electron/stopping command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_electron_stopping.html#fix-electron-stopping-fit-command">fix electron/stopping/fit command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_enforce2d.html">fix enforce2d command</a></li>
@@ -147,6 +158,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_grem.html">fix grem command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_halt.html">fix halt command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_heat.html">fix heat command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_heat_flow.html">fix heat/flow command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_hyper_global.html">fix hyper/global command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_hyper_local.html">fix hyper/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_imd.html">fix imd command</a></li>
@@ -156,13 +168,13 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_drude.html">fix langevin/drude command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_eff.html">fix langevin/eff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_spin.html">fix langevin/spin command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_latte.html">fix latte command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_fluid.html">fix lb/fluid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_momentum.html">fix lb/momentum command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_viscous.html">fix lb/viscous command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lineforce.html">fix lineforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_manifoldforce.html">fix manifoldforce command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_mdi_aimd.html">fix mdi/aimd command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_mdi_qm.html">fix mdi/qm command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_mdi_qmmm.html">fix mdi/qmmm command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_meso_move.html">fix meso/move command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify.html">fix_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
@@ -223,8 +235,10 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_orient.html#fix-orient-bcc-command">fix orient/bcc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_orient_eco.html">fix orient/eco command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_pafi.html">fix pafi command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pair.html">fix pair command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_phonon.html">fix phonon command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html">fix pimd command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html">fix pimd/langevin command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html#fix-pimd-nvt-command">fix pimd/nvt command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_planeforce.html">fix planeforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_plumed.html">fix plumed command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_poems.html">fix poems command</a></li>
@@ -269,6 +283,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_saed_vtk.html">fix saed/vtk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_setforce.html">fix setforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_setforce.html#fix-setforce-spin-command">fix setforce/spin command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_sgcmc.html">fix sgcmc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shake.html">fix shake command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shake.html#fix-rattle-command">fix rattle command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shardlow.html">fix shardlow command</a></li>
@@ -312,7 +327,9 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-lj1043-command">fix wall/lj1043 command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-colloid-command">fix wall/colloid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-harmonic-command">fix wall/harmonic command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-lepton-command">fix wall/lepton command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-morse-command">fix wall/morse command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-table-command">fix wall/table command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_body_polygon.html">fix wall/body/polygon command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_body_polyhedron.html">fix wall/body/polyhedron command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_ees.html">fix wall/ees command</a></li>
@@ -333,6 +350,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -350,12 +368,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="fixes.html">Fixes</a> &raquo;</li>
-      <li>fix adapt/fep command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="fixes.html">Fixes</a></li>
+      <li class="breadcrumb-item active">fix adapt/fep command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="fix_adapt.html" class="btn btn-neutral float-left" title="fix adapt command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -366,11 +383,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="fix-adapt-fep-command">
-<span id="index-0"></span><h1>fix adapt/fep command<a class="headerlink" href="#fix-adapt-fep-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="fix-adapt-fep-command">
+<span id="index-0"></span><h1>fix adapt/fep command<a class="headerlink" href="#fix-adapt-fep-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fix ID group-ID adapt/fep N attribute args ... keyword value ...
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">ID</span><span class="w"> </span><span class="nv nv-Identifier">group-ID</span><span class="w"> </span><span class="n">adapt</span><span class="o">/</span><span class="n">fep</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="n">attribute</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">...</span>
 </pre></div>
 </div>
 <ul>
@@ -380,7 +398,7 @@
 <li><p>one or more attribute/arg pairs may be appended</p></li>
 <li><p>attribute = <em>pair</em> or <em>kspace</em> or <em>atom</em></p>
 <pre class="literal-block"><em>pair</em> args = pstyle pparam I J v_name
-  pstyle = pair style name, e.g. lj/cut
+  pstyle = pair style name (e.g., lj/cut)
   pparam = parameter to adapt over time
   I,J = type pair(s) to set parameter for
   v_name = variable with name that calculates value of pparam
@@ -407,26 +425,26 @@
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">adapt</span><span class="o">/</span><span class="n">fep</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">pair</span><span class="w"> </span><span class="n">soft</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">v_prefactor</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">adapt</span><span class="o">/</span><span class="n">fep</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">pair</span><span class="w"> </span><span class="n">soft</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="m">2</span><span class="o">*</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="n">v_prefactor</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">adapt</span><span class="o">/</span><span class="n">fep</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">pair</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="w"> </span><span class="n">epsilon</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v_scale1</span><span class="w"> </span><span class="n">coul</span><span class="o">/</span><span class="n">cut</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="n">v_scale2</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="n">yes</span><span class="w"> </span><span class="n">reset</span><span class="w"> </span><span class="n">yes</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">adapt</span><span class="o">/</span><span class="n">fep</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="n">atom</span><span class="w"> </span><span class="n">diameter</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">v_size</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">adapt</span><span class="o">/</span><span class="n">fep</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">pair</span><span class="w"> </span><span class="n">soft</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">v_prefactor</span>
+<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">adapt</span><span class="o">/</span><span class="n">fep</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">pair</span><span class="w"> </span><span class="n">soft</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="m">2</span><span class="o">*</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="n">v_prefactor</span>
+<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">adapt</span><span class="o">/</span><span class="n">fep</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">pair</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="w"> </span><span class="n">epsilon</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v_scale1</span><span class="w"> </span><span class="n">coul</span><span class="o">/</span><span class="n">cut</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="n">v_scale2</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="n">yes</span><span class="w"> </span><span class="n">reset</span><span class="w"> </span><span class="n">yes</span>
+<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">adapt</span><span class="o">/</span><span class="n">fep</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="n">atom</span><span class="w"> </span><span class="n">diameter</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">v_size</span>
 </pre></div>
 </div>
 <p>Example input scripts available: examples/PACKAGES/fep</p>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <p>Change or adapt one or more specific simulation attributes or settings
 over time as a simulation runs.</p>
 <p>This is an enhanced version of the <a class="reference internal" href="fix_adapt.html"><span class="doc">fix adapt</span></a> command
-with two differences,</p>
+with two differences:</p>
 <ul class="simple">
 <li><p>It is possible to modify the charges of chosen atom types only,
 instead of scaling all the charges in the system.</p></li>
-<li><p>There is a new option <em>after</em> for better compatibility with “fix
-ave/time”.</p></li>
+<li><p>There is a new option <em>after</em> for better compatibility with
+<a class="reference internal" href="fix_ave_time.html"><span class="doc">fix ave/time</span></a>.</p></li>
 </ul>
 <p>This version is suited for free energy calculations using
 <a class="reference internal" href="compute_ti.html"><span class="doc">compute ti</span></a> or <a class="reference internal" href="compute_fep.html"><span class="doc">compute fep</span></a>.</p>
@@ -444,8 +462,8 @@ settings.</p>
 set to will be whatever the variable generates.  If the <em>scale</em>
 keyword is set to <em>yes</em>, then the value of the altered parameter will
 be the initial value of that parameter multiplied by whatever the
-variable generates.  I.e. the variable is now a “scale factor” applied
-in (presumably) a time-varying fashion to the parameter.  Internally,
+variable generates (i.e., the variable is now a “scale factor” applied
+in (presumably) a time-varying fashion to the parameter).  Internally,
 the parameters themselves are actually altered; make sure you use the
 <em>reset yes</em> option if you want the parameters to be restored to their
 initial values after the run.</p>
@@ -468,11 +486,6 @@ change.  This is the current list of pair styles and parameters that
 can be varied by this fix.  See the doc pages for individual pair
 styles and their energy formulas for the meaning of these parameters:</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 68%" />
-<col style="width: 22%" />
-<col style="width: 10%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="pair_born.html"><span class="doc">born</span></a></p></td>
 <td><p>a,b,c</p></td>
@@ -600,7 +613,7 @@ pair_*.cpp file associated with the potential.</p>
 </div>
 <p>Note that for many of the potentials, the parameter that can be varied
 is effectively a prefactor on the entire energy expression for the
-potential, e.g. the lj/cut epsilon.  The parameters listed as “scale”
+potential (e.g., the lj/cut epsilon).  The parameters listed as “scale”
 are exactly that, since the energy expression for the
 <a class="reference internal" href="pair_coul.html"><span class="doc">coul/cut</span></a> potential (for example) has no labeled
 prefactor in its formula.  To apply an effective prefactor to some
@@ -614,21 +627,21 @@ parameter is specified, the <em>I</em> and <em>J</em> settings still need to be
 specified, but are ignored.</p>
 <p>Similar to the <a class="reference internal" href="pair_coeff.html"><span class="doc">pair_coeff command</span></a>, I and J can be
 specified in one of two ways.  Explicit numeric values can be used for
-each, as in the first example above.  I &lt;= J is required.  LAMMPS sets
+each, as in the first example above.  <span class="math notranslate nohighlight">\(I \le J\)</span> is required.  LAMMPS sets
 the coefficients for the symmetric J,I interaction to the same values.</p>
 <p>A wild-card asterisk can be used in place of or in conjunction with
-the I,J arguments to set the coefficients for multiple pairs of atom
-types.  This takes the form “*” or “*n” or “n*” or “m*n”.  If N = the
-number of atom types, then an asterisk with no numeric values means
-all types from 1 to N.  A leading asterisk means all types from 1 to n
-(inclusive).  A trailing asterisk means all types from n to N
+the <span class="math notranslate nohighlight">\(I,J\)</span> arguments to set the coefficients for multiple pairs of atom
+types.  This takes the form “*” or “*n” or “m*” or “m*n”.  If <span class="math notranslate nohighlight">\(N\)</span> is
+the number of atom types, then an asterisk with no numeric values means
+all types from 1 to <span class="math notranslate nohighlight">\(N\)</span>.  A leading asterisk means all types from 1 to n
+(inclusive).  A trailing asterisk means all types from m to <span class="math notranslate nohighlight">\(N\)</span>
 (inclusive).  A middle asterisk means all types from m to n
-(inclusive).  Note that only type pairs with I &lt;= J are considered; if
-asterisks imply type pairs where J &lt; I, they are ignored.</p>
-<p>IMPROTANT NOTE: If <a class="reference internal" href="pair_hybrid.html"><span class="doc">pair_style hybrid or hybrid/overlay</span></a> is being used, then the <em>pstyle</em> will
-be a sub-style name.  You must specify I,J arguments that correspond
-to type pair values defined (via the <a class="reference internal" href="pair_coeff.html"><span class="doc">pair_coeff</span></a>
-command) for that sub-style.</p>
+(inclusive).  Note that only type pairs with <span class="math notranslate nohighlight">\(I \le J\)</span> are considered; if
+asterisks imply type pairs where <span class="math notranslate nohighlight">\(J &lt; I\)</span>, they are ignored.</p>
+<p>IMPROTANT NOTE: If <a class="reference internal" href="pair_hybrid.html"><span class="doc">pair_style hybrid or hybrid/overlay</span></a> is
+being used, then the <em>pstyle</em> will be a sub-style name.  You must specify
+<span class="math notranslate nohighlight">\(I,J\)</span> arguments that correspond to type pair values defined (via the
+<a class="reference internal" href="pair_coeff.html"><span class="doc">pair_coeff</span></a> command) for that sub-style.</p>
 <p>The <em>v_name</em> argument for keyword <em>pair</em> is the name of an
 <a class="reference internal" href="variable.html"><span class="doc">equal-style variable</span></a> which will be evaluated each time
 this fix is invoked to set the parameter to a new value.  It should be
@@ -639,18 +652,17 @@ simulation box parameters and timestep and elapsed time.  Thus it is
 easy to specify parameters that change as a function of time or span
 consecutive runs in a continuous fashion.  For the latter, see the
 <em>start</em> and <em>stop</em> keywords of the <a class="reference internal" href="run.html"><span class="doc">run</span></a> command and the
-<em>elaplong</em> keyword of <a class="reference internal" href="thermo_style.html"><span class="doc">thermo_style custom</span></a> for
-details.</p>
+<em>elaplong</em> keyword of <a class="reference internal" href="thermo_style.html"><span class="doc">thermo_style custom</span></a> for details.</p>
 <p>For example, these commands would change the prefactor coefficient of
 the <a class="reference internal" href="pair_soft.html"><span class="doc">pair_style soft</span></a> potential from 10.0 to 30.0 in a
 linear fashion over the course of a simulation:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">variable </span><span class="nv nv-Identifier">prefactor</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="n">ramp</span><span class="nv">(10,30)</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">adapt</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">pair</span><span class="w"> </span><span class="n">soft</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v_prefactor</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">variable </span><span class="nv nv-Identifier">prefactor</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="n">ramp</span><span class="nv">(10,30)</span>
+<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">adapt</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">pair</span><span class="w"> </span><span class="n">soft</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v_prefactor</span>
 </pre></div>
 </div>
 <hr class="docutils" />
 <p>The <em>kspace</em> keyword used the specified variable as a scale factor on
-the energy, forces, virial calculated by whatever K-Space solver is
+the energy, forces, virial calculated by whatever <span class="math notranslate nohighlight">\(k\)</span>-space solver is
 defined by the <a class="reference internal" href="kspace_style.html"><span class="doc">kspace_style</span></a> command.  If the
 variable has a value of 1.0, then the solver is unaltered.</p>
 <p>The <em>kspace</em> keyword works this way whether the <em>scale</em> keyword
@@ -663,8 +675,8 @@ current list of atom parameters that can be varied by this fix:</p>
 <li><p>charge = charge on particle</p></li>
 <li><p>diameter = diameter of particle</p></li>
 </ul>
-<p>The <em>I</em> argument indicates which atom types are affected. A wild-card
-asterisk can be used in place of or in conjunction with the I argument
+<p>The <span class="math notranslate nohighlight">\(I\)</span> argument indicates which atom types are affected. A wild-card
+asterisk can be used in place of or in conjunction with the <span class="math notranslate nohighlight">\(I\)</span> argument
 to set the coefficients for multiple atom types.</p>
 <p>The <em>v_name</em> argument of the <em>atom</em> keyword is the name of an
 <a class="reference internal" href="variable.html"><span class="doc">equal-style variable</span></a> which will be evaluated each time
@@ -674,14 +686,14 @@ discussion above describing the formulas associated with equal-style
 variables.  The new value is assigned to the corresponding attribute
 for all atoms in the fix group.</p>
 <p>If the atom parameter is <em>diameter</em> and per-atom density and per-atom
-mass are defined for particles (e.g. <a class="reference internal" href="atom_style.html"><span class="doc">atom_style granular</span></a>), then the mass of each particle is also
-changed when the diameter changes (density is assumed to stay
-constant).</p>
+mass are defined for particles (e.g., <a class="reference internal" href="atom_style.html"><span class="doc">atom_style granular</span></a>),
+then the mass of each particle is also changed when the diameter changes
+(density is assumed to stay constant).</p>
 <p>For example, these commands would shrink the diameter of all granular
 particles in the “center” group from 1.0 to 0.1 in a linear fashion
 over the course of a 1000-step simulation:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">variable </span><span class="nv nv-Identifier">size</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="n">ramp</span><span class="nv">(1.0,0.1)</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">center</span><span class="w"> </span><span class="n">adapt</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="n">atom</span><span class="w"> </span><span class="n">diameter</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v_size</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">variable </span><span class="nv nv-Identifier">size</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="n">ramp</span><span class="nv">(1.0,0.1)</span>
+<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">center</span><span class="w"> </span><span class="n">adapt</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="n">atom</span><span class="w"> </span><span class="n">diameter</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v_size</span>
 </pre></div>
 </div>
 <p>For <a class="reference internal" href="run_style.html"><span class="doc">rRESPA time integration</span></a>, this fix changes
@@ -689,25 +701,29 @@ parameters on the outermost rRESPA level.</p>
 </section>
 <hr class="docutils" />
 <section id="restart-fix-modify-output-run-start-stop-minimize-info">
-<h2>Restart, fix_modify, output, run start/stop, minimize info<a class="headerlink" href="#restart-fix-modify-output-run-start-stop-minimize-info" title="Permalink to this headline">¶</a></h2>
-<p>No information about this fix is written to <a class="reference internal" href="restart.html"><span class="doc">binary restart files</span></a>.  None of the <a class="reference internal" href="fix_modify.html"><span class="doc">fix_modify</span></a> options
+<h2>Restart, fix_modify, output, run start/stop, minimize info<a class="headerlink" href="#restart-fix-modify-output-run-start-stop-minimize-info" title="Permalink to this heading"></a></h2>
+<p>No information about this fix is written to
+<a class="reference internal" href="restart.html"><span class="doc">binary restart files</span></a>.
+None of the <a class="reference internal" href="fix_modify.html"><span class="doc">fix_modify</span></a> options
 are relevant to this fix.  No global or per-atom quantities are stored
 by this fix for access by various <a class="reference internal" href="Howto_output.html"><span class="doc">output commands</span></a>.
 No parameter of this fix can be used with the <em>start/stop</em> keywords of
-the <a class="reference internal" href="run.html"><span class="doc">run</span></a> command.  This fix is not invoked during <a class="reference internal" href="minimize.html"><span class="doc">energy minimization</span></a>.</p>
+the <a class="reference internal" href="run.html"><span class="doc">run</span></a> command.  This fix is not invoked during
+<a class="reference internal" href="minimize.html"><span class="doc">energy minimization</span></a>.</p>
 </section>
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <blockquote>
 <div><p>none</p>
 </div></blockquote>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="compute_fep.html"><span class="doc">compute fep</span></a>, <a class="reference internal" href="fix_adapt.html"><span class="doc">fix adapt</span></a>, <a class="reference internal" href="compute_ti.html"><span class="doc">compute ti</span></a>, <a class="reference internal" href="pair_fep_soft.html"><span class="doc">pair_style */soft</span></a></p>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
+<p><a class="reference internal" href="compute_fep.html"><span class="doc">compute fep</span></a>, <a class="reference internal" href="fix_adapt.html"><span class="doc">fix adapt</span></a>,
+<a class="reference internal" href="compute_ti.html"><span class="doc">compute ti</span></a>, <a class="reference internal" href="pair_fep_soft.html"><span class="doc">pair_style */soft</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
 <p>The option defaults are scale = no, reset = no, after = no.</p>
 </section>
 </section>
@@ -723,7 +739,7 @@ the <a class="reference internal" href="run.html"><span class="doc">run</span></
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -732,7 +748,6 @@ the <a class="reference internal" href="run.html"><span class="doc">run</span></
    
 
 </footer>
-
         </div>
       </div>
     </section>

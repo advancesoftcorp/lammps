@@ -2,7 +2,7 @@
 /* ----------------------------------------------------------------------
    LAMMPS - Large-scale Atomic/Molecular Massively Parallel Simulator
    https://www.lammps.org/, Sandia National Laboratories
-   Steve Plimpton, sjplimp@sandia.gov
+   LAMMPS development team: developers@lammps.org
 
    Copyright (2003) Sandia Corporation.  Under the terms of Contract
    DE-AC04-94AL85000 with Sandia Corporation, the U.S. Government retains
@@ -58,8 +58,8 @@ void NPairHalfSizeNsqNewtonOmp::build(NeighList *list)
 #endif
   NPAIR_OMP_SETUP(nlocal);
 
-  int i,j,jh,n,itag,jtag,which,imol,iatom;
-  tagint tagprev;
+  int i,j,jh,n,which,imol,iatom;
+  tagint itag,jtag,tagprev;
   double xtmp,ytmp,ztmp,delx,dely,delz,rsq;
   double radi,radsum,cutsq;
   int *neighptr;
@@ -140,7 +140,7 @@ void NPairHalfSizeNsqNewtonOmp::build(NeighList *list)
         if (molecular != Atom::ATOMIC) {
           if (!moltemplate)
             which = find_special(special[i],nspecial[i],tag[j]);
-          else if (imol >=0)
+          else if (imol >= 0)
             which = find_special(onemols[imol]->special[iatom],
                                  onemols[imol]->nspecial[iatom],
                                  tag[j]-tagprev);

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>1.1.1. Creating or deleting a LAMMPS object &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Library_create.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -95,6 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -112,12 +117,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Library.html"><span class="section-number">1. </span>LAMMPS Library Interfaces</a> &raquo;</li>
-      <li><span class="section-number">1.1.1. </span>Creating or deleting a LAMMPS object</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Library.html"><span class="section-number">1. </span>LAMMPS Library Interfaces</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">1.1.1. </span>Creating or deleting a LAMMPS object</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="Library.html" class="btn btn-neutral float-left" title="1. LAMMPS Library Interfaces" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -128,8 +132,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="creating-or-deleting-a-lammps-object">
-<h1><span class="section-number">1.1.1. </span>Creating or deleting a LAMMPS object<a class="headerlink" href="#creating-or-deleting-a-lammps-object" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="creating-or-deleting-a-lammps-object">
+<h1><span class="section-number">1.1.1. </span>Creating or deleting a LAMMPS object<a class="headerlink" href="#creating-or-deleting-a-lammps-object" title="Permalink to this heading"></a></h1>
 <p>This section documents the following functions:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#_CPPv411lammps_openiPPc8MPI_CommPPv" title="lammps_open"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_open()</span></code></a></p></li>
@@ -140,6 +145,7 @@
 <li><p><a class="reference internal" href="#_CPPv419lammps_mpi_finalizev" title="lammps_mpi_finalize"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_mpi_finalize()</span></code></a></p></li>
 <li><p><a class="reference internal" href="#_CPPv422lammps_kokkos_finalizev" title="lammps_kokkos_finalize"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_kokkos_finalize()</span></code></a></p></li>
 <li><p><a class="reference internal" href="#_CPPv422lammps_python_finalizev" title="lammps_python_finalize"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_python_finalize()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#_CPPv412lammps_errorPviPKc" title="lammps_error"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_error()</span></code></a></p></li>
 </ul>
 <hr class="docutils" />
 <p>The <a class="reference internal" href="#_CPPv411lammps_openiPPc8MPI_CommPPv" title="lammps_open"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_open()</span></code></a> and <a class="reference internal" href="#_CPPv418lammps_open_no_mpiiPPcPPv" title="lammps_open_no_mpi"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_open_no_mpi()</span></code></a> functions
@@ -148,33 +154,33 @@ return a reference to this instance as a <code class="docutils literal notransla
 as the “handle” argument in subsequent function calls until that
 instance is destroyed by calling <a class="reference internal" href="#_CPPv412lammps_closePv" title="lammps_close"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_close()</span></code></a>.  Here is a
 simple example demonstrating its use:</p>
-<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;library.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;library.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">handle</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">version</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">lmpargv</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;liblammps&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;-log&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;none&quot;</span><span class="p">};</span><span class="w"></span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">lmpargc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">lmpargv</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">);</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">handle</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">version</span><span class="p">;</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">lmpargv</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;liblammps&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;-log&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;none&quot;</span><span class="p">};</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">lmpargc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">lmpargv</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">);</span>
 
-<span class="w">  </span><span class="cm">/* create LAMMPS instance */</span><span class="w"></span>
-<span class="w">  </span><span class="n">handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lammps_open_no_mpi</span><span class="p">(</span><span class="n">lmpargc</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="p">)</span><span class="n">lmpargv</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">handle</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;LAMMPS initialization failed&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">lammps_mpi_finalize</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* create LAMMPS instance */</span>
+<span class="w">  </span><span class="n">handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lammps_open_no_mpi</span><span class="p">(</span><span class="n">lmpargc</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="p">)</span><span class="n">lmpargv</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">handle</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;LAMMPS initialization failed&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">lammps_mpi_finalize</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
 
-<span class="w">  </span><span class="cm">/* get and print numerical version code */</span><span class="w"></span>
-<span class="w">  </span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lammps_version</span><span class="p">(</span><span class="n">handle</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;LAMMPS Version: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">version</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* get and print numerical version code */</span>
+<span class="w">  </span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lammps_version</span><span class="p">(</span><span class="n">handle</span><span class="p">);</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;LAMMPS Version: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">version</span><span class="p">);</span>
 
-<span class="w">  </span><span class="cm">/* delete LAMMPS instance and shut down MPI */</span><span class="w"></span>
-<span class="w">  </span><span class="n">lammps_close</span><span class="p">(</span><span class="n">handle</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="n">lammps_mpi_finalize</span><span class="p">();</span><span class="w"></span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* delete LAMMPS instance and shut down MPI */</span>
+<span class="w">  </span><span class="n">lammps_close</span><span class="p">(</span><span class="n">handle</span><span class="p">);</span>
+<span class="w">  </span><span class="n">lammps_mpi_finalize</span><span class="p">();</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>The LAMMPS library uses the MPI library it was compiled with and will
@@ -203,7 +209,7 @@ calling program.</p>
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv411lammps_openiPPc8MPI_CommPPv">
-<span id="_CPPv311lammps_openiPPc8MPI_CommPPv"></span><span id="_CPPv211lammps_openiPPc8MPI_CommPPv"></span><span id="lammps_open__i.cPP.MPI_Comm.voidPP"></span><span class="target" id="library_8h_1a72b42bbe7e60dc8851ef0e955cfad399"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">lammps_open</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">argc</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">argv</span></span>, <span class="n"><span class="pre">MPI_Comm</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">comm</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ptr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411lammps_openiPPc8MPI_CommPPv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv311lammps_openiPPc8MPI_CommPPv"></span><span id="_CPPv211lammps_openiPPc8MPI_CommPPv"></span><span id="lammps_open__i.cPP.MPI_Comm.voidPP"></span><span class="target" id="library_8h_1a72b42bbe7e60dc8851ef0e955cfad399"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">lammps_open</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">argc</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">argv</span></span>, <span class="n"><span class="pre">MPI_Comm</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">comm</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ptr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411lammps_openiPPc8MPI_CommPPv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Create instance of the LAMMPS class and return pointer to it.</p>
 <p><p>The <a class="reference internal" href="#_CPPv411lammps_openiPPc8MPI_CommPPv" title="lammps_open"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_open()</span></code></a> function creates a new <a class="reference internal" href="Classes_lammps.html#_CPPv4N9LAMMPS_NS6LAMMPSE" title="LAMMPS_NS::LAMMPS"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">LAMMPS</span></code></a> class instance while passing in a list of strings
 as if they were <a class="reference internal" href="Run_options.html"><span class="doc">command-line arguments</span></a> for the
@@ -240,16 +246,16 @@ or contains a <code class="docutils literal notranslate"><span class="pre">#defi
 functions.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>argc</strong> – number of command line arguments </p></li>
 <li><p><strong>argv</strong> – list of command line argument strings </p></li>
 <li><p><strong>comm</strong> – MPI communicator for this LAMMPS instance </p></li>
-<li><p><strong>ptr</strong> – pointer to a void pointer variable which serves as a handle; may be <code class="docutils literal notranslate"><span class="pre">NULL</span></code> </p></li>
+<li><p><strong>ptr</strong> – pointer to a void pointer variable which serves as a handle; may be <code class="docutils literal notranslate"><span class="pre">NULL</span></code></p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>pointer to new LAMMPS instance cast to <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*</span></code> </p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>pointer to new LAMMPS instance cast to <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -257,7 +263,7 @@ functions.</p>
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv418lammps_open_no_mpiiPPcPPv">
-<span id="_CPPv318lammps_open_no_mpiiPPcPPv"></span><span id="_CPPv218lammps_open_no_mpiiPPcPPv"></span><span id="lammps_open_no_mpi__i.cPP.voidPP"></span><span class="target" id="library_8h_1a01c641f102a6d3fa96ed34750914a98a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">lammps_open_no_mpi</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">argc</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">argv</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ptr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lammps_open_no_mpiiPPcPPv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv318lammps_open_no_mpiiPPcPPv"></span><span id="_CPPv218lammps_open_no_mpiiPPcPPv"></span><span id="lammps_open_no_mpi__i.cPP.voidPP"></span><span class="target" id="library_8h_1a01c641f102a6d3fa96ed34750914a98a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">lammps_open_no_mpi</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">argc</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">argv</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ptr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lammps_open_no_mpiiPPcPPv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Variant of <code class="docutils literal notranslate"><span class="pre">lammps_open()</span></code> that implicitly uses <code class="docutils literal notranslate"><span class="pre">MPI_COMM_WORLD</span></code>.</p>
 <p><p>This function is a version of <a class="reference internal" href="#_CPPv411lammps_openiPPc8MPI_CommPPv" title="lammps_open"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_open()</span></code></a>, that is missing
 the MPI communicator argument.  It will use <code class="docutils literal notranslate"><span class="pre">MPI_COMM_WORLD</span></code> instead.
@@ -285,15 +291,15 @@ It should be set to <code class="docutils literal notranslate"><span class="pre"
 </dl>
 </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>argc</strong> – number of command line arguments </p></li>
 <li><p><strong>argv</strong> – list of command line argument strings </p></li>
-<li><p><strong>ptr</strong> – pointer to a void pointer variable which serves as a handle; may be <code class="docutils literal notranslate"><span class="pre">NULL</span></code> </p></li>
+<li><p><strong>ptr</strong> – pointer to a void pointer variable which serves as a handle; may be <code class="docutils literal notranslate"><span class="pre">NULL</span></code></p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>pointer to new LAMMPS instance cast to <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*</span></code> </p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>pointer to new LAMMPS instance cast to <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -301,9 +307,12 @@ It should be set to <code class="docutils literal notranslate"><span class="pre"
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv419lammps_open_fortraniPPci">
-<span id="_CPPv319lammps_open_fortraniPPci"></span><span id="_CPPv219lammps_open_fortraniPPci"></span><span id="lammps_open_fortran__i.cPP.i"></span><span class="target" id="library_8h_1a4f33b973643d1fee38ecdd87c81bbb0f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">lammps_open_fortran</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">argc</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">argv</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">f_comm</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lammps_open_fortraniPPci" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv319lammps_open_fortraniPPci"></span><span id="_CPPv219lammps_open_fortraniPPci"></span><span id="lammps_open_fortran__i.cPP.i"></span><span class="target" id="library_8h_1a4f33b973643d1fee38ecdd87c81bbb0f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">lammps_open_fortran</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">argc</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">argv</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">f_comm</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lammps_open_fortraniPPci" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Variant of <code class="docutils literal notranslate"><span class="pre">lammps_open()</span></code> using a Fortran MPI communicator.</p>
-<p><p>This function is a version of <a class="reference internal" href="#_CPPv411lammps_openiPPc8MPI_CommPPv" title="lammps_open"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_open()</span></code></a>, that uses an
+<p><div class="versionadded">
+<p><span class="versionmodified added">New in version 18Sep2020.</span></p>
+</div>
+<p>This function is a version of <a class="reference internal" href="#_CPPv411lammps_openiPPc8MPI_CommPPv" title="lammps_open"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_open()</span></code></a>, that uses an
 integer for the MPI communicator as the MPI Fortran interface does.  It
 is used in the <code class="xref f f-func docutils literal notranslate"><span class="pre">lammps()</span></code> constructor of the LAMMPS Fortran
 module.  Internally it converts the <em>f_comm</em> argument into a C-style MPI
@@ -311,24 +320,21 @@ communicator with <code class="docutils literal notranslate"><span class="pre">M
 <a class="reference internal" href="#_CPPv411lammps_openiPPc8MPI_CommPPv" title="lammps_open"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_open()</span></code></a>.</p>
 <p>If for some reason the creation or initialization of the LAMMPS instance
 fails a null pointer is returned.</p>
-<div class="versionadded">
-<p><span class="versionmodified added">New in version 18Sep2020.</span></p>
-</div>
 <dl class="simple">
 <dt><em>See also</em></dt><dd><p><a class="reference internal" href="#_CPPv419lammps_open_fortraniPPci" title="lammps_open_fortran"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_open_fortran()</span></code></a>, <a class="reference internal" href="#_CPPv418lammps_open_no_mpiiPPcPPv" title="lammps_open_no_mpi"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_open_no_mpi()</span></code></a></p>
 </dd>
 </dl>
 </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>argc</strong> – number of command line arguments </p></li>
 <li><p><strong>argv</strong> – list of command line argument strings </p></li>
 <li><p><strong>f_comm</strong> – Fortran style MPI communicator for this LAMMPS instance </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>pointer to new LAMMPS instance cast to <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*</span></code> </p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>pointer to new LAMMPS instance cast to <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -336,7 +342,7 @@ fails a null pointer is returned.</p>
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv412lammps_closePv">
-<span id="_CPPv312lammps_closePv"></span><span id="_CPPv212lammps_closePv"></span><span id="lammps_close__voidP"></span><span class="target" id="library_8h_1a75570a623be78c153a75eb533a0b65d2"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_close</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412lammps_closePv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv312lammps_closePv"></span><span id="_CPPv212lammps_closePv"></span><span id="lammps_close__voidP"></span><span class="target" id="library_8h_1a75570a623be78c153a75eb533a0b65d2"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_close</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412lammps_closePv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Delete a LAMMPS instance created by lammps_open() or its variants.</p>
 <p>This function deletes the LAMMPS class instance pointed to by <code class="docutils literal notranslate"><span class="pre">handle</span></code>
 that was created by one of the <a class="reference internal" href="#_CPPv411lammps_openiPPc8MPI_CommPPv" title="lammps_open"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_open()</span></code></a> variants.  It
@@ -344,7 +350,7 @@ does <strong>not</strong> call <code class="docutils literal notranslate"><span 
 multiple LAMMPS instances concurrently or sequentially.  See
 <a class="reference internal" href="#_CPPv419lammps_mpi_finalizev" title="lammps_mpi_finalize"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_mpi_finalize()</span></code></a> for a function performing this operation.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>handle</strong> – pointer to a previously created LAMMPS instance </p>
 </dd>
 </dl>
@@ -353,70 +359,70 @@ multiple LAMMPS instances concurrently or sequentially.  See
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv415lammps_mpi_initv">
-<span id="_CPPv315lammps_mpi_initv"></span><span id="_CPPv215lammps_mpi_initv"></span><span id="lammps_mpi_init"></span><span class="target" id="library_8h_1afee0113d4bcf1cbe55a8f83176b39b59"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_mpi_init</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415lammps_mpi_initv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv315lammps_mpi_initv"></span><span id="_CPPv215lammps_mpi_initv"></span><span id="lammps_mpi_init"></span><span class="target" id="library_8h_1afee0113d4bcf1cbe55a8f83176b39b59"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_mpi_init</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415lammps_mpi_initv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Ensure the MPI environment is initialized.</p>
-<p><p><p>The MPI standard requires that any MPI application must call
+<p><div class="versionadded">
+<p><span class="versionmodified added">New in version 18Sep2020.</span></p>
+</div>
+<p>The MPI standard requires that any MPI application must call
 <code class="docutils literal notranslate"><span class="pre">MPI_Init()</span></code> exactly once before performing any other MPI function
 calls.  This function checks, whether MPI is already initialized and
 calls <code class="docutils literal notranslate"><span class="pre">MPI_Init()</span></code> in case it is not.</p>
-<div class="versionadded">
-<p><span class="versionmodified added">New in version 18Sep2020.</span></p>
-</div>
 </p>
- </p>
 </dd></dl>
 
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv419lammps_mpi_finalizev">
-<span id="_CPPv319lammps_mpi_finalizev"></span><span id="_CPPv219lammps_mpi_finalizev"></span><span id="lammps_mpi_finalize"></span><span class="target" id="library_8h_1a181557f91cb6d49ba67083a51cf110dc"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_mpi_finalize</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lammps_mpi_finalizev" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv319lammps_mpi_finalizev"></span><span id="_CPPv219lammps_mpi_finalizev"></span><span id="lammps_mpi_finalize"></span><span class="target" id="library_8h_1a181557f91cb6d49ba67083a51cf110dc"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_mpi_finalize</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lammps_mpi_finalizev" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Shut down the MPI infrastructure.</p>
-<p><p><p>The MPI standard requires that any MPI application calls
+<p><div class="versionadded">
+<p><span class="versionmodified added">New in version 18Sep2020.</span></p>
+</div>
+<p>The MPI standard requires that any MPI application calls
 <code class="docutils literal notranslate"><span class="pre">MPI_Finalize()</span></code> before exiting.  Even if a calling program does not
 do any MPI calls, MPI is still initialized internally to avoid errors
 accessing any MPI functions.  This function should then be called right
 before exiting the program to wait until all (parallel) tasks are
 completed and then MPI is cleanly shut down.  After calling this
 function no more MPI calls may be made.</p>
-<div class="versionadded">
-<p><span class="versionmodified added">New in version 18Sep2020.</span></p>
-</div>
 <dl class="simple">
 <dt><em>See also</em></dt><dd><p><a class="reference internal" href="#_CPPv422lammps_kokkos_finalizev" title="lammps_kokkos_finalize"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_kokkos_finalize()</span></code></a>, <a class="reference internal" href="#_CPPv422lammps_python_finalizev" title="lammps_python_finalize"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_python_finalize()</span></code></a></p>
 </dd>
 </dl>
 </p>
- </p>
 </dd></dl>
 
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv422lammps_kokkos_finalizev">
-<span id="_CPPv322lammps_kokkos_finalizev"></span><span id="_CPPv222lammps_kokkos_finalizev"></span><span id="lammps_kokkos_finalize"></span><span class="target" id="library_8h_1a295c98b87692b72b5bf594e7b291905b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_kokkos_finalize</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422lammps_kokkos_finalizev" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv322lammps_kokkos_finalizev"></span><span id="_CPPv222lammps_kokkos_finalizev"></span><span id="lammps_kokkos_finalize"></span><span class="target" id="library_8h_1a295c98b87692b72b5bf594e7b291905b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_kokkos_finalize</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422lammps_kokkos_finalizev" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Shut down the Kokkos library environment.</p>
-<p><p><p>The Kokkos library may only be initialized once during the execution of
+<p><div class="versionadded">
+<p><span class="versionmodified added">New in version 2Jul2021.</span></p>
+</div>
+<p>The Kokkos library may only be initialized once during the execution of
 a process.  This is done automatically the first time Kokkos
 functionality is used.  This requires that the Kokkos environment
 must be explicitly shut down after any LAMMPS instance using it is
 closed (to release associated resources).
 After calling this function no Kokkos functionality may be used.</p>
-<div class="versionadded">
-<p><span class="versionmodified added">New in version 2Jul2021.</span></p>
-</div>
 <dl class="simple">
 <dt><em>See also</em></dt><dd><p><a class="reference internal" href="#_CPPv419lammps_mpi_finalizev" title="lammps_mpi_finalize"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_mpi_finalize()</span></code></a>, <a class="reference internal" href="#_CPPv422lammps_python_finalizev" title="lammps_python_finalize"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_python_finalize()</span></code></a></p>
 </dd>
 </dl>
 </p>
- </p>
 </dd></dl>
 
 <hr class="docutils" />
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv422lammps_python_finalizev">
-<span id="_CPPv322lammps_python_finalizev"></span><span id="_CPPv222lammps_python_finalizev"></span><span id="lammps_python_finalize"></span><span class="target" id="library_8h_1a5d625667e3988ecae35e94490cb5aa8f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_python_finalize</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422lammps_python_finalizev" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv322lammps_python_finalizev"></span><span id="_CPPv222lammps_python_finalizev"></span><span id="lammps_python_finalize"></span><span class="target" id="library_8h_1a5d625667e3988ecae35e94490cb5aa8f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_python_finalize</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422lammps_python_finalizev" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Clear the embedded Python environment</p>
-<p><p><p>This function resets and clears an embedded Python environment
+<p><div class="versionadded">
+<p><span class="versionmodified added">New in version 20Sep2021.</span></p>
+</div>
+<p>This function resets and clears an embedded Python environment
 by calling the <a class="reference external" href="https://docs.python.org/3/c-api/init.html#c.Py_FinalizeEx">Py_Finalize() function</a>
 of the embedded Python library, if enabled.
 This call would free up all allocated resources and release
@@ -431,15 +437,37 @@ LAMMPS instances using Python would be created <em>after</em>
 after calling Py_Finalize().</p>
 <p>This function can be called to explicitly clear the Python
 environment in case it is safe to do so.</p>
-<div class="versionadded">
-<p><span class="versionmodified added">New in version 20Sep2021.</span></p>
-</div>
 <dl class="simple">
 <dt><em>See also</em></dt><dd><p><a class="reference internal" href="#_CPPv419lammps_mpi_finalizev" title="lammps_mpi_finalize"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_mpi_finalize()</span></code></a>, <a class="reference internal" href="#_CPPv422lammps_kokkos_finalizev" title="lammps_kokkos_finalize"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lammps_kokkos_finalize()</span></code></a></p>
 </dd>
 </dl>
 </p>
- </p>
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv412lammps_errorPviPKc">
+<span id="_CPPv312lammps_errorPviPKc"></span><span id="_CPPv212lammps_errorPviPKc"></span><span id="lammps_error__voidP.i.cCP"></span><span class="target" id="library_8h_1ad365a1950c1e4e6bf21e414cab86a57a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lammps_error</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">error_type</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">error_text</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412lammps_errorPviPKc" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Call a LAMMPS Error class function</p>
+<p><div class="versionadded">
+<p><span class="versionmodified added">New in version 3Nov2022.</span></p>
+</div>
+<p>This function is a wrapper around functions in the <code class="docutils literal notranslate"><span class="pre">Error</span></code> to print an
+error message and then stop LAMMPS.</p>
+<p>The <em>error_type</em> parameter selects which function to call.  It is a sum
+of constants from <code class="xref cpp cpp-enum docutils literal notranslate"><span class="pre">_LMP_ERROR_CONST</span></code>.  If the value does not
+match any valid combination of constants a warning is printed and the
+function returns.</p>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>handle</strong> – pointer to a previously created LAMMPS instance </p></li>
+<li><p><strong>error_type</strong> – parameter to select function in the Error class </p></li>
+<li><p><strong>error_text</strong> – error message </p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -455,7 +483,7 @@ environment in case it is safe to do so.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -464,7 +492,6 @@ environment in case it is safe to do so.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

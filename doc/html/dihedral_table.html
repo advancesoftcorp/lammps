@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>dihedral_style table command &mdash; LAMMPS documentation</title>
@@ -10,18 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/dihedral_table.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -34,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -86,6 +89,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dihedral_harmonic.html">dihedral_style harmonic command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_helix.html">dihedral_style helix command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_hybrid.html">dihedral_style hybrid command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dihedral_lepton.html">dihedral_style lepton command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_multi_harmonic.html">dihedral_style multi/harmonic command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_nharmonic.html">dihedral_style nharmonic command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_none.html">dihedral_style none command</a></li>
@@ -104,10 +108,12 @@
 <li class="toctree-l3"><a class="reference internal" href="#default">Default</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="dihedral_write.html">dihedral_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_zero.html">dihedral_style zero command</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -125,12 +131,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="dihedrals.html">Dihedral Styles</a> &raquo;</li>
-      <li>dihedral_style table command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="dihedrals.html">Dihedral Styles</a></li>
+      <li class="breadcrumb-item active">dihedral_style table command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="dihedral_spherical.html" class="btn btn-neutral float-left" title="dihedral_style spherical command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -141,15 +146,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <span class="target" id="index-0"></span><span class="target" id="index-1"></span><section id="dihedral-style-table-command">
-<span id="index-2"></span><h1>dihedral_style table command<a class="headerlink" href="#dihedral-style-table-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<span class="target" id="index-0"></span><span class="target" id="index-1"></span><section id="dihedral-style-table-command">
+<span id="index-2"></span><h1>dihedral_style table command<a class="headerlink" href="#dihedral-style-table-command" title="Permalink to this heading"></a></h1>
 <p>Accelerator Variants: <em>table/omp</em></p>
 </section>
 <section id="dihedral-style-table-cut-command">
-<h1>dihedral_style table/cut command<a class="headerlink" href="#dihedral-style-table-cut-command" title="Permalink to this headline">¶</a></h1>
+<h1>dihedral_style table/cut command<a class="headerlink" href="#dihedral-style-table-cut-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">dihedral_style</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="n">interpolation</span><span class="w"> </span><span class="n">Ntable</span><span class="w"></span>
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">dihedral_style</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="n">interpolation</span><span class="w"> </span><span class="n">Ntable</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -159,21 +165,21 @@
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">dihedral_style</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">spline</span><span class="w"> </span><span class="m">400</span><span class="w"></span>
-<span class="k">dihedral_style</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">linear</span><span class="w"> </span><span class="m">1000</span><span class="w"></span>
-<span class="k">dihedral_coeff</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">file.table</span><span class="w"> </span><span class="n">DIH_TABLE1</span><span class="w"></span>
-<span class="k">dihedral_coeff</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">file.table</span><span class="w"> </span><span class="n">DIH_TABLE2</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">dihedral_style</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">spline</span><span class="w"> </span><span class="m">400</span>
+<span class="k">dihedral_style</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">linear</span><span class="w"> </span><span class="m">1000</span>
+<span class="k">dihedral_coeff</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">file.table</span><span class="w"> </span><span class="n">DIH_TABLE1</span>
+<span class="k">dihedral_coeff</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">file.table</span><span class="w"> </span><span class="n">DIH_TABLE2</span>
 
-<span class="k">dihedral_style</span><span class="w"> </span><span class="n">table</span><span class="o">/</span><span class="n">cut</span><span class="w"> </span><span class="n">spline</span><span class="w"> </span><span class="m">400</span><span class="w"></span>
-<span class="k">dihedral_style</span><span class="w"> </span><span class="n">table</span><span class="o">/</span><span class="n">cut</span><span class="w"> </span><span class="n">linear</span><span class="w"> </span><span class="m">1000</span><span class="w"></span>
-<span class="k">dihedral_coeff</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">aat</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">177</span><span class="w"> </span><span class="m">180</span><span class="w"> </span><span class="n">file.table</span><span class="w"> </span><span class="n">DIH_TABLE1</span><span class="w"></span>
-<span class="k">dihedral_coeff</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">aat</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">170</span><span class="w"> </span><span class="m">180</span><span class="w"> </span><span class="n">file.table</span><span class="w"> </span><span class="n">DIH_TABLE2</span><span class="w"></span>
+<span class="k">dihedral_style</span><span class="w"> </span><span class="n">table</span><span class="o">/</span><span class="n">cut</span><span class="w"> </span><span class="n">spline</span><span class="w"> </span><span class="m">400</span>
+<span class="k">dihedral_style</span><span class="w"> </span><span class="n">table</span><span class="o">/</span><span class="n">cut</span><span class="w"> </span><span class="n">linear</span><span class="w"> </span><span class="m">1000</span>
+<span class="k">dihedral_coeff</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">aat</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">177</span><span class="w"> </span><span class="m">180</span><span class="w"> </span><span class="n">file.table</span><span class="w"> </span><span class="n">DIH_TABLE1</span>
+<span class="k">dihedral_coeff</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">aat</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">170</span><span class="w"> </span><span class="m">180</span><span class="w"> </span><span class="n">file.table</span><span class="w"> </span><span class="n">DIH_TABLE2</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <p>The <em>table</em> and <em>table/cut</em> dihedral styles create interpolation tables
 of length <em>Ntable</em> from dihedral potential and derivative values listed
 in a file(s) as a function of the dihedral angle “phi”.  The files are
@@ -209,10 +215,10 @@ below.</p>
 <p>For dihedral style <em>table/cut</em> the following coefficients must be
 defined for each dihedral type via the <a class="reference internal" href="dihedral_coeff.html"><span class="doc">dihedral_coeff</span></a> command as in the example above.</p>
 <ul class="simple">
-<li><p>style (aat)</p></li>
-<li><p>cutoff prefactor</p></li>
-<li><p>cutoff angle1</p></li>
-<li><p>cutoff angle2</p></li>
+<li><p>style (= aat)</p></li>
+<li><p>cutoff prefactor (unitless)</p></li>
+<li><p>cutoff angle1 (degrees)</p></li>
+<li><p>cutoff angle2 (degrees)</p></li>
 <li><p>filename</p></li>
 <li><p>keyword</p></li>
 </ul>
@@ -221,9 +227,9 @@ cutoff function:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}f(\theta) &amp; = K \qquad\qquad\qquad\qquad\qquad\qquad \theta &lt; \theta_1 \\
 f(\theta) &amp; = K \left(1-\frac{(\theta - \theta_1)^2}{(\theta_2 - \theta_1)^2}\right) \qquad \theta_1 &lt; \theta &lt; \theta_2\end{split}\]</div>
-<p>The cutoff specifies an prefactor to the cutoff function.  While this
-value would ordinarily equal 1 there may be situations where the value
-should change.</p>
+<p>The cutoff includes a prefactor <em>K</em> to the cutoff function <span class="math notranslate nohighlight">\(f(\theta)\)</span>.
+While this value would ordinarily be 1, there may be situations where the value
+could be different.</p>
 <p>The cutoff <span class="math notranslate nohighlight">\(\theta_1\)</span> specifies the angle (in degrees) below which
 the dihedral interaction is unmodified, i.e. the cutoff function is 1.</p>
 <p>The cutoff function is applied between <span class="math notranslate nohighlight">\(\theta_1\)</span> and
@@ -235,6 +241,9 @@ values. The keyword specifies which section of the file to read.  The
 format of this file is the same for both dihedral styles and described
 below.</p>
 <hr class="docutils" />
+<p>Suitable tables for use with this dihedral style can be created using
+the Python code in the <code class="docutils literal notranslate"><span class="pre">tools/tabulate</span></code> folder of the LAMMPS source
+code distribution.</p>
 <p>The format of a tabulated file is as follows (without the
 parenthesized comments).  It can begin with one or more comment
 or blank lines.</p>
@@ -304,7 +313,7 @@ are then used as described above, when computing energy and force for
 individual dihedral angles and their atoms.  This means that if you
 want the interpolation tables of length <em>Ntable</em> to match exactly what
 is in the tabulated file (with effectively nopreliminary
-interpolation), you should set <em>Ntable</em> = <em>Nfile</em>.  To insure the
+interpolation), you should set <em>Ntable</em> = <em>Nfile</em>.  To ensure the
 nodal points in the user’s file are aligned with the interpolated
 table entries, the angles in the table should be integer multiples of
 360/<em>Ntable</em> degrees, or 2*PI/<em>Ntable</em> radians (depending on your
@@ -341,7 +350,7 @@ hardware, as discussed on the <a class="reference internal" href="Speed_packages
 page.  The accelerated styles take the same arguments and should
 produce the same results, except for round-off and precision issues.</p>
 <p>These accelerated styles are part of the GPU, INTEL, KOKKOS,
-OPENMP and OPT packages, respectively.  They are only enabled if
+OPENMP, and OPT packages, respectively.  They are only enabled if
 LAMMPS was built with those packages.  See the <a class="reference internal" href="Build_package.html"><span class="doc">Build package</span></a> page for more info.</p>
 <p>You can specify the accelerated styles explicitly in your input script
 by including their suffix, or you can use the <a class="reference internal" href="Run_options.html"><span class="doc">-suffix command-line switch</span></a> when you invoke LAMMPS, or you can use the
@@ -350,7 +359,7 @@ by including their suffix, or you can use the <a class="reference internal" href
 instructions on how to use the accelerated styles effectively.</p>
 </section>
 <section id="restart-fix-modify-output-run-start-stop-minimize-info">
-<h2>Restart, fix_modify, output, run start/stop, minimize info<a class="headerlink" href="#restart-fix-modify-output-run-start-stop-minimize-info" title="Permalink to this headline">¶</a></h2>
+<h2>Restart, fix_modify, output, run start/stop, minimize info<a class="headerlink" href="#restart-fix-modify-output-run-start-stop-minimize-info" title="Permalink to this heading"></a></h2>
 <p>These dihedral styles write the settings for the “dihedral_style table”
 or “dihedral_style table/cut” command to <a class="reference internal" href="restart.html"><span class="doc">binary restart files</span></a>, so a dihedral_style command does not need to specified in an
 input script that reads a restart file.  However, the coefficient
@@ -360,18 +369,18 @@ dihedral_coeff commands do need to be specified in the restart input
 script after reading the restart file.</p>
 </section>
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <p>The <em>table</em> dihedral style can only be used if LAMMPS was built with the
 MOLECULE package.  The <em>table/cut</em> dihedral style can only be used if
 LAMMPS was built with the EXTRA-MOLECULE package. See the
 <a class="reference internal" href="Build_package.html"><span class="doc">Build package</span></a> doc page for more info.</p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="dihedral_coeff.html"><span class="doc">dihedral_coeff</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
 <p>none</p>
 </section>
 </section>
@@ -387,7 +396,7 @@ LAMMPS was built with the EXTRA-MOLECULE package. See the
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -396,7 +405,6 @@ LAMMPS was built with the EXTRA-MOLECULE package. See the
    
 
 </footer>
-
         </div>
       </div>
     </section>

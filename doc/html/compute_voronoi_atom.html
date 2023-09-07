@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>compute voronoi/atom command &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/compute_voronoi_atom.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -95,17 +99,21 @@
 <li class="toctree-l2"><a class="reference internal" href="compute_com_chunk.html">compute com/chunk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_contact_atom.html">compute contact/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_coord_atom.html">compute coord/atom command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_count_type.html">compute count/type command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_damage_atom.html">compute damage/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dihedral.html">compute dihedral command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dihedral_local.html">compute dihedral/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dilatation_atom.html">compute dilatation/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dipole.html">compute dipole command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_dipole.html#compute-dipole-tip4p-command">compute dipole/tip4p command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dipole_chunk.html">compute dipole/chunk command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_dipole_chunk.html#compute-dipole-tip4p-chunk-command">compute dipole/tip4p/chunk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_displace_atom.html">compute displace/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dpd.html">compute dpd command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dpd_atom.html">compute dpd/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_edpd_temp_atom.html">compute edpd/temp/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_efield_atom.html">compute efield/atom command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_efield_wolf_atom.html">compute efield/wolf/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_entropy_atom.html">compute entropy/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_erotate_asphere.html">compute erotate/asphere command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_erotate_rigid.html">compute erotate/rigid command</a></li>
@@ -132,7 +140,6 @@
 <li class="toctree-l2"><a class="reference internal" href="compute_ke_atom_eff.html">compute ke/atom/eff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_ke_eff.html">compute ke/eff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_ke_rigid.html">compute ke/rigid command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute_mesont.html">compute mesont command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_mliap.html">compute mliap command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_modify.html">compute_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_momentum.html">compute momentum command</a></li>
@@ -148,9 +155,11 @@
 <li class="toctree-l2"><a class="reference internal" href="compute_pe_atom.html">compute pe/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_plasticity_atom.html">compute plasticity/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_pressure.html">compute pressure command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_pressure_alchemy.html">compute pressure/alchemy command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_pressure_uef.html">compute pressure/uef command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_property_atom.html">compute property/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_property_chunk.html">compute property/chunk command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_property_grid.html">compute property/grid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_property_local.html">compute property/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_ptm_atom.html">compute ptm/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_rdf.html">compute rdf command</a></li>
@@ -185,17 +194,19 @@
 <li class="toctree-l2"><a class="reference internal" href="compute_sna_atom.html#compute-snad-atom-command">compute snad/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_sna_atom.html#compute-snav-atom-command">compute snav/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_sna_atom.html#compute-snap-command">compute snap command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_sna_atom.html#compute-sna-grid-command">compute sna/grid command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_sna_atom.html#compute-sna-grid-local-command">compute sna/grid/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_sph_e_atom.html">compute sph/e/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_sph_rho_atom.html">compute sph/rho/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_sph_t_atom.html">compute sph/t/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_spin.html">compute spin command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_stress_atom.html">compute stress/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_stress_atom.html#compute-centroid-stress-atom-command">compute centroid/stress/atom command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_stress_cartesian.html">compute stress/cartesian command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_stress_curvilinear.html">compute stress/cylinder command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_stress_curvilinear.html#compute-stress-spherical-command">compute stress/spherical command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_stress_mop.html">compute stress/mop command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_stress_mop.html#compute-stress-mop-profile-command">compute stress/mop/profile command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute_stress_profile.html">compute stress/cartesian command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute_stress_profile.html#compute-stress-cylinder-command">compute stress/cylinder command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute_stress_profile.html#compute-stress-spherical-command">compute stress/spherical command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_tally.html">compute force/tally command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_tally.html#compute-heat-flux-tally-command">compute heat/flux/tally command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_tally.html#compute-heat-flux-virial-tally-command">compute heat/flux/virial/tally command</a></li>
@@ -244,6 +255,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -261,12 +273,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="computes.html">Computes</a> &raquo;</li>
-      <li>compute voronoi/atom command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="computes.html">Computes</a></li>
+      <li class="breadcrumb-item active">compute voronoi/atom command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="compute_viscosity_cos.html" class="btn btn-neutral float-left" title="compute viscosity/cos command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -277,19 +288,19 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="compute-voronoi-atom-command">
-<span id="index-0"></span><h1>compute voronoi/atom command<a class="headerlink" href="#compute-voronoi-atom-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="compute-voronoi-atom-command">
+<span id="index-0"></span><h1>compute voronoi/atom command<a class="headerlink" href="#compute-voronoi-atom-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>compute ID group-ID voronoi/atom keyword arg ...
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">ID</span><span class="w"> </span><span class="nv nv-Identifier">group-ID</span><span class="w"> </span><span class="n">voronoi</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">arg</span><span class="w"> </span><span class="n">...</span>
 </pre></div>
 </div>
 <ul>
 <li><p>ID, group-ID are documented in <a class="reference internal" href="compute.html"><span class="doc">compute</span></a> command</p></li>
 <li><p>voronoi/atom = style name of this compute command</p></li>
 <li><p>zero or more keyword/value pairs may be appended</p></li>
-<li><p>keyword = <em>only_group</em> or <em>surface</em> or <em>radius</em> or <em>edge_histo</em> or <em>edge_threshold</em>
-or <em>face_threshold</em> or <em>neighbors</em> or <em>peratom</em></p>
+<li><p>keyword = <em>only_group</em> or <em>occupation</em> or <em>surface</em> or <em>radius</em> or <em>edge_histo</em> or <em>edge_threshold</em> or <em>face_threshold</em> or <em>neighbors</em> or <em>peratom</em></p>
 <pre class="literal-block"><em>only_group</em> = no arg
 <em>occupation</em> = no arg
 <em>surface</em> arg = sgroup-ID
@@ -309,18 +320,18 @@ or <em>face_threshold</em> or <em>neighbors</em> or <em>peratom</em></p>
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">voronoi</span><span class="o">/</span><span class="n">atom</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">precipitate</span><span class="w"> </span><span class="n">voronoi</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">surface</span><span class="w"> </span><span class="n">matrix</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">3b</span><span class="w"> </span><span class="nv nv-Identifier">precipitate</span><span class="w"> </span><span class="n">voronoi</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">radius</span><span class="w"> </span><span class="n">v_r</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">4</span><span class="w"> </span><span class="nv nv-Identifier">solute</span><span class="w"> </span><span class="n">voronoi</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">only_group</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">5</span><span class="w"> </span><span class="nv nv-Identifier">defects</span><span class="w"> </span><span class="n">voronoi</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">occupation</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">6</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">voronoi</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">neighbors</span><span class="w"> </span><span class="n">yes</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">voronoi</span><span class="o">/</span><span class="n">atom</span>
+<span class="k">compute </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">precipitate</span><span class="w"> </span><span class="n">voronoi</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">surface</span><span class="w"> </span><span class="n">matrix</span>
+<span class="k">compute </span><span class="nv nv-Identifier">3b</span><span class="w"> </span><span class="nv nv-Identifier">precipitate</span><span class="w"> </span><span class="n">voronoi</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">radius</span><span class="w"> </span><span class="n">v_r</span>
+<span class="k">compute </span><span class="nv nv-Identifier">4</span><span class="w"> </span><span class="nv nv-Identifier">solute</span><span class="w"> </span><span class="n">voronoi</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">only_group</span>
+<span class="k">compute </span><span class="nv nv-Identifier">5</span><span class="w"> </span><span class="nv nv-Identifier">defects</span><span class="w"> </span><span class="n">voronoi</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">occupation</span>
+<span class="k">compute </span><span class="nv nv-Identifier">6</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">voronoi</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">neighbors</span><span class="w"> </span><span class="n">yes</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <p>Define a computation that calculates the Voronoi tessellation of the
 atoms in the simulation box.  The tessellation is calculated using all
 atoms in the simulation, but non-zero values are only stored for atoms
@@ -347,13 +358,13 @@ group are counted towards the surface area.</p>
 at the surface of the precipitate will have non-zero surface area, and
 only the outward facing facets of the Voronoi cells are counted (the
 hull of the precipitate). The total surface area of the precipitate
-can be obtained by running a “reduce sum” compute on c_2[3]</p>
+can be obtained by running a “reduce sum” compute on c_2[3].</p>
 <p>If the <em>radius</em> keyword is specified with an atom style variable as
 the argument, a poly-disperse Voronoi tessellation is
 performed. Examples for radius variables are</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">variable </span><span class="nv nv-Identifier">r1</span><span class="w"> </span><span class="n">atom</span><span class="w"> </span><span class="nv">(type==1)</span><span class="o">*</span><span class="m">0.1</span><span class="o">+</span><span class="nv">(type==2)</span><span class="o">*</span><span class="m">0.4</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">radius</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">property</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">radius</span><span class="w"></span>
-<span class="k">variable </span><span class="nv nv-Identifier">r2</span><span class="w"> </span><span class="n">atom</span><span class="w"> </span><span class="n">c_radius</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">variable </span><span class="nv nv-Identifier">r1</span><span class="w"> </span><span class="n">atom</span><span class="w"> </span><span class="nv">(type==1)</span><span class="o">*</span><span class="m">0.1</span><span class="o">+</span><span class="nv">(type==2)</span><span class="o">*</span><span class="m">0.4</span>
+<span class="k">compute </span><span class="nv nv-Identifier">radius</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">property</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">radius</span>
+<span class="k">variable </span><span class="nv nv-Identifier">r2</span><span class="w"> </span><span class="n">atom</span><span class="w"> </span><span class="n">c_radius</span>
 </pre></div>
 </div>
 <p>Here v_r1 specifies a per-type radius of 0.1 units for type 1 atoms
@@ -398,53 +409,55 @@ input.  See the <a class="reference internal" href="Howto_output.html"><span cla
 overview of LAMMPS output options. More specifically, the array can be
 accessed by a <a class="reference internal" href="dump.html"><span class="doc">dump local</span></a> command to write a file
 containing all the Voronoi neighbors in a system:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">6</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">voronoi</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">neighbors</span><span class="w"> </span><span class="n">yes</span><span class="w"></span>
-<span class="k">dump </span><span class="nv nv-Identifier">d2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">local</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">dump.neighbors</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="n">c_6[1]</span><span class="w"> </span><span class="n">c_6[2]</span><span class="w"> </span><span class="n">c_6[3]</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">6</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">voronoi</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">neighbors</span><span class="w"> </span><span class="n">yes</span>
+<span class="k">dump </span><span class="nv nv-Identifier">d2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">local</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">dump.neighbors</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="n">c_6[1]</span><span class="w"> </span><span class="n">c_6[2]</span><span class="w"> </span><span class="n">c_6[3]</span>
 </pre></div>
 </div>
 <p>If the <em>face_threshold</em> keyword is used, then only faces
 with areas greater than the threshold are stored.</p>
 <hr class="docutils" />
-<p>The Voronoi calculation is performed by the freely available <a class="reference external" href="http://math.lbl.gov/voro++/">Voro++ package</a>, written by Chris Rycroft at UC Berkeley and LBL,
+<p>The Voronoi calculation is performed by the freely available
+<a class="reference external" href="https://math.lbl.gov/voro++/">Voro++ package</a>, written by Chris Rycroft at UC Berkeley and LBL,
 which must be installed on your system when building LAMMPS for use
 with this compute.  See instructions on obtaining and installing the
 Voro++ software in the src/VORONOI/README file.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The calculation of Voronoi volumes is performed by each
-processor for the atoms it owns, and includes the effect of ghost
-atoms stored by the processor.  This assumes that the Voronoi cells of
-owned atoms are not affected by atoms beyond the ghost atom cut-off
-distance.  This is usually a good assumption for liquid and solid
-systems, but may lead to underestimation of Voronoi volumes in low
-density systems.  By default, the set of ghost atoms stored by each
-processor is determined by the cutoff used for
-<a class="reference internal" href="pair_style.html"><span class="doc">pair_style</span></a> interactions.  The cutoff can be set
-explicitly via the <a class="reference internal" href="comm_modify.html"><span class="doc">comm_modify cutoff</span></a> command.  The
-Voronoi cells for atoms adjacent to empty regions will extend into
-those regions up to the communication cutoff in x, y, or z.  In that
-situation, an exterior face is created at the cutoff distance normal
-to the x, y, or z direction.  For triclinic systems, the exterior face
-is parallel to the corresponding reciprocal lattice vector.</p>
+<p>The calculation of Voronoi volumes is performed by each processor for
+the atoms it owns, and includes the effect of ghost atoms stored by
+the processor.  This assumes that the Voronoi cells of owned atoms
+are not affected by atoms beyond the ghost atom cut-off distance.
+This is usually a good assumption for liquid and solid systems, but
+may lead to underestimation of Voronoi volumes in low density
+systems.  By default, the set of ghost atoms stored by each processor
+is determined by the cutoff used for <a class="reference internal" href="pair_style.html"><span class="doc">pair_style</span></a>
+interactions.  The cutoff can be set explicitly via the
+<a class="reference internal" href="comm_modify.html"><span class="doc">comm_modify cutoff</span></a> command.  The Voronoi cells
+for atoms adjacent to empty regions will extend into those regions up
+to the communication cutoff in <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>, or <span class="math notranslate nohighlight">\(z\)</span>.
+In that situation, an exterior face is created at the cutoff distance
+normal to the <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>, or <span class="math notranslate nohighlight">\(z\)</span> direction.  For
+triclinic systems, the exterior face is parallel to the corresponding
+reciprocal lattice vector.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The Voro++ package performs its calculation in 3d.  This will
 still work for a 2d LAMMPS simulation, provided all the atoms have the
-same z coordinate. The Voronoi cell of each atom will be a columnar
-polyhedron with constant cross-sectional area along the z direction
+same <span class="math notranslate nohighlight">\(z\)</span>-coordinate. The Voronoi cell of each atom will be a columnar
+polyhedron with constant cross-sectional area along the <span class="math notranslate nohighlight">\(z\)</span>-direction
 and two exterior faces at the top and bottom of the simulation box. If
-the atoms do not all have the same z coordinate, then the columnar
+the atoms do not all have the same <span class="math notranslate nohighlight">\(z\)</span>-coordinate, then the columnar
 cells will be accordingly distorted. The cross-sectional area of each
-Voronoi cell can be obtained by dividing its volume by the z extent of
-the simulation box.  Note that you define the z extent of the
+Voronoi cell can be obtained by dividing its volume by the <span class="math notranslate nohighlight">\(z\)</span> extent
+of the simulation box.  Note that you define the <span class="math notranslate nohighlight">\(z\)</span> extent of the
 simulation box for 2d simulations when using the
 <a class="reference internal" href="create_box.html"><span class="doc">create_box</span></a> or <a class="reference internal" href="read_data.html"><span class="doc">read_data</span></a> commands.</p>
 </div>
 </section>
 <section id="output-info">
-<h2>Output info<a class="headerlink" href="#output-info" title="Permalink to this headline">¶</a></h2>
-<p>By default, this compute calculates a per-atom array with 2
+<h2>Output info<a class="headerlink" href="#output-info" title="Permalink to this heading"></a></h2>
+<p>By default, this compute calculates a per-atom array with two
 columns. In regular dynamic tessellation mode the first column is the
 Voronoi volume, the second is the neighbor count, as described above
 (read above for the output data in case the <em>occupation</em> keyword is
@@ -455,13 +468,14 @@ is still created, but it is not accessible.</p>
 <p>If the <em>edge_histo</em> keyword is used, then this compute generates a
 global vector of length <em>maxedge</em>+1, containing a histogram of the
 number of edges per face.</p>
-<p>If the <em>neighbors</em> value is set to yes, then this compute calculates a
-local array with 3 columns. There is one row for each face of each
+<p>If the <em>neighbors</em> value is set to <em>yes</em>, then this compute calculates a
+local array with three columns. There is one row for each face of each
 Voronoi cell.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Some LAMMPS commands such as the <a class="reference internal" href="compute_reduce.html"><span class="doc">compute reduce</span></a> command can accept either a per-atom or
-local quantity. If this compute produces both quantities, the command
+<p>Some LAMMPS commands such as the <a class="reference internal" href="compute_reduce.html"><span class="doc">compute reduce</span></a>
+command can accept either a per-atom or local quantity. If this compute
+produces both quantities, the command
 may access the per-atom quantity, even if you want to access the local
 quantity.  This effect can be eliminated by using the <em>peratom</em>
 keyword to turn off the production of the per-atom quantities.  For
@@ -472,7 +486,7 @@ the default value <em>yes</em> both quantities are produced.  For the value
 The Voronoi face area will be in distance <a class="reference internal" href="units.html"><span class="doc">units</span></a> squared.</p>
 </section>
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <p>This compute is part of the VORONOI package.  It is only enabled if
 LAMMPS was built with that package.  See the <a class="reference internal" href="Build_package.html"><span class="doc">Build package</span></a> page for more info.</p>
 <p>It also requires you have a copy of the Voro++ library built and
@@ -480,11 +494,11 @@ installed on your system.  See instructions on obtaining and
 installing the Voro++ software in the src/VORONOI/README file.</p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="dump.html"><span class="doc">dump custom</span></a>, <a class="reference internal" href="dump.html"><span class="doc">dump local</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
 <p><em>neighbors</em> no, <em>peratom</em> yes</p>
 </section>
 </section>
@@ -500,7 +514,7 @@ installing the Voro++ software in the src/VORONOI/README file.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -509,7 +523,6 @@ installing the Voro++ software in the src/VORONOI/README file.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

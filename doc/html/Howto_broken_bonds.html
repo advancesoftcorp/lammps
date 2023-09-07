@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>8.1.9. Broken Bonds &mdash; LAMMPS documentation</title>
+  <title>8.1.8. Broken Bonds &mdash; LAMMPS documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Howto_broken_bonds.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="8.2.1. 2d simulations" href="Howto_2d.html" />
-    <link rel="prev" title="8.1.8. Bonded particle models" href="Howto_bpm.html" /> 
+    <link rel="prev" title="8.1.7. Using LAMMPS with the MDI library for code coupling" href="Howto_mdi.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -64,8 +68,7 @@
 <li class="toctree-l3"><a class="reference internal" href="Howto_library.html">8.1.5. Library interface to LAMMPS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Howto_couple.html">8.1.6. Coupling LAMMPS to other codes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Howto_mdi.html">8.1.7. Using LAMMPS with the MDI library for code coupling</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Howto_bpm.html">8.1.8. Bonded particle models</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">8.1.9. Broken Bonds</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">8.1.8. Broken Bonds</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Howto.html#settings-howto">8.2. Settings howto</a></li>
@@ -96,6 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -113,15 +117,14 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Howto.html"><span class="section-number">8. </span>Howto discussions</a> &raquo;</li>
-      <li><span class="section-number">8.1.9. </span>Broken Bonds</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Howto.html"><span class="section-number">8. </span>Howto discussions</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">8.1.8. </span>Broken Bonds</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
-        <a href="Howto_bpm.html" class="btn btn-neutral float-left" title="8.1.8. Bonded particle models" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Howto_mdi.html" class="btn btn-neutral float-left" title="8.1.7. Using LAMMPS with the MDI library for code coupling" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="Howto_2d.html" class="btn btn-neutral float-right" title="8.2.1. 2d simulations" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
@@ -129,61 +132,65 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="broken-bonds">
-<h1><span class="section-number">8.1.9. </span>Broken Bonds<a class="headerlink" href="#broken-bonds" title="Permalink to this headline">¶</a></h1>
-<p>Typically, bond interactions persist for the duration of a simulation
-in LAMMPS. However, there are some exceptions that allow for bonds to
-break including the <a class="reference internal" href="bond_quartic.html"><span class="doc">quartic bond style</span></a> and the
-bond styles in the <a class="reference internal" href="Howto_bpm.html"><span class="doc">BPM package</span></a> which contains the
-<a class="reference internal" href="bond_bpm_spring.html"><span class="doc">bpm/spring</span></a> and
-<a class="reference internal" href="bond_bpm_rotational.html"><span class="doc">bpm/rotational</span></a> bond styles. In these cases,
-a bond can be broken if it is stretched beyond a user-defined threshold.
-LAMMPS accomplishes this by setting the bond type to zero such that the
-bond force is no longer computed.</p>
-<p>Users are normally able to weight the contribution of pair forces to atoms
-that are bonded using the <a class="reference internal" href="special_bonds.html"><span class="doc">special_bonds command</span></a>.
-When bonds break, this is not always the case. For the quartic bond style,
-pair forces are always turned off between bonded particles. LAMMPS does
-this via a computational sleight-of-hand. It subtracts the pairwise
-interaction as part of the bond computation. When the bond breaks, the
-subtraction stops.  For this to work, the pairwise interaction must always
-be computed by the <a class="reference internal" href="pair_style.html"><span class="doc">pair_style</span></a> command, whether the bond
-is broken or not.  This means that <a class="reference internal" href="special_bonds.html"><span class="doc">special_bonds</span></a> must
-be set to 1,1,1. After the bond breaks, the pairwise interaction between the
-two atoms is turned on, since they are no longer bonded.</p>
-<p>In the BPM package, one can either turn off all pair interactions between
-bonded particles or leave them on, overlaying pair forces on top of bond
-forces. To remove pair forces, the special bond list is dynamically
-updated. More details can be found on the <a class="reference internal" href="Howto_bpm.html"><span class="doc">Howto BPM</span></a>
-page.</p>
-<p>Bonds can also be broken by fixes which change bond topology, including
-<a class="reference internal" href="fix_bond_break.html"><span class="doc">fix bond/break</span></a> and
-<a class="reference internal" href="fix_bond_react.html"><span class="doc">fix bond/react</span></a>. These fixes will automatically
-trigger a rebuild of the neighbor list and update special bond data structures
-when bonds are broken.</p>
-<p>Note that when bonds are dumped to a file via the <a class="reference internal" href="dump.html"><span class="doc">dump local</span></a> command, bonds with type 0 are not included.  The
-<a class="reference internal" href="delete_bonds.html"><span class="doc">delete_bonds</span></a> command can also be used to query the
-status of broken bonds or permanently delete them, e.g.:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">delete_bonds</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">stats</span><span class="w"></span>
-<span class="k">delete_bonds</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">bond</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="n">remove</span><span class="w"></span>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="broken-bonds">
+<h1><span class="section-number">8.1.8. </span>Broken Bonds<a class="headerlink" href="#broken-bonds" title="Permalink to this heading"></a></h1>
+<p>Typically, molecular bond interactions persist for the duration of a
+simulation in LAMMPS.  However, some commands break bonds dynamically,
+including the following:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="bond_quartic.html"><span class="doc">bond_style quartic</span></a></p></li>
+<li><p><a class="reference internal" href="fix_bond_break.html"><span class="doc">fix bond/break</span></a></p></li>
+<li><p><a class="reference internal" href="fix_bond_react.html"><span class="doc">fix bond/react</span></a></p></li>
+<li><p><a class="reference internal" href="Howto_bpm.html"><span class="doc">BPM package</span></a> bond styles</p></li>
+</ul>
+<p>A bond can break if it is stretched beyond a user-defined threshold or
+more generally if other criteria are met.</p>
+<p>For the quartic bond style, when a bond is broken its bond type is set
+to 0 to effectively break it and pairwise forces between the two atoms
+in the broken bond are “turned on”.  Angles, dihedrals, etc cannot be
+defined for a system when <a class="reference internal" href="bond_quartic.html"><span class="doc">bond_style quartic</span></a> is
+used.</p>
+<p>Similarly, bond styles in the BPM package are also incompatible with
+angles, dihedrals, etc. and when a bond breaks its type is set to zero.
+However, in the BPM package one can either turn off all pair interactions
+between bonded particles or leave them on, overlaying pair forces on
+top of bond forces. To remove pair forces, the special bond list is
+dynamically updated.  More details can be found on the <a class="reference internal" href="Howto_bpm.html"><span class="doc">Howto BPM</span></a> page.</p>
+<p>The <a class="reference internal" href="fix_bond_break.html"><span class="doc">fix bond/break</span></a> and <a class="reference internal" href="fix_bond_react.html"><span class="doc">fix bond/react</span></a> commands allow breaking of bonds within a molecular
+topology with may also define angles, dihedrals, etc.  These commands
+update internal topology data structures to remove broken bonds, as
+well as the appropriate angle, dihedral, etc interactions which
+include the bond.  They also trigger a rebuild of the neighbor list
+when this occurs, to turn on the appropriate pairwise forces.</p>
+<p>Note that when bonds are dumped to a file via the <a class="reference internal" href="dump.html"><span class="doc">dump local</span></a> command, bonds with type 0 are not included.</p>
+<p>The <a class="reference internal" href="delete_bonds.html"><span class="doc">delete_bonds</span></a> command can be used to query
+the status of broken bonds with type = 0 or permanently delete them,
+e.g.:</p>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">delete_bonds </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">stats</span>
+<span class="k">delete_bonds </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">bond</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="n">remove</span>
 </pre></div>
 </div>
-<p>The compute <a class="reference internal" href="compute_nbond_atom.html"><span class="doc">nbond/atom</span></a> can also be used
-to tally the current number of bonds per atom, excluding broken bonds.</p>
+<p>The compute <a class="reference internal" href="compute_count_type.html"><span class="doc">count/type</span></a> command tallies the
+current number of bonds (or angles, etc) for each bond (angle, etc)
+type.  It also tallies broken bonds with type = 0.</p>
+<p>The compute <a class="reference internal" href="compute_nbond_atom.html"><span class="doc">nbond/atom</span></a> command tallies the
+current number of bonds each atom is part of, excluding broken bonds
+with type = 0.</p>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="Howto_bpm.html" class="btn btn-neutral float-left" title="8.1.8. Bonded particle models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Howto_mdi.html" class="btn btn-neutral float-left" title="8.1.7. Using LAMMPS with the MDI library for code coupling" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="Howto_2d.html" class="btn btn-neutral float-right" title="8.2.1. 2d simulations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -192,7 +199,6 @@ to tally the current number of bonds per atom, excluding broken bonds.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>fix balance command &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/fix_balance.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -77,6 +81,9 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_adapt_fep.html">fix adapt/fep command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_addforce.html">fix addforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_addtorque.html">fix addtorque command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_alchemy.html">fix alchemy command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_amoeba_bitorsion.html">fix amoeba/bitorsion command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_amoeba_pitorsion.html">fix amoeba/pitorsion command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_append_atoms.html">fix append/atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_atc.html">fix atc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_atom_swap.html">fix atom/swap command</a></li>
@@ -84,8 +91,11 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_chunk.html">fix ave/chunk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_correlate.html">fix ave/correlate command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_correlate_long.html">fix ave/correlate/long command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_grid.html">fix ave/grid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_histo.html">fix ave/histo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_histo.html#fix-ave-histo-weight-command">fix ave/histo/weight command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_spatial.html">Fix ave/spatial command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_spatial_sphere.html">Fix ave/spatial command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_time.html">fix ave/time command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_aveforce.html">fix aveforce command</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">fix balance command</a><ul>
@@ -124,10 +134,11 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_drude_transform.html#fix-drude-transform-inverse-command">fix drude/transform/inverse command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_dt_reset.html">fix dt/reset command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_efield.html">fix efield command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_efield.html#fix-efield-tip4p-command">fix efield/tip4p command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ehex.html">fix ehex command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html">fix electrode/conp command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html#fix-electrode-conq-command">fix electrode/conq command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html#fix-electrode-thermo-command">fix electrode/thermo command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html">fix electrode/conp command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html#fix-electrode-conq-command">fix electrode/conq command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html#fix-electrode-thermo-command">fix electrode/thermo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_electron_stopping.html">fix electron/stopping command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_electron_stopping.html#fix-electron-stopping-fit-command">fix electron/stopping/fit command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_enforce2d.html">fix enforce2d command</a></li>
@@ -147,6 +158,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_grem.html">fix grem command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_halt.html">fix halt command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_heat.html">fix heat command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_heat_flow.html">fix heat/flow command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_hyper_global.html">fix hyper/global command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_hyper_local.html">fix hyper/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_imd.html">fix imd command</a></li>
@@ -156,13 +168,13 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_drude.html">fix langevin/drude command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_eff.html">fix langevin/eff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_spin.html">fix langevin/spin command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_latte.html">fix latte command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_fluid.html">fix lb/fluid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_momentum.html">fix lb/momentum command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_viscous.html">fix lb/viscous command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lineforce.html">fix lineforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_manifoldforce.html">fix manifoldforce command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_mdi_aimd.html">fix mdi/aimd command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_mdi_qm.html">fix mdi/qm command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_mdi_qmmm.html">fix mdi/qmmm command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_meso_move.html">fix meso/move command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify.html">fix_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
@@ -223,8 +235,10 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_orient.html#fix-orient-bcc-command">fix orient/bcc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_orient_eco.html">fix orient/eco command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_pafi.html">fix pafi command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pair.html">fix pair command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_phonon.html">fix phonon command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html">fix pimd command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html">fix pimd/langevin command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html#fix-pimd-nvt-command">fix pimd/nvt command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_planeforce.html">fix planeforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_plumed.html">fix plumed command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_poems.html">fix poems command</a></li>
@@ -269,6 +283,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_saed_vtk.html">fix saed/vtk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_setforce.html">fix setforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_setforce.html#fix-setforce-spin-command">fix setforce/spin command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_sgcmc.html">fix sgcmc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shake.html">fix shake command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shake.html#fix-rattle-command">fix rattle command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shardlow.html">fix shardlow command</a></li>
@@ -312,7 +327,9 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-lj1043-command">fix wall/lj1043 command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-colloid-command">fix wall/colloid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-harmonic-command">fix wall/harmonic command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-lepton-command">fix wall/lepton command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-morse-command">fix wall/morse command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-table-command">fix wall/table command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_body_polygon.html">fix wall/body/polygon command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_body_polyhedron.html">fix wall/body/polyhedron command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_ees.html">fix wall/ees command</a></li>
@@ -333,6 +350,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -350,12 +368,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="fixes.html">Fixes</a> &raquo;</li>
-      <li>fix balance command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="fixes.html">Fixes</a></li>
+      <li class="breadcrumb-item active">fix balance command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="fix_aveforce.html" class="btn btn-neutral float-left" title="fix aveforce command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -366,11 +383,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="fix-balance-command">
-<span id="index-0"></span><h1>fix balance command<a class="headerlink" href="#fix-balance-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="fix-balance-command">
+<span id="index-0"></span><h1>fix balance command<a class="headerlink" href="#fix-balance-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fix ID group-ID balance Nfreq thresh style args keyword args ...
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">ID</span><span class="w"> </span><span class="nv nv-Identifier">group-ID</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="n">Nfreq</span><span class="w"> </span><span class="n">thresh</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="n">...</span>
 </pre></div>
 </div>
 <ul>
@@ -380,7 +398,7 @@
 <li><p>thresh = imbalance threshold that must be exceeded to perform a re-balance</p></li>
 <li><p>style = <em>shift</em> or <em>rcb</em></p>
 <pre class="literal-block">shift args = dimstr Niter stopthresh
-  dimstr = sequence of letters containing &quot;x&quot; or &quot;y&quot; or &quot;z&quot;, each not more than once
+  dimstr = sequence of letters containing <em>x</em> or <em>y</em> or <em>z</em>, each not more than once
   Niter = # of times to iterate within each dimension of dimstr sequence
   stopthresh = stop balancing when this imbalance threshold is reached
 <em>rcb</em> args = none</pre>
@@ -401,25 +419,26 @@
       name = name of the atom-style variable
     <em>store</em> name = store weight in custom atom property defined by <a class="reference internal" href="fix_property_atom.html"><span class="doc">fix property/atom</span></a> command
       name = atom property name (without d_ prefix)
+<em>sort</em> arg = <em>no</em> or <em>yes</em>
 <em>out</em> arg = filename
-  filename = write each processor's sub-domain to a file, at each re-balancing</pre>
+  filename = write each processor's subdomain to a file, at each re-balancing</pre>
 </li>
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="m">1.05</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">1.05</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">0.9</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="n">xy</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">1.1</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="n">tmp.balance</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">0.9</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="n">xy</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">1.1</span><span class="w"> </span><span class="n">weight</span><span class="w"> </span><span class="k">group </span><span class="nv nv-Identifier">3</span><span class="w"> </span><span class="n">substrate</span><span class="w"> </span><span class="m">3.0</span><span class="w"> </span><span class="n">solvent</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">solute</span><span class="w"> </span><span class="m">0.8</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="n">tmp.balance</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">1.1</span><span class="w"> </span><span class="n">weight</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="m">0.8</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="n">xy</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">1.1</span><span class="w"> </span><span class="n">weight</span><span class="w"> </span><span class="n">var</span><span class="w"> </span><span class="n">myweight</span><span class="w"> </span><span class="n">weight</span><span class="w"> </span><span class="n">neigh</span><span class="w"> </span><span class="m">0.6</span><span class="w"> </span><span class="n">weight</span><span class="w"> </span><span class="n">store</span><span class="w"> </span><span class="n">allweight</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="m">1.1</span><span class="w"> </span><span class="n">rcb</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="m">1.05</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">1.05</span>
+<span class="k">fix </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">0.9</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="n">xy</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">1.1</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="n">tmp.balance</span>
+<span class="k">fix </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">0.9</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="n">xy</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">1.1</span><span class="w"> </span><span class="n">weight</span><span class="w"> </span><span class="k">group </span><span class="nv nv-Identifier">3</span><span class="w"> </span><span class="n">substrate</span><span class="w"> </span><span class="m">3.0</span><span class="w"> </span><span class="n">solvent</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">solute</span><span class="w"> </span><span class="m">0.8</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="n">tmp.balance</span>
+<span class="k">fix </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">1.1</span><span class="w"> </span><span class="n">weight</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="m">0.8</span>
+<span class="k">fix </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="n">xy</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">1.1</span><span class="w"> </span><span class="n">weight</span><span class="w"> </span><span class="n">var</span><span class="w"> </span><span class="n">myweight</span><span class="w"> </span><span class="n">weight</span><span class="w"> </span><span class="n">neigh</span><span class="w"> </span><span class="m">0.6</span><span class="w"> </span><span class="n">weight</span><span class="w"> </span><span class="n">store</span><span class="w"> </span><span class="n">allweight</span>
+<span class="k">fix </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="m">1.1</span><span class="w"> </span><span class="n">rcb</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p>This command adjusts the size and shape of processor sub-domains
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
+<p>This command adjusts the size and shape of processor subdomains
 within the simulation box, to attempt to balance the number of
 particles and thus the computational cost (load) evenly across
 processors.  The load balancing is “dynamic” in the sense that
@@ -429,12 +448,12 @@ perform “static” balancing, before or between runs, see the
 <p>Load-balancing is typically most useful if the particles in the
 simulation box have a spatially-varying density distribution or
 where the computational cost varies significantly between different
-atoms. E.g. a model of a vapor/liquid interface, or a solid with
+atoms (e.g., a model of a vapor/liquid interface, or a solid with
 an irregular-shaped geometry containing void regions, or
-<a class="reference internal" href="pair_hybrid.html"><span class="doc">hybrid pair style simulations</span></a> which combine
-pair styles with different computational cost.  In these cases, the
+<a class="reference internal" href="pair_hybrid.html"><span class="doc">hybrid pair style simulations</span></a> that combine
+pair styles with different computational cost).  In these cases, the
 LAMMPS default of dividing the simulation box volume into a
-regular-spaced grid of 3d bricks, with one equal-volume sub-domain
+regular-spaced grid of 3d bricks, with one equal-volume subdomain
 per processor, may assign numbers of particles per processor in a
 way that the computational effort varies significantly.  This can
 lead to poor performance when the simulation is run in parallel.</p>
@@ -447,26 +466,28 @@ processor.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The weighting options listed above are documented with the
-<a class="reference internal" href="balance.html"><span class="doc">balance</span></a> command in <a class="reference internal" href="balance.html#weighted-balance"><span class="std std-ref">this section of the balance command</span></a> doc page.  That section
+<a class="reference internal" href="balance.html"><span class="doc">balance</span></a> command in <a class="reference internal" href="balance.html#weighted-balance"><span class="std std-ref">this section of the balance
+command</span></a> doc page.  That section
 describes the various weighting options and gives a few examples of
 how they can be used.  The weighting options are the same for both the
 fix balance and <a class="reference internal" href="balance.html"><span class="doc">balance</span></a> commands.</p>
 </div>
 <p>Note that the <a class="reference internal" href="processors.html"><span class="doc">processors</span></a> command allows some control
 over how the box volume is split across processors.  Specifically, for
-a Px by Py by Pz grid of processors, it allows choice of Px, Py, and
-Pz, subject to the constraint that Px * Py * Pz = P, the total number
-of processors.  This is sufficient to achieve good load-balance for
+a <span class="math notranslate nohighlight">\(P_x \times P_y \times P_z\)</span> grid of processors, it allows choices of
+<span class="math notranslate nohighlight">\(P_x\)</span>, <span class="math notranslate nohighlight">\(P_y\)</span>, and <span class="math notranslate nohighlight">\(P_z\)</span> subject to the constraint that
+<span class="math notranslate nohighlight">\(P_x P_y P_z = P\)</span>, the total number of processors.
+This is sufficient to achieve good load-balance for
 some problems on some processor counts.  However, all the processor
-sub-domains will still have the same shape and same volume.</p>
-<p>On a particular timestep, a load-balancing operation is only performed
+subdomains will still have the same shape and the same volume.</p>
+<p>On a particular time step, a load-balancing operation is only performed
 if the current “imbalance factor” in particles owned by each processor
 exceeds the specified <em>thresh</em> parameter.  The imbalance factor is
 defined as the maximum number of particles (or weight) owned by any
 processor, divided by the average number of particles (or weight) per
-processor.  Thus an imbalance factor of 1.0 is perfect balance.</p>
+processor.  Thus, an imbalance factor of 1.0 is perfect balance.</p>
 <p>As an example, for 10000 particles running on 10 processors, if the
-most heavily loaded processor has 1200 particles, then the factor is
+most heavily loaded processor has 1200 particles, then the imbalance factor is
 1.2, meaning there is a 20% imbalance.  Note that re-balances can be
 forced even if the current balance is perfect (1.0) be specifying a
 <em>thresh</em> &lt; 1.0.</p>
@@ -477,33 +498,34 @@ defined above.  But depending on the method a perfect balance (1.0)
 may not be achieved.  For example, “grid” methods (defined below) that
 create a logical 3d grid cannot achieve perfect balance for many
 irregular distributions of particles.  Likewise, if a portion of the
-system is a perfect lattice, e.g. the initial system is generated by
-the <a class="reference internal" href="create_atoms.html"><span class="doc">create_atoms</span></a> command, then “grid” methods may
-be unable to achieve exact balance.  This is because entire lattice
-planes will be owned or not owned by a single processor.</p>
+system is a perfect, non-rotated lattice (e.g., the initial system is
+generated by the <a class="reference internal" href="create_atoms.html"><span class="doc">create_atoms</span></a> command with no
+rotations), then “grid” methods may be unable to achieve exact balance.
+This is because entire lattice planes will be owned or not owned by a single
+processor.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The imbalance factor is also an estimate of the maximum speed-up
 you can hope to achieve by running a perfectly balanced simulation
-versus an imbalanced one.  In the example above, the 10000 particle
+versus an imbalanced one.  In the example above, the 10000-particle
 simulation could run up to 20% faster if it were perfectly balanced,
 versus when imbalanced.  However, computational cost is not strictly
 proportional to particle count, and changing the relative size and
-shape of processor sub-domains may lead to additional computational
-and communication overheads, e.g. in the PPPM solver used via the
-<a class="reference internal" href="kspace_style.html"><span class="doc">kspace_style</span></a> command.  Thus you should benchmark
+shape of processor subdomains may lead to additional computational
+and communication overheads (e.g., in the PPPM solver used via the
+<a class="reference internal" href="kspace_style.html"><span class="doc">kspace_style</span></a> command).  Thus, you should benchmark
 the run times of a simulation before and after balancing.</p>
 </div>
 <hr class="docutils" />
 <p>The method used to perform a load balance is specified by one of the
-listed styles, which are described in detail below.  There are 2 kinds
+listed styles, which are described in detail below.  There are two kinds
 of styles.</p>
 <p>The <em>shift</em> style is a “grid” method which produces a logical 3d grid
 of processors.  It operates by changing the cutting planes (or lines)
 between processors in 3d (or 2d), to adjust the volume (area in 2d)
 assigned to each processor, as in the following 2d diagram where
-processor sub-domains are shown and atoms are colored by the processor
+processor subdomains are shown and atoms are colored by the processor
 that owns them.</p>
 <p><a class="reference internal" href="_images/balance_uniform.jpg"><img alt="balance1" src="_images/balance_uniform.jpg" style="width: 32%;" /></a>  <a class="reference internal" href="_images/balance_nonuniform.jpg"><img alt="balance2" src="_images/balance_nonuniform.jpg" style="width: 32%;" /></a>  <a class="reference internal" href="_images/balance_rcb.jpg"><img alt="balance3" src="_images/balance_rcb.jpg" style="width: 32%;" /></a></p>
 <p>The leftmost diagram is the default partitioning of the simulation box
@@ -531,11 +553,12 @@ from scratch.</p>
 <p>The <em>group-ID</em> is ignored.  However the impact of balancing on
 different groups of atoms can be affected by using the <em>group</em> weight
 style as described below.</p>
-<p>The <em>Nfreq</em> setting determines how often a re-balance is performed.  If
-<em>Nfreq</em> &gt; 0, then re-balancing will occur every <em>Nfreq</em> steps.  Each
-time a re-balance occurs, a reneighboring is triggered, so <em>Nfreq</em>
-should not be too small.  If <em>Nfreq</em> = 0, then re-balancing will be
-done every time reneighboring normally occurs, as determined by the
+<p>The <span class="math notranslate nohighlight">\(N_\text{freq}\)</span> setting determines how often a re-balance is
+performed.  If <span class="math notranslate nohighlight">\(N_\text{freq} &gt; 0\)</span>, then re-balancing will occur every
+<span class="math notranslate nohighlight">\(N_\text{freq}\)</span> steps.  Each time a re-balance occurs, a reneighboring is
+triggered, so <span class="math notranslate nohighlight">\(N_\text{freq}\)</span> should not be too small.  If
+<span class="math notranslate nohighlight">\(N_\text{freq} = 0\)</span>, then re-balancing will be done every time
+reneighboring normally occurs, as determined by the
 the <a class="reference internal" href="neighbor.html"><span class="doc">neighbor</span></a> and <a class="reference internal" href="neigh_modify.html"><span class="doc">neigh_modify</span></a>
 command settings.</p>
 <p>On re-balance steps, re-balancing will only be attempted if the current
@@ -545,15 +568,15 @@ imbalance factor, as defined above, exceeds the <em>thresh</em> setting.</p>
 above.  It changes the positions of cutting planes between processors
 in an iterative fashion, seeking to reduce the imbalance factor.</p>
 <p>The <em>dimstr</em> argument is a string of characters, each of which must be
-an “x” or “y” or “z”.  Each character can appear zero or one time,
+<em>x</em> or <em>y</em> or <em>z</em>.  Each character can appear zero or one time,
 since there is no advantage to balancing on a dimension more than
 once.  You should normally only list dimensions where you expect there
 to be a density variation in the particles.</p>
 <p>Balancing proceeds by adjusting the cutting planes in each of the
 dimensions listed in <em>dimstr</em>, one dimension at a time.  For a single
 dimension, the balancing operation (described below) is iterated on up
-to <em>Niter</em> times.  After each dimension finishes, the imbalance factor
-is re-computed, and the balancing operation halts if the <em>stopthresh</em>
+to <span class="math notranslate nohighlight">\(N_\text{iter}\)</span> times.  After each dimension finishes, the imbalance
+factor is re-computed, and the balancing operation halts if the <em>stopthresh</em>
 criterion is met.</p>
 <p>A re-balance operation in a single dimension is performed using a
 density-dependent recursive multisectioning algorithm, where the
@@ -579,36 +602,36 @@ be a disadvantage if you attempt to re-balance a system that is far
 from balanced, and converge more slowly.  In this case you probably
 want to use the <a class="reference internal" href="balance.html"><span class="doc">balance</span></a> command before starting a run,
 so that you begin the run with a balanced system.</p>
-<p>Once the re-balancing is complete and final processor sub-domains
+<p>Once the re-balancing is complete and final processor subdomains
 assigned, particles migrate to their new owning processor as part of
 the normal reneighboring procedure.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>At each re-balance operation, the bisectioning for each cutting
 plane (line in 2d) typically starts with low and high bounds separated
-by the extent of a processor’s sub-domain in one dimension.  The size
+by the extent of a processor’s subdomain in one dimension.  The size
 of this bracketing region shrinks based on the local density, as
 described above, which should typically be 1/2 or more every
-iteration.  Thus if <em>Niter</em> is specified as 10, the cutting plane will
-typically be positioned to better than 1 part in 1000 accuracy
-(relative to the perfect target position).  For <em>Niter</em> = 20, it will
-be accurate to better than 1 part in a million.  Thus there is no need
-to set <em>Niter</em> to a large value.  This is especially true if you are
-re-balancing often enough that each time you expect only an incremental
-adjustment in the cutting planes is necessary.  LAMMPS will check if
-the threshold accuracy is reached (in a dimension) is less iterations
-than <em>Niter</em> and exit early.</p>
+iteration.  Thus if <span class="math notranslate nohighlight">\(N_\text{iter}\)</span> is specified as 10, the cutting
+plane will typically be positioned to better than 1 part in 1000 accuracy
+(relative to the perfect target position).  For <span class="math notranslate nohighlight">\(N_\text{iter} = 20\)</span>,
+it will be accurate to better than 1 part in a million.  Thus there is no
+need to set <span class="math notranslate nohighlight">\(N_\text{iter}\)</span> to a large value.  This is especially true
+if you are re-balancing often enough that each time you expect only an
+incremental adjustment in the cutting planes is necessary.  LAMMPS will
+check if the threshold accuracy is reached (in a dimension) is less
+iterations than <span class="math notranslate nohighlight">\(N_\text{iter}\)</span> and exit early.</p>
 </div>
 <hr class="docutils" />
 <p>The <em>rcb</em> style invokes a “tiled” method for balancing, as described
 above.  It performs a recursive coordinate bisectioning (RCB) of the
 simulation domain. The basic idea is as follows.</p>
-<p>The simulation domain is cut into 2 boxes by an axis-aligned cut in
+<p>The simulation domain is cut into two boxes by an axis-aligned cut in
 the longest dimension, leaving one new box on either side of the cut.
-All the processors are also partitioned into 2 groups, half assigned
+All the processors are also partitioned into two groups, half assigned
 to the box on the lower side of the cut, and half to the box on the
-upper side.  (If the processor count is odd, one side gets an extra
-processor.)  The cut is positioned so that the number of atoms in the
+upper side.  If the processor count is odd, one side gets an extra
+processor.  The cut is positioned so that the number of atoms in the
 lower box is exactly the number that the processors assigned to that
 box should own for load balance to be perfect.  This also makes load
 balance for the upper box perfect.  The positioning is done
@@ -623,12 +646,19 @@ the box in two.  The recursion continues until every processor is
 assigned a sub-box of the entire simulation domain, and owns the atoms
 in that sub-box.</p>
 <hr class="docutils" />
+<p>The <em>sort</em> keyword determines whether the communication of per-atom
+data to other processors during load-balancing will be random or
+deterministic.  Random is generally faster; deterministic will ensure
+the new ordering of atoms on each processor is the same each time the
+same simulation is run.  This can be useful for debugging purposes.
+Since the fix balance command is performed during timestepping, the
+default is <em>no</em> so that sorting is not performed.</p>
 <p>The <em>out</em> keyword writes text to the specified <em>filename</em> with the
 results of each re-balancing operation.  The file contains the bounds
-of the sub-domain for each processor after the balancing operation
+of the subdomain for each processor after the balancing operation
 completes.  The format of the file is compatible with the
 <a class="reference external" href="https://lammps.github.io/pizza">Pizza.py</a> <em>mdump</em> tool which has support for manipulating and
-visualizing mesh files.  An example is shown here for a balancing by 4
+visualizing mesh files.  An example is shown here for a balancing by four
 processors for a 2d problem:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ITEM: TIMESTEP
 0
@@ -666,22 +696,23 @@ ITEM: SQUARES
 4 1 13 14 15 16
 </pre></div>
 </div>
-<p>The coordinates of all the vertices are listed in the NODES section, 5
-per processor.  Note that the 4 sub-domains share vertices, so there
+<p>The coordinates of all the vertices are listed in the NODES section, five
+per processor.  Note that the four subdomains share vertices, so there
 will be duplicate nodes in the list.</p>
-<p>The “SQUARES” section lists the node IDs of the 4 vertices in a
+<p>The “SQUARES” section lists the node IDs of the four vertices in a
 rectangle for each processor (1 to 4).</p>
-<p>For a 3d problem, the syntax is similar with 8 vertices listed for
-each processor, instead of 4, and “SQUARES” replaced by “CUBES”.</p>
+<p>For a 3d problem, the syntax is similar but with eight vertices listed for
+each processor instead of four, and “SQUARES” replaced by “CUBES”.</p>
 </section>
 <hr class="docutils" />
 <section id="restart-fix-modify-output-run-start-stop-minimize-info">
-<h2>Restart, fix_modify, output, run start/stop, minimize info<a class="headerlink" href="#restart-fix-modify-output-run-start-stop-minimize-info" title="Permalink to this headline">¶</a></h2>
-<p>No information about this fix is written to <a class="reference internal" href="restart.html"><span class="doc">binary restart files</span></a>.  None of the <a class="reference internal" href="fix_modify.html"><span class="doc">fix_modify</span></a> options
-are relevant to this fix.</p>
+<h2>Restart, fix_modify, output, run start/stop, minimize info<a class="headerlink" href="#restart-fix-modify-output-run-start-stop-minimize-info" title="Permalink to this heading"></a></h2>
+<p>No information about this fix is written to
+<a class="reference internal" href="restart.html"><span class="doc">binary restart files</span></a>.  None of the
+<a class="reference internal" href="fix_modify.html"><span class="doc">fix_modify</span></a> options are relevant to this fix.</p>
 <p>This fix computes a global scalar which is the imbalance factor
 after the most recent re-balance and a global vector of length 3 with
-additional information about the most recent re-balancing.  The 3
+additional information about the most recent re-balancing.  The three
 values in the vector are as follows:</p>
 <ul class="simple">
 <li><p>1 = max # of particles per processor</p></li>
@@ -691,27 +722,29 @@ values in the vector are as follows:</p>
 <p>As explained above, the imbalance factor is the ratio of the maximum
 number of particles (or total weight) on any processor to the average
 number of particles (or total weight) per processor.</p>
-<p>These quantities can be accessed by various <a class="reference internal" href="Howto_output.html"><span class="doc">output commands</span></a>.  The scalar and vector values calculated
+<p>These quantities can be accessed by various
+<a class="reference internal" href="Howto_output.html"><span class="doc">output commands</span></a>.  The scalar and vector values calculated
 by this fix are “intensive”.</p>
 <p>No parameter of this fix can be used with the <em>start/stop</em> keywords of
-the <a class="reference internal" href="run.html"><span class="doc">run</span></a> command.  This fix is not invoked during <a class="reference internal" href="minimize.html"><span class="doc">energy minimization</span></a>.</p>
+the <a class="reference internal" href="run.html"><span class="doc">run</span></a> command.  This fix is not invoked during
+<a class="reference internal" href="minimize.html"><span class="doc">energy minimization</span></a>.</p>
 </section>
 <hr class="docutils" />
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
-<p>For 2d simulations, the <em>z</em> style cannot be used.  Nor can a “z”
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
+<p>For 2d simulations, the <em>z</em> style cannot be used, nor can <em>z</em>
 appear in <em>dimstr</em> for the <em>shift</em> style.</p>
 <p>Balancing through recursive bisectioning (<em>rcb</em> style) requires
-<a class="reference internal" href="comm_style.html"><span class="doc">comm_style tiled</span></a></p>
+<a class="reference internal" href="comm_style.html"><span class="doc">comm_style tiled</span></a>.</p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="group.html"><span class="doc">group</span></a>, <a class="reference internal" href="processors.html"><span class="doc">processors</span></a>, <a class="reference internal" href="balance.html"><span class="doc">balance</span></a>,
 <a class="reference internal" href="comm_style.html"><span class="doc">comm_style</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
-<p>none</p>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
+<p>The default setting is sort = no.</p>
 </section>
 </section>
 
@@ -726,7 +759,7 @@ appear in <em>dimstr</em> for the <em>shift</em> style.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -735,7 +768,6 @@ appear in <em>dimstr</em> for the <em>shift</em> style.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>3.8. Build the LAMMPS documentation &mdash; LAMMPS documentation</title>
@@ -10,19 +10,18 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Build_manual.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/tabs.js"></script>
-        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/tabs.js?v=3030b3cb"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -35,14 +34,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -100,6 +103,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -117,12 +121,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Build.html"><span class="section-number">3. </span>Build LAMMPS</a> &raquo;</li>
-      <li><span class="section-number">3.8. </span>Build the LAMMPS documentation</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Build.html"><span class="section-number">3. </span>Build LAMMPS</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">3.8. </span>Build the LAMMPS documentation</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="Build_extras.html" class="btn btn-neutral float-left" title="3.7. Packages with extra build options" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -133,26 +136,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="build-the-lammps-documentation">
-<h1><span class="section-number">3.8. </span>Build the LAMMPS documentation<a class="headerlink" href="#build-the-lammps-documentation" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="build-the-lammps-documentation">
+<h1><span class="section-number">3.8. </span>Build the LAMMPS documentation<a class="headerlink" href="#build-the-lammps-documentation" title="Permalink to this heading"></a></h1>
 <p>Depending on how you obtained LAMMPS and whether you have built the
-manual yourself, this directory has a number of sub-directories and
+manual yourself, this directory has a number of subdirectories and
 files. Here is a list with descriptions:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>README           <span class="c1"># brief info about the documentation</span>
-src              <span class="c1"># content files for LAMMPS documentation</span>
-html             <span class="c1"># HTML version of the LAMMPS manual (see html/Manual.html)</span>
-utils            <span class="c1"># tools and settings for building the documentation</span>
-lammps.1         <span class="c1"># man page for the lammps command</span>
-msi2lmp.1        <span class="c1"># man page for the msi2lmp command</span>
-Manual.pdf       <span class="c1"># large PDF version of entire manual</span>
-LAMMPS.epub      <span class="c1"># Manual in ePUB e-book format</span>
-LAMMPS.mobi      <span class="c1"># Manual in MOBI e-book format</span>
-docenv           <span class="c1"># virtualenv folder for processing the manual sources</span>
-doctrees         <span class="c1"># temporary data from processing the manual</span>
-doxygen          <span class="c1"># doxygen configuration and output</span>
-.gitignore       <span class="c1"># list of files and folders to be ignored by git</span>
-doxygen-warn.log <span class="c1"># logfile with warnings from running doxygen</span>
-github-development-workflow.md   <span class="c1"># notes on the LAMMPS development workflow</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>README<span class="w">           </span><span class="c1"># brief info about the documentation</span>
+src<span class="w">              </span><span class="c1"># content files for LAMMPS documentation</span>
+html<span class="w">             </span><span class="c1"># HTML version of the LAMMPS manual (see html/Manual.html)</span>
+utils<span class="w">            </span><span class="c1"># tools and settings for building the documentation</span>
+lammps.1<span class="w">         </span><span class="c1"># man page for the lammps command</span>
+msi2lmp.1<span class="w">        </span><span class="c1"># man page for the msi2lmp command</span>
+Manual.pdf<span class="w">       </span><span class="c1"># large PDF version of entire manual</span>
+LAMMPS.epub<span class="w">      </span><span class="c1"># Manual in ePUB e-book format</span>
+LAMMPS.mobi<span class="w">      </span><span class="c1"># Manual in MOBI e-book format</span>
+docenv<span class="w">           </span><span class="c1"># virtualenv folder for processing the manual sources</span>
+doctrees<span class="w">         </span><span class="c1"># temporary data from processing the manual</span>
+doxygen<span class="w">          </span><span class="c1"># doxygen configuration and output</span>
+.gitignore<span class="w">       </span><span class="c1"># list of files and folders to be ignored by git</span>
+doxygen-warn.log<span class="w"> </span><span class="c1"># logfile with warnings from running doxygen</span>
+github-development-workflow.md<span class="w">   </span><span class="c1"># notes on the LAMMPS development workflow</span>
 </pre></div>
 </div>
 <p>If you downloaded LAMMPS as a tarball from <a class="reference external" href="https://www.lammps.org">the LAMMPS website</a>,
@@ -163,7 +167,7 @@ by typing <code class="docutils literal notranslate"><span class="pre">make</spa
 various tools and files.  Some of them have to be installed (see below).  For
 the rest the build process will attempt to download and install them into
 a python virtual environment and local folders.</p>
-<p>A current version of the manual (latest patch release, that is the state
+<p>A current version of the manual (latest feature release, that is the state
 of the <em>release</em> branch) is is available online at:
 <a class="reference external" href="https://docs.lammps.org/">https://docs.lammps.org/</a>.
 A version of the manual corresponding to the ongoing development (that is
@@ -173,16 +177,17 @@ A version of the manual corresponding to the latest stable LAMMPS release
 (that is the state of the <em>stable</em> branch) is available online at:
 <a class="reference external" href="https://docs.lammps.org/stable/">https://docs.lammps.org/stable/</a></p>
 <section id="build-using-gnu-make">
-<h2><span class="section-number">3.8.1. </span>Build using GNU make<a class="headerlink" href="#build-using-gnu-make" title="Permalink to this headline">¶</a></h2>
-<p>The LAMMPS manual is written in <a class="reference external" href="https://docutils.readthedocs.io/en/sphinx-docs/user/rst/quickstart.html">reStructuredText</a> format which
-can be translated to different output format using the <a class="reference external" href="https://www.sphinx-doc.org">Sphinx</a> document generator tool.  It also incorporates programmer
-documentation extracted from the LAMMPS C++ sources through the <a class="reference external" href="https://doxygen.nl">Doxygen</a> program.  Currently the translation to HTML, PDF
-(via LaTeX), ePUB (for many e-book readers) and MOBI (for Amazon Kindle
-readers) are supported.  For that to work a Python 3 interpreter, the
-<code class="docutils literal notranslate"><span class="pre">doxygen</span></code> tools and internet access to download additional files and
-tools are required.  This download is usually only required once or
-after the documentation folder is returned to a pristine state with
-<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean-all</span></code>.</p>
+<h2><span class="section-number">3.8.1. </span>Build using GNU make<a class="headerlink" href="#build-using-gnu-make" title="Permalink to this heading"></a></h2>
+<p>The LAMMPS manual is written in <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html">reStructuredText</a> format which
+can be translated to different output format using the <a class="reference external" href="https://www.sphinx-doc.org/">Sphinx</a> document generator tool.  It also
+incorporates programmer documentation extracted from the LAMMPS C++
+sources through the <a class="reference external" href="https://doxygen.nl/">Doxygen</a> program.  Currently
+the translation to HTML, PDF (via LaTeX), ePUB (for many e-book readers)
+and MOBI (for Amazon Kindle readers) are supported.  For that to work a
+Python interpreter version 3.8 or later, the <code class="docutils literal notranslate"><span class="pre">doxygen</span></code> tools and
+internet access to download additional files and tools are required.
+This download is usually only required once or after the documentation
+folder is returned to a pristine state with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean-all</span></code>.</p>
 <p>For the documentation build a python virtual environment is set up in
 the folder <code class="docutils literal notranslate"><span class="pre">doc/docenv</span></code> and various python packages are installed into
 that virtual environment via the <code class="docutils literal notranslate"><span class="pre">pip</span></code> tool.  For rendering embedded
@@ -194,27 +199,28 @@ environment variable or uncomment and edit the <code class="docutils literal not
 at beginning of the makefile.</p>
 <p>The actual translation is then done via <code class="docutils literal notranslate"><span class="pre">make</span></code> commands in the doc
 folder.  The following <code class="docutils literal notranslate"><span class="pre">make</span></code> commands are available:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make html          <span class="c1"># generate HTML in html dir using Sphinx</span>
-make pdf           <span class="c1"># generate PDF  as Manual.pdf using Sphinx and PDFLaTeX</span>
-make epub          <span class="c1"># generate LAMMPS.epub in ePUB format using Sphinx</span>
-make mobi          <span class="c1"># generate LAMMPS.mobi in MOBI format using ebook-convert</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>html<span class="w">          </span><span class="c1"># generate HTML in html dir using Sphinx</span>
+make<span class="w"> </span>pdf<span class="w">           </span><span class="c1"># generate PDF  as Manual.pdf using Sphinx and PDFLaTeX</span>
+make<span class="w"> </span>epub<span class="w">          </span><span class="c1"># generate LAMMPS.epub in ePUB format using Sphinx</span>
+make<span class="w"> </span>mobi<span class="w">          </span><span class="c1"># generate LAMMPS.mobi in MOBI format using ebook-convert</span>
 
-make fasthtml      <span class="c1"># generate approximate HTML in fasthtml dir using Sphinx</span>
-                   <span class="c1"># some Sphinx extensions do not work correctly with this</span>
+make<span class="w"> </span>fasthtml<span class="w">      </span><span class="c1"># generate approximate HTML in fasthtml dir using Sphinx</span>
+<span class="w">                   </span><span class="c1"># some Sphinx extensions do not work correctly with this</span>
 
-make clean         <span class="c1"># remove intermediate RST files created by HTML build</span>
-make clean-all     <span class="c1"># remove entire build folder and any cached data</span>
+make<span class="w"> </span>clean<span class="w">         </span><span class="c1"># remove intermediate RST files created by HTML build</span>
+make<span class="w"> </span>clean-all<span class="w">     </span><span class="c1"># remove entire build folder and any cached data</span>
 
-make anchor_check  <span class="c1"># check for duplicate anchor labels</span>
-make style_check   <span class="c1"># check for complete and consistent style lists</span>
-make package_check <span class="c1"># check for complete and consistent package lists</span>
-make spelling      <span class="c1"># spell-check the manual</span>
+make<span class="w"> </span>anchor_check<span class="w">  </span><span class="c1"># check for duplicate anchor labels</span>
+make<span class="w"> </span>style_check<span class="w">   </span><span class="c1"># check for complete and consistent style lists</span>
+make<span class="w"> </span>package_check<span class="w"> </span><span class="c1"># check for complete and consistent package lists</span>
+make<span class="w"> </span>link_check<span class="w">    </span><span class="c1"># check for broken or outdated URLs</span>
+make<span class="w"> </span>spelling<span class="w">      </span><span class="c1"># spell-check the manual</span>
 </pre></div>
 </div>
 </section>
 <hr class="docutils" />
 <section id="build-using-cmake">
-<h2><span class="section-number">3.8.2. </span>Build using CMake<a class="headerlink" href="#build-using-cmake" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.8.2. </span>Build using CMake<a class="headerlink" href="#build-using-cmake" title="Permalink to this heading"></a></h2>
 <p>It is also possible to create the HTML version (and <strong>only</strong> the HTML
 version) of the manual within the <a class="reference internal" href="Build_cmake.html"><span class="doc">CMake build directory</span></a>.  The reason for this option is to include the
 installation of the HTML manual pages into the “install” step when
@@ -225,47 +231,42 @@ target, but can also be requested independently with
 to the pip commands to work (e.g. to use a web proxy or to point to
 additional SSL certificates) you can set them via the <code class="docutils literal notranslate"><span class="pre">PIP_OPTIONS</span></code>
 environment variable.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-D <span class="nv">BUILD_DOC</span><span class="o">=</span>value       <span class="c1"># yes or no (default)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-D<span class="w"> </span><span class="nv">BUILD_DOC</span><span class="o">=</span>value<span class="w">       </span><span class="c1"># yes or no (default)</span>
 </pre></div>
 </div>
 </section>
 <hr class="docutils" />
 <section id="prerequisites-for-html">
-<h2><span class="section-number">3.8.3. </span>Prerequisites for HTML<a class="headerlink" href="#prerequisites-for-html" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.8.3. </span>Prerequisites for HTML<a class="headerlink" href="#prerequisites-for-html" title="Permalink to this heading"></a></h2>
 <p>To run the HTML documentation build toolchain, python 3, git, doxygen,
 and virtualenv have to be installed locally.  Here are instructions for
 common setups:</p>
 <div class="sphinx-tabs docutils container">
-<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Ubuntu</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">RHEL or CentOS (Version 7.x)</button><button aria-controls="panel-0-0-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-2" name="0-2" role="tab" tabindex="-1">Fedora or RHEL/CentOS (8.x or later)</button><button aria-controls="panel-0-0-3" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-3" name="0-3" role="tab" tabindex="-1">MacOS X</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get install python-virtualenv git doxygen
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Ubuntu</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">RHEL or CentOS (Version 7.x)</button><button aria-controls="panel-0-0-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-2" name="0-2" role="tab" tabindex="-1">Fedora or RHEL/CentOS (8.x or later)</button><button aria-controls="panel-0-0-3" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-3" name="0-3" role="tab" tabindex="-1">macOS</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>git<span class="w"> </span>doxygen
 </pre></div>
 </div>
-</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo yum install python3-virtualenv git doxygen
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>git<span class="w"> </span>doxygen
 </pre></div>
 </div>
-</div><div aria-labelledby="tab-0-0-2" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-2" name="0-2" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo dnf install python3-virtualenv git doxygen
+</div><div aria-labelledby="tab-0-0-2" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-2" name="0-2" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>git<span class="w"> </span>doxygen
 </pre></div>
 </div>
 </div><div aria-labelledby="tab-0-0-3" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-3" name="0-3" role="tabpanel" tabindex="0"><p><em>Python 3</em></p>
-<p>Download the latest Python 3 MacOS X package from
+<p>If Python 3 is not available on your macOS system, you can
+download the latest Python 3 macOS package from
 <a class="reference external" href="https://www.python.org">https://www.python.org</a> and install it.
 This will install both Python 3 and pip3.</p>
-<p><em>virtualenv</em></p>
-<p>Once Python 3 is installed, open a Terminal and type</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3 install virtualenv
-</pre></div>
-</div>
-<p>This will install virtualenv from the Python Package Index.</p>
 </div></div>
 </section>
 <section id="prerequisites-for-pdf">
-<h2><span class="section-number">3.8.4. </span>Prerequisites for PDF<a class="headerlink" href="#prerequisites-for-pdf" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.8.4. </span>Prerequisites for PDF<a class="headerlink" href="#prerequisites-for-pdf" title="Permalink to this heading"></a></h2>
 <p>In addition to the tools needed for building the HTML format manual,
 a working LaTeX installation with support for PDFLaTeX and a selection
 of LaTeX styles/packages are required.  To run the PDFLaTeX translation
 the <code class="docutils literal notranslate"><span class="pre">latexmk</span></code> script needs to be installed as well.</p>
 </section>
 <section id="prerequisites-for-epub-and-mobi">
-<h2><span class="section-number">3.8.5. </span>Prerequisites for ePUB and MOBI<a class="headerlink" href="#prerequisites-for-epub-and-mobi" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.8.5. </span>Prerequisites for ePUB and MOBI<a class="headerlink" href="#prerequisites-for-epub-and-mobi" title="Permalink to this heading"></a></h2>
 <p>In addition to the tools needed for building the HTML format manual,
 a working LaTeX installation with a few add-on LaTeX packages
 as well as the <code class="docutils literal notranslate"><span class="pre">dvipng</span></code> tool are required to convert embedded
@@ -273,17 +274,17 @@ math expressions transparently into embedded images.</p>
 <p>For converting the generated ePUB file to a MOBI format file (for e-book
 readers, like Kindle, that cannot read ePUB), you also need to have the
 <code class="docutils literal notranslate"><span class="pre">ebook-convert</span></code> tool from the “calibre” software
-installed. <a class="reference external" href="http://calibre-ebook.com/">http://calibre-ebook.com/</a>
+installed. <a class="reference external" href="https://calibre-ebook.com/">https://calibre-ebook.com/</a>
 Typing <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">mobi</span></code> will first create the ePUB file and then convert
 it.  On the Kindle readers in particular, you also have support for PDF
 files, so you could download and view the PDF version as an alternative.</p>
 </section>
 <section id="instructions-for-developers">
-<h2><span class="section-number">3.8.6. </span>Instructions for Developers<a class="headerlink" href="#instructions-for-developers" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.8.6. </span>Instructions for Developers<a class="headerlink" href="#instructions-for-developers" title="Permalink to this heading"></a></h2>
 <p>When adding new styles or options to the LAMMPS code, corresponding
 documentation is required and either existing files in the <code class="docutils literal notranslate"><span class="pre">src</span></code>
 folder need to be updated or new files added. These files are written in
-<a class="reference external" href="https://docutils.readthedocs.io/en/sphinx-docs/user/rst/quickstart.html">reStructuredText</a> markup for translation with the Sphinx tool.</p>
+<a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html">reStructuredText</a> markup for translation with the Sphinx tool.</p>
 <p>Before contributing any documentation, please check that both the HTML
 and the PDF format documentation can translate without errors.  During
 testing the html translation, you may use the <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">fasthtml</span></code> command
@@ -307,9 +308,18 @@ Package NEWPACKAGE missing in Packages_details.rst
 <li><p>A test that only standard, printable ASCII text characters are used.
 This runs the command <code class="docutils literal notranslate"><span class="pre">env</span> <span class="pre">LC_ALL=C</span> <span class="pre">grep</span> <span class="pre">-n</span> <span class="pre">'[^</span> <span class="pre">-~]'</span> <span class="pre">src/*.rst</span></code> and
 thus prints all offending lines with filename and line number
-prepended to the screen.  Special characters like the Angstrom
-<span class="math notranslate nohighlight">\(\mathrm{\mathring{A}}\)</span> should be typeset with embedded math
-(like this <code class="docutils literal notranslate"><span class="pre">:math:`\mathrm{\mathring{A}}`</span></code>).</p></li>
+prepended to the screen.  Special characters like Greek letters
+(<span class="math notranslate nohighlight">\(\alpha~~\sigma~~\epsilon\)</span>), super- or subscripts
+(<span class="math notranslate nohighlight">\(x^2~~\mathrm{U}_{LJ}\)</span>), mathematical expressions
+(<span class="math notranslate nohighlight">\(\frac{1}{2}\mathrm{N}~~x\to\infty\)</span>), or the Angstrom symbol
+(<span class="math notranslate nohighlight">\(\AA\)</span>) should be typeset with embedded LaTeX (like this
+<code class="docutils literal notranslate"><span class="pre">:math:`\alpha</span> <span class="pre">\sigma</span> <span class="pre">\epsilon`</span></code>, <code class="docutils literal notranslate"><span class="pre">:math:`x^2</span> <span class="pre">\mathrm{E}_{LJ}`</span></code>,
+<code class="docutils literal notranslate"><span class="pre">:math:`\frac{1}{2}\mathrm{N}</span> <span class="pre">x\to\infty`</span></code>, or <code class="docutils literal notranslate"><span class="pre">:math:`\AA`</span></code>).</p></li>
+<li><p>Embedded LaTeX is rendered in HTML output with <a class="reference external" href="https://www.mathjax.org/">MathJax</a> and in PDF output by passing the embedded
+text to LaTeX.  Some care has to be taken, though, since there are
+limitations which macros and features can be used in either mode, so
+it is recommended to always check whether any new or changed
+documentation does translate and render correctly with either output.</p></li>
 <li><p>A test whether all styles are documented and listed in their
 respective overview pages.  A typical output with warnings looks like this:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Parsed style names w/o suffixes from C++ tree in ../src:
@@ -350,7 +360,7 @@ the file <code class="docutils literal notranslate"><span class="pre">lammps/doc
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -359,7 +369,6 @@ the file <code class="docutils literal notranslate"><span class="pre">lammps/doc
    
 
 </footer>
-
         </div>
       </div>
     </section>

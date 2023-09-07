@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>min_modify command &mdash; LAMMPS documentation</title>
@@ -10,18 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/min_modify.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -34,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -73,6 +76,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="commands_list.html">Commands</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="angle_coeff.html">angle_coeff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="angle_style.html">angle_style command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="angle_write.html">angle_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="atom_modify.html">atom_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="atom_style.html">atom_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="balance.html">balance command</a></li>
@@ -80,7 +84,6 @@
 <li class="toctree-l2"><a class="reference internal" href="bond_style.html">bond_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_write.html">bond_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="boundary.html">boundary command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="box.html">box command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="change_box.html">change_box command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="clear.html">clear command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="comm_modify.html">comm_modify command</a></li>
@@ -95,6 +98,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dielectric.html">dielectric command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_coeff.html">dihedral_coeff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_style.html">dihedral_style command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dihedral_write.html">dihedral_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dimension.html">dimension command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="displace_atoms.html">displace_atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html">dump command</a></li>
@@ -106,6 +110,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-movie-command"><span class="xref std std-doc">dump movie</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-atom-adios-command"><span class="xref std std-doc">dump atom/adios</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-custom-adios-command"><span class="xref std std-doc">dump custom/adios</span> command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dump.html#dump-cfg-uef-command"><span class="xref std std-doc">dump cfg/uef</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_adios.html">dump atom/adios  command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_adios.html#dump-custom-adios-command">dump custom/adios command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_cfg_uef.html">dump cfg/uef command</a></li>
@@ -123,6 +128,7 @@
 <li class="toctree-l2"><a class="reference internal" href="echo.html">echo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix.html">fix command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify.html">fix_modify command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitpod_command.html">fitpod command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group.html">group command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group2ndx.html">group2ndx command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group2ndx.html#ndx2group-command">ndx2group command</a></li>
@@ -137,6 +143,7 @@
 <li class="toctree-l2"><a class="reference internal" href="kspace_modify.html">kspace_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kspace_style.html">kspace_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="label.html">label command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labelmap.html">labelmap command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lattice.html">lattice command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="log.html">log command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mass.html">mass command</a></li>
@@ -158,12 +165,10 @@
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-sd-command">min_style sd command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-quickmin-command">min_style quickmin command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-fire-command">min_style fire command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-fire-old-command">min_style fire/old command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-command"><span class="xref std std-doc">min_style spin</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-cg-command"><span class="xref std std-doc">min_style spin/cg</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-lbfgs-command"><span class="xref std std-doc">min_style spin/lbfgs</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="minimize.html">minimize command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="minimize.html#minimize-kk-command">minimize/kk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="molecule.html">molecule command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neb.html">neb command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neb_spin.html">neb/spin command</a></li>
@@ -189,8 +194,7 @@
 <li class="toctree-l2"><a class="reference internal" href="region.html">region command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="replicate.html">replicate command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rerun.html">rerun command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset_atom_ids.html">reset_atom_ids command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset_mol_ids.html">reset_mol_ids command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reset_atoms.html">reset_atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reset_timestep.html">reset_timestep command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="restart.html">restart command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="run.html">run command</a></li>
@@ -228,6 +232,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -245,12 +250,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="commands_list.html">Commands</a> &raquo;</li>
-      <li>min_modify command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="commands_list.html">Commands</a></li>
+      <li class="breadcrumb-item active">min_modify command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="mdi.html" class="btn btn-neutral float-left" title="mdi command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -261,16 +265,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="min-modify-command">
-<span id="index-0"></span><h1>min_modify command<a class="headerlink" href="#min-modify-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="min-modify-command">
+<span id="index-0"></span><h1>min_modify command<a class="headerlink" href="#min-modify-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">min_modify</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">values</span><span class="w"> </span><span class="n">...</span><span class="w"></span>
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">min_modify</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">values</span><span class="w"> </span><span class="n">...</span>
 </pre></div>
 </div>
 <ul>
 <li><p>one or more keyword/value pairs may be listed</p>
-<pre class="literal-block">keyword = <em>dmax</em> or <em>line</em> or <em>norm</em> or <em>alpha_damp</em> or <em>discrete_factor</em> or <em>integrator</em> or <em>tmax</em>
+<pre class="literal-block">keyword = <em>dmax</em> or <em>line</em> or <em>norm</em> or <em>alpha_damp</em> or <em>discrete_factor</em> or <em>integrator</em> or <em>abcfire</em> or <em>tmax</em>
   <em>dmax</em> value = max
     max = maximum distance for line search to move (distance units)
   <em>line</em> value = <em>backtrack</em> or <em>quadratic</em> or <em>forcezero</em> or <em>spin_cubic</em> or <em>spin_none</em>
@@ -280,25 +285,28 @@
     inf = max force component across all 3-vectors
     max = max force norm across all 3-vectors
   <em>alpha_damp</em> value = damping
-    damping = fictitious Gilbert damping for spin minimization (adim)
+    damping = fictitious magnetic damping for spin minimization (adim)
   <em>discrete_factor</em> value = factor
     factor = discretization factor for adaptive spin timestep (adim)
-  <em>integrator</em> value = <em>eulerimplicit</em> or <em>verlet</em>
+  <em>integrator</em> value = <em>eulerimplicit</em> or <em>verlet</em> or <em>leapfrog</em> or <em>eulerexplicit</em>
     time integration scheme for fire minimization
+  <em>abcfire</em> value = yes or no (default no)
+    yes = use ABC-FIRE variant of fire minimization style
+    no  = use default FIRE variant of fire minimization style
   <em>tmax</em> value = factor
     factor = maximum adaptive timestep for fire minimization (adim)</pre>
 </li>
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">min_modify</span><span class="w"> </span><span class="n">dmax</span><span class="w"> </span><span class="m">0.2</span><span class="w"></span>
-<span class="k">min_modify</span><span class="w"> </span><span class="n">integrator</span><span class="w"> </span><span class="n">verlet</span><span class="w"> </span><span class="n">tmax</span><span class="w"> </span><span class="m">4</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">min_modify</span><span class="w"> </span><span class="n">dmax</span><span class="w"> </span><span class="m">0.2</span>
+<span class="k">min_modify</span><span class="w"> </span><span class="n">integrator</span><span class="w"> </span><span class="n">verlet</span><span class="w"> </span><span class="n">tmax</span><span class="w"> </span><span class="m">4</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <p>This command sets parameters that affect the energy minimization
 algorithms selected by the <a class="reference internal" href="min_style.html"><span class="doc">min_style</span></a> command.  The
 various settings may affect the convergence rate and overall number of
@@ -351,9 +359,9 @@ all atoms in the system:</p>
 norm is replaced by the spin-torque norm.</p>
 <p>Keywords <em>alpha_damp</em> and <em>discrete_factor</em> only make sense when
 a <a class="reference internal" href="min_spin.html"><span class="doc">min_spin</span></a> command is declared.
-Keyword <em>alpha_damp</em> defines an analog of a magnetic Gilbert
-damping. It defines a relaxation rate toward an equilibrium for
-a given magnetic system.
+Keyword <em>alpha_damp</em> defines an analog of a magnetic damping.
+It defines a relaxation rate toward an equilibrium for a given
+magnetic system.
 Keyword <em>discrete_factor</em> defines a discretization factor for the
 adaptive timestep used in the <em>spin</em> minimization.
 See <a class="reference internal" href="min_spin.html"><span class="doc">min_spin</span></a> for more information about those
@@ -367,48 +375,54 @@ direction. The <em>spin_none</em> keyword deactivates the line search
 procedure.  The <em>spin_none</em> is a default value for <em>line</em> keyword for
 both <em>spin/lbfgs</em> and <em>spin/cg</em>. Convergence of <em>spin/lbfgs</em> can be
 more robust if <em>spin_cubic</em> line search is used.</p>
-<p>The Newton <em>integrator</em> used for <em>fire</em> minimization can be selected
-to be either the symplectic Euler (<em>eulerimplicit</em>) or velocity
-Verlet (<em>verlet</em>).  <em>tmax</em> defines the maximum value for the
-adaptive timestep during a <em>fire</em> minimization. It is a multiplication
-factor applied to the current <a class="reference internal" href="timestep.html"><span class="doc">timestep</span></a> (not in time
-unit). For example, <em>tmax</em> = 4.0 with a <a class="reference internal" href="timestep.html"><span class="doc">timestep</span></a> of
-2fs, means that the maximum value the timestep can reach during a <em>fire</em>
-minimization is 4fs.
-Note that parameter defaults has been chosen to be reliable in most cases,
-but one should consider adjusting <a class="reference internal" href="timestep.html"><span class="doc">timestep</span></a> and <em>tmax</em> to
-optimize the minimization for large or complex systems.  Other
-parameters of the <em>fire</em> minimization can be tuned (<em>tmin</em>,
-<em>delaystep</em>, <em>dtgrow</em>, <em>dtshrink</em>, <em>alpha0</em>, and
-<em>alphashrink</em>). Please refer to the references describing the
-<a class="reference internal" href="min_style.html"><span class="doc">min_style</span></a> <em>fire</em>.
-An additional stopping criteria <em>vdfmax</em> is used by <em>fire</em> in order to avoid
-unnecessary looping when it is reasonable to think the system will not
-be relaxed further.  Note that in this case the system will NOT have
+<p>The Newton <em>integrator</em> used for <em>fire</em> minimization can be selected to
+be either the symplectic Euler (<em>eulerimplicit</em>), velocity Verlet (<em>verlet</em>), Leapfrog (<em>leapfrog</em>) or non-symplectic forward Euler
+(<em>eulerexplicit</em> ). The keyword <em>tmax</em> defines the maximum value for
+the adaptive timestep during a <em>fire</em> minimization. It is a
+multiplication factor applied to the current <a class="reference internal" href="timestep.html"><span class="doc">timestep</span></a>
+(not in time unit). For example, <em>tmax</em> = 4.0 with a <a class="reference internal" href="timestep.html"><span class="doc">timestep</span></a> of 2fs, means that the maximum value the timestep can reach
+during a <em>fire</em> minimization is 4fs.  Note that parameter defaults has
+been chosen to be reliable in most cases, but one should consider
+adjusting <a class="reference internal" href="timestep.html"><span class="doc">timestep</span></a> and <em>tmax</em> to optimize the
+minimization for large or complex systems.  Other parameters of the
+<em>fire</em> minimization can be tuned (<em>tmin</em>, <em>delaystep</em>, <em>dtgrow</em>,
+<em>dtshrink</em>, <em>alpha0</em>, and <em>alphashrink</em>). Please refer to the
+references describing the <a class="reference internal" href="min_style.html"><span class="doc">min_style</span></a> <em>fire</em>.  An
+additional stopping criteria <em>vdfmax</em> is used by <em>fire</em> in order to
+avoid unnecessary looping when it is reasonable to think the system will
+not be relaxed further.  Note that in this case the system will NOT have
 reached your minimization criteria. This could happen when the system
-comes to be stuck in a local basin of the phase space.  <em>vdfmax</em> is
-the maximum number of consecutive iterations with P(t) &lt; 0.</p>
+comes to be stuck in a local basin of the phase space.  <em>vdfmax</em> is the
+maximum number of consecutive iterations with P(t) &lt; 0.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 8Feb2023.</span></p>
+</div>
+<p>The <em>abcfire</em> keyword allows to activate the ABC-FIRE variant of the
+<em>fire</em> minimization algorithm. ABC-FIRE introduces an additional factor
+that modifies the bias and scaling of the velocities of the atoms during
+the mixing step <a class="reference internal" href="#echeverrirestrepo"><span class="std std-ref">(Echeverri Restrepo)</span></a>.  This
+can lead to faster convergence of the minimizer.</p>
 <p>The <a class="reference internal" href="min_style.html"><span class="doc">min_style</span></a> <em>fire</em> is an optimized implementation of
 <a class="reference internal" href="min_style.html"><span class="doc">min_style</span></a> <em>fire/old</em>. It can however behave similarly
 to the <em>fire/old</em> style by using the following set of parameters:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">min_modify</span><span class="w"> </span><span class="n">integrator</span><span class="w"> </span><span class="n">eulerexplicit</span><span class="w"> </span><span class="n">tmax</span><span class="w"> </span><span class="m">10.0</span><span class="w"> </span><span class="n">tmin</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="n">delaystep</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">          </span><span class="n">dtgrow</span><span class="w"> </span><span class="m">1.1</span><span class="w"> </span><span class="n">dtshrink</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="n">alpha0</span><span class="w"> </span><span class="m">0.1</span><span class="w"> </span><span class="n">alphashrink</span><span class="w"> </span><span class="m">0.99</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">          </span><span class="n">vdfmax</span><span class="w"> </span><span class="m">100000</span><span class="w"> </span><span class="n">halfstepback</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="n">initialdelay</span><span class="w"> </span><span class="n">no</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">min_modify</span><span class="w"> </span><span class="n">integrator</span><span class="w"> </span><span class="n">eulerexplicit</span><span class="w"> </span><span class="n">tmax</span><span class="w"> </span><span class="m">10.0</span><span class="w"> </span><span class="n">tmin</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="n">delaystep</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">          </span><span class="n">dtgrow</span><span class="w"> </span><span class="m">1.1</span><span class="w"> </span><span class="n">dtshrink</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="n">alpha0</span><span class="w"> </span><span class="m">0.1</span><span class="w"> </span><span class="n">alphashrink</span><span class="w"> </span><span class="m">0.99</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">          </span><span class="n">vdfmax</span><span class="w"> </span><span class="m">100000</span><span class="w"> </span><span class="n">halfstepback</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="n">initialdelay</span><span class="w"> </span><span class="n">no</span>
 </pre></div>
 </div>
 </section>
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <p>For magnetic GNEB calculations, only <em>spin_none</em> value for <em>line</em>
 keyword can be used when minimization styles <em>spin/cg</em> and <em>spin/lbfgs</em> are
 employed.  See <a class="reference internal" href="neb_spin.html"><span class="doc">neb/spin</span></a> for more explanation.</p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="min_style.html"><span class="doc">min_style</span></a>, <a class="reference internal" href="minimize.html"><span class="doc">minimize</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
 <p>The option defaults are dmax = 0.1, line = quadratic and norm = two.</p>
 <p>For the <em>spin</em>, <em>spin/cg</em> and <em>spin/lbfgs</em> styles, the option
 defaults are alpha_damp = 1.0, discrete_factor = 10.0, line =
@@ -417,6 +431,7 @@ spin_none, and norm = euclidean.</p>
 eulerimplicit, tmax = 10.0, tmin = 0.02, delaystep = 20, dtgrow = 1.1,
 dtshrink = 0.5, alpha0 = 0.25, alphashrink = 0.99, vdfmax = 2000,
 halfstepback = yes and initialdelay = yes.</p>
+<p id="echeverrirestrepo"><strong>(EcheverriRestrepo)</strong> Echeverri Restrepo, Andric, Comput Mater Sci, 218, 111978 (2023).</p>
 </section>
 </section>
 
@@ -431,7 +446,7 @@ halfstepback = yes and initialdelay = yes.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -440,7 +455,6 @@ halfstepback = yes and initialdelay = yes.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

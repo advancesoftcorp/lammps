@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>fix polarize/bem/gmres command &mdash; LAMMPS documentation</title>
@@ -10,18 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/fix_polarize.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -34,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -78,6 +81,9 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_adapt_fep.html">fix adapt/fep command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_addforce.html">fix addforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_addtorque.html">fix addtorque command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_alchemy.html">fix alchemy command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_amoeba_bitorsion.html">fix amoeba/bitorsion command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_amoeba_pitorsion.html">fix amoeba/pitorsion command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_append_atoms.html">fix append/atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_atc.html">fix atc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_atom_swap.html">fix atom/swap command</a></li>
@@ -85,8 +91,11 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_chunk.html">fix ave/chunk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_correlate.html">fix ave/correlate command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_correlate_long.html">fix ave/correlate/long command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_grid.html">fix ave/grid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_histo.html">fix ave/histo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_histo.html#fix-ave-histo-weight-command">fix ave/histo/weight command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_spatial.html">Fix ave/spatial command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_spatial_sphere.html">Fix ave/spatial command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_time.html">fix ave/time command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_aveforce.html">fix aveforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_balance.html">fix balance command</a></li>
@@ -116,10 +125,11 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_drude_transform.html#fix-drude-transform-inverse-command">fix drude/transform/inverse command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_dt_reset.html">fix dt/reset command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_efield.html">fix efield command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_efield.html#fix-efield-tip4p-command">fix efield/tip4p command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ehex.html">fix ehex command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html">fix electrode/conp command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html#fix-electrode-conq-command">fix electrode/conq command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html#fix-electrode-thermo-command">fix electrode/thermo command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html">fix electrode/conp command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html#fix-electrode-conq-command">fix electrode/conq command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html#fix-electrode-thermo-command">fix electrode/thermo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_electron_stopping.html">fix electron/stopping command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_electron_stopping.html#fix-electron-stopping-fit-command">fix electron/stopping/fit command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_enforce2d.html">fix enforce2d command</a></li>
@@ -139,6 +149,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_grem.html">fix grem command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_halt.html">fix halt command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_heat.html">fix heat command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_heat_flow.html">fix heat/flow command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_hyper_global.html">fix hyper/global command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_hyper_local.html">fix hyper/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_imd.html">fix imd command</a></li>
@@ -148,13 +159,13 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_drude.html">fix langevin/drude command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_eff.html">fix langevin/eff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_spin.html">fix langevin/spin command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_latte.html">fix latte command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_fluid.html">fix lb/fluid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_momentum.html">fix lb/momentum command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_viscous.html">fix lb/viscous command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lineforce.html">fix lineforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_manifoldforce.html">fix manifoldforce command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_mdi_aimd.html">fix mdi/aimd command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_mdi_qm.html">fix mdi/qm command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_mdi_qmmm.html">fix mdi/qmmm command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_meso_move.html">fix meso/move command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify.html">fix_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
@@ -215,8 +226,10 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_orient.html#fix-orient-bcc-command">fix orient/bcc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_orient_eco.html">fix orient/eco command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_pafi.html">fix pafi command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pair.html">fix pair command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_phonon.html">fix phonon command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html">fix pimd command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html">fix pimd/langevin command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html#fix-pimd-nvt-command">fix pimd/nvt command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_planeforce.html">fix planeforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_plumed.html">fix plumed command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_poems.html">fix poems command</a></li>
@@ -270,6 +283,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_saed_vtk.html">fix saed/vtk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_setforce.html">fix setforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_setforce.html#fix-setforce-spin-command">fix setforce/spin command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_sgcmc.html">fix sgcmc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shake.html">fix shake command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shake.html#fix-rattle-command">fix rattle command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shardlow.html">fix shardlow command</a></li>
@@ -313,7 +327,9 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-lj1043-command">fix wall/lj1043 command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-colloid-command">fix wall/colloid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-harmonic-command">fix wall/harmonic command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-lepton-command">fix wall/lepton command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-morse-command">fix wall/morse command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-table-command">fix wall/table command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_body_polygon.html">fix wall/body/polygon command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_body_polyhedron.html">fix wall/body/polyhedron command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_ees.html">fix wall/ees command</a></li>
@@ -334,6 +350,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -351,12 +368,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="fixes.html">Fixes</a> &raquo;</li>
-      <li>fix polarize/bem/gmres command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="fixes.html">Fixes</a></li>
+      <li class="breadcrumb-item active">fix polarize/bem/gmres command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="fix_poems.html" class="btn btn-neutral float-left" title="fix poems command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -367,31 +383,32 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <span class="target" id="index-0"></span><span class="target" id="index-1"></span><section id="fix-polarize-bem-gmres-command">
-<span id="index-2"></span><h1>fix polarize/bem/gmres command<a class="headerlink" href="#fix-polarize-bem-gmres-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<span class="target" id="index-0"></span><span class="target" id="index-1"></span><section id="fix-polarize-bem-gmres-command">
+<span id="index-2"></span><h1>fix polarize/bem/gmres command<a class="headerlink" href="#fix-polarize-bem-gmres-command" title="Permalink to this heading"></a></h1>
 </section>
 <section id="fix-polarize-bem-icc-command">
-<h1>fix polarize/bem/icc command<a class="headerlink" href="#fix-polarize-bem-icc-command" title="Permalink to this headline">¶</a></h1>
+<h1>fix polarize/bem/icc command<a class="headerlink" href="#fix-polarize-bem-icc-command" title="Permalink to this heading"></a></h1>
 </section>
 <section id="fix-polarize-functional-command">
-<h1>fix polarize/functional command<a class="headerlink" href="#fix-polarize-functional-command" title="Permalink to this headline">¶</a></h1>
+<h1>fix polarize/functional command<a class="headerlink" href="#fix-polarize-functional-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fix ID group-ID style nevery tolerance ...
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">ID</span><span class="w"> </span><span class="nv nv-Identifier">group-ID</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="n">nevery</span><span class="w"> </span><span class="n">tolerance</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>ID, group-ID are documented in <a class="reference internal" href="fix.html"><span class="doc">fix</span></a> command</p></li>
 <li><p>style = <em>polarize/bem/gmres</em> or <em>polarize/bem/icc</em> or <em>polarize/functional</em></p></li>
-<li><p>Nevery = this fixed is invoked every this many timesteps</p></li>
+<li><p>nevery = this fixed is invoked every this many timesteps</p></li>
 <li><p>tolerance = the relative tolerance for the iterative solver to stop</p></li>
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">interface</span><span class="w"> </span><span class="n">polarize</span><span class="o">/</span><span class="n">bem</span><span class="o">/</span><span class="n">gmres</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">0.0001</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">interface</span><span class="w"> </span><span class="n">polarize</span><span class="o">/</span><span class="n">bem</span><span class="o">/</span><span class="n">icc</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0.0001</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">3</span><span class="w"> </span><span class="nv nv-Identifier">interface</span><span class="w"> </span><span class="n">polarize</span><span class="o">/</span><span class="n">functional</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0.001</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">interface</span><span class="w"> </span><span class="n">polarize</span><span class="o">/</span><span class="n">bem</span><span class="o">/</span><span class="n">gmres</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">0.0001</span>
+<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">interface</span><span class="w"> </span><span class="n">polarize</span><span class="o">/</span><span class="n">bem</span><span class="o">/</span><span class="n">icc</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0.0001</span>
+<span class="k">fix </span><span class="nv nv-Identifier">3</span><span class="w"> </span><span class="nv nv-Identifier">interface</span><span class="w"> </span><span class="n">polarize</span><span class="o">/</span><span class="n">functional</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0.0001</span>
 </pre></div>
 </div>
 <p>Used in input scripts:</p>
@@ -403,44 +420,51 @@ examples/PACKAGES/dielectric/in.nopbc
 </div></blockquote>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <p>These fixes compute induced charges at the interface between two
 impermeable media with different dielectric constants. The interfaces
-need to be discretized into vertices, each representing a boundary element.
-The vertices are treated as if they were regular atoms or particles.
-<a class="reference internal" href="atom_style.html"><span class="doc">atom_style dielectric</span></a> should be used since it defines
-the additional properties of each interface particle such as
-interface normal vectors, element areas, and local dielectric mismatch.
-These fixes also require the use of <a class="reference internal" href="pair_style.html"><span class="doc">pair_style</span></a> and
-<a class="reference internal" href="kspace_style.html"><span class="doc">kspace_style</span></a> with the <em>dielectric</em> suffix.
-At every time step, given a configuration of the physical charges in the system
-(such as atoms and charged particles) these fixes compute and update
-the charge of the interface particles. The interfaces are allowed to move
-during the simulation with appropriate time integrators (for example,
-with <a class="reference internal" href="fix_rigid.html"><span class="doc">fix_rigid</span></a>).</p>
-<p>Consider an interface between two media: one with dielectric constant
-of 78 (water), the other of 4 (silica). The interface is discretized
-into 2000 boundary elements, each represented by an interface particle. Suppose that
-each interface particle has a normal unit vector pointing from the silica medium to water.
-The dielectric difference along the normal vector is then 78 - 4 = 74,
-the mean dielectric value is (78 + 4) / 2 = 41. Each boundary element
-also has its area and the local mean curvature (which is used by these fixes
-for computing a correction term in the local electric field).
-To model charged interfaces, the interface particle will have a non-zero charge value,
-coming from its area and surface charge density.</p>
-<p>For non-interface particles such as atoms and charged particles,
-the interface normal vectors, element area, and dielectric mismatch are
-irrelevant. Their local dielectric value is used to rescale their actual charge
-when computing the Coulombic interactions. For instance, for a cation carrying
-a charge of +2 (in charge unit) in an implicit solvent with dielectric constant of 40
-would have actual charge of +2, and a local dielectric constant value of 40.
-It is assumed that the particles cannot pass through the interface during the simulation
-so that its local dielectric constant value does not change.</p>
-<p>There are some example scripts for using these fixes
-with LAMMPS in the <code class="docutils literal notranslate"><span class="pre">examples/PACKAGES/dielectric</span></code> directory. The README file
-therein contains specific details on the system setup. Note that the example data files
-show the additional fields (columns) needed for <a class="reference internal" href="atom_style.html"><span class="doc">atom_style dielectric</span></a>
-beyond the conventional fields <em>id</em>, <em>mol</em>, <em>type</em>, <em>q</em>, <em>x</em>, <em>y</em>, and <em>z</em>.</p>
+need to be discretized into vertices, each representing a boundary
+element.  The vertices are treated as if they were regular atoms or
+particles.  <a class="reference internal" href="atom_style.html"><span class="doc">atom_style dielectric</span></a> should be used
+since it defines the additional properties of each interface particle
+such as interface normal vectors, element areas, and local dielectric
+mismatch.  These fixes also require the use of <a class="reference internal" href="pair_style.html"><span class="doc">pair_style</span></a> and <a class="reference internal" href="kspace_style.html"><span class="doc">kspace_style</span></a> with the
+<em>dielectric</em> suffix.  At every time step, given a configuration of the
+physical charges in the system (such as atoms and charged particles)
+these fixes compute and update the charge of the interface
+particles. The interfaces are allowed to move during the simulation if
+the appropriate time integrators are also set (for example, with
+<a class="reference internal" href="fix_rigid.html"><span class="doc">fix_rigid</span></a>).</p>
+<p>Consider an interface between two media: one with dielectric constant of
+78 (water), the other of 4 (silica). The interface is discretized into
+2000 boundary elements, each represented by an interface
+particle. Suppose that each interface particle has a normal unit vector
+pointing from the silica medium to water.  The dielectric difference
+along the normal vector is then 78 - 4 = 74, the mean dielectric value
+is (78 + 4) / 2 = 41. Each boundary element also has its area and the
+local mean curvature, which is used by these fixes for computing a
+correction term in the local electric field.  To model charged
+interfaces, an interface particle will have a non-zero charge value,
+coming from its area and surface charge density, and its local dielectric
+constant set to the mean dielectric value.</p>
+<p>For non-interface particles such as atoms and charged particles, the
+interface normal vectors, element area, and dielectric mismatch are
+irrelevant and unused. Their local dielectric value is used internally
+to rescale their given charge when computing the Coulombic
+interactions. For instance, to simulate a cation carrying a charge of +2
+(in simulation charge units) in an implicit solvent with a dielectric
+constant of 40, the cation’s charge should be set to +2 and its local
+dielectric constant property (defined in the <a class="reference internal" href="atom_style.html"><span class="doc">atom_style dielectric</span></a>) should be set to 40; there is no need to manually rescale
+charge. This will produce the proper force for any <a class="reference internal" href="pair_style.html"><span class="doc">pair_style</span></a> with the dielectric suffix.  It is assumed that the
+particles cannot pass through the interface during the simulation
+because the value of the local dielectric constant property does not
+change.</p>
+<p>There are some example scripts for using these fixes with LAMMPS in the
+<code class="docutils literal notranslate"><span class="pre">examples/PACKAGES/dielectric</span></code> directory. The README file therein
+contains specific details on the system setup. Note that the example
+data files show the additional fields (columns) needed for
+<a class="reference internal" href="atom_style.html"><span class="doc">atom_style dielectric</span></a> beyond the conventional fields
+<em>id</em>, <em>mol</em>, <em>type</em>, <em>q</em>, <em>x</em>, <em>y</em>, and <em>z</em>.</p>
 <hr class="docutils" />
 <p>For fix <em>polarize/bem/gmres</em> and fix <em>polarize/bem/icc</em> the induced
 charges of the atoms in the specified group, which are the vertices on
@@ -457,56 +481,109 @@ the interface, are computed using the equation:</p>
 <li><p><span class="math notranslate nohighlight">\(\mathbf{E}(\mathbf{s})\)</span> is the electrical field at the vertex</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathbf{n}(\mathbf{s})\)</span> is the unit normal vector at the vertex pointing from medium with <span class="math notranslate nohighlight">\(\epsilon_2\)</span> to that with <span class="math notranslate nohighlight">\(\epsilon_1\)</span></p></li>
 </ul>
-<p>Fix <em>polarize/bem/gmres</em> employs the Generalized Minimum Residual (GMRES)
-as described in <a class="reference internal" href="#barros"><span class="std std-ref">(Barros)</span></a> to solve <span class="math notranslate nohighlight">\(\sigma_b\)</span>.</p>
+<p>Fix <em>polarize/bem/gmres</em> employs the Generalized Minimum Residual
+(GMRES) as described in <a class="reference internal" href="#barros"><span class="std std-ref">(Barros)</span></a> to solve
+<span class="math notranslate nohighlight">\(\sigma_b\)</span>.</p>
 <p>Fix <em>polarize/bem/icc</em> employs the successive over-relaxation algorithm
 as described in <a class="reference internal" href="#tyagi"><span class="std std-ref">(Tyagi)</span></a> to solve <span class="math notranslate nohighlight">\(\sigma_b\)</span>.</p>
-<p>The iterative solvers would terminate either when the maximum relative change
-in the induced charges in consecutive iterations is below the set tolerance,
-or when the number of iterations reaches <em>iter_max</em> (see below).</p>
-<p>Fix <em>polarize/functional</em> employs the energy functional variation approach
-as described in <a class="reference internal" href="#jadhao"><span class="std std-ref">(Jadhao)</span></a> to solve <span class="math notranslate nohighlight">\(\sigma_b\)</span>.</p>
-<p>More details on the implementation of these fixes and their recommended use
-are described in <a class="reference internal" href="#nguyentd"><span class="std std-ref">(NguyenTD)</span></a>.</p>
+<p>The iterative solvers would terminate either when the maximum relative
+change in the induced charges in consecutive iterations is below the set
+tolerance, or when the number of iterations reaches <em>iter_max</em> (see
+below).</p>
+<p>Fix <em>polarize/functional</em> employs the energy functional variation
+approach as described in <a class="reference internal" href="#jadhao"><span class="std std-ref">(Jadhao)</span></a> to solve
+<span class="math notranslate nohighlight">\(\sigma_b\)</span>.</p>
+<p>The induced charges computed by these fixes are stored in the <em>q_scaled</em> field,
+and can be accessed as in the following example:</p>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">qs</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">property</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">q_scaled</span>
+<span class="k">dump </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="n">all.txt</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="n">c_qs</span>
+</pre></div>
+</div>
+<p>Note that the <em>q</em> field is the regular atom charges, which do not change
+during the simulation. For interface particles, <em>q_scaled</em> is the sum
+of the real charge, divided by the local dielectric constant <em>epsilon</em>,
+and their induced charges. For non-interface particles, <em>q_scaled</em> is
+the real charge, divided by the local dielectric constant <em>epsilon</em>.</p>
+<p>More details on the implementation of these fixes and their recommended
+use are described in <a class="reference internal" href="#nguyentd"><span class="std std-ref">(NguyenTD)</span></a>.</p>
 </section>
 <section id="restart-fix-modify-output-run-start-stop-minimize-info">
-<h2>Restart, fix_modify, output, run start/stop, minimize info<a class="headerlink" href="#restart-fix-modify-output-run-start-stop-minimize-info" title="Permalink to this headline">¶</a></h2>
+<h2>Restart, fix_modify, output, run start/stop, minimize info<a class="headerlink" href="#restart-fix-modify-output-run-start-stop-minimize-info" title="Permalink to this heading"></a></h2>
 <p>No information about this fix is written to <a class="reference internal" href="restart.html"><span class="doc">binary restart files</span></a>.</p>
-<p>The <a class="reference internal" href="fix_modify.html"><span class="doc">fix_modify</span></a> command provides certain options to
-control the induced charge solver and the initial values of the interface elements:</p>
+<p>The <a class="reference internal" href="fix_modify.html"><span class="doc">fix_modify</span></a> command provides the ability to modify certain
+settings:</p>
 <blockquote>
 <div><pre class="literal-block"><em>itr_max</em> arg
    arg = maximum number of iterations for convergence
 <em>dielectrics</em> ediff emean epsilon area charge
-   ediff = dielectric difference
-   emean = dielectric mean
-   epsilon = local dielectric value
-   aree = element area
-   charge = real interface charge</pre>
+   ediff = dielectric difference or NULL
+   emean = dielectric mean or NULL
+   epsilon = local dielectric value or NULL
+   area = element area or NULL
+   charge = real interface charge or NULL
+<em>kspace</em> arg = yes or no
+<em>rand</em> max seed
+   max = range of random induced charges to be generated
+   seed = random number seed to use when generating random charge
+<em>mr</em> arg
+   arg = maximum number of q-vectors to use when solving (GMRES only)
+<em>omega</em> arg
+   arg = relaxation parameter to use when iterating (ICC only)</pre>
 </div></blockquote>
-<p><em>polarize/bem/gmres</em> or <em>polarize/bem/icc</em> compute a global 2-element vector
-which can be accessed by various <a class="reference internal" href="Howto_output.html"><span class="doc">output commands</span></a>.
-The first element is the number of iterations when the solver terminates
-(of which the upper bound is set by <em>iter_max</em>). The second element is the RMS error.</p>
+<p>The <em>itr_max</em> keyword sets the max number of iterations to be used for
+solving each step.</p>
+<p>The <em>dielectrics</em> keyword allows properties of the atoms in group
+<em>group-ID</em> to be modified. Values passed to any of the arguments
+(<em>ediff</em>, <em>emean</em>, <em>epsilon</em>, <em>area</em>, <em>charge</em>) will override existing
+values for all atoms in the group <em>group-ID</em>. Passing NULL to any of
+these arguments will preserve the existing value. Note that setting the
+properties of the interface this way will change the properties of all
+atoms associated with the fix (all atoms in <em>group-ID</em>), so multiple fix
+and fix_modify commands would be needed to change the properties of two
+different interfaces to different values (one fix and fix_modify for
+each interface group).</p>
+<p>The <em>kspace</em> keyword turns on long range interactions.</p>
+<p>If the arguments of the <em>rand</em> keyword are set, then the atoms subject
+to this fix will be assigned a random initial charge in a uniform
+distribution from -<em>max</em>/2 to <em>max</em>/2, using random number seed <em>seed</em>.</p>
+<p>The <em>mr</em> keyword only applies to <em>style</em> = <em>polarize/bem/gmres</em>. It is
+the maximum number of q-vectors to use when solving for the surface
+charge.</p>
+<p>The <em>omega</em> keyword only applies when using <em>style</em> =
+<em>polarize/bem/icc</em>. It is a relaxation parameter defined in
+<a class="reference internal" href="#tyagi"><span class="std std-ref">(Tyagi)</span></a> that should generally be set between 0 and 2.</p>
+<p>Note that the local dielectric constant (epsilon) can also be set
+independently using the <a class="reference internal" href="set.html"><span class="doc">set</span></a> command.</p>
+<hr class="docutils" />
+<p><em>polarize/bem/gmres</em> or <em>polarize/bem/icc</em> compute a global 2-element
+vector which can be accessed by various <a class="reference internal" href="Howto_output.html"><span class="doc">output commands</span></a>.  The first element is the number of iterations when the
+solver terminates (of which the upper bound is set by <em>iter_max</em>). The
+second element is the RMS error.</p>
 </section>
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
-<p>These fixes are part of the DIELECTRIC package.  It is only enabled
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
+<p>These fixes are part of the DIELECTRIC package.  They are only enabled
 if LAMMPS was built with that package, which requires that also the
 KSPACE package is installed.  See the <a class="reference internal" href="Build_package.html"><span class="doc">Build package</span></a> page for more info.</p>
-<p>Note that the <em>polarize/bem/gmres</em> and <em>polarize/bem/icc</em> fixes only support
-<a class="reference internal" href="units.html"><span class="doc">units</span></a> <em>lj</em>, <em>real</em>, <em>metal</em>, <em>si</em> and <em>nano</em> at the moment.</p>
+<p>Note that the <em>polarize/bem/gmres</em> and <em>polarize/bem/icc</em> fixes only
+support <a class="reference internal" href="units.html"><span class="doc">units</span></a> <em>lj</em>, <em>real</em>, <em>metal</em>, <em>si</em> and <em>nano</em> at
+the moment.</p>
+<p>Note that <em>polarize/functional</em> does not yet support charged interfaces.</p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="pair_coeff.html"><span class="doc">pair_coeff</span></a>, <a class="reference internal" href="#"><span class="doc">fix polarize</span></a>, <a class="reference internal" href="read_data.html"><span class="doc">read_data</span></a>,
 <a class="reference internal" href="pair_dielectric.html"><span class="doc">pair_style lj/cut/coul/long/dielectric</span></a>,
 <a class="reference internal" href="kspace_style.html"><span class="doc">kspace_style pppm/dielectric</span></a>,
 <a class="reference internal" href="compute_efield_atom.html"><span class="doc">compute efield/atom</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
-<p><em>iter_max</em> = 20</p>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
+<p><em>iter_max</em> = 50</p>
+<p><em>kspace</em> = yes</p>
+<p><em>omega</em> = 0.7 (ICC only)</p>
+<p><em>mr</em> = # atoms in group <em>group-ID</em> minus 1 (GMRES only)</p>
+<p>No random charge initialization happens by default.</p>
 <hr class="docutils" />
 <p id="barros"><strong>(Barros)</strong> Barros, Sinkovits, Luijten, J. Chem. Phys, 140, 064903 (2014)</p>
 <p id="tyagi"><strong>(Tyagi)</strong> Tyagi, Suzen, Sega, Barbosa, Kantorovich, Holm, J Chem Phys, 132, 154112 (2010)</p>
@@ -526,7 +603,7 @@ KSPACE package is installed.  See the <a class="reference internal" href="Build_
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -535,7 +612,6 @@ KSPACE package is installed.  See the <a class="reference internal" href="Build_
    
 
 </footer>
-
         </div>
       </div>
     </section>

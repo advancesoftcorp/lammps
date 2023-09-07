@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>compute_modify command &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/compute_modify.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -95,17 +99,21 @@
 <li class="toctree-l2"><a class="reference internal" href="compute_com_chunk.html">compute com/chunk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_contact_atom.html">compute contact/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_coord_atom.html">compute coord/atom command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_count_type.html">compute count/type command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_damage_atom.html">compute damage/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dihedral.html">compute dihedral command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dihedral_local.html">compute dihedral/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dilatation_atom.html">compute dilatation/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dipole.html">compute dipole command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_dipole.html#compute-dipole-tip4p-command">compute dipole/tip4p command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dipole_chunk.html">compute dipole/chunk command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_dipole_chunk.html#compute-dipole-tip4p-chunk-command">compute dipole/tip4p/chunk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_displace_atom.html">compute displace/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dpd.html">compute dpd command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dpd_atom.html">compute dpd/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_edpd_temp_atom.html">compute edpd/temp/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_efield_atom.html">compute efield/atom command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_efield_wolf_atom.html">compute efield/wolf/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_entropy_atom.html">compute entropy/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_erotate_asphere.html">compute erotate/asphere command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_erotate_rigid.html">compute erotate/rigid command</a></li>
@@ -132,7 +140,6 @@
 <li class="toctree-l2"><a class="reference internal" href="compute_ke_atom_eff.html">compute ke/atom/eff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_ke_eff.html">compute ke/eff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_ke_rigid.html">compute ke/rigid command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute_mesont.html">compute mesont command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_mliap.html">compute mliap command</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">compute_modify command</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#syntax">Syntax</a></li>
@@ -156,9 +163,11 @@
 <li class="toctree-l2"><a class="reference internal" href="compute_pe_atom.html">compute pe/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_plasticity_atom.html">compute plasticity/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_pressure.html">compute pressure command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_pressure_alchemy.html">compute pressure/alchemy command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_pressure_uef.html">compute pressure/uef command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_property_atom.html">compute property/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_property_chunk.html">compute property/chunk command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_property_grid.html">compute property/grid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_property_local.html">compute property/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_ptm_atom.html">compute ptm/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_rdf.html">compute rdf command</a></li>
@@ -193,17 +202,19 @@
 <li class="toctree-l2"><a class="reference internal" href="compute_sna_atom.html#compute-snad-atom-command">compute snad/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_sna_atom.html#compute-snav-atom-command">compute snav/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_sna_atom.html#compute-snap-command">compute snap command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_sna_atom.html#compute-sna-grid-command">compute sna/grid command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_sna_atom.html#compute-sna-grid-local-command">compute sna/grid/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_sph_e_atom.html">compute sph/e/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_sph_rho_atom.html">compute sph/rho/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_sph_t_atom.html">compute sph/t/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_spin.html">compute spin command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_stress_atom.html">compute stress/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_stress_atom.html#compute-centroid-stress-atom-command">compute centroid/stress/atom command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_stress_cartesian.html">compute stress/cartesian command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_stress_curvilinear.html">compute stress/cylinder command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_stress_curvilinear.html#compute-stress-spherical-command">compute stress/spherical command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_stress_mop.html">compute stress/mop command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_stress_mop.html#compute-stress-mop-profile-command">compute stress/mop/profile command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute_stress_profile.html">compute stress/cartesian command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute_stress_profile.html#compute-stress-cylinder-command">compute stress/cylinder command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute_stress_profile.html#compute-stress-spherical-command">compute stress/spherical command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_tally.html">compute force/tally command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_tally.html#compute-heat-flux-tally-command">compute heat/flux/tally command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_tally.html#compute-heat-flux-virial-tally-command">compute heat/flux/virial/tally command</a></li>
@@ -243,6 +254,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -260,12 +272,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="commands_list.html">Commands</a> &raquo;</li>
-      <li>compute_modify command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="commands_list.html">Commands</a></li>
+      <li class="breadcrumb-item active">compute_modify command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="compute.html" class="btn btn-neutral float-left" title="compute command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -276,75 +287,68 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="compute-modify-command">
-<span id="index-0"></span><h1>compute_modify command<a class="headerlink" href="#compute-modify-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="compute-modify-command">
+<span id="index-0"></span><h1>compute_modify command<a class="headerlink" href="#compute-modify-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute_modify</span><span class="w"> </span><span class="n">compute</span><span class="o">-</span><span class="n">ID</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">...</span><span class="w"></span>
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute_modify </span><span class="nv nv-Identifier">compute-ID</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">...</span>
 </pre></div>
 </div>
 <ul>
 <li><p>compute-ID = ID of the compute to modify</p></li>
 <li><p>one or more keyword/value pairs may be listed</p></li>
-<li><p>keyword = <em>extra/dof</em> or <em>extra</em> or <em>dynamic/dof</em> or <em>dynamic</em></p>
+<li><p>keyword = <em>extra/dof</em> or <em>dynamic/dof</em></p>
 <pre class="literal-block"><em>extra/dof</em> value = N
   N = # of extra degrees of freedom to subtract
-<em>extra</em> syntax is identical to <em>extra/dof</em>, will be disabled at some point
 <em>dynamic/dof</em> value = <em>yes</em> or <em>no</em>
-  yes/no = do or do not re-compute the number of degrees of freedom (DOF) contributing to the temperature
-<em>dynamic</em> syntax is identical to <em>dynamic/dof</em>, will be disabled at some point</pre>
+  yes/no = do or do not re-compute the number of degrees of freedom (DOF) contributing to the temperature</pre>
 </li>
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute_modify</span><span class="w"> </span><span class="n">myTemp</span><span class="w"> </span><span class="n">extra</span><span class="o">/</span><span class="n">dof</span><span class="w"> </span><span class="m">0</span><span class="w"></span>
-<span class="k">compute_modify</span><span class="w"> </span><span class="n">newtemp</span><span class="w"> </span><span class="n">dynamic</span><span class="o">/</span><span class="n">dof</span><span class="w"> </span><span class="n">yes</span><span class="w"> </span><span class="n">extra</span><span class="o">/</span><span class="n">dof</span><span class="w"> </span><span class="m">600</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute_modify </span><span class="nv nv-Identifier">myTemp</span><span class="w"> </span><span class="n">extra</span><span class="o">/</span><span class="n">dof</span><span class="w"> </span><span class="m">0</span>
+<span class="k">compute_modify </span><span class="nv nv-Identifier">newtemp</span><span class="w"> </span><span class="n">dynamic</span><span class="o">/</span><span class="n">dof</span><span class="w"> </span><span class="n">yes</span><span class="w"> </span><span class="n">extra</span><span class="o">/</span><span class="n">dof</span><span class="w"> </span><span class="m">600</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <p>Modify one or more parameters of a previously defined compute.  Not
 all compute styles support all parameters.</p>
-<p>The <em>extra/dof</em> or <em>extra</em> keyword refers to how many
-degrees-of-freedom are subtracted (typically from 3N) as a normalizing
-factor in a temperature computation.  Only computes that compute a
-temperature use this option.  The default is 2 or 3 for <a class="reference internal" href="dimension.html"><span class="doc">2d or 3d systems</span></a> which is a correction factor for an ensemble
-of velocities with zero total linear momentum. For compute
-temp/partial, if one or more velocity components are excluded, the
-value used for <em>extra</em> is scaled accordingly. You can use a negative
-number for the <em>extra</em> parameter if you need to add
-degrees-of-freedom.  See the <a class="reference internal" href="compute_temp_asphere.html"><span class="doc">compute temp/asphere</span></a> command for an example.</p>
-<p>The <em>dynamic/dof</em> or <em>dynamic</em> keyword determines whether the number
-of atoms N in the compute group and their associated degrees of
-freedom are re-computed each time a temperature is computed.  Only
-compute styles that calculate a temperature use this option.  By
-default, N and their DOF are assumed to be constant.  If you are
-adding atoms or molecules to the system (see the <a class="reference internal" href="fix_pour.html"><span class="doc">fix pour</span></a>, <a class="reference internal" href="fix_deposit.html"><span class="doc">fix deposit</span></a>, and <a class="reference internal" href="fix_gcmc.html"><span class="doc">fix gcmc</span></a> commands) or expect atoms or molecules to be lost
-(e.g. due to exiting the simulation box or via <a class="reference internal" href="fix_evaporate.html"><span class="doc">fix evaporate</span></a>), then this option should be used to
-insure the temperature is correctly normalized.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The <em>extra</em> and <em>dynamic</em> keywords should not be used as they
-are deprecated (March 2017) and will eventually be disabled.  Instead,
-use the equivalent <em>extra/dof</em> and <em>dynamic/dof</em> keywords.</p>
-</div>
+<p>The <em>extra/dof</em> keyword refers to how many degrees of freedom are
+subtracted (typically from <span class="math notranslate nohighlight">\(3N\)</span>) as a normalizing factor in a
+temperature computation.  Only computes that compute a temperature use
+this option.  The default is 2 or 3 for <a class="reference internal" href="dimension.html"><span class="doc">2d or 3d systems</span></a> which is a correction factor for an ensemble of velocities
+with zero total linear momentum. For compute temp/partial, if one or
+more velocity components are excluded, the value used for <em>extra/dof</em> is
+scaled accordingly. You can use a negative number for the <em>extra/dof</em>
+parameter if you need to add degrees-of-freedom.  See the <a class="reference internal" href="compute_temp_asphere.html"><span class="doc">compute
+temp/asphere</span></a> command for an example.</p>
+<p>The <em>dynamic/dof</em> keyword determines whether the number
+of atoms <span class="math notranslate nohighlight">\(N\)</span> in the compute group and their associated degrees
+of freedom (DOF) are re-computed each time a temperature is computed.
+Only compute styles that calculate a temperature use this option.  By
+default, <span class="math notranslate nohighlight">\(N\)</span> and their DOF are assumed to be constant.  If you
+are adding atoms or molecules to the system (see the <a class="reference internal" href="fix_pour.html"><span class="doc">fix pour</span></a>, <a class="reference internal" href="fix_deposit.html"><span class="doc">fix deposit</span></a>, and <a class="reference internal" href="fix_gcmc.html"><span class="doc">fix gcmc</span></a> commands) or expect atoms or molecules to be lost
+(e.g. due to exiting the simulation box or via <a class="reference internal" href="fix_evaporate.html"><span class="doc">fix evaporate</span></a>), then this option should be used to ensure the
+temperature is correctly normalized.</p>
 </section>
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <blockquote>
 <div><p>none</p>
 </div></blockquote>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="compute.html"><span class="doc">compute</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
-<p>The option defaults are extra/dof = 2 or 3 for 2d or 3d systems and
-dynamic/dof = no.</p>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
+<p>The option defaults are extra/dof = 2 or 3 for 2d or 3d systems,
+respectively, and dynamic/dof = <em>no</em>.</p>
 </section>
 </section>
 
@@ -359,7 +363,7 @@ dynamic/dof = no.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -368,7 +372,6 @@ dynamic/dof = no.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

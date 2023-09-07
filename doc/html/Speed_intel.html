@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>7.4.2. INTEL package &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Speed_intel.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -91,6 +95,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -108,13 +113,12 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Speed.html"><span class="section-number">7. </span>Accelerate performance</a> &raquo;</li>
-          <li><a href="Speed_packages.html"><span class="section-number">7.4. </span>Accelerator packages</a> &raquo;</li>
-      <li><span class="section-number">7.4.2. </span>INTEL package</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Speed.html"><span class="section-number">7. </span>Accelerate performance</a></li>
+          <li class="breadcrumb-item"><a href="Speed_packages.html"><span class="section-number">7.4. </span>Accelerator packages</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">7.4.2. </span>INTEL package</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="Speed_gpu.html" class="btn btn-neutral float-left" title="7.4.1. GPU package" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -125,8 +129,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="intel-package">
-<h1><span class="section-number">7.4.2. </span>INTEL package<a class="headerlink" href="#intel-package" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="intel-package">
+<h1><span class="section-number">7.4.2. </span>INTEL package<a class="headerlink" href="#intel-package" title="Permalink to this heading"></a></h1>
 <p>The INTEL package is maintained by Mike Brown at Intel
 Corporation.  It provides two methods for accelerating simulations,
 depending on the hardware you have.  The first is acceleration on
@@ -138,7 +143,7 @@ When offloading to a co-processor from a CPU, the same routine is run
 twice, once on the CPU and once with an offload flag. This allows
 LAMMPS to run on the CPU cores and co-processor cores simultaneously.</p>
 <section id="currently-available-intel-styles">
-<h2>Currently Available INTEL Styles<a class="headerlink" href="#currently-available-intel-styles" title="Permalink to this headline">¶</a></h2>
+<h2>Currently Available INTEL Styles<a class="headerlink" href="#currently-available-intel-styles" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>Angle Styles: charmm, harmonic</p></li>
 <li><p>Bond Styles: fene, fourier, harmonic</p></li>
@@ -159,7 +164,7 @@ input requires it, LAMMPS will abort with an error message.</p>
 </div>
 </section>
 <section id="speed-up-to-expect">
-<h2>Speed-up to expect<a class="headerlink" href="#speed-up-to-expect" title="Permalink to this headline">¶</a></h2>
+<h2>Speed-up to expect<a class="headerlink" href="#speed-up-to-expect" title="Permalink to this heading"></a></h2>
 <p>The speedup will depend on your simulation, the hardware, which
 styles are used, the number of atoms, and the floating-point
 precision mode. Performance improvements are shown compared to
@@ -183,7 +188,7 @@ instructions to reproduce.</p>
 </section>
 <hr class="docutils" />
 <section id="accuracy-and-order-of-operations">
-<h2>Accuracy and order of operations<a class="headerlink" href="#accuracy-and-order-of-operations" title="Permalink to this headline">¶</a></h2>
+<h2>Accuracy and order of operations<a class="headerlink" href="#accuracy-and-order-of-operations" title="Permalink to this heading"></a></h2>
 <p>In most molecular dynamics software, parallelization parameters
 (# of MPI, OpenMP, and vectorization) can change the results due
 to changing the order of operations with finite-precision
@@ -219,7 +224,7 @@ mode should not be used without appropriate validation.</p>
 </section>
 <hr class="docutils" />
 <section id="quick-start-for-experienced-users">
-<h2>Quick Start for Experienced Users<a class="headerlink" href="#quick-start-for-experienced-users" title="Permalink to this headline">¶</a></h2>
+<h2>Quick Start for Experienced Users<a class="headerlink" href="#quick-start-for-experienced-users" title="Permalink to this heading"></a></h2>
 <p>LAMMPS should be built with the INTEL package installed.
 Simulations should be run with 1 MPI task per physical <em>core</em>,
 not <em>hardware thread</em>.</p>
@@ -259,7 +264,7 @@ co-processors per node.</p></li>
 </section>
 <hr class="docutils" />
 <section id="required-hardware-software">
-<h2>Required hardware/software<a class="headerlink" href="#required-hardware-software" title="Permalink to this headline">¶</a></h2>
+<h2>Required hardware/software<a class="headerlink" href="#required-hardware-software" title="Permalink to this heading"></a></h2>
 <p>When using Intel compilers version 16.0 or later is required.</p>
 <p>In order to use offload to co-processors, an Intel Xeon Phi
 co-processor and an Intel compiler are required.</p>
@@ -279,7 +284,7 @@ For best performance, we recommend that the MCDRAM is configured in
 slightly lower.</p>
 </section>
 <section id="notes-about-simultaneous-multithreading">
-<h2>Notes about Simultaneous Multithreading<a class="headerlink" href="#notes-about-simultaneous-multithreading" title="Permalink to this headline">¶</a></h2>
+<h2>Notes about Simultaneous Multithreading<a class="headerlink" href="#notes-about-simultaneous-multithreading" title="Permalink to this heading"></a></h2>
 <p>Modern CPUs often support Simultaneous Multithreading (SMT). On
 Intel processors, this is called Hyper-Threading (HT) technology.
 SMT is hardware support for running multiple threads efficiently on
@@ -308,22 +313,22 @@ benefit for any software package in most cases. The operating system
 will report every hardware thread as a separate core allowing one to
 determine the number of hardware threads available. On Linux systems,
 this information can normally be obtained with:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat /proc/cpuinfo
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span>/proc/cpuinfo
 </pre></div>
 </div>
 </section>
 <section id="building-lammps-with-the-intel-package">
-<h2>Building LAMMPS with the INTEL package<a class="headerlink" href="#building-lammps-with-the-intel-package" title="Permalink to this headline">¶</a></h2>
+<h2>Building LAMMPS with the INTEL package<a class="headerlink" href="#building-lammps-with-the-intel-package" title="Permalink to this heading"></a></h2>
 <p>See the <a class="reference internal" href="Build_extras.html#intel"><span class="std std-ref">Build extras</span></a> page for
 instructions.  Some additional details are covered here.</p>
 <p>For building with make, several example Makefiles for building with
 the Intel compiler are included with LAMMPS in the src/MAKE/OPTIONS/
 directory:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Makefile.intel_cpu_intelmpi <span class="c1"># Intel Compiler, Intel MPI, No Offload</span>
-Makefile.knl                <span class="c1"># Intel Compiler, Intel MPI, No Offload</span>
-Makefile.intel_cpu_mpich    <span class="c1"># Intel Compiler, MPICH, No Offload</span>
-Makefile.intel_cpu_openpmi  <span class="c1"># Intel Compiler, OpenMPI, No Offload</span>
-Makefile.intel_co-processor  <span class="c1"># Intel Compiler, Intel MPI, Offload</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Makefile.intel_cpu_intelmpi<span class="w"> </span><span class="c1"># Intel Compiler, Intel MPI, No Offload</span>
+Makefile.knl<span class="w">                </span><span class="c1"># Intel Compiler, Intel MPI, No Offload</span>
+Makefile.intel_cpu_mpich<span class="w">    </span><span class="c1"># Intel Compiler, MPICH, No Offload</span>
+Makefile.intel_cpu_openpmi<span class="w">  </span><span class="c1"># Intel Compiler, OpenMPI, No Offload</span>
+Makefile.intel_co-processor<span class="w">  </span><span class="c1"># Intel Compiler, Intel MPI, Offload</span>
 </pre></div>
 </div>
 <p>Makefile.knl is identical to Makefile.intel_cpu_intelmpi except that
@@ -331,10 +336,10 @@ it explicitly specifies that vectorization should be for Intel Xeon
 Phi x200 processors making it easier to cross-compile. For users with
 recent installations of Intel Parallel Studio, the process can be as
 simple as:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make yes-intel
-<span class="nb">source</span> /opt/intel/parallel_studio_xe_2016.3.067/psxevars.sh
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>yes-intel
+<span class="nb">source</span><span class="w"> </span>/opt/intel/parallel_studio_xe_2016.3.067/psxevars.sh
 <span class="c1"># or psxevars.csh for C-shell</span>
-make intel_cpu_intelmpi
+make<span class="w"> </span>intel_cpu_intelmpi
 </pre></div>
 </div>
 <p>Note that if you build with support for a Phi co-processor, the same
@@ -374,7 +379,7 @@ should not be used when cross-compiling.</p>
 </div>
 </section>
 <section id="running-lammps-with-the-intel-package">
-<h2>Running LAMMPS with the INTEL package<a class="headerlink" href="#running-lammps-with-the-intel-package" title="Permalink to this headline">¶</a></h2>
+<h2>Running LAMMPS with the INTEL package<a class="headerlink" href="#running-lammps-with-the-intel-package" title="Permalink to this heading"></a></h2>
 <p>Running LAMMPS with the INTEL package is similar to normal use
 with the exceptions that one should 1) specify that LAMMPS should use
 the INTEL package, 2) specify the number of OpenMP threads, and
@@ -414,7 +419,7 @@ Hyper-Threading technology disabled.</p>
 </div>
 </section>
 <section id="run-with-the-intel-package-from-the-command-line">
-<h2>Run with the INTEL package from the command line<a class="headerlink" href="#run-with-the-intel-package-from-the-command-line" title="Permalink to this headline">¶</a></h2>
+<h2>Run with the INTEL package from the command line<a class="headerlink" href="#run-with-the-intel-package-from-the-command-line" title="Permalink to this heading"></a></h2>
 <p>To enable INTEL optimizations for all available styles used in
 the input script, the “-sf intel” <a class="reference internal" href="Run_options.html"><span class="doc">command-line switch</span></a> can be used without any requirement for
 editing the input script. This switch will automatically append
@@ -440,23 +445,23 @@ of OpenMP threads via the OMP_NUM_THREADS environment variable if
 desired.</p>
 <p>Examples (see documentation for your MPI/Machine for differences in
 launching MPI applications):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mpirun -np <span class="m">72</span> -ppn <span class="m">36</span> lmp_machine -sf intel -in <span class="k">in</span>.script                                 <span class="c1"># 2 nodes, 36 MPI tasks/node, $OMP_NUM_THREADS OpenMP Threads</span>
-mpirun -np <span class="m">72</span> -ppn <span class="m">36</span> lmp_machine -sf intel -in <span class="k">in</span>.script -pk intel <span class="m">0</span> omp <span class="m">2</span> mode double   <span class="c1"># Don&#39;t use any co-processors that might be available, use 2 OpenMP threads for each task, use double precision</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mpirun<span class="w"> </span>-np<span class="w"> </span><span class="m">72</span><span class="w"> </span>-ppn<span class="w"> </span><span class="m">36</span><span class="w"> </span>lmp_machine<span class="w"> </span>-sf<span class="w"> </span>intel<span class="w"> </span>-in<span class="w"> </span><span class="k">in</span>.script<span class="w">                                 </span><span class="c1"># 2 nodes, 36 MPI tasks/node, $OMP_NUM_THREADS OpenMP Threads</span>
+mpirun<span class="w"> </span>-np<span class="w"> </span><span class="m">72</span><span class="w"> </span>-ppn<span class="w"> </span><span class="m">36</span><span class="w"> </span>lmp_machine<span class="w"> </span>-sf<span class="w"> </span>intel<span class="w"> </span>-in<span class="w"> </span><span class="k">in</span>.script<span class="w"> </span>-pk<span class="w"> </span>intel<span class="w"> </span><span class="m">0</span><span class="w"> </span>omp<span class="w"> </span><span class="m">2</span><span class="w"> </span>mode<span class="w"> </span>double<span class="w">   </span><span class="c1"># Don&#39;t use any co-processors that might be available, use 2 OpenMP threads for each task, use double precision</span>
 </pre></div>
 </div>
 </section>
 <section id="or-run-with-the-intel-package-by-editing-an-input-script">
-<h2>Or run with the INTEL package by editing an input script<a class="headerlink" href="#or-run-with-the-intel-package-by-editing-an-input-script" title="Permalink to this headline">¶</a></h2>
+<h2>Or run with the INTEL package by editing an input script<a class="headerlink" href="#or-run-with-the-intel-package-by-editing-an-input-script" title="Permalink to this heading"></a></h2>
 <p>As an alternative to adding command-line arguments, the input script
 can be edited to enable the INTEL package. This requires adding
 the <a class="reference internal" href="package.html"><span class="doc">package intel</span></a> command to the top of the input
 script. For the second example above, this would be:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">package</span><span class="w"> </span><span class="n">intel</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="n">omp</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="n">double</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">package</span><span class="w"> </span><span class="n">intel</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="n">omp</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="n">double</span>
 </pre></div>
 </div>
 <p>To enable the INTEL package only for individual styles, you can
 add an “intel” suffix to the individual style, e.g.:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">pair_style</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">intel</span><span class="w"> </span><span class="m">2.5</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">pair_style</span><span class="w"> </span><span class="n">lj</span><span class="o">/</span><span class="n">cut</span><span class="o">/</span><span class="n">intel</span><span class="w"> </span><span class="m">2.5</span>
 </pre></div>
 </div>
 <p>Alternatively, the <a class="reference internal" href="suffix.html"><span class="doc">suffix intel</span></a> command can be added to
@@ -464,7 +469,7 @@ the input script to enable INTEL styles for the commands that
 follow in the input script.</p>
 </section>
 <section id="tuning-for-performance">
-<h2>Tuning for Performance<a class="headerlink" href="#tuning-for-performance" title="Permalink to this headline">¶</a></h2>
+<h2>Tuning for Performance<a class="headerlink" href="#tuning-for-performance" title="Permalink to this heading"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The INTEL package will perform better with modifications
@@ -531,7 +536,7 @@ consult your system documentation for the best approach to specify
 that MPI runs are performed in MCDRAM.</p>
 </section>
 <section id="tuning-for-offload-performance">
-<h2>Tuning for Offload Performance<a class="headerlink" href="#tuning-for-offload-performance" title="Permalink to this headline">¶</a></h2>
+<h2>Tuning for Offload Performance<a class="headerlink" href="#tuning-for-offload-performance" title="Permalink to this heading"></a></h2>
 <p>The default settings for offload should give good performance.</p>
 <p>When using LAMMPS with offload to Intel co-processors, best performance
 will typically be achieved with concurrent calculations performed on
@@ -597,7 +602,7 @@ tasks, unless the <em>tptask</em> option of the “-pk intel” <a class="refere
 MPI task.</p>
 </section>
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <p>When offloading to a co-processor, <a class="reference internal" href="pair_hybrid.html"><span class="doc">hybrid</span></a> styles
 that require skip lists for neighbor builds cannot be offloaded.
 Using <a class="reference internal" href="pair_hybrid.html"><span class="doc">hybrid/overlay</span></a> is allowed.  Only one intel
@@ -611,10 +616,10 @@ the pair styles in the INTEL package currently support the
 supported.</p>
 </section>
 <section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
 <ul class="simple">
-<li><p>Brown, W.M., Carrillo, J.-M.Y., Mishra, B., Gavhane, N., Thakkar, F.M., De Kraker, A.R., Yamada, M., Ang, J.A., Plimpton, S.J., “Optimizing Classical Molecular Dynamics in LAMMPS,” in Intel Xeon Phi Processor High Performance Programming: Knights Landing Edition, J. Jeffers, J. Reinders, A. Sodani, Eds. Morgan Kaufmann.</p></li>
-<li><p>Brown, W. M., Semin, A., Hebenstreit, M., Khvostov, S., Raman, K., Plimpton, S.J. <a class="reference external" href="http://dl.acm.org/citation.cfm?id=3014915">Increasing Molecular Dynamics Simulation Rates with an 8-Fold Increase in Electrical Power Efficiency.</a> 2016 High Performance Computing, Networking, Storage and Analysis, SC16: International Conference (pp. 82-95).</p></li>
+<li><p>Brown, W.M., Carrillo, J.-M.Y., Mishra, B., Gavhane, N., Thakkar, F.M., De Kraker, A.R., Yamada, M., Ang, J.A., Plimpton, S.J., “Optimizing Classical Molecular Dynamics in LAMMPS”, in Intel Xeon Phi Processor High Performance Programming: Knights Landing Edition, J. Jeffers, J. Reinders, A. Sodani, Eds. Morgan Kaufmann.</p></li>
+<li><p>Brown, W. M., Semin, A., Hebenstreit, M., Khvostov, S., Raman, K., Plimpton, S.J. <a class="reference external" href="https://dl.acm.org/citation.cfm?id=3014915">Increasing Molecular Dynamics Simulation Rates with an 8-Fold Increase in Electrical Power Efficiency.</a> 2016 High Performance Computing, Networking, Storage and Analysis, SC16: International Conference (pp. 82-95).</p></li>
 <li><p>Brown, W.M., Carrillo, J.-M.Y., Gavhane, N., Thakkar, F.M., Plimpton, S.J. Optimizing Legacy Molecular Dynamics Software with Directive-Based Offload. Computer Physics Communications. 2015. 195: p. 95-101.</p></li>
 </ul>
 </section>
@@ -631,7 +636,7 @@ supported.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -640,7 +645,6 @@ supported.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

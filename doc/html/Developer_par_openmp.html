@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>4.4.5. OpenMP Parallelism &mdash; LAMMPS documentation</title>
@@ -10,21 +10,21 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Developer_par_openmp.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4.5. Communication patterns" href="Developer_comm_ops.html" />
+    <link rel="next" title="4.5. Accessing per-atom data" href="Developer_atom.html" />
     <link rel="prev" title="4.4.4. Long-range interactions" href="Developer_par_long.html" /> 
 </head>
 
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -77,22 +81,25 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">4.4.5. OpenMP Parallelism</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_comm_ops.html">4.5. Communication patterns</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_flow.html">4.6. How a timestep works</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_write.html">4.7. Writing new styles</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_notes.html">4.8. Notes for developers and code maintainers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_plugins.html">4.9. Writing plugins</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_unittest.html">4.10. Adding tests for unit testing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Classes.html">4.11. C++ base classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_platform.html">4.12. Platform abstraction functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html">4.13. Utility functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#special-math-functions">4.14. Special Math functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#tokenizer-classes">4.15. Tokenizer classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#argument-parsing-classes">4.16. Argument parsing classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#file-reader-classes">4.17. File reader classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#memory-pool-classes">4.18. Memory pool classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#eigensolver-functions">4.19. Eigensolver functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#communication-buffer-coding-with-ubuf">4.20. Communication buffer coding with <em>ubuf</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_atom.html">4.5. Accessing per-atom data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_comm_ops.html">4.6. Communication patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_flow.html">4.7. How a timestep works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_write.html">4.8. Writing new styles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_notes.html">4.9. Notes for developers and code maintainers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_updating.html">4.10. Notes for updating code written for older LAMMPS versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_plugins.html">4.11. Writing plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_unittest.html">4.12. Adding tests for unit testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Classes.html">4.13. C++ base classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_platform.html">4.14. Platform abstraction functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html">4.15. Utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#special-math-functions">4.16. Special Math functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#tokenizer-classes">4.17. Tokenizer classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#argument-parsing-classes">4.18. Argument parsing classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#file-reader-classes">4.19. File reader classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#memory-pool-classes">4.20. Memory pool classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#eigensolver-functions">4.21. Eigensolver functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#communication-buffer-coding-with-ubuf">4.22. Communication buffer coding with <em>ubuf</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_grid.html">4.23. Use of distributed grids within style classes</a></li>
 </ul>
 </li>
 </ul>
@@ -106,6 +113,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -123,37 +131,37 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Developer.html"><span class="section-number">4. </span>Information for Developers</a> &raquo;</li>
-          <li><a href="Developer_parallel.html"><span class="section-number">4.4. </span>Parallel algorithms</a> &raquo;</li>
-      <li><span class="section-number">4.4.5. </span>OpenMP Parallelism</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Developer.html"><span class="section-number">4. </span>Information for Developers</a></li>
+          <li class="breadcrumb-item"><a href="Developer_parallel.html"><span class="section-number">4.4. </span>Parallel algorithms</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">4.4.5. </span>OpenMP Parallelism</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="Developer_par_long.html" class="btn btn-neutral float-left" title="4.4.4. Long-range interactions" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Developer_comm_ops.html" class="btn btn-neutral float-right" title="4.5. Communication patterns" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Developer_atom.html" class="btn btn-neutral float-right" title="4.5. Accessing per-atom data" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="openmp-parallelism">
-<h1><span class="section-number">4.4.5. </span>OpenMP Parallelism<a class="headerlink" href="#openmp-parallelism" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="openmp-parallelism">
+<h1><span class="section-number">4.4.5. </span>OpenMP Parallelism<a class="headerlink" href="#openmp-parallelism" title="Permalink to this heading"></a></h1>
 <p>The styles in the INTEL, KOKKOS, and OPENMP package offer to use OpenMP
 thread parallelism to predominantly distribute loops over local data
 and thus follow an orthogonal parallelization strategy to the
 decomposition into spatial domains used by the <a class="reference internal" href="Developer_par_part.html"><span class="doc">MPI partitioning</span></a>.  For clarity, this section discusses only the
-implementation in the OPENMP package as it is the simplest. The INTEL
+implementation in the OPENMP package, as it is the simplest. The INTEL
 and KOKKOS package offer additional options and are more complex since
 they support more features and different hardware like co-processors
 or GPUs.</p>
 <p>One of the key decisions when implementing the OPENMP package was to
 keep the changes to the source code small, so that it would be easier to
 maintain the code and keep it in sync with the non-threaded standard
-implementation.  this is achieved by a) making the OPENMP version a
+implementation.  This is achieved by a) making the OPENMP version a
 derived class from the regular version (e.g. <code class="docutils literal notranslate"><span class="pre">PairLJCutOMP</span></code> from
 <code class="docutils literal notranslate"><span class="pre">PairLJCut</span></code>) and overriding only methods that are multi-threaded or
 need to be modified to support multi-threading (similar to what was done
@@ -165,17 +173,17 @@ into three separate classes <code class="docutils literal notranslate"><span cla
 available in the corresponding base class (e.g. <code class="docutils literal notranslate"><span class="pre">Pair</span></code> for
 <code class="docutils literal notranslate"><span class="pre">PairLJCutOMP</span></code>) like multi-thread aware variants of the “tally”
 functions. Those functions are made available through multiple
-inheritance so those new functions have to have unique names to avoid
+inheritance, so those new functions have to have unique names to avoid
 ambiguities; typically <code class="docutils literal notranslate"><span class="pre">_thr</span></code> is appended to the name of the function.
-<code class="docutils literal notranslate"><span class="pre">ThrData</span></code> is a classes that manages per-thread data structures.
-It is used instead of extending the corresponding storage to per-thread
-arrays to avoid slowdowns due to “false sharing” when multiple threads
-update adjacent elements in an array and thus force the CPU cache lines
-to be reset and re-fetched.  <code class="docutils literal notranslate"><span class="pre">FixOMP</span></code> finally manages the “multi-thread
+<code class="docutils literal notranslate"><span class="pre">ThrData</span></code> is a class that manages per-thread data structures.  It is
+used instead of extending the corresponding storage to per-thread arrays
+to avoid slowdowns due to “false sharing” when multiple threads update
+adjacent elements in an array and thus force the CPU cache lines to be
+reset and re-fetched.  <code class="docutils literal notranslate"><span class="pre">FixOMP</span></code> finally manages the “multi-thread
 state” like settings and access to per-thread storage, it is activated
 by the <a class="reference internal" href="package.html"><span class="doc">package omp</span></a> command.</p>
 <section id="avoiding-data-races">
-<h2>Avoiding data races<a class="headerlink" href="#avoiding-data-races" title="Permalink to this headline">¶</a></h2>
+<h2>Avoiding data races<a class="headerlink" href="#avoiding-data-races" title="Permalink to this heading"></a></h2>
 <p>A key problem when implementing thread parallelism in an MD code is
 to avoid data races when updating accumulated properties like forces,
 energies, and stresses.  When interactions are computed, they always
@@ -183,24 +191,24 @@ involve multiple atoms and thus there are race conditions when multiple
 threads want to update per-atom data of the same atoms.  Five possible
 strategies have been considered to avoid this:</p>
 <ol class="arabic simple">
-<li><p>restructure the code so that there is no overlapping access possible
+<li><p>Restructure the code so that there is no overlapping access possible
 when computing in parallel, e.g. by breaking lists into multiple
 parts and synchronizing threads in between.</p></li>
-<li><p>have each thread be “responsible” for a specific group of atoms and
+<li><p>Have each thread be “responsible” for a specific group of atoms and
 compute these interactions multiple times, once on each thread that
-is responsible for a given atom and then have each thread only update
+is responsible for a given atom, and then have each thread only update
 the properties of this atom.</p></li>
-<li><p>use mutexes around functions and regions of code where the data race
-could happen</p></li>
-<li><p>use atomic operations when updating per-atom properties</p></li>
-<li><p>use replicated per-thread data structures to accumulate data without
+<li><p>Use mutexes around functions and regions of code where the data race
+could happen.</p></li>
+<li><p>Use atomic operations when updating per-atom properties.</p></li>
+<li><p>Use replicated per-thread data structures to accumulate data without
 conflicts and then use a reduction to combine those results into the
 data structures used by the regular style.</p></li>
 </ol>
 <p>Option 5 was chosen for the OPENMP package because it would retain the
-performance for the case of 1 thread and the code would be more
+performance for the case of a single thread and the code would be more
 maintainable.  Option 1 would require extensive code changes,
-particularly to the neighbor list code; options 2 would have incurred a
+particularly to the neighbor list code; option 2 would have incurred a
 2x or more performance penalty for the serial case; option 3 causes
 significant overhead and would enforce serialization of operations in
 inner loops and thus defeat the purpose of multi-threading; option 4
@@ -216,16 +224,16 @@ of threads (2-8).  At the time of its implementation, that number was
 equivalent to the number of CPU cores per CPU socket on high-end
 supercomputers.</p>
 <p>Thus arrays like the force array are dimensioned to the number of atoms
-times the number of threads when enabling OpenMP support and inside the
+times the number of threads when enabling OpenMP support, and inside the
 compute functions a pointer to a different chunk is obtained by each thread.
 Similarly, accumulators like potential energy or virial are kept in
 per-thread instances of the <code class="docutils literal notranslate"><span class="pre">ThrData</span></code> class and then only reduced and
 stored in their global counterparts at the end of the force computation.</p>
 </section>
 <section id="loop-scheduling">
-<h2>Loop scheduling<a class="headerlink" href="#loop-scheduling" title="Permalink to this headline">¶</a></h2>
+<h2>Loop scheduling<a class="headerlink" href="#loop-scheduling" title="Permalink to this heading"></a></h2>
 <p>Multi-thread parallelization is applied by distributing (outer) loops
-statically across threads.  Typically this would be the loop over local
+statically across threads.  Typically, this would be the loop over local
 atoms <em>i</em> when processing <em>i,j</em> pairs of atoms from a neighbor list.
 The design of the neighbor list code results in atoms having a similar
 number of neighbors for homogeneous systems and thus load imbalances
@@ -236,7 +244,7 @@ scheduling scheme can also be applied to the reduction operations on
 per-atom data to try and reduce the overhead of the reduction operation.</p>
 </section>
 <section id="neighbor-list-parallelization">
-<h2>Neighbor list parallelization<a class="headerlink" href="#neighbor-list-parallelization" title="Permalink to this headline">¶</a></h2>
+<h2>Neighbor list parallelization<a class="headerlink" href="#neighbor-list-parallelization" title="Permalink to this heading"></a></h2>
 <p>In addition to the parallelization of force computations, also the
 generation of the neighbor lists is parallelized.  As explained
 previously, neighbor lists are built by looping over “owned” atoms and
@@ -253,13 +261,13 @@ data.  This is achieved by each thread keeping its own instance of the
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="Developer_par_long.html" class="btn btn-neutral float-left" title="4.4.4. Long-range interactions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Developer_comm_ops.html" class="btn btn-neutral float-right" title="4.5. Communication patterns" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Developer_atom.html" class="btn btn-neutral float-right" title="4.5. Accessing per-atom data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -268,7 +276,6 @@ data.  This is achieved by each thread keeping its own instance of the
    
 
 </footer>
-
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>fix bond/create command &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/fix_bond_create.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -77,6 +81,9 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_adapt_fep.html">fix adapt/fep command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_addforce.html">fix addforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_addtorque.html">fix addtorque command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_alchemy.html">fix alchemy command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_amoeba_bitorsion.html">fix amoeba/bitorsion command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_amoeba_pitorsion.html">fix amoeba/pitorsion command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_append_atoms.html">fix append/atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_atc.html">fix atc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_atom_swap.html">fix atom/swap command</a></li>
@@ -84,8 +91,11 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_chunk.html">fix ave/chunk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_correlate.html">fix ave/correlate command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_correlate_long.html">fix ave/correlate/long command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_grid.html">fix ave/grid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_histo.html">fix ave/histo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_histo.html#fix-ave-histo-weight-command">fix ave/histo/weight command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_spatial.html">Fix ave/spatial command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_spatial_sphere.html">Fix ave/spatial command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_time.html">fix ave/time command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_aveforce.html">fix aveforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_balance.html">fix balance command</a></li>
@@ -124,10 +134,11 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_drude_transform.html#fix-drude-transform-inverse-command">fix drude/transform/inverse command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_dt_reset.html">fix dt/reset command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_efield.html">fix efield command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_efield.html#fix-efield-tip4p-command">fix efield/tip4p command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ehex.html">fix ehex command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html">fix electrode/conp command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html#fix-electrode-conq-command">fix electrode/conq command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html#fix-electrode-thermo-command">fix electrode/thermo command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html">fix electrode/conp command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html#fix-electrode-conq-command">fix electrode/conq command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html#fix-electrode-thermo-command">fix electrode/thermo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_electron_stopping.html">fix electron/stopping command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_electron_stopping.html#fix-electron-stopping-fit-command">fix electron/stopping/fit command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_enforce2d.html">fix enforce2d command</a></li>
@@ -147,6 +158,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_grem.html">fix grem command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_halt.html">fix halt command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_heat.html">fix heat command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_heat_flow.html">fix heat/flow command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_hyper_global.html">fix hyper/global command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_hyper_local.html">fix hyper/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_imd.html">fix imd command</a></li>
@@ -156,13 +168,13 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_drude.html">fix langevin/drude command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_eff.html">fix langevin/eff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_spin.html">fix langevin/spin command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_latte.html">fix latte command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_fluid.html">fix lb/fluid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_momentum.html">fix lb/momentum command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_viscous.html">fix lb/viscous command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lineforce.html">fix lineforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_manifoldforce.html">fix manifoldforce command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_mdi_aimd.html">fix mdi/aimd command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_mdi_qm.html">fix mdi/qm command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_mdi_qmmm.html">fix mdi/qmmm command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_meso_move.html">fix meso/move command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify.html">fix_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
@@ -223,8 +235,10 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_orient.html#fix-orient-bcc-command">fix orient/bcc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_orient_eco.html">fix orient/eco command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_pafi.html">fix pafi command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pair.html">fix pair command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_phonon.html">fix phonon command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html">fix pimd command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html">fix pimd/langevin command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html#fix-pimd-nvt-command">fix pimd/nvt command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_planeforce.html">fix planeforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_plumed.html">fix plumed command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_poems.html">fix poems command</a></li>
@@ -269,6 +283,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_saed_vtk.html">fix saed/vtk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_setforce.html">fix setforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_setforce.html#fix-setforce-spin-command">fix setforce/spin command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_sgcmc.html">fix sgcmc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shake.html">fix shake command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shake.html#fix-rattle-command">fix rattle command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shardlow.html">fix shardlow command</a></li>
@@ -312,7 +327,9 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-lj1043-command">fix wall/lj1043 command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-colloid-command">fix wall/colloid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-harmonic-command">fix wall/harmonic command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-lepton-command">fix wall/lepton command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-morse-command">fix wall/morse command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-table-command">fix wall/table command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_body_polygon.html">fix wall/body/polygon command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_body_polyhedron.html">fix wall/body/polyhedron command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_ees.html">fix wall/ees command</a></li>
@@ -333,6 +350,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -350,12 +368,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="fixes.html">Fixes</a> &raquo;</li>
-      <li>fix bond/create command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="fixes.html">Fixes</a></li>
+      <li class="breadcrumb-item active">fix bond/create command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="fix_bond_break.html" class="btn btn-neutral float-left" title="fix bond/break command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -366,14 +383,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <span class="target" id="index-0"></span><section id="fix-bond-create-command">
-<span id="index-1"></span><h1>fix bond/create command<a class="headerlink" href="#fix-bond-create-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<span class="target" id="index-0"></span><section id="fix-bond-create-command">
+<span id="index-1"></span><h1>fix bond/create command<a class="headerlink" href="#fix-bond-create-command" title="Permalink to this heading"></a></h1>
 </section>
 <section id="fix-bond-create-angle-command">
-<h1>fix bond/create/angle command<a class="headerlink" href="#fix-bond-create-angle-command" title="Permalink to this headline">¶</a></h1>
+<h1>fix bond/create/angle command<a class="headerlink" href="#fix-bond-create-angle-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fix ID group-ID bond/create Nevery itype jtype Rmin bondtype keyword values ...
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">ID</span><span class="w"> </span><span class="nv nv-Identifier">group-ID</span><span class="w"> </span><span class="n">bond</span><span class="o">/</span><span class="n">create</span><span class="w"> </span><span class="n">Nevery</span><span class="w"> </span><span class="n">itype</span><span class="w"> </span><span class="n">jtype</span><span class="w"> </span><span class="n">Rmin</span><span class="w"> </span><span class="n">bondtype</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">values</span><span class="w"> </span><span class="n">...</span>
 </pre></div>
 </div>
 <ul>
@@ -407,83 +425,84 @@
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">5</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">bond</span><span class="o">/</span><span class="n">create</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">0.8</span><span class="w"> </span><span class="m">1</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">5</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">bond</span><span class="o">/</span><span class="n">create</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">0.8</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">prob</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">85784</span><span class="w"> </span><span class="n">iparam</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">5</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">bond</span><span class="o">/</span><span class="n">create</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">0.8</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">prob</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">85784</span><span class="w"> </span><span class="n">iparam</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="n">atype</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">dtype</span><span class="w"> </span><span class="m">2</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">5</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">bond</span><span class="o">/</span><span class="n">create</span><span class="o">/</span><span class="n">angle</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">1.122</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">aconstrain</span><span class="w"> </span><span class="m">120</span><span class="w"> </span><span class="m">180</span><span class="w"> </span><span class="n">prob</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">4928459</span><span class="w"> </span><span class="n">iparam</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">jparam</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">2</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">5</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">bond</span><span class="o">/</span><span class="n">create</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">0.8</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fix </span><span class="nv nv-Identifier">5</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">bond</span><span class="o">/</span><span class="n">create</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">0.8</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">prob</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">85784</span><span class="w"> </span><span class="n">iparam</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span>
+<span class="k">fix </span><span class="nv nv-Identifier">5</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">bond</span><span class="o">/</span><span class="n">create</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">0.8</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">prob</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">85784</span><span class="w"> </span><span class="n">iparam</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="n">atype</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">dtype</span><span class="w"> </span><span class="m">2</span>
+<span class="k">fix </span><span class="nv nv-Identifier">5</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">bond</span><span class="o">/</span><span class="n">create</span><span class="o">/</span><span class="n">angle</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">1.122</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">aconstrain</span><span class="w"> </span><span class="m">120</span><span class="w"> </span><span class="m">180</span><span class="w"> </span><span class="n">prob</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">4928459</span><span class="w"> </span><span class="n">iparam</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">jparam</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">2</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <p>Create bonds between pairs of atoms as a simulation runs according to
-specified criteria.  This can be used to model cross-linking of
+specified criteria.  This can be used to model the cross-linking of
 polymers, the formation of a percolation network, etc.  In this
 context, a bond means an interaction between a pair of atoms computed
 by the <a class="reference internal" href="bond_style.html"><span class="doc">bond_style</span></a> command.  Once the bond is created
 it will be permanently in place.  Optionally, the creation of a bond
-can also create angle, dihedral, and improper interactions that bond
+can also create angle, dihedral, and improper interactions that the bond
 is part of.  See the discussion of the <em>atype</em>, <em>dtype</em>, and <em>itype</em>
 keywords below.</p>
-<p>This is different than a <a class="reference internal" href="pair_style.html"><span class="doc">pairwise</span></a> bond-order
-potential such as Tersoff or AIREBO which infers bonds and many-body
+<p>This process is different than a <a class="reference internal" href="pair_style.html"><span class="doc">pair-wise</span></a> bond-order
+potential such as Tersoff or AIREBO, which infer bonds and many-body
 interactions based on the current geometry of a small cluster of atoms
-and effectively creates and destroys bonds and higher-order many-body
-interactions from timestep to timestep as atoms move.</p>
-<p>A check for possible new bonds is performed every <em>Nevery</em> timesteps.
-If two atoms I,J are within a distance <em>Rmin</em> of each other, if I is
-of atom type <em>itype</em>, if J is of atom type <em>jtype</em>, if both I and J
-are in the specified fix group, if a bond does not already exist
-between I and J, and if both I and J meet their respective <em>maxbond</em>
-requirement (explained below), then I,J is labeled as a “possible”
-bond pair.</p>
+and effectively create and destroy bonds and higher-order many-body
+interactions from time step to time step as the atoms move.</p>
+<p>A check for possible new bonds is performed every <em>Nevery</em> time steps.
+If two atoms <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> are within a distance <em>Rmin</em> of each
+other, atom <span class="math notranslate nohighlight">\(i\)</span> is of type <em>itype</em>, atom <span class="math notranslate nohighlight">\(j\)</span> is of type <em>jtype</em>,
+and both <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> are in the specified fix group, then if a bond
+does not already exist between atoms <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span>, and if both
+<span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> meet their respective <em>maxbond</em> requirements (explained
+below), then <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> are labeled as a “possible” bond pair.</p>
 <p>If several atoms are close to an atom, it may have multiple possible
 bond partners.  Every atom checks its list of possible bond partners
 and labels the closest such partner as its “sole” bond partner.  After
-this is done, if atom I has atom J as its sole partner, and atom J has
-atom I as its sole partner, then the I,J bond is “eligible” to be
-formed.</p>
-<p>Note that these rules mean an atom will only be part of at most one
-created bond on a given timestep.  It also means that if atom I
-chooses atom J as its sole partner, but atom J chooses atom K is its
-sole partner (due to Rjk &lt; Rij), then this means atom I will not form
-a bond on this timestep, even if it has other possible bond partners.</p>
-<p>It is permissible to have <em>itype</em> = <em>jtype</em>.  <em>Rmin</em> must be &lt;= the
-pairwise cutoff distance between <em>itype</em> and <em>jtype</em> atoms, as defined
+this is done, if atom <span class="math notranslate nohighlight">\(i\)</span> has atom <span class="math notranslate nohighlight">\(j\)</span> as its sole partner and
+atom <span class="math notranslate nohighlight">\(j\)</span> has atom <span class="math notranslate nohighlight">\(i\)</span> as its sole partner, then the
+<span class="math notranslate nohighlight">\(i,j\)</span> bond is “eligible” to be formed.</p>
+<p>Note that these rules mean that an atom will only be part of at most one
+created bond on a given time step.  It also means that if atom <span class="math notranslate nohighlight">\(i\)</span>
+chooses atom <span class="math notranslate nohighlight">\(j\)</span> as its sole partner, but atom <span class="math notranslate nohighlight">\(j\)</span> chooses atom
+<span class="math notranslate nohighlight">\(k\)</span> as its sole partner (because <span class="math notranslate nohighlight">\(R_{jk} &lt; R_{ij}\)</span>), then atom
+<span class="math notranslate nohighlight">\(i\)</span> will not form a bond on this time step, even if it has other possible
+bond partners.</p>
+<p>It is permissible to have <em>itype</em> = <em>jtype</em>.  <em>Rmin</em> must be <span class="math notranslate nohighlight">\(\leq\)</span> the
+pair-wise cutoff distance between <em>itype</em> and <em>jtype</em> atoms, as defined
 by the <a class="reference internal" href="pair_style.html"><span class="doc">pair_style</span></a> command.</p>
 <p>The <em>iparam</em> and <em>jparam</em> keywords can be used to limit the bonding
 functionality of the participating atoms.  Each atom keeps track of
-how many bonds of <em>bondtype</em> it already has.  If atom I of
-itype already has <em>maxbond</em> bonds (as set by the <em>iparam</em>
-keyword), then it will not form any more.  Likewise for atom J.  If
-<em>maxbond</em> is set to 0, then there is no limit on the number of bonds
+how many bonds of <em>bondtype</em> it already has.  If atom <span class="math notranslate nohighlight">\(i\)</span> of type
+<em>itype</em> already has <em>maxbond</em> bonds (as set by the <em>iparam</em>
+keyword), then it will not form any more, and likewise for atom <span class="math notranslate nohighlight">\(j\)</span>.
+If <em>maxbond</em> is set to 0, then there is no limit on the number of bonds
 that can be formed with that atom.</p>
 <p>The <em>newtype</em> value for <em>iparam</em> and <em>jparam</em> can be used to change
-the atom type of atom I or J when it reaches <em>maxbond</em> number of bonds
-of type <em>bondtype</em>.  This means it can now interact in a pairwise
+the atom type of atom <span class="math notranslate nohighlight">\(i\)</span> or <span class="math notranslate nohighlight">\(j\)</span> when it reaches <em>maxbond</em> number
+of bonds of type <em>bondtype</em>.  This means it can now interact in a pair-wise
 fashion with other atoms in a different way by specifying different
 <a class="reference internal" href="pair_coeff.html"><span class="doc">pair_coeff</span></a> coefficients.  If you do not wish the
 atom type to change, simply specify <em>newtype</em> as <em>itype</em> or <em>jtype</em>.</p>
-<p>The <em>prob</em> keyword can also effect whether an eligible bond is
+<p>The <em>prob</em> keyword can also affect whether an eligible bond is
 actually created.  The <em>fraction</em> setting must be a value between 0.0
 and 1.0.  A uniform random number between 0.0 and 1.0 is generated and
-the eligible bond is only created if the random number &lt; fraction.</p>
+the eligible bond is only created if the random number is less than <em>fraction</em>.</p>
 <p>The <em>aconstrain</em> keyword is only available with the fix
-bond/create/angle command.  It allows to specify a minimal and maximal
-angle <em>amin</em> and <em>amax</em> between the two prospective bonding partners and
-a third particle that is already bonded to one of the two partners.
-Such a criterion can be important when new angles are defined together
-with the formation of a new bond.  Without a restriction on the
+bond/create/angle command.  It allows one to specify minimum and maximum
+angles <em>amin</em> and <em>amax</em>, respectively, between the two prospective bonding
+partners and a third particle that is already bonded to one of the two
+partners. Such a criterion can be important when new angles are defined
+together with the formation of a new bond.  Without a restriction on the
 permissible angle, and for stiffer angle potentials, very large energies
-can arise and lead to uncontrolled behavior.</p>
+can arise and lead to unphysical behavior.</p>
 <p>Any bond that is created is assigned a bond type of <em>bondtype</em>.</p>
 <p>When a bond is created, data structures within LAMMPS that store bond
-topology are updated to reflect the creation.  If the bond is part of
+topologies are updated to reflect the creation.  If the bond is part of
 new 3-body (angle) or 4-body (dihedral, improper) interactions, you
-can choose to create new angles, dihedrals, impropers as well, using
+can choose to create new angles, dihedrals, and impropers as well using
 the <em>atype</em>, <em>dtype</em>, and <em>itype</em> keywords.  All of these changes
-typically affect pairwise interactions between atoms that are now part
+typically affect pair-wise interactions between atoms that are now part
 of new bonds, angles, etc.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -512,19 +531,19 @@ improper per atom” if angles, dihedrals, or impropers are being added
 when bonds are created.  See the <a class="reference internal" href="read_data.html"><span class="doc">read_data</span></a> or
 <a class="reference internal" href="create_box.html"><span class="doc">create_box</span></a> command for more details.  Note that a
 data file with no atoms can be used if you wish to add non-bonded
-atoms via the <a class="reference internal" href="create_atoms.html"><span class="doc">create atoms</span></a> command, e.g. for a
-percolation simulation.</p>
+atoms via the <a class="reference internal" href="create_atoms.html"><span class="doc">create atoms</span></a> command (e.g., for a
+percolation simulation).</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>LAMMPS stores and maintains a data structure with a list of the
 first, second, and third neighbors of each atom (within the bond topology of
-the system) for use in weighting pairwise interactions for bonded
+the system) for use in weighting pair-wise interactions for bonded
 atoms.  Note that adding a single bond always adds a new first neighbor
-but may also induce *many* new second and third neighbors, depending on the
+but may also induce <strong>many</strong> new second and third neighbors, depending on the
 molecular topology of your system.  The “extra special per atom”
 parameter must typically be set to allow for the new maximum total
-size (first + second + third neighbors) of this per-atom list.  There are 2
+size (first + second + third neighbors) of this per-atom list.  There are two
 ways to do this.  See the <a class="reference internal" href="read_data.html"><span class="doc">read_data</span></a> or
 <a class="reference internal" href="create_box.html"><span class="doc">create_box</span></a> commands for details.</p>
 </div>
@@ -533,15 +552,16 @@ ways to do this.  See the <a class="reference internal" href="read_data.html"><s
 <p>Even if you do not use the <em>atype</em>, <em>dtype</em>, or <em>itype</em>
 keywords, the list of topological neighbors is updated for atoms
 affected by the new bond.  This in turn affects which neighbors are
-considered for pairwise interactions, using the weighting rules set by
+considered for pair-wise interactions, using the weighting rules set by
 the <a class="reference internal" href="special_bonds.html"><span class="doc">special_bonds</span></a> command.  Consider a new bond
-created between atoms I,J.  If J has a bonded neighbor K, then K
-becomes a second neighbor of I.  Even if the <em>atype</em> keyword is not used
-to create angle I-J-K, the pairwise interaction between I and K will
-be potentially turned off or weighted by the 1-3 weighting specified
+created between atoms <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span>.  If <span class="math notranslate nohighlight">\(j\)</span> has a bonded
+neighbor <span class="math notranslate nohighlight">\(k\)</span>, then <span class="math notranslate nohighlight">\(k\)</span> becomes a second neighbor of <span class="math notranslate nohighlight">\(i\)</span>.
+Even if the <em>atype</em> keyword is not used to create angle <span class="math notranslate nohighlight">\(\angle ijk\)</span>,
+the pair-wise interaction between <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(k\)</span> could potentially
+be turned off or weighted by the 1–3 weighting specified
 by the <a class="reference internal" href="special_bonds.html"><span class="doc">special_bonds</span></a> command.  This is the case
 even if the “angle yes” option was used with that command.  The same
-is true for third neighbors (1-4 interactions), the <em>dtype</em> keyword, and
+is true for third neighbors (1–4 interactions), the <em>dtype</em> keyword, and
 the “dihedral yes” option used with the
 <a class="reference internal" href="special_bonds.html"><span class="doc">special_bonds</span></a> command.</p>
 </div>
@@ -550,27 +570,27 @@ define a <a class="reference internal" href="bond_style.html"><span class="doc">
 <a class="reference internal" href="bond_coeff.html"><span class="doc">bond_coeff</span></a> command to specify coefficients for the
 <em>bondtype</em>.  Similarly, if new atom types are specified by the
 <em>iparam</em> or <em>jparam</em> keywords, they must be within the range of atom
-types allowed by the simulation and pairwise coefficients must be
+types allowed by the simulation and pair-wise coefficients must be
 specified for the new types.</p>
-<p>Computationally, each timestep this fix operates, it loops over
+<p>Computationally, each time step this fix is invoked, it loops over
 neighbor lists and computes distances between pairs of atoms in the
 list.  It also communicates between neighboring processors to
 coordinate which bonds are created.  Moreover, if any bonds are
 created, neighbor lists must be immediately updated on the same
-timestep.  This is to insure that any pairwise interactions that
+time step.  This is to ensure that any pair-wise interactions that
 should be turned “off” due to a bond creation, because they are now
 excluded by the presence of the bond and the settings of the
 <a class="reference internal" href="special_bonds.html"><span class="doc">special_bonds</span></a> command, will be immediately
-recognized.  All of these operations increase the cost of a timestep.
-Thus you should be cautious about invoking this fix too frequently.</p>
+recognized.  All of these operations increase the cost of a time step.
+Thus, you should be cautious about invoking this fix too frequently.</p>
 <p>You can dump out snapshots of the current bond topology via the <a class="reference internal" href="dump.html"><span class="doc">dump local</span></a> command.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Creating a bond typically alters the energy of a system.  You
 should be careful not to choose bond creation criteria that induce a
 dramatic change in energy.  For example, if you define a very stiff
-harmonic bond and create it when 2 atoms are separated by a distance
-far from the equilibrium bond length, then the 2 atoms will oscillate
+harmonic bond and create it when two atoms are separated by a distance
+far from the equilibrium bond length, then the two atoms will oscillate
 dramatically when the bond is formed.  More generally, you may need to
 thermostat your system to compensate for energy changes resulting from
 created bonds (and angles, dihedrals, impropers).</p>
@@ -578,39 +598,35 @@ created bonds (and angles, dihedrals, impropers).</p>
 </section>
 <hr class="docutils" />
 <section id="restart-fix-modify-output-run-start-stop-minimize-info">
-<h2>Restart, fix_modify, output, run start/stop, minimize info<a class="headerlink" href="#restart-fix-modify-output-run-start-stop-minimize-info" title="Permalink to this headline">¶</a></h2>
+<h2>Restart, fix_modify, output, run start/stop, minimize info<a class="headerlink" href="#restart-fix-modify-output-run-start-stop-minimize-info" title="Permalink to this heading"></a></h2>
 <p>No information about this fix is written to <a class="reference internal" href="restart.html"><span class="doc">binary restart files</span></a>.  None of the <a class="reference internal" href="fix_modify.html"><span class="doc">fix_modify</span></a> options are
 relevant to this fix.</p>
 <p>This fix computes two statistics which it stores in a global vector of
 length 2, which can be accessed by various <a class="reference internal" href="Howto_output.html"><span class="doc">output commands</span></a>.  The vector values calculated by this fix are
 “intensive”.</p>
-<p>These are the 2 quantities:</p>
-<ul class="simple">
-<li><ol class="arabic simple">
-<li><p># of bonds created on the most recent creation timestep</p></li>
+<p>The two quantities in the global vector are</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>number of bonds created on the most recent creation time step</p></li>
+<li><p>cumulative number of bonds created</p></li>
 </ol>
-</li>
-<li><ol class="arabic simple" start="2">
-<li><p>cumulative # of bonds created</p></li>
-</ol>
-</li>
-</ul>
+</div></blockquote>
 <p>No parameter of this fix can be used with the <em>start/stop</em> keywords of
 the <a class="reference internal" href="run.html"><span class="doc">run</span></a> command.  This fix is not invoked during <a class="reference internal" href="minimize.html"><span class="doc">energy minimization</span></a>.</p>
 </section>
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <p>This fix is part of the MC package.  It is only enabled if LAMMPS was
 built with that package.  See the <a class="reference internal" href="Build_package.html"><span class="doc">Build package</span></a>
 doc page for more info.</p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="fix_bond_break.html"><span class="doc">fix bond/break</span></a>, <a class="reference internal" href="fix_bond_react.html"><span class="doc">fix bond/react</span></a>, <a class="reference internal" href="fix_bond_swap.html"><span class="doc">fix bond/swap</span></a>,
 <a class="reference internal" href="dump.html"><span class="doc">dump local</span></a>, <a class="reference internal" href="special_bonds.html"><span class="doc">special_bonds</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
 <p>The option defaults are iparam = (0,itype), jparam = (0,jtype), and
 prob = 1.0.</p>
 </section>
@@ -627,7 +643,7 @@ prob = 1.0.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -636,7 +652,6 @@ prob = 1.0.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

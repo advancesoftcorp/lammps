@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>4.9. Writing plugins &mdash; LAMMPS documentation</title>
+  <title>4.11. Writing plugins &mdash; LAMMPS documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Developer_plugins.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4.10. Adding tests for unit testing" href="Developer_unittest.html" />
-    <link rel="prev" title="4.8. Notes for developers and code maintainers" href="Developer_notes.html" /> 
+    <link rel="next" title="4.12. Adding tests for unit testing" href="Developer_unittest.html" />
+    <link rel="prev" title="4.10. Notes for updating code written for older LAMMPS versions" href="Developer_updating.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -70,30 +74,33 @@
 <li class="toctree-l2"><a class="reference internal" href="Developer_org.html#class-topology">4.2. Class topology</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Developer_code_design.html">4.3. Code design</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Developer_parallel.html">4.4. Parallel algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_comm_ops.html">4.5. Communication patterns</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_flow.html">4.6. How a timestep works</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_write.html">4.7. Writing new styles</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_notes.html">4.8. Notes for developers and code maintainers</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">4.9. Writing plugins</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#members-of-lammpsplugin-t">4.9.1. Members of <code class="docutils literal notranslate"><span class="pre">lammpsplugin_t</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pair-style-example">4.9.2. Pair style example</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#fix-style-example">4.9.3. Fix style example</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#command-style-example">4.9.4. Command style example</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#additional-details">4.9.5. Additional Details</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#compiling-plugins">4.9.6. Compiling plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_atom.html">4.5. Accessing per-atom data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_comm_ops.html">4.6. Communication patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_flow.html">4.7. How a timestep works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_write.html">4.8. Writing new styles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_notes.html">4.9. Notes for developers and code maintainers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_updating.html">4.10. Notes for updating code written for older LAMMPS versions</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4.11. Writing plugins</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#members-of-lammpsplugin-t">4.11.1. Members of <code class="docutils literal notranslate"><span class="pre">lammpsplugin_t</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pair-style-example">4.11.2. Pair style example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fix-style-example">4.11.3. Fix style example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#command-style-example">4.11.4. Command style example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-details">4.11.5. Additional Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compiling-plugins">4.11.6. Compiling plugins</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_unittest.html">4.10. Adding tests for unit testing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Classes.html">4.11. C++ base classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_platform.html">4.12. Platform abstraction functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html">4.13. Utility functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#special-math-functions">4.14. Special Math functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#tokenizer-classes">4.15. Tokenizer classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#argument-parsing-classes">4.16. Argument parsing classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#file-reader-classes">4.17. File reader classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#memory-pool-classes">4.18. Memory pool classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#eigensolver-functions">4.19. Eigensolver functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#communication-buffer-coding-with-ubuf">4.20. Communication buffer coding with <em>ubuf</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_unittest.html">4.12. Adding tests for unit testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Classes.html">4.13. C++ base classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_platform.html">4.14. Platform abstraction functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html">4.15. Utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#special-math-functions">4.16. Special Math functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#tokenizer-classes">4.17. Tokenizer classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#argument-parsing-classes">4.18. Argument parsing classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#file-reader-classes">4.19. File reader classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#memory-pool-classes">4.20. Memory pool classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#eigensolver-functions">4.21. Eigensolver functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_utils.html#communication-buffer-coding-with-ubuf">4.22. Communication buffer coding with <em>ubuf</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Developer_grid.html">4.23. Use of distributed grids within style classes</a></li>
 </ul>
 </li>
 </ul>
@@ -107,6 +114,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -124,24 +132,24 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Developer.html"><span class="section-number">4. </span>Information for Developers</a> &raquo;</li>
-      <li><span class="section-number">4.9. </span>Writing plugins</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Developer.html"><span class="section-number">4. </span>Information for Developers</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">4.11. </span>Writing plugins</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
-        <a href="Developer_notes.html" class="btn btn-neutral float-left" title="4.8. Notes for developers and code maintainers" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Developer_unittest.html" class="btn btn-neutral float-right" title="4.10. Adding tests for unit testing" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Developer_updating.html" class="btn btn-neutral float-left" title="4.10. Notes for updating code written for older LAMMPS versions" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Developer_unittest.html" class="btn btn-neutral float-right" title="4.12. Adding tests for unit testing" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="writing-plugins">
-<h1><span class="section-number">4.9. </span>Writing plugins<a class="headerlink" href="#writing-plugins" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="writing-plugins">
+<h1><span class="section-number">4.11. </span>Writing plugins<a class="headerlink" href="#writing-plugins" title="Permalink to this heading"></a></h1>
 <p>Plugins provide a mechanism to add functionality to a LAMMPS executable
 without recompiling LAMMPS.  The functionality for this and the
 <a class="reference internal" href="plugin.html"><span class="doc">plugin command</span></a> are implemented in the
@@ -185,8 +193,8 @@ with information about the plugin and a pointer to the current LAMMPS
 instance.  Please see below for an example of how the registration is
 done.</p>
 <section id="members-of-lammpsplugin-t">
-<h2><span class="section-number">4.9.1. </span>Members of <code class="docutils literal notranslate"><span class="pre">lammpsplugin_t</span></code><a class="headerlink" href="#members-of-lammpsplugin-t" title="Permalink to this headline">¶</a></h2>
-<table class="colwidths-auto docutils align-default">
+<h2><span class="section-number">4.11.1. </span>Members of <code class="docutils literal notranslate"><span class="pre">lammpsplugin_t</span></code><a class="headerlink" href="#members-of-lammpsplugin-t" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Member</p></th>
 <th class="head"><p>Description</p></th>
@@ -233,36 +241,36 @@ arguments. The factory function pointer needs to be cast to the
 <code class="docutils literal notranslate"><span class="pre">lammpsplugin_factory2</span></code> type before assignment.</p>
 </section>
 <section id="pair-style-example">
-<h2><span class="section-number">4.9.2. </span>Pair style example<a class="headerlink" href="#pair-style-example" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.11.2. </span>Pair style example<a class="headerlink" href="#pair-style-example" title="Permalink to this heading"></a></h2>
 <p>As an example, a hypothetical pair style plugin “morse2” implemented in
 a class <code class="docutils literal notranslate"><span class="pre">PairMorse2</span></code> in the files <code class="docutils literal notranslate"><span class="pre">pair_morse2.h</span></code> and
 <code class="docutils literal notranslate"><span class="pre">pair_morse2.cpp</span></code> with the factory function and initialization
 function would look like this:</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;lammpsplugin.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;version.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;pair_morse2.h&quot;</span><span class="cp"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;lammpsplugin.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;version.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;pair_morse2.h&quot;</span>
 
-<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">LAMMPS_NS</span><span class="p">;</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">LAMMPS_NS</span><span class="p">;</span>
 
-<span class="k">static</span><span class="w"> </span><span class="n">Pair</span><span class="w"> </span><span class="o">*</span><span class="nf">morse2creator</span><span class="p">(</span><span class="n">LAMMPS</span><span class="w"> </span><span class="o">*</span><span class="n">lmp</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PairMorse2</span><span class="p">(</span><span class="n">lmp</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="n">Pair</span><span class="w"> </span><span class="o">*</span><span class="nf">morse2creator</span><span class="p">(</span><span class="n">LAMMPS</span><span class="w"> </span><span class="o">*</span><span class="n">lmp</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PairMorse2</span><span class="p">(</span><span class="n">lmp</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span class="k">extern</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">lammpsplugin_init</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">lmp</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">regfunc</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">lammpsplugin_regfunc</span><span class="w"> </span><span class="n">register_plugin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">lammpsplugin_regfunc</span><span class="p">)</span><span class="w"> </span><span class="n">regfunc</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">lammpsplugin_t</span><span class="w"> </span><span class="n">plugin</span><span class="p">;</span><span class="w"></span>
+<span class="k">extern</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">lammpsplugin_init</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">lmp</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">regfunc</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">lammpsplugin_regfunc</span><span class="w"> </span><span class="n">register_plugin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">lammpsplugin_regfunc</span><span class="p">)</span><span class="w"> </span><span class="n">regfunc</span><span class="p">;</span>
+<span class="w">  </span><span class="n">lammpsplugin_t</span><span class="w"> </span><span class="n">plugin</span><span class="p">;</span>
 
-<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LAMMPS_VERSION</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">style</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;pair&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">name</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;morse2&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">info</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Morse2 variant pair style v1.0&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">author</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Axel Kohlmeyer (akohlmey@gmail.com)&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">creator</span><span class="p">.</span><span class="n">v1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">lammpsplugin_factory1</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="n">morse2creator</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">handle</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">handle</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">(</span><span class="o">*</span><span class="n">register_plugin</span><span class="p">)(</span><span class="o">&amp;</span><span class="n">plugin</span><span class="p">,</span><span class="n">lmp</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LAMMPS_VERSION</span><span class="p">;</span>
+<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">style</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;pair&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">name</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;morse2&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">info</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Morse2 variant pair style v1.0&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">author</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Axel Kohlmeyer (akohlmey@gmail.com)&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">creator</span><span class="p">.</span><span class="n">v1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">lammpsplugin_factory1</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="n">morse2creator</span><span class="p">;</span>
+<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">handle</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">handle</span><span class="p">;</span>
+<span class="w">  </span><span class="p">(</span><span class="o">*</span><span class="n">register_plugin</span><span class="p">)(</span><span class="o">&amp;</span><span class="n">plugin</span><span class="p">,</span><span class="n">lmp</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>The factory function in this example is called <code class="docutils literal notranslate"><span class="pre">morse2creator()</span></code>.  It
@@ -275,96 +283,96 @@ plugins.  The name of the derived class, <code class="docutils literal notransla
 unique inside the entire LAMMPS executable.</p>
 </section>
 <section id="fix-style-example">
-<h2><span class="section-number">4.9.3. </span>Fix style example<a class="headerlink" href="#fix-style-example" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.11.3. </span>Fix style example<a class="headerlink" href="#fix-style-example" title="Permalink to this heading"></a></h2>
 <p>If the factory function would be for a fix or compute, which take three
 arguments (a pointer to the LAMMPS class, the number of arguments and the
 list of argument strings), then the pointer type is <code class="docutils literal notranslate"><span class="pre">lammpsplugin_factory2</span></code>
 and it must be assigned to the <em>creator.v2</em> member of the plugin struct.
 Below is an example for that:</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;lammpsplugin.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;version.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;fix_nve2.h&quot;</span><span class="cp"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;lammpsplugin.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;version.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;fix_nve2.h&quot;</span>
 
-<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">LAMMPS_NS</span><span class="p">;</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">LAMMPS_NS</span><span class="p">;</span>
 
-<span class="k">static</span><span class="w"> </span><span class="n">Fix</span><span class="w"> </span><span class="o">*</span><span class="nf">nve2creator</span><span class="p">(</span><span class="n">LAMMPS</span><span class="w"> </span><span class="o">*</span><span class="n">lmp</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FixNVE2</span><span class="p">(</span><span class="n">lmp</span><span class="p">,</span><span class="n">argc</span><span class="p">,</span><span class="n">argv</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="n">Fix</span><span class="w"> </span><span class="o">*</span><span class="nf">nve2creator</span><span class="p">(</span><span class="n">LAMMPS</span><span class="w"> </span><span class="o">*</span><span class="n">lmp</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FixNVE2</span><span class="p">(</span><span class="n">lmp</span><span class="p">,</span><span class="n">argc</span><span class="p">,</span><span class="n">argv</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span class="k">extern</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">lammpsplugin_init</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">lmp</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">regfunc</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">lammpsplugin_regfunc</span><span class="w"> </span><span class="n">register_plugin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">lammpsplugin_regfunc</span><span class="p">)</span><span class="w"> </span><span class="n">regfunc</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">lammpsplugin_t</span><span class="w"> </span><span class="n">plugin</span><span class="p">;</span><span class="w"></span>
+<span class="k">extern</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">lammpsplugin_init</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">lmp</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">regfunc</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">lammpsplugin_regfunc</span><span class="w"> </span><span class="n">register_plugin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">lammpsplugin_regfunc</span><span class="p">)</span><span class="w"> </span><span class="n">regfunc</span><span class="p">;</span>
+<span class="w">  </span><span class="n">lammpsplugin_t</span><span class="w"> </span><span class="n">plugin</span><span class="p">;</span>
 
-<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LAMMPS_VERSION</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">style</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;fix&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">name</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;nve2&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">info</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;NVE2 variant fix style v1.0&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">author</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Axel Kohlmeyer (akohlmey@gmail.com)&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">creator</span><span class="p">.</span><span class="n">v2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">lammpsplugin_factory2</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="n">nve2creator</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">handle</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">handle</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">(</span><span class="o">*</span><span class="n">register_plugin</span><span class="p">)(</span><span class="o">&amp;</span><span class="n">plugin</span><span class="p">,</span><span class="n">lmp</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LAMMPS_VERSION</span><span class="p">;</span>
+<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">style</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;fix&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">name</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;nve2&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">info</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;NVE2 variant fix style v1.0&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">author</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Axel Kohlmeyer (akohlmey@gmail.com)&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">creator</span><span class="p">.</span><span class="n">v2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">lammpsplugin_factory2</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="n">nve2creator</span><span class="p">;</span>
+<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">handle</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">handle</span><span class="p">;</span>
+<span class="w">  </span><span class="p">(</span><span class="o">*</span><span class="n">register_plugin</span><span class="p">)(</span><span class="o">&amp;</span><span class="n">plugin</span><span class="p">,</span><span class="n">lmp</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </section>
 <section id="command-style-example">
-<h2><span class="section-number">4.9.4. </span>Command style example<a class="headerlink" href="#command-style-example" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.11.4. </span>Command style example<a class="headerlink" href="#command-style-example" title="Permalink to this heading"></a></h2>
 <p>Command styles also use the first variant of factory function as
 demonstrated in the following example, which also shows that the
 implementation of the plugin class may be within the same source
 file as the plugin interface code:</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;lammpsplugin.h&quot;</span><span class="cp"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;lammpsplugin.h&quot;</span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;comm.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;error.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;command.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;version.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;comm.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;error.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;command.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;version.h&quot;</span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstring&gt;</span>
 
-<span class="k">namespace</span><span class="w"> </span><span class="nn">LAMMPS_NS</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">Hello</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Command</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">   </span><span class="k">public</span><span class="o">:</span><span class="w"></span>
-<span class="w">    </span><span class="n">Hello</span><span class="p">(</span><span class="k">class</span><span class="w"> </span><span class="nc">LAMMPS</span><span class="w"> </span><span class="o">*</span><span class="n">lmp</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Command</span><span class="p">(</span><span class="n">lmp</span><span class="p">)</span><span class="w"> </span><span class="p">{};</span><span class="w"></span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">command</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">};</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">LAMMPS_NS</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">Hello</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Command</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">Hello</span><span class="p">(</span><span class="k">class</span><span class="w"> </span><span class="nc">LAMMPS</span><span class="w"> </span><span class="o">*</span><span class="n">lmp</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Command</span><span class="p">(</span><span class="n">lmp</span><span class="p">)</span><span class="w"> </span><span class="p">{};</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">command</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="p">);</span>
+<span class="w">  </span><span class="p">};</span>
+<span class="p">}</span>
 
-<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">LAMMPS_NS</span><span class="p">;</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">LAMMPS_NS</span><span class="p">;</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">Hello::command</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">argc</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">error</span><span class="o">-&gt;</span><span class="n">all</span><span class="p">(</span><span class="n">FLERR</span><span class="p">,</span><span class="s">&quot;Illegal hello command&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">comm</span><span class="o">-&gt;</span><span class="n">me</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
-<span class="w">     </span><span class="n">utils</span><span class="o">::</span><span class="n">logmesg</span><span class="p">(</span><span class="n">lmp</span><span class="p">,</span><span class="n">fmt</span><span class="o">::</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;Hello, {}!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]));</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">Hello::command</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">argc</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">error</span><span class="o">-&gt;</span><span class="n">all</span><span class="p">(</span><span class="n">FLERR</span><span class="p">,</span><span class="s">&quot;Illegal hello command&quot;</span><span class="p">);</span>
+<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">comm</span><span class="o">-&gt;</span><span class="n">me</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">     </span><span class="n">utils</span><span class="o">::</span><span class="n">logmesg</span><span class="p">(</span><span class="n">lmp</span><span class="p">,</span><span class="n">fmt</span><span class="o">::</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;Hello, {}!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]));</span>
+<span class="p">}</span>
 
-<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">hellocreator</span><span class="p">(</span><span class="n">LAMMPS</span><span class="w"> </span><span class="o">*</span><span class="n">lmp</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Hello</span><span class="p">(</span><span class="n">lmp</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">hellocreator</span><span class="p">(</span><span class="n">LAMMPS</span><span class="w"> </span><span class="o">*</span><span class="n">lmp</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Hello</span><span class="p">(</span><span class="n">lmp</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span class="k">extern</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">lammpsplugin_init</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">lmp</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">regfunc</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">lammpsplugin_t</span><span class="w"> </span><span class="n">plugin</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">lammpsplugin_regfunc</span><span class="w"> </span><span class="n">register_plugin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">lammpsplugin_regfunc</span><span class="p">)</span><span class="w"> </span><span class="n">regfunc</span><span class="p">;</span><span class="w"></span>
+<span class="k">extern</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">lammpsplugin_init</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">lmp</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">regfunc</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">lammpsplugin_t</span><span class="w"> </span><span class="n">plugin</span><span class="p">;</span>
+<span class="w">  </span><span class="n">lammpsplugin_regfunc</span><span class="w"> </span><span class="n">register_plugin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">lammpsplugin_regfunc</span><span class="p">)</span><span class="w"> </span><span class="n">regfunc</span><span class="p">;</span>
 
-<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LAMMPS_VERSION</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">style</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;command&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">name</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hello&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">info</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello world command v1.1&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">author</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Axel Kohlmeyer (akohlmey@gmail.com)&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">creator</span><span class="p">.</span><span class="n">v1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">lammpsplugin_factory1</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="n">hellocreator</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">handle</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">handle</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">(</span><span class="o">*</span><span class="n">register_plugin</span><span class="p">)(</span><span class="o">&amp;</span><span class="n">plugin</span><span class="p">,</span><span class="n">lmp</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LAMMPS_VERSION</span><span class="p">;</span>
+<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">style</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;command&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">name</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hello&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">info</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello world command v1.1&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">author</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Axel Kohlmeyer (akohlmey@gmail.com)&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">creator</span><span class="p">.</span><span class="n">v1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">lammpsplugin_factory1</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="n">hellocreator</span><span class="p">;</span>
+<span class="w">  </span><span class="n">plugin</span><span class="p">.</span><span class="n">handle</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">handle</span><span class="p">;</span>
+<span class="w">  </span><span class="p">(</span><span class="o">*</span><span class="n">register_plugin</span><span class="p">)(</span><span class="o">&amp;</span><span class="n">plugin</span><span class="p">,</span><span class="n">lmp</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </section>
 <section id="additional-details">
-<h2><span class="section-number">4.9.5. </span>Additional Details<a class="headerlink" href="#additional-details" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.11.5. </span>Additional Details<a class="headerlink" href="#additional-details" title="Permalink to this heading"></a></h2>
 <p>The initialization function <strong>must</strong> be called <code class="docutils literal notranslate"><span class="pre">lammpsplugin_init</span></code>, it
 <strong>must</strong> have C bindings and it takes three void pointers as arguments.
 The first is a pointer to the LAMMPS class that calls it and it needs to
@@ -399,7 +407,7 @@ the behavior of existing styles or to debug new versions of them without
 having to re-compile or re-install all of LAMMPS.</p>
 </section>
 <section id="compiling-plugins">
-<h2><span class="section-number">4.9.6. </span>Compiling plugins<a class="headerlink" href="#compiling-plugins" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.11.6. </span>Compiling plugins<a class="headerlink" href="#compiling-plugins" title="Permalink to this heading"></a></h2>
 <p>Plugins need to be compiled with the same compilers and libraries
 (e.g. MPI) and compilation settings (MPI on/off, OpenMP, integer sizes)
 as the LAMMPS executable and library.  Otherwise the plugin will likely
@@ -410,13 +418,28 @@ Compilation of the plugin can be managed via both, CMake or traditional
 GNU makefiles.  Some examples that can be used as a template are in the
 <code class="docutils literal notranslate"><span class="pre">examples/plugins</span></code> folder.  The CMake script code has some small
 adjustments to allow building the plugins for running unit tests with
-them. Another example that converts the KIM package into a plugin can be
-found in the <code class="docutils literal notranslate"><span class="pre">examples/kim/plugin</span></code> folder.  No changes to the sources
-of the KIM package themselves are needed; only the plugin interface and
-loader code needs to be added.  This example only supports building with
-CMake, but is probably a more typical example. To compile you need to
-run CMake with -DLAMMPS_SOURCE_DIR=&lt;path/to/lammps/src/folder&gt;.  Other
+them.</p>
+<p>Another example that converts the KIM package into a plugin can be found
+in the <code class="docutils literal notranslate"><span class="pre">examples/kim/plugin</span></code> folder.  No changes to the sources of the
+KIM package themselves are needed; only the plugin interface and loader
+code needs to be added.  This example only supports building with CMake,
+but is probably a more typical example. To compile you need to run CMake
+with -DLAMMPS_SOURCE_DIR=&lt;path/to/lammps/src/folder&gt;.  Other
 configuration setting are identical to those for compiling LAMMPS.</p>
+<p>A second example for a plugin from a package is in the
+<code class="docutils literal notranslate"><span class="pre">examples/PACKAGES/pace/plugin</span></code> folder that will create a plugin from
+the ML-PACE package.  In this case the bulk of the code is in a static
+external library that is being downloaded and compiled first and then
+combined with the pair style wrapper and the plugin loader.  This
+example also contains a NSIS script that can be used to create an
+Installer package for Windows (the mutual licensing terms of the
+external library and LAMMPS conflict when distributing binaries, so the
+ML-PACE package cannot be linked statically, but the LAMMPS headers
+required to build the plugin are also available under a less restrictive
+license).  This will automatically set the required environment variable
+and launching a (compatible) LAMMPS binary will load and register the
+plugin and the ML-PACE package can then be used as it was linked into
+LAMMPS.</p>
 </section>
 </section>
 
@@ -424,14 +447,14 @@ configuration setting are identical to those for compiling LAMMPS.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="Developer_notes.html" class="btn btn-neutral float-left" title="4.8. Notes for developers and code maintainers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Developer_unittest.html" class="btn btn-neutral float-right" title="4.10. Adding tests for unit testing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Developer_updating.html" class="btn btn-neutral float-left" title="4.10. Notes for updating code written for older LAMMPS versions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Developer_unittest.html" class="btn btn-neutral float-right" title="4.12. Adding tests for unit testing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -440,7 +463,6 @@ configuration setting are identical to those for compiling LAMMPS.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

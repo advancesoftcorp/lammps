@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>fix_modify command &mdash; LAMMPS documentation</title>
@@ -10,21 +10,21 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/fix_modify.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="group command" href="group.html" />
+    <link rel="next" title="fitpod command" href="fitpod_command.html" />
     <link rel="prev" title="fix command" href="fix.html" /> 
 </head>
 
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -77,6 +81,9 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_adapt_fep.html">fix adapt/fep command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_addforce.html">fix addforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_addtorque.html">fix addtorque command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_alchemy.html">fix alchemy command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_amoeba_bitorsion.html">fix amoeba/bitorsion command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_amoeba_pitorsion.html">fix amoeba/pitorsion command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_append_atoms.html">fix append/atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_atc.html">fix atc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_atom_swap.html">fix atom/swap command</a></li>
@@ -84,8 +91,11 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_chunk.html">fix ave/chunk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_correlate.html">fix ave/correlate command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_correlate_long.html">fix ave/correlate/long command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_grid.html">fix ave/grid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_histo.html">fix ave/histo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_histo.html#fix-ave-histo-weight-command">fix ave/histo/weight command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_spatial.html">Fix ave/spatial command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_spatial_sphere.html">Fix ave/spatial command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_time.html">fix ave/time command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_aveforce.html">fix aveforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_balance.html">fix balance command</a></li>
@@ -115,10 +125,11 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_drude_transform.html#fix-drude-transform-inverse-command">fix drude/transform/inverse command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_dt_reset.html">fix dt/reset command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_efield.html">fix efield command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_efield.html#fix-efield-tip4p-command">fix efield/tip4p command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ehex.html">fix ehex command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html">fix electrode/conp command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html#fix-electrode-conq-command">fix electrode/conq command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html#fix-electrode-thermo-command">fix electrode/thermo command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html">fix electrode/conp command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html#fix-electrode-conq-command">fix electrode/conq command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html#fix-electrode-thermo-command">fix electrode/thermo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_electron_stopping.html">fix electron/stopping command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_electron_stopping.html#fix-electron-stopping-fit-command">fix electron/stopping/fit command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_enforce2d.html">fix enforce2d command</a></li>
@@ -138,6 +149,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_grem.html">fix grem command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_halt.html">fix halt command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_heat.html">fix heat command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_heat_flow.html">fix heat/flow command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_hyper_global.html">fix hyper/global command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_hyper_local.html">fix hyper/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_imd.html">fix imd command</a></li>
@@ -147,13 +159,13 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_drude.html">fix langevin/drude command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_eff.html">fix langevin/eff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_spin.html">fix langevin/spin command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_latte.html">fix latte command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_fluid.html">fix lb/fluid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_momentum.html">fix lb/momentum command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_viscous.html">fix lb/viscous command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lineforce.html">fix lineforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_manifoldforce.html">fix manifoldforce command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_mdi_aimd.html">fix mdi/aimd command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_mdi_qm.html">fix mdi/qm command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_mdi_qmmm.html">fix mdi/qmmm command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_meso_move.html">fix meso/move command</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">fix_modify command</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#syntax">Syntax</a></li>
@@ -222,8 +234,10 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_orient.html#fix-orient-bcc-command">fix orient/bcc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_orient_eco.html">fix orient/eco command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_pafi.html">fix pafi command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pair.html">fix pair command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_phonon.html">fix phonon command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html">fix pimd command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html">fix pimd/langevin command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html#fix-pimd-nvt-command">fix pimd/nvt command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_planeforce.html">fix planeforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_plumed.html">fix plumed command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_poems.html">fix poems command</a></li>
@@ -268,6 +282,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_saed_vtk.html">fix saed/vtk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_setforce.html">fix setforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_setforce.html#fix-setforce-spin-command">fix setforce/spin command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_sgcmc.html">fix sgcmc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shake.html">fix shake command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shake.html#fix-rattle-command">fix rattle command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shardlow.html">fix shardlow command</a></li>
@@ -311,7 +326,9 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-lj1043-command">fix wall/lj1043 command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-colloid-command">fix wall/colloid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-harmonic-command">fix wall/harmonic command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-lepton-command">fix wall/lepton command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-morse-command">fix wall/morse command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-table-command">fix wall/table command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_body_polygon.html">fix wall/body/polygon command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_body_polyhedron.html">fix wall/body/polyhedron command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_ees.html">fix wall/ees command</a></li>
@@ -332,6 +349,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -349,33 +367,33 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="commands_list.html">Commands</a> &raquo;</li>
-      <li>fix_modify command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="commands_list.html">Commands</a></li>
+      <li class="breadcrumb-item active">fix_modify command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="fix.html" class="btn btn-neutral float-left" title="fix command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="group.html" class="btn btn-neutral float-right" title="group command" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="fitpod_command.html" class="btn btn-neutral float-right" title="fitpod command" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="fix-modify-command">
-<span id="index-0"></span><h1>fix_modify command<a class="headerlink" href="#fix-modify-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="fix-modify-command">
+<span id="index-0"></span><h1>fix_modify command<a class="headerlink" href="#fix-modify-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix_modify</span><span class="w"> </span><span class="n">fix</span><span class="o">-</span><span class="n">ID</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">...</span><span class="w"></span>
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix_modify </span><span class="nv nv-Identifier">fix-ID</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">...</span>
 </pre></div>
 </div>
 <ul>
 <li><p>fix-ID = ID of the fix to modify</p></li>
 <li><p>one or more keyword/value pairs may be appended</p></li>
-<li><p>keyword =  <em>bodyforces</em> or <em>colname</em> or <em>dynamic/dof</em> or <em>energy</em> or <em>press</em> or <em>respa</em> or <em>temp</em> or <em>virial</em></p>
+<li><p>keyword = <em>bodyforces</em> or <em>colname</em> or <em>dynamic/dof</em> or <em>energy</em> or <em>press</em> or <em>respa</em> or <em>temp</em> or <em>virial</em></p>
 <pre class="literal-block"><em>bodyforces</em> value = <em>early</em> or <em>late</em>
   early/late = compute rigid-body forces/torques early or late in the timestep
 <em>colname</em> values =  ID string
@@ -393,16 +411,16 @@
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix_modify</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">myTemp</span><span class="w"> </span><span class="n">press</span><span class="w"> </span><span class="n">myPress</span><span class="w"></span>
-<span class="k">fix_modify</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">energy</span><span class="w"> </span><span class="n">yes</span><span class="w"></span>
-<span class="k">fix_modify</span><span class="w"> </span><span class="n">tether</span><span class="w"> </span><span class="n">respa</span><span class="w"> </span><span class="m">2</span><span class="w"></span>
-<span class="k">fix_modify</span><span class="w"> </span><span class="n">ave</span><span class="w"> </span><span class="n">colname</span><span class="w"> </span><span class="n">c_thermo_press</span><span class="w"> </span><span class="n">Pressure</span><span class="w"> </span><span class="n">colname</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">Temperature</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix_modify </span><span class="nv nv-Identifier">3</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">myTemp</span><span class="w"> </span><span class="n">press</span><span class="w"> </span><span class="n">myPress</span>
+<span class="k">fix_modify </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="n">energy</span><span class="w"> </span><span class="n">yes</span>
+<span class="k">fix_modify </span><span class="nv nv-Identifier">tether</span><span class="w"> </span><span class="n">respa</span><span class="w"> </span><span class="m">2</span>
+<span class="k">fix_modify </span><span class="nv nv-Identifier">ave</span><span class="w"> </span><span class="n">colname</span><span class="w"> </span><span class="n">c_thermo_press</span><span class="w"> </span><span class="n">Pressure</span><span class="w"> </span><span class="n">colname</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">Temperature</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <p>Modify one or more parameters of a previously defined fix.  Only
 specific fix styles support specific parameters.  See the doc pages
 for individual fix commands for info on which ones support which
@@ -484,23 +502,20 @@ with their specified level at the beginning of a r-RESPA run.</p>
 <p>The <em>dynamic/dof</em> keyword determines whether the number of atoms N in
 the fix group and their associated degrees of freedom are re-computed
 each time a temperature is computed.  Only fix styles that calculate
-their own internal temperature use this option.  Currently this is
-only the <a class="reference internal" href="fix_rigid.html"><span class="doc">fix rigid/nvt/small</span></a> and <a class="reference internal" href="fix_rigid.html"><span class="doc">fix
-rigid/npt/small</span></a> commands for the purpose of
-thermostatting rigid body translation and rotation.  By default, N and
-their DOF are assumed to be constant.  If you are adding atoms or
-molecules to the system (see the <a class="reference internal" href="fix_pour.html"><span class="doc">fix pour</span></a>, <a class="reference internal" href="fix_deposit.html"><span class="doc">fix
-deposit</span></a>, and <a class="reference internal" href="fix_gcmc.html"><span class="doc">fix gcmc</span></a> commands) or
-expect atoms or molecules to be lost (e.g. due to exiting the
-simulation box or via <a class="reference internal" href="fix_evaporate.html"><span class="doc">fix evaporate</span></a>), then this
-option should be used to insure the temperature is correctly
-normalized.</p>
+their own internal temperature use this option.  Currently this is only
+the <a class="reference internal" href="fix_rigid.html"><span class="doc">fix rigid/nvt/small</span></a> and <a class="reference internal" href="fix_rigid.html"><span class="doc">fix rigid/npt/small</span></a> commands for the purpose of thermostatting rigid body
+translation and rotation.  By default, N and their DOF are assumed to be
+constant.  If you are adding atoms or molecules to the system (see the
+<a class="reference internal" href="fix_pour.html"><span class="doc">fix pour</span></a>, <a class="reference internal" href="fix_deposit.html"><span class="doc">fix deposit</span></a>, and
+<a class="reference internal" href="fix_gcmc.html"><span class="doc">fix gcmc</span></a> commands) or expect atoms or molecules to be
+lost (e.g. due to exiting the simulation box or via <a class="reference internal" href="fix_evaporate.html"><span class="doc">fix evaporate</span></a>), then this option should be used to ensure the
+temperature is correctly normalized.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Other thermostatting fixes, such as <a class="reference internal" href="fix_nh.html"><span class="doc">fix nvt</span></a>, do
-not use the <em>dynamic/dof</em> keyword because they use a temperature
-compute to calculate temperature.  See the <a class="reference internal" href="compute_modify.html"><span class="doc">compute_modify dynamic/dof</span></a> command for a similar way to insure
-correct temperature normalization for those thermostats.</p>
+<p>Other thermostatting fixes, such as <a class="reference internal" href="fix_nh.html"><span class="doc">fix nvt</span></a>, do not
+use the <em>dynamic/dof</em> keyword because they use a temperature compute
+to calculate temperature.  See the <a class="reference internal" href="compute_modify.html"><span class="doc">compute_modify dynamic/dof</span></a> command for a similar way to ensure correct
+temperature normalization for those thermostats.</p>
 </div>
 <p>The <em>bodyforces</em> keyword determines whether the forces and torques
 acting on rigid bodies are computed <em>early</em> at the post-force stage of
@@ -533,16 +548,16 @@ be used multiple times. If multiple <em>colname</em> settings refer to the same
 keyword, the last setting has precedence.</p>
 </section>
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <p>none</p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="fix.html"><span class="doc">fix</span></a>, <a class="reference internal" href="compute_temp.html"><span class="doc">compute temp</span></a>,
 <a class="reference internal" href="compute_pressure.html"><span class="doc">compute pressure</span></a>, <a class="reference internal" href="thermo_style.html"><span class="doc">thermo_style</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
 <p>The option defaults are temp = ID defined by fix, press = ID defined
 by fix, energy = no, virial = different for each fix style, respa = 0,
 bodyforce = late.</p>
@@ -554,13 +569,13 @@ bodyforce = late.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="fix.html" class="btn btn-neutral float-left" title="fix command" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="group.html" class="btn btn-neutral float-right" title="group command" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="fitpod_command.html" class="btn btn-neutral float-right" title="fitpod command" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -569,7 +584,6 @@ bodyforce = late.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

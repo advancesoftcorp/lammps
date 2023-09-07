@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2.1. Download an executable for Linux &mdash; LAMMPS documentation</title>
@@ -10,21 +10,21 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Install_linux.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="2.2. Download an executable for Mac" href="Install_mac.html" />
+    <link rel="next" title="2.2. Download an executable for macOS" href="Install_mac.html" />
     <link rel="prev" title="2. Install LAMMPS" href="Install.html" /> 
 </head>
 
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -51,17 +55,18 @@
 <li class="toctree-l1"><a class="reference internal" href="Intro.html">1. Introduction</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="Install.html">2. Install LAMMPS</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">2.1. Download an executable for Linux</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#pre-built-ubuntu-linux-executables">2.1.1. Pre-built Ubuntu Linux executables</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pre-built-fedora-linux-executables">2.1.2. Pre-built Fedora Linux executables</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pre-built-epel-linux-executable">2.1.3. Pre-built EPEL Linux executable</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pre-built-opensuse-linux-executable">2.1.4. Pre-built OpenSuse Linux executable</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#gentoo-linux-executable">2.1.5. Gentoo Linux executable</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#archlinux-build-script">2.1.6. Archlinux build-script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pre-built-static-linux-x86-64-executables">2.1.1. Pre-built static Linux x86_64 executables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pre-built-ubuntu-and-debian-linux-executables">2.1.2. Pre-built Ubuntu and Debian Linux executables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pre-built-fedora-linux-executables">2.1.3. Pre-built Fedora Linux executables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pre-built-epel-linux-executable">2.1.4. Pre-built EPEL Linux executable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pre-built-opensuse-linux-executable">2.1.5. Pre-built OpenSuse Linux executable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gentoo-linux-executable">2.1.6. Gentoo Linux executable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#archlinux-build-script">2.1.7. Archlinux build-script</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="Install_mac.html">2.2. Download an executable for Mac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Install_mac.html">2.2. Download an executable for macOS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Install_windows.html">2.3. Download an executable for Windows</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Install_conda.html">2.4. Download an executable for Linux or Mac via Conda</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Install_conda.html">2.4. Download an executable for Linux or macOS via Conda</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Install_tarball.html">2.5. Download source and documentation as a tarball</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Install_git.html">2.6. Download the LAMMPS source with git</a></li>
 </ul>
@@ -93,6 +98,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -110,128 +116,135 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Install.html"><span class="section-number">2. </span>Install LAMMPS</a> &raquo;</li>
-      <li><span class="section-number">2.1. </span>Download an executable for Linux</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Install.html"><span class="section-number">2. </span>Install LAMMPS</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">2.1. </span>Download an executable for Linux</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="Install.html" class="btn btn-neutral float-left" title="2. Install LAMMPS" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Install_mac.html" class="btn btn-neutral float-right" title="2.2. Download an executable for Mac" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Install_mac.html" class="btn btn-neutral float-right" title="2.2. Download an executable for macOS" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="download-an-executable-for-linux">
-<h1><span class="section-number">2.1. </span>Download an executable for Linux<a class="headerlink" href="#download-an-executable-for-linux" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="download-an-executable-for-linux">
+<h1><span class="section-number">2.1. </span>Download an executable for Linux<a class="headerlink" href="#download-an-executable-for-linux" title="Permalink to this heading"></a></h1>
 <p>Binaries are available for different versions of Linux:</p>
-<div class="line-block">
-<div class="line"><a class="reference internal" href="#ubuntu"><span class="std std-ref">Pre-built Ubuntu Linux executables</span></a></div>
-<div class="line"><a class="reference internal" href="#fedora"><span class="std std-ref">Pre-built Fedora Linux executables</span></a></div>
-<div class="line"><a class="reference internal" href="#epel"><span class="std std-ref">Pre-built EPEL Linux executables (RHEL, CentOS)</span></a></div>
-<div class="line"><a class="reference internal" href="#opensuse"><span class="std std-ref">Pre-built OpenSuse Linux executables</span></a></div>
-<div class="line"><a class="reference internal" href="#gentoo"><span class="std std-ref">Gentoo Linux executable</span></a></div>
-<div class="line"><a class="reference internal" href="#arch"><span class="std std-ref">Arch Linux build-script</span></a></div>
-<div class="line"><br /></div>
+<ul class="simple">
+<li><p><a class="reference internal" href="#static"><span class="std std-ref">Pre-built static Linux x86_64 executables</span></a></p></li>
+<li><p><a class="reference internal" href="#ubuntu"><span class="std std-ref">Pre-built Ubuntu and Debian Linux executables</span></a></p></li>
+<li><p><a class="reference internal" href="#fedora"><span class="std std-ref">Pre-built Fedora Linux executables</span></a></p></li>
+<li><p><a class="reference internal" href="#epel"><span class="std std-ref">Pre-built EPEL Linux executables (RHEL, CentOS)</span></a></p></li>
+<li><p><a class="reference internal" href="#opensuse"><span class="std std-ref">Pre-built OpenSuse Linux executables</span></a></p></li>
+<li><p><a class="reference internal" href="#gentoo"><span class="std std-ref">Gentoo Linux executable</span></a></p></li>
+<li><p><a class="reference internal" href="#arch"><span class="std std-ref">Arch Linux build-script</span></a></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have questions about these pre-compiled LAMMPS executables,
+you need to contact the people preparing those packages.  The LAMMPS
+developers have no control over how they configure and build their
+packages and when they update them.  They may only provide packages
+for stable release versions and not always update the packages in a
+timely fashion after a new LAMMPS release is made.</p>
 </div>
 <hr class="docutils" />
-<section id="pre-built-ubuntu-linux-executables">
-<span id="ubuntu"></span><h2><span class="section-number">2.1.1. </span>Pre-built Ubuntu Linux executables<a class="headerlink" href="#pre-built-ubuntu-linux-executables" title="Permalink to this headline">¶</a></h2>
-<p>A pre-built LAMMPS executable suitable for running on the latest
-Ubuntu Linux versions, can be downloaded as a Debian package.  This
-allows you to install LAMMPS with a single command, and stay
+<section id="pre-built-static-linux-x86-64-executables">
+<span id="static"></span><h2><span class="section-number">2.1.1. </span>Pre-built static Linux x86_64 executables<a class="headerlink" href="#pre-built-static-linux-x86-64-executables" title="Permalink to this heading"></a></h2>
+<p>Pre-built LAMMPS executables for Linux, that are statically linked and
+compiled for 64-bit x86 CPUs (x86_64 or AMD64) are available for download
+at <a class="reference external" href="https://download.lammps.org/static/">https://download.lammps.org/static/</a>.
+Because of that static linkage (and unlike the Linux distribution specific
+packages listed below), they do not depend on any installed software and
+thus should run on <em>any</em> 64-bit x86 machine with <em>any</em> Linux version.</p>
+<p>These executable include most of the available packages and multi-thread
+parallelization (via INTEL, KOKKOS, or OPENMP package).  They are <strong>not</strong>
+compatible with MPI.  Several of the LAMMPS tools executables (e.g. <code class="docutils literal notranslate"><span class="pre">msi2lmp</span></code>)
+and the <code class="docutils literal notranslate"><span class="pre">lammps-shell</span></code> program are included as well.  Because of the
+static linkage, there is no <code class="docutils literal notranslate"><span class="pre">liblammps.so</span></code> library file and thus also the
+LAMMPS python module, which depends on it, is not included.</p>
+<p>The compressed tar archives available for download have names following
+the pattern <code class="docutils literal notranslate"><span class="pre">lammps-linux-x86_64-&lt;version&gt;.tar.gz</span></code> and will all unpack
+into a <code class="docutils literal notranslate"><span class="pre">lammps-static</span></code> folder.  The executables are then in the
+<code class="docutils literal notranslate"><span class="pre">lammps-static/bin/</span></code> folder.  Since they do not depend on any other
+software, they may be freely moved or copied around.</p>
+<hr class="docutils" />
+</section>
+<section id="pre-built-ubuntu-and-debian-linux-executables">
+<span id="ubuntu"></span><h2><span class="section-number">2.1.2. </span>Pre-built Ubuntu and Debian Linux executables<a class="headerlink" href="#pre-built-ubuntu-and-debian-linux-executables" title="Permalink to this heading"></a></h2>
+<p>A pre-built LAMMPS executable, suitable for running on the latest Ubuntu
+and Debian Linux versions, can be downloaded as a Debian package.  This
+allows you to install LAMMPS with a single command, and stay (mostly)
 up-to-date with the current stable version of LAMMPS by simply updating
-your operating system.  Please note, that the repository below offers
-two LAMMPS packages, <code class="docutils literal notranslate"><span class="pre">lammps-daily</span></code> and <code class="docutils literal notranslate"><span class="pre">lammps-stable</span></code>.  The
-LAMMPS developers recommend to use the <code class="docutils literal notranslate"><span class="pre">lammps-stable</span></code> package for
-any production simulations.  The <code class="docutils literal notranslate"><span class="pre">lammps-daily</span></code> package is built
-from the LAMMPS development sources, and those versions may have known
-issues and bugs when new features are added and the software has not
-undergone full release testing.</p>
-<p>To install the appropriate personal-package archives (PPAs), do the
-following once:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo add-apt-repository ppa:gladky-anton/lammps
-$ sudo add-apt-repository ppa:openkim/latest
-$ sudo apt-get update
-</pre></div>
-</div>
+your operating system.</p>
 <p>To install LAMMPS do the following once:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install lammps-stable
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>lammps
 </pre></div>
 </div>
-<p>This downloads an executable named <code class="docutils literal notranslate"><span class="pre">lmp_stable</span></code> to your box, which
-can then be used in the usual way to run input scripts:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ lmp_stable -in <span class="k">in</span>.lj
+<p>This downloads an executable named <code class="docutils literal notranslate"><span class="pre">lmp</span></code> to your box and multiple
+packages with supporting data, examples and libraries as well as any
+missing dependencies.  For example, the LAMMPS binary in this package is
+built with the <a class="reference internal" href="Build_extras.html#kim"><span class="std std-ref">KIM package</span></a> enabled, which results in the
+above command also installing the <code class="docutils literal notranslate"><span class="pre">kim-api</span></code> binaries when LAMMPS is
+installed, unless they were installed already.  In order to use
+potentials from <a class="reference external" href="https://openkim.org">openkim.org</a>, you can also install the
+<code class="docutils literal notranslate"><span class="pre">openkim-models</span></code> package:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>openkim-models
 </pre></div>
 </div>
-<p>To update LAMMPS to the most current stable version, do the following:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get update
+<p>Or use the <a class="reference external" href="https://openkim.org/doc/usage/obtaining-models/#installing_api">KIM-API commands</a>
+to download and install individual models.</p>
+<p>This LAMMPS executable can then be used in the usual way to run input
+scripts:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>lmp<span class="w"> </span>-in<span class="w"> </span><span class="k">in</span>.lj
 </pre></div>
 </div>
-<p>which will also update other packages on your system.</p>
-<p>To get a copy of the current documentation and examples:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install lammps-stable-doc
+<p>To update LAMMPS to the latest packaged version, do the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
 </pre></div>
 </div>
-<p>which will download the doc files in
-<code class="docutils literal notranslate"><span class="pre">/usr/share/doc/lammps-stable-doc/doc</span></code> and example problems in
-<code class="docutils literal notranslate"><span class="pre">/usr/share/doc/lammps-doc/examples</span></code>.</p>
-<p>To get a copy of the current potentials files:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install lammps-stable-data
+<p>This will also update other packages on your system.</p>
+<p>To uninstall LAMMPS, do the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>remove<span class="w"> </span>lammps
 </pre></div>
 </div>
-<p>which will download the potentials files to
-<code class="docutils literal notranslate"><span class="pre">/usr/share/lammps-stable/potentials</span></code>.  The <code class="docutils literal notranslate"><span class="pre">lmp_stable</span></code> binary is
-hard-coded to look for potential files in this directory (it does not
-use the <code class="docutils literal notranslate"><span class="pre">LAMMPS_POTENTIALS</span></code> environment variable, as described
-in <a class="reference internal" href="pair_coeff.html"><span class="doc">pair_coeff</span></a> command).</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">lmp_stable</span></code> binary is built with the <a class="reference internal" href="Build_extras.html#kim"><span class="std std-ref">KIM package</span></a> which
-results in the above command also installing the <code class="docutils literal notranslate"><span class="pre">kim-api</span></code> binaries when LAMMPS
-is installed.  In order to use potentials from <a class="reference external" href="https://openkim.org">openkim.org</a>, you
-can install the <code class="docutils literal notranslate"><span class="pre">openkim-models</span></code> package</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install openkim-models
-</pre></div>
-</div>
-<p>To un-install LAMMPS, do the following:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get remove lammps-stable
-</pre></div>
-</div>
-<p>Please use <code class="docutils literal notranslate"><span class="pre">lmp_stable</span> <span class="pre">-help</span></code> to see which compilation options, packages,
+<p>Please use <code class="docutils literal notranslate"><span class="pre">lmp</span> <span class="pre">-help</span></code> to see which compilation options, packages,
 and styles are included in the binary.</p>
 <p>Thanks to Anton Gladky (gladky.anton at gmail.com) for setting up this
 Ubuntu package capability.</p>
 <hr class="docutils" />
 </section>
 <section id="pre-built-fedora-linux-executables">
-<span id="fedora"></span><h2><span class="section-number">2.1.2. </span>Pre-built Fedora Linux executables<a class="headerlink" href="#pre-built-fedora-linux-executables" title="Permalink to this headline">¶</a></h2>
-<p>Pre-built LAMMPS packages for stable releases are available
-in the Fedora Linux distribution as of version 28. The packages
-can be installed via the dnf package manager. There are 3 basic
-varieties (lammps = no MPI, lammps-mpich = MPICH MPI library,
-lammps-openmpi = OpenMPI MPI library) and for each support for
-linking to the C library interface (lammps-devel, lammps-mpich-devel,
-lammps-openmpi-devel), the header for compiling programs using
-the C library interface (lammps-headers), and the LAMMPS python
-module for Python 3. All packages can be installed at the same
-time and the name of the LAMMPS executable is <code class="docutils literal notranslate"><span class="pre">lmp</span></code> and <code class="docutils literal notranslate"><span class="pre">lmp_openmpi</span></code>
-or <code class="docutils literal notranslate"><span class="pre">lmp_mpich</span></code> respectively.  By default, <code class="docutils literal notranslate"><span class="pre">lmp</span></code> will refer to the
-serial executable, unless one of the MPI environment modules is loaded
-(<code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">mpi/mpich-x86_64</span></code> or <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">mpi/openmpi-x86_64</span></code>).
-Then the corresponding parallel LAMMPS executable can be used.
-The same mechanism applies when loading the LAMMPS python module.</p>
+<span id="fedora"></span><h2><span class="section-number">2.1.3. </span>Pre-built Fedora Linux executables<a class="headerlink" href="#pre-built-fedora-linux-executables" title="Permalink to this heading"></a></h2>
+<p>Pre-built <a class="reference external" href="https://packages.fedoraproject.org/pkgs/lammps/">LAMMPS packages for stable releases</a> are available in the
+Fedora Linux distribution since Fedora version 28. The packages can be
+installed via the dnf package manager. There are 3 basic varieties
+(lammps = no MPI, lammps-mpich = MPICH MPI library, lammps-openmpi =
+OpenMPI MPI library) and for each support for linking to the C library
+interface (lammps-devel, lammps-mpich-devel, lammps-openmpi-devel), the
+header for compiling programs using the C library interface
+(lammps-headers), and the LAMMPS python module for Python 3. All
+packages can be installed at the same time and the name of the LAMMPS
+executable is <code class="docutils literal notranslate"><span class="pre">lmp</span></code> and <code class="docutils literal notranslate"><span class="pre">lmp_openmpi</span></code> or <code class="docutils literal notranslate"><span class="pre">lmp_mpich</span></code> respectively.
+By default, <code class="docutils literal notranslate"><span class="pre">lmp</span></code> will refer to the serial executable, unless one of
+the MPI environment modules is loaded (<code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">mpi/mpich-x86_64</span></code>
+or <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">mpi/openmpi-x86_64</span></code>).  Then the corresponding parallel
+LAMMPS executable can be used.  The same mechanism applies when loading
+the LAMMPS python module.</p>
 <p>To install LAMMPS with OpenMPI and run an input <code class="docutils literal notranslate"><span class="pre">in.lj</span></code> with 2 CPUs do:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ dnf install lammps-openmpi
-$ module load mpi/openmpi-x86_64
-$ mpirun -np <span class="m">2</span> lmp -in <span class="k">in</span>.lj
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dnf<span class="w"> </span>install<span class="w"> </span>lammps-openmpi
+module<span class="w"> </span>load<span class="w"> </span>mpi/openmpi-x86_64
+mpirun<span class="w"> </span>-np<span class="w"> </span><span class="m">2</span><span class="w"> </span>lmp<span class="w"> </span>-in<span class="w"> </span><span class="k">in</span>.lj
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">dnf</span> <span class="pre">install</span></code> command is needed only once. In case of a new LAMMPS
+<p>The <code class="docutils literal notranslate"><span class="pre">dnf</span> <span class="pre">install</span></code> command is needed only once.  In case of a new LAMMPS
 stable release, <code class="docutils literal notranslate"><span class="pre">dnf</span> <span class="pre">update</span></code> will automatically update to the newer
-version as soon at the RPM files are built and uploaded to the download
+version as soon as the RPM files are built and uploaded to the download
 mirrors. The <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span></code> command is needed once per (shell) session
 or shell terminal instance, unless it is automatically loaded from the
 shell profile.</p>
@@ -239,7 +252,7 @@ shell profile.</p>
 results in the above command also installing the <cite>kim-api</cite> binaries when LAMMPS
 is installed.  In order to use potentials from <a class="reference external" href="https://openkim.org">openkim.org</a>, you
 can install the <cite>openkim-models</cite> package</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ dnf install openkim-models
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dnf<span class="w"> </span>install<span class="w"> </span>openkim-models
 </pre></div>
 </div>
 <p>Please use <code class="docutils literal notranslate"><span class="pre">lmp</span> <span class="pre">-help</span></code> to see which compilation options, packages,
@@ -248,9 +261,9 @@ and styles are included in the binary.</p>
 <hr class="docutils" />
 </section>
 <section id="pre-built-epel-linux-executable">
-<span id="epel"></span><h2><span class="section-number">2.1.3. </span>Pre-built EPEL Linux executable<a class="headerlink" href="#pre-built-epel-linux-executable" title="Permalink to this headline">¶</a></h2>
+<span id="epel"></span><h2><span class="section-number">2.1.4. </span>Pre-built EPEL Linux executable<a class="headerlink" href="#pre-built-epel-linux-executable" title="Permalink to this heading"></a></h2>
 <p>Pre-built LAMMPS (and KIM) packages for stable releases are available
-in the <a class="reference external" href="https://fedoraproject.org/wiki/EPEL">Extra Packages for Enterprise Linux (EPEL) repository</a>
+in the <a class="reference external" href="https://docs.fedoraproject.org/en-US/epel/">Extra Packages for Enterprise Linux (EPEL) repository</a>
 for use with Red Hat Enterprise Linux (RHEL) or CentOS version 7.x
 and compatible Linux distributions. Names of packages, executable,
 and content are the same as described above for Fedora Linux.
@@ -262,15 +275,15 @@ and styles are included in the binary.</p>
 <hr class="docutils" />
 </section>
 <section id="pre-built-opensuse-linux-executable">
-<span id="opensuse"></span><h2><span class="section-number">2.1.4. </span>Pre-built OpenSuse Linux executable<a class="headerlink" href="#pre-built-opensuse-linux-executable" title="Permalink to this headline">¶</a></h2>
+<span id="opensuse"></span><h2><span class="section-number">2.1.5. </span>Pre-built OpenSuse Linux executable<a class="headerlink" href="#pre-built-opensuse-linux-executable" title="Permalink to this heading"></a></h2>
 <p>A pre-built LAMMPS package for stable releases is available
 in OpenSuse as of Leap 15.0. You can install the package with:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ zypper install lammps
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zypper<span class="w"> </span>install<span class="w"> </span>lammps
 </pre></div>
 </div>
 <p>This includes support for OpenMPI. The name of the LAMMPS executable
-is <code class="docutils literal notranslate"><span class="pre">lmp</span></code>. Thus to run an input in parallel on 2 CPUs you would do:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mpirun -np <span class="m">2</span> lmp -in <span class="k">in</span>.lj
+is <code class="docutils literal notranslate"><span class="pre">lmp</span></code>. To run an input in parallel on 2 CPUs you would do:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mpirun<span class="w"> </span>-np<span class="w"> </span><span class="m">2</span><span class="w"> </span>lmp<span class="w"> </span>-in<span class="w"> </span><span class="k">in</span>.lj
 </pre></div>
 </div>
 <p>Please use <code class="docutils literal notranslate"><span class="pre">lmp</span> <span class="pre">-help</span></code> to see which compilation options, packages,
@@ -279,23 +292,23 @@ and styles are included in the binary.</p>
 results in the above command also installing the <cite>kim-api</cite> binaries when LAMMPS
 is installed.  In order to use potentials from <a class="reference external" href="https://openkim.org">openkim.org</a>, you
 can install the <cite>openkim-models</cite> package</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ zypper install openkim-models
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zypper<span class="w"> </span>install<span class="w"> </span>openkim-models
 </pre></div>
 </div>
 <p>Thanks to Christoph Junghans (LANL) for making LAMMPS available in OpenSuse.</p>
 <hr class="docutils" />
 </section>
 <section id="gentoo-linux-executable">
-<span id="gentoo"></span><h2><span class="section-number">2.1.5. </span>Gentoo Linux executable<a class="headerlink" href="#gentoo-linux-executable" title="Permalink to this headline">¶</a></h2>
-<p>LAMMPS is part of Gentoo’s main package tree and can be installed by
-typing:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>% emerge --ask lammps
+<span id="gentoo"></span><h2><span class="section-number">2.1.6. </span>Gentoo Linux executable<a class="headerlink" href="#gentoo-linux-executable" title="Permalink to this heading"></a></h2>
+<p>LAMMPS is part of <a class="reference external" href="https://packages.gentoo.org/packages/sci-physics/lammps">Gentoo’s main package tree</a> and can be
+installed by typing:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>emerge<span class="w"> </span>--ask<span class="w"> </span>lammps
 </pre></div>
 </div>
-<p>Note that in Gentoo the LAMMPS source is downloaded and the package is
-built on the your machine.</p>
-<p>Certain LAMMPS packages can be enable via USE flags, type</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>% equery uses lammps
+<p>Note that in Gentoo the LAMMPS source code is downloaded and the package is
+then compiled and installed on your machine.</p>
+<p>Certain LAMMPS packages can be enabled via USE flags, type</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>equery<span class="w"> </span>uses<span class="w"> </span>lammps
 </pre></div>
 </div>
 <p>for details.</p>
@@ -304,27 +317,27 @@ this Gentoo capability.</p>
 <hr class="docutils" />
 </section>
 <section id="archlinux-build-script">
-<span id="arch"></span><h2><span class="section-number">2.1.6. </span>Archlinux build-script<a class="headerlink" href="#archlinux-build-script" title="Permalink to this headline">¶</a></h2>
+<span id="arch"></span><h2><span class="section-number">2.1.7. </span>Archlinux build-script<a class="headerlink" href="#archlinux-build-script" title="Permalink to this heading"></a></h2>
 <p>LAMMPS is available via Arch’s unofficial Arch User repository (AUR).
-There are three scripts available, named lammps, lammps-beta and lammps-git.
-They respectively package the stable, patch and git releases.</p>
+There are three scripts available, named <a class="reference external" href="https://aur.archlinux.org/packages/lammps">lammps</a>, <a class="reference external" href="https://aur.archlinux.org/packages/lammps">lammps-beta</a> and <a class="reference external" href="https://aur.archlinux.org/packages/lammps">lammps-git</a>.  They respectively
+package the stable, feature, and git releases.</p>
 <p>To install, you will need to have the git package installed. You may use
 any of the above names in-place of lammps.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone https://aur.archlinux.org/lammps.git
-$ <span class="nb">cd</span> lammps
-$ makepkg -s
-$ makepkg -i
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://aur.archlinux.org/lammps.git
+<span class="nb">cd</span><span class="w"> </span>lammps
+makepkg<span class="w"> </span>-s
+makepkg<span class="w"> </span>-i
 </pre></div>
 </div>
-<p>To update, you may repeat the above, or change into the cloned directory,
-and execute the following, after which, if there are any changes, you may
-use makepkg as above.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git pull
+<p>To update LAMMPS, you may repeat the above, or change into the cloned
+directory, and execute the following, after which, if there are any
+changes, you may use makepkg as above.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>pull
 </pre></div>
 </div>
 <p>Alternatively, you may use an AUR helper to install these packages.</p>
-<p>Note that the AUR provides build-scripts that download the source and
-the build the package on your machine.</p>
+<p>Note that the AUR provides build-scripts that download the source code
+and then build and install the package on your machine.</p>
 </section>
 </section>
 
@@ -333,13 +346,13 @@ the build the package on your machine.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="Install.html" class="btn btn-neutral float-left" title="2. Install LAMMPS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Install_mac.html" class="btn btn-neutral float-right" title="2.2. Download an executable for Mac" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Install_mac.html" class="btn btn-neutral float-right" title="2.2. Download an executable for macOS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -348,7 +361,6 @@ the build the package on your machine.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

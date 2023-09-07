@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>fix neb command &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/fix_neb.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -77,6 +81,9 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_adapt_fep.html">fix adapt/fep command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_addforce.html">fix addforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_addtorque.html">fix addtorque command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_alchemy.html">fix alchemy command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_amoeba_bitorsion.html">fix amoeba/bitorsion command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_amoeba_pitorsion.html">fix amoeba/pitorsion command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_append_atoms.html">fix append/atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_atc.html">fix atc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_atom_swap.html">fix atom/swap command</a></li>
@@ -84,8 +91,11 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_chunk.html">fix ave/chunk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_correlate.html">fix ave/correlate command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_correlate_long.html">fix ave/correlate/long command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_grid.html">fix ave/grid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_histo.html">fix ave/histo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_histo.html#fix-ave-histo-weight-command">fix ave/histo/weight command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_spatial.html">Fix ave/spatial command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_spatial_sphere.html">Fix ave/spatial command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_time.html">fix ave/time command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_aveforce.html">fix aveforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_balance.html">fix balance command</a></li>
@@ -115,10 +125,11 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_drude_transform.html#fix-drude-transform-inverse-command">fix drude/transform/inverse command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_dt_reset.html">fix dt/reset command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_efield.html">fix efield command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_efield.html#fix-efield-tip4p-command">fix efield/tip4p command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ehex.html">fix ehex command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html">fix electrode/conp command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html#fix-electrode-conq-command">fix electrode/conq command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html#fix-electrode-thermo-command">fix electrode/thermo command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html">fix electrode/conp command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html#fix-electrode-conq-command">fix electrode/conq command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html#fix-electrode-thermo-command">fix electrode/thermo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_electron_stopping.html">fix electron/stopping command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_electron_stopping.html#fix-electron-stopping-fit-command">fix electron/stopping/fit command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_enforce2d.html">fix enforce2d command</a></li>
@@ -138,6 +149,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_grem.html">fix grem command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_halt.html">fix halt command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_heat.html">fix heat command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_heat_flow.html">fix heat/flow command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_hyper_global.html">fix hyper/global command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_hyper_local.html">fix hyper/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_imd.html">fix imd command</a></li>
@@ -147,13 +159,13 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_drude.html">fix langevin/drude command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_eff.html">fix langevin/eff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_spin.html">fix langevin/spin command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_latte.html">fix latte command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_fluid.html">fix lb/fluid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_momentum.html">fix lb/momentum command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_viscous.html">fix lb/viscous command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lineforce.html">fix lineforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_manifoldforce.html">fix manifoldforce command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_mdi_aimd.html">fix mdi/aimd command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_mdi_qm.html">fix mdi/qm command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_mdi_qmmm.html">fix mdi/qmmm command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_meso_move.html">fix meso/move command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify.html">fix_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
@@ -223,8 +235,10 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_orient.html#fix-orient-bcc-command">fix orient/bcc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_orient_eco.html">fix orient/eco command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_pafi.html">fix pafi command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pair.html">fix pair command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_phonon.html">fix phonon command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html">fix pimd command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html">fix pimd/langevin command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html#fix-pimd-nvt-command">fix pimd/nvt command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_planeforce.html">fix planeforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_plumed.html">fix plumed command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_poems.html">fix poems command</a></li>
@@ -269,6 +283,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_saed_vtk.html">fix saed/vtk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_setforce.html">fix setforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_setforce.html#fix-setforce-spin-command">fix setforce/spin command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_sgcmc.html">fix sgcmc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shake.html">fix shake command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shake.html#fix-rattle-command">fix rattle command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shardlow.html">fix shardlow command</a></li>
@@ -312,7 +327,9 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-lj1043-command">fix wall/lj1043 command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-colloid-command">fix wall/colloid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-harmonic-command">fix wall/harmonic command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-lepton-command">fix wall/lepton command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-morse-command">fix wall/morse command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-table-command">fix wall/table command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_body_polygon.html">fix wall/body/polygon command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_body_polyhedron.html">fix wall/body/polyhedron command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_ees.html">fix wall/ees command</a></li>
@@ -333,6 +350,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -350,12 +368,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="fixes.html">Fixes</a> &raquo;</li>
-      <li>fix neb command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="fixes.html">Fixes</a></li>
+      <li class="breadcrumb-item active">fix neb command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="fix_mvv_dpd.html" class="btn btn-neutral float-left" title="fix mvv/dpd command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -366,11 +383,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="fix-neb-command">
-<span id="index-0"></span><h1>fix neb command<a class="headerlink" href="#fix-neb-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="fix-neb-command">
+<span id="index-0"></span><h1>fix neb command<a class="headerlink" href="#fix-neb-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fix ID group-ID neb Kspring keyword value
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">ID</span><span class="w"> </span><span class="nv nv-Identifier">group-ID</span><span class="w"> </span><span class="n">neb</span><span class="w"> </span><span class="n">Kspring</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">value</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -380,9 +398,10 @@
 <li><p>zero or more keyword/value pairs may be appended</p></li>
 <li><p>keyword = <em>parallel</em> or <em>perp</em> or <em>end</em></p></li>
 </ul>
-<pre class="literal-block"><em>parallel</em> value = <em>neigh</em> or <em>ideal</em>
+<pre class="literal-block"><em>parallel</em> value = <em>neigh</em> or <em>ideal</em> or <em>equal</em>
   <em>neigh</em> = parallel nudging force based on distance to neighbor replicas (Kspring = force/distance units)
   <em>ideal</em> = parallel nudging force based on interpolated ideal position (Kspring = force units)
+  <em>equal</em> = parallel nudging force based on interpolated ideal position before climbing, then interpolated ideal energy whilst climbing (Kspring = force units)
 <em>perp</em> value = <em>Kspring2</em>
   <em>Kspring2</em> = spring constant for perpendicular nudging force (force/distance units)
 <em>end</em> values = estyle Kspring3
@@ -394,16 +413,16 @@
   <em>Kspring3</em> = spring constant for target energy term (1/distance units)</pre>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">active</span><span class="w"> </span><span class="n">neb</span><span class="w"> </span><span class="m">10.0</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">neb</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">perp</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="n">last</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">neb</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">perp</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="n">first</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="n">last</span><span class="w"> </span><span class="m">1.0</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">neb</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">parallel</span><span class="w"> </span><span class="n">ideal</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="n">last</span><span class="o">/</span><span class="n">efirst</span><span class="w"> </span><span class="m">1</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">active</span><span class="w"> </span><span class="n">neb</span><span class="w"> </span><span class="m">10.0</span>
+<span class="k">fix </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">neb</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">perp</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="n">last</span>
+<span class="k">fix </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">neb</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">perp</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="n">first</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="n">last</span><span class="w"> </span><span class="m">1.0</span>
+<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">neb</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">parallel</span><span class="w"> </span><span class="n">ideal</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="n">last</span><span class="o">/</span><span class="n">efirst</span><span class="w"> </span><span class="m">1</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <p>Add nudging forces to atoms in the group for a multi-replica
 simulation run via the <a class="reference internal" href="neb.html"><span class="doc">neb</span></a> command to perform a nudged
 elastic band (NEB) calculation for finding the transition state.
@@ -418,53 +437,74 @@ replica having the highest energy relaxes toward the saddle point
 (i.e. the point of highest energy along the MEP), and a second
 relaxation is performed.</p>
 <p>A key purpose of the nudging forces is to keep the replicas equally
-spaced.  During the NEB calculation, the 3N-length vector of
-interatomic force Fi = -Grad(V) for each replica I is altered.  For
-all intermediate replicas (i.e. for 1 &lt; I &lt; N, except the climbing
-replica) the force vector becomes:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Fi = -Grad(V) + (Grad(V) dot T&#39;) T&#39; + Fnudge_parallel + Fnudge_perp
-</pre></div>
-</div>
-<p>T’ is the unit “tangent” vector for replica I and is a function of Ri,
-Ri-1, Ri+1, and the potential energy of the 3 replicas; it points
-roughly in the direction of (Ri+i - Ri-1); see the
-<a class="reference internal" href="#henkelman1"><span class="std std-ref">(Henkelman1)</span></a> paper for details.  Ri are the atomic
-coordinates of replica I; Ri-1 and Ri+1 are the coordinates of its
-neighbor replicas.  The term (Grad(V) dot T’) is used to remove the
-component of the gradient parallel to the path which would tend to
-distribute the replica unevenly along the path.  Fnudge_parallel is an
-artificial nudging force which is applied only in the tangent
-direction and which maintains the equal spacing between replicas (see
-below for more information).  Fnudge_perp is an optional artificial
-spring which is applied in a direction perpendicular to the tangent
-direction and which prevent the paths from forming acute kinks (see
-below for more information).</p>
-<p>In the second stage of the NEB calculation, the interatomic force Fi
+spaced.  During the NEB calculation, the <span class="math notranslate nohighlight">\(3N\)</span>-length vector of
+interatomic force <span class="math notranslate nohighlight">\(F_i = -\nabla V\)</span> for each replica <em>i</em> is
+altered.  For all intermediate replicas (i.e. for <span class="math notranslate nohighlight">\(1 &lt; i &lt; N\)</span>,
+except the climbing replica) the force vector becomes:</p>
+<div class="math notranslate nohighlight">
+\[F_i = -\nabla V + (\nabla V \cdot T') T' + F_\parallel + F_\perp\]</div>
+<p>T’ is the unit “tangent” vector for replica <em>i</em> and is a function of
+<span class="math notranslate nohighlight">\(R_i, R_{i-1}, R_{i+1}\)</span>, and the potential energy of the 3
+replicas; it points roughly in the direction of <span class="math notranslate nohighlight">\(R_{i+i} -
+R_{i-1}\)</span>; see the <a class="reference internal" href="#henkelman1"><span class="std std-ref">(Henkelman1)</span></a> paper for details.
+<span class="math notranslate nohighlight">\(R_i\)</span> are the atomic coordinates of replica <em>i</em>; <span class="math notranslate nohighlight">\(R_{i-1}\)</span>
+and <span class="math notranslate nohighlight">\(R_{i+1}\)</span> are the coordinates of its neighbor replicas.  The
+term <span class="math notranslate nohighlight">\(\nabla V \cdot T'\)</span> is used to remove the component of the
+gradient parallel to the path which would tend to distribute the replica
+unevenly along the path.  <span class="math notranslate nohighlight">\(F_\parallel\)</span> is an artificial nudging
+force which is applied only in the tangent direction and which maintains
+the equal spacing between replicas (see below for more information).
+<span class="math notranslate nohighlight">\(F_\perp\)</span> is an optional artificial spring which is applied in a
+direction perpendicular to the tangent direction and which prevent the
+paths from forming acute kinks (see below for more information).</p>
+<p>In the second stage of the NEB calculation, the interatomic force <span class="math notranslate nohighlight">\(F_i\)</span>
 for the climbing replica (the replica of highest energy after the
 first stage) is changed to:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Fi = -Grad(V) + 2 (Grad(V) dot T&#39;) T&#39; + Fnudge_perp
-</pre></div>
-</div>
+<div class="math notranslate nohighlight">
+\[F_i = -\nabla V + 2 (\nabla V \cdot T') T' + F_\perp\]</div>
 <p>and the relaxation procedure is continued to a new converged MEP.</p>
 <hr class="docutils" />
 <p>The keyword <em>parallel</em> specifies how the parallel nudging force is
 computed.  With a value of <em>neigh</em>, the parallel nudging force is
 computed as in <a class="reference internal" href="#henkelman1"><span class="std std-ref">(Henkelman1)</span></a> by connecting each
 intermediate replica with the previous and the next image:</p>
-<pre class="literal-block">Fnudge_parallel = <em>Kspring</em> * (|Ri+1 - Ri| - |Ri - Ri-1|)</pre>
-<p>Note that in this case the specified <em>Kspring</em> is in force/distance
-units.</p>
+<div class="math notranslate nohighlight">
+\[F_\parallel = Kspring \cdot \left(\left|R_{i+1} - R_i\right| - \left|R_i - R_{i-1}\right|\right)\]</div>
+<p>Note that in this case the specified <em>Kspring</em> is in
+force/distance units.</p>
 <p>With a value of <em>ideal</em>, the spring force is computed as suggested in
 ref`(WeinanE) &lt;WeinanE&gt;`</p>
-<pre class="literal-block">Fnudge_parallel = -<em>Kspring</em> * (RD-RDideal) / (2 * meanDist)</pre>
-<p>where RD is the “reaction coordinate” see <a class="reference internal" href="neb.html"><span class="doc">neb</span></a> section, and
-RDideal is the ideal RD for which all the images are equally spaced.
-I.e. RDideal = (I-1)*meanDist when the climbing replica is off, where
-I is the replica number).  The meanDist is the average distance
-between replicas.  Note that in this case the specified <em>Kspring</em> is
-in force units.</p>
-<p>Note that the <em>ideal</em> form of nudging can often be more effective at
-keeping the replicas equally spaced.</p>
+<div class="math notranslate nohighlight">
+\[F_\parallel = -Kspring \cdot (RD - RD_{ideal}) / (2 \cdot meanDist)\]</div>
+<p>where <em>RD</em> is the “reaction coordinate” see <a class="reference internal" href="neb.html"><span class="doc">neb</span></a> section,
+and <span class="math notranslate nohighlight">\(RD_{ideal}\)</span> is the ideal <em>RD</em> for which all the images are
+equally spaced.  I.e. <span class="math notranslate nohighlight">\(RD_{ideal} = (i-1) \cdot meanDist\)</span> when the
+climbing replica is off, where <em>i</em> is the replica number).  The
+<em>meanDist</em> is the average distance between replicas.  Note that in this
+case the specified <em>Kspring</em> is in force units. When the climbing replica
+is on, <span class="math notranslate nohighlight">\(RD_{ideal}\)</span> and <span class="math notranslate nohighlight">\(meanDist\)</span> are calculated separately
+each side of the climbing image. Note that the <em>ideal</em> form of nudging
+can often be more effective at keeping the replicas equally spaced before
+climbing, then equally spaced either side of the climbing image whilst
+climbing.</p>
+<p>With a value of <em>equal</em> the spring force is computed as for <em>ideal</em>
+when the climbing replica is off, promoting equidistance. When the climbing
+replica is on, the spring force is computed to promote equidistant
+absolute differences in energy, rather than distance, each side of
+the climbing image:</p>
+<div class="math notranslate nohighlight">
+\[F_\parallel = -Kspring \cdot (ED - ED_{ideal}) / (2 \cdot meanEDist)\]</div>
+<p>where <em>ED</em> is the cumulative sum of absolute energy differences:</p>
+<div class="math notranslate nohighlight">
+\[ED = \sum_{i&lt;N} \left|E(R_{i+1}) - E(R_i)\right|,\]</div>
+<p><em>meanEdist</em> is the average absolute energy difference between
+replicas up to the climbing image or from the climbing image
+to the final image, for images before or after the climbing
+image respectively. <span class="math notranslate nohighlight">\(ED_{ideal}\)</span> is the corresponding
+cumulative sum of average absolute energy differences in
+each case, in close analogy to <em>ideal</em>. This form of nudging
+is to aid schemes which integrate forces along, or near to,
+NEB pathways such as <a class="reference internal" href="fix_pafi.html"><span class="doc">fix_pafi</span></a>.</p>
 <hr class="docutils" />
 <p>The keyword <em>perp</em> specifies if and how a perpendicular nudging force
 is computed.  It adds a spring force perpendicular to the path in
@@ -473,11 +513,13 @@ significantly improve the convergence of the NEB calculation when the
 resolution is poor.  I.e. when few replicas are used; see
 <a class="reference internal" href="#maras1"><span class="std std-ref">(Maras)</span></a> for details.</p>
 <p>The perpendicular spring force is given by</p>
-<pre class="literal-block">Fnudge_perp = <em>Kspring2</em> * F(Ri-1,Ri,Ri+1) (Ri+1 + Ri-1 - 2 Ri)</pre>
-<p>where <em>Kspring2</em> is the specified value.  F(Ri-1 Ri R+1) is a smooth
-scalar function of the angle Ri-1 Ri Ri+1.  It is equal to 0.0 when
-the path is straight and is equal to 1 when the angle Ri-1 Ri Ri+1 is
-acute.  F(Ri-1 Ri R+1) is defined in <a class="reference internal" href="#jonsson"><span class="std std-ref">(Jonsson)</span></a>.</p>
+<div class="math notranslate nohighlight">
+\[F_\perp = K_{spring2} \cdot F(R_{i-1},R_i,R_{i+1}) (R_{i+1} + R_{i-1} - 2 R_i)\]</div>
+<p>where <em>Kspring2</em> is the specified value.  <span class="math notranslate nohighlight">\(F(R_{i-1}, R_i,
+R_{i+1})\)</span> is a smooth scalar function of the angle <span class="math notranslate nohighlight">\(R_{i-1} R_i
+R_{i+1}\)</span>.  It is equal to 0.0 when the path is straight and is equal to
+1 when the angle <span class="math notranslate nohighlight">\(R_{i-1} R_i R_{i+1}\)</span> is acute.
+<span class="math notranslate nohighlight">\(F(R_{i-1}, R_i, R_{i+1})\)</span> is defined in <a class="reference internal" href="#jonsson"><span class="std std-ref">(Jonsson)</span></a>.</p>
 <p>If <em>Kspring2</em> is set to 0.0 (the default) then no perpendicular spring
 force is added.</p>
 <hr class="docutils" />
@@ -487,9 +529,11 @@ respective local minima.  By using the key word <em>end</em>, additional
 forces can be applied to the first and/or last replicas, to enable
 them to relax toward a MEP while constraining their energy E to the
 target energy ETarget.</p>
-<p>If ETarget&gt;E, the interatomic force Fi for the specified replica becomes:</p>
-<pre class="literal-block">Fi = -Grad(V) + (Grad(V) dot T' + (E-ETarget)*Kspring3) T',  <em>when</em> Grad(V) dot T' &lt; 0
-Fi = -Grad(V) + (Grad(V) dot T' + (ETarget- E)*Kspring3) T', <em>when</em> Grad(V) dot T' &gt; 0</pre>
+<p>If <span class="math notranslate nohighlight">\(E_{Target} &gt; E\)</span>, the interatomic force <span class="math notranslate nohighlight">\(F_i\)</span> for the
+specified replica becomes:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}F_i &amp; = -\nabla V + (\nabla V \cdot T' + (E - E_{Target}) \cdot K_{spring3}) T', \qquad  \textrm{when} \quad \nabla V \cdot T' &lt; 0 \\
+F_i &amp; = -\nabla V + (\nabla V \cdot T' + (E_{Target} - E) \cdot K_{spring3}) T', \qquad \textrm{when} \quad \nabla V  \cdot T' &gt; 0\end{split}\]</div>
 <p>The “spring” constant on the difference in energies is the specified
 <em>Kspring3</em> value.</p>
 <p>When <em>estyle</em> is specified as <em>first</em>, the force is applied to the
@@ -525,7 +569,7 @@ if it is stuck in a local minima which has a larger energy than the
 target energy.</p>
 </section>
 <section id="restart-fix-modify-output-run-start-stop-minimize-info">
-<h2>Restart, fix_modify, output, run start/stop, minimize info<a class="headerlink" href="#restart-fix-modify-output-run-start-stop-minimize-info" title="Permalink to this headline">¶</a></h2>
+<h2>Restart, fix_modify, output, run start/stop, minimize info<a class="headerlink" href="#restart-fix-modify-output-run-start-stop-minimize-info" title="Permalink to this heading"></a></h2>
 <p>No information about this fix is written to <a class="reference internal" href="restart.html"><span class="doc">binary restart files</span></a>.  None of the <a class="reference internal" href="fix_modify.html"><span class="doc">fix_modify</span></a> options
 are relevant to this fix.  No global or per-atom quantities are stored
 by this fix for access by various <a class="reference internal" href="Howto_output.html"><span class="doc">output commands</span></a>.
@@ -536,17 +580,17 @@ as invoked by the <a class="reference internal" href="minimize.html"><span class
 <a class="reference internal" href="neb.html"><span class="doc">neb</span></a> command.</p>
 </section>
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <p>This command can only be used if LAMMPS was built with the REPLICA
 package.  See the <a class="reference internal" href="Build_package.html"><span class="doc">Build package</span></a> doc
 page for more info.</p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="neb.html"><span class="doc">neb</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
 <p>The option defaults are parallel = neigh, perp = 0.0, ends is not
 specified (no inter-replica force on the end replicas).</p>
 <hr class="docutils" />
@@ -573,7 +617,7 @@ Comp Phys Comm, 205, 13-21 (2016).</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -582,7 +626,6 @@ Comp Phys Comm, 205, 13-21 (2016).</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

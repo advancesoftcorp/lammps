@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>fix rigid command &mdash; LAMMPS documentation</title>
@@ -10,18 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/fix_rigid.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -34,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -78,6 +81,9 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_adapt_fep.html">fix adapt/fep command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_addforce.html">fix addforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_addtorque.html">fix addtorque command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_alchemy.html">fix alchemy command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_amoeba_bitorsion.html">fix amoeba/bitorsion command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_amoeba_pitorsion.html">fix amoeba/pitorsion command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_append_atoms.html">fix append/atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_atc.html">fix atc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_atom_swap.html">fix atom/swap command</a></li>
@@ -85,8 +91,11 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_chunk.html">fix ave/chunk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_correlate.html">fix ave/correlate command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_correlate_long.html">fix ave/correlate/long command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_grid.html">fix ave/grid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_histo.html">fix ave/histo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_histo.html#fix-ave-histo-weight-command">fix ave/histo/weight command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_spatial.html">Fix ave/spatial command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_spatial_sphere.html">Fix ave/spatial command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_time.html">fix ave/time command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_aveforce.html">fix aveforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_balance.html">fix balance command</a></li>
@@ -116,10 +125,11 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_drude_transform.html#fix-drude-transform-inverse-command">fix drude/transform/inverse command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_dt_reset.html">fix dt/reset command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_efield.html">fix efield command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_efield.html#fix-efield-tip4p-command">fix efield/tip4p command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ehex.html">fix ehex command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html">fix electrode/conp command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html#fix-electrode-conq-command">fix electrode/conq command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html#fix-electrode-thermo-command">fix electrode/thermo command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html">fix electrode/conp command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html#fix-electrode-conq-command">fix electrode/conq command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html#fix-electrode-thermo-command">fix electrode/thermo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_electron_stopping.html">fix electron/stopping command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_electron_stopping.html#fix-electron-stopping-fit-command">fix electron/stopping/fit command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_enforce2d.html">fix enforce2d command</a></li>
@@ -139,6 +149,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_grem.html">fix grem command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_halt.html">fix halt command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_heat.html">fix heat command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_heat_flow.html">fix heat/flow command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_hyper_global.html">fix hyper/global command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_hyper_local.html">fix hyper/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_imd.html">fix imd command</a></li>
@@ -148,13 +159,13 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_drude.html">fix langevin/drude command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_eff.html">fix langevin/eff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_spin.html">fix langevin/spin command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_latte.html">fix latte command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_fluid.html">fix lb/fluid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_momentum.html">fix lb/momentum command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_viscous.html">fix lb/viscous command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lineforce.html">fix lineforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_manifoldforce.html">fix manifoldforce command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_mdi_aimd.html">fix mdi/aimd command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_mdi_qm.html">fix mdi/qm command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_mdi_qmmm.html">fix mdi/qmmm command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_meso_move.html">fix meso/move command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify.html">fix_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
@@ -215,8 +226,10 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_orient.html#fix-orient-bcc-command">fix orient/bcc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_orient_eco.html">fix orient/eco command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_pafi.html">fix pafi command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pair.html">fix pair command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_phonon.html">fix phonon command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html">fix pimd command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html">fix pimd/langevin command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html#fix-pimd-nvt-command">fix pimd/nvt command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_planeforce.html">fix planeforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_plumed.html">fix plumed command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_poems.html">fix poems command</a></li>
@@ -270,6 +283,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_saed_vtk.html">fix saed/vtk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_setforce.html">fix setforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_setforce.html#fix-setforce-spin-command">fix setforce/spin command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_sgcmc.html">fix sgcmc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shake.html">fix shake command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shake.html#fix-rattle-command">fix rattle command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shardlow.html">fix shardlow command</a></li>
@@ -313,7 +327,9 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-lj1043-command">fix wall/lj1043 command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-colloid-command">fix wall/colloid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-harmonic-command">fix wall/harmonic command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-lepton-command">fix wall/lepton command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-morse-command">fix wall/morse command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-table-command">fix wall/table command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_body_polygon.html">fix wall/body/polygon command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_body_polyhedron.html">fix wall/body/polyhedron command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_ees.html">fix wall/ees command</a></li>
@@ -334,6 +350,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -351,12 +368,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="fixes.html">Fixes</a> &raquo;</li>
-      <li>fix rigid command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="fixes.html">Fixes</a></li>
+      <li class="breadcrumb-item active">fix rigid command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="fix_rhok.html" class="btn btn-neutral float-left" title="fix rhok command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -367,44 +383,45 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><span class="target" id="index-3"></span><span class="target" id="index-4"></span><span class="target" id="index-5"></span><span class="target" id="index-6"></span><span class="target" id="index-7"></span><span class="target" id="index-8"></span><span class="target" id="index-9"></span><span class="target" id="index-10"></span><span class="target" id="index-11"></span><span class="target" id="index-12"></span><span class="target" id="index-13"></span><span class="target" id="index-14"></span><section id="fix-rigid-command">
-<span id="index-15"></span><h1>fix rigid command<a class="headerlink" href="#fix-rigid-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><span class="target" id="index-3"></span><span class="target" id="index-4"></span><span class="target" id="index-5"></span><span class="target" id="index-6"></span><span class="target" id="index-7"></span><span class="target" id="index-8"></span><span class="target" id="index-9"></span><span class="target" id="index-10"></span><span class="target" id="index-11"></span><span class="target" id="index-12"></span><span class="target" id="index-13"></span><span class="target" id="index-14"></span><section id="fix-rigid-command">
+<span id="index-15"></span><h1>fix rigid command<a class="headerlink" href="#fix-rigid-command" title="Permalink to this heading"></a></h1>
 <p>Accelerator Variants: <em>rigid/omp</em></p>
 </section>
 <section id="fix-rigid-nve-command">
-<h1>fix rigid/nve command<a class="headerlink" href="#fix-rigid-nve-command" title="Permalink to this headline">¶</a></h1>
+<h1>fix rigid/nve command<a class="headerlink" href="#fix-rigid-nve-command" title="Permalink to this heading"></a></h1>
 <p>Accelerator Variants: <em>rigid/nve/omp</em></p>
 </section>
 <section id="fix-rigid-nvt-command">
-<h1>fix rigid/nvt command<a class="headerlink" href="#fix-rigid-nvt-command" title="Permalink to this headline">¶</a></h1>
+<h1>fix rigid/nvt command<a class="headerlink" href="#fix-rigid-nvt-command" title="Permalink to this heading"></a></h1>
 <p>Accelerator Variants: <em>rigid/nvt/omp</em></p>
 </section>
 <section id="fix-rigid-npt-command">
-<h1>fix rigid/npt command<a class="headerlink" href="#fix-rigid-npt-command" title="Permalink to this headline">¶</a></h1>
+<h1>fix rigid/npt command<a class="headerlink" href="#fix-rigid-npt-command" title="Permalink to this heading"></a></h1>
 <p>Accelerator Variants: <em>rigid/npt/omp</em></p>
 </section>
 <section id="fix-rigid-nph-command">
-<h1>fix rigid/nph command<a class="headerlink" href="#fix-rigid-nph-command" title="Permalink to this headline">¶</a></h1>
+<h1>fix rigid/nph command<a class="headerlink" href="#fix-rigid-nph-command" title="Permalink to this heading"></a></h1>
 <p>Accelerator Variants: <em>rigid/nph/omp</em></p>
 </section>
 <section id="fix-rigid-small-command">
-<h1>fix rigid/small command<a class="headerlink" href="#fix-rigid-small-command" title="Permalink to this headline">¶</a></h1>
+<h1>fix rigid/small command<a class="headerlink" href="#fix-rigid-small-command" title="Permalink to this heading"></a></h1>
 <p>Accelerator Variants: <em>rigid/small/omp</em></p>
 </section>
 <section id="fix-rigid-nve-small-command">
-<h1>fix rigid/nve/small command<a class="headerlink" href="#fix-rigid-nve-small-command" title="Permalink to this headline">¶</a></h1>
+<h1>fix rigid/nve/small command<a class="headerlink" href="#fix-rigid-nve-small-command" title="Permalink to this heading"></a></h1>
 </section>
 <section id="fix-rigid-nvt-small-command">
-<h1>fix rigid/nvt/small command<a class="headerlink" href="#fix-rigid-nvt-small-command" title="Permalink to this headline">¶</a></h1>
+<h1>fix rigid/nvt/small command<a class="headerlink" href="#fix-rigid-nvt-small-command" title="Permalink to this heading"></a></h1>
 </section>
 <section id="fix-rigid-npt-small-command">
-<h1>fix rigid/npt/small command<a class="headerlink" href="#fix-rigid-npt-small-command" title="Permalink to this headline">¶</a></h1>
+<h1>fix rigid/npt/small command<a class="headerlink" href="#fix-rigid-npt-small-command" title="Permalink to this heading"></a></h1>
 </section>
 <section id="fix-rigid-nph-small-command">
-<h1>fix rigid/nph/small command<a class="headerlink" href="#fix-rigid-nph-small-command" title="Permalink to this headline">¶</a></h1>
+<h1>fix rigid/nph/small command<a class="headerlink" href="#fix-rigid-nph-small-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fix ID group-ID style bodystyle args keyword values ...
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">ID</span><span class="w"> </span><span class="nv nv-Identifier">group-ID</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="n">bodystyle</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">values</span><span class="w"> </span><span class="n">...</span>
 </pre></div>
 </div>
 <ul>
@@ -421,12 +438,12 @@
   groupID1, groupID2, ... = list of N group IDs</pre>
 </li>
 <li><p>zero or more keyword/value pairs may be appended</p></li>
-<li><p>keyword = <em>langevin</em> or <em>reinit</em> or <em>temp</em> or <em>iso</em> or <em>aniso</em> or <em>x</em> or <em>y</em> or <em>z</em> or <em>couple</em> or <em>tparam</em> or <em>pchain</em> or <em>dilate</em> or <em>force</em> or <em>torque</em> or <em>infile</em></p>
+<li><p>keyword = <em>langevin</em> or <em>reinit</em> or <em>temp</em> or <em>iso</em> or <em>aniso</em> or <em>x</em> or <em>y</em> or <em>z</em> or <em>couple</em> or <em>tparam</em> or <em>pchain</em> or <em>dilate</em> or <em>force</em> or <em>torque</em> or <em>infile</em> or <em>gravity</em></p>
 <pre class="literal-block"><em>langevin</em> values = Tstart Tstop Tperiod seed
   Tstart,Tstop = desired temperature at start/stop of run (temperature units)
   Tdamp = temperature damping parameter (time units)
   seed = random number seed to use for white noise (positive integer)
-<em>reinit</em> = <em>yes</em> or <em>no</em>
+<em>reinit</em> value = <em>yes</em> or <em>no</em>
 <em>temp</em> values = Tstart Tstop Tdamp
   Tstart,Tstop = desired temperature at start/stop of run (temperature units)
   Tdamp = temperature damping parameter (time units)
@@ -436,7 +453,7 @@
 <em>x</em> or <em>y</em> or <em>z</em> values = Pstart Pstop Pdamp
   Pstart,Pstop = external stress tensor component at start/end of run (pressure units)
   Pdamp = stress damping parameter (time units)
-<em>couple</em> = <em>none</em> or <em>xyz</em> or <em>xy</em> or <em>yz</em> or <em>xz</em>
+<em>couple</em> value = <em>none</em> or <em>xyz</em> or <em>xy</em> or <em>yz</em> or <em>xz</em>
 <em>tparam</em> values = Tchain Titer Torder
   Tchain = length of Nose/Hoover thermostat chain
   Titer = number of thermostat iterations performed
@@ -453,39 +470,39 @@
   xflag,yflag,zflag = off/on if component of center-of-mass torque is active
 <em>infile</em> filename
   filename = file with per-body values of mass, center-of-mass, moments of inertia
-<em>mol</em> value = template-ID
-  template-ID = ID of molecule template specified in a separate <a class="reference internal" href="molecule.html"><span class="doc">molecule</span></a> command</pre>
+<em>gravity</em> values = gravity-ID
+  gravity-ID = ID of fix gravity command to add gravitational forces</pre>
 </li>
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">clump</span><span class="w"> </span><span class="n">rigid</span><span class="w"> </span><span class="n">single</span><span class="w"> </span><span class="n">reinit</span><span class="w"> </span><span class="n">yes</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">clump</span><span class="w"> </span><span class="n">rigid</span><span class="o">/</span><span class="n">small</span><span class="w"> </span><span class="n">molecule</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">clump</span><span class="w"> </span><span class="n">rigid</span><span class="w"> </span><span class="n">single</span><span class="w"> </span><span class="n">force</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">off</span><span class="w"> </span><span class="n">off</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">langevin</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">428984</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">polychains</span><span class="w"> </span><span class="n">rigid</span><span class="o">/</span><span class="n">nvt</span><span class="w"> </span><span class="n">molecule</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">5.0</span><span class="w"> </span><span class="n">reinit</span><span class="w"> </span><span class="n">no</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">polychains</span><span class="w"> </span><span class="n">rigid</span><span class="w"> </span><span class="n">molecule</span><span class="w"> </span><span class="n">force</span><span class="w"> </span><span class="m">1</span><span class="o">*</span><span class="m">5</span><span class="w"> </span><span class="n">off</span><span class="w"> </span><span class="n">off</span><span class="w"> </span><span class="n">off</span><span class="w"> </span><span class="n">force</span><span class="w"> </span><span class="m">6</span><span class="o">*</span><span class="m">10</span><span class="w"> </span><span class="n">off</span><span class="w"> </span><span class="n">off</span><span class="w"> </span><span class="n">on</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">polychains</span><span class="w"> </span><span class="n">rigid</span><span class="o">/</span><span class="n">small</span><span class="w"> </span><span class="n">molecule</span><span class="w"> </span><span class="n">langevin</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">428984</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">fluid</span><span class="w"> </span><span class="n">rigid</span><span class="w"> </span><span class="k">group </span><span class="nv nv-Identifier">3</span><span class="w"> </span><span class="n">clump1</span><span class="w"> </span><span class="n">clump2</span><span class="w"> </span><span class="n">clump3</span><span class="w"> </span><span class="n">torque</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">off</span><span class="w"> </span><span class="n">off</span><span class="w"> </span><span class="n">off</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">rods</span><span class="w"> </span><span class="n">rigid</span><span class="o">/</span><span class="n">npt</span><span class="w"> </span><span class="n">molecule</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">300.0</span><span class="w"> </span><span class="m">300.0</span><span class="w"> </span><span class="m">100.0</span><span class="w"> </span><span class="n">iso</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">10.0</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">particles</span><span class="w"> </span><span class="n">rigid</span><span class="o">/</span><span class="n">npt</span><span class="w"> </span><span class="n">molecule</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">5.0</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">couple</span><span class="w"> </span><span class="n">xz</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">water</span><span class="w"> </span><span class="n">rigid</span><span class="o">/</span><span class="n">nph</span><span class="w"> </span><span class="n">molecule</span><span class="w"> </span><span class="n">iso</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">1.0</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">particles</span><span class="w"> </span><span class="n">rigid</span><span class="o">/</span><span class="n">npt</span><span class="o">/</span><span class="n">small</span><span class="w"> </span><span class="n">molecule</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">iso</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">1.0</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">clump</span><span class="w"> </span><span class="n">rigid</span><span class="w"> </span><span class="n">single</span><span class="w"> </span><span class="n">reinit</span><span class="w"> </span><span class="n">yes</span>
+<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">clump</span><span class="w"> </span><span class="n">rigid</span><span class="o">/</span><span class="n">small</span><span class="w"> </span><span class="n">molecule</span>
+<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">clump</span><span class="w"> </span><span class="n">rigid</span><span class="w"> </span><span class="n">single</span><span class="w"> </span><span class="n">force</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">off</span><span class="w"> </span><span class="n">off</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">langevin</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">428984</span>
+<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">polychains</span><span class="w"> </span><span class="n">rigid</span><span class="o">/</span><span class="n">nvt</span><span class="w"> </span><span class="n">molecule</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">5.0</span><span class="w"> </span><span class="n">reinit</span><span class="w"> </span><span class="n">no</span>
+<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">polychains</span><span class="w"> </span><span class="n">rigid</span><span class="w"> </span><span class="n">molecule</span><span class="w"> </span><span class="n">force</span><span class="w"> </span><span class="m">1</span><span class="o">*</span><span class="m">5</span><span class="w"> </span><span class="n">off</span><span class="w"> </span><span class="n">off</span><span class="w"> </span><span class="n">off</span><span class="w"> </span><span class="n">force</span><span class="w"> </span><span class="m">6</span><span class="o">*</span><span class="m">10</span><span class="w"> </span><span class="n">off</span><span class="w"> </span><span class="n">off</span><span class="w"> </span><span class="n">on</span>
+<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">polychains</span><span class="w"> </span><span class="n">rigid</span><span class="o">/</span><span class="n">small</span><span class="w"> </span><span class="n">molecule</span><span class="w"> </span><span class="n">langevin</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">428984</span>
+<span class="k">fix </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">fluid</span><span class="w"> </span><span class="n">rigid</span><span class="w"> </span><span class="k">group </span><span class="nv nv-Identifier">3</span><span class="w"> </span><span class="n">clump1</span><span class="w"> </span><span class="n">clump2</span><span class="w"> </span><span class="n">clump3</span><span class="w"> </span><span class="n">torque</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">off</span><span class="w"> </span><span class="n">off</span><span class="w"> </span><span class="n">off</span>
+<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">rods</span><span class="w"> </span><span class="n">rigid</span><span class="o">/</span><span class="n">npt</span><span class="w"> </span><span class="n">molecule</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">300.0</span><span class="w"> </span><span class="m">300.0</span><span class="w"> </span><span class="m">100.0</span><span class="w"> </span><span class="n">iso</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">10.0</span>
+<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">particles</span><span class="w"> </span><span class="n">rigid</span><span class="o">/</span><span class="n">npt</span><span class="w"> </span><span class="n">molecule</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">5.0</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">couple</span><span class="w"> </span><span class="n">xz</span>
+<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">water</span><span class="w"> </span><span class="n">rigid</span><span class="o">/</span><span class="n">nph</span><span class="w"> </span><span class="n">molecule</span><span class="w"> </span><span class="n">iso</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">1.0</span>
+<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">particles</span><span class="w"> </span><span class="n">rigid</span><span class="o">/</span><span class="n">npt</span><span class="o">/</span><span class="n">small</span><span class="w"> </span><span class="n">molecule</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">iso</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">1.0</span>
 
-<span class="k">variable </span><span class="nv nv-Identifier">bodyid</span><span class="w"> </span><span class="n">atom</span><span class="w"> </span><span class="m">1.0</span><span class="o">*</span><span class="n">gmask</span><span class="nv">(clump1)</span><span class="o">+</span><span class="m">2.0</span><span class="o">*</span><span class="n">gmask</span><span class="nv">(clump2)</span><span class="o">+</span><span class="m">3.0</span><span class="o">*</span><span class="n">gmask</span><span class="nv">(clump3)</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">clump</span><span class="w"> </span><span class="n">rigid</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">v_bodyid</span><span class="w"></span>
+<span class="k">variable </span><span class="nv nv-Identifier">bodyid</span><span class="w"> </span><span class="n">atom</span><span class="w"> </span><span class="m">1.0</span><span class="o">*</span><span class="n">gmask</span><span class="nv">(clump1)</span><span class="o">+</span><span class="m">2.0</span><span class="o">*</span><span class="n">gmask</span><span class="nv">(clump2)</span><span class="o">+</span><span class="m">3.0</span><span class="o">*</span><span class="n">gmask</span><span class="nv">(clump3)</span>
+<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">clump</span><span class="w"> </span><span class="n">rigid</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">v_bodyid</span>
 
-<span class="k">variable </span><span class="nv nv-Identifier">bodyid</span><span class="w"> </span><span class="n">atomfile</span><span class="w"> </span><span class="n">bodies.txt</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">clump</span><span class="w"> </span><span class="n">rigid</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">v_bodyid</span><span class="w"></span>
+<span class="k">variable </span><span class="nv nv-Identifier">bodyid</span><span class="w"> </span><span class="n">atomfile</span><span class="w"> </span><span class="n">bodies.txt</span>
+<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">clump</span><span class="w"> </span><span class="n">rigid</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">v_bodyid</span>
 
-<span class="k">fix </span><span class="nv nv-Identifier">0</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">property</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">i_bodyid</span><span class="w"></span>
-<span class="k">read_restart</span><span class="w"> </span><span class="n">data.rigid</span><span class="w"> </span><span class="k">fix </span><span class="nv nv-Identifier">0</span><span class="w"> </span><span class="nv nv-Identifier">NULL</span><span class="w"> </span><span class="n">Bodies</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">clump</span><span class="w"> </span><span class="n">rigid</span><span class="o">/</span><span class="n">small</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">i_bodyid</span><span class="w"></span>
+<span class="k">fix </span><span class="nv nv-Identifier">0</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">property</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">i_bodyid</span>
+<span class="k">read_restart</span><span class="w"> </span><span class="n">data.rigid</span><span class="w"> </span><span class="k">fix </span><span class="nv nv-Identifier">0</span><span class="w"> </span><span class="nv nv-Identifier">NULL</span><span class="w"> </span><span class="n">Bodies</span>
+<span class="k">fix </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">clump</span><span class="w"> </span><span class="n">rigid</span><span class="o">/</span><span class="n">small</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">i_bodyid</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <p>Treat one or more sets of atoms as independent rigid bodies.  This
 means that each timestep the total force and torque on each rigid body
 is computed as the sum of the forces and torques on its constituent
@@ -635,7 +652,7 @@ to be part of rigid bodies.</p>
 <p class="admonition-title">Note</p>
 <p>To compute the initial center-of-mass position and other
 properties of each rigid body, the image flags for each atom in the
-body are used to “unwrap” the atom coordinates.  Thus you must insure
+body are used to “unwrap” the atom coordinates.  Thus you must ensure
 that these image flags are consistent so that the unwrapping creates a
 valid rigid body (one where the atoms are close together),
 particularly if the atoms in a single rigid body straddle a periodic
@@ -655,7 +672,7 @@ This may be useful if you wish a body to rotate but not translate, or
 vice versa, or if you wish it to rotate or translate continuously
 unaffected by interactions with other particles.  Note that if you
 expect a rigid body not to move or rotate by using these keywords, you
-must insure its initial center-of-mass translational or angular
+must ensure its initial center-of-mass translational or angular
 velocity is 0.0.  Otherwise the initial translational or angular
 momentum the body has will persist.</p>
 <p>An xflag, yflag, or zflag set to <em>off</em> means turn off the component of
@@ -895,10 +912,11 @@ such attributes: the total mass of the rigid body, its center-of-mass
 position, its 6 moments of inertia, its center-of-mass velocity, and
 the 3 image flags of the center-of-mass position.  For rigid bodies
 consisting of point particles or non-overlapping finite-size
-particles, LAMMPS can compute these values accurately.  However, for
-rigid bodies consisting of finite-size particles which overlap each
-other, LAMMPS will ignore the overlaps when computing these 4
-attributes.  The amount of error this induces depends on the amount of
+particles, LAMMPS can compute these values accurately.</p>
+<p>However, for rigid bodies consisting of finite-size particles which
+overlap each other, LAMMPS will ignore the overlaps when computing
+these 4 attributes, which means the dynamics of the bodies will be
+incorrect.  The amount of error this induces depends on the amount of
 overlap.  To avoid this issue, the values can be pre-computed
 (e.g. using Monte Carlo integration).</p>
 <p>The format of the file is as follows.  Note that the file does not
@@ -954,6 +972,23 @@ using an <em>infile</em> keyword and the appropriate filename.  Note that the
 auxiliary file will contain one line for every rigid body, even if the
 original file only listed a subset of the rigid bodies.</p>
 </div>
+<p>If the system has rigid bodies with finite-size overlapping particles
+and the model uses the <a class="reference internal" href="fix_gravity.html"><span class="doc">fix gravity</span></a> command to
+apply a gravitational force to the rigid bodies, then the <em>gravity</em>
+keyword should be used in the following manner.</p>
+<p>First, the group specified for the <a class="reference internal" href="fix_gravity.html"><span class="doc">fix gravity</span></a>
+command should not include any atoms in rigid bodies which have
+overlapping particles.  It can be empty (see the <a class="reference internal" href="group.html"><span class="doc">group empty</span></a> command) or only contain single particles not in rigid
+bodies, e.g. background particles.</p>
+<p>Second, the <em>infile</em> keyword should be used to specify the total mass
+and other properties of the rigid bodies with overlaps, so that their
+dynamics will be modeled correctly, as explained above.</p>
+<p>Third, the <em>gravity</em> keyword should be used the with the ID of the
+<a class="reference internal" href="fix_gravity.html"><span class="doc">fix gravity</span></a> command as its argument.  The rigid
+fixes will access the gravity fix to extract the current direction of
+the gravity vector at each timestep (which can be static or dynamic).
+A gravity force will then be applied to each rigid body at its
+center-of-mass position using its total mass.</p>
 <hr class="docutils" />
 <p>If you use a <a class="reference internal" href="compute.html"><span class="doc">temperature compute</span></a> with a group that
 includes particles in rigid bodies, the degrees-of-freedom removed by
@@ -974,48 +1009,52 @@ not do this automatically.</p>
 <p>The rigid body contribution to the pressure of the system (virial) is
 also accounted for by this fix.</p>
 <hr class="docutils" />
-<p>If your simulation is a hybrid model with a mixture of rigid bodies
-and non-rigid particles (e.g. solvent) there are several ways these
-rigid fixes can be used in tandem with <a class="reference internal" href="fix_nve.html"><span class="doc">fix nve</span></a>, <a class="reference internal" href="fix_nh.html"><span class="doc">fix nvt</span></a>, <a class="reference internal" href="fix_nh.html"><span class="doc">fix npt</span></a>, and <a class="reference internal" href="fix_nh.html"><span class="doc">fix nph</span></a>.</p>
+<p>If your simulation is a hybrid model with a mixture of rigid bodies and
+non-rigid particles (e.g. solvent) there are several ways these rigid
+fixes can be used in tandem with <a class="reference internal" href="fix_nve.html"><span class="doc">fix nve</span></a>, <a class="reference internal" href="fix_nh.html"><span class="doc">fix nvt</span></a>, <a class="reference internal" href="fix_nh.html"><span class="doc">fix npt</span></a>, and <a class="reference internal" href="fix_nh.html"><span class="doc">fix nph</span></a>.</p>
 <p>If you wish to perform NVE dynamics (no thermostatting or
 barostatting), use one of 4 NVE rigid styles to integrate the rigid
 bodies, and <a class="reference internal" href="fix_nve.html"><span class="doc">fix nve</span></a> to integrate the non-rigid
 particles.</p>
 <p>If you wish to perform NVT dynamics (thermostatting, but no
 barostatting), you can use one of the 2 NVT rigid styles for the rigid
-bodies, and any thermostatting fix for the non-rigid particles (<a class="reference internal" href="fix_nh.html"><span class="doc">fix nvt</span></a>, <a class="reference internal" href="fix_langevin.html"><span class="doc">fix langevin</span></a>, <a class="reference internal" href="fix_temp_berendsen.html"><span class="doc">fix temp/berendsen</span></a>).  You can also use one of the
-4 NVE rigid styles for the rigid bodies and thermostat them using <a class="reference internal" href="fix_langevin.html"><span class="doc">fix langevin</span></a> on the group that contains all the
-particles in the rigid bodies.  The net force added by <a class="reference internal" href="fix_langevin.html"><span class="doc">fix langevin</span></a> to each rigid body effectively thermostats
-its translational center-of-mass motion.  Not sure how well it does at
+bodies, and any thermostatting fix for the non-rigid particles
+(<a class="reference internal" href="fix_nh.html"><span class="doc">fix nvt</span></a>, <a class="reference internal" href="fix_langevin.html"><span class="doc">fix langevin</span></a>, <a class="reference internal" href="fix_temp_berendsen.html"><span class="doc">fix
+temp/berendsen</span></a>).  You can also use one of the 4
+NVE rigid styles for the rigid bodies and thermostat them using
+<a class="reference internal" href="fix_langevin.html"><span class="doc">fix langevin</span></a> on the group that contains all the
+particles in the rigid bodies.  The net force added by <a class="reference internal" href="fix_langevin.html"><span class="doc">fix
+langevin</span></a> to each rigid body effectively thermostats its
+translational center-of-mass motion.  Not sure how well it does at
 thermostatting its rotational motion.</p>
-<p>If you with to perform NPT or NPH dynamics (barostatting), you cannot
+<p>If you wish to perform NPT or NPH dynamics (barostatting), you cannot
 use both <a class="reference internal" href="fix_nh.html"><span class="doc">fix npt</span></a> and the NPT or NPH rigid styles.  This
 is because there can only be one fix which monitors the global
 pressure and changes the simulation box dimensions.  So you have 3
 choices:</p>
-<ul class="simple">
+<ol class="arabic simple">
 <li><p>Use one of the 4 NPT or NPH styles for the rigid bodies.  Use the
 <em>dilate</em> all option so that it will dilate the positions of the
-non-rigid particles as well.  Use <a class="reference internal" href="fix_nh.html"><span class="doc">fix nvt</span></a> (or any other
-thermostat) for the non-rigid particles.</p></li>
+non-rigid particles as well.  Use <a class="reference internal" href="fix_nh.html"><span class="doc">fix nvt</span></a> (or any
+other thermostat) for the non-rigid particles.</p></li>
 <li><p>Use <a class="reference internal" href="fix_nh.html"><span class="doc">fix npt</span></a> for the group of non-rigid particles.  Use
 the <em>dilate</em> all option so that it will dilate the center-of-mass
 positions of the rigid bodies as well.  Use one of the 4 NVE or 2 NVT
 rigid styles for the rigid bodies.</p></li>
 <li><p>Use <a class="reference internal" href="fix_press_berendsen.html"><span class="doc">fix press/berendsen</span></a> to compute the
 pressure and change the box dimensions.  Use one of the 4 NVE or 2 NVT
-rigid styles for the rigid bodies.  Use <a class="reference internal" href="fix_nh.html"><span class="doc">fix nvt</span></a> (or any
-other thermostat) for the non-rigid particles.</p></li>
-</ul>
+rigid styles for the rigid bodies.  Use <a class="reference internal" href="fix_nh.html"><span class="doc">fix nvt</span></a> (or
+any other thermostat) for the non-rigid particles.</p></li>
+</ol>
 <p>In all case, the rigid bodies and non-rigid particles both contribute
 to the global pressure and the box is scaled the same by any of the
 barostatting fixes.</p>
-<p>You could even use the second and third options for a non-hybrid simulation
-consisting of only rigid bodies, assuming you give <a class="reference internal" href="fix_nh.html"><span class="doc">fix npt</span></a> an empty group, though it’s an odd thing to do.  The
-barostatting fixes (<a class="reference internal" href="fix_nh.html"><span class="doc">fix npt</span></a> and <a class="reference internal" href="fix_press_berendsen.html"><span class="doc">fix press/berensen</span></a>) will monitor the pressure
-and change the box dimensions, but not time integrate any particles.
-The integration of the rigid bodies will be performed by fix
-rigid/nvt.</p>
+<p>You could even use the second and third options for a non-hybrid
+simulation consisting of only rigid bodies, assuming you give <a class="reference internal" href="fix_nh.html"><span class="doc">fix
+npt</span></a> an empty group, though it’s an odd thing to do.  The
+barostatting fixes (<a class="reference internal" href="fix_nh.html"><span class="doc">fix npt</span></a> and <a class="reference internal" href="fix_press_berendsen.html"><span class="doc">fix press/berensen</span></a>) will monitor the pressure and change the box
+dimensions, but not time integrate any particles.  The integration of
+the rigid bodies will be performed by fix rigid/nvt.</p>
 <hr class="docutils" />
 <p>Styles with a <em>gpu</em>, <em>intel</em>, <em>kk</em>, <em>omp</em>, or <em>opt</em> suffix are
 functionally the same as the corresponding style without the suffix.
@@ -1024,7 +1063,7 @@ hardware, as discussed on the <a class="reference internal" href="Speed_packages
 page.  The accelerated styles take the same arguments and should
 produce the same results, except for round-off and precision issues.</p>
 <p>These accelerated styles are part of the GPU, INTEL, KOKKOS,
-OPENMP and OPT packages, respectively.  They are only enabled if
+OPENMP, and OPT packages, respectively.  They are only enabled if
 LAMMPS was built with those packages.  See the <a class="reference internal" href="Build_package.html"><span class="doc">Build package</span></a> page for more info.</p>
 <p>You can specify the accelerated styles explicitly in your input script
 by including their suffix, or you can use the <a class="reference internal" href="Run_options.html"><span class="doc">-suffix command-line switch</span></a> when you invoke LAMMPS, or you can use the
@@ -1034,7 +1073,7 @@ instructions on how to use the accelerated styles effectively.</p>
 </section>
 <hr class="docutils" />
 <section id="restart-fix-modify-output-run-start-stop-minimize-info">
-<h2>Restart, fix_modify, output, run start/stop, minimize info<a class="headerlink" href="#restart-fix-modify-output-run-start-stop-minimize-info" title="Permalink to this headline">¶</a></h2>
+<h2>Restart, fix_modify, output, run start/stop, minimize info<a class="headerlink" href="#restart-fix-modify-output-run-start-stop-minimize-info" title="Permalink to this heading"></a></h2>
 <p>No information about the 4 NVE rigid styles is written to <a class="reference internal" href="restart.html"><span class="doc">binary
 restart files</span></a>.  The exception is if the <em>infile</em> or <em>mol</em>
 keyword is used, in which case an auxiliary file is written out with
@@ -1116,7 +1155,7 @@ of the <a class="reference internal" href="run.html"><span class="doc">run</span
 </section>
 <hr class="docutils" />
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <p>These fixes are all part of the RIGID package.  It is only enabled if
 LAMMPS was built with that package.  See the <a class="reference internal" href="Build_package.html"><span class="doc">Build package</span></a> page for more info.</p>
 <p>Assigning a temperature via the <a class="reference internal" href="velocity.html"><span class="doc">velocity create</span></a>
@@ -1128,22 +1167,22 @@ possible to compute the target temperature correctly.  Second, the
 assigned velocities may be partially canceled when constraints are
 first enforced, leading to a different temperature than desired.  A
 workaround for this is to perform a <a class="reference internal" href="run.html"><span class="doc">run 0</span></a> command, which
-insures all DOFs are accounted for properly, and then rescale the
+ensures all DOFs are accounted for properly, and then rescale the
 temperature to the desired value before performing a simulation.  For
 example:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">velocity</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">300.0</span><span class="w"> </span><span class="m">12345</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">velocity </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">300.0</span><span class="w"> </span><span class="m">12345</span>
 <span class="k">run</span><span class="w"> </span><span class="m">0</span><span class="w">                             </span><span class="c"># temperature may not be 300K</span>
-<span class="k">velocity</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="m">300.0</span><span class="w">          </span><span class="c"># now it should be</span>
+<span class="k">velocity </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="m">300.0</span><span class="w">          </span><span class="c"># now it should be</span>
 </pre></div>
 </div>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="delete_bonds.html"><span class="doc">delete_bonds</span></a>, <a class="reference internal" href="neigh_modify.html"><span class="doc">neigh_modify</span></a>
 exclude, <a class="reference internal" href="fix_shake.html"><span class="doc">fix shake</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
 <p>The option defaults are force * on on on and torque * on on on,
 meaning all rigid bodies are acted on by center-of-mass force and
 torque.  Also Tchain = Pchain = 10, Titer = 1, Torder = 3, reinit = yes.</p>
@@ -1169,7 +1208,7 @@ J Chem Phys, 116, 8649 (2002).</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -1178,7 +1217,6 @@ J Chem Phys, 116, 8649 (2002).</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

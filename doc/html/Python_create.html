@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2.3.4. Creating or deleting a LAMMPS object &mdash; LAMMPS documentation</title>
@@ -10,18 +10,18 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Python_create.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/tabs.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/tabs.js?v=3030b3cb"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -34,14 +34,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -103,6 +107,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -120,13 +125,12 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Python_head.html"><span class="section-number">2. </span>Use Python with LAMMPS</a> &raquo;</li>
-          <li><a href="Python_run.html"><span class="section-number">2.3. </span>Run LAMMPS from Python</a> &raquo;</li>
-      <li><span class="section-number">2.3.4. </span>Creating or deleting a LAMMPS object</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Python_head.html"><span class="section-number">2. </span>Use Python with LAMMPS</a></li>
+          <li class="breadcrumb-item"><a href="Python_run.html"><span class="section-number">2.3. </span>Run LAMMPS from Python</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">2.3.4. </span>Creating or deleting a LAMMPS object</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="Python_launch.html" class="btn btn-neutral float-left" title="2.3.1. Running LAMMPS and Python in serial" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -137,8 +141,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="creating-or-deleting-a-lammps-object">
-<span id="python-create-lammps"></span><h1><span class="section-number">2.3.4. </span>Creating or deleting a LAMMPS object<a class="headerlink" href="#creating-or-deleting-a-lammps-object" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="creating-or-deleting-a-lammps-object">
+<span id="python-create-lammps"></span><h1><span class="section-number">2.3.4. </span>Creating or deleting a LAMMPS object<a class="headerlink" href="#creating-or-deleting-a-lammps-object" title="Permalink to this heading"></a></h1>
 <p>With the Python interface the creation of a <a class="reference internal" href="Classes_lammps.html#_CPPv4N9LAMMPS_NS6LAMMPSE" title="LAMMPS_NS::LAMMPS"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">LAMMPS</span></code></a> instance is included in the constructors for the
 <a class="reference internal" href="Python_module.html#lammps.lammps" title="lammps.lammps"><code class="xref py py-class docutils literal notranslate"><span class="pre">lammps</span></code></a>, <a class="reference internal" href="Python_module.html#lammps.PyLammps" title="lammps.PyLammps"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyLammps</span></code></a>,
 and <a class="reference internal" href="Python_module.html#lammps.IPyLammps" title="lammps.IPyLammps"><code class="xref py py-class docutils literal notranslate"><span class="pre">IPyLammps</span></code></a> classes.
@@ -194,7 +199,7 @@ along all arguments to the constructor of <a class="reference internal" href="Py
 </div>
 <p><a class="reference internal" href="Python_module.html#lammps.PyLammps" title="lammps.PyLammps"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyLammps</span></code></a> objects can also be created on top of an existing
 <a class="reference internal" href="Python_module.html#lammps.lammps" title="lammps.lammps"><code class="xref py py-class docutils literal notranslate"><span class="pre">lammps</span></code></a> object:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lammps</span> <span class="kn">import</span> <span class="n">lammps</span><span class="p">,</span> <span class="n">PyLammps</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lammps</span> <span class="kn">import</span> <span class="n">lammps</span><span class="p">,</span> <span class="n">PyLammps</span>
 <span class="o">...</span>
 <span class="c1"># create LAMMPS instance</span>
 <span class="n">lmp</span> <span class="o">=</span> <span class="n">lammps</span><span class="p">(</span><span class="n">cmdargs</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
@@ -226,7 +231,7 @@ along all arguments to the constructor of <a class="reference internal" href="Py
 </pre></div>
 </div>
 <p>You can also initialize IPyLammps on top of an existing <a class="reference internal" href="Python_module.html#module-lammps" title="lammps"><code class="xref py py-class docutils literal notranslate"><span class="pre">lammps</span></code></a> or <code class="xref py py-class docutils literal notranslate"><span class="pre">PyLammps</span></code> object:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lammps</span> <span class="kn">import</span> <span class="n">lammps</span><span class="p">,</span> <span class="n">IPyLammps</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lammps</span> <span class="kn">import</span> <span class="n">lammps</span><span class="p">,</span> <span class="n">IPyLammps</span>
 <span class="o">...</span>
 <span class="c1"># create LAMMPS instance</span>
 <span class="n">lmp</span> <span class="o">=</span> <span class="n">lammps</span><span class="p">(</span><span class="n">cmdargs</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
@@ -251,7 +256,7 @@ this will destruct the LAMMPS instance, but also finalized and release
 the MPI and/or Kokkos environment if enabled and active.</p>
 <p>Note that you can create multiple LAMMPS objects in your Python
 script, and coordinate and run multiple simulations, e.g.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lammps</span> <span class="kn">import</span> <span class="n">lammps</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lammps</span> <span class="kn">import</span> <span class="n">lammps</span>
 <span class="n">lmp1</span> <span class="o">=</span> <span class="n">lammps</span><span class="p">()</span>
 <span class="n">lmp2</span> <span class="o">=</span> <span class="n">lammps</span><span class="p">()</span>
 <span class="n">lmp1</span><span class="o">.</span><span class="n">file</span><span class="p">(</span><span class="s2">&quot;in.file1&quot;</span><span class="p">)</span>
@@ -271,7 +276,7 @@ script, and coordinate and run multiple simulations, e.g.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -280,7 +285,6 @@ script, and coordinate and run multiple simulations, e.g.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

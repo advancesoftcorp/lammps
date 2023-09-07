@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>6.1. Available Packages &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Packages_list.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -81,6 +85,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -98,12 +103,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Packages.html"><span class="section-number">6. </span>Optional packages</a> &raquo;</li>
-      <li><span class="section-number">6.1. </span>Available Packages</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Packages.html"><span class="section-number">6. </span>Optional packages</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">6.1. </span>Available Packages</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="Packages.html" class="btn btn-neutral float-left" title="6. Optional packages" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -114,17 +118,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="available-packages">
-<h1><span class="section-number">6.1. </span>Available Packages<a class="headerlink" href="#available-packages" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="available-packages">
+<h1><span class="section-number">6.1. </span>Available Packages<a class="headerlink" href="#available-packages" title="Permalink to this heading"></a></h1>
 <p>This is the list of packages included in LAMMPS.  The link for each
 package name gives more details.</p>
 <p>Packages are supported by either the LAMMPS developers or the
 contributing authors and written in a syntax and style consistent with
 the rest of LAMMPS.</p>
-<p>The “Example” column is a sub-directory in the examples directory of the
-distribution which has an input script that uses the package.
+<p>The “Examples” column is a subdirectory in the examples directory of the
+distribution which has one or more input scripts that use the package.
 E.g. “peptide” refers to the examples/peptide directory; PACKAGES/atc refers
-to the examples/PACKAGES/atc directory.  The “Library” column indicates
+to the examples/PACKAGES/atc directory.  The “Lib” column indicates
 whether an extra library is needed to build and use the package:</p>
 <ul class="simple">
 <li><p>no  = no library</p></li>
@@ -132,13 +137,13 @@ whether an extra library is needed to build and use the package:</p>
 <li><p>int = internal library: provided with LAMMPS, but you may need to build it</p></li>
 <li><p>ext = external library: you will need to download and install it on your machine</p></li>
 </ul>
-<table class="colwidths-auto docutils align-default">
+<table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Package</p></th>
 <th class="head"><p>Description</p></th>
 <th class="head"><p>Doc page</p></th>
-<th class="head"><p>Example</p></th>
-<th class="head"><p>Library</p></th>
+<th class="head"><p>Examples</p></th>
+<th class="head"><p>Lib</p></th>
 </tr>
 </thead>
 <tbody>
@@ -148,316 +153,328 @@ whether an extra library is needed to build and use the package:</p>
 <td><p>PACKAGES/adios</p></td>
 <td><p>ext</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-asphere"><span class="std std-ref">ASPHERE</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-amoeba"><span class="std std-ref">AMOEBA</span></a></p></td>
+<td><p>AMOEBA and HIPPO force fields</p></td>
+<td><p><a class="reference internal" href="Howto_amoeba.html"><span class="doc">AMOEBA and HIPPO howto</span></a></p></td>
+<td><p>amoeba</p></td>
+<td><p>no</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-asphere"><span class="std std-ref">ASPHERE</span></a></p></td>
 <td><p>aspherical particle models</p></td>
 <td><p><a class="reference internal" href="Howto_spherical.html"><span class="doc">Howto spherical</span></a></p></td>
 <td><p>ellipse</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-atc"><span class="std std-ref">ATC</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-atc"><span class="std std-ref">ATC</span></a></p></td>
 <td><p>Atom-to-Continuum coupling</p></td>
 <td><p><a class="reference internal" href="fix_atc.html"><span class="doc">fix atc</span></a></p></td>
 <td><p>PACKAGES/atc</p></td>
 <td><p>int</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-awpmd"><span class="std std-ref">AWPMD</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-awpmd"><span class="std std-ref">AWPMD</span></a></p></td>
 <td><p>wave packet MD</p></td>
 <td><p><a class="reference internal" href="pair_awpmd.html"><span class="doc">pair_style awpmd/cut</span></a></p></td>
 <td><p>PACKAGES/awpmd</p></td>
 <td><p>int</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-bocs"><span class="std std-ref">BOCS</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-bocs"><span class="std std-ref">BOCS</span></a></p></td>
 <td><p>BOCS bottom up coarse graining</p></td>
 <td><p><a class="reference internal" href="fix_bocs.html"><span class="doc">fix bocs</span></a></p></td>
 <td><p>PACKAGES/bocs</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-body"><span class="std std-ref">BODY</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-body"><span class="std std-ref">BODY</span></a></p></td>
 <td><p>body-style particles</p></td>
 <td><p><a class="reference internal" href="Howto_body.html"><span class="doc">Howto body</span></a></p></td>
 <td><p>body</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-bpm"><span class="std std-ref">BPM</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-bpm"><span class="std std-ref">BPM</span></a></p></td>
 <td><p>bonded particle models</p></td>
 <td><p><a class="reference internal" href="Howto_bpm.html"><span class="doc">Howto bpm</span></a></p></td>
 <td><p>bpm</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-brownian"><span class="std std-ref">BROWNIAN</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-brownian"><span class="std std-ref">BROWNIAN</span></a></p></td>
 <td><p>Brownian dynamics, self-propelled particles</p></td>
 <td><p><a class="reference internal" href="fix_brownian.html"><span class="doc">fix brownian</span></a>, <a class="reference internal" href="fix_propel_self.html"><span class="doc">fix propel/self</span></a></p></td>
 <td><p>PACKAGES/brownian</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-cg-dna"><span class="std std-ref">CG-DNA</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-cg-dna"><span class="std std-ref">CG-DNA</span></a></p></td>
 <td><p>coarse-grained DNA force fields</p></td>
 <td><p>src/CG-DNA/README</p></td>
 <td><p>PACKAGES/cgdna</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-cg-sdk"><span class="std std-ref">CG-SDK</span></a></p></td>
-<td><p>SDK coarse-graining model</p></td>
-<td><p><a class="reference internal" href="pair_sdk.html"><span class="doc">pair_style lj/sdk</span></a></p></td>
-<td><p>PACKAGES/cgsdk</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-cg-spica"><span class="std std-ref">CG-SPICA</span></a></p></td>
+<td><p>SPICA (SDK) coarse-graining model</p></td>
+<td><p><a class="reference internal" href="pair_spica.html"><span class="doc">pair_style lj/spica</span></a></p></td>
+<td><p>PACKAGES/cgspica</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-class2"><span class="std std-ref">CLASS2</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-class2"><span class="std std-ref">CLASS2</span></a></p></td>
 <td><p>class 2 force fields</p></td>
 <td><p><a class="reference internal" href="pair_class2.html"><span class="doc">pair_style lj/class2</span></a></p></td>
 <td><p>n/a</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-colloid"><span class="std std-ref">COLLOID</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-colloid"><span class="std std-ref">COLLOID</span></a></p></td>
 <td><p>colloidal particles</p></td>
 <td><p><a class="reference internal" href="atom_style.html"><span class="doc">atom_style colloid</span></a></p></td>
 <td><p>colloid</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-colvars"><span class="std std-ref">COLVARS</span></a></p></td>
-<td><p>collective variables library</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-colvars"><span class="std std-ref">COLVARS</span></a></p></td>
+<td><p><a class="reference external" href="https://colvars.github.io/">Colvars collective variables library</a></p></td>
 <td><p><a class="reference internal" href="fix_colvars.html"><span class="doc">fix colvars</span></a></p></td>
 <td><p>PACKAGES/colvars</p></td>
 <td><p>int</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-compress"><span class="std std-ref">COMPRESS</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-compress"><span class="std std-ref">COMPRESS</span></a></p></td>
 <td><p>I/O compression</p></td>
 <td><p><a class="reference internal" href="dump.html"><span class="doc">dump */gz</span></a></p></td>
 <td><p>n/a</p></td>
 <td><p>sys</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-coreshell"><span class="std std-ref">CORESHELL</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-coreshell"><span class="std std-ref">CORESHELL</span></a></p></td>
 <td><p>adiabatic core/shell model</p></td>
 <td><p><a class="reference internal" href="Howto_coreshell.html"><span class="doc">Howto coreshell</span></a></p></td>
 <td><p>coreshell</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-dielectric"><span class="std std-ref">DIELECTRIC</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-dielectric"><span class="std std-ref">DIELECTRIC</span></a></p></td>
 <td><p>dielectric boundary solvers and force styles</p></td>
 <td><p><a class="reference internal" href="compute_efield_atom.html"><span class="doc">compute efield/atom</span></a></p></td>
 <td><p>PACKAGES/dielectric</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-diffraction"><span class="std std-ref">DIFFRACTION</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-diffraction"><span class="std std-ref">DIFFRACTION</span></a></p></td>
 <td><p>virtual x-ray and electron diffraction</p></td>
 <td><p><a class="reference internal" href="compute_xrd.html"><span class="doc">compute xrd</span></a></p></td>
 <td><p>PACKAGES/diffraction</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-dipole"><span class="std std-ref">DIPOLE</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-dipole"><span class="std std-ref">DIPOLE</span></a></p></td>
 <td><p>point dipole particles</p></td>
 <td><p><a class="reference internal" href="pair_dipole.html"><span class="doc">pair_style lj/…/dipole</span></a></p></td>
 <td><p>dipole</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-dpd-basic"><span class="std std-ref">DPD-BASIC</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-dpd-basic"><span class="std std-ref">DPD-BASIC</span></a></p></td>
 <td><p>basic DPD models</p></td>
-<td><p><a class="reference internal" href="pair_dpd.html"><span class="doc">pair_styles dpd dpd/tstat</span></a> <a class="reference internal" href="pair_dpd_ext.html"><span class="doc">dpd/ext dpd/ext/tstat</span></a></p></td>
+<td><p><a class="reference internal" href="pair_dpd.html"><span class="doc">pair_styles dpd</span></a> <a class="reference internal" href="pair_dpd_ext.html"><span class="doc">dpd/ext</span></a></p></td>
 <td><p>PACKAGES/dpd-basic</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-dpd-meso"><span class="std std-ref">DPD-MESO</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-dpd-meso"><span class="std std-ref">DPD-MESO</span></a></p></td>
 <td><p>mesoscale DPD models</p></td>
 <td><p><a class="reference internal" href="pair_mesodpd.html"><span class="doc">pair_style edpd</span></a></p></td>
 <td><p>PACKAGES/dpd-meso</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-dpd-react"><span class="std std-ref">DPD-REACT</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-dpd-react"><span class="std std-ref">DPD-REACT</span></a></p></td>
 <td><p>reactive dissipative particle dynamics</p></td>
 <td><p>src/DPD-REACT/README</p></td>
 <td><p>PACKAGES/dpd-react</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-dpd-smooth"><span class="std std-ref">DPD-SMOOTH</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-dpd-smooth"><span class="std std-ref">DPD-SMOOTH</span></a></p></td>
 <td><p>smoothed dissipative particle dynamics</p></td>
 <td><p>src/DPD-SMOOTH/README</p></td>
 <td><p>PACKAGES/dpd-smooth</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-drude"><span class="std std-ref">DRUDE</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-drude"><span class="std std-ref">DRUDE</span></a></p></td>
 <td><p>Drude oscillators</p></td>
 <td><p><a class="reference internal" href="Howto_drude.html"><span class="doc">Howto drude</span></a></p></td>
 <td><p>PACKAGES/drude</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-eff"><span class="std std-ref">EFF</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-eff"><span class="std std-ref">EFF</span></a></p></td>
 <td><p>electron force field</p></td>
 <td><p><a class="reference internal" href="pair_eff.html"><span class="doc">pair_style eff/cut</span></a></p></td>
 <td><p>PACKAGES/eff</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-electrode"><span class="std std-ref">ELECTRODE</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-electrode"><span class="std std-ref">ELECTRODE</span></a></p></td>
 <td><p>electrode charges to match potential</p></td>
-<td><p><a class="reference internal" href="fix_electrode_conp.html"><span class="doc">fix electrode/conp</span></a></p></td>
+<td><p><a class="reference internal" href="fix_electrode.html"><span class="doc">fix electrode/conp</span></a></p></td>
 <td><p>PACKAGES/electrode</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-extra-compute"><span class="std std-ref">EXTRA-COMPUTE</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-extra-compute"><span class="std std-ref">EXTRA-COMPUTE</span></a></p></td>
 <td><p>additional compute styles</p></td>
 <td><p><a class="reference internal" href="compute.html"><span class="doc">compute</span></a></p></td>
 <td><p>n/a</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-extra-dump"><span class="std std-ref">EXTRA-DUMP</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-extra-dump"><span class="std std-ref">EXTRA-DUMP</span></a></p></td>
 <td><p>additional dump styles</p></td>
 <td><p><a class="reference internal" href="dump.html"><span class="doc">dump</span></a></p></td>
 <td><p>n/a</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-extra-fix"><span class="std std-ref">EXTRA-FIX</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-extra-fix"><span class="std std-ref">EXTRA-FIX</span></a></p></td>
 <td><p>additional fix styles</p></td>
 <td><p><a class="reference internal" href="fix.html"><span class="doc">fix</span></a></p></td>
 <td><p>n/a</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-extra-molecule"><span class="std std-ref">EXTRA-MOLECULE</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-extra-molecule"><span class="std std-ref">EXTRA-MOLECULE</span></a></p></td>
 <td><p>additional molecular styles</p></td>
 <td><p><a class="reference internal" href="Commands_bond.html"><span class="doc">molecular styles</span></a></p></td>
 <td><p>n/a</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-extra-pair"><span class="std std-ref">EXTRA-PAIR</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-extra-pair"><span class="std std-ref">EXTRA-PAIR</span></a></p></td>
 <td><p>additional pair styles</p></td>
 <td><p><a class="reference internal" href="pair_style.html"><span class="doc">pair_style</span></a></p></td>
 <td><p>n/a</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-fep"><span class="std std-ref">FEP</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-fep"><span class="std std-ref">FEP</span></a></p></td>
 <td><p>free energy perturbation</p></td>
 <td><p><a class="reference internal" href="compute_fep.html"><span class="doc">compute fep</span></a></p></td>
 <td><p>PACKAGES/fep</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-gpu"><span class="std std-ref">GPU</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-gpu"><span class="std std-ref">GPU</span></a></p></td>
 <td><p>GPU-enabled styles</p></td>
 <td><p><a class="reference internal" href="Speed_gpu.html"><span class="doc">Section gpu</span></a></p></td>
 <td><p><a class="reference external" href="https://www.lammps.org/bench.html">Benchmarks</a></p></td>
 <td><p>int</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-granular"><span class="std std-ref">GRANULAR</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-granular"><span class="std std-ref">GRANULAR</span></a></p></td>
 <td><p>granular systems</p></td>
 <td><p><a class="reference internal" href="Howto_granular.html"><span class="doc">Howto granular</span></a></p></td>
 <td><p>pour</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-h5md"><span class="std std-ref">H5MD</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-h5md"><span class="std std-ref">H5MD</span></a></p></td>
 <td><p>dump output via HDF5</p></td>
 <td><p><a class="reference internal" href="dump_h5md.html"><span class="doc">dump h5md</span></a></p></td>
 <td><p>n/a</p></td>
 <td><p>ext</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-intel"><span class="std std-ref">INTEL</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-intel"><span class="std std-ref">INTEL</span></a></p></td>
 <td><p>optimized Intel CPU and KNL styles</p></td>
 <td><p><a class="reference internal" href="Speed_intel.html"><span class="doc">Speed intel</span></a></p></td>
 <td><p><a class="reference external" href="https://www.lammps.org/bench.html">Benchmarks</a></p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-interlayer"><span class="std std-ref">INTERLAYER</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-interlayer"><span class="std std-ref">INTERLAYER</span></a></p></td>
 <td><p>Inter-layer pair potentials</p></td>
 <td><p><a class="reference internal" href="Commands_pair.html"><span class="doc">several pair styles</span></a></p></td>
 <td><p>PACKAGES/interlayer</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-kim"><span class="std std-ref">KIM</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-kim"><span class="std std-ref">KIM</span></a></p></td>
 <td><p>OpenKIM wrapper</p></td>
 <td><p><a class="reference internal" href="pair_kim.html"><span class="doc">pair_style kim</span></a></p></td>
 <td><p>kim</p></td>
 <td><p>ext</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-kokkos"><span class="std std-ref">KOKKOS</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-kokkos"><span class="std std-ref">KOKKOS</span></a></p></td>
 <td><p>Kokkos-enabled styles</p></td>
 <td><p><a class="reference internal" href="Speed_kokkos.html"><span class="doc">Speed kokkos</span></a></p></td>
 <td><p><a class="reference external" href="https://www.lammps.org/bench.html">Benchmarks</a></p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-kspace"><span class="std std-ref">KSPACE</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-kspace"><span class="std std-ref">KSPACE</span></a></p></td>
 <td><p>long-range Coulombic solvers</p></td>
 <td><p><a class="reference internal" href="kspace_style.html"><span class="doc">kspace_style</span></a></p></td>
 <td><p>peptide</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-latboltz"><span class="std std-ref">LATBOLTZ</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-latboltz"><span class="std std-ref">LATBOLTZ</span></a></p></td>
 <td><p>Lattice Boltzmann fluid</p></td>
 <td><p><a class="reference internal" href="fix_lb_fluid.html"><span class="doc">fix lb/fluid</span></a></p></td>
 <td><p>PACKAGES/latboltz</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-latte"><span class="std std-ref">LATTE</span></a></p></td>
-<td><p>quantum DFTB forces via LATTE</p></td>
-<td><p><a class="reference internal" href="fix_latte.html"><span class="doc">fix latte</span></a></p></td>
-<td><p>latte</p></td>
-<td><p>ext</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-lepton"><span class="std std-ref">LEPTON</span></a></p></td>
+<td><p>evaluate strings as potential function</p></td>
+<td><p><a class="reference internal" href="pair_lepton.html"><span class="doc">pair_style lepton</span></a></p></td>
+<td><p>PACKAGES/lepton</p></td>
+<td><p>int</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-machdyn"><span class="std std-ref">MACHDYN</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-machdyn"><span class="std std-ref">MACHDYN</span></a></p></td>
 <td><p>smoothed Mach dynamics</p></td>
 <td><p><a class="reference external" href="PDF/MACHDYN_LAMMPS_userguide.pdf">SMD User Guide</a></p></td>
 <td><p>PACKAGES/machdyn</p></td>
 <td><p>ext</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-manifold"><span class="std std-ref">MANIFOLD</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-manifold"><span class="std std-ref">MANIFOLD</span></a></p></td>
 <td><p>motion on 2d surfaces</p></td>
 <td><p><a class="reference internal" href="fix_manifoldforce.html"><span class="doc">fix manifoldforce</span></a></p></td>
 <td><p>PACKAGES/manifold</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-manybody"><span class="std std-ref">MANYBODY</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-manybody"><span class="std std-ref">MANYBODY</span></a></p></td>
 <td><p>many-body potentials</p></td>
 <td><p><a class="reference internal" href="pair_tersoff.html"><span class="doc">pair_style tersoff</span></a></p></td>
 <td><p>shear</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-mc"><span class="std std-ref">MC</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-mc"><span class="std std-ref">MC</span></a></p></td>
 <td><p>Monte Carlo options</p></td>
 <td><p><a class="reference internal" href="fix_gcmc.html"><span class="doc">fix gcmc</span></a></p></td>
 <td><p>n/a</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-mdi"><span class="std std-ref">MDI</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-mdi"><span class="std std-ref">MDI</span></a></p></td>
 <td><p>client-server code coupling</p></td>
 <td><p><a class="reference internal" href="Howto_mdi.html"><span class="doc">MDI Howto</span></a></p></td>
 <td><p>PACKAGES/mdi</p></td>
 <td><p>ext</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-meam"><span class="std std-ref">MEAM</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-meam"><span class="std std-ref">MEAM</span></a></p></td>
 <td><p>modified EAM potential (C++)</p></td>
 <td><p><a class="reference internal" href="pair_meam.html"><span class="doc">pair_style meam</span></a></p></td>
 <td><p>meam</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-mesont"><span class="std std-ref">MESONT</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-mesont"><span class="std std-ref">MESONT</span></a></p></td>
 <td><p>mesoscopic tubular potential model</p></td>
-<td><p>pair styles <a class="reference internal" href="pair_mesont_tpm.html"><span class="doc">mesont/tpm</span></a>, <a class="reference internal" href="pair_mesocnt.html"><span class="doc">mesocnt</span></a></p></td>
+<td><p>pair styles <a class="reference internal" href="pair_mesocnt.html"><span class="doc">mesocnt</span></a></p></td>
 <td><p>PACKAGES/mesont</p></td>
-<td><p>int</p></td>
+<td><p>no</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-mgpt"><span class="std std-ref">MGPT</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-mgpt"><span class="std std-ref">MGPT</span></a></p></td>
 <td><p>fast MGPT multi-ion potentials</p></td>
 <td><p><a class="reference internal" href="pair_mgpt.html"><span class="doc">pair_style mgpt</span></a></p></td>
 <td><p>PACKAGES/mgpt</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-misc"><span class="std std-ref">MISC</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-misc"><span class="std std-ref">MISC</span></a></p></td>
 <td><p>miscellaneous single-file commands</p></td>
 <td><p>n/a</p></td>
 <td><p>no</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-ml-hdnnp"><span class="std std-ref">ML-HDNNP</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-ml-hdnnp"><span class="std std-ref">ML-HDNNP</span></a></p></td>
 <td><p>High-dimensional neural network potentials</p></td>
 <td><p><a class="reference internal" href="pair_hdnnp.html"><span class="doc">pair_style hdnnp</span></a></p></td>
 <td><p>PACKAGES/hdnnp</p></td>
 <td><p>ext</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-ml-iap"><span class="std std-ref">ML-IAP</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-ml-iap"><span class="std std-ref">ML-IAP</span></a></p></td>
 <td><p>multiple machine learning potentials</p></td>
 <td><p><a class="reference internal" href="pair_mliap.html"><span class="doc">pair_style mliap</span></a></p></td>
 <td><p>mliap</p></td>
 <td><p>no</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-ml-pace"><span class="std std-ref">ML-PACE</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-ml-pace"><span class="std std-ref">ML-PACE</span></a></p></td>
 <td><p>Atomic Cluster Expansion potential</p></td>
 <td><p><a class="reference internal" href="pair_pace.html"><span class="doc">pair pace</span></a></p></td>
 <td><p>PACKAGES/pace</p></td>
+<td><p>ext</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-ml-pod"><span class="std std-ref">ML-POD</span></a></p></td>
+<td><p>Proper orthogonal decomposition potentials</p></td>
+<td><p><a class="reference internal" href="pair_pod.html"><span class="doc">pair pod</span></a></p></td>
+<td><p>pod</p></td>
 <td><p>ext</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-ml-quip"><span class="std std-ref">ML-QUIP</span></a></p></td>
@@ -551,7 +568,7 @@ whether an extra library is needed to build and use the package:</p>
 <td><p>no</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="Packages_details.html#pkg-plumed"><span class="std std-ref">PLUMED</span></a></p></td>
-<td><p><a class="reference internal" href="Build_extras.html#plumed"><span class="std std-ref">PLUMED</span></a> free energy library</p></td>
+<td><p><a class="reference external" href="https://www.plumed.org">PLUMED free energy library</a></p></td>
 <td><p><a class="reference internal" href="fix_plumed.html"><span class="doc">fix plumed</span></a></p></td>
 <td><p>PACKAGES/plumed</p></td>
 <td><p>ext</p></td>
@@ -630,7 +647,7 @@ whether an extra library is needed to build and use the package:</p>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="Packages_details.html#pkg-smtbq"><span class="std std-ref">SMTBQ</span></a></p></td>
 <td><p>second moment tight binding potentials</p></td>
-<td><p><a class="reference internal" href="pair_smtbq.html"><span class="doc">pair_style smtbq</span></a> <a class="reference internal" href="pair_smatb.html"><span class="doc">pair_style smatb</span></a></p></td>
+<td><p>pair styles <a class="reference internal" href="pair_smtbq.html"><span class="doc">smtbq</span></a>, <a class="reference internal" href="pair_smatb.html"><span class="doc">smatb</span></a></p></td>
 <td><p>PACKAGES/smtbq</p></td>
 <td><p>no</p></td>
 </tr>
@@ -697,7 +714,7 @@ whether an extra library is needed to build and use the package:</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -706,7 +723,6 @@ whether an extra library is needed to build and use the package:</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

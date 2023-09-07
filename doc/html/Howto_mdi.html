@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>8.1.7. Using LAMMPS with the MDI library for code coupling &mdash; LAMMPS documentation</title>
@@ -10,21 +10,21 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Howto_mdi.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="8.1.8. Bonded particle models" href="Howto_bpm.html" />
+    <link rel="next" title="8.1.8. Broken Bonds" href="Howto_broken_bonds.html" />
     <link rel="prev" title="8.1.6. Coupling LAMMPS to other codes" href="Howto_couple.html" /> 
 </head>
 
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -64,8 +68,7 @@
 <li class="toctree-l3"><a class="reference internal" href="Howto_library.html">8.1.5. Library interface to LAMMPS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Howto_couple.html">8.1.6. Coupling LAMMPS to other codes</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">8.1.7. Using LAMMPS with the MDI library for code coupling</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Howto_bpm.html">8.1.8. Bonded particle models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Howto_broken_bonds.html">8.1.9. Broken Bonds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_broken_bonds.html">8.1.8. Broken Bonds</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Howto.html#settings-howto">8.2. Settings howto</a></li>
@@ -96,6 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -113,36 +117,37 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Howto.html"><span class="section-number">8. </span>Howto discussions</a> &raquo;</li>
-      <li><span class="section-number">8.1.7. </span>Using LAMMPS with the MDI library for code coupling</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Howto.html"><span class="section-number">8. </span>Howto discussions</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">8.1.7. </span>Using LAMMPS with the MDI library for code coupling</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="Howto_couple.html" class="btn btn-neutral float-left" title="8.1.6. Coupling LAMMPS to other codes" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Howto_bpm.html" class="btn btn-neutral float-right" title="8.1.8. Bonded particle models" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Howto_broken_bonds.html" class="btn btn-neutral float-right" title="8.1.8. Broken Bonds" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="using-lammps-with-the-mdi-library-for-code-coupling">
-<h1><span class="section-number">8.1.7. </span>Using LAMMPS with the MDI library for code coupling<a class="headerlink" href="#using-lammps-with-the-mdi-library-for-code-coupling" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="using-lammps-with-the-mdi-library-for-code-coupling">
+<h1><span class="section-number">8.1.7. </span>Using LAMMPS with the MDI library for code coupling<a class="headerlink" href="#using-lammps-with-the-mdi-library-for-code-coupling" title="Permalink to this heading"></a></h1>
 <p>Client/server coupling of two (or more) codes is where one code is the
 “client” and sends request messages (data) to one (or more) “server”
 code(s).  A server responds to each request with a reply message
 (data).  This enables two (or more) codes to work in tandem to perform
-a simulation.  LAMMPS can act as either a client or server code; it
-does this by using the <a class="reference external" href="https://molssi-mdi.github.io/MDI_Library/html/index.html">MolSSI Driver Interface (MDI) library</a>,
+a simulation.  In this context, LAMMPS can act as either a client or
+server code.  It does this by using the <a class="reference external" href="https://molssi-mdi.github.io/MDI_Library/html/index.html">MolSSI Driver Interface (MDI)
+library</a>,
 developed by the <a class="reference external" href="https://molssi.org">Molecular Sciences Software Institute (MolSSI)</a>, which is supported by the <a class="reference internal" href="Packages_details.html#pkg-mdi"><span class="std std-ref">MDI</span></a>
 package.</p>
-<p>Alternate methods for code coupling with LAMMPS are described on the
-<a class="reference internal" href="Howto_couple.html"><span class="doc">Howto couple</span></a> doc page.</p>
+<p>Alternate methods for coupling codes with LAMMPS are described on the
+<a class="reference internal" href="Howto_couple.html"><span class="doc">Coupling LAMMPS to other codes</span></a> page.</p>
 <p>Some advantages of client/server coupling are that the codes can run
-as stand-alone executables; they need not be linked together.  Thus
+as stand-alone executables; they need not be linked together.  Thus,
 neither code needs to have a library interface.  This also makes it
 easy to run the two codes on different numbers of processors.  If a
 message protocol (format and content) is defined for a particular kind
@@ -165,7 +170,7 @@ within that sub-communicator exchange messages with the corresponding
 engine instance, and can also send MPI messages to other processors in
 the driver.  The driver code can also destroy engine instances and
 re-instantiate them.  LAMMPS can operate as either a stand-alone or
-plugin MDI engine.  When it operates as a driver, if can use either
+plugin MDI engine.  When it operates as a driver, it can use either
 stand-alone or plugin MDI engines.</p>
 <p>The way in which an MDI driver communicates with an MDI engine is by
 making MDI_Send() and MDI_Recv() calls, which are conceptually similar
@@ -173,46 +178,79 @@ to MPI_Send() and MPI_Recv() calls.  Each send or receive operation
 uses a string to identify the command name, and optionally some data,
 which can be a single value or vector of values of any data type.
 Inside the MDI library, data is exchanged between the driver and
-engine via MPI calls or sockets.  This a run-time choice by the user.</p>
+engine via MPI calls or sockets.  This is a run-time choice by the user.</p>
 <hr class="docutils" />
 <p>The <a class="reference internal" href="Packages_details.html#pkg-mdi"><span class="std std-ref">MDI</span></a> package provides a <a class="reference internal" href="mdi.html"><span class="doc">mdi engine</span></a>
-command which enables LAMMPS to operate as an MDI engine.  Its doc
+command, which enables LAMMPS to operate as an MDI engine.  Its doc
 page explains the variety of standard and custom MDI commands which
 the LAMMPS engine recognizes and can respond to.</p>
-<p>The package also provides a <a class="reference internal" href="mdi.html"><span class="doc">mdi plugin</span></a> command which
+<p>The package also provides a <a class="reference internal" href="mdi.html"><span class="doc">mdi plugin</span></a> command, which
 enables LAMMPS to operate as an MDI driver and load an MDI engine as a
 plugin library.</p>
-<p>The package also has a <cite>fix mdi/aimd &lt;fix_mdi_aimd&gt;</cite> command in which
-LAMMPS operates as an MDI driver to perform <em>ab initio</em> MD simulations
-in conjunction with a quantum mechanics code.  Its post_force() method
-illustrates how a driver issues MDI commands to another code.  This
-command can be used to couple to an MDI engine which is either a
-stand-alone code or a plugin library.</p>
+<p>The package furthermore includes a <a class="reference internal" href="fix_mdi_qm.html"><span class="doc">fix mdi/qm</span></a>
+command, in which LAMMPS operates as an MDI driver in conjunction with a
+quantum mechanics code as an MDI engine.  The post_force() method of the
+<code class="docutils literal notranslate"><span class="pre">fix_mdi_qm.cpp</span></code> file shows how a driver issues MDI commands to
+another code.  This command can be used to couple to an MDI engine,
+which is either a stand-alone code or a plugin library.</p>
+<p>As explained in the <a class="reference internal" href="fix_mdi_qm.html"><span class="doc">fix mdi/qm</span></a> command
+documentation, it can be used to perform <em>ab initio</em> MD simulations or
+energy minimizations, or to evaluate the quantum energy and forces for a
+series of independent systems.  The <code class="docutils literal notranslate"><span class="pre">examples/mdi</span></code> directory has
+example input scripts for all of these use cases.</p>
+<p>The package also has a <a class="reference internal" href="fix_mdi_qmmm.html"><span class="doc">fix mdi/qmmm</span></a> command in
+which LAMMPS operates as an MDI driver in conjunction with a quantum
+mechanics code as an MDI engine to perform QM/MM simulations.  The
+LAMMPS input script partitions the system into QM and MM (molecular
+mechanics) atoms.  As described below the <code class="docutils literal notranslate"><span class="pre">examples/QUANTUM</span></code> directory
+has examples for coupling to 3 different quantum codes in this manner.</p>
 <hr class="docutils" />
-<p>The examples/mdi directory contains Python scripts and LAMMPS input
-script which use LAMMPS as either an MDI driver or engine or both.
-Three example use cases are provided:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">examples/mdi</span></code> directory contains Python scripts and LAMMPS input
+script which use LAMMPS as either an MDI driver or engine, or both.
+Currently, 5 example use cases are provided:</p>
 <ul class="simple">
-<li><p>Run ab initio MD (AIMD) using 2 instances of LAMMPS, one as driver
-and one as an engine.  As an engine, LAMMPS is a surrogate for a
-quantum code.</p></li>
+<li><p>Run ab initio MD (AIMD) using 2 instances of LAMMPS.  As a driver,
+LAMMPS performs the timestepping in either NVE or NPT mode.  As an
+engine, LAMMPS computes forces and is a surrogate for a quantum
+code.</p></li>
+<li><p>LAMMPS runs an MD simulation as a driver.  Every N steps it passes the
+current snapshot to an MDI engine to evaluate the energy, virial, and
+peratom forces.  As the engine, LAMMPS is a surrogate for a quantum
+code.</p></li>
+<li><p>LAMMPS loops over a series of data files and passes the configuration
+to an MDI engine to evaluate the energy, virial, and peratom forces
+and thus acts as a simulation driver.  As the engine, LAMMPS is used
+as a surrogate for a quantum code.</p></li>
 <li><p>A Python script driver invokes a sequence of unrelated LAMMPS
 calculations.  Calculations can be single-point energy/force
 evaluations, MD runs, or energy minimizations.</p></li>
-<li><p>Run AIMD with a Python driver code and 2 LAMMPS instances as
-engines.  The first LAMMPS instance performs MD timestepping.  The
-second LAMMPS instance acts as a surrogate QM code to compute
-forces.</p></li>
+<li><p>Run AIMD with a Python driver code and 2 LAMMPS instances as engines.
+The first LAMMPS instance performs MD timestepping.  The second LAMMPS
+instance acts as a surrogate QM code to compute forces.</p></li>
 </ul>
-<p>Note that in any of these example where LAMMPS is used as an engine,
-an actual QM code (which supports MDI) could be used in its place,
-without modifying other code or scripts, except to specify the name of
-the QM code.</p>
-<p>The examples/mdi/README file explains how to launch both driver and
-engine codes so that they communicate using the MDI library via either
-MPI or sockets.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In any of these examples where LAMMPS is used as an engine, an actual
+QM code (provided it has support for MDI) could be used in its place,
+without modifying the input scripts or launch commands, except to
+specify the name of the QM code.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">examples/mdi/Run.sh</span></code> file illustrates how to launch both driver
+and engine codes so that they communicate using the MDI library via
+either MPI or sockets, or using the engine as a stand-alone code, or
+as a plugin library.</p>
 <hr class="docutils" />
-<p>Currently there are two quantum DFT codes which have direct MDI
+<p>As of March 2023, these are quantum codes with MDI support provided via
+Python wrapper scripts included in the LAMMPS distribution.  These can
+be used with the fix mdi/qm and fix mdi/qmmm commands to perform QM
+calculations of an entire system (e.g. AIMD) or QM/MM simulations.  See
+the <code class="docutils literal notranslate"><span class="pre">examples/QUANTUM</span></code> sub-directories for more details:</p>
+<ul class="simple">
+<li><p>LATTE - AIMD only</p></li>
+<li><p>PySCF - QM/MM only</p></li>
+<li><p>NWChem - AIMD or QM/MM</p></li>
+</ul>
+<p>There are also at least two quantum codes which have direct MDI
 support, <a class="reference external" href="https://www.quantum-espresso.org/">Quantum ESPRESSO (QE)</a>
 and <a class="reference external" href="https://qsg.llnl.gov/node/101.html">INQ</a>.  There are also
 several QM codes which have indirect support through QCEngine or i-PI.
@@ -220,33 +258,9 @@ The former means they require a wrapper program (QCEngine) with MDI
 support which writes/read files to pass data to the quantum code
 itself.  The list of QCEngine-supported and i-PI-supported quantum
 codes is on the <a class="reference external" href="https://molssi-mdi.github.io/MDI_Library/html/index.html">MDI webpage</a>.</p>
-<p>Here is how to build QE as a stand-alone <code class="docutils literal notranslate"><span class="pre">pw.x</span></code> file which can be
-used in stand-alone mode:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>% git clone --branch mdi_plugin https://github.com/MolSSI-MDI/q-e.git &lt;base_path&gt;/q-e
-% build the executable pw.x, following the <span class="sb">`</span>QE build guide &lt;https://gitlab.com/QEF/q-e/-/wikis/Developers/CMake-build-system&gt;<span class="sb">`</span>_
-</pre></div>
-</div>
-<p>Here is how to build QE as a shared library which can be used in plugin mode,
-which results in a libqemdi.so file in &lt;base_path&gt;/q-e/MDI/src:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>% git clone --branch mdi_plugin https://github.com/MolSSI-MDI/q-e.git &lt;base_path&gt;/q-e
-% <span class="nb">cd</span> &lt;base_path&gt;/q-e
-% ./configure --enable-parallel --enable-openmp --enable-shared <span class="nv">FFLAGS</span><span class="o">=</span><span class="s2">&quot;-fPIC&quot;</span> <span class="nv">FCFLAGS</span><span class="o">=</span><span class="s2">&quot;-fPIC&quot;</span> <span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">&quot;-fPIC&quot;</span> <span class="nv">foxflags</span><span class="o">=</span><span class="s2">&quot;-fPIC&quot;</span> <span class="nv">try_foxflags</span><span class="o">=</span><span class="s2">&quot;-fPIC&quot;</span>
-% make -j <span class="m">4</span> mdi
-</pre></div>
-</div>
-<p>INQ cannot be built as a stand-alone code; it is by design a library.
-Here is how to build INQ as a shared library which can be used in
-plugin mode, which results in a libinqmdi.so file in
-&lt;base_path&gt;/inq/build/examples:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>% git clone --branch mdi --recurse-submodules https://gitlab.com/taylor-a-barnes/inq.git &lt;base_path&gt;/inq
-% <span class="nb">cd</span> &lt;base_path&gt;/inq
-% mkdir -p build
-% <span class="nb">cd</span> build
-% ../configure --prefix<span class="o">=</span>&lt;install_path&gt;/install
-% make -j <span class="m">4</span>
-% make install
-</pre></div>
-</div>
+<p>These direct- and indirect-support codes should be usable for full
+system calculations (e.g. AIMD).  Whether they support QM/MM models
+depends on the individual QM code.</p>
 </section>
 
 
@@ -254,13 +268,13 @@ plugin mode, which results in a libinqmdi.so file in
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="Howto_couple.html" class="btn btn-neutral float-left" title="8.1.6. Coupling LAMMPS to other codes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Howto_bpm.html" class="btn btn-neutral float-right" title="8.1.8. Bonded particle models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Howto_broken_bonds.html" class="btn btn-neutral float-right" title="8.1.8. Broken Bonds" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -269,7 +283,6 @@ plugin mode, which results in a libinqmdi.so file in
    
 
 </footer>
-
         </div>
       </div>
     </section>

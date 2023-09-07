@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>balance command &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/balance.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -72,6 +76,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="commands_list.html">Commands</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="angle_coeff.html">angle_coeff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="angle_style.html">angle_style command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="angle_write.html">angle_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="atom_modify.html">atom_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="atom_style.html">atom_style command</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">balance command</a><ul>
@@ -87,7 +92,6 @@
 <li class="toctree-l2"><a class="reference internal" href="bond_style.html">bond_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_write.html">bond_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="boundary.html">boundary command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="box.html">box command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="change_box.html">change_box command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="clear.html">clear command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="comm_modify.html">comm_modify command</a></li>
@@ -102,6 +106,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dielectric.html">dielectric command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_coeff.html">dihedral_coeff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_style.html">dihedral_style command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dihedral_write.html">dihedral_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dimension.html">dimension command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="displace_atoms.html">displace_atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html">dump command</a></li>
@@ -113,6 +118,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-movie-command"><span class="xref std std-doc">dump movie</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-atom-adios-command"><span class="xref std std-doc">dump atom/adios</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-custom-adios-command"><span class="xref std std-doc">dump custom/adios</span> command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dump.html#dump-cfg-uef-command"><span class="xref std std-doc">dump cfg/uef</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_adios.html">dump atom/adios  command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_adios.html#dump-custom-adios-command">dump custom/adios command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_cfg_uef.html">dump cfg/uef command</a></li>
@@ -130,6 +136,7 @@
 <li class="toctree-l2"><a class="reference internal" href="echo.html">echo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix.html">fix command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify.html">fix_modify command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitpod_command.html">fitpod command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group.html">group command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group2ndx.html">group2ndx command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group2ndx.html#ndx2group-command">ndx2group command</a></li>
@@ -144,6 +151,7 @@
 <li class="toctree-l2"><a class="reference internal" href="kspace_modify.html">kspace_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kspace_style.html">kspace_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="label.html">label command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labelmap.html">labelmap command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lattice.html">lattice command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="log.html">log command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mass.html">mass command</a></li>
@@ -157,12 +165,10 @@
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-sd-command">min_style sd command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-quickmin-command">min_style quickmin command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-fire-command">min_style fire command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-fire-old-command">min_style fire/old command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-command"><span class="xref std std-doc">min_style spin</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-cg-command"><span class="xref std std-doc">min_style spin/cg</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-lbfgs-command"><span class="xref std std-doc">min_style spin/lbfgs</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="minimize.html">minimize command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="minimize.html#minimize-kk-command">minimize/kk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="molecule.html">molecule command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neb.html">neb command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neb_spin.html">neb/spin command</a></li>
@@ -188,8 +194,7 @@
 <li class="toctree-l2"><a class="reference internal" href="region.html">region command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="replicate.html">replicate command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rerun.html">rerun command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset_atom_ids.html">reset_atom_ids command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset_mol_ids.html">reset_mol_ids command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reset_atoms.html">reset_atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reset_timestep.html">reset_timestep command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="restart.html">restart command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="run.html">run command</a></li>
@@ -227,6 +232,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -244,12 +250,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="commands_list.html">Commands</a> &raquo;</li>
-      <li>balance command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="commands_list.html">Commands</a></li>
+      <li class="breadcrumb-item active">balance command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="atom_style.html" class="btn btn-neutral float-left" title="atom_style command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -260,11 +265,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="balance-command">
-<span id="index-0"></span><h1>balance command<a class="headerlink" href="#balance-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="balance-command">
+<span id="index-0"></span><h1>balance command<a class="headerlink" href="#balance-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>balance thresh style args ... keyword args ...
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">balance</span><span class="w"> </span><span class="n">thresh</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="n">...</span>
 </pre></div>
 </div>
 <ul>
@@ -305,33 +311,34 @@
       name = name of the atom-style variable
     <em>store</em> name = store weight in custom atom property defined by <a class="reference internal" href="fix_property_atom.html"><span class="doc">fix property/atom</span></a> command
       name = atom property name (without d_ prefix)
+<em>sort</em> arg = <em>no</em> or <em>yes</em>
 <em>out</em> arg = filename
-  filename = write each processor's sub-domain to a file</pre>
+  filename = write each processor's subdomain to a file</pre>
 </li>
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">balance</span><span class="w"> </span><span class="m">0.9</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">uniform</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="m">0.4</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.6</span><span class="w"></span>
-<span class="k">balance</span><span class="w"> </span><span class="m">1.2</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="n">xz</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">1.1</span><span class="w"></span>
-<span class="k">balance</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="n">xz</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">1.1</span><span class="w"></span>
-<span class="k">balance</span><span class="w"> </span><span class="m">1.1</span><span class="w"> </span><span class="n">rcb</span><span class="w"></span>
-<span class="k">balance</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">1.1</span><span class="w"> </span><span class="n">weight</span><span class="w"> </span><span class="k">group </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="n">fast</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="n">slow</span><span class="w"> </span><span class="m">2.0</span><span class="w"></span>
-<span class="k">balance</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">1.1</span><span class="w"> </span><span class="n">weight</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="m">0.8</span><span class="w"> </span><span class="n">weight</span><span class="w"> </span><span class="n">neigh</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="n">weight</span><span class="w"> </span><span class="n">store</span><span class="w"> </span><span class="n">balance</span><span class="w"></span>
-<span class="k">balance</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="n">tmp.balance</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">balance</span><span class="w"> </span><span class="m">0.9</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">uniform</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="m">0.4</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.6</span>
+<span class="k">balance</span><span class="w"> </span><span class="m">1.2</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="n">xz</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">1.1</span>
+<span class="k">balance</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="n">xz</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">1.1</span>
+<span class="k">balance</span><span class="w"> </span><span class="m">1.1</span><span class="w"> </span><span class="n">rcb</span>
+<span class="k">balance</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">1.1</span><span class="w"> </span><span class="n">weight</span><span class="w"> </span><span class="k">group </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="n">fast</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="n">slow</span><span class="w"> </span><span class="m">2.0</span>
+<span class="k">balance</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">1.1</span><span class="w"> </span><span class="n">weight</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="m">0.8</span><span class="w"> </span><span class="n">weight</span><span class="w"> </span><span class="n">neigh</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="n">weight</span><span class="w"> </span><span class="n">store</span><span class="w"> </span><span class="n">balance</span>
+<span class="k">balance</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="n">tmp.balance</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p>This command adjusts the size and shape of processor sub-domains
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
+<p>This command adjusts the size and shape of processor subdomains
 within the simulation box, to attempt to balance the number of atoms
 or particles and thus indirectly the computational cost (load) more
 evenly across processors.  The load balancing is “static” in the sense
 that this command performs the balancing once, before or between
-simulations.  The processor sub-domains will then remain static during
+simulations.  The processor subdomains will then remain static during
 the subsequent run.  To perform “dynamic” balancing, see the <a class="reference internal" href="fix_balance.html"><span class="doc">fix
-balance</span></a> command, which can adjust processor sub-domain
+balance</span></a> command, which can adjust processor subdomain
 sizes and shapes on-the-fly during a <a class="reference internal" href="run.html"><span class="doc">run</span></a>.</p>
 <p>Load-balancing is typically most useful if the particles in the
 simulation box have a spatially-varying density distribution or when
@@ -341,7 +348,7 @@ an irregular-shaped geometry containing void regions, or <a class="reference int
 pair style simulations</span></a> which combine pair styles with
 different computational cost.  In these cases, the LAMMPS default of
 dividing the simulation box volume into a regular-spaced grid of 3d
-bricks, with one equal-volume sub-domain per processor, may assign
+bricks, with one equal-volume subdomain per processor, may assign
 numbers of particles per processor in a way that the computational
 effort varies significantly.  This can lead to poor performance when
 the simulation is run in parallel.</p>
@@ -358,7 +365,7 @@ Specifically, for a Px by Py by Pz grid of processors, it allows
 choice of Px, Py, and Pz, subject to the constraint that Px * Py *
 Pz = P, the total number of processors.  This is sufficient to achieve
 good load-balance for some problems on some processor counts.
-However, all the processor sub-domains will still have the same shape
+However, all the processor subdomains will still have the same shape
 and same volume.</p>
 <p>The requested load-balancing operation is only performed if the
 current “imbalance factor” in particles owned by each processor
@@ -407,7 +414,7 @@ versus an imbalanced one.  In the example above, the 10000 particle
 simulation could run up to 20% faster if it were perfectly balanced,
 versus when imbalanced.  However, computational cost is not strictly
 proportional to particle count, and changing the relative size and
-shape of processor sub-domains may lead to additional computational
+shape of processor subdomains may lead to additional computational
 and communication overheads, e.g. in the PPPM solver used via the
 <a class="reference internal" href="kspace_style.html"><span class="doc">kspace_style</span></a> command.  Thus you should benchmark
 the run times of a simulation before and after balancing.</p>
@@ -420,7 +427,7 @@ described in detail below.  There are 2 kinds of styles.</p>
 produce a logical 3d grid of processors.  They operate by changing the
 cutting planes (or lines) between processors in 3d (or 2d), to adjust
 the volume (area in 2d) assigned to each processor, as in the
-following 2d diagram where processor sub-domains are shown and
+following 2d diagram where processor subdomains are shown and
 particles are colored by the processor that owns them.</p>
 <p><a class="reference internal" href="_images/balance_uniform.jpg"><img alt="balance1" src="_images/balance_uniform.jpg" style="width: 32%;" /></a>  <a class="reference internal" href="_images/balance_nonuniform.jpg"><img alt="balance2" src="_images/balance_nonuniform.jpg" style="width: 32%;" /></a>  <a class="reference internal" href="_images/balance_rcb.jpg"><img alt="balance3" src="_images/balance_rcb.jpg" style="width: 32%;" /></a></p>
 <p>The leftmost diagram is the default partitioning of the simulation box
@@ -452,7 +459,7 @@ from scratch.</p>
 described above.  Note that any or all of these 3 styles can be
 specified together, one after the other, but they cannot be used with
 any other style.  This style adjusts the position of cutting planes
-between processor sub-domains in specific dimensions.  Only the
+between processor subdomains in specific dimensions.  Only the
 specified dimensions are altered.</p>
 <p>The <em>uniform</em> argument spaces the planes evenly, as in the left
 diagrams above.  The <em>numeric</em> argument requires listing Ps-1 numbers
@@ -469,8 +476,8 @@ the cutting place.  The left (or lower) edge of the box is 0.0, and
 the right (or upper) edge is 1.0.  Neither of these values is
 specified.  Only the interior Ps-1 positions are specified.  Thus is
 there are 2 processors in the x dimension, you specify a single value
-such as 0.75, which would make the left processor’s sub-domain 3x
-larger than the right processor’s sub-domain.</p>
+such as 0.75, which would make the left processor’s subdomain 3x
+larger than the right processor’s subdomain.</p>
 <hr class="docutils" />
 <p>The <em>shift</em> style invokes a “grid” method for balancing, as
 described above.  It changes the positions of cutting planes between
@@ -506,16 +513,16 @@ adjacent planes are closer together than the neighbor skin distance
 (as specified by the <a class="reference internal" href="neigh_modify.html"><span class="doc">neigh_modify</span></a> command), then
 the plane positions are shifted to separate them by at least this
 amount.  This is to prevent particles being lost when dynamics are run
-with processor sub-domains that are too narrow in one or more
+with processor subdomains that are too narrow in one or more
 dimensions.</p>
-<p>Once the re-balancing is complete and final processor sub-domains
+<p>Once the re-balancing is complete and final processor subdomains
 assigned, particles are migrated to their new owning processor, and
 the balance procedure ends.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>At each re-balance operation, the bisectioning for each cutting
 plane (line in 2d) typically starts with low and high bounds separated
-by the extent of a processor’s sub-domain in one dimension.  The size
+by the extent of a processor’s subdomain in one dimension.  The size
 of this bracketing region shrinks by 1/2 every iteration.  Thus if
 <em>Niter</em> is specified as 10, the cutting plane will typically be
 positioned to 1 part in 1000 accuracy (relative to the perfect target
@@ -558,7 +565,7 @@ box in two.  The recursion continues until every processor is assigned
 a sub-box of the entire simulation domain, and owns the (weighted)
 particles in that sub-box.</p>
 <hr class="docutils" />
-<p id="weighted-balance">This sub-section describes how to perform weighted load balancing
+<p id="weighted-balance">This subsection describes how to perform weighted load balancing
 using the <em>weight</em> keyword.</p>
 <p>By default, all particles have a weight of 1.0, which means each
 particle is assumed to require the same amount of computation during a
@@ -683,9 +690,16 @@ per-particle weights used during the load-balancing operation.</p>
 as <em>name</em>, not as <em>d_name</em> as it is for other commands that use
 different kinds of custom atom vectors or arrays as arguments.</p>
 <hr class="docutils" />
+<p>The <em>sort</em> keyword determines whether the communication of per-atom
+data to other processors during load-balancing will be random or
+deterministic.  Random is generally faster; deterministic will ensure
+the new ordering of atoms on each processor is the same each time the
+same simulation is run.  This can be useful for debugging purposes.
+Since the balance command is a one-time operation, the default is
+<em>yes</em> to perform sorting.</p>
 <p>The <em>out</em> keyword writes a text file to the specified <em>filename</em> with
 the results of the balancing operation.  The file contains the bounds
-of the sub-domain for each processor after the balancing operation
+of the subdomain for each processor after the balancing operation
 completes.  The format of the file is compatible with the
 <a class="reference external" href="https://lammps.github.io/pizza">Pizza.py</a> <em>mdump</em> tool which has support for manipulating and
 visualizing mesh files.  An example is shown here for a balancing by 4
@@ -727,7 +741,7 @@ ITEM: SQUARES
 </pre></div>
 </div>
 <p>The coordinates of all the vertices are listed in the NODES section, 5
-per processor.  Note that the 4 sub-domains share vertices, so there
+per processor.  Note that the 4 subdomains share vertices, so there
 will be duplicate nodes in the list.</p>
 <p>The “SQUARES” section lists the node IDs of the 4 vertices in a
 rectangle for each processor (1 to 4).</p>
@@ -736,20 +750,20 @@ each processor, instead of 4, and “SQUARES” replaced by “CUBES”.</p>
 </section>
 <hr class="docutils" />
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <p>For 2d simulations, the <em>z</em> style cannot be used.  Nor can a “z”
 appear in <em>dimstr</em> for the <em>shift</em> style.</p>
 <p>Balancing through recursive bisectioning (<em>rcb</em> style) requires
 <a class="reference internal" href="comm_style.html"><span class="doc">comm_style tiled</span></a></p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="group.html"><span class="doc">group</span></a>, <a class="reference internal" href="processors.html"><span class="doc">processors</span></a>,
 <a class="reference internal" href="fix_balance.html"><span class="doc">fix balance</span></a>, <a class="reference internal" href="comm_style.html"><span class="doc">comm_style</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
-<p>none</p>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
+<p>The default setting is sort = yes.</p>
 </section>
 </section>
 
@@ -764,7 +778,7 @@ appear in <em>dimstr</em> for the <em>shift</em> style.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -773,7 +787,6 @@ appear in <em>dimstr</em> for the <em>shift</em> style.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

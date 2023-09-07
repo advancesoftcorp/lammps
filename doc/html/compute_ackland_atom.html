@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>compute ackland/atom command &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/compute_ackland_atom.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -104,17 +108,21 @@
 <li class="toctree-l2"><a class="reference internal" href="compute_com_chunk.html">compute com/chunk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_contact_atom.html">compute contact/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_coord_atom.html">compute coord/atom command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_count_type.html">compute count/type command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_damage_atom.html">compute damage/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dihedral.html">compute dihedral command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dihedral_local.html">compute dihedral/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dilatation_atom.html">compute dilatation/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dipole.html">compute dipole command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_dipole.html#compute-dipole-tip4p-command">compute dipole/tip4p command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dipole_chunk.html">compute dipole/chunk command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_dipole_chunk.html#compute-dipole-tip4p-chunk-command">compute dipole/tip4p/chunk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_displace_atom.html">compute displace/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dpd.html">compute dpd command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dpd_atom.html">compute dpd/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_edpd_temp_atom.html">compute edpd/temp/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_efield_atom.html">compute efield/atom command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_efield_wolf_atom.html">compute efield/wolf/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_entropy_atom.html">compute entropy/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_erotate_asphere.html">compute erotate/asphere command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_erotate_rigid.html">compute erotate/rigid command</a></li>
@@ -141,7 +149,6 @@
 <li class="toctree-l2"><a class="reference internal" href="compute_ke_atom_eff.html">compute ke/atom/eff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_ke_eff.html">compute ke/eff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_ke_rigid.html">compute ke/rigid command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute_mesont.html">compute mesont command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_mliap.html">compute mliap command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_modify.html">compute_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_momentum.html">compute momentum command</a></li>
@@ -157,9 +164,11 @@
 <li class="toctree-l2"><a class="reference internal" href="compute_pe_atom.html">compute pe/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_plasticity_atom.html">compute plasticity/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_pressure.html">compute pressure command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_pressure_alchemy.html">compute pressure/alchemy command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_pressure_uef.html">compute pressure/uef command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_property_atom.html">compute property/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_property_chunk.html">compute property/chunk command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_property_grid.html">compute property/grid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_property_local.html">compute property/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_ptm_atom.html">compute ptm/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_rdf.html">compute rdf command</a></li>
@@ -194,17 +203,19 @@
 <li class="toctree-l2"><a class="reference internal" href="compute_sna_atom.html#compute-snad-atom-command">compute snad/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_sna_atom.html#compute-snav-atom-command">compute snav/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_sna_atom.html#compute-snap-command">compute snap command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_sna_atom.html#compute-sna-grid-command">compute sna/grid command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_sna_atom.html#compute-sna-grid-local-command">compute sna/grid/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_sph_e_atom.html">compute sph/e/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_sph_rho_atom.html">compute sph/rho/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_sph_t_atom.html">compute sph/t/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_spin.html">compute spin command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_stress_atom.html">compute stress/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_stress_atom.html#compute-centroid-stress-atom-command">compute centroid/stress/atom command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_stress_cartesian.html">compute stress/cartesian command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_stress_curvilinear.html">compute stress/cylinder command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_stress_curvilinear.html#compute-stress-spherical-command">compute stress/spherical command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_stress_mop.html">compute stress/mop command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_stress_mop.html#compute-stress-mop-profile-command">compute stress/mop/profile command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute_stress_profile.html">compute stress/cartesian command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute_stress_profile.html#compute-stress-cylinder-command">compute stress/cylinder command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute_stress_profile.html#compute-stress-spherical-command">compute stress/spherical command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_tally.html">compute force/tally command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_tally.html#compute-heat-flux-tally-command">compute heat/flux/tally command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_tally.html#compute-heat-flux-virial-tally-command">compute heat/flux/virial/tally command</a></li>
@@ -244,6 +255,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -261,12 +273,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="computes.html">Computes</a> &raquo;</li>
-      <li>compute ackland/atom command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="computes.html">Computes</a></li>
+      <li class="breadcrumb-item active">compute ackland/atom command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="computes.html" class="btn btn-neutral float-left" title="Computes" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -277,11 +288,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="compute-ackland-atom-command">
-<span id="index-0"></span><h1>compute ackland/atom command<a class="headerlink" href="#compute-ackland-atom-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="compute-ackland-atom-command">
+<span id="index-0"></span><h1>compute ackland/atom command<a class="headerlink" href="#compute-ackland-atom-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>compute ID group-ID ackland/atom keyword/value
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">ID</span><span class="w"> </span><span class="nv nv-Identifier">group-ID</span><span class="w"> </span><span class="n">ackland</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">keyword</span><span class="o">/</span><span class="n">value</span>
 </pre></div>
 </div>
 <ul>
@@ -289,19 +301,19 @@
 <li><p>ackland/atom = style name of this compute command</p></li>
 <li><p>zero or more keyword/value pairs may be appended</p></li>
 <li><p>keyword = <em>legacy</em></p>
-<pre class="literal-block"><em>legacy</em> yes/no = use (<em>yes</em>) or do not use (<em>no</em>) legacy ackland algorithm implementation</pre>
+<pre class="literal-block"><em>legacy</em> args = <em>yes</em> or <em>no</em> = use (<em>yes</em>) or do not use (<em>no</em>) legacy Ackland algorithm implementation</pre>
 </li>
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">ackland</span><span class="o">/</span><span class="n">atom</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">ackland</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">legacy</span><span class="w"> </span><span class="n">yes</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">ackland</span><span class="o">/</span><span class="n">atom</span>
+<span class="k">compute </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">ackland</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">legacy</span><span class="w"> </span><span class="n">yes</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <p>Defines a computation that calculates the local lattice structure
 according to the formulation given in <a class="reference internal" href="#ackland"><span class="std std-ref">(Ackland)</span></a>.
 Historically, LAMMPS had two, slightly different implementations of
@@ -329,25 +341,25 @@ too frequently or to have multiple compute/dump commands, each of
 which computes this quantity.-</p>
 </section>
 <section id="output-info">
-<h2>Output info<a class="headerlink" href="#output-info" title="Permalink to this headline">¶</a></h2>
+<h2>Output info<a class="headerlink" href="#output-info" title="Permalink to this heading"></a></h2>
 <p>This compute calculates a per-atom vector, which can be accessed by
 any command that uses per-atom values from a compute as input.  See
 the <a class="reference internal" href="Howto_output.html"><span class="doc">Howto output</span></a> page for an overview of
 LAMMPS output options.</p>
 </section>
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <p>This compute is part of the EXTRA-COMPUTE package.  It is only enabled if
 LAMMPS was built with that package.  See the <a class="reference internal" href="Build_package.html"><span class="doc">Build package</span></a> page for more info.</p>
 <p>The per-atom vector values will be unitless since they are the
 integers defined above.</p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="compute_centro_atom.html"><span class="doc">compute centro/atom</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
 <p>The keyword <em>legacy</em> defaults to <em>no</em>.</p>
 <hr class="docutils" />
 <p id="ackland"><strong>(Ackland)</strong> Ackland, Jones, Phys Rev B, 73, 054104 (2006).</p>
@@ -365,7 +377,7 @@ integers defined above.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -374,7 +386,6 @@ integers defined above.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

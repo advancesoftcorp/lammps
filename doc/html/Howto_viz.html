@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>8.1.2. Visualize LAMMPS snapshots &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Howto_viz.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -64,8 +68,7 @@
 <li class="toctree-l3"><a class="reference internal" href="Howto_library.html">8.1.5. Library interface to LAMMPS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Howto_couple.html">8.1.6. Coupling LAMMPS to other codes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Howto_mdi.html">8.1.7. Using LAMMPS with the MDI library for code coupling</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Howto_bpm.html">8.1.8. Bonded particle models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Howto_broken_bonds.html">8.1.9. Broken Bonds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_broken_bonds.html">8.1.8. Broken Bonds</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Howto.html#settings-howto">8.2. Settings howto</a></li>
@@ -96,6 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -113,12 +117,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Howto.html"><span class="section-number">8. </span>Howto discussions</a> &raquo;</li>
-      <li><span class="section-number">8.1.2. </span>Visualize LAMMPS snapshots</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Howto.html"><span class="section-number">8. </span>Howto discussions</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">8.1.2. </span>Visualize LAMMPS snapshots</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="Howto_restart.html" class="btn btn-neutral float-left" title="8.1.1. Restart a simulation" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -129,28 +132,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="visualize-lammps-snapshots">
-<h1><span class="section-number">8.1.2. </span>Visualize LAMMPS snapshots<a class="headerlink" href="#visualize-lammps-snapshots" title="Permalink to this headline">¶</a></h1>
-<p>LAMMPS itself does not do visualization, but snapshots from LAMMPS
-simulations can be visualized (and analyzed) in a variety of ways.</p>
-<p>Mention dump image and dump movie.</p>
-<p>LAMMPS snapshots are created by the <a class="reference internal" href="dump.html"><span class="doc">dump</span></a> command which can
-create files in several formats. The native LAMMPS dump format is a
-text file (see “dump atom” or “dump custom”) which can be visualized
-by several popular visualization tools. The <a class="reference internal" href="dump_image.html"><span class="doc">dump image</span></a> and <a class="reference internal" href="dump_image.html"><span class="doc">dump movie</span></a> styles can
-output internally rendered images and convert a sequence of them to a
-movie during the MD run.  Several programs included with LAMMPS as
-auxiliary tools can convert between LAMMPS format files and other
-formats.  See the <a class="reference internal" href="Tools.html"><span class="doc">Tools</span></a> page for details.</p>
-<p>A Python-based toolkit distributed by our group can read native LAMMPS
-dump files, including custom dump files with additional columns of
-user-specified atom information, and convert them to various formats
-or pipe them into visualization software directly.  See the <a class="reference external" href="https://lammps.github.io/pizza">Pizza.py WWW site</a> for details.  Specifically, Pizza.py can convert
-LAMMPS dump files into PDB, XYZ, <a class="reference external" href="https://www.ansys.com/products/fluids/ansys-ensight">EnSight</a>, and VTK formats.
-Pizza.py can pipe LAMMPS dump files directly into the Raster3d and
-RasMol visualization programs.  Pizza.py has tools that do interactive
-3d OpenGL visualization and one that creates SVG images of dump file
-snapshots.</p>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="visualize-lammps-snapshots">
+<h1><span class="section-number">8.1.2. </span>Visualize LAMMPS snapshots<a class="headerlink" href="#visualize-lammps-snapshots" title="Permalink to this heading"></a></h1>
+<p>Snapshots from LAMMPS simulations can be viewed, visualized, and
+analyzed in a variety of ways.</p>
+<p>LAMMPS snapshots are created by the <a class="reference internal" href="dump.html"><span class="doc">dump</span></a> command, which
+can create files in several formats. The native LAMMPS dump format is a
+text file (see “dump atom” or “dump custom”) which can be visualized by
+<a class="reference external" href="https://www.lammps.org/viz.html">several visualization tools</a> for MD
+simulation trajectories.  <a class="reference external" href="https://www.ovito.org">OVITO</a> and <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd">VMD</a> seem to be the most popular
+choices among them.</p>
+<p>The <a class="reference internal" href="dump_image.html"><span class="doc">dump image</span></a> and <a class="reference internal" href="dump_image.html"><span class="doc">dump movie</span></a>
+styles can output internally rendered images or convert them to a movie
+during the MD run.</p>
+<p>Programs included with LAMMPS as auxiliary tools can convert
+between LAMMPS format files and other formats.  See the <a class="reference internal" href="Tools.html"><span class="doc">Tools</span></a> page for details.  These are rarely needed these days.</p>
 </section>
 
 
@@ -164,7 +161,7 @@ snapshots.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -173,7 +170,6 @@ snapshots.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

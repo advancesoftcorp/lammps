@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>compute reduce command &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/compute_reduce.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -95,17 +99,21 @@
 <li class="toctree-l2"><a class="reference internal" href="compute_com_chunk.html">compute com/chunk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_contact_atom.html">compute contact/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_coord_atom.html">compute coord/atom command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_count_type.html">compute count/type command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_damage_atom.html">compute damage/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dihedral.html">compute dihedral command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dihedral_local.html">compute dihedral/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dilatation_atom.html">compute dilatation/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dipole.html">compute dipole command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_dipole.html#compute-dipole-tip4p-command">compute dipole/tip4p command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dipole_chunk.html">compute dipole/chunk command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_dipole_chunk.html#compute-dipole-tip4p-chunk-command">compute dipole/tip4p/chunk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_displace_atom.html">compute displace/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dpd.html">compute dpd command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dpd_atom.html">compute dpd/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_edpd_temp_atom.html">compute edpd/temp/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_efield_atom.html">compute efield/atom command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_efield_wolf_atom.html">compute efield/wolf/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_entropy_atom.html">compute entropy/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_erotate_asphere.html">compute erotate/asphere command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_erotate_rigid.html">compute erotate/rigid command</a></li>
@@ -132,7 +140,6 @@
 <li class="toctree-l2"><a class="reference internal" href="compute_ke_atom_eff.html">compute ke/atom/eff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_ke_eff.html">compute ke/eff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_ke_rigid.html">compute ke/rigid command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute_mesont.html">compute mesont command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_mliap.html">compute mliap command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_modify.html">compute_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_momentum.html">compute momentum command</a></li>
@@ -148,9 +155,11 @@
 <li class="toctree-l2"><a class="reference internal" href="compute_pe_atom.html">compute pe/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_plasticity_atom.html">compute plasticity/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_pressure.html">compute pressure command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_pressure_alchemy.html">compute pressure/alchemy command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_pressure_uef.html">compute pressure/uef command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_property_atom.html">compute property/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_property_chunk.html">compute property/chunk command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_property_grid.html">compute property/grid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_property_local.html">compute property/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_ptm_atom.html">compute ptm/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_rdf.html">compute rdf command</a></li>
@@ -194,17 +203,19 @@
 <li class="toctree-l2"><a class="reference internal" href="compute_sna_atom.html#compute-snad-atom-command">compute snad/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_sna_atom.html#compute-snav-atom-command">compute snav/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_sna_atom.html#compute-snap-command">compute snap command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_sna_atom.html#compute-sna-grid-command">compute sna/grid command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_sna_atom.html#compute-sna-grid-local-command">compute sna/grid/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_sph_e_atom.html">compute sph/e/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_sph_rho_atom.html">compute sph/rho/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_sph_t_atom.html">compute sph/t/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_spin.html">compute spin command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_stress_atom.html">compute stress/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_stress_atom.html#compute-centroid-stress-atom-command">compute centroid/stress/atom command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_stress_cartesian.html">compute stress/cartesian command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_stress_curvilinear.html">compute stress/cylinder command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_stress_curvilinear.html#compute-stress-spherical-command">compute stress/spherical command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_stress_mop.html">compute stress/mop command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_stress_mop.html#compute-stress-mop-profile-command">compute stress/mop/profile command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute_stress_profile.html">compute stress/cartesian command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute_stress_profile.html#compute-stress-cylinder-command">compute stress/cylinder command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute_stress_profile.html#compute-stress-spherical-command">compute stress/spherical command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_tally.html">compute force/tally command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_tally.html#compute-heat-flux-tally-command">compute heat/flux/tally command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_tally.html#compute-heat-flux-virial-tally-command">compute heat/flux/virial/tally command</a></li>
@@ -244,6 +255,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -261,12 +273,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="computes.html">Computes</a> &raquo;</li>
-      <li>compute reduce command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="computes.html">Computes</a></li>
+      <li class="breadcrumb-item active">compute reduce command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="compute_rdf.html" class="btn btn-neutral float-left" title="compute rdf command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -277,14 +288,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <span class="target" id="index-0"></span><section id="compute-reduce-command">
-<span id="index-1"></span><h1>compute reduce command<a class="headerlink" href="#compute-reduce-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<span class="target" id="index-0"></span><section id="compute-reduce-command">
+<span id="index-1"></span><h1>compute reduce command<a class="headerlink" href="#compute-reduce-command" title="Permalink to this heading"></a></h1>
 </section>
 <section id="compute-reduce-region-command">
-<h1>compute reduce/region command<a class="headerlink" href="#compute-reduce-region-command" title="Permalink to this headline">¶</a></h1>
+<h1>compute reduce/region command<a class="headerlink" href="#compute-reduce-region-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>compute ID group-ID style arg mode input1 input2 ... keyword args ...
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">ID</span><span class="w"> </span><span class="nv nv-Identifier">group-ID</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="n">arg</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="n">input1</span><span class="w"> </span><span class="n">input2</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="n">...</span>
 </pre></div>
 </div>
 <ul>
@@ -294,17 +306,15 @@
 <em>reduce/region</em> arg = region-ID
   region-ID = ID of region to use for choosing atoms</pre>
 </li>
-<li><p>mode = <em>sum</em> or <em>min</em> or <em>max</em> or <em>ave</em> or <em>sumsq</em> or <em>avesq</em> or <em>sumabs</em> or <em>aveabs</em></p></li>
+<li><p>mode = <em>sum</em> or <em>min</em> or <em>minabs</em> or <em>max</em> or <em>maxabs</em> or <em>ave</em> or <em>sumsq</em> or <em>avesq</em> or <em>sumabs</em> or <em>aveabs</em></p></li>
 <li><p>one or more inputs can be listed</p></li>
-<li><p>input = x, y, z, vx, vy, vz, fx, fy, fz, c_ID, c_ID[N], f_ID, f_ID[N], v_name</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>x,y,z,vx,vy,vz,fx,fy,fz = atom attribute (position, velocity, force component)
+<li><p>input = <em>x</em> or <em>y</em> or <em>z</em> or <em>vx</em> or <em>vy</em> or <em>vz</em> or <em>fx</em> or <em>fy</em> or <em>fz</em> or c_ID or c_ID[N] or f_ID or f_ID[N] or v_name</p>
+<pre class="literal-block"><em>x</em>,<em>y</em>,<em>z</em>,<em>vx</em>,<em>vy</em>,<em>vz</em>,<em>fx</em>,<em>fy</em>,<em>fz</em> = atom attribute (position, velocity, force component)
 c_ID = per-atom or local vector calculated by a compute with ID
 c_ID[I] = Ith column of per-atom or local array calculated by a compute with ID, I can include wildcard (see below)
 f_ID = per-atom or local vector calculated by a fix with ID
 f_ID[I] = Ith column of per-atom or local array calculated by a fix with ID, I can include wildcard (see below)
-v_name = per-atom vector calculated by an atom-style variable with name
-</pre></div>
-</div>
+v_name = per-atom vector calculated by an atom-style variable with name</pre>
 </li>
 <li><p>zero or more keyword/args pairs may be appended</p></li>
 <li><p>keyword = <em>replace</em></p>
@@ -315,17 +325,17 @@ v_name = per-atom vector calculated by an atom-style variable with name
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">reduce</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="n">c_force</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">reduce</span><span class="o">/</span><span class="k">region </span><span class="nv nv-Identifier">subbox</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="n">c_force</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">reduce</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="n">c_press[2]</span><span class="w"> </span><span class="n">f_ave</span><span class="w"> </span><span class="n">v_myKE</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">reduce</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="n">c_press[</span><span class="o">*</span><span class="n">]</span><span class="w"> </span><span class="n">f_ave</span><span class="w"> </span><span class="n">v_myKE</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">3</span><span class="w"> </span><span class="nv nv-Identifier">fluid</span><span class="w"> </span><span class="n">reduce</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="n">c_index[1]</span><span class="w"> </span><span class="n">c_index[2]</span><span class="w"> </span><span class="n">c_dist</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">reduce</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="n">c_force</span>
+<span class="k">compute </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">reduce</span><span class="o">/</span><span class="k">region </span><span class="nv nv-Identifier">subbox</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="n">c_force</span>
+<span class="k">compute </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">reduce</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="n">c_press[2]</span><span class="w"> </span><span class="n">f_ave</span><span class="w"> </span><span class="n">v_myKE</span>
+<span class="k">compute </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">reduce</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="n">c_press[</span><span class="o">*</span><span class="n">]</span><span class="w"> </span><span class="n">f_ave</span><span class="w"> </span><span class="n">v_myKE</span>
+<span class="k">compute </span><span class="nv nv-Identifier">3</span><span class="w"> </span><span class="nv nv-Identifier">fluid</span><span class="w"> </span><span class="n">reduce</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="n">c_index[1]</span><span class="w"> </span><span class="n">c_index[2]</span><span class="w"> </span><span class="n">c_dist</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <p>Define a calculation that “reduces” one or more vector inputs into
 scalar values, one per listed input.  The inputs can be per-atom or
 local quantities; they cannot be global quantities.  Atom attributes
@@ -337,15 +347,16 @@ vectors.</p>
 <p>The reduction operation is specified by the <em>mode</em> setting.  The <em>sum</em>
 option adds the values in the vector into a global total.  The <em>min</em>
 or <em>max</em> options find the minimum or maximum value across all vector
-values.  The <em>ave</em> setting adds the vector values into a global total,
-then divides by the number of values in the vector.  The <em>sumsq</em>
-option sums the square of the values in the vector into a global
-total.  The <em>avesq</em> setting does the same as <em>sumsq</em>, then divides the
-sum of squares by the number of values.  The last two options can be
-useful for calculating the variance of some quantity, e.g. variance =
-sumsq - ave^2.  The <em>sumabs</em> option sums the absolute values in the
-vector into a global total.  The <em>aveabs</em> setting does the same as
-<em>sumabs</em>, then divides the sum of absolute values by the number of
+values.  The <em>minabs</em> or <em>maxabs</em> options find the minimum or maximum
+value across all absolute vector values.  The <em>ave</em> setting adds the
+vector values into a global total, then divides by the number of values
+in the vector.  The <em>sumsq</em> option sums the square of the values in the
+vector into a global total.  The <em>avesq</em> setting does the same as <em>sumsq</em>,
+then divides the sum of squares by the number of values.  The last two options
+can be useful for calculating the variance of some quantity (e.g., variance =
+sumsq <span class="math notranslate nohighlight">\(-\)</span> ave<span class="math notranslate nohighlight">\(^2\)</span>).  The <em>sumabs</em> option sums the absolute
+values in the vector into a global total.  The <em>aveabs</em> setting does the same
+as <em>sumabs</em>, then divides the sum of absolute values by the number of
 values.</p>
 <p>Each listed input is operated on independently.  For per-atom inputs,
 the group specified with this command means only atoms within the
@@ -360,29 +371,31 @@ group specified for that compute.</p>
 component) or can be the result of a <a class="reference internal" href="compute.html"><span class="doc">compute</span></a> or
 <a class="reference internal" href="fix.html"><span class="doc">fix</span></a> or the evaluation of an atom-style
 <a class="reference internal" href="variable.html"><span class="doc">variable</span></a>.</p>
-<p>Note that for values from a compute or fix, the bracketed index I can
+<p>Note that for values from a compute or fix, the bracketed index <span class="math notranslate nohighlight">\(I\)</span> can
 be specified using a wildcard asterisk with the index to effectively
-specify multiple values.  This takes the form “*” or “*n” or “n*” or
-“m*n”.  If N = the size of the vector (for <em>mode</em> = scalar) or the
+specify multiple values.  This takes the form “*” or “*n” or “m*” or
+“m*n”.  If <span class="math notranslate nohighlight">\(N\)</span> is the size of the vector (for <em>mode</em> = scalar) or the
 number of columns in the array (for <em>mode</em> = vector), then an asterisk
-with no numeric values means all indices from 1 to N.  A leading
+with no numeric values means all indices from 1 to <span class="math notranslate nohighlight">\(N\)</span>.  A leading
 asterisk means all indices from 1 to n (inclusive).  A trailing
-asterisk means all indices from n to N (inclusive).  A middle asterisk
+asterisk means all indices from m to <span class="math notranslate nohighlight">\(N\)</span> (inclusive).  A middle asterisk
 means all indices from m to n (inclusive).</p>
 <p>Using a wildcard is the same as if the individual columns of the array
-had been listed one by one.  E.g. these 2 compute reduce commands are
-equivalent, since the <a class="reference internal" href="compute_stress_atom.html"><span class="doc">compute stress/atom</span></a>
-command creates a per-atom array with 6 columns:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">myPress</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">stress</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">NULL</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">reduce</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="n">c_myPress[</span><span class="o">*</span><span class="n">]</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">reduce</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="n">c_myPress[1]</span><span class="w"> </span><span class="n">c_myPress[2]</span><span class="w"> </span><span class="n">c_myPress[3]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">                         </span><span class="n">c_myPress[4]</span><span class="w"> </span><span class="n">c_myPress[5]</span><span class="w"> </span><span class="n">c_myPress[6]</span><span class="w"></span>
+had been listed one by one. For example, the following two compute reduce
+commands are equivalent, since the
+<a class="reference internal" href="compute_stress_atom.html"><span class="doc">compute stress/atom</span></a> command creates a per-atom
+array with six columns:</p>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">myPress</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">stress</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">NULL</span>
+<span class="k">compute </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">reduce</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="n">c_myPress[</span><span class="o">*</span><span class="n">]</span>
+<span class="k">compute </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">reduce</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="n">c_myPress[1]</span><span class="w"> </span><span class="n">c_myPress[2]</span><span class="w"> </span><span class="n">c_myPress[3]</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">                         </span><span class="n">c_myPress[4]</span><span class="w"> </span><span class="n">c_myPress[5]</span><span class="w"> </span><span class="n">c_myPress[6]</span>
 </pre></div>
 </div>
 <hr class="docutils" />
-<p>The atom attribute values (x,y,z,vx,vy,vz,fx,fy,fz) are
-self-explanatory.  Note that other atom attributes can be used as
-inputs to this fix by using the <a class="reference internal" href="compute_property_atom.html"><span class="doc">compute property/atom</span></a> command and then specifying
+<p>The atom attribute values (<em>x</em>, <em>y</em>, <em>z</em>, <em>vx</em>, <em>vy</em>, <em>vz</em>, <em>fx</em>, <em>fy</em>, and
+<em>fz</em>) are self-explanatory.  Note that other atom attributes can be used as
+inputs to this fix by using the
+<a class="reference internal" href="compute_property_atom.html"><span class="doc">compute property/atom</span></a> command and then specifying
 an input value from that compute.</p>
 <p>If a value begins with “c_”, a compute ID must follow which has been
 previously defined in the input script.  Computes can generate
@@ -392,7 +405,7 @@ is appended, the vector calculated by the compute is used.  If a
 bracketed integer is appended, the Ith column of the array calculated
 by the compute is used.  Users can also write code for their own
 compute styles and <a class="reference internal" href="Modify.html"><span class="doc">add them to LAMMPS</span></a>.  See the
-discussion above for how I can be specified with a wildcard asterisk
+discussion above for how <span class="math notranslate nohighlight">\(I\)</span> can be specified with a wildcard asterisk
 to effectively specify multiple values.</p>
 <p>If a value begins with “f_”, a fix ID must follow which has been
 previously defined in the input script.  Fixes can generate per-atom
@@ -402,35 +415,37 @@ timesteps, which must be compatible with when compute reduce
 references the values, else an error results.  If no bracketed integer
 is appended, the vector calculated by the fix is used.  If a bracketed
 integer is appended, the Ith column of the array calculated by the fix
-is used.  Users can also write code for their own fix style and <a class="reference internal" href="Modify.html"><span class="doc">add them to LAMMPS</span></a>.  See the discussion above for how I can
-be specified with a wildcard asterisk to effectively specify multiple
-values.</p>
+is used.  Users can also write code for their own fix style and
+<a class="reference internal" href="Modify.html"><span class="doc">add them to LAMMPS</span></a>.  See the discussion above for how
+<span class="math notranslate nohighlight">\(I\)</span> can be specified with a wildcard asterisk to effectively specify
+multiple values.</p>
 <p>If a value begins with “v_”, a variable name must follow which has
 been previously defined in the input script.  It must be an
 <a class="reference internal" href="variable.html"><span class="doc">atom-style variable</span></a>.  Atom-style variables can
 reference thermodynamic keywords and various per-atom attributes, or
 invoke other computes, fixes, or variables when they are evaluated, so
-this is a very general means of generating per-atom quantities to
-reduce.</p>
+this is a very general means of generating per-atom quantities to reduce.</p>
 <hr class="docutils" />
 <p>If the <em>replace</em> keyword is used, two indices <em>vec1</em> and <em>vec2</em> are
-specified, where each index ranges from 1 to the # of input values.
+specified, where each index ranges from 1 to the number of input values.
 The replace keyword can only be used if the <em>mode</em> is <em>min</em> or <em>max</em>.
 It works as follows.  A min/max is computed as usual on the <em>vec2</em>
-input vector.  The index N of that value within <em>vec2</em> is also stored.
+input vector.  The index <span class="math notranslate nohighlight">\(N\)</span> of that value within <em>vec2</em> is also stored.
 Then, instead of performing a min/max on the <em>vec1</em> input vector, the
-stored index is used to select the Nth element of the <em>vec1</em> vector.</p>
+stored index is used to select the <span class="math notranslate nohighlight">\(N\)</span>th element of the <em>vec1</em> vector.</p>
 <p>Thus, for example, if you wish to use this compute to find the bond
 with maximum stretch, you can do it as follows:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">property</span><span class="o">/</span><span class="n">local</span><span class="w"> </span><span class="n">batom1</span><span class="w"> </span><span class="n">batom2</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">bond</span><span class="o">/</span><span class="n">local</span><span class="w"> </span><span class="n">dist</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">3</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">reduce</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="n">c_1[1]</span><span class="w"> </span><span class="n">c_1[2]</span><span class="w"> </span><span class="n">c_2</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"></span>
-<span class="k">thermo_style</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">c_3[1]</span><span class="w"> </span><span class="n">c_3[2]</span><span class="w"> </span><span class="n">c_3[3]</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">property</span><span class="o">/</span><span class="n">local</span><span class="w"> </span><span class="n">batom1</span><span class="w"> </span><span class="n">batom2</span>
+<span class="k">compute </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">bond</span><span class="o">/</span><span class="n">local</span><span class="w"> </span><span class="n">dist</span>
+<span class="k">compute </span><span class="nv nv-Identifier">3</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">reduce</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="n">c_1[1]</span><span class="w"> </span><span class="n">c_1[2]</span><span class="w"> </span><span class="n">c_2</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span>
+<span class="k">thermo_style</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">c_3[1]</span><span class="w"> </span><span class="n">c_3[2]</span><span class="w"> </span><span class="n">c_3[3]</span>
 </pre></div>
 </div>
 <p>The first two input values in the compute reduce command are vectors
-with the IDs of the 2 atoms in each bond, using the <a class="reference internal" href="compute_property_local.html"><span class="doc">compute property/local</span></a> command.  The last input
-value is bond distance, using the <a class="reference internal" href="compute_bond_local.html"><span class="doc">compute bond/local</span></a> command.  Instead of taking the
+with the IDs of the 2 atoms in each bond, using the
+<a class="reference internal" href="compute_property_local.html"><span class="doc">compute property/local</span></a> command.  The last input
+value is bond distance, using the
+<a class="reference internal" href="compute_bond_local.html"><span class="doc">compute bond/local</span></a> command.  Instead of taking the
 max of the two atom ID vectors, which does not yield useful
 information in this context, the <em>replace</em> keywords will extract the
 atom IDs for the two atoms in the bond of maximum stretch.  These atom
@@ -440,40 +455,43 @@ IDs and the bond stretch will be printed with thermodynamic output.</p>
 value.  If multiple inputs are specified, this compute produces a
 global vector of values, the length of which is equal to the number of
 inputs specified.</p>
-<p>As discussed below, for the <em>sum</em>, <em>sumabs</em> and <em>sumsq</em> modes, the value(s)
+<p>As discussed below, for the <em>sum</em>, <em>sumabs</em>, and <em>sumsq</em> modes, the value(s)
 produced by this compute are all “extensive”, meaning their value
 scales linearly with the number of atoms involved.  If normalized
-values are desired, this compute can be accessed by the <a class="reference internal" href="thermo_style.html"><span class="doc">thermo_style custom</span></a> command with <a class="reference internal" href="thermo_modify.html"><span class="doc">thermo_modify norm yes</span></a> set as an option.  Or it can be accessed by a
+values are desired, this compute can be accessed by the
+<a class="reference internal" href="thermo_style.html"><span class="doc">thermo_style custom</span></a> command with
+<a class="reference internal" href="thermo_modify.html"><span class="doc">thermo_modify norm yes</span></a> set as an option.
+Or it can be accessed by a
 <a class="reference internal" href="variable.html"><span class="doc">variable</span></a> that divides by the appropriate atom count.</p>
 </section>
 <hr class="docutils" />
 <section id="output-info">
-<h2>Output info<a class="headerlink" href="#output-info" title="Permalink to this headline">¶</a></h2>
-<p>This compute calculates a global scalar if a single input value is
-specified or a global vector of length N where N is the number of
-inputs, and which can be accessed by indices 1 to N.  These values can
+<h2>Output info<a class="headerlink" href="#output-info" title="Permalink to this heading"></a></h2>
+<p>This compute calculates a global scalar if a single input value is specified
+or a global vector of length <span class="math notranslate nohighlight">\(N\)</span>, where <span class="math notranslate nohighlight">\(N\)</span> is the number of
+inputs, and which can be accessed by indices 1 to <span class="math notranslate nohighlight">\(N\)</span>.  These values can
 be used by any command that uses global scalar or vector values from a
 compute as input.  See the <a class="reference internal" href="Howto_output.html"><span class="doc">Howto output</span></a> doc page
 for an overview of LAMMPS output options.</p>
 <p>All the scalar or vector values calculated by this compute are
-“intensive”, except when the <em>sum</em>, <em>sumabs</em> or <em>sumsq</em> modes are used on
+“intensive”, except when the <em>sum</em>, <em>sumabs</em>, or <em>sumsq</em> modes are used on
 per-atom or local vectors, in which case the calculated values are
 “extensive”.</p>
 <p>The scalar or vector values will be in whatever <a class="reference internal" href="units.html"><span class="doc">units</span></a> the
 quantities being reduced are in.</p>
 </section>
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <blockquote>
 <div><p>none</p>
 </div></blockquote>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="compute.html"><span class="doc">compute</span></a>, <a class="reference internal" href="fix.html"><span class="doc">fix</span></a>, <a class="reference internal" href="variable.html"><span class="doc">variable</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
 <p>none</p>
 </section>
 </section>
@@ -489,7 +507,7 @@ quantities being reduced are in.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -498,7 +516,6 @@ quantities being reduced are in.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

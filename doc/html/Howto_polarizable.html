@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>8.5.4. Polarizable models &mdash; LAMMPS documentation</title>
+  <title>8.5.5. Polarizable models &mdash; LAMMPS documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Howto_polarizable.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="8.5.5. Adiabatic core/shell model" href="Howto_coreshell.html" />
-    <link rel="prev" title="8.5.3. Body particles" href="Howto_body.html" /> 
+    <link rel="next" title="8.5.6. Adiabatic core/shell model" href="Howto_coreshell.html" />
+    <link rel="prev" title="8.5.4. Bonded particle models" href="Howto_bpm.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -64,12 +68,14 @@
 <li class="toctree-l3"><a class="reference internal" href="Howto_spherical.html">8.5.1. Finite-size spherical and aspherical particles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Howto_granular.html">8.5.2. Granular models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Howto_body.html">8.5.3. Body particles</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">8.5.4. Polarizable models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Howto_coreshell.html">8.5.5. Adiabatic core/shell model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Howto_drude.html">8.5.6. Drude induced dipoles</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Howto_drude2.html">8.5.7. Tutorial for Thermalized Drude oscillators in LAMMPS</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Howto_manifold.html">8.5.8. Manifolds (surfaces)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Howto_spins.html">8.5.9. Magnetic spins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_bpm.html">8.5.4. Bonded particle models</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">8.5.5. Polarizable models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_coreshell.html">8.5.6. Adiabatic core/shell model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_drude.html">8.5.7. Drude induced dipoles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_drude2.html">8.5.8. Tutorial for Thermalized Drude oscillators in LAMMPS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_peri.html">8.5.9. Peridynamics with LAMMPS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_manifold.html">8.5.10. Manifolds (surfaces)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Howto_spins.html">8.5.11. Magnetic spins</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Howto.html#tutorials-howto">8.6. Tutorials howto</a></li>
@@ -96,6 +102,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -113,24 +120,24 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Howto.html"><span class="section-number">8. </span>Howto discussions</a> &raquo;</li>
-      <li><span class="section-number">8.5.4. </span>Polarizable models</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Howto.html"><span class="section-number">8. </span>Howto discussions</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">8.5.5. </span>Polarizable models</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
-        <a href="Howto_body.html" class="btn btn-neutral float-left" title="8.5.3. Body particles" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Howto_coreshell.html" class="btn btn-neutral float-right" title="8.5.5. Adiabatic core/shell model" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Howto_bpm.html" class="btn btn-neutral float-left" title="8.5.4. Bonded particle models" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Howto_coreshell.html" class="btn btn-neutral float-right" title="8.5.6. Adiabatic core/shell model" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="polarizable-models">
-<h1><span class="section-number">8.5.4. </span>Polarizable models<a class="headerlink" href="#polarizable-models" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="polarizable-models">
+<h1><span class="section-number">8.5.5. </span>Polarizable models<a class="headerlink" href="#polarizable-models" title="Permalink to this heading"></a></h1>
 <p>In polarizable force fields the charge distributions in molecules and
 materials respond to their electrostatic environments. Polarizable
 systems can be simulated in LAMMPS using three methods:</p>
@@ -203,14 +210,14 @@ well.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="Howto_body.html" class="btn btn-neutral float-left" title="8.5.3. Body particles" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Howto_coreshell.html" class="btn btn-neutral float-right" title="8.5.5. Adiabatic core/shell model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Howto_bpm.html" class="btn btn-neutral float-left" title="8.5.4. Bonded particle models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Howto_coreshell.html" class="btn btn-neutral float-right" title="8.5.6. Adiabatic core/shell model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -219,7 +226,6 @@ well.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

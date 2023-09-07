@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>3.9. Notes for building LAMMPS on Windows &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Build_windows.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -98,6 +102,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -115,12 +120,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Build.html"><span class="section-number">3. </span>Build LAMMPS</a> &raquo;</li>
-      <li><span class="section-number">3.9. </span>Notes for building LAMMPS on Windows</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Build.html"><span class="section-number">3. </span>Build LAMMPS</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">3.9. </span>Notes for building LAMMPS on Windows</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="Build_manual.html" class="btn btn-neutral float-left" title="3.8. Build the LAMMPS documentation" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -131,8 +135,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="notes-for-building-lammps-on-windows">
-<h1><span class="section-number">3.9. </span>Notes for building LAMMPS on Windows<a class="headerlink" href="#notes-for-building-lammps-on-windows" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="notes-for-building-lammps-on-windows">
+<h1><span class="section-number">3.9. </span>Notes for building LAMMPS on Windows<a class="headerlink" href="#notes-for-building-lammps-on-windows" title="Permalink to this heading"></a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="#generic"><span class="std std-ref">General remarks</span></a></p></li>
 <li><p><a class="reference internal" href="#linux"><span class="std std-ref">Running Linux on Windows</span></a></p></li>
@@ -143,7 +148,7 @@
 </ul>
 <hr class="docutils" />
 <section id="general-remarks">
-<span id="generic"></span><h2><span class="section-number">3.9.1. </span>General remarks<a class="headerlink" href="#general-remarks" title="Permalink to this headline">¶</a></h2>
+<span id="generic"></span><h2><span class="section-number">3.9.1. </span>General remarks<a class="headerlink" href="#general-remarks" title="Permalink to this heading"></a></h2>
 <p>LAMMPS is developed and tested primarily on Linux machines.  The vast
 majority of HPC clusters and supercomputers today run on Linux as well.
 While portability to other platforms is desired, it is not always
@@ -164,7 +169,7 @@ Windows.  This is mostly facilitated by using the
 and see if they are sufficient for your needs.</p>
 </section>
 <section id="running-linux-on-windows">
-<span id="linux"></span><h2><span class="section-number">3.9.2. </span>Running Linux on Windows<a class="headerlink" href="#running-linux-on-windows" title="Permalink to this headline">¶</a></h2>
+<span id="linux"></span><h2><span class="section-number">3.9.2. </span>Running Linux on Windows<a class="headerlink" href="#running-linux-on-windows" title="Permalink to this heading"></a></h2>
 <p>If it is necessary for you to compile LAMMPS on a Windows machine
 (e.g. because it is your main desktop), please also consider using a
 virtual machine software and compile and run LAMMPS in a Linux virtual
@@ -177,7 +182,7 @@ Ubuntu Linux machine (e.g. installing software via apt-get and more).
 For more details on that, please see <a class="reference internal" href="Howto_wsl.html"><span class="doc">this tutorial</span></a>.</p>
 </section>
 <section id="using-a-gnu-gcc-ported-to-windows">
-<span id="gnu"></span><h2><span class="section-number">3.9.3. </span>Using a GNU GCC ported to Windows<a class="headerlink" href="#using-a-gnu-gcc-ported-to-windows" title="Permalink to this headline">¶</a></h2>
+<span id="gnu"></span><h2><span class="section-number">3.9.3. </span>Using a GNU GCC ported to Windows<a class="headerlink" href="#using-a-gnu-gcc-ported-to-windows" title="Permalink to this heading"></a></h2>
 <p>One option for compiling LAMMPS on Windows natively is to install a Bash
 shell, Unix shell utilities, Perl, Python, GNU make, and a GNU compiler
 ported to Windows.  The Cygwin package provides a unix/linux interface
@@ -201,7 +206,7 @@ yourself, please report them on the
 or file them as an issue or pull request on the LAMMPS GitHub project.</p>
 </section>
 <section id="using-microsoft-visual-studio">
-<span id="msvc"></span><h2><span class="section-number">3.9.4. </span>Using Microsoft Visual Studio<a class="headerlink" href="#using-microsoft-visual-studio" title="Permalink to this headline">¶</a></h2>
+<span id="msvc"></span><h2><span class="section-number">3.9.4. </span>Using Microsoft Visual Studio<a class="headerlink" href="#using-microsoft-visual-studio" title="Permalink to this heading"></a></h2>
 <p>Following the integration of the <a class="reference internal" href="Developer_platform.html"><span class="doc">platform namespace</span></a> into the LAMMPS code base, portability of LAMMPS
 for native compilation on Windows using Visual Studio has been
 significantly improved.  This has been tested with Visual Studio 2019
@@ -244,7 +249,7 @@ if you have questions or LAMMPS specific problems.</p>
 </div>
 </section>
 <section id="using-intel-oneapi-compilers-and-libraries">
-<span id="oneapi"></span><h2><span class="section-number">3.9.5. </span>Using Intel oneAPI Compilers and Libraries<a class="headerlink" href="#using-intel-oneapi-compilers-and-libraries" title="Permalink to this headline">¶</a></h2>
+<span id="oneapi"></span><h2><span class="section-number">3.9.5. </span>Using Intel oneAPI Compilers and Libraries<a class="headerlink" href="#using-intel-oneapi-compilers-and-libraries" title="Permalink to this heading"></a></h2>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 31May2022.</span></p>
 </div>
@@ -286,7 +291,7 @@ if you have questions or LAMMPS specific problems.</p>
 </div>
 </section>
 <section id="using-a-cross-compiler">
-<span id="cross"></span><h2><span class="section-number">3.9.6. </span>Using a cross-compiler<a class="headerlink" href="#using-a-cross-compiler" title="Permalink to this headline">¶</a></h2>
+<span id="cross"></span><h2><span class="section-number">3.9.6. </span>Using a cross-compiler<a class="headerlink" href="#using-a-cross-compiler" title="Permalink to this heading"></a></h2>
 <p>If you need to provide custom LAMMPS binaries for Windows, but do not
 need to do the compilation on Windows, please consider using a Linux to
 Windows cross-compiler.  This is how currently the Windows binary
@@ -319,7 +324,7 @@ this is subject to time constraints and focus on HPC platforms.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -328,7 +333,6 @@ this is subject to time constraints and focus on HPC platforms.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

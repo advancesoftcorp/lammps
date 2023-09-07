@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>bond_style table command &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/bond_table.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -84,9 +88,12 @@
 <li class="toctree-l2"><a class="reference internal" href="bond_gaussian.html">bond_style gaussian command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_gromos.html">bond_style gromos command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_harmonic.html">bond_style harmonic command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bond_harmonic_restrain.html">bond_style harmonic/restrain command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_harmonic_shift.html">bond_style harmonic/shift command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_harmonic_shift_cut.html">bond_style harmonic/shift/cut command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_hybrid.html">bond_style hybrid command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bond_lepton.html">bond_style lepton command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bond_mesocnt.html">bond_style mesocnt command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_mm3.html">bond_style mm3 command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_morse.html">bond_style morse command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_none.html">bond_style none command</a></li>
@@ -101,7 +108,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#syntax">Syntax</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#description">Description</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#restart-fix-modify-output-run-start-stop-minimize-info">Restart, fix_modify, output, run start/stop, minimize info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#restart-info">Restart info</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#restrictions">Restrictions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#related-commands">Related commands</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#default">Default</a></li>
@@ -114,6 +121,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -131,12 +139,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="bonds.html">Bond Styles</a> &raquo;</li>
-      <li>bond_style table command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="bonds.html">Bond Styles</a></li>
+      <li class="breadcrumb-item active">bond_style table command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="bond_special.html" class="btn btn-neutral float-left" title="bond_style special command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -147,12 +154,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <span class="target" id="index-0"></span><section id="bond-style-table-command">
-<span id="index-1"></span><h1>bond_style table command<a class="headerlink" href="#bond-style-table-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<span class="target" id="index-0"></span><section id="bond-style-table-command">
+<span id="index-1"></span><h1>bond_style table command<a class="headerlink" href="#bond-style-table-command" title="Permalink to this heading"></a></h1>
 <p>Accelerator Variants: <em>table/omp</em></p>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">bond_style</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="n">N</span><span class="w"></span>
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">bond_style</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="n">N</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -161,14 +169,14 @@
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">bond_style</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">linear</span><span class="w"> </span><span class="m">1000</span><span class="w"></span>
-<span class="k">bond_coeff</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">file.table</span><span class="w"> </span><span class="n">ENTRY1</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">bond_style</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">linear</span><span class="w"> </span><span class="m">1000</span>
+<span class="k">bond_coeff</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">file.table</span><span class="w"> </span><span class="n">ENTRY1</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <p>Style <em>table</em> creates interpolation tables of length <em>N</em> from bond
 potential and force values listed in a file(s) as a function of bond
 length.  The files are read by the <a class="reference internal" href="bond_coeff.html"><span class="doc">bond_coeff</span></a>
@@ -195,6 +203,11 @@ evaluate a cubic polynomial which computes the energy or force.</p>
 values.  The keyword specifies a section of the file.  The format of
 this file is described below.</p>
 <hr class="docutils" />
+<p>Suitable tables for use with this bond style can be created by LAMMPS
+itself from existing bond styles using the <a class="reference internal" href="bond_write.html"><span class="doc">bond_write</span></a> command.  This can be useful to have a template file for
+testing the bond style settings and to build a compatible custom file.
+Another option to generate tables is the Python code in the
+<code class="docutils literal notranslate"><span class="pre">tools/tabulate</span></code> folder of the LAMMPS source code distribution.</p>
 <p>The format of a tabulated file is as follows (without the
 parenthesized comments):</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Bond potential for harmonic (one or more comment or blank lines)
@@ -236,8 +249,9 @@ construction routines.  If not specified by the “FP” parameter, they
 are estimated (less accurately) by the first two and last two force
 values in the table.</p>
 <p>The “EQ” parameter is also optional.  If used, it is followed by a the
-equilibrium bond length, which is used, for example, by the <a class="reference internal" href="fix_shake.html"><span class="doc">fix shake</span></a> command.  If not used, the equilibrium bond
-length is to the distance in the table with the lowest potential energy.</p>
+equilibrium bond length, which is used, for example, by the <a class="reference internal" href="fix_shake.html"><span class="doc">fix
+shake</span></a> command.  If not used, the equilibrium bond length is
+to the distance in the table with the lowest potential energy.</p>
 <p>Following a blank line, the next N lines list the tabulated values.
 On each line, the first value is the index from 1 to N, the second value is
 the bond length r (in distance units), the third value is the energy (in
@@ -258,7 +272,7 @@ hardware, as discussed on the <a class="reference internal" href="Speed_packages
 page.  The accelerated styles take the same arguments and should
 produce the same results, except for round-off and precision issues.</p>
 <p>These accelerated styles are part of the GPU, INTEL, KOKKOS,
-OPENMP and OPT packages, respectively.  They are only enabled if
+OPENMP, and OPT packages, respectively.  They are only enabled if
 LAMMPS was built with those packages.  See the <a class="reference internal" href="Build_package.html"><span class="doc">Build package</span></a> page for more info.</p>
 <p>You can specify the accelerated styles explicitly in your input script
 by including their suffix, or you can use the <a class="reference internal" href="Run_options.html"><span class="doc">-suffix command-line switch</span></a> when you invoke LAMMPS, or you can use the
@@ -267,28 +281,28 @@ by including their suffix, or you can use the <a class="reference internal" href
 instructions on how to use the accelerated styles effectively.</p>
 </section>
 <hr class="docutils" />
-<section id="restart-fix-modify-output-run-start-stop-minimize-info">
-<h2>Restart, fix_modify, output, run start/stop, minimize info<a class="headerlink" href="#restart-fix-modify-output-run-start-stop-minimize-info" title="Permalink to this headline">¶</a></h2>
-<p>This bond style writes the settings for the “bond_style table”
-command to <a class="reference internal" href="restart.html"><span class="doc">binary restart files</span></a>, so a bond_style
-command does not need to specified in an input script that reads a
-restart file.  However, the coefficient information is not stored in
-the restart file, since it is tabulated in the potential files.  Thus,
-bond_coeff commands do need to be specified in the restart input
-script.</p>
+<section id="restart-info">
+<h2>Restart info<a class="headerlink" href="#restart-info" title="Permalink to this heading"></a></h2>
+<p>This bond style writes the settings for the “bond_style table” command
+to <a class="reference internal" href="restart.html"><span class="doc">binary restart files</span></a>, so a bond_style command does
+not need to specified in an input script that reads a restart file.
+However, the coefficient information is not stored in the restart file,
+since it is tabulated in the potential files.  Thus, bond_coeff commands
+do need to be specified in the restart input script.</p>
 </section>
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <p>This bond style can only be used if LAMMPS was built with the MOLECULE
 package.  See the <a class="reference internal" href="Build_package.html"><span class="doc">Build package</span></a> page for more
 info.</p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="bond_coeff.html"><span class="doc">bond_coeff</span></a>, <a class="reference internal" href="delete_bonds.html"><span class="doc">delete_bonds</span></a></p>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
+<p><a class="reference internal" href="bond_coeff.html"><span class="doc">bond_coeff</span></a>, <a class="reference internal" href="delete_bonds.html"><span class="doc">delete_bonds</span></a>,
+<a class="reference internal" href="bond_write.html"><span class="doc">bond_write</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
 <p>none</p>
 </section>
 </section>
@@ -304,7 +318,7 @@ info.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -313,7 +327,6 @@ info.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

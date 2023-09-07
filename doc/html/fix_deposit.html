@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>fix deposit command &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/fix_deposit.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -77,6 +81,9 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_adapt_fep.html">fix adapt/fep command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_addforce.html">fix addforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_addtorque.html">fix addtorque command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_alchemy.html">fix alchemy command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_amoeba_bitorsion.html">fix amoeba/bitorsion command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_amoeba_pitorsion.html">fix amoeba/pitorsion command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_append_atoms.html">fix append/atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_atc.html">fix atc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_atom_swap.html">fix atom/swap command</a></li>
@@ -84,8 +91,11 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_chunk.html">fix ave/chunk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_correlate.html">fix ave/correlate command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_correlate_long.html">fix ave/correlate/long command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_grid.html">fix ave/grid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_histo.html">fix ave/histo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_histo.html#fix-ave-histo-weight-command">fix ave/histo/weight command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_spatial.html">Fix ave/spatial command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_ave_spatial_sphere.html">Fix ave/spatial command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ave_time.html">fix ave/time command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_aveforce.html">fix aveforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_balance.html">fix balance command</a></li>
@@ -124,10 +134,11 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_drude_transform.html#fix-drude-transform-inverse-command">fix drude/transform/inverse command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_dt_reset.html">fix dt/reset command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_efield.html">fix efield command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_efield.html#fix-efield-tip4p-command">fix efield/tip4p command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_ehex.html">fix ehex command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html">fix electrode/conp command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html#fix-electrode-conq-command">fix electrode/conq command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_electrode_conp.html#fix-electrode-thermo-command">fix electrode/thermo command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html">fix electrode/conp command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html#fix-electrode-conq-command">fix electrode/conq command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_electrode.html#fix-electrode-thermo-command">fix electrode/thermo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_electron_stopping.html">fix electron/stopping command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_electron_stopping.html#fix-electron-stopping-fit-command">fix electron/stopping/fit command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_enforce2d.html">fix enforce2d command</a></li>
@@ -147,6 +158,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_grem.html">fix grem command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_halt.html">fix halt command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_heat.html">fix heat command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_heat_flow.html">fix heat/flow command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_hyper_global.html">fix hyper/global command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_hyper_local.html">fix hyper/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_imd.html">fix imd command</a></li>
@@ -156,13 +168,13 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_drude.html">fix langevin/drude command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_eff.html">fix langevin/eff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_langevin_spin.html">fix langevin/spin command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_latte.html">fix latte command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_fluid.html">fix lb/fluid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_momentum.html">fix lb/momentum command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lb_viscous.html">fix lb/viscous command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_lineforce.html">fix lineforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_manifoldforce.html">fix manifoldforce command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_mdi_aimd.html">fix mdi/aimd command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_mdi_qm.html">fix mdi/qm command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_mdi_qmmm.html">fix mdi/qmmm command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_meso_move.html">fix meso/move command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify.html">fix_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
@@ -223,8 +235,10 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_orient.html#fix-orient-bcc-command">fix orient/bcc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_orient_eco.html">fix orient/eco command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_pafi.html">fix pafi command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pair.html">fix pair command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_phonon.html">fix phonon command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html">fix pimd command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html">fix pimd/langevin command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_pimd.html#fix-pimd-nvt-command">fix pimd/nvt command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_planeforce.html">fix planeforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_plumed.html">fix plumed command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_poems.html">fix poems command</a></li>
@@ -269,6 +283,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_saed_vtk.html">fix saed/vtk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_setforce.html">fix setforce command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_setforce.html#fix-setforce-spin-command">fix setforce/spin command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_sgcmc.html">fix sgcmc command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shake.html">fix shake command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shake.html#fix-rattle-command">fix rattle command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_shardlow.html">fix shardlow command</a></li>
@@ -312,7 +327,9 @@
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-lj1043-command">fix wall/lj1043 command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-colloid-command">fix wall/colloid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-harmonic-command">fix wall/harmonic command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-lepton-command">fix wall/lepton command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-morse-command">fix wall/morse command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fix_wall.html#fix-wall-table-command">fix wall/table command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_body_polygon.html">fix wall/body/polygon command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_body_polyhedron.html">fix wall/body/polyhedron command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_wall_ees.html">fix wall/ees command</a></li>
@@ -333,6 +350,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -350,12 +368,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="fixes.html">Fixes</a> &raquo;</li>
-      <li>fix deposit command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="fixes.html">Fixes</a></li>
+      <li class="breadcrumb-item active">fix deposit command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="fix_deform.html" class="btn btn-neutral float-left" title="fix deform command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -366,11 +383,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="fix-deposit-command">
-<span id="index-0"></span><h1>fix deposit command<a class="headerlink" href="#fix-deposit-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="fix-deposit-command">
+<span id="index-0"></span><h1>fix deposit command<a class="headerlink" href="#fix-deposit-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fix ID group-ID deposit N type M seed keyword values ...
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">ID</span><span class="w"> </span><span class="nv nv-Identifier">group-ID</span><span class="w"> </span><span class="n">deposit</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="n">seed</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">values</span><span class="w"> </span><span class="n">...</span>
 </pre></div>
 </div>
 <ul>
@@ -381,7 +399,7 @@
 <li><p>M = insert a single atom or molecule every M steps</p></li>
 <li><p>seed = random # seed (positive integer)</p></li>
 <li><p>one or more keyword/value pairs may be appended to args</p></li>
-<li><p>keyword = <em>region</em> or <em>id</em> or <em>global</em> or <em>local</em> or <em>near</em> or <em>gaussian</em> or <em>attempt</em> or <em>rate</em> or <em>vx</em> or <em>vy</em> or <em>vz</em> or <em>mol</em> or <em>rigid</em> or <em>shake</em> or <em>units</em></p>
+<li><p>keyword = <em>region</em> or <em>id</em> or <em>global</em> or <em>local</em> or <em>near</em> or <em>gaussian</em> or <em>attempt</em> or <em>rate</em> or <em>vx</em> or <em>vy</em> or <em>vz</em> or <em>target</em> or <em>mol</em> or <em>molfrac</em> or <em>rigid</em> or <em>shake</em> or <em>orient</em> or <em>units</em></p>
 <pre class="literal-block"><em>region</em> value = region-ID
   region-ID = ID of region to use as insertion volume
 <em>id</em> value = <em>max</em> or <em>next</em>
@@ -426,16 +444,16 @@
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">3</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">deposit</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">29494</span><span class="w"> </span><span class="k">region </span><span class="nv nv-Identifier">myblock</span><span class="w"> </span><span class="n">local</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">units</span><span class="w"> </span><span class="n">box</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">newatoms</span><span class="w"> </span><span class="n">deposit</span><span class="w"> </span><span class="m">10000</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">500</span><span class="w"> </span><span class="m">12345</span><span class="w"> </span><span class="k">region </span><span class="nv nv-Identifier">disk</span><span class="w"> </span><span class="n">near</span><span class="w"> </span><span class="m">2.0</span><span class="w"> </span><span class="n">vz</span><span class="w"> </span><span class="o">-</span><span class="m">1.0</span><span class="w"> </span><span class="o">-</span><span class="m">0.8</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">4</span><span class="w"> </span><span class="nv nv-Identifier">sputter</span><span class="w"> </span><span class="n">deposit</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">500</span><span class="w"> </span><span class="m">12235</span><span class="w"> </span><span class="k">region </span><span class="nv nv-Identifier">sphere</span><span class="w"> </span><span class="n">vz</span><span class="w"> </span><span class="o">-</span><span class="m">1.0</span><span class="w"> </span><span class="o">-</span><span class="m">1.0</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="m">5.0</span><span class="w"> </span><span class="m">5.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="n">units</span><span class="w"> </span><span class="n">lattice</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">5</span><span class="w"> </span><span class="nv nv-Identifier">insert</span><span class="w"> </span><span class="n">deposit</span><span class="w"> </span><span class="m">200</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">777</span><span class="w"> </span><span class="k">region </span><span class="nv nv-Identifier">disk</span><span class="w"> </span><span class="n">gaussian</span><span class="w"> </span><span class="m">5.0</span><span class="w"> </span><span class="m">5.0</span><span class="w"> </span><span class="m">9.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">units</span><span class="w"> </span><span class="n">box</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">fix </span><span class="nv nv-Identifier">3</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">deposit</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">29494</span><span class="w"> </span><span class="k">region </span><span class="nv nv-Identifier">myblock</span><span class="w"> </span><span class="n">local</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">units</span><span class="w"> </span><span class="n">box</span>
+<span class="k">fix </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">newatoms</span><span class="w"> </span><span class="n">deposit</span><span class="w"> </span><span class="m">10000</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">500</span><span class="w"> </span><span class="m">12345</span><span class="w"> </span><span class="k">region </span><span class="nv nv-Identifier">disk</span><span class="w"> </span><span class="n">near</span><span class="w"> </span><span class="m">2.0</span><span class="w"> </span><span class="n">vz</span><span class="w"> </span><span class="o">-</span><span class="m">1.0</span><span class="w"> </span><span class="o">-</span><span class="m">0.8</span>
+<span class="k">fix </span><span class="nv nv-Identifier">4</span><span class="w"> </span><span class="nv nv-Identifier">sputter</span><span class="w"> </span><span class="n">deposit</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">500</span><span class="w"> </span><span class="m">12235</span><span class="w"> </span><span class="k">region </span><span class="nv nv-Identifier">sphere</span><span class="w"> </span><span class="n">vz</span><span class="w"> </span><span class="o">-</span><span class="m">1.0</span><span class="w"> </span><span class="o">-</span><span class="m">1.0</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="m">5.0</span><span class="w"> </span><span class="m">5.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="n">units</span><span class="w"> </span><span class="n">lattice</span>
+<span class="k">fix </span><span class="nv nv-Identifier">5</span><span class="w"> </span><span class="nv nv-Identifier">insert</span><span class="w"> </span><span class="n">deposit</span><span class="w"> </span><span class="m">200</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">777</span><span class="w"> </span><span class="k">region </span><span class="nv nv-Identifier">disk</span><span class="w"> </span><span class="n">gaussian</span><span class="w"> </span><span class="m">5.0</span><span class="w"> </span><span class="m">5.0</span><span class="w"> </span><span class="m">9.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">units</span><span class="w"> </span><span class="n">box</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <p>Insert a single atom or molecule into the simulation domain every M
 timesteps until N atoms or molecules have been inserted.  This is
 useful for simulating deposition onto a surface.  For the remainder of
@@ -453,10 +471,8 @@ will have atom types 3,4,5.</p>
 default group “all” and the group specified in the fix deposit command
 (which can also be “all”).</p>
 <p>If you are computing temperature values which include inserted
-particles, you will want to use the
-<a class="reference internal" href="compute_modify.html"><span class="doc">compute_modify</span></a> dynamic option, which insures the
-current number of atoms is used as a normalizing factor each time the
-temperature is computed.</p>
+particles, you will want to use the <a class="reference internal" href="compute_modify.html"><span class="doc">compute_modify dynamic/dof yes</span></a> option, which ensures the current number of atoms is
+used as a normalizing factor each time the temperature is computed.</p>
 <p>Care must be taken that inserted particles are not too near existing
 atoms, using the options described below.  When inserting particles
 above a surface in a non-periodic box (see the
@@ -483,7 +499,7 @@ boxes.  However for <a class="reference internal" href="Howto_triclinic.html"><s
 tests against the larger orthonormal box that bounds the tilted
 simulation box.  If the specified region includes volume outside the
 tilted box, then an insertion will likely fail, leading to a “lost
-atoms” error.  Thus for triclinic boxes you should insure the
+atoms” error.  Thus for triclinic boxes you should ensure the
 specified region is wholly inside the simulation box.</p>
 </div>
 <p>The locations of inserted particles are taken from uniform distributed
@@ -511,11 +527,12 @@ value the ID of a separate <a class="reference internal" href="fix_rigid.html"><
 command which also appears in your input script.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you wish the new rigid molecules (and other rigid molecules)
-to be thermostatted correctly via <a class="reference internal" href="fix_rigid.html"><span class="doc">fix rigid/small/nvt</span></a>
-or <a class="reference internal" href="fix_rigid.html"><span class="doc">fix rigid/small/npt</span></a>, then you need to use the
-“fix_modify dynamic/dof yes” command for the rigid fix.  This is to
-inform that fix that the molecule count will vary dynamically.</p>
+<p>If you wish the new rigid molecules (and other rigid molecules) to be
+thermostatted correctly via <a class="reference internal" href="fix_rigid.html"><span class="doc">fix rigid/small/nvt</span></a> or
+<a class="reference internal" href="fix_rigid.html"><span class="doc">fix rigid/small/npt</span></a>, then you need to use the
+<a class="reference internal" href="fix_modify.html"><span class="doc">fix_modify dynamic/dof yes</span></a> command for the rigid
+fix.  This is to inform that fix that the molecule count will vary
+dynamically.</p>
 </div>
 <p>If you wish to insert molecules via the <em>mol</em> keyword, that will have
 their bonds or angles constrained via SHAKE, use the <em>shake</em> keyword,
@@ -566,11 +583,11 @@ successively higher height over time.  Note that this parameter is
 ignored if the <em>global</em> or <em>local</em> keywords are used, since those
 options choose a z-coordinate for insertion independently.</p>
 <p>The vx, vy, and vz components of velocity for the inserted particle
-are set using the values specified for the <em>vx</em>, <em>vy</em>, and <em>vz</em>
-keywords.  Note that normally, new particles should be a assigned a
-negative vertical velocity so that they move towards the surface.  For
-molecules, the same velocity is given to every particle (no rotation
-or bond vibration).</p>
+are set by sampling a uniform distribution between the bounds set by
+the values specified for the <em>vx</em>, <em>vy</em>, and <em>vz</em> keywords. Note that
+normally, new particles should be a assigned a negative vertical
+velocity so that they move towards the surface.  For molecules, the
+same velocity is given to every particle (no rotation or bond vibration).</p>
 <p>If the <em>target</em> option is used, the velocity vector of the inserted
 particle is changed so that it points from the insertion position
 towards the specified target point.  The magnitude of the velocity is
@@ -609,12 +626,12 @@ units of distance or velocity.</p>
 <p class="admonition-title">Note</p>
 <p>If you are monitoring the temperature of a system where the atom
 count is changing due to adding particles, you typically should use
-the <a class="reference internal" href="compute_modify.html"><span class="doc">compute_modify dynamic yes</span></a> command for the
-temperature compute you are using.</p>
+the <a class="reference internal" href="compute_modify.html"><span class="doc">compute_modify dynamic/dof yes</span></a> command
+for the temperature compute you are using.</p>
 </div>
 </section>
 <section id="restart-fix-modify-output-run-start-stop-minimize-info">
-<h2>Restart, fix_modify, output, run start/stop, minimize info<a class="headerlink" href="#restart-fix-modify-output-run-start-stop-minimize-info" title="Permalink to this headline">¶</a></h2>
+<h2>Restart, fix_modify, output, run start/stop, minimize info<a class="headerlink" href="#restart-fix-modify-output-run-start-stop-minimize-info" title="Permalink to this heading"></a></h2>
 <p>This fix writes the state of the deposition to <a class="reference internal" href="restart.html"><span class="doc">binary restart files</span></a>.  This includes information about how many
 particles have been deposited, the random number generator seed, the
 next timestep for deposition, etc.  See the
@@ -634,16 +651,16 @@ of this fix can be used with the <em>start/stop</em> keywords of the
 <a class="reference internal" href="run.html"><span class="doc">run</span></a> command.  This fix is not invoked during <a class="reference internal" href="minimize.html"><span class="doc">energy minimization</span></a>.</p>
 </section>
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <p>The specified insertion region cannot be a “dynamic” region, as
 defined by the <a class="reference internal" href="region.html"><span class="doc">region</span></a> command.</p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="fix_pour.html"><span class="doc">fix pour</span></a>, <a class="reference internal" href="region.html"><span class="doc">region</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
 <p>Insertions are performed for individual atoms, i.e. no <em>mol</em> setting
 is defined.  If the <em>mol</em> keyword is used, the default for <em>molfrac</em>
 is an equal probabilities for all molecules in the template.
@@ -664,7 +681,7 @@ and units = lattice.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -673,7 +690,6 @@ and units = lattice.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

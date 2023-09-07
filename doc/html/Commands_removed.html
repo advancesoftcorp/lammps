@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>5.14. Removed commands and packages &mdash; LAMMPS documentation</title>
+  <title>5.15. Removed commands and packages &mdash; LAMMPS documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Commands_removed.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="6. Optional packages" href="Packages.html" />
-    <link rel="prev" title="5.13. KSpace solvers" href="Commands_kspace.html" /> 
+    <link rel="prev" title="5.14. Dump commands" href="Commands_dump.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -66,13 +70,18 @@
 <li class="toctree-l2"><a class="reference internal" href="Commands_bond.html#dihedral-style-potentials">5.11. Dihedral_style potentials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Commands_bond.html#improper-style-potentials">5.12. Improper_style potentials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Commands_kspace.html">5.13. KSpace solvers</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">5.14. Removed commands and packages</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#fix-ave-spatial-and-fix-ave-spatial-sphere">5.14.1. Fix ave/spatial and fix ave/spatial/sphere</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#reset-ids-command">5.14.2. Reset_ids command</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#meam-package">5.14.3. MEAM package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#reax-package">5.14.4. REAX package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#user-cuda-package">5.14.5. USER-CUDA package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#restart2data-tool">5.14.6. restart2data tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Commands_dump.html">5.14. Dump commands</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.15. Removed commands and packages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fix-ave-spatial-and-fix-ave-spatial-sphere">5.15.1. Fix ave/spatial and fix ave/spatial/sphere</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#box-command">5.15.2. Box command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reset-ids-reset-atom-ids-reset-mol-ids-commands">5.15.3. Reset_ids, reset_atom_ids, reset_mol_ids commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#latte-package">5.15.4. LATTE package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#meam-package">5.15.5. MEAM package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#minimize-style-fire-old">5.15.6. Minimize style fire/old</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pair-style-mesont-tpm-compute-style-mesont-atom-style-mesont">5.15.7. Pair style mesont/tpm, compute style mesont, atom style mesont</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reax-package">5.15.8. REAX package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#user-cuda-package">5.15.9. USER-CUDA package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#restart2data-tool">5.15.10. restart2data tool</a></li>
 </ul>
 </li>
 </ul>
@@ -101,6 +110,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -118,15 +128,14 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Commands.html"><span class="section-number">5. </span>Commands</a> &raquo;</li>
-      <li><span class="section-number">5.14. </span>Removed commands and packages</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Commands.html"><span class="section-number">5. </span>Commands</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">5.15. </span>Removed commands and packages</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
-        <a href="Commands_kspace.html" class="btn btn-neutral float-left" title="5.13. KSpace solvers" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Commands_dump.html" class="btn btn-neutral float-left" title="5.14. Dump commands" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="Packages.html" class="btn btn-neutral float-right" title="6. Optional packages" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
@@ -134,15 +143,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="removed-commands-and-packages">
-<h1><span class="section-number">5.14. </span>Removed commands and packages<a class="headerlink" href="#removed-commands-and-packages" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="removed-commands-and-packages">
+<h1><span class="section-number">5.15. </span>Removed commands and packages<a class="headerlink" href="#removed-commands-and-packages" title="Permalink to this heading"></a></h1>
 <p>This page lists LAMMPS commands and packages that have been removed from
-the distribution and provides suggestions for alternatives or replacements.
-LAMMPS has special dummy styles implemented, that will stop LAMMPS and
-print a suitable error message in most cases, when a style/command is used
-that has been removed.</p>
+the distribution and provides suggestions for alternatives or
+replacements.  LAMMPS has special dummy styles implemented, that will
+stop LAMMPS and print a suitable error message in most cases, when a
+style/command is used that has been removed or will replace the command
+with the direct alternative (if available) and print a warning.</p>
 <section id="fix-ave-spatial-and-fix-ave-spatial-sphere">
-<h2><span class="section-number">5.14.1. </span>Fix ave/spatial and fix ave/spatial/sphere<a class="headerlink" href="#fix-ave-spatial-and-fix-ave-spatial-sphere" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.15.1. </span>Fix ave/spatial and fix ave/spatial/sphere<a class="headerlink" href="#fix-ave-spatial-and-fix-ave-spatial-sphere" title="Permalink to this heading"></a></h2>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 11Dec2015.</span></p>
+</div>
 <p>The fixes ave/spatial and ave/spatial/sphere have been removed from LAMMPS
 since they were superseded by the more general and extensible “chunk
 infrastructure”.  Here the system is partitioned in one of many possible
@@ -150,31 +164,82 @@ ways through the <a class="reference internal" href="compute_chunk_atom.html"><s
 and then averaging is done using <a class="reference internal" href="fix_ave_chunk.html"><span class="doc">fix ave/chunk</span></a>.
 Please refer to the <a class="reference internal" href="Howto_chunk.html"><span class="doc">chunk HOWTO</span></a> section for an overview.</p>
 </section>
-<section id="reset-ids-command">
-<h2><span class="section-number">5.14.2. </span>Reset_ids command<a class="headerlink" href="#reset-ids-command" title="Permalink to this headline">¶</a></h2>
-<p>The reset_ids command has been renamed to <a class="reference internal" href="reset_atom_ids.html"><span class="doc">reset_atom_ids</span></a>.</p>
+<section id="box-command">
+<h2><span class="section-number">5.15.2. </span>Box command<a class="headerlink" href="#box-command" title="Permalink to this heading"></a></h2>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 22Dec2022.</span></p>
+</div>
+<p>The <em>box</em> command has been removed and the LAMMPS code changed so it won’t
+be needed.  If present, LAMMPS will ignore the command and print a warning.</p>
+</section>
+<section id="reset-ids-reset-atom-ids-reset-mol-ids-commands">
+<h2><span class="section-number">5.15.3. </span>Reset_ids, reset_atom_ids, reset_mol_ids commands<a class="headerlink" href="#reset-ids-reset-atom-ids-reset-mol-ids-commands" title="Permalink to this heading"></a></h2>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 22Dec2022.</span></p>
+</div>
+<p>The <em>reset_ids</em>, <em>reset_atom_ids</em>, and <em>reset_mol_ids</em> commands have
+been folded into the <a class="reference internal" href="reset_atoms.html"><span class="doc">reset_atoms</span></a> command.  If
+present, LAMMPS will replace the commands accordingly and print a
+warning.</p>
+</section>
+<section id="latte-package">
+<h2><span class="section-number">5.15.4. </span>LATTE package<a class="headerlink" href="#latte-package" title="Permalink to this heading"></a></h2>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 15Jun2023.</span></p>
+</div>
+<p>The LATTE package with the fix latte command was removed from LAMMPS.
+This functionality has been superseded by <a class="reference internal" href="fix_mdi_qm.html"><span class="doc">fix mdi/qm</span></a>
+and <a class="reference internal" href="fix_mdi_qmmm.html"><span class="doc">fix mdi/qmmm</span></a> from the <a class="reference internal" href="Packages_details.html#pkg-mdi"><span class="std std-ref">MDI package</span></a>.  These fixes are compatible with several quantum software
+packages, including LATTE.  See the <code class="docutils literal notranslate"><span class="pre">examples/QUANTUM</span></code> dir and the
+<a class="reference internal" href="Howto_mdi.html"><span class="doc">MDI coupling HOWTO</span></a> page.  MDI supports running LAMMPS
+with LATTE as a plugin library (similar to the way fix latte worked), as
+well as on a different set of MPI processors.</p>
 </section>
 <section id="meam-package">
-<h2><span class="section-number">5.14.3. </span>MEAM package<a class="headerlink" href="#meam-package" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.15.5. </span>MEAM package<a class="headerlink" href="#meam-package" title="Permalink to this heading"></a></h2>
 <p>The MEAM package in Fortran has been replaced by a C++ implementation.
 The code in the <a class="reference internal" href="Packages_details.html#pkg-meam"><span class="std std-ref">MEAM package</span></a> is a translation of the
 Fortran code of MEAM into C++, which removes several restrictions
 (e.g. there can be multiple instances in hybrid pair styles) and allows
 for some optimizations leading to better performance.  The pair style
-<a class="reference internal" href="pair_meam.html"><span class="doc">meam</span></a> has the exact same syntax.</p>
+<a class="reference internal" href="pair_meam.html"><span class="doc">meam</span></a> has the exact same syntax.  For a transition
+period the C++ version of MEAM was called USER-MEAMC so it could
+coexist with the Fortran version.</p>
+</section>
+<section id="minimize-style-fire-old">
+<h2><span class="section-number">5.15.6. </span>Minimize style fire/old<a class="headerlink" href="#minimize-style-fire-old" title="Permalink to this heading"></a></h2>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 8Feb2023.</span></p>
+</div>
+<p>Minimize style <em>fire/old</em> has been removed. Its functionality can be
+reproduced with <em>fire</em> with specific options. Please see the
+<a class="reference internal" href="min_modify.html"><span class="doc">min_modify command</span></a> documentation for details.</p>
+</section>
+<section id="pair-style-mesont-tpm-compute-style-mesont-atom-style-mesont">
+<h2><span class="section-number">5.15.7. </span>Pair style mesont/tpm, compute style mesont, atom style mesont<a class="headerlink" href="#pair-style-mesont-tpm-compute-style-mesont-atom-style-mesont" title="Permalink to this heading"></a></h2>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 8Feb2023.</span></p>
+</div>
+<p>Pair style <em>mesont/tpm</em>, compute style <em>mesont</em>, and atom style
+<em>mesont</em> have been removed from the <a class="reference internal" href="Packages_details.html#pkg-mesont"><span class="std std-ref">MESONT package</span></a>.
+The same functionality is available through
+<a class="reference internal" href="pair_mesocnt.html"><span class="doc">pair style mesocnt</span></a>,
+<a class="reference internal" href="bond_mesocnt.html"><span class="doc">bond style mesocnt</span></a> and
+<a class="reference internal" href="angle_mesocnt.html"><span class="doc">angle style mesocnt</span></a>.</p>
 </section>
 <section id="reax-package">
-<h2><span class="section-number">5.14.4. </span>REAX package<a class="headerlink" href="#reax-package" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.15.8. </span>REAX package<a class="headerlink" href="#reax-package" title="Permalink to this heading"></a></h2>
 <p>The REAX package has been removed since it was superseded by the
-<a class="reference internal" href="Packages_details.html#pkg-reaxff"><span class="std std-ref">REAXFF package</span></a>.  The REAXFF
-package has been tested to yield equivalent results to the REAX package,
-offers better performance, supports OpenMP multi-threading via OPENMP,
-and GPU and threading parallelization through KOKKOS.  The new pair styles
-are not syntax compatible with the removed reax pair style, so input
-files will have to be adapted.</p>
+<a class="reference internal" href="Packages_details.html#pkg-reaxff"><span class="std std-ref">REAXFF package</span></a>.  The REAXFF package has been tested
+to yield equivalent results to the REAX package, offers better
+performance, supports OpenMP multi-threading via OPENMP, and GPU and
+threading parallelization through KOKKOS.  The new pair styles are not
+syntax compatible with the removed reax pair style, so input files will
+have to be adapted.  The REAXFF package was originally called
+USER-REAXC.</p>
 </section>
 <section id="user-cuda-package">
-<h2><span class="section-number">5.14.5. </span>USER-CUDA package<a class="headerlink" href="#user-cuda-package" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.15.9. </span>USER-CUDA package<a class="headerlink" href="#user-cuda-package" title="Permalink to this heading"></a></h2>
 <p>The USER-CUDA package had been removed, since it had been unmaintained
 for a long time and had known bugs and problems.  Significant parts of
 the design were transferred to the
@@ -184,12 +249,13 @@ and the <a class="reference internal" href="Packages_details.html#pkg-gpu"><span
 and allow running LAMMPS with GPU acceleration.</p>
 </section>
 <section id="restart2data-tool">
-<h2><span class="section-number">5.14.6. </span>restart2data tool<a class="headerlink" href="#restart2data-tool" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.15.10. </span>restart2data tool<a class="headerlink" href="#restart2data-tool" title="Permalink to this heading"></a></h2>
 <p>The functionality of the restart2data tool has been folded into the
 LAMMPS executable directly instead of having a separate tool.  A
 combination of the commands <a class="reference internal" href="read_restart.html"><span class="doc">read_restart</span></a> and
-<a class="reference internal" href="write_data.html"><span class="doc">write_data</span></a> can be used to the same effect.  For added
-convenience this conversion can also be triggered by <a class="reference internal" href="Run_options.html"><span class="doc">command line flags</span></a></p>
+<a class="reference internal" href="write_data.html"><span class="doc">write_data</span></a> can be used to the same effect.  For
+added convenience this conversion can also be triggered by
+<a class="reference internal" href="Run_options.html"><span class="doc">command line flags</span></a></p>
 </section>
 </section>
 
@@ -197,14 +263,14 @@ convenience this conversion can also be triggered by <a class="reference interna
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="Commands_kspace.html" class="btn btn-neutral float-left" title="5.13. KSpace solvers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Commands_dump.html" class="btn btn-neutral float-left" title="5.14. Dump commands" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="Packages.html" class="btn btn-neutral float-right" title="6. Optional packages" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -213,7 +279,6 @@ convenience this conversion can also be triggered by <a class="reference interna
    
 
 </footer>
-
         </div>
       </div>
     </section>

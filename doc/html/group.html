@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>group command &mdash; LAMMPS documentation</title>
@@ -10,22 +10,22 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/group.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="group2ndx command" href="group2ndx.html" />
-    <link rel="prev" title="fix_modify command" href="fix_modify.html" /> 
+    <link rel="prev" title="fitpod command" href="fitpod_command.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -72,6 +76,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="commands_list.html">Commands</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="angle_coeff.html">angle_coeff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="angle_style.html">angle_style command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="angle_write.html">angle_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="atom_modify.html">atom_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="atom_style.html">atom_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="balance.html">balance command</a></li>
@@ -79,7 +84,6 @@
 <li class="toctree-l2"><a class="reference internal" href="bond_style.html">bond_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_write.html">bond_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="boundary.html">boundary command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="box.html">box command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="change_box.html">change_box command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="clear.html">clear command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="comm_modify.html">comm_modify command</a></li>
@@ -94,6 +98,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dielectric.html">dielectric command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_coeff.html">dihedral_coeff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_style.html">dihedral_style command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dihedral_write.html">dihedral_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dimension.html">dimension command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="displace_atoms.html">displace_atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html">dump command</a></li>
@@ -105,6 +110,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-movie-command"><span class="xref std std-doc">dump movie</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-atom-adios-command"><span class="xref std std-doc">dump atom/adios</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-custom-adios-command"><span class="xref std std-doc">dump custom/adios</span> command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dump.html#dump-cfg-uef-command"><span class="xref std std-doc">dump cfg/uef</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_adios.html">dump atom/adios  command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_adios.html#dump-custom-adios-command">dump custom/adios command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_cfg_uef.html">dump cfg/uef command</a></li>
@@ -122,6 +128,7 @@
 <li class="toctree-l2"><a class="reference internal" href="echo.html">echo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix.html">fix command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify.html">fix_modify command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitpod_command.html">fitpod command</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">group command</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#syntax">Syntax</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
@@ -144,6 +151,7 @@
 <li class="toctree-l2"><a class="reference internal" href="kspace_modify.html">kspace_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kspace_style.html">kspace_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="label.html">label command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labelmap.html">labelmap command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lattice.html">lattice command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="log.html">log command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mass.html">mass command</a></li>
@@ -157,12 +165,10 @@
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-sd-command">min_style sd command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-quickmin-command">min_style quickmin command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-fire-command">min_style fire command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-fire-old-command">min_style fire/old command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-command"><span class="xref std std-doc">min_style spin</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-cg-command"><span class="xref std std-doc">min_style spin/cg</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-lbfgs-command"><span class="xref std std-doc">min_style spin/lbfgs</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="minimize.html">minimize command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="minimize.html#minimize-kk-command">minimize/kk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="molecule.html">molecule command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neb.html">neb command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neb_spin.html">neb/spin command</a></li>
@@ -188,8 +194,7 @@
 <li class="toctree-l2"><a class="reference internal" href="region.html">region command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="replicate.html">replicate command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rerun.html">rerun command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset_atom_ids.html">reset_atom_ids command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset_mol_ids.html">reset_mol_ids command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reset_atoms.html">reset_atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reset_timestep.html">reset_timestep command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="restart.html">restart command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="run.html">run command</a></li>
@@ -227,6 +232,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -244,15 +250,14 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="commands_list.html">Commands</a> &raquo;</li>
-      <li>group command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="commands_list.html">Commands</a></li>
+      <li class="breadcrumb-item active">group command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
-        <a href="fix_modify.html" class="btn btn-neutral float-left" title="fix_modify command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fitpod_command.html" class="btn btn-neutral float-left" title="fitpod command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="group2ndx.html" class="btn btn-neutral float-right" title="group2ndx command" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
@@ -260,16 +265,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="group-command">
-<span id="index-0"></span><h1>group command<a class="headerlink" href="#group-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="group-command">
+<span id="index-0"></span><h1>group command<a class="headerlink" href="#group-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>group ID style args
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">group </span><span class="nv nv-Identifier">ID</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="n">args</span>
 </pre></div>
 </div>
 <ul>
 <li><p>ID = user-defined name of the group</p></li>
-<li><p>style = <em>delete</em> or <em>clear</em> or <em>empty</em> or <em>region</em> or         <em>type</em> or <em>id</em> or <em>molecule</em> or <em>variable</em> or         <em>include</em> or <em>subtract</em> or <em>union</em> or <em>intersect</em> or         <em>dynamic</em> or <em>static</em></p>
+<li><p>style = <em>delete</em> or <em>clear</em> or <em>empty</em> or <em>region</em> or <em>type</em> or <em>id</em> or <em>molecule</em> or <em>variable</em> or <em>include</em> or <em>subtract</em> or <em>union</em> or <em>intersect</em> or <em>dynamic</em> or <em>static</em></p>
 <pre class="literal-block"><em>delete</em> = no args
 <em>clear</em> = no args
 <em>empty</em> = no args
@@ -303,26 +309,26 @@
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">group </span><span class="nv nv-Identifier">edge</span><span class="w"> </span><span class="k">region </span><span class="nv nv-Identifier">regstrip</span><span class="w"></span>
-<span class="k">group </span><span class="nv nv-Identifier">water</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">4</span><span class="w"></span>
-<span class="k">group </span><span class="nv nv-Identifier">sub</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">25</span><span class="w"> </span><span class="m">50</span><span class="w"></span>
-<span class="k">group </span><span class="nv nv-Identifier">sub</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">25</span><span class="w"> </span><span class="m">50</span><span class="w"> </span><span class="m">500:1000</span><span class="w"></span>
-<span class="k">group </span><span class="nv nv-Identifier">sub</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="m">100:10000:10</span><span class="w"></span>
-<span class="k">group </span><span class="nv nv-Identifier">sub</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">150</span><span class="w"></span>
-<span class="k">group </span><span class="nv nv-Identifier">polyA</span><span class="w"> </span><span class="n">molecule</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="m">50</span><span class="w"> </span><span class="m">250</span><span class="w"></span>
-<span class="k">group </span><span class="nv nv-Identifier">hienergy</span><span class="w"> </span><span class="n">variable</span><span class="w"> </span><span class="n">eng</span><span class="w"></span>
-<span class="k">group </span><span class="nv nv-Identifier">hienergy</span><span class="w"> </span><span class="n">include</span><span class="w"> </span><span class="n">molecule</span><span class="w"></span>
-<span class="k">group </span><span class="nv nv-Identifier">boundary</span><span class="w"> </span><span class="n">subtract</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">a2</span><span class="w"> </span><span class="n">a3</span><span class="w"></span>
-<span class="k">group </span><span class="nv nv-Identifier">boundary</span><span class="w"> </span><span class="n">union</span><span class="w"> </span><span class="n">lower</span><span class="w"> </span><span class="n">upper</span><span class="w"></span>
-<span class="k">group </span><span class="nv nv-Identifier">boundary</span><span class="w"> </span><span class="n">intersect</span><span class="w"> </span><span class="n">upper</span><span class="w"> </span><span class="n">flow</span><span class="w"></span>
-<span class="k">group </span><span class="nv nv-Identifier">boundary</span><span class="w"> </span><span class="n">delete</span><span class="w"></span>
-<span class="k">group </span><span class="nv nv-Identifier">mine</span><span class="w"> </span><span class="n">dynamic</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="k">region </span><span class="nv nv-Identifier">myRegion</span><span class="w"> </span><span class="n">every</span><span class="w"> </span><span class="m">100</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">group </span><span class="nv nv-Identifier">edge</span><span class="w"> </span><span class="k">region </span><span class="nv nv-Identifier">regstrip</span>
+<span class="k">group </span><span class="nv nv-Identifier">water</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">4</span>
+<span class="k">group </span><span class="nv nv-Identifier">sub</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">25</span><span class="w"> </span><span class="m">50</span>
+<span class="k">group </span><span class="nv nv-Identifier">sub</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">25</span><span class="w"> </span><span class="m">50</span><span class="w"> </span><span class="m">500:1000</span>
+<span class="k">group </span><span class="nv nv-Identifier">sub</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="m">100:10000:10</span>
+<span class="k">group </span><span class="nv nv-Identifier">sub</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">150</span>
+<span class="k">group </span><span class="nv nv-Identifier">polyA</span><span class="w"> </span><span class="n">molecule</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="m">50</span><span class="w"> </span><span class="m">250</span>
+<span class="k">group </span><span class="nv nv-Identifier">hienergy</span><span class="w"> </span><span class="k">variable </span><span class="nv nv-Identifier">eng</span>
+<span class="k">group </span><span class="nv nv-Identifier">hienergy</span><span class="w"> </span><span class="n">include</span><span class="w"> </span><span class="n">molecule</span>
+<span class="k">group </span><span class="nv nv-Identifier">boundary</span><span class="w"> </span><span class="n">subtract</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">a2</span><span class="w"> </span><span class="n">a3</span>
+<span class="k">group </span><span class="nv nv-Identifier">boundary</span><span class="w"> </span><span class="n">union</span><span class="w"> </span><span class="n">lower</span><span class="w"> </span><span class="n">upper</span>
+<span class="k">group </span><span class="nv nv-Identifier">boundary</span><span class="w"> </span><span class="n">intersect</span><span class="w"> </span><span class="n">upper</span><span class="w"> </span><span class="n">flow</span>
+<span class="k">group </span><span class="nv nv-Identifier">boundary</span><span class="w"> </span><span class="n">delete</span>
+<span class="k">group </span><span class="nv nv-Identifier">mine</span><span class="w"> </span><span class="n">dynamic</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="k">region </span><span class="nv nv-Identifier">myRegion</span><span class="w"> </span><span class="n">every</span><span class="w"> </span><span class="m">100</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <p>Identify a collection of atoms as belonging to a group.  The group ID
 can then be used in other commands such as <a class="reference internal" href="fix.html"><span class="doc">fix</span></a>,
 <a class="reference internal" href="compute.html"><span class="doc">compute</span></a>, <a class="reference internal" href="dump.html"><span class="doc">dump</span></a>, or <a class="reference internal" href="velocity.html"><span class="doc">velocity</span></a>
@@ -340,8 +346,8 @@ determination is made as to which atoms are in the group.  Since many
 LAMMPS commands operate on groups of atoms, you should think carefully
 about whether making a group dynamic makes sense for your model.</p>
 </div>
-<p>A group with the ID <em>all</em> is predefined.  All atoms belong to this
-group.  This group cannot be deleted, or made dynamic.</p>
+<p>A group with the ID <em>all</em> is predefined.  All atoms belong to this group.
+This group cannot be deleted, or made dynamic.</p>
 <p>The <em>delete</em> style removes the named group and un-assigns all atoms
 that were assigned to that group.  Since there is a restriction (see
 below) that no more than 32 groups can be defined at any time, the
@@ -350,9 +356,9 @@ so that more can be specified.  You cannot delete a group if it has
 been used to define a current <a class="reference internal" href="fix.html"><span class="doc">fix</span></a> or <a class="reference internal" href="compute.html"><span class="doc">compute</span></a>
 or <a class="reference internal" href="dump.html"><span class="doc">dump</span></a>.</p>
 <p>The <em>clear</em> style un-assigns all atoms that were assigned to that
-group.  This may be dangerous to do during a simulation run,
-e.g. using the <a class="reference internal" href="run.html"><span class="doc">run every</span></a> command if a fix or compute or
-other operation expects the atoms in the group to remain constant, but
+group.  This may be dangerous to do during a simulation run
+(e.g., using the <a class="reference internal" href="run.html"><span class="doc">run every</span></a> command if a fix or compute or
+other operation expects the atoms in the group to remain constant), but
 LAMMPS does not check for this.</p>
 <p>The <em>empty</em> style creates an empty group, which is useful for commands
 like <a class="reference internal" href="fix_gcmc.html"><span class="doc">fix gcmc</span></a> or with complex scripts that add atoms
@@ -363,7 +369,7 @@ assigned (or not assigned) to the group even in they later move out of
 the region volume.</p>
 <p>The <em>type</em>, <em>id</em>, and <em>molecule</em> styles put all atoms with the
 specified atom types, atom IDs, or molecule IDs into the group.  These
-3 styles can use arguments specified in one of two formats.</p>
+three styles can use arguments specified in one of two formats.</p>
 <p>The first format is a list of values (types or IDs).  For example, the
 second command in the examples above puts all atoms of type 3 or 4 into
 the group named <em>water</em>.  Each entry in the list can be a
@@ -371,14 +377,14 @@ colon-separated sequence <code class="docutils literal notranslate"><span class=
 above.  A “sequence” generates a sequence of values (types or IDs),
 with an optional increment.  The first example with <code class="docutils literal notranslate"><span class="pre">500:1000</span></code> has the
 default increment of 1 and would add all atom IDs from 500 to 1000
-(inclusive) to the group sub, along with 10,25,50 since they also
+(inclusive) to the group sub, along with 10, 25, and 50 since they also
 appear in the list of values.  The second example with <code class="docutils literal notranslate"><span class="pre">100:10000:10</span></code>
 uses an increment of 10 and would thus would add atoms IDs
-100,110,120, … 9990,10000 to the group sub.</p>
+<span class="math notranslate nohighlight">\(100, 110, 120, \dots, 9990, 10000\)</span> to the group sub.</p>
 <p>The second format is a <em>logical</em> followed by one or two values (type
 or ID).  The 7 valid logicals are listed above.  All the logicals
-except &lt;&gt; take a single argument.  The third example above adds all
-atoms with IDs from 1 to 150 to the group named <em>sub</em>.  The logical &lt;&gt;
+except <code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code> take a single argument.  The third example above adds all
+atoms with IDs from 1 to 150 to the group named <em>sub</em>.  The logical <code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code>
 means “between” and takes 2 arguments.  The fourth example above adds all
 atoms belonging to molecules with IDs from 50 to 250 (inclusive) to
 the group named polyA.</p>
@@ -390,37 +396,37 @@ to the specified group.</p>
 <p>Atom-style variables can specify formulas that include thermodynamic
 quantities, per-atom values such as atom coordinates, or per-atom
 quantities calculated by computes, fixes, or other variables.  They
-can also include Boolean logic where 2 numeric values are compared to
-yield a 1 or 0 (effectively a true or false).  Thus using the
-<em>variable</em> style, is a general way to flag specific atoms to include
+can also include Boolean logic where two numeric values are compared to
+yield a 1 or 0 (effectively a true or false).  Thus, using the
+<em>variable</em> style is a general way to flag specific atoms to include
 or exclude from a group.</p>
 <p>For example, these lines define a variable “eatom” that calculates the
 potential energy of each atom and includes it in the group if its
-potential energy is above the threshold value -3.0.</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute         </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">pe</span><span class="o">/</span><span class="n">atom</span><span class="w"></span>
-<span class="k">compute         </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">reduce</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="n">c_1</span><span class="w"></span>
-<span class="k">thermo_style</span><span class="w">    </span><span class="n">custom</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">pe</span><span class="w"> </span><span class="n">c_2</span><span class="w"></span>
-<span class="k">run</span><span class="w">             </span><span class="m">0</span><span class="w"></span>
+potential energy is above the threshold value <span class="math notranslate nohighlight">\(-3.0\)</span>.</p>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute         </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">pe</span><span class="o">/</span><span class="n">atom</span>
+<span class="k">compute         </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">reduce</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="n">c_1</span>
+<span class="k">thermo_style</span><span class="w">    </span><span class="n">custom</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">pe</span><span class="w"> </span><span class="n">c_2</span>
+<span class="k">run</span><span class="w">             </span><span class="m">0</span>
 
-<span class="k">variable        </span><span class="nv nv-Identifier">eatom</span><span class="w"> </span><span class="n">atom</span><span class="w"> </span><span class="s">&quot;c_1 &gt; -3.0&quot;</span><span class="w"></span>
-<span class="k">group           </span><span class="nv nv-Identifier">hienergy</span><span class="w"> </span><span class="n">variable</span><span class="w"> </span><span class="n">eatom</span><span class="w"></span>
+<span class="k">variable        </span><span class="nv nv-Identifier">eatom</span><span class="w"> </span><span class="n">atom</span><span class="w"> </span><span class="s">&quot;c_1 &gt; -3.0&quot;</span>
+<span class="k">group           </span><span class="nv nv-Identifier">hienergy</span><span class="w"> </span><span class="k">variable </span><span class="nv nv-Identifier">eatom</span>
 </pre></div>
 </div>
 <p>Note that these lines</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute         </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">reduce</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="n">c_1</span><span class="w"></span>
-<span class="k">thermo_style</span><span class="w">    </span><span class="n">custom</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">pe</span><span class="w"> </span><span class="n">c_2</span><span class="w"></span>
-<span class="k">run</span><span class="w">             </span><span class="m">0</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute         </span><span class="nv nv-Identifier">2</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">reduce</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="n">c_1</span>
+<span class="k">thermo_style</span><span class="w">    </span><span class="n">custom</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">pe</span><span class="w"> </span><span class="n">c_2</span>
+<span class="k">run</span><span class="w">             </span><span class="m">0</span>
 </pre></div>
 </div>
-<p>are necessary to insure that the “eatom” variable is current when the
+<p>are necessary to ensure that the “eatom” variable is current when the
 group command invokes it.  Because the eatom variable computes the
 per-atom energy via the pe/atom compute, it will only be current if a
 run has been performed which evaluated pairwise energies, and the
 pe/atom compute was actually invoked during the run.  Printing the
-thermodynamic info for compute 2 insures that this is the case, since
+thermodynamic info for compute 2 ensures that this is the case, since
 it sums the pe/atom compute values (in the reduce compute) to output
 them to the screen.  See the “Variable Accuracy” section of the
-<a class="reference internal" href="variable.html"><span class="doc">variable</span></a> page for more details on insuring that
+<a class="reference internal" href="variable.html"><span class="doc">variable</span></a> page for more details on ensuring that
 variables are current when they are evaluated between runs.</p>
 <p>The <em>include</em> style with its arg <em>molecule</em> adds atoms to a group that
 have the same molecule ID as atoms already in the group.  The molecule
@@ -479,7 +485,7 @@ other commands that use different kinds of custom atom vectors or
 arrays as arguments.</p>
 <p>The assignment of atoms to a dynamic group is done at the beginning of
 each run and on every timestep that is a multiple of <em>N</em>, which is
-the argument for the <em>every</em> keyword (N = 1 is the default).  For an
+the argument for the <em>every</em> keyword (<span class="math notranslate nohighlight">\(N = 1\)</span> is the default).  For an
 energy minimization, via the <a class="reference internal" href="minimize.html"><span class="doc">minimize</span></a> command, an
 assignment is made at the beginning of the minimization, but not
 during the iterations of the minimizer.</p>
@@ -491,8 +497,8 @@ lists and ghost atoms are current, and both intermolecular and
 intramolecular forces have been calculated based on the new
 coordinates.  Thus the region criterion, if applied, should be
 accurate.  Also, any computes invoked by an atom-style variable should
-use updated information for that timestep, e.g. potential energy/atom
-or coordination number/atom.  Similarly, fixes or computes which are
+use updated information for that timestep (e.g., potential energy/atom
+or coordination number/atom).  Similarly, fixes or computes which are
 invoked after that point in the timestep, should operate on the new
 group of atoms.</p>
 <div class="admonition note">
@@ -502,7 +508,7 @@ the dynamic group, atoms can move outside of the simulation box
 between reneighboring events.  Thus if you want to include all atoms
 on the left side of the simulation box, you probably want to set the
 left boundary of the region to be outside the simulation box by some
-reasonable amount (e.g. up to the cutoff of the potential), else they
+reasonable amount (e.g., up to the cutoff of the potential), else they
 may be excluded from the dynamic region.</p>
 </div>
 <p>Here is an example of using a dynamic group to shrink the set of atoms
@@ -511,14 +517,14 @@ being integrated by using a spherical region with a variable radius
 used to model a quench of the system, freezing atoms outside the
 shrinking sphere, then converting the remaining atoms to a static
 group and running further.</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">variable        </span><span class="nv nv-Identifier">nsteps</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="m">5000</span><span class="w"></span>
-<span class="k">variable        </span><span class="nv nv-Identifier">rad</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="m">18</span><span class="o">-</span><span class="nv">(step/v_nsteps)</span><span class="o">*</span><span class="nv">(18-5)</span><span class="w"></span>
-<span class="k">region          </span><span class="nv nv-Identifier">ss</span><span class="w"> </span><span class="n">sphere</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="n">v_rad</span><span class="w"></span>
-<span class="k">group           </span><span class="nv nv-Identifier">mobile</span><span class="w"> </span><span class="n">dynamic</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="k">region </span><span class="nv nv-Identifier">ss</span><span class="w"></span>
-<span class="k">fix             </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">mobile</span><span class="w"> </span><span class="n">nve</span><span class="w"></span>
-<span class="k">run</span><span class="w">             </span><span class="nv">${nsteps}</span><span class="w"></span>
-<span class="k">group           </span><span class="nv nv-Identifier">mobile</span><span class="w"> </span><span class="n">static</span><span class="w"></span>
-<span class="k">run</span><span class="w">             </span><span class="nv">${nsteps}</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">variable        </span><span class="nv nv-Identifier">nsteps</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="m">5000</span>
+<span class="k">variable        </span><span class="nv nv-Identifier">rad</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="m">18</span><span class="o">-</span><span class="nv">(step/v_nsteps)</span><span class="o">*</span><span class="nv">(18-5)</span>
+<span class="k">region          </span><span class="nv nv-Identifier">ss</span><span class="w"> </span><span class="n">sphere</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="n">v_rad</span>
+<span class="k">group           </span><span class="nv nv-Identifier">mobile</span><span class="w"> </span><span class="n">dynamic</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="k">region </span><span class="nv nv-Identifier">ss</span>
+<span class="k">fix             </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">mobile</span><span class="w"> </span><span class="n">nve</span>
+<span class="k">run</span><span class="w">             </span><span class="nv">${nsteps}</span>
+<span class="k">group           </span><span class="nv nv-Identifier">mobile</span><span class="w"> </span><span class="n">static</span>
+<span class="k">run</span><span class="w">             </span><span class="nv">${nsteps}</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -527,7 +533,7 @@ group and running further.</p>
 not all allow for use of a dynamic group.  If you get an error
 message that this is not allowed, but feel that it should be for the
 fix or compute in question, then please post your reasoning to the
-<a class="reference external" href="https://matsci.org/c/lammps-development/">LAMMPS forum at MatSci</a>
+<a class="reference external" href="https://matsci.org/c/lammps-development/42">LAMMPS forum at MatSci</a>
 and we can look into changing it.  The same applies if you come
 across inconsistent behavior when dynamic groups are allowed.</p>
 </div>
@@ -537,18 +543,18 @@ those currently in the dynamic group.</p>
 </section>
 <hr class="docutils" />
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <p>There can be no more than 32 groups defined at one time, including
 “all”.</p>
 <p>The parent group of a dynamic group cannot itself be a dynamic group.</p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="dump.html"><span class="doc">dump</span></a>, <a class="reference internal" href="fix.html"><span class="doc">fix</span></a>, <a class="reference internal" href="region.html"><span class="doc">region</span></a>,
 <a class="reference internal" href="velocity.html"><span class="doc">velocity</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
 <p>All atoms belong to the “all” group.</p>
 </section>
 </section>
@@ -557,14 +563,14 @@ those currently in the dynamic group.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="fix_modify.html" class="btn btn-neutral float-left" title="fix_modify command" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fitpod_command.html" class="btn btn-neutral float-left" title="fitpod command" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="group2ndx.html" class="btn btn-neutral float-right" title="group2ndx command" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -573,7 +579,6 @@ those currently in the dynamic group.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

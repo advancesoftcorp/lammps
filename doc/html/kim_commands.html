@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>kim command &mdash; LAMMPS documentation</title>
@@ -10,17 +10,17 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/kim_commands.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -72,6 +76,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="commands_list.html">Commands</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="angle_coeff.html">angle_coeff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="angle_style.html">angle_style command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="angle_write.html">angle_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="atom_modify.html">atom_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="atom_style.html">atom_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="balance.html">balance command</a></li>
@@ -79,7 +84,6 @@
 <li class="toctree-l2"><a class="reference internal" href="bond_style.html">bond_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bond_write.html">bond_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="boundary.html">boundary command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="box.html">box command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="change_box.html">change_box command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="clear.html">clear command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="comm_modify.html">comm_modify command</a></li>
@@ -94,6 +98,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dielectric.html">dielectric command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_coeff.html">dihedral_coeff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dihedral_style.html">dihedral_style command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dihedral_write.html">dihedral_write command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dimension.html">dimension command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="displace_atoms.html">displace_atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html">dump command</a></li>
@@ -105,6 +110,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-movie-command"><span class="xref std std-doc">dump movie</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-atom-adios-command"><span class="xref std std-doc">dump atom/adios</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump.html#dump-custom-adios-command"><span class="xref std std-doc">dump custom/adios</span> command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dump.html#dump-cfg-uef-command"><span class="xref std std-doc">dump cfg/uef</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_adios.html">dump atom/adios  command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_adios.html#dump-custom-adios-command">dump custom/adios command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dump_cfg_uef.html">dump cfg/uef command</a></li>
@@ -122,6 +128,7 @@
 <li class="toctree-l2"><a class="reference internal" href="echo.html">echo command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix.html">fix command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_modify.html">fix_modify command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitpod_command.html">fitpod command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group.html">group command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group2ndx.html">group2ndx command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group2ndx.html#ndx2group-command">ndx2group command</a></li>
@@ -148,6 +155,7 @@
 <li class="toctree-l2"><a class="reference internal" href="kspace_modify.html">kspace_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kspace_style.html">kspace_style command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="label.html">label command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labelmap.html">labelmap command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lattice.html">lattice command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="log.html">log command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mass.html">mass command</a></li>
@@ -161,12 +169,10 @@
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-sd-command">min_style sd command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-quickmin-command">min_style quickmin command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-fire-command">min_style fire command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-fire-old-command">min_style fire/old command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-command"><span class="xref std std-doc">min_style spin</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-cg-command"><span class="xref std std-doc">min_style spin/cg</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min_style.html#min-style-spin-lbfgs-command"><span class="xref std std-doc">min_style spin/lbfgs</span> command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="minimize.html">minimize command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="minimize.html#minimize-kk-command">minimize/kk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="molecule.html">molecule command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neb.html">neb command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neb_spin.html">neb/spin command</a></li>
@@ -192,8 +198,7 @@
 <li class="toctree-l2"><a class="reference internal" href="region.html">region command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="replicate.html">replicate command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rerun.html">rerun command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset_atom_ids.html">reset_atom_ids command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset_mol_ids.html">reset_mol_ids command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reset_atoms.html">reset_atoms command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reset_timestep.html">reset_timestep command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="restart.html">restart command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="run.html">run command</a></li>
@@ -231,6 +236,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -248,12 +254,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="commands_list.html">Commands</a> &raquo;</li>
-      <li>kim command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="commands_list.html">Commands</a></li>
+      <li class="breadcrumb-item active">kim command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="jump.html" class="btn btn-neutral float-left" title="jump command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -264,11 +269,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="kim-command">
-<span id="index-0"></span><h1>kim command<a class="headerlink" href="#kim-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="kim-command">
+<span id="index-0"></span><h1>kim command<a class="headerlink" href="#kim-command" title="Permalink to this heading"></a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">sub</span><span class="o">-</span><span class="n">command</span><span class="w"> </span><span class="n">args</span><span class="w"></span>
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">sub-command</span><span class="w"> </span><span class="n">args</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -278,25 +284,25 @@
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">init</span><span class="w"> </span><span class="n">args</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">interactions</span><span class="w"> </span><span class="n">args</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">args</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">param</span><span class="w"> </span><span class="n">args</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">args</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">init</span><span class="w"> </span><span class="n">args</span>
+<span class="k">kim </span><span class="s1">interactions</span><span class="w"> </span><span class="n">args</span>
+<span class="k">kim </span><span class="s1">query</span><span class="w"> </span><span class="n">args</span>
+<span class="k">kim </span><span class="s1">param</span><span class="w"> </span><span class="n">args</span>
+<span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">args</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p>The <em>kim command</em> includes a set of sub-commands that allow LAMMPS users to use
-interatomic models (IM) (potentials and force fields) and their predictions for
-various physical properties archived in the
-<a class="reference external" href="https://openkim.org">Open Knowledgebase of Interatomic Models (OpenKIM)</a>
-repository.</p>
-<p>Using OpenKIM provides LAMMPS users with immediate access to a large number of
-verified IMs and their predictions. OpenKIM IMs have multiple benefits including
-<a class="reference external" href="https://openkim.org/doc/overview/kim-features/">reliability, reproducibility and convenience</a>.</p>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
+<p>The <em>kim command</em> includes a set of sub-commands that allow LAMMPS
+users to use interatomic models (IM) (potentials and force fields) and
+their predictions for various physical properties archived in the
+<a class="reference external" href="https://openkim.org">Open Knowledgebase of Interatomic Models (OpenKIM)</a> repository.</p>
+<p>Using OpenKIM provides LAMMPS users with immediate access to a large
+number of verified IMs and their predictions. OpenKIM IMs have
+multiple benefits including <a class="reference external" href="https://openkim.org/doc/overview/kim-features/">reliability, reproducibility and
+convenience</a>.</p>
 <p id="im-types">There are two types of IMs archived in OpenKIM:</p>
 <ol class="arabic simple">
 <li><p>The first type is called a <em>KIM Portable Model</em> (PM).  A KIM PM is an
@@ -355,15 +361,15 @@ in which case their names do not have to conform to the KIM ID format.</p>
 </div>
 </section>
 <section id="using-openkim-ims-with-lammps-kim-init-kim-interactions">
-<h2>Using OpenKIM IMs with LAMMPS (<em>kim init</em>, <em>kim interactions</em>)<a class="headerlink" href="#using-openkim-ims-with-lammps-kim-init-kim-interactions" title="Permalink to this headline">¶</a></h2>
+<h2>Using OpenKIM IMs with LAMMPS (<em>kim init</em>, <em>kim interactions</em>)<a class="headerlink" href="#using-openkim-ims-with-lammps-kim-init-kim-interactions" title="Permalink to this heading"></a></h2>
 <p>Two sub-commands are employed when using OpenKIM IMs in LAMMPS, one to select
 the IM and perform necessary initialization (<em>kim init</em>), and the second to
 set up the IM for use by executing any necessary LAMMPS commands
 (<em>kim interactions</em>).  Both are required.</p>
 <section id="id1">
-<h3>Syntax<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">init</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="n">user_units</span><span class="w"> </span><span class="n">unitarg</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">interactions</span><span class="w"> </span><span class="n">typeargs</span><span class="w"></span>
+<h3>Syntax<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">init</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="n">user_units</span><span class="w"> </span><span class="n">unitarg</span>
+<span class="k">kim </span><span class="s1">interactions</span><span class="w"> </span><span class="n">typeargs</span>
 </pre></div>
 </div>
 <ul class="simple" id="typeargs-options">
@@ -377,23 +383,23 @@ input script</p></li>
 </ul>
 </section>
 <section id="id2">
-<h3>Examples<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">init</span><span class="w"> </span><span class="n">SW_StillingerWeber_1985_Si__MO_405512056662_005</span><span class="w"> </span><span class="n">metal</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">interactions</span><span class="w"> </span><span class="n">Si</span><span class="w"></span>
+<h3>Examples<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">init</span><span class="w"> </span><span class="n">SW_StillingerWeber_1985_Si__MO_405512056662_005</span><span class="w"> </span><span class="n">metal</span>
+<span class="k">kim </span><span class="s1">interactions</span><span class="w"> </span><span class="n">Si</span>
 
-<span class="k">kim</span><span class="w"> </span><span class="n">init</span><span class="w"> </span><span class="n">Sim_LAMMPS_ReaxFF_StrachanVanDuinChakraborty_2003_CHNO__SM_107643900657_001</span><span class="w"> </span><span class="n">real</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">init</span><span class="w"> </span><span class="n">Sim_LAMMPS_ReaxFF_StrachanVanDuinChakraborty_2003_CHNO__SM_107643900657_001</span><span class="w"> </span><span class="n">metal</span><span class="w"> </span><span class="n">unit_conversion_mode</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">interactions</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">H</span><span class="w"> </span><span class="n">O</span><span class="w"></span>
+<span class="k">kim </span><span class="s1">init</span><span class="w"> </span><span class="n">Sim_LAMMPS_ReaxFF_StrachanVanDuinChakraborty_2003_CHNO__SM_107643900657_001</span><span class="w"> </span><span class="n">real</span>
+<span class="k">kim </span><span class="s1">init</span><span class="w"> </span><span class="n">Sim_LAMMPS_ReaxFF_StrachanVanDuinChakraborty_2003_CHNO__SM_107643900657_001</span><span class="w"> </span><span class="n">metal</span><span class="w"> </span><span class="n">unit_conversion_mode</span>
+<span class="k">kim </span><span class="s1">interactions</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">H</span><span class="w"> </span><span class="n">O</span>
 
-<span class="k">kim</span><span class="w"> </span><span class="n">init</span><span class="w"> </span><span class="n">Sim_LAMMPS_IFF_PCFF_HeinzMishraLinEmami_2015Ver1v5_FccmetalsMineralsSolventsPolymers__SM_039297821658_000</span><span class="w"> </span><span class="n">real</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">interactions</span><span class="w"> </span><span class="n">fixed_types</span><span class="w"></span>
+<span class="k">kim </span><span class="s1">init</span><span class="w"> </span><span class="n">Sim_LAMMPS_IFF_PCFF_HeinzMishraLinEmami_2015Ver1v5_FccmetalsMineralsSolventsPolymers__SM_039297821658_000</span><span class="w"> </span><span class="n">real</span>
+<span class="k">kim </span><span class="s1">interactions</span><span class="w"> </span><span class="n">fixed_types</span>
 </pre></div>
 </div>
 <p>See the <em>examples/kim</em> directory for example input scripts that use KIM PMs
 and KIM SMs.</p>
 </section>
 <section id="openkim-im-initialization-kim-init">
-<span id="kim-init"></span><h3>OpenKIM IM Initialization (<em>kim init</em>)<a class="headerlink" href="#openkim-im-initialization-kim-init" title="Permalink to this headline">¶</a></h3>
+<span id="kim-init"></span><h3>OpenKIM IM Initialization (<em>kim init</em>)<a class="headerlink" href="#openkim-im-initialization-kim-init" title="Permalink to this heading"></a></h3>
 <p>The <em>kim</em> command followed by <em>init</em> sub-command must be issued <strong>before</strong>
 the simulation box is created (normally at the top of the file).  This command
 sets the OpenKIM IM that will be used and may issue additional commands changing
@@ -434,17 +440,17 @@ cutoff) as 2.0 Angstroms and sets the default value for the
 <p>Here is an example of a LAMMPS script to compute the cohesive energy of a
 face-centered cubic (fcc) lattice for the MEAM potential by Pascuet and
 Fernandez (2015) for Al.</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w">          </span><span class="n">init</span><span class="w"> </span><span class="n">Sim_LAMMPS_MEAM_PascuetFernandez_2015_Al__SM_811588957187_000</span><span class="w"> </span><span class="n">metal</span><span class="w"></span>
-<span class="k">boundary</span><span class="w">     </span><span class="n">p</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
-<span class="k">lattice</span><span class="w">      </span><span class="n">fcc</span><span class="w"> </span><span class="m">4.049</span><span class="w"></span>
-<span class="k">region       </span><span class="nv nv-Identifier">simbox</span><span class="w"> </span><span class="n">block</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">units</span><span class="w"> </span><span class="n">lattice</span><span class="w"></span>
-<span class="k">create_box</span><span class="w">   </span><span class="m">1</span><span class="w"> </span><span class="n">simbox</span><span class="w"></span>
-<span class="k">create_atoms</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">box</span><span class="w"></span>
-<span class="k">mass</span><span class="w">         </span><span class="m">1</span><span class="w"> </span><span class="m">26.981539</span><span class="w"></span>
-<span class="k">kim</span><span class="w">          </span><span class="n">interactions</span><span class="w"> </span><span class="n">Al</span><span class="w"></span>
-<span class="k">run</span><span class="w">          </span><span class="m">0</span><span class="w"></span>
-<span class="k">variable     </span><span class="nv nv-Identifier">Ec</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="nv">(pe/count(all))</span><span class="w"></span>
-<span class="k">print</span><span class="w">        </span><span class="s">&quot;Cohesive Energy = ${Ec} eV&quot;</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim          </span><span class="s1">init</span><span class="w"> </span><span class="n">Sim_LAMMPS_MEAM_PascuetFernandez_2015_Al__SM_811588957187_000</span><span class="w"> </span><span class="n">metal</span>
+<span class="k">boundary</span><span class="w">     </span><span class="n">p</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">p</span>
+<span class="k">lattice</span><span class="w">      </span><span class="n">fcc</span><span class="w"> </span><span class="m">4.049</span>
+<span class="k">region       </span><span class="nv nv-Identifier">simbox</span><span class="w"> </span><span class="n">block</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">units</span><span class="w"> </span><span class="n">lattice</span>
+<span class="k">create_box   </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">simbox</span>
+<span class="k">create_atoms</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">box</span>
+<span class="k">mass</span><span class="w">         </span><span class="m">1</span><span class="w"> </span><span class="m">26.981539</span>
+<span class="k">kim          </span><span class="s1">interactions</span><span class="w"> </span><span class="n">Al</span>
+<span class="k">run</span><span class="w">          </span><span class="m">0</span>
+<span class="k">variable     </span><span class="nv nv-Identifier">Ec</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="nv">(pe/count(all))</span>
+<span class="k">print</span><span class="w">        </span><span class="s">&quot;Cohesive Energy = ${Ec} eV&quot;</span>
 </pre></div>
 </div>
 <p>The above script will end with an error in the <em>kim init</em> line if the IM is
@@ -482,18 +488,18 @@ rewritten to work with any IM regardless of units.  The following script
 constructs an fcc lattice with a lattice parameter defined in meters, computes
 the total energy, and prints the cohesive energy in Joules regardless of the
 units of the IM.</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w">          </span><span class="n">init</span><span class="w"> </span><span class="n">Sim_LAMMPS_MEAM_PascuetFernandez_2015_Al__SM_811588957187_000</span><span class="w"> </span><span class="n">si</span><span class="w"> </span><span class="n">unit_conversion_mode</span><span class="w"></span>
-<span class="k">boundary</span><span class="w">     </span><span class="n">p</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
-<span class="k">lattice</span><span class="w">      </span><span class="n">fcc</span><span class="w"> </span><span class="nv">$(4.049e-10*v__u_distance)</span><span class="w"></span>
-<span class="k">region       </span><span class="nv nv-Identifier">simbox</span><span class="w"> </span><span class="n">block</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">units</span><span class="w"> </span><span class="n">lattice</span><span class="w"></span>
-<span class="k">create_box</span><span class="w">   </span><span class="m">1</span><span class="w"> </span><span class="n">simbox</span><span class="w"></span>
-<span class="k">create_atoms</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">box</span><span class="w"></span>
-<span class="k">mass</span><span class="w">         </span><span class="m">1</span><span class="w"> </span><span class="nv">$(4.480134e-26*v__u_mass)</span><span class="w"></span>
-<span class="k">kim</span><span class="w">          </span><span class="n">interactions</span><span class="w"> </span><span class="n">Al</span><span class="w"></span>
-<span class="k">neighbor</span><span class="w">     </span><span class="nv">$(2e-10*v__u_distance)</span><span class="w"> </span><span class="n">bin</span><span class="w"></span>
-<span class="k">run</span><span class="w">          </span><span class="m">0</span><span class="w"></span>
-<span class="k">variable     </span><span class="nv nv-Identifier">Ec_in_J</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="nv">(pe/count(all))</span><span class="o">/</span><span class="n">v__u_energy</span><span class="w"></span>
-<span class="k">print</span><span class="w">        </span><span class="s">&quot;Cohesive Energy = ${Ec_in_J} J&quot;</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim          </span><span class="s1">init</span><span class="w"> </span><span class="n">Sim_LAMMPS_MEAM_PascuetFernandez_2015_Al__SM_811588957187_000</span><span class="w"> </span><span class="n">si</span><span class="w"> </span><span class="n">unit_conversion_mode</span>
+<span class="k">boundary</span><span class="w">     </span><span class="n">p</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">p</span>
+<span class="k">lattice</span><span class="w">      </span><span class="n">fcc</span><span class="w"> </span><span class="nv">$(4.049e-10*v__u_distance)</span>
+<span class="k">region       </span><span class="nv nv-Identifier">simbox</span><span class="w"> </span><span class="n">block</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">units</span><span class="w"> </span><span class="n">lattice</span>
+<span class="k">create_box   </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">simbox</span>
+<span class="k">create_atoms</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">box</span>
+<span class="k">mass</span><span class="w">         </span><span class="m">1</span><span class="w"> </span><span class="nv">$(4.480134e-26*v__u_mass)</span>
+<span class="k">kim          </span><span class="s1">interactions</span><span class="w"> </span><span class="n">Al</span>
+<span class="k">neighbor</span><span class="w">     </span><span class="nv">$(2e-10*v__u_distance)</span><span class="w"> </span><span class="n">bin</span>
+<span class="k">run</span><span class="w">          </span><span class="m">0</span>
+<span class="k">variable     </span><span class="nv nv-Identifier">Ec_in_J</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="nv">(pe/count(all))</span><span class="o">/</span><span class="n">v__u_energy</span>
+<span class="k">print</span><span class="w">        </span><span class="s">&quot;Cohesive Energy = ${Ec_in_J} J&quot;</span>
 </pre></div>
 </div>
 <p>Note the multiplication by <cite>v__u_distance</cite> and <cite>v__u_mass</cite> to convert from SI
@@ -505,13 +511,13 @@ units to SI units (Joule).  This script will work correctly for any IM for Al
 from a file.  For example, if a configuration of atoms is read in from a dump
 file using the <a class="reference internal" href="read_dump.html"><span class="doc">read_dump</span></a> command, the following can be done
 to convert the box and all atomic positions to the correct units:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">change_box </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="nv">${_u_distance}</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">               </span><span class="n">y</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="nv">${_u_distance}</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">               </span><span class="n">z</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="nv">${_u_distance}</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">               </span><span class="n">xy</span><span class="w"> </span><span class="n">final</span><span class="w"> </span><span class="nv">$(xy*v__u_distance)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">               </span><span class="n">xz</span><span class="w"> </span><span class="n">final</span><span class="w"> </span><span class="nv">$(xz*v__u_distance)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">               </span><span class="n">yz</span><span class="w"> </span><span class="n">final</span><span class="w"> </span><span class="nv">$(yz*v__u_distance)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">               </span><span class="n">remap</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">change_box </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="nv">${_u_distance}</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">               </span><span class="n">y</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="nv">${_u_distance}</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">               </span><span class="n">z</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="nv">${_u_distance}</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">               </span><span class="n">xy</span><span class="w"> </span><span class="n">final</span><span class="w"> </span><span class="nv">$(xy*v__u_distance)</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">               </span><span class="n">xz</span><span class="w"> </span><span class="n">final</span><span class="w"> </span><span class="nv">$(xz*v__u_distance)</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">               </span><span class="n">yz</span><span class="w"> </span><span class="n">final</span><span class="w"> </span><span class="nv">$(yz*v__u_distance)</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">               </span><span class="n">remap</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -522,7 +528,7 @@ correctly.</p>
 </div>
 </section>
 <section id="openkim-im-execution-kim-interactions">
-<span id="interactions"></span><h3>OpenKIM IM Execution (<em>kim interactions</em>)<a class="headerlink" href="#openkim-im-execution-kim-interactions" title="Permalink to this headline">¶</a></h3>
+<span id="interactions"></span><h3>OpenKIM IM Execution (<em>kim interactions</em>)<a class="headerlink" href="#openkim-im-execution-kim-interactions" title="Permalink to this heading"></a></h3>
 <p>The second and final step in using an OpenKIM IM is to execute the
 <em>kim interactions</em> command.  This command must be preceded by a <em>kim init</em>
 command and a command that defines the number of atom types <em>N</em> (such as
@@ -538,11 +544,11 @@ chemical species.</p>
 <p>For example, consider an OpenKIM IM that supports Si and C species.  If the
 LAMMPS simulation has four atom types, where the first three are Si, and the
 fourth is C, the following <em>kim interactions</em> command would be used:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">interactions</span><span class="w"> </span><span class="n">Si</span><span class="w"> </span><span class="n">Si</span><span class="w"> </span><span class="n">Si</span><span class="w"> </span><span class="n">C</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">interactions</span><span class="w"> </span><span class="n">Si</span><span class="w"> </span><span class="n">Si</span><span class="w"> </span><span class="n">Si</span><span class="w"> </span><span class="n">C</span>
 </pre></div>
 </div>
 <p>Alternatively, for a model with a fixed mapping the command would be:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">interactions</span><span class="w"> </span><span class="n">fixed_types</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">interactions</span><span class="w"> </span><span class="n">fixed_types</span>
 </pre></div>
 </div>
 <p>The <em>kim interactions</em> command performs all the necessary steps to set up the
@@ -551,16 +557,16 @@ whether the IM is a KIM PM or a KIM SM.  For a KIM PM, a
 <a class="reference internal" href="pair_kim.html"><span class="doc">pair_style kim</span></a> command is executed followed by the appropriate
 <em>pair_coeff</em> command.  For example, for the Ercolessi and Adams (1994) KIM PM
 for Al set by the following commands:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">init</span><span class="w"> </span><span class="n">EAM_Dynamo_ErcolessiAdams_1994_Al__MO_123629422045_005</span><span class="w"> </span><span class="n">metal</span><span class="w"></span>
-<span class="n">...</span><span class="w"></span>
-<span class="n">...</span><span class="w">  </span><span class="n">box</span><span class="w"> </span><span class="n">specification</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="n">skipped</span><span class="w"></span>
-<span class="n">...</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">interactions</span><span class="w"> </span><span class="n">Al</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">init</span><span class="w"> </span><span class="n">EAM_Dynamo_ErcolessiAdams_1994_Al__MO_123629422045_005</span><span class="w"> </span><span class="n">metal</span>
+<span class="n">...</span>
+<span class="n">...</span><span class="w">  </span><span class="n">box</span><span class="w"> </span><span class="n">specification</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="n">skipped</span>
+<span class="n">...</span>
+<span class="k">kim </span><span class="s1">interactions</span><span class="w"> </span><span class="n">Al</span>
 </pre></div>
 </div>
 <p>the <em>kim interactions</em> command executes the following LAMMPS input commands:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">pair_style</span><span class="w"> </span><span class="n">kim</span><span class="w"> </span><span class="n">EAM_Dynamo_ErcolessiAdams_1994_Al__MO_123629422045_005</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Al</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">pair_style</span><span class="w"> </span><span class="k">kim </span><span class="s1">EAM_Dynamo_ErcolessiAdams_1994_Al__MO_123629422045_005</span>
+<span class="k">pair_coeff</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Al</span>
 </pre></div>
 </div>
 <p>For a KIM SM, the generated input commands may be more complex and require that
@@ -568,17 +574,17 @@ LAMMPS is built with the required packages included for the type of potential
 being used.  The set of commands to be executed is defined in the SM
 specification file, which is part of the SM package.  For example, for the
 Strachan et al.  (2003) ReaxFF SM set by the following commands:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">init</span><span class="w"> </span><span class="n">Sim_LAMMPS_ReaxFF_StrachanVanDuinChakraborty_2003_CHNO__SM_107643900657_000</span><span class="w"> </span><span class="n">real</span><span class="w"></span>
-<span class="n">...</span><span class="w"></span>
-<span class="n">...</span><span class="w">  </span><span class="n">box</span><span class="w"> </span><span class="n">specification</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="n">skipped</span><span class="w"></span>
-<span class="n">...</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">interactions</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">H</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="n">O</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">init</span><span class="w"> </span><span class="n">Sim_LAMMPS_ReaxFF_StrachanVanDuinChakraborty_2003_CHNO__SM_107643900657_000</span><span class="w"> </span><span class="n">real</span>
+<span class="n">...</span>
+<span class="n">...</span><span class="w">  </span><span class="n">box</span><span class="w"> </span><span class="n">specification</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="n">skipped</span>
+<span class="n">...</span>
+<span class="k">kim </span><span class="s1">interactions</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">H</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="n">O</span>
 </pre></div>
 </div>
 <p>the <em>kim interactions</em> command executes the following LAMMPS input commands:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">pair_style</span><span class="w"> </span><span class="n">reaxff</span><span class="w"> </span><span class="n">lmp_control</span><span class="w"> </span><span class="n">safezone</span><span class="w"> </span><span class="m">2.0</span><span class="w"> </span><span class="n">mincap</span><span class="w"> </span><span class="m">100</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ffield.reax.rdx</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">H</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="n">O</span><span class="w"></span>
-<span class="k">fix </span><span class="nv nv-Identifier">reaxqeq</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">qeq</span><span class="o">/</span><span class="n">reaxff</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">10.0</span><span class="w"> </span><span class="m">1.0e-6</span><span class="w"> </span><span class="n">param.qeq</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">pair_style</span><span class="w"> </span><span class="n">reaxff</span><span class="w"> </span><span class="n">lmp_control</span><span class="w"> </span><span class="n">safezone</span><span class="w"> </span><span class="m">2.0</span><span class="w"> </span><span class="n">mincap</span><span class="w"> </span><span class="m">100</span>
+<span class="k">pair_coeff</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ffield.reax.rdx</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">H</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="n">O</span>
+<span class="k">fix </span><span class="nv nv-Identifier">reaxqeq</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">qeq</span><span class="o">/</span><span class="n">reaxff</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">10.0</span><span class="w"> </span><span class="m">1.0e-6</span><span class="w"> </span><span class="n">param.qeq</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -616,13 +622,13 @@ changes to a non-periodic one.  In other cases, the second call to
 </section>
 </section>
 <section id="using-openkim-web-queries-in-lammps-kim-query">
-<span id="query"></span><h2>Using OpenKIM Web Queries in LAMMPS (<em>kim query</em>)<a class="headerlink" href="#using-openkim-web-queries-in-lammps-kim-query" title="Permalink to this headline">¶</a></h2>
+<span id="query"></span><h2>Using OpenKIM Web Queries in LAMMPS (<em>kim query</em>)<a class="headerlink" href="#using-openkim-web-queries-in-lammps-kim-query" title="Permalink to this heading"></a></h2>
 <p>The <em>kim query</em> command performs a web query to retrieve the predictions of an
 IM set by <em>kim init</em> for material properties archived in
 <a class="reference external" href="https://openkim.org">OpenKIM</a>.</p>
 <section id="id5">
-<h3>Syntax<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">variable</span><span class="w"> </span><span class="n">formatarg</span><span class="w"> </span><span class="n">query_function</span><span class="w"> </span><span class="n">queryargs</span><span class="w"></span>
+<h3>Syntax<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">query</span><span class="w"> </span><span class="k">variable </span><span class="nv nv-Identifier">formatarg</span><span class="w"> </span><span class="n">query_function</span><span class="w"> </span><span class="n">queryargs</span>
 </pre></div>
 </div>
 <ul>
@@ -645,9 +651,9 @@ supported keywords depend on the query function</p></li>
 </ul>
 </section>
 <section id="id6">
-<h3>Examples<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">a0</span><span class="w"> </span><span class="n">get_lattice_constant_cubic</span><span class="w"> </span><span class="n">crystal</span><span class="o">=</span><span class="n">[fcc]</span><span class="w"> </span><span class="n">species</span><span class="o">=</span><span class="n">[Al]</span><span class="w"> </span><span class="n">units</span><span class="o">=</span><span class="n">[angstrom]</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="n">get_available_models</span><span class="w"> </span><span class="n">species</span><span class="o">=</span><span class="n">[Al]</span><span class="w"> </span><span class="n">potential_type</span><span class="o">=</span><span class="n">[eam]</span><span class="w"></span>
+<h3>Examples<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h3>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">query</span><span class="w"> </span><span class="n">a0</span><span class="w"> </span><span class="n">get_lattice_constant_cubic</span><span class="w"> </span><span class="n">crystal</span><span class="o">=</span><span class="n">[fcc]</span><span class="w"> </span><span class="n">species</span><span class="o">=</span><span class="n">[Al]</span><span class="w"> </span><span class="n">units</span><span class="o">=</span><span class="n">[angstrom]</span>
+<span class="k">kim </span><span class="s1">query</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="n">get_available_models</span><span class="w"> </span><span class="n">species</span><span class="o">=</span><span class="n">[Al]</span><span class="w"> </span><span class="n">potential_type</span><span class="o">=</span><span class="n">[eam]</span>
 </pre></div>
 </div>
 <p>The result of the query is stored in one or more
@@ -699,21 +705,21 @@ methods are available for a given <em>query_function</em>.</p>
 </div>
 </section>
 <section id="kim-query-usage-examples-and-further-clarifications">
-<h3><em>kim query</em> Usage Examples and Further Clarifications<a class="headerlink" href="#kim-query-usage-examples-and-further-clarifications" title="Permalink to this headline">¶</a></h3>
+<h3><em>kim query</em> Usage Examples and Further Clarifications<a class="headerlink" href="#kim-query-usage-examples-and-further-clarifications" title="Permalink to this heading"></a></h3>
 <p>The data obtained by <em>kim query</em> commands can be used as part of the setup or
 analysis phases of LAMMPS simulations.  Some examples are given below.</p>
 <p><strong>Define an equilibrium fcc crystal</strong></p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w">      </span><span class="n">init</span><span class="w"> </span><span class="n">EAM_Dynamo_ErcolessiAdams_1994_Al__MO_123629422045_005</span><span class="w"> </span><span class="n">metal</span><span class="w"></span>
-<span class="k">boundary</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
-<span class="k">kim</span><span class="w">      </span><span class="n">query</span><span class="w"> </span><span class="n">a0</span><span class="w"> </span><span class="n">get_lattice_constant_cubic</span><span class="w"> </span><span class="n">crystal</span><span class="o">=</span><span class="n">[fcc]</span><span class="w"> </span><span class="n">species</span><span class="o">=</span><span class="n">[Al]</span><span class="w"> </span><span class="n">units</span><span class="o">=</span><span class="n">[angstrom]</span><span class="w"></span>
-<span class="k">lattice</span><span class="w">  </span><span class="n">fcc</span><span class="w"> </span><span class="nv">${a0}</span><span class="w"></span>
-<span class="n">...</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim      </span><span class="s1">init</span><span class="w"> </span><span class="n">EAM_Dynamo_ErcolessiAdams_1994_Al__MO_123629422045_005</span><span class="w"> </span><span class="n">metal</span>
+<span class="k">boundary</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">p</span>
+<span class="k">kim      </span><span class="s1">query</span><span class="w"> </span><span class="n">a0</span><span class="w"> </span><span class="n">get_lattice_constant_cubic</span><span class="w"> </span><span class="n">crystal</span><span class="o">=</span><span class="n">[fcc]</span><span class="w"> </span><span class="n">species</span><span class="o">=</span><span class="n">[Al]</span><span class="w"> </span><span class="n">units</span><span class="o">=</span><span class="n">[angstrom]</span>
+<span class="k">lattice</span><span class="w">  </span><span class="n">fcc</span><span class="w"> </span><span class="nv">${a0}</span>
+<span class="n">...</span>
 </pre></div>
 </div>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">units</span><span class="w">   </span><span class="n">metal</span><span class="w"></span>
-<span class="k">kim</span><span class="w">     </span><span class="n">query</span><span class="w"> </span><span class="n">a0</span><span class="w"> </span><span class="n">get_lattice_constant_cubic</span><span class="w"> </span><span class="n">crystal</span><span class="o">=</span><span class="n">[fcc]</span><span class="w"> </span><span class="n">species</span><span class="o">=</span><span class="n">[Al]</span><span class="w"> </span><span class="n">units</span><span class="o">=</span><span class="n">[angstrom]</span><span class="w"> </span><span class="n">model</span><span class="o">=</span><span class="n">[EAM_Dynamo_ErcolessiAdams_1994_Al__MO_123629422045_005]</span><span class="w"></span>
-<span class="k">lattice</span><span class="w"> </span><span class="n">fcc</span><span class="w"> </span><span class="nv">${a0}</span><span class="w"></span>
-<span class="n">...</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">units</span><span class="w">   </span><span class="n">metal</span>
+<span class="k">kim     </span><span class="s1">query</span><span class="w"> </span><span class="n">a0</span><span class="w"> </span><span class="n">get_lattice_constant_cubic</span><span class="w"> </span><span class="n">crystal</span><span class="o">=</span><span class="n">[fcc]</span><span class="w"> </span><span class="n">species</span><span class="o">=</span><span class="n">[Al]</span><span class="w"> </span><span class="n">units</span><span class="o">=</span><span class="n">[angstrom]</span><span class="w"> </span><span class="n">model</span><span class="o">=</span><span class="n">[EAM_Dynamo_ErcolessiAdams_1994_Al__MO_123629422045_005]</span>
+<span class="k">lattice</span><span class="w"> </span><span class="n">fcc</span><span class="w"> </span><span class="nv">${a0}</span>
+<span class="n">...</span>
 </pre></div>
 </div>
 <p>The <em>kim query</em> command retrieves from <a class="reference external" href="https://openkim.org">OpenKIM</a> the
@@ -731,12 +737,12 @@ script, the lattice command would need to be changed to:
 “lattice fcc $(v_a0*v__u_distance)”.</p>
 </div>
 <p><strong>Define an equilibrium hcp crystal</strong></p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w">      </span><span class="n">init</span><span class="w"> </span><span class="n">EAM_Dynamo_MendelevAckland_2007v3_Zr__MO_004835508849_000</span><span class="w"> </span><span class="n">metal</span><span class="w"></span>
-<span class="k">boundary</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
-<span class="k">kim</span><span class="w">      </span><span class="n">query</span><span class="w"> </span><span class="n">latconst</span><span class="w"> </span><span class="n">split</span><span class="w"> </span><span class="n">get_lattice_constant_hexagonal</span><span class="w"> </span><span class="n">crystal</span><span class="o">=</span><span class="n">[hcp]</span><span class="w"> </span><span class="n">species</span><span class="o">=</span><span class="n">[Zr]</span><span class="w"> </span><span class="n">units</span><span class="o">=</span><span class="n">[angstrom]</span><span class="w"></span>
-<span class="k">lattice</span><span class="w">  </span><span class="n">custom</span><span class="w"> </span><span class="nv">${latconst_1}</span><span class="w"> </span><span class="n">a1</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="o">-</span><span class="m">0.866025</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="n">a2</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.866025</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="n">a3</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="nv">$(latconst_2/latconst_1)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">         </span><span class="n">basis</span><span class="w"> </span><span class="m">0.333333</span><span class="w"> </span><span class="m">0.666666</span><span class="w"> </span><span class="m">0.25</span><span class="w"> </span><span class="n">basis</span><span class="w"> </span><span class="m">0.666666</span><span class="w"> </span><span class="m">0.333333</span><span class="w"> </span><span class="m">0.75</span><span class="w"></span>
-<span class="n">...</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim      </span><span class="s1">init</span><span class="w"> </span><span class="n">EAM_Dynamo_MendelevAckland_2007v3_Zr__MO_004835508849_000</span><span class="w"> </span><span class="n">metal</span>
+<span class="k">boundary</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">p</span>
+<span class="k">kim      </span><span class="s1">query</span><span class="w"> </span><span class="n">latconst</span><span class="w"> </span><span class="n">split</span><span class="w"> </span><span class="n">get_lattice_constant_hexagonal</span><span class="w"> </span><span class="n">crystal</span><span class="o">=</span><span class="n">[hcp]</span><span class="w"> </span><span class="n">species</span><span class="o">=</span><span class="n">[Zr]</span><span class="w"> </span><span class="n">units</span><span class="o">=</span><span class="n">[angstrom]</span>
+<span class="k">lattice</span><span class="w">  </span><span class="n">custom</span><span class="w"> </span><span class="nv">${latconst_1}</span><span class="w"> </span><span class="n">a1</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="o">-</span><span class="m">0.866025</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="n">a2</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.866025</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="n">a3</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="nv">$(latconst_2/latconst_1)</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">         </span><span class="n">basis</span><span class="w"> </span><span class="m">0.333333</span><span class="w"> </span><span class="m">0.666666</span><span class="w"> </span><span class="m">0.25</span><span class="w"> </span><span class="n">basis</span><span class="w"> </span><span class="m">0.666666</span><span class="w"> </span><span class="m">0.333333</span><span class="w"> </span><span class="m">0.75</span>
+<span class="n">...</span>
 </pre></div>
 </div>
 <p>In this case the <em>kim query</em> returns two arguments (since the hexagonal close
@@ -744,13 +750,13 @@ packed (hcp) structure has two independent lattice constants).  The <em>formatar
 keyword “split” places the two values into the variables <em>latconst_1</em> and
 <em>latconst_2</em>.  (These variables are created if they do not already exist.)</p>
 <p><strong>Define a crystal at finite temperature accounting for thermal expansion</strong></p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w">      </span><span class="n">init</span><span class="w"> </span><span class="n">EAM_Dynamo_ErcolessiAdams_1994_Al__MO_123629422045_005</span><span class="w"> </span><span class="n">metal</span><span class="w"></span>
-<span class="k">boundary</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
-<span class="k">kim</span><span class="w">      </span><span class="n">query</span><span class="w"> </span><span class="n">a0</span><span class="w"> </span><span class="n">get_lattice_constant_cubic</span><span class="w"> </span><span class="n">crystal</span><span class="o">=</span><span class="n">[fcc]</span><span class="w"> </span><span class="n">species</span><span class="o">=</span><span class="n">[Al]</span><span class="w"> </span><span class="n">units</span><span class="o">=</span><span class="n">[angstrom]</span><span class="w"></span>
-<span class="k">kim</span><span class="w">      </span><span class="n">query</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="n">get_linear_thermal_expansion_coefficient_cubic</span><span class="w"> </span><span class="n">crystal</span><span class="o">=</span><span class="n">[fcc]</span><span class="w"> </span><span class="n">species</span><span class="o">=</span><span class="n">[Al]</span><span class="w"> </span><span class="n">units</span><span class="o">=</span><span class="n">[1</span><span class="o">/</span><span class="n">K]</span><span class="w"> </span><span class="n">temperature</span><span class="o">=</span><span class="n">[293.15]</span><span class="w"> </span><span class="n">temperature_units</span><span class="o">=</span><span class="n">[K]</span><span class="w"></span>
-<span class="k">variable </span><span class="nv nv-Identifier">DeltaT</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="m">300</span><span class="w"></span>
-<span class="k">lattice</span><span class="w">  </span><span class="n">fcc</span><span class="w"> </span><span class="nv">$(v_a0*v_alpha*v_DeltaT)</span><span class="w"></span>
-<span class="n">...</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim      </span><span class="s1">init</span><span class="w"> </span><span class="n">EAM_Dynamo_ErcolessiAdams_1994_Al__MO_123629422045_005</span><span class="w"> </span><span class="n">metal</span>
+<span class="k">boundary</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">p</span>
+<span class="k">kim      </span><span class="s1">query</span><span class="w"> </span><span class="n">a0</span><span class="w"> </span><span class="n">get_lattice_constant_cubic</span><span class="w"> </span><span class="n">crystal</span><span class="o">=</span><span class="n">[fcc]</span><span class="w"> </span><span class="n">species</span><span class="o">=</span><span class="n">[Al]</span><span class="w"> </span><span class="n">units</span><span class="o">=</span><span class="n">[angstrom]</span>
+<span class="k">kim      </span><span class="s1">query</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="n">get_linear_thermal_expansion_coefficient_cubic</span><span class="w"> </span><span class="n">crystal</span><span class="o">=</span><span class="n">[fcc]</span><span class="w"> </span><span class="n">species</span><span class="o">=</span><span class="n">[Al]</span><span class="w"> </span><span class="n">units</span><span class="o">=</span><span class="n">[1</span><span class="o">/</span><span class="n">K]</span><span class="w"> </span><span class="n">temperature</span><span class="o">=</span><span class="n">[293.15]</span><span class="w"> </span><span class="n">temperature_units</span><span class="o">=</span><span class="n">[K]</span>
+<span class="k">variable </span><span class="nv nv-Identifier">DeltaT</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="m">300</span>
+<span class="k">lattice</span><span class="w">  </span><span class="n">fcc</span><span class="w"> </span><span class="nv">$(v_a0*v_alpha*v_DeltaT)</span>
+<span class="n">...</span>
 </pre></div>
 </div>
 <p>As in the previous example, the equilibrium lattice constant is obtained for the
@@ -769,14 +775,14 @@ numerical arguments and tolerances are available for a given
 <em>query_function</em>.</p>
 </div>
 <p><strong>Compute defect formation energy</strong></p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w">      </span><span class="n">init</span><span class="w"> </span><span class="n">EAM_Dynamo_ErcolessiAdams_1994_Al__MO_123629422045_005</span><span class="w"> </span><span class="n">metal</span><span class="w"></span>
-<span class="n">...</span><span class="w"></span>
-<span class="n">...</span><span class="w"> </span><span class="n">Build</span><span class="w"> </span><span class="n">fcc</span><span class="w"> </span><span class="n">crystal</span><span class="w"> </span><span class="n">containing</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">defect</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="k">compute </span><span class="nv nv-Identifier">the</span><span class="w"> </span><span class="nv nv-Identifier">total</span><span class="w"> </span><span class="n">energy</span><span class="w"></span>
-<span class="n">...</span><span class="w"> </span><span class="n">which</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">stored</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">variable</span><span class="w"> </span><span class="o">*</span><span class="n">Etot</span><span class="o">*</span><span class="w"></span>
-<span class="n">...</span><span class="w"></span>
-<span class="k">kim</span><span class="w">      </span><span class="n">query</span><span class="w"> </span><span class="n">Ec</span><span class="w"> </span><span class="n">get_cohesive_energy_cubic</span><span class="w"> </span><span class="n">crystal</span><span class="o">=</span><span class="n">[fcc]</span><span class="w"> </span><span class="n">species</span><span class="o">=</span><span class="n">[Al]</span><span class="w"> </span><span class="n">units</span><span class="o">=</span><span class="n">[eV]</span><span class="w"></span>
-<span class="k">variable </span><span class="nv nv-Identifier">Eform</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="nv">${Etot}</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">count</span><span class="nv">(all)</span><span class="o">*</span><span class="nv">${Ec}</span><span class="w"></span>
-<span class="n">...</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim      </span><span class="s1">init</span><span class="w"> </span><span class="n">EAM_Dynamo_ErcolessiAdams_1994_Al__MO_123629422045_005</span><span class="w"> </span><span class="n">metal</span>
+<span class="n">...</span>
+<span class="n">...</span><span class="w"> </span><span class="n">Build</span><span class="w"> </span><span class="n">fcc</span><span class="w"> </span><span class="n">crystal</span><span class="w"> </span><span class="n">containing</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">defect</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="k">compute </span><span class="nv nv-Identifier">the</span><span class="w"> </span><span class="nv nv-Identifier">total</span><span class="w"> </span><span class="n">energy</span>
+<span class="n">...</span><span class="w"> </span><span class="n">which</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">stored</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">variable </span><span class="o">*</span><span class="n">Etot</span><span class="o">*</span>
+<span class="n">...</span>
+<span class="k">kim      </span><span class="s1">query</span><span class="w"> </span><span class="n">Ec</span><span class="w"> </span><span class="n">get_cohesive_energy_cubic</span><span class="w"> </span><span class="n">crystal</span><span class="o">=</span><span class="n">[fcc]</span><span class="w"> </span><span class="n">species</span><span class="o">=</span><span class="n">[Al]</span><span class="w"> </span><span class="n">units</span><span class="o">=</span><span class="n">[eV]</span>
+<span class="k">variable </span><span class="nv nv-Identifier">Eform</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="nv">${Etot}</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">count</span><span class="nv">(all)</span><span class="o">*</span><span class="nv">${Ec}</span>
+<span class="n">...</span>
 </pre></div>
 </div>
 <p>The defect formation energy <em>Eform</em> is computed by subtracting the ideal fcc
@@ -784,15 +790,15 @@ cohesive energy of the atoms in the system from <em>Etot</em>.  The ideal fcc
 cohesive energy of the atoms is obtained from
 <a class="reference external" href="https://openkim.org">OpenKIM</a> for the Ercolessi and Adams (1994) potential.</p>
 <p><strong>Retrieve equilibrium fcc crystal of all EAM potentials that support a specific species</strong></p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w">   </span><span class="n">query</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="n">get_available_models</span><span class="w"> </span><span class="n">species</span><span class="o">=</span><span class="n">[Al]</span><span class="w"> </span><span class="n">potential_type</span><span class="o">=</span><span class="n">[eam]</span><span class="w"></span>
-<span class="k">label</span><span class="w"> </span><span class="n">model_loop</span><span class="w"></span>
-<span class="k">kim</span><span class="w">   </span><span class="n">query</span><span class="w"> </span><span class="n">latconst</span><span class="w"> </span><span class="n">get_lattice_constant_cubic</span><span class="w"> </span><span class="n">crystal</span><span class="o">=</span><span class="n">[fcc]</span><span class="w"> </span><span class="n">species</span><span class="o">=</span><span class="n">[Al]</span><span class="w"> </span><span class="n">units</span><span class="o">=</span><span class="n">[angstrom]</span><span class="w"> </span><span class="n">model</span><span class="o">=</span><span class="n">[</span><span class="nv">${model}</span><span class="n">]</span><span class="w"></span>
-<span class="k">print</span><span class="w"> </span><span class="s">&quot;FCC lattice constant (${model} potential) = ${latconst}&quot;</span><span class="w"></span>
-<span class="n">...</span><span class="w"></span>
-<span class="n">...</span><span class="w">   </span><span class="n">do</span><span class="w"> </span><span class="n">something</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">latconst</span><span class="w"></span>
-<span class="n">...</span><span class="w"></span>
-<span class="k">next</span><span class="w">  </span><span class="n">model</span><span class="w"></span>
-<span class="k">jump</span><span class="w">  </span><span class="n">SELF</span><span class="w"> </span><span class="n">model_loop</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim   </span><span class="s1">query</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="n">get_available_models</span><span class="w"> </span><span class="n">species</span><span class="o">=</span><span class="n">[Al]</span><span class="w"> </span><span class="n">potential_type</span><span class="o">=</span><span class="n">[eam]</span>
+<span class="k">label </span><span class="sc">model_loop</span>
+<span class="k">kim   </span><span class="s1">query</span><span class="w"> </span><span class="n">latconst</span><span class="w"> </span><span class="n">get_lattice_constant_cubic</span><span class="w"> </span><span class="n">crystal</span><span class="o">=</span><span class="n">[fcc]</span><span class="w"> </span><span class="n">species</span><span class="o">=</span><span class="n">[Al]</span><span class="w"> </span><span class="n">units</span><span class="o">=</span><span class="n">[angstrom]</span><span class="w"> </span><span class="n">model</span><span class="o">=</span><span class="n">[</span><span class="nv">${model}</span><span class="n">]</span>
+<span class="k">print</span><span class="w"> </span><span class="s">&quot;FCC lattice constant (${model} potential) = ${latconst}&quot;</span>
+<span class="n">...</span>
+<span class="n">...</span><span class="w">   </span><span class="n">do</span><span class="w"> </span><span class="n">something</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">latconst</span>
+<span class="n">...</span>
+<span class="k">next  </span><span class="nv nv-Identifier">model</span>
+<span class="k">jump  </span><span class="sc">SELF</span><span class="w"> </span><span class="n">model_loop</span>
 </pre></div>
 </div>
 <p>In this example, the <em>index</em> mode of <em>formatarg</em> is used.  The first <em>kim query</em>
@@ -815,7 +821,7 @@ information about the nature of the query or its source is recorded.</p>
 </section>
 </section>
 <section id="accessing-kim-model-parameters-from-lammps-kim-param">
-<span id="param"></span><h2>Accessing KIM Model Parameters from LAMMPS (<em>kim param</em>)<a class="headerlink" href="#accessing-kim-model-parameters-from-lammps-kim-param" title="Permalink to this headline">¶</a></h2>
+<span id="param"></span><h2>Accessing KIM Model Parameters from LAMMPS (<em>kim param</em>)<a class="headerlink" href="#accessing-kim-model-parameters-from-lammps-kim-param" title="Permalink to this heading"></a></h2>
 <p>All IMs are functional forms containing a set of parameters.  These parameters’
 values are typically selected to best reproduce a training set of quantum
 mechanical calculations or available experimental data.  For example, a
@@ -851,9 +857,9 @@ The <em>kim param set</em> command may be used wherever a <em>pair_coeff</em> co
 occur.</p>
 </div>
 <section id="id13">
-<h3>Syntax<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">param</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">param_name</span><span class="w"> </span><span class="n">index_range</span><span class="w"> </span><span class="n">variable</span><span class="w"> </span><span class="n">formatarg</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">param</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">param_name</span><span class="w"> </span><span class="n">index_range</span><span class="w"> </span><span class="n">values</span><span class="w"></span>
+<h3>Syntax<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h3>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">param</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">param_name</span><span class="w"> </span><span class="n">index_range</span><span class="w"> </span><span class="k">variable </span><span class="nv nv-Identifier">formatarg</span>
+<span class="k">kim </span><span class="s1">param</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">param_name</span><span class="w"> </span><span class="n">index_range</span><span class="w"> </span><span class="n">values</span>
 </pre></div>
 </div>
 <ul id="formatarg-options">
@@ -921,30 +927,30 @@ spaces.  Multiple parameters can be set with a single call to <em>kim param set<
 repeating the argument list following <em>set</em>.</p>
 </section>
 <section id="kim-param-usage-examples-and-further-clarifications">
-<h3><em>kim param</em> Usage Examples and Further Clarifications<a class="headerlink" href="#kim-param-usage-examples-and-further-clarifications" title="Permalink to this headline">¶</a></h3>
+<h3><em>kim param</em> Usage Examples and Further Clarifications<a class="headerlink" href="#kim-param-usage-examples-and-further-clarifications" title="Permalink to this heading"></a></h3>
 <p>Examples of getting and setting KIM PM parameters with further clarifications
 are provided below.</p>
 <p><strong>Getting a scalar parameter</strong></p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">init</span><span class="w"> </span><span class="n">SW_StillingerWeber_1985_Si__MO_405512056662_005</span><span class="w"> </span><span class="n">metal</span><span class="w"></span>
-<span class="n">...</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">interactions</span><span class="w"> </span><span class="n">Si</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">param</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">VARA</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">init</span><span class="w"> </span><span class="n">SW_StillingerWeber_1985_Si__MO_405512056662_005</span><span class="w"> </span><span class="n">metal</span>
+<span class="n">...</span>
+<span class="k">kim </span><span class="s1">interactions</span><span class="w"> </span><span class="n">Si</span>
+<span class="k">kim </span><span class="s1">param</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">VARA</span>
 </pre></div>
 </div>
 <p>or</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="n">...</span><span class="w"></span>
-<span class="k">pair_style</span><span class="w"> </span><span class="n">kim</span><span class="w"> </span><span class="n">SW_StillingerWeber_1985_Si__MO_405512056662_005</span><span class="w"></span>
-<span class="k">pair_coeff</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Si</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">param</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">VARA</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="n">...</span>
+<span class="k">pair_style</span><span class="w"> </span><span class="k">kim </span><span class="s1">SW_StillingerWeber_1985_Si__MO_405512056662_005</span>
+<span class="k">pair_coeff</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Si</span>
+<span class="k">kim </span><span class="s1">param</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">VARA</span>
 </pre></div>
 </div>
 <p>In these cases, the value of the SW <em>A</em> parameter is retrieved and placed in the
 LAMMPS variable <em>VARA</em>.  The variable <em>VARA</em> can be used in the remainder of
 the input script in the same manner as any other LAMMPS variable.</p>
 <p><strong>Getting multiple scalar parameters with a single call</strong></p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="n">...</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">interactions</span><span class="w"> </span><span class="n">Si</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">param</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">VARA</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">VARB</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="n">...</span>
+<span class="k">kim </span><span class="s1">interactions</span><span class="w"> </span><span class="n">Si</span>
+<span class="k">kim </span><span class="s1">param</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">VARA</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">VARB</span>
 </pre></div>
 </div>
 <p>In this example, it is shown how to retrieve the <em>A</em> and <em>B</em> parameters of the
@@ -952,10 +958,10 @@ SW potential and store them in the LAMMPS variables <em>VARA</em> and <em>VARB</
 <p><strong>Getting a range of values from a parameter</strong></p>
 <p>There are several options when getting a range of values from a parameter
 determined by the <em>formatarg</em> argument.</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">init</span><span class="w"> </span><span class="n">SW_ZhouWardMartin_2013_CdTeZnSeHgS__MO_503261197030_002</span><span class="w"> </span><span class="n">metal</span><span class="w"></span>
-<span class="n">...</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">interactions</span><span class="w"> </span><span class="n">Te</span><span class="w"> </span><span class="n">Zn</span><span class="w"> </span><span class="n">Se</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">param</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">lambda</span><span class="w"> </span><span class="m">7:9</span><span class="w"> </span><span class="n">LAM_TeTe</span><span class="w"> </span><span class="n">LAM_TeZn</span><span class="w"> </span><span class="n">LAM_TeSe</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">init</span><span class="w"> </span><span class="n">SW_ZhouWardMartin_2013_CdTeZnSeHgS__MO_503261197030_002</span><span class="w"> </span><span class="n">metal</span>
+<span class="n">...</span>
+<span class="k">kim </span><span class="s1">interactions</span><span class="w"> </span><span class="n">Te</span><span class="w"> </span><span class="n">Zn</span><span class="w"> </span><span class="n">Se</span>
+<span class="k">kim </span><span class="s1">param</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">lambda</span><span class="w"> </span><span class="m">7:9</span><span class="w"> </span><span class="n">LAM_TeTe</span><span class="w"> </span><span class="n">LAM_TeZn</span><span class="w"> </span><span class="n">LAM_TeSe</span>
 </pre></div>
 </div>
 <p>In this case, <em>formatarg</em> is not specified and therefore the default
@@ -973,16 +979,16 @@ with .param ending) and consulting the README documentation provided with the
 driver for the PM being used.  A link to the driver is provided at the top of
 the model page.</p>
 </div>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="n">...</span><span class="w"></span>
-<span class="k">kim</span><span class="w">      </span><span class="n">interactions</span><span class="w"> </span><span class="n">Te</span><span class="w"> </span><span class="n">Zn</span><span class="w"> </span><span class="n">Se</span><span class="w"></span>
-<span class="k">kim</span><span class="w">      </span><span class="n">param</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">lambda</span><span class="w"> </span><span class="m">15:17</span><span class="w"> </span><span class="n">LAMS</span><span class="w"> </span><span class="n">list</span><span class="w"></span>
-<span class="k">variable </span><span class="nv nv-Identifier">LAM_VALUE</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="nv">${LAMS}</span><span class="w"></span>
-<span class="k">label</span><span class="w">    </span><span class="n">loop_on_lambda</span><span class="w"></span>
-<span class="n">...</span><span class="w"></span>
-<span class="n">...</span><span class="w">      </span><span class="n">do</span><span class="w"> </span><span class="n">something</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">lambda</span><span class="w"></span>
-<span class="n">...</span><span class="w"></span>
-<span class="k">next</span><span class="w">     </span><span class="n">LAM_VALUE</span><span class="w"></span>
-<span class="k">jump</span><span class="w">     </span><span class="n">SELF</span><span class="w"> </span><span class="n">loop_on_lambda</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="n">...</span>
+<span class="k">kim      </span><span class="s1">interactions</span><span class="w"> </span><span class="n">Te</span><span class="w"> </span><span class="n">Zn</span><span class="w"> </span><span class="n">Se</span>
+<span class="k">kim      </span><span class="s1">param</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">lambda</span><span class="w"> </span><span class="m">15:17</span><span class="w"> </span><span class="n">LAMS</span><span class="w"> </span><span class="n">list</span>
+<span class="k">variable </span><span class="nv nv-Identifier">LAM_VALUE</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="nv">${LAMS}</span>
+<span class="k">label    </span><span class="sc">loop_on_lambda</span>
+<span class="n">...</span>
+<span class="n">...</span><span class="w">      </span><span class="n">do</span><span class="w"> </span><span class="n">something</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">lambda</span>
+<span class="n">...</span>
+<span class="k">next     </span><span class="nv nv-Identifier">LAM_VALUE</span>
+<span class="k">jump     </span><span class="sc">SELF</span><span class="w"> </span><span class="n">loop_on_lambda</span>
 </pre></div>
 </div>
 <p>In this case, the “list” mode of <em>formatarg</em> is used.  The result of the <em>get</em>
@@ -991,9 +997,9 @@ three retrieved values separated by spaces, e.g “1.0 2.0 3.0”.  This can be 
 in LAMMPS with an <em>index</em> variable to access the values one at a time within a
 loop as shown in the example.  At each iteration of the loop <em>LAM_VALUE</em>
 contains the current value of lambda.</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="n">...</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">interactions</span><span class="w"> </span><span class="n">Te</span><span class="w"> </span><span class="n">Zn</span><span class="w"> </span><span class="n">Se</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">param</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">lambda</span><span class="w"> </span><span class="m">15:17</span><span class="w"> </span><span class="n">LAM</span><span class="w"> </span><span class="n">split</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="n">...</span>
+<span class="k">kim </span><span class="s1">interactions</span><span class="w"> </span><span class="n">Te</span><span class="w"> </span><span class="n">Zn</span><span class="w"> </span><span class="n">Se</span>
+<span class="k">kim </span><span class="s1">param</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">lambda</span><span class="w"> </span><span class="m">15:17</span><span class="w"> </span><span class="n">LAM</span><span class="w"> </span><span class="n">split</span>
 </pre></div>
 </div>
 <p>In this case, the “split” mode of <em>formatarg</em> is used.  The three values
@@ -1001,43 +1007,43 @@ retrieved by the <em>get</em> operation are stored in the three LAMMPS variables
 <em>LAM_15</em>, <em>LAM_16</em> and <em>LAM_17</em>.  The provided name “LAM” is used as prefix
 and the location in the lambda array is appended to create the variable names.</p>
 <p><strong>Setting a scalar parameter</strong></p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">init</span><span class="w"> </span><span class="n">SW_StillingerWeber_1985_Si__MO_405512056662_005</span><span class="w"> </span><span class="n">metal</span><span class="w"></span>
-<span class="n">...</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">interactions</span><span class="w"> </span><span class="n">Si</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">param</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">gamma</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2.6</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">init</span><span class="w"> </span><span class="n">SW_StillingerWeber_1985_Si__MO_405512056662_005</span><span class="w"> </span><span class="n">metal</span>
+<span class="n">...</span>
+<span class="k">kim </span><span class="s1">interactions</span><span class="w"> </span><span class="n">Si</span>
+<span class="k">kim </span><span class="s1">param</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">gamma</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2.6</span>
 </pre></div>
 </div>
 <p>Here, the SW potential’s gamma parameter is set to 2.6.  Note that the <em>get</em>
 and <em>set</em> commands work together, so that a <em>get</em> following a <em>set</em> operation
 will return the new value that was set.  For example,</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="n">...</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">interactions</span><span class="w"> </span><span class="n">Si</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">param</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">gamma</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">ORIG_GAMMA</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">param</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">gamma</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2.6</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">param</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">gamma</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">NEW_GAMMA</span><span class="w"></span>
-<span class="n">...</span><span class="w"></span>
-<span class="k">print</span><span class="w"> </span><span class="s">&quot;original gamma = ${ORIG_GAMMA}, new gamma = ${NEW_GAMMA}&quot;</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="n">...</span>
+<span class="k">kim </span><span class="s1">interactions</span><span class="w"> </span><span class="n">Si</span>
+<span class="k">kim </span><span class="s1">param</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">gamma</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">ORIG_GAMMA</span>
+<span class="k">kim </span><span class="s1">param</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">gamma</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2.6</span>
+<span class="k">kim </span><span class="s1">param</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">gamma</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">NEW_GAMMA</span>
+<span class="n">...</span>
+<span class="k">print</span><span class="w"> </span><span class="s">&quot;original gamma = ${ORIG_GAMMA}, new gamma = ${NEW_GAMMA}&quot;</span>
 </pre></div>
 </div>
 <p>Here, <em>ORIG_GAMMA</em> will contain the original gamma value for the SW potential,
 while <em>NEW_GAMMA</em> will contain the value 2.6.</p>
 <p><strong>Setting multiple scalar parameters with a single call</strong></p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w">      </span><span class="n">init</span><span class="w"> </span><span class="n">SW_ZhouWardMartin_2013_CdTeZnSeHgS__MO_503261197030_002</span><span class="w"> </span><span class="n">metal</span><span class="w"></span>
-<span class="n">...</span><span class="w"></span>
-<span class="k">kim</span><span class="w">      </span><span class="n">interactions</span><span class="w"> </span><span class="n">Cd</span><span class="w"> </span><span class="n">Te</span><span class="w"></span>
-<span class="k">variable </span><span class="nv nv-Identifier">VARG</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="m">2.6</span><span class="w"></span>
-<span class="k">variable </span><span class="nv nv-Identifier">VARS</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="m">2.0951</span><span class="w"></span>
-<span class="k">kim</span><span class="w">      </span><span class="n">param</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">gamma</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="nv">${VARG}</span><span class="w"> </span><span class="n">sigma</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="nv">${VARS}</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim      </span><span class="s1">init</span><span class="w"> </span><span class="n">SW_ZhouWardMartin_2013_CdTeZnSeHgS__MO_503261197030_002</span><span class="w"> </span><span class="n">metal</span>
+<span class="n">...</span>
+<span class="k">kim      </span><span class="s1">interactions</span><span class="w"> </span><span class="n">Cd</span><span class="w"> </span><span class="n">Te</span>
+<span class="k">variable </span><span class="nv nv-Identifier">VARG</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="m">2.6</span>
+<span class="k">variable </span><span class="nv nv-Identifier">VARS</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="m">2.0951</span>
+<span class="k">kim      </span><span class="s1">param</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">gamma</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="nv">${VARG}</span><span class="w"> </span><span class="n">sigma</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="nv">${VARS}</span>
 </pre></div>
 </div>
 <p>In this case, the first element of the <em>gamma</em> parameter and third element of
 the <em>sigma</em> parameter are set to 2.6 and 2.0951, respectively.  This example
 also shows how LAMMPS variables can be used when setting parameters.</p>
 <p><strong>Setting a range of values of a parameter</strong></p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">init</span><span class="w"> </span><span class="n">SW_ZhouWardMartin_2013_CdTeZnSeHgS__MO_503261197030_002</span><span class="w"> </span><span class="n">metal</span><span class="w"></span>
-<span class="n">...</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">interactions</span><span class="w"> </span><span class="n">Cd</span><span class="w"> </span><span class="n">Te</span><span class="w"> </span><span class="n">Zn</span><span class="w"> </span><span class="n">Se</span><span class="w"> </span><span class="n">Hg</span><span class="w"> </span><span class="n">S</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">param</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">sigma</span><span class="w"> </span><span class="m">2:6</span><span class="w"> </span><span class="m">2.35214</span><span class="w"> </span><span class="m">2.23869</span><span class="w"> </span><span class="m">2.04516</span><span class="w"> </span><span class="m">2.43269</span><span class="w"> </span><span class="m">1.80415</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">init</span><span class="w"> </span><span class="n">SW_ZhouWardMartin_2013_CdTeZnSeHgS__MO_503261197030_002</span><span class="w"> </span><span class="n">metal</span>
+<span class="n">...</span>
+<span class="k">kim </span><span class="s1">interactions</span><span class="w"> </span><span class="n">Cd</span><span class="w"> </span><span class="n">Te</span><span class="w"> </span><span class="n">Zn</span><span class="w"> </span><span class="n">Se</span><span class="w"> </span><span class="n">Hg</span><span class="w"> </span><span class="n">S</span>
+<span class="k">kim </span><span class="s1">param</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">sigma</span><span class="w"> </span><span class="m">2:6</span><span class="w"> </span><span class="m">2.35214</span><span class="w"> </span><span class="m">2.23869</span><span class="w"> </span><span class="m">2.04516</span><span class="w"> </span><span class="m">2.43269</span><span class="w"> </span><span class="m">1.80415</span>
 </pre></div>
 </div>
 <p>In this case, elements 2 through 6 of the parameter <em>sigma</em> are set to the
@@ -1045,7 +1051,7 @@ values 2.35214, 2.23869, 2.04516, 2.43269 and 1.80415 in order.</p>
 </section>
 </section>
 <section id="writing-material-properties-in-standard-kim-property-instance-format-kim-property">
-<span id="property"></span><h2>Writing material properties in standard KIM Property Instance format (<em>kim property</em>)<a class="headerlink" href="#writing-material-properties-in-standard-kim-property-instance-format-kim-property" title="Permalink to this headline">¶</a></h2>
+<span id="property"></span><h2>Writing material properties in standard KIM Property Instance format (<em>kim property</em>)<a class="headerlink" href="#writing-material-properties-in-standard-kim-property-instance-format-kim-property" title="Permalink to this heading"></a></h2>
 <p>The OpenKIM system includes a
 collection of Tests (material property calculation codes), Models (interatomic
 potentials), Predictions, and Reference Data (DFT or experiments).
@@ -1071,12 +1077,12 @@ property definitions have been identified, the <em>kim property create</em>,
 commands provide an interface to create, set, modify, remove, and destroy
 instances of them within a LAMMPS script.</p>
 <section id="id14">
-<h3>Syntax<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">create</span><span class="w">  </span><span class="n">instance_id</span><span class="w"> </span><span class="n">property_id</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">modify</span><span class="w">  </span><span class="n">instance_id</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">key_name</span><span class="w"> </span><span class="n">key_name_key</span><span class="w"> </span><span class="n">key_name_value</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">remove</span><span class="w">  </span><span class="n">instance_id</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">key_name</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">destroy</span><span class="w"> </span><span class="n">instance_id</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="k">dump    </span><span class="nv nv-Identifier">file</span><span class="w"></span>
+<h3>Syntax<a class="headerlink" href="#id14" title="Permalink to this heading"></a></h3>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">create</span><span class="w">  </span><span class="n">instance_id</span><span class="w"> </span><span class="n">property_id</span>
+<span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">modify</span><span class="w">  </span><span class="n">instance_id</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">key_name</span><span class="w"> </span><span class="n">key_name_key</span><span class="w"> </span><span class="n">key_name_value</span>
+<span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">remove</span><span class="w">  </span><span class="n">instance_id</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">key_name</span>
+<span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">destroy</span><span class="w"> </span><span class="n">instance_id</span>
+<span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="k">dump    </span><span class="nv nv-Identifier">file</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -1096,22 +1102,22 @@ pair</p></li>
 instances to</p></li>
 </ul>
 <p>Examples of each of the three <em>property_id</em> cases are shown below,</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">atomic</span><span class="o">-</span><span class="n">mass</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">cohesive</span><span class="o">-</span><span class="n">energy</span><span class="o">-</span><span class="n">relation</span><span class="o">-</span><span class="n">cubic</span><span class="o">-</span><span class="n">crystal</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">atomic</span><span class="o">-</span><span class="n">mass</span>
+<span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">cohesive</span><span class="o">-</span><span class="n">energy</span><span class="o">-</span><span class="n">relation</span><span class="o">-</span><span class="n">cubic</span><span class="o">-</span><span class="n">crystal</span>
 </pre></div>
 </div>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">tag</span>:brunnels@noreply.openkim.org,2016-05-11:property/atomic-mass<span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">tag</span>:staff@noreply.openkim.org,2014-04-15:property/cohesive-energy-relation-cubic-crystal<span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">tag</span>:brunnels@noreply.openkim.org,2016-05-11:property/atomic-mass
+<span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">tag</span>:staff@noreply.openkim.org,2014-04-15:property/cohesive-energy-relation-cubic-crystal
 </pre></div>
 </div>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">new</span><span class="o">-</span><span class="n">property.edn</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">mary</span><span class="o">/</span><span class="n">marys</span><span class="o">-</span><span class="n">kim</span><span class="o">-</span><span class="n">properties</span><span class="o">/</span><span class="n">dissociation</span><span class="o">-</span><span class="n">energy.edn</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">new</span><span class="o">-</span><span class="n">property.edn</span>
+<span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">mary</span><span class="o">/</span><span class="n">marys</span><span class="o">-</span><span class="n">kim</span><span class="o">-</span><span class="n">properties</span><span class="o">/</span><span class="n">dissociation</span><span class="o">-</span><span class="n">energy.edn</span>
 </pre></div>
 </div>
 <p>In the last example, “new-property.edn” and
 “/home/mary/marys-kim-properties/dissociation-energy.edn” are the names of files
 that contain user-defined (local) property definitions.</p>
-<p>A KIM property instance takes the form of a “map,” i.e. a set of key-value
+<p>A KIM property instance takes the form of a “map”, i.e. a set of key-value
 pairs akin to Perl’s hash, Python’s dictionary, or Java’s Hashtable.  It
 consists of a set of property key names, each of which is referred to here by
 the <em>key_name</em> argument, that are defined as part of the relevant KIM Property
@@ -1138,31 +1144,31 @@ in the map associated with the key that is to be set.  For example, the
 <a class="reference external" href="https://openkim.org/properties/show/2016-05-11/brunnels&#64;noreply.openkim.org/atomic-mass">atomic-mass</a>
 property definition consists of two property keys named “mass” and “species.”
 An instance of this property could be created like so:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">atomic</span><span class="o">-</span><span class="n">mass</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="n">Al</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">mass</span><span class="w">    </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">26.98154</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">mass</span><span class="w">    </span><span class="n">source</span><span class="o">-</span><span class="n">unit</span><span class="w"> </span><span class="n">amu</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">atomic</span><span class="o">-</span><span class="n">mass</span>
+<span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="n">Al</span>
+<span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">mass</span><span class="w">    </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">26.98154</span>
+<span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">mass</span><span class="w">    </span><span class="n">source</span><span class="o">-</span><span class="n">unit</span><span class="w"> </span><span class="n">amu</span>
 </pre></div>
 </div>
 <p>or, equivalently,</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">atomic</span><span class="o">-</span><span class="n">mass</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="n">Al</span><span class="w">       </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">mass</span><span class="w">    </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">26.98154</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">                                  </span><span class="n">source</span><span class="o">-</span><span class="n">unit</span><span class="w">  </span><span class="n">amu</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">atomic</span><span class="o">-</span><span class="n">mass</span>
+<span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="n">Al</span><span class="w">       </span><span class="o">&amp;</span>
+<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">mass</span><span class="w">    </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">26.98154</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">                                  </span><span class="n">source</span><span class="o">-</span><span class="n">unit</span><span class="w">  </span><span class="n">amu</span>
 </pre></div>
 </div>
 </section>
 <section id="kim-property-usage-examples-and-further-clarifications">
-<h3><em>kim property</em> Usage Examples and Further Clarifications<a class="headerlink" href="#kim-property-usage-examples-and-further-clarifications" title="Permalink to this headline">¶</a></h3>
+<h3><em>kim property</em> Usage Examples and Further Clarifications<a class="headerlink" href="#kim-property-usage-examples-and-further-clarifications" title="Permalink to this heading"></a></h3>
 <p><strong>Create</strong></p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="n">instance_id</span><span class="w"> </span><span class="n">property_id</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="n">instance_id</span><span class="w"> </span><span class="n">property_id</span>
 </pre></div>
 </div>
 <p>The <em>kim property create</em> command takes as input a property instance ID and the
 property definition name, and creates an initial empty property instance data
 structure.  For example,</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">atomic</span><span class="o">-</span><span class="n">mass</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">cohesive</span><span class="o">-</span><span class="n">energy</span><span class="o">-</span><span class="n">relation</span><span class="o">-</span><span class="n">cubic</span><span class="o">-</span><span class="n">crystal</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">atomic</span><span class="o">-</span><span class="n">mass</span>
+<span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">cohesive</span><span class="o">-</span><span class="n">energy</span><span class="o">-</span><span class="n">relation</span><span class="o">-</span><span class="n">cubic</span><span class="o">-</span><span class="n">crystal</span>
 </pre></div>
 </div>
 <p>creates an empty property instance of the “atomic-mass” property definition
@@ -1171,7 +1177,7 @@ with instance ID 1 and an empty instance of the
 published property definitions in OpenKIM can be found on the <a class="reference external" href="https://openkim.org/properties">properties page</a>.</p>
 <p>One can also provide the name of a file in the current working directory or the
 path of a file containing a valid property definition.  For example,</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">new</span><span class="o">-</span><span class="n">property.edn</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">new</span><span class="o">-</span><span class="n">property.edn</span>
 </pre></div>
 </div>
 <p>where “new-property.edn” refers to a file name containing a new property
@@ -1181,25 +1187,25 @@ containing a valid property definition can be found, this command will produce
 an error with an appropriate message.  Calling <em>kim property create</em> with the
 same instance ID multiple times will also produce an error.</p>
 <p><strong>Modify</strong></p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="n">instance_id</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">key_name</span><span class="w"> </span><span class="n">key_name_key</span><span class="w"> </span><span class="n">key_name_value</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="n">instance_id</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">key_name</span><span class="w"> </span><span class="n">key_name_key</span><span class="w"> </span><span class="n">key_name_value</span>
 </pre></div>
 </div>
 <p>The <em>kim property modify</em> command incrementally builds the property instance
 by receiving property definition keys along with associated arguments.  Each
 <em>key_name</em> is associated with a map containing one or more key-value pairs (in
 the form of <em>key_name_key</em>-<em>key_name_value</em> pairs).  For example,</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="n">Al</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">mass</span><span class="w">    </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">26.98154</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">mass</span><span class="w">    </span><span class="n">source</span><span class="o">-</span><span class="n">unit</span><span class="w">  </span><span class="n">amu</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="n">Al</span>
+<span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">mass</span><span class="w">    </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">26.98154</span>
+<span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">mass</span><span class="w">    </span><span class="n">source</span><span class="o">-</span><span class="n">unit</span><span class="w">  </span><span class="n">amu</span>
 </pre></div>
 </div>
 <p>where the special keyword “key” is followed by a <em>key_name</em> (“species” or
 “mass” in the above) and one or more key-value pairs.  These key-value pairs
 may continue until either another “key” keyword is given or the end of the
 command line is reached.  Thus, the above could equivalently be written as</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="n">Al</span><span class="w">       </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">mass</span><span class="w">    </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">26.98154</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">mass</span><span class="w">    </span><span class="n">source</span><span class="o">-</span><span class="n">unit</span><span class="w">  </span><span class="n">amu</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="n">Al</span><span class="w">       </span><span class="o">&amp;</span>
+<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">mass</span><span class="w">    </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">26.98154</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">mass</span><span class="w">    </span><span class="n">source</span><span class="o">-</span><span class="n">unit</span><span class="w">  </span><span class="n">amu</span>
 </pre></div>
 </div>
 <p>As an example of modifying multiple key-value pairs belonging to the map of a
@@ -1207,7 +1213,7 @@ single property key, the following command modifies the map of the
 “cohesive-potential-energy” property key to contain the key “source-unit” which
 is assigned a value of “eV” and the key “digits” which is assigned a value of
 5,</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">cohesive</span><span class="o">-</span><span class="n">potential</span><span class="o">-</span><span class="n">energy</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">unit</span><span class="w"> </span><span class="n">eV</span><span class="w"> </span><span class="n">digits</span><span class="w"> </span><span class="m">5</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">cohesive</span><span class="o">-</span><span class="n">potential</span><span class="o">-</span><span class="n">energy</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">unit</span><span class="w"> </span><span class="n">eV</span><span class="w"> </span><span class="n">digits</span><span class="w"> </span><span class="m">5</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -1242,10 +1248,10 @@ property is a one-dimensional array that can contain any number of entries
 based on the number of atoms in the unit cell of a given cubic crystal.  To
 assign an array containing the string “Al” four times to the “source-value” key
 of the “species” property key, we can do so by issuing:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">Al</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">Al</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="n">Al</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="n">Al</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">Al</span>
+<span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">Al</span>
+<span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="n">Al</span>
+<span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="n">Al</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -1261,10 +1267,6 @@ array index without having set the values of all lesser indices, they will
 be assigned default values based on the data type associated with the key in
 the map:</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p>Data type</p></td>
 <td><p>Default value</p></td>
@@ -1284,8 +1286,8 @@ the map:</p>
 </tbody>
 </table>
 <p>For example, doing the following:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">cohesive</span><span class="o">-</span><span class="n">energy</span><span class="o">-</span><span class="n">relation</span><span class="o">-</span><span class="n">cubic</span><span class="o">-</span><span class="n">crystal</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="n">Al</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">cohesive</span><span class="o">-</span><span class="n">energy</span><span class="o">-</span><span class="n">relation</span><span class="o">-</span><span class="n">cubic</span><span class="o">-</span><span class="n">crystal</span>
+<span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="n">Al</span>
 </pre></div>
 </div>
 <p>will result in the “source-value” key in the map for the property key
@@ -1295,7 +1297,7 @@ the map:</p>
 indices by specifying two integers separated by a colon (the first integer must
 be less than or equal to the second integer, and no whitespace should be
 included).  Thus, the snippet above could equivalently be written:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">1:4</span><span class="w"> </span><span class="n">Al</span><span class="w"> </span><span class="n">Al</span><span class="w"> </span><span class="n">Al</span><span class="w"> </span><span class="n">Al</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">1:4</span><span class="w"> </span><span class="n">Al</span><span class="w"> </span><span class="n">Al</span><span class="w"> </span><span class="n">Al</span><span class="w"> </span><span class="n">Al</span>
 </pre></div>
 </div>
 <p>Calling this command with a non-positive index, e.g.
@@ -1317,17 +1319,17 @@ with this key should be assigned the following value:</p>
 </div>
 <p>While each of the twelve components could be set individually, we can instead
 set each row at a time using colon notation:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.0</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.5</span><span class="w"></span>
-<span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span>
+<span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.0</span>
+<span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.5</span>
+<span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span>
 </pre></div>
 </div>
 <p>Where the first index given refers to a row and the second index refers to a
 column.  We could, instead, choose to set each column at a time like so:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">1:4</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">1:4</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">1:4</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">1:4</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">1:4</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">1:4</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -1335,21 +1337,21 @@ column.  We could, instead, choose to set each column at a time like so:</p>
 <p>Multiple calls of <em>kim property modify</em> made for the same instance ID
 can be combined into a single invocation, meaning the following are
 both valid:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span>
 </pre></div>
 </div>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">short</span><span class="o">-</span><span class="n">name</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">fcc</span><span class="w">                         </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">1:4</span><span class="w"> </span><span class="n">Al</span><span class="w"> </span><span class="n">Al</span><span class="w"> </span><span class="n">Al</span><span class="w"> </span><span class="n">Al</span><span class="w">                  </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">1:5</span><span class="w"> </span><span class="m">3.9149</span><span class="w"> </span><span class="m">4.0000</span><span class="w"> </span><span class="m">4.032</span><span class="w"> </span><span class="m">4.0817</span><span class="w"> </span><span class="m">4.1602</span><span class="w">  </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">                            </span><span class="n">source</span><span class="o">-</span><span class="n">unit</span><span class="w"> </span><span class="n">angstrom</span><span class="w">                                </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">                            </span><span class="n">digits</span><span class="w"> </span><span class="m">5</span><span class="w">                                            </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">short</span><span class="o">-</span><span class="n">name</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">fcc</span><span class="w">                         </span><span class="o">&amp;</span>
+<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">1:4</span><span class="w"> </span><span class="n">Al</span><span class="w"> </span><span class="n">Al</span><span class="w"> </span><span class="n">Al</span><span class="w"> </span><span class="n">Al</span><span class="w">                  </span><span class="o">&amp;</span>
+<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">1:5</span><span class="w"> </span><span class="m">3.9149</span><span class="w"> </span><span class="m">4.0000</span><span class="w"> </span><span class="m">4.032</span><span class="w"> </span><span class="m">4.0817</span><span class="w"> </span><span class="m">4.1602</span><span class="w">  </span><span class="o">&amp;</span>
+<span class="w">                            </span><span class="n">source</span><span class="o">-</span><span class="n">unit</span><span class="w"> </span><span class="n">angstrom</span><span class="w">                                </span><span class="o">&amp;</span>
+<span class="w">                            </span><span class="n">digits</span><span class="w"> </span><span class="m">5</span><span class="w">                                            </span><span class="o">&amp;</span>
+<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">                      </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="n">source</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.5</span><span class="w"> </span><span class="m">0.5</span>
 </pre></div>
 </div>
 </div>
@@ -1357,11 +1359,11 @@ both valid:</p>
 <p class="admonition-title">Note</p>
 <p>For multidimensional arrays, only one colon-separated range is allowed
 in the index listing.  Therefore,</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span>
 </pre></div>
 </div>
 <p>is valid but</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="m">1:2</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"> </span><span class="m">1:2</span><span class="w"> </span><span class="m">1:3</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">0.0</span>
 </pre></div>
 </div>
 <p>is not.</p>
@@ -1372,21 +1374,21 @@ in the index listing.  Therefore,</p>
 additional calls will overwrite the previous value.</p>
 </div>
 <p><strong>Remove</strong></p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">remove</span><span class="w"> </span><span class="n">instance_id</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">key_name</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">remove</span><span class="w"> </span><span class="n">instance_id</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">key_name</span>
 </pre></div>
 </div>
 <p>The <em>kim property remove</em> command can be used to remove a property key from a
 property instance.  For example,</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">remove</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">remove</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">basis</span><span class="o">-</span><span class="n">atom</span><span class="o">-</span><span class="n">coordinates</span>
 </pre></div>
 </div>
 <p><strong>Destroy</strong></p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">destroy</span><span class="w"> </span><span class="n">instance_id</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">destroy</span><span class="w"> </span><span class="n">instance_id</span>
 </pre></div>
 </div>
 <p>The <em>kim property destroy</em> command deletes a previously created property
 instance ID.  For example,</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">destroy</span><span class="w"> </span><span class="m">2</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="n">destroy</span><span class="w"> </span><span class="m">2</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -1397,11 +1399,11 @@ error is raised.</p>
 <p><strong>Dump</strong></p>
 <p>The <em>kim property dump</em>  command can be used to write the content of all
 currently defined property instances to a file:</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="k">dump </span><span class="nv nv-Identifier">file</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="k">dump </span><span class="nv nv-Identifier">file</span>
 </pre></div>
 </div>
 <p>For example,</p>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="k">dump </span><span class="nv nv-Identifier">results.edn</span><span class="w"></span>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">kim </span><span class="s1">property</span><span class="w"> </span><span class="k">dump </span><span class="nv nv-Identifier">results.edn</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -1412,36 +1414,35 @@ instances from memory.</p>
 </section>
 </section>
 <section id="citation-of-openkim-ims">
-<h2>Citation of OpenKIM IMs<a class="headerlink" href="#citation-of-openkim-ims" title="Permalink to this headline">¶</a></h2>
-<p>When publishing results obtained using OpenKIM IMs researchers are requested
-to cite the OpenKIM project <a class="reference internal" href="#kim-mainpaper"><span class="std std-ref">(Tadmor)</span></a>, KIM API
-<a class="reference internal" href="#id18"><span class="std std-ref">(Elliott)</span></a>, and the specific IM codes used in the simulations,
-in addition to the relevant scientific references for the IM. The citation
-format for an IM is displayed on its page on
-<a class="reference external" href="https://openkim.org">OpenKIM</a> along with the corresponding BibTex file, and
-is automatically added to the LAMMPS citation reminder.</p>
+<h2>Citation of OpenKIM IMs<a class="headerlink" href="#citation-of-openkim-ims" title="Permalink to this heading"></a></h2>
+<p>When publishing results obtained using OpenKIM IMs researchers are
+requested to cite the OpenKIM project <a class="reference internal" href="#kim-mainpaper"><span class="std std-ref">(Tadmor)</span></a>,
+KIM API <a class="reference internal" href="#id18"><span class="std std-ref">(Elliott)</span></a>, and the specific IM codes used in
+the simulations, in addition to the relevant scientific references for
+the IM. The citation format for an IM is displayed on its page on
+<a class="reference external" href="https://openkim.org">OpenKIM</a> along with the corresponding BibTex
+file, and is automatically added to the LAMMPS citation reminder.</p>
 <p>Citing the IM software (KIM infrastructure and specific PM or SM codes) used in
 the simulation gives credit to the researchers who developed them and enables
 open source efforts like OpenKIM to function.</p>
 </section>
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
-<p>The <em>kim</em> command is part of the KIM package.  It is only enabled if LAMMPS is
-built with that package.  A requirement for the KIM package, is the KIM API
-library that must be downloaded from the
-<a class="reference external" href="https://openkim.org/kim-api/">OpenKIM website</a> and installed before LAMMPS is
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
+<p>The <em>kim</em> command is part of the KIM package.  It is only enabled if
+LAMMPS is built with that package.  A requirement for the KIM package,
+is the KIM API library that must be downloaded from the <a class="reference external" href="https://openkim.org/kim-api/">OpenKIM website</a> and installed before LAMMPS is
 compiled.  When installing LAMMPS from binary, the kim-api package is a
-dependency that is automatically downloaded and installed.  The <em>kim query</em>
-command requires the <em>libcurl</em> library to be installed.  The <em>kim property</em>
-command requires <em>Python</em> 3.6 or later and the <em>kim-property</em> python package to
-be installed.  See the KIM section of the
+dependency that is automatically downloaded and installed.  The <em>kim
+query</em> command requires the <em>libcurl</em> library to be installed.  The <em>kim
+property</em> command requires <em>Python</em> 3.6 or later and the <em>kim-property</em>
+python package to be installed.  See the KIM section of the
 <a class="reference internal" href="Packages_details.html"><span class="doc">Packages details</span></a> for details.</p>
 <p>Furthermore, when using <em>kim</em> command to run KIM SMs, any packages required by
 the native potential being used or other commands or fixes that it invokes must
 be installed.</p>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="pair_kim.html"><span class="doc">pair_style kim</span></a></p>
 <hr class="docutils" />
 <p id="kim-mainpaper"><strong>(Tadmor)</strong> Tadmor, Elliott, Sethna, Miller and Becker, JOM, 63, 17 (2011).
@@ -1462,7 +1463,7 @@ doi: <a class="reference external" href="https://doi.org/10.25950/FF8F563A">http
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -1471,7 +1472,6 @@ doi: <a class="reference external" href="https://doi.org/10.25950/FF8F563A">http
    
 
 </footer>
-
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>compute coord/atom command &mdash; LAMMPS documentation</title>
@@ -10,21 +10,21 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/compute_coord_atom.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="compute damage/atom command" href="compute_damage_atom.html" />
+    <link rel="next" title="compute count/type command" href="compute_count_type.html" />
     <link rel="prev" title="compute contact/atom command" href="compute_contact_atom.html" /> 
 </head>
 
@@ -33,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -104,17 +108,21 @@
 <li class="toctree-l3"><a class="reference internal" href="#default">Default</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="compute_count_type.html">compute count/type command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_damage_atom.html">compute damage/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dihedral.html">compute dihedral command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dihedral_local.html">compute dihedral/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dilatation_atom.html">compute dilatation/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dipole.html">compute dipole command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_dipole.html#compute-dipole-tip4p-command">compute dipole/tip4p command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dipole_chunk.html">compute dipole/chunk command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_dipole_chunk.html#compute-dipole-tip4p-chunk-command">compute dipole/tip4p/chunk command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_displace_atom.html">compute displace/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dpd.html">compute dpd command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_dpd_atom.html">compute dpd/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_edpd_temp_atom.html">compute edpd/temp/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_efield_atom.html">compute efield/atom command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_efield_wolf_atom.html">compute efield/wolf/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_entropy_atom.html">compute entropy/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_erotate_asphere.html">compute erotate/asphere command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_erotate_rigid.html">compute erotate/rigid command</a></li>
@@ -141,7 +149,6 @@
 <li class="toctree-l2"><a class="reference internal" href="compute_ke_atom_eff.html">compute ke/atom/eff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_ke_eff.html">compute ke/eff command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_ke_rigid.html">compute ke/rigid command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute_mesont.html">compute mesont command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_mliap.html">compute mliap command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_modify.html">compute_modify command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_momentum.html">compute momentum command</a></li>
@@ -157,9 +164,11 @@
 <li class="toctree-l2"><a class="reference internal" href="compute_pe_atom.html">compute pe/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_plasticity_atom.html">compute plasticity/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_pressure.html">compute pressure command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_pressure_alchemy.html">compute pressure/alchemy command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_pressure_uef.html">compute pressure/uef command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_property_atom.html">compute property/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_property_chunk.html">compute property/chunk command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_property_grid.html">compute property/grid command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_property_local.html">compute property/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_ptm_atom.html">compute ptm/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_rdf.html">compute rdf command</a></li>
@@ -194,17 +203,19 @@
 <li class="toctree-l2"><a class="reference internal" href="compute_sna_atom.html#compute-snad-atom-command">compute snad/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_sna_atom.html#compute-snav-atom-command">compute snav/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_sna_atom.html#compute-snap-command">compute snap command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_sna_atom.html#compute-sna-grid-command">compute sna/grid command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_sna_atom.html#compute-sna-grid-local-command">compute sna/grid/local command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_sph_e_atom.html">compute sph/e/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_sph_rho_atom.html">compute sph/rho/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_sph_t_atom.html">compute sph/t/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_spin.html">compute spin command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_stress_atom.html">compute stress/atom command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_stress_atom.html#compute-centroid-stress-atom-command">compute centroid/stress/atom command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_stress_cartesian.html">compute stress/cartesian command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_stress_curvilinear.html">compute stress/cylinder command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute_stress_curvilinear.html#compute-stress-spherical-command">compute stress/spherical command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_stress_mop.html">compute stress/mop command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_stress_mop.html#compute-stress-mop-profile-command">compute stress/mop/profile command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute_stress_profile.html">compute stress/cartesian command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute_stress_profile.html#compute-stress-cylinder-command">compute stress/cylinder command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute_stress_profile.html#compute-stress-spherical-command">compute stress/spherical command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_tally.html">compute force/tally command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_tally.html#compute-heat-flux-tally-command">compute heat/flux/tally command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compute_tally.html#compute-heat-flux-virial-tally-command">compute heat/flux/virial/tally command</a></li>
@@ -244,6 +255,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -261,37 +273,37 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="computes.html">Computes</a> &raquo;</li>
-      <li>compute coord/atom command</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="computes.html">Computes</a></li>
+      <li class="breadcrumb-item active">compute coord/atom command</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="compute_contact_atom.html" class="btn btn-neutral float-left" title="compute contact/atom command" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="compute_damage_atom.html" class="btn btn-neutral float-right" title="compute damage/atom command" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="compute_count_type.html" class="btn btn-neutral float-right" title="compute count/type command" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <span class="target" id="index-0"></span><section id="compute-coord-atom-command">
-<span id="index-1"></span><h1>compute coord/atom command<a class="headerlink" href="#compute-coord-atom-command" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<span class="target" id="index-0"></span><section id="compute-coord-atom-command">
+<span id="index-1"></span><h1>compute coord/atom command<a class="headerlink" href="#compute-coord-atom-command" title="Permalink to this heading"></a></h1>
 <p>Accelerator Variants: <em>coord/atom/kk</em></p>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>compute ID group-ID coord/atom cstyle args ...
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">ID</span><span class="w"> </span><span class="nv nv-Identifier">group-ID</span><span class="w"> </span><span class="n">coord</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="n">...</span>
 </pre></div>
 </div>
 <ul>
 <li><p>ID, group-ID are documented in <a class="reference internal" href="compute.html"><span class="doc">compute</span></a> command</p></li>
 <li><p>coord/atom = style name of this compute command</p></li>
-<li><p>cstyle = <em>cutoff</em> or <em>orientorder</em></p>
-<pre class="literal-block"><em>cutoff</em> args = cutoff [group group2-ID] typeN
+<li><p>style = <em>cutoff</em> or <em>orientorder</em></p>
+<pre class="literal-block"><em>cutoff</em> args = cutoff [<em>group</em> group2-ID] typeN
   cutoff = distance within which to count coordination neighbors (distance units)
-  group <em>group2-ID</em> = select group-ID to restrict which atoms to consider for coordination number (optional)
+  <em>group</em> group2-ID = select group-ID to restrict which atoms to consider for coordination number (optional)
   typeN = atom type for Nth coordination count (see asterisk form below)
 <em>orientorder</em> args = orientorderID threshold
   orientorderID = ID of an orientorder/atom compute
@@ -300,17 +312,17 @@
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">coord</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">cutoff</span><span class="w"> </span><span class="m">2.0</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">coord</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">cutoff</span><span class="w"> </span><span class="m">6.0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">coord</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">cutoff</span><span class="w"> </span><span class="m">6.0</span><span class="w"> </span><span class="m">2</span><span class="o">*</span><span class="m">4</span><span class="w"> </span><span class="m">5</span><span class="o">*</span><span class="m">8</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">solute</span><span class="w"> </span><span class="n">coord</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">cutoff</span><span class="w"> </span><span class="m">2.0</span><span class="w"> </span><span class="k">group </span><span class="nv nv-Identifier">solvent</span><span class="w"></span>
-<span class="k">compute </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">coord</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">orientorder</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">0.5</span><span class="w"></span>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-LAMMPS notranslate"><div class="highlight"><pre><span></span><span class="k">compute </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">coord</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">cutoff</span><span class="w"> </span><span class="m">2.0</span>
+<span class="k">compute </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">coord</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">cutoff</span><span class="w"> </span><span class="m">6.0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span>
+<span class="k">compute </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">coord</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">cutoff</span><span class="w"> </span><span class="m">6.0</span><span class="w"> </span><span class="m">2</span><span class="o">*</span><span class="m">4</span><span class="w"> </span><span class="m">5</span><span class="o">*</span><span class="m">8</span><span class="w"> </span><span class="o">*</span>
+<span class="k">compute </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">solute</span><span class="w"> </span><span class="n">coord</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">cutoff</span><span class="w"> </span><span class="m">2.0</span><span class="w"> </span><span class="k">group </span><span class="nv nv-Identifier">solvent</span>
+<span class="k">compute </span><span class="nv nv-Identifier">1</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">coord</span><span class="o">/</span><span class="n">atom</span><span class="w"> </span><span class="n">orientorder</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">0.5</span>
 </pre></div>
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <p>This compute performs calculations between neighboring atoms to
 determine a coordination value.  The specific calculation and the
 meaning of the resulting value depend on the <em>cstyle</em> keyword used.</p>
@@ -322,7 +334,7 @@ the central atom. The compute group selects only the central atoms; all
 neighboring atoms, unless selected by type, type range, or group option,
 are included in the coordination number tally.</p>
 <p>The optional <em>group</em> keyword allows to specify from which group atoms
-contribute to the coordination number. Default setting is group ‘all’.</p>
+contribute to the coordination number. Default setting is group ‘all.’</p>
 <p>The <em>typeN</em> keywords allow specification of which atom types
 contribute to each coordination number.  One coordination number is
 computed for each of the <em>typeN</em> keywords listed.  If no <em>typeN</em>
@@ -331,14 +343,14 @@ includes atoms of all types (same as the “*” format, see below).</p>
 <p>The <em>typeN</em> keywords can be specified in one of two ways.  An explicit
 numeric value can be used, as in the second example above.  Or a
 wild-card asterisk can be used to specify a range of atom types.  This
-takes the form “*” or “*n” or “n*” or “m*n”.  If N = the number of
+takes the form “*” or “*n” or “m*” or “m*n”.  If <span class="math notranslate nohighlight">\(N\)</span> is the number of
 atom types, then an asterisk with no numeric values means all types
-from 1 to N.  A leading asterisk means all types from 1 to n
-(inclusive).  A trailing asterisk means all types from n to N
+from 1 to <span class="math notranslate nohighlight">\(N\)</span>.  A leading asterisk means all types from 1 to n
+(inclusive).  A trailing asterisk means all types from m to <span class="math notranslate nohighlight">\(N\)</span>
 (inclusive).  A middle asterisk means all types from m to n
 (inclusive).</p>
 <p>The <em>orientorder</em> cstyle calculates the number of “connected” neighbor
-atoms J around each central atom I.  For this <em>cstyle</em>, connected is
+atoms <em>j</em> around each central atom <em>i</em>.  For this <em>cstyle</em>, connected is
 defined by the orientational order parameter calculated by the
 <a class="reference internal" href="compute_orientorder_atom.html"><span class="doc">compute orientorder/atom</span></a> command.
 This <em>cstyle</em> thus allows one to apply the ten Wolde’s criterion to
@@ -348,14 +360,14 @@ identify crystal-like atoms in a system, as discussed in <a class="reference int
 calculate components of the <em>Ybar_lm</em> vector for each atoms, as
 described in its documentation.  Note that orientorder/atom compute
 defines its own criteria for identifying neighboring atoms.  If the
-scalar product (<em>Ybar_lm(i)</em>,*Ybar_lm(j)*), calculated by the
+scalar product (<em>Ybar_lm(i)</em>, <em>Ybar_lm(j)</em>), calculated by the
 orientorder/atom compute is larger than the specified <em>threshold</em>,
-then I and J are connected, and the coordination value of I is
+then <em>i</em> and <em>j</em> are connected, and the coordination value of <em>i</em> is
 incremented by one.</p>
 <p>For all <em>cstyle</em> settings, all coordination values will be 0.0 for
 atoms not in the specified compute group.</p>
 <p>The neighbor list needed to compute this quantity is constructed each
-time the calculation is performed (i.e. each time a snapshot of atoms
+time the calculation is performed (i.e., each time a snapshot of atoms
 is dumped).  Thus it can be inefficient to compute/dump this quantity
 too frequently.</p>
 <div class="admonition note">
@@ -381,7 +393,7 @@ hardware, as discussed on the <a class="reference internal" href="Speed_packages
 page.  The accelerated styles take the same arguments and should
 produce the same results, except for round-off and precision issues.</p>
 <p>These accelerated styles are part of the GPU, INTEL, KOKKOS,
-OPENMP and OPT packages, respectively.  They are only enabled if
+OPENMP, and OPT packages, respectively.  They are only enabled if
 LAMMPS was built with those packages.  See the <a class="reference internal" href="Build_package.html"><span class="doc">Build package</span></a> page for more info.</p>
 <p>You can specify the accelerated styles explicitly in your input script
 by including their suffix, or you can use the <a class="reference internal" href="Run_options.html"><span class="doc">-suffix command-line switch</span></a> when you invoke LAMMPS, or you can use the
@@ -391,32 +403,32 @@ instructions on how to use the accelerated styles effectively.</p>
 </section>
 <hr class="docutils" />
 <section id="output-info">
-<h2>Output info<a class="headerlink" href="#output-info" title="Permalink to this headline">¶</a></h2>
+<h2>Output info<a class="headerlink" href="#output-info" title="Permalink to this heading"></a></h2>
 <p>For <em>cstyle</em> cutoff, this compute can calculate a per-atom vector or
 array.  If single <em>type1</em> keyword is specified (or if none are
 specified), this compute calculates a per-atom vector.  If multiple
 <em>typeN</em> keywords are specified, this compute calculates a per-atom
-array, with N columns.</p>
+array, with <span class="math notranslate nohighlight">\(N\)</span> columns.</p>
 <p>For <em>cstyle</em> orientorder, this compute calculates a per-atom vector.</p>
 <p>These values can be accessed by any command that uses per-atom values
 from a compute as input.  See the <a class="reference internal" href="Howto_output.html"><span class="doc">Howto output</span></a> doc
 page for an overview of LAMMPS output options.</p>
-<p>The per-atom vector or array values will be a number &gt;= 0.0, as
+<p>The per-atom vector or array values will be a number <span class="math notranslate nohighlight">\(\ge 0.0\)</span>, as
 explained above.</p>
 </section>
 <section id="restrictions">
-<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
 <blockquote>
 <div><p>none</p>
 </div></blockquote>
 </section>
 <section id="related-commands">
-<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
 <p><a class="reference internal" href="compute_cluster_atom.html"><span class="doc">compute cluster/atom</span></a>
 <a class="reference internal" href="compute_orientorder_atom.html"><span class="doc">compute orientorder/atom</span></a></p>
 </section>
 <section id="default">
-<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
 <p>group = all</p>
 <hr class="docutils" />
 <p id="tenwolde1"><strong>(tenWolde)</strong> P. R. ten Wolde, M. J. Ruiz-Montero, D. Frenkel,
@@ -429,13 +441,13 @@ J. Chem. Phys. 104, 9932 (1996).</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="compute_contact_atom.html" class="btn btn-neutral float-left" title="compute contact/atom command" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="compute_damage_atom.html" class="btn btn-neutral float-right" title="compute damage/atom command" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="compute_count_type.html" class="btn btn-neutral float-right" title="compute count/type command" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -444,7 +456,6 @@ J. Chem. Phys. 104, 9932 (1996).</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>3.4. Basic build options &mdash; LAMMPS documentation</title>
@@ -10,18 +10,18 @@
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/lammps.css" type="text/css" />
     <link rel="shortcut icon" href="_static/lammps.ico"/>
+    <link rel="canonical" href="https://docs.lammps.org/Build_basics.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-
   
-  <script src="_static/js/modernizr.min.js"></script>
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/tabs.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f5d268a4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/tabs.js?v=3030b3cb"></script>
+        <script async="async" src="_static/mathjax/es5/tex-mml-chtml.js?v=cadf963e"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -34,14 +34,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="Manual.html">
-            <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="Manual.html">
+            
+              <img src="_static/lammps-logo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="lammps_version">Version: <b>2 Jun 2022</b></div>
-              <div class="lammps_release">git info: patch 2Jun2022</div>
+            <div class="lammps_version">Version: <b>2 Aug 2023</b></div>
+            <div class="lammps_release">git info: 2Aug2023</div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -99,6 +103,7 @@
 <li class="toctree-l1"><a class="reference internal" href="angles.html">Angle Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dihedrals.html">Dihedral Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="impropers.html">Improper Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dumps.html">Dump Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fix_modify_atc_commands.html">fix_modify AtC commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
@@ -116,12 +121,11 @@
         <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="Manual.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="Build.html"><span class="section-number">3. </span>Build LAMMPS</a> &raquo;</li>
-      <li><span class="section-number">3.4. </span>Basic build options</li>
+      <li><a href="Manual.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Build.html"><span class="section-number">3. </span>Build LAMMPS</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">3.4. </span>Basic build options</li>
       <li class="wy-breadcrumbs-aside">
-          <a href="https://www.lammps.org">Website</a>
-          <a href="Commands_all.html">Commands</a>
+          <a href="https://www.lammps.org"><img src="_static/lammps-logo.png" width="64" height="16" alt="LAMMPS Homepage"></a> | <a href="Commands_all.html">Commands</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="Build_link.html" class="btn btn-neutral float-left" title="3.3. Link LAMMPS as a library to another code" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -132,8 +136,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="basic-build-options">
-<h1><span class="section-number">3.4. </span>Basic build options<a class="headerlink" href="#basic-build-options" title="Permalink to this headline">¶</a></h1>
+  <p><span class="math notranslate nohighlight">\(\renewcommand{\AA}{\text{Å}}\)</span></p>
+<section id="basic-build-options">
+<h1><span class="section-number">3.4. </span>Basic build options<a class="headerlink" href="#basic-build-options" title="Permalink to this heading"></a></h1>
 <p>The following topics are covered on this page, for building with both
 CMake and make:</p>
 <ul class="simple">
@@ -145,7 +150,7 @@ CMake and make:</p>
 </ul>
 <hr class="docutils" />
 <section id="serial-vs-parallel-build">
-<span id="serial"></span><h2><span class="section-number">3.4.1. </span>Serial vs parallel build<a class="headerlink" href="#serial-vs-parallel-build" title="Permalink to this headline">¶</a></h2>
+<span id="serial"></span><h2><span class="section-number">3.4.1. </span>Serial vs parallel build<a class="headerlink" href="#serial-vs-parallel-build" title="Permalink to this heading"></a></h2>
 <p>LAMMPS is written to use the ubiquitous <a class="reference external" href="https://en.wikipedia.org/wiki/Message_Passing_Interface">MPI (Message Passing Interface)</a> library API
 for distributed memory parallel computation.  You need to have such a
 library installed for building and running LAMMPS in parallel using a
@@ -158,26 +163,26 @@ LAMMPS are also written with support for shared memory parallelization
 using the <a class="reference external" href="https://en.wikipedia.org/wiki/OpenMP">OpenMP</a> threading
 standard. A more detailed discussion of that is below.</p>
 <div class="sphinx-tabs docutils container">
-<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">CMake build</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Traditional make</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-D <span class="nv">BUILD_MPI</span><span class="o">=</span>value        <span class="c1"># yes or no, default is yes if CMake finds MPI, else no</span>
--D <span class="nv">BUILD_OMP</span><span class="o">=</span>value        <span class="c1"># yes or no, default is yes if a compatible compiler is detected</span>
--D <span class="nv">LAMMPS_MACHINE</span><span class="o">=</span>name    <span class="c1"># name = mpi, serial, mybox, titan, laptop, etc</span>
-                          <span class="c1"># no default value</span>
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">CMake build</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Traditional make</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-D<span class="w"> </span><span class="nv">BUILD_MPI</span><span class="o">=</span>value<span class="w">        </span><span class="c1"># yes or no, default is yes if CMake finds MPI, else no</span>
+-D<span class="w"> </span><span class="nv">BUILD_OMP</span><span class="o">=</span>value<span class="w">        </span><span class="c1"># yes or no, default is yes if a compatible compiler is detected</span>
+-D<span class="w"> </span><span class="nv">LAMMPS_MACHINE</span><span class="o">=</span>name<span class="w">    </span><span class="c1"># name = mpi, serial, mybox, titan, laptop, etc</span>
+<span class="w">                          </span><span class="c1"># no default value</span>
 </pre></div>
 </div>
 <p>The executable created by CMake (after running make) is named
 <code class="docutils literal notranslate"><span class="pre">lmp</span></code> unless the <code class="docutils literal notranslate"><span class="pre">LAMMPS_MACHINE</span></code> option is set.  When setting
-<code class="docutils literal notranslate"><span class="pre">LAMMPS_MACHINE=name</span></code> the executable will be called
+<code class="docutils literal notranslate"><span class="pre">LAMMPS_MACHINE=name</span></code>, the executable will be called
 <code class="docutils literal notranslate"><span class="pre">lmp_name</span></code>.  Using <code class="docutils literal notranslate"><span class="pre">BUILD_MPI=no</span></code> will enforce building a
 serial executable using the MPI STUBS library.</p>
 </div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>The build with traditional makefiles has to be done inside the source folder <code class="docutils literal notranslate"><span class="pre">src</span></code>.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make mpi                <span class="c1"># parallel build, produces lmp_mpi using Makefile.mpi</span>
-make serial             <span class="c1"># serial build, produces lmp_serial using Makefile/serial</span>
-make mybox              <span class="c1"># uses Makefile.mybox to produce lmp_mybox</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>mpi<span class="w">                </span><span class="c1"># parallel build, produces lmp_mpi using Makefile.mpi</span>
+make<span class="w"> </span>serial<span class="w">             </span><span class="c1"># serial build, produces lmp_serial using Makefile/serial</span>
+make<span class="w"> </span>mybox<span class="w">              </span><span class="c1"># uses Makefile.mybox to produce lmp_mybox</span>
 </pre></div>
 </div>
 <p>Any <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">machine</span></code> command will look up the make settings from a
 file <code class="docutils literal notranslate"><span class="pre">Makefile.machine</span></code> in the folder <code class="docutils literal notranslate"><span class="pre">src/MAKE</span></code> or one of its
-sub-directories <code class="docutils literal notranslate"><span class="pre">MINE</span></code>, <code class="docutils literal notranslate"><span class="pre">MACHINES</span></code>, or <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code>, create a
+subdirectories <code class="docutils literal notranslate"><span class="pre">MINE</span></code>, <code class="docutils literal notranslate"><span class="pre">MACHINES</span></code>, or <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code>, create a
 folder <code class="docutils literal notranslate"><span class="pre">Obj_machine</span></code> with all objects and generated files and an
 executable called <code class="docutils literal notranslate"><span class="pre">lmp_machine</span></code>.  The standard parallel build
 with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">mpi</span></code> assumes a standard MPI installation with MPI
@@ -191,11 +196,11 @@ be added to the compile and link commands.  For the GNU compilers,
 this is <code class="docutils literal notranslate"><span class="pre">-fopenmp</span></code>, which can be added to the <code class="docutils literal notranslate"><span class="pre">CC</span></code> and
 <code class="docutils literal notranslate"><span class="pre">LINK</span></code> makefile variables.</p>
 <p>For the serial build the following make variables are set (see src/MAKE/Makefile.serial):</p>
-<div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="nv">CC</span> <span class="o">=</span>            g++
-<span class="nv">LINK</span> <span class="o">=</span>          g++
-<span class="nv">MPI_INC</span> <span class="o">=</span>       -I../STUBS
-<span class="nv">MPI_PATH</span> <span class="o">=</span>      -L../STUBS
-<span class="nv">MPI_LIB</span> <span class="o">=</span>       -lmpi_stubs
+<div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="nv">CC</span><span class="w"> </span><span class="o">=</span><span class="w">            </span>g++
+<span class="nv">LINK</span><span class="w"> </span><span class="o">=</span><span class="w">          </span>g++
+<span class="nv">MPI_INC</span><span class="w"> </span><span class="o">=</span><span class="w">       </span>-I../STUBS
+<span class="nv">MPI_PATH</span><span class="w"> </span><span class="o">=</span><span class="w">      </span>-L../STUBS
+<span class="nv">MPI_LIB</span><span class="w"> </span><span class="o">=</span><span class="w">       </span>-lmpi_stubs
 </pre></div>
 </div>
 <p>You also need to build the STUBS library for your platform before
@@ -218,11 +223,11 @@ simulations.</p>
 </div>
 </div></div>
 <section id="mpi-and-openmp-support-in-lammps">
-<h3>MPI and OpenMP support in LAMMPS<a class="headerlink" href="#mpi-and-openmp-support-in-lammps" title="Permalink to this headline">¶</a></h3>
+<h3>MPI and OpenMP support in LAMMPS<a class="headerlink" href="#mpi-and-openmp-support-in-lammps" title="Permalink to this heading"></a></h3>
 <p>If you are installing MPI yourself to build a parallel LAMMPS
-executable, we recommend either MPICH or OpenMPI which are regularly
+executable, we recommend either MPICH or OpenMPI, which are regularly
 used and tested with LAMMPS by the LAMMPS developers.  MPICH can be
-downloaded from the <a class="reference external" href="https://www.mpich.org">MPICH home page</a> and
+downloaded from the <a class="reference external" href="https://www.mpich.org">MPICH home page</a>, and
 OpenMPI can be downloaded correspondingly from the <a class="reference external" href="https://www.open-mpi.org">OpenMPI home page</a>.  Other MPI packages should also work.  No
 specific vendor provided and standard compliant MPI library is currently
 known to be incompatible with LAMMPS.  If you are running on a large
@@ -238,26 +243,26 @@ back on styles from that package, if a <code class="docutils literal notranslate
 and adds vectorization support when compiled with compatible compilers,
 in particular the Intel compilers on top of OpenMP. Also, the <code class="docutils literal notranslate"><span class="pre">KOKKOS</span></code>
 package can be compiled to include OpenMP threading.</p>
-<p>In addition, there are a few commands in LAMMPS that have native OpenMP
-support included as well.  These are commands in the <code class="docutils literal notranslate"><span class="pre">MPIIO</span></code>,
-<code class="docutils literal notranslate"><span class="pre">ML-SNAP</span></code>, <code class="docutils literal notranslate"><span class="pre">DIFFRACTION</span></code>, and <code class="docutils literal notranslate"><span class="pre">DPD-REACT</span></code> packages.  In addition
-some packages support OpenMP threading indirectly through the libraries
-they interface to: e.g. <code class="docutils literal notranslate"><span class="pre">LATTE</span></code>, <code class="docutils literal notranslate"><span class="pre">KSPACE</span></code>, and <code class="docutils literal notranslate"><span class="pre">COLVARS</span></code>.
-See the <a class="reference internal" href="Packages_details.html"><span class="doc">Packages details</span></a> page for more
-info on these packages and the pages for their respective commands
-for OpenMP threading info.</p>
+<p>In addition, there are a few commands in LAMMPS that have native
+OpenMP support included as well.  These are commands in the <code class="docutils literal notranslate"><span class="pre">MPIIO</span></code>,
+<code class="docutils literal notranslate"><span class="pre">ML-SNAP</span></code>, <code class="docutils literal notranslate"><span class="pre">DIFFRACTION</span></code>, and <code class="docutils literal notranslate"><span class="pre">DPD-REACT</span></code> packages.
+Furthermore, some packages support OpenMP threading indirectly through
+the libraries they interface to: e.g. <code class="docutils literal notranslate"><span class="pre">KSPACE</span></code>, and <code class="docutils literal notranslate"><span class="pre">COLVARS</span></code>.
+See the <a class="reference internal" href="Packages_details.html"><span class="doc">Packages details</span></a> page for more info
+on these packages, and the pages for their respective commands for
+OpenMP threading info.</p>
 <p>For CMake, if you use <code class="docutils literal notranslate"><span class="pre">BUILD_OMP=yes</span></code>, you can use these packages
 and turn on their native OpenMP support and turn on their native OpenMP
 support at run time, by setting the <code class="docutils literal notranslate"><span class="pre">OMP_NUM_THREADS</span></code> environment
 variable before you launch LAMMPS.</p>
 <p>For building via conventional make, the <code class="docutils literal notranslate"><span class="pre">CCFLAGS</span></code> and <code class="docutils literal notranslate"><span class="pre">LINKFLAGS</span></code>
 variables in Makefile.machine need to include the compiler flag that
-enables OpenMP. For GNU compilers it is <code class="docutils literal notranslate"><span class="pre">-fopenmp</span></code>.  For (recent) Intel
-compilers it is <code class="docutils literal notranslate"><span class="pre">-qopenmp</span></code>.  If you are using a different compiler,
-please refer to its documentation.</p>
+enables OpenMP. For the GNU compilers or Clang, it is <code class="docutils literal notranslate"><span class="pre">-fopenmp</span></code>.
+For (recent) Intel compilers, it is <code class="docutils literal notranslate"><span class="pre">-qopenmp</span></code>.  If you are using a
+different compiler, please refer to its documentation.</p>
 </section>
 <section id="openmp-compiler-compatibility">
-<span id="default-none-issues"></span><h3>OpenMP Compiler compatibility<a class="headerlink" href="#openmp-compiler-compatibility" title="Permalink to this headline">¶</a></h3>
+<span id="default-none-issues"></span><h3>OpenMP Compiler compatibility<a class="headerlink" href="#openmp-compiler-compatibility" title="Permalink to this heading"></a></h3>
 <p>Some compilers do not fully support the <code class="docutils literal notranslate"><span class="pre">default(none)</span></code> directive and
 others (e.g. GCC version 9 and beyond, Clang version 10 and later) may
 implement strict OpenMP 4.0 and later semantics, which are incompatible
@@ -272,26 +277,27 @@ for most GNU, Clang, and Intel compilers.</p>
 </section>
 </section>
 <section id="choice-of-compiler-and-compile-link-options">
-<span id="compile"></span><h2><span class="section-number">3.4.2. </span>Choice of compiler and compile/link options<a class="headerlink" href="#choice-of-compiler-and-compile-link-options" title="Permalink to this headline">¶</a></h2>
+<span id="compile"></span><h2><span class="section-number">3.4.2. </span>Choice of compiler and compile/link options<a class="headerlink" href="#choice-of-compiler-and-compile-link-options" title="Permalink to this heading"></a></h2>
 <p>The choice of compiler and compiler flags can be important for maximum
 performance.  Vendor provided compilers for a specific hardware can
 produce faster code than open-source compilers like the GNU compilers.
-On the most common x86 hardware most popular C++ compilers are quite
-similar in performance of C/C++ code at high optimization levels.  When
-using the <code class="docutils literal notranslate"><span class="pre">INTEL</span></code> package, there is a distinct advantage in using
-the <a class="reference external" href="https://software.intel.com/en-us/intel-compilers">Intel C++ compiler</a> due to much improved vectorization
-through SSE and AVX instructions on compatible hardware as the source
-code includes changes and Intel compiler specific directives to enable
-high degrees of vectorization.  This may change over time as equivalent
-vectorization directives are included into OpenMP standard revisions and
-other compilers adopt them.</p>
+On the most common x86 hardware, the most popular C++ compilers are
+quite similar in their ability to optimize regular C/C++ source code at
+high optimization levels.  When using the <code class="docutils literal notranslate"><span class="pre">INTEL</span></code> package, there is a
+distinct advantage in using the <a class="reference external" href="https://software.intel.com/en-us/intel-compilers">Intel C++ compiler</a> due to
+much improved vectorization through SSE and AVX instructions on
+compatible hardware.  The source code in that package conditionally
+includes compiler specific directives to enable these high degrees of
+vectorization.  This may change over time as equivalent vectorization
+directives are included into the OpenMP standard and other compilers
+adopt them.</p>
 <p>On parallel clusters or supercomputers which use “environment modules”
 for their compile/link environments, you can often access different
 compilers by simply loading the appropriate module before building
 LAMMPS.</p>
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">CMake build</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">Makefile.machine settings for traditional make</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><p>By default CMake will use the compiler it finds according to
-internal preferences and it will add optimization flags
+internal preferences, and it will add optimization flags
 appropriate to that compiler and any <a class="reference internal" href="Speed_packages.html"><span class="doc">accelerator packages</span></a> you have included in the build.  CMake will
 check if the detected or selected compiler is compatible with the
 C++ support requirements of LAMMPS and stop with an error, if this
@@ -308,26 +314,26 @@ variables individually, if you want to experiment with alternate
 optimization flags.  You should specify all 3 compilers, so that
 the (few) LAMMPS source files written in C or Fortran are built
 with a compiler consistent with the one used for the C++ files:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-D <span class="nv">CMAKE_CXX_COMPILER</span><span class="o">=</span>name            <span class="c1"># name of C++ compiler</span>
--D <span class="nv">CMAKE_C_COMPILER</span><span class="o">=</span>name              <span class="c1"># name of C compiler</span>
--D <span class="nv">CMAKE_Fortran_COMPILER</span><span class="o">=</span>name        <span class="c1"># name of Fortran compiler</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-D<span class="w"> </span><span class="nv">CMAKE_CXX_COMPILER</span><span class="o">=</span>name<span class="w">            </span><span class="c1"># name of C++ compiler</span>
+-D<span class="w"> </span><span class="nv">CMAKE_C_COMPILER</span><span class="o">=</span>name<span class="w">              </span><span class="c1"># name of C compiler</span>
+-D<span class="w"> </span><span class="nv">CMAKE_Fortran_COMPILER</span><span class="o">=</span>name<span class="w">        </span><span class="c1"># name of Fortran compiler</span>
 
--D <span class="nv">CMAKE_CXX_FLAGS</span><span class="o">=</span>string             <span class="c1"># flags to use with C++ compiler</span>
--D <span class="nv">CMAKE_C_FLAGS</span><span class="o">=</span>string               <span class="c1"># flags to use with C compiler</span>
--D <span class="nv">CMAKE_Fortran_FLAGS</span><span class="o">=</span>string         <span class="c1"># flags to use with Fortran compiler</span>
+-D<span class="w"> </span><span class="nv">CMAKE_CXX_FLAGS</span><span class="o">=</span>string<span class="w">             </span><span class="c1"># flags to use with C++ compiler</span>
+-D<span class="w"> </span><span class="nv">CMAKE_C_FLAGS</span><span class="o">=</span>string<span class="w">               </span><span class="c1"># flags to use with C compiler</span>
+-D<span class="w"> </span><span class="nv">CMAKE_Fortran_FLAGS</span><span class="o">=</span>string<span class="w">         </span><span class="c1"># flags to use with Fortran compiler</span>
 </pre></div>
 </div>
 <p>A few example command lines are:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Building with GNU Compilers:</span>
-cmake ../cmake -DCMAKE_C_COMPILER<span class="o">=</span>gcc -DCMAKE_CXX_COMPILER<span class="o">=</span>g++ -DCMAKE_Fortran_COMPILER<span class="o">=</span>gfortran
+cmake<span class="w"> </span>../cmake<span class="w"> </span>-DCMAKE_C_COMPILER<span class="o">=</span>gcc<span class="w"> </span>-DCMAKE_CXX_COMPILER<span class="o">=</span>g++<span class="w"> </span>-DCMAKE_Fortran_COMPILER<span class="o">=</span>gfortran
 <span class="c1"># Building with Intel Compilers:</span>
-cmake ../cmake -DCMAKE_C_COMPILER<span class="o">=</span>icc -DCMAKE_CXX_COMPILER<span class="o">=</span>icpc -DCMAKE_Fortran_COMPILER<span class="o">=</span>ifort
+cmake<span class="w"> </span>../cmake<span class="w"> </span>-DCMAKE_C_COMPILER<span class="o">=</span>icc<span class="w"> </span>-DCMAKE_CXX_COMPILER<span class="o">=</span>icpc<span class="w"> </span>-DCMAKE_Fortran_COMPILER<span class="o">=</span>ifort
 <span class="c1"># Building with Intel oneAPI Compilers:</span>
-cmake ../cmake -DCMAKE_C_COMPILER<span class="o">=</span>icx -DCMAKE_CXX_COMPILER<span class="o">=</span>icpx -DCMAKE_Fortran_COMPILER<span class="o">=</span>ifx
+cmake<span class="w"> </span>../cmake<span class="w"> </span>-DCMAKE_C_COMPILER<span class="o">=</span>icx<span class="w"> </span>-DCMAKE_CXX_COMPILER<span class="o">=</span>icpx<span class="w"> </span>-DCMAKE_Fortran_COMPILER<span class="o">=</span>ifx
 <span class="c1"># Building with LLVM/Clang Compilers:</span>
-cmake ../cmake -DCMAKE_C_COMPILER<span class="o">=</span>clang -DCMAKE_CXX_COMPILER<span class="o">=</span>clang++ -DCMAKE_Fortran_COMPILER<span class="o">=</span>flang
+cmake<span class="w"> </span>../cmake<span class="w"> </span>-DCMAKE_C_COMPILER<span class="o">=</span>clang<span class="w"> </span>-DCMAKE_CXX_COMPILER<span class="o">=</span>clang++<span class="w"> </span>-DCMAKE_Fortran_COMPILER<span class="o">=</span>flang
 <span class="c1"># Building with PGI/Nvidia Compilers:</span>
-cmake ../cmake -DCMAKE_C_COMPILER<span class="o">=</span>pgcc -DCMAKE_CXX_COMPILER<span class="o">=</span>pgc++ -DCMAKE_Fortran_COMPILER<span class="o">=</span>pgfortran
+cmake<span class="w"> </span>../cmake<span class="w"> </span>-DCMAKE_C_COMPILER<span class="o">=</span>pgcc<span class="w"> </span>-DCMAKE_CXX_COMPILER<span class="o">=</span>pgc++<span class="w"> </span>-DCMAKE_Fortran_COMPILER<span class="o">=</span>pgfortran
 </pre></div>
 </div>
 <p>For compiling with the Clang/LLVM compilers a CMake preset is
@@ -338,9 +344,9 @@ toolchain to the legacy Intel compilers, <cite>-C ../cmake/presets/oneapi.cmake<
 will switch to the LLVM based oneAPI Intel compilers,
 and <cite>-C ../cmake/presets/pgi.cmake</cite>
 will switch the compiler to the PGI compilers.</p>
-<p>In addition you can set <code class="docutils literal notranslate"><span class="pre">CMAKE_TUNE_FLAGS</span></code> to specifically add
-compiler flags to tune for optimal performance on given hosts. By
-default this variable is empty.</p>
+<p>Furthermore, you can set <code class="docutils literal notranslate"><span class="pre">CMAKE_TUNE_FLAGS</span></code> to specifically add
+compiler flags to tune for optimal performance on given hosts.
+This variable is empty by default.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>When the cmake command completes, it prints a summary to the
@@ -359,27 +365,27 @@ include a variety of settings appropriate for your MPI
 installation and thus avoiding the guesswork of finding the right
 flags.</p>
 <p>Parallel build (see <code class="docutils literal notranslate"><span class="pre">src/MAKE/Makefile.mpi</span></code>):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">CC</span> <span class="o">=</span>            mpicxx
-<span class="nv">CCFLAGS</span> <span class="o">=</span>       -g -O3
-<span class="nv">LINK</span> <span class="o">=</span>          mpicxx
-<span class="nv">LINKFLAGS</span> <span class="o">=</span>     -g -O
+<div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="nv">CC</span><span class="w"> </span><span class="o">=</span><span class="w">            </span>mpicxx
+<span class="nv">CCFLAGS</span><span class="w"> </span><span class="o">=</span><span class="w">       </span>-g<span class="w"> </span>-O3
+<span class="nv">LINK</span><span class="w"> </span><span class="o">=</span><span class="w">          </span>mpicxx
+<span class="nv">LINKFLAGS</span><span class="w"> </span><span class="o">=</span><span class="w">     </span>-g<span class="w"> </span>-O
 </pre></div>
 </div>
 <p>Serial build with GNU gcc (see <code class="docutils literal notranslate"><span class="pre">src/MAKE/Makefile.serial</span></code>):</p>
-<div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="nv">CC</span> <span class="o">=</span>            g++
-<span class="nv">CCFLAGS</span> <span class="o">=</span>       -g -O3
-<span class="nv">LINK</span> <span class="o">=</span>          g++
-<span class="nv">LINKFLAGS</span> <span class="o">=</span>     -g -O
+<div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="nv">CC</span><span class="w"> </span><span class="o">=</span><span class="w">            </span>g++
+<span class="nv">CCFLAGS</span><span class="w"> </span><span class="o">=</span><span class="w">       </span>-g<span class="w"> </span>-O3
+<span class="nv">LINK</span><span class="w"> </span><span class="o">=</span><span class="w">          </span>g++
+<span class="nv">LINKFLAGS</span><span class="w"> </span><span class="o">=</span><span class="w">     </span>-g<span class="w"> </span>-O
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If compilation stops with a message like the following:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>g++ -g -O3  -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64    -I../STUBS     -c ../main.cpp
-In file included from ../pointers.h:24:0,
-           from ../input.h:17,
-           from ../main.cpp:16:
-../lmptype.h:34:2: error: #error LAMMPS requires a C++11 (or later) compliant compiler. Enable C++11 compatibility or upgrade the compiler.
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">g++ -g -O3  -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64    -I../STUBS     -c ../main.cpp</span>
+<span class="go">In file included from ../pointers.h:24:0,</span>
+<span class="go">           from ../input.h:17,</span>
+<span class="go">           from ../main.cpp:16:</span>
+<span class="go">../lmptype.h:34:2: error: #error LAMMPS requires a C++11 (or later) compliant compiler. Enable C++11 compatibility or upgrade the compiler.</span>
 </pre></div>
 </div>
 <p>then you have either an unsupported (old) compiler or you have
@@ -398,14 +404,14 @@ documentation for the individual packages listed on the
 <a class="reference internal" href="Speed_packages.html"><span class="doc">Accelerator packages</span></a> page.  Or examine these files in the
 src/MAKE/OPTIONS directory.  They correspond to each of the 5
 accelerator packages and their hardware variants:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Makefile.opt                   <span class="c1"># OPT package</span>
-Makefile.omp                   <span class="c1"># OPENMP package</span>
-Makefile.intel_cpu             <span class="c1"># INTEL package for CPUs</span>
-Makefile.intel_coprocessor     <span class="c1"># INTEL package for KNLs</span>
-Makefile.gpu                   <span class="c1"># GPU package</span>
-Makefile.kokkos_cuda_mpi       <span class="c1"># KOKKOS package for GPUs</span>
-Makefile.kokkos_omp            <span class="c1"># KOKKOS package for CPUs (OpenMP)</span>
-Makefile.kokkos_phi            <span class="c1"># KOKKOS package for KNLs (OpenMP)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Makefile.opt<span class="w">                   </span><span class="c1"># OPT package</span>
+Makefile.omp<span class="w">                   </span><span class="c1"># OPENMP package</span>
+Makefile.intel_cpu<span class="w">             </span><span class="c1"># INTEL package for CPUs</span>
+Makefile.intel_coprocessor<span class="w">     </span><span class="c1"># INTEL package for KNLs</span>
+Makefile.gpu<span class="w">                   </span><span class="c1"># GPU package</span>
+Makefile.kokkos_cuda_mpi<span class="w">       </span><span class="c1"># KOKKOS package for GPUs</span>
+Makefile.kokkos_omp<span class="w">            </span><span class="c1"># KOKKOS package for CPUs (OpenMP)</span>
+Makefile.kokkos_phi<span class="w">            </span><span class="c1"># KOKKOS package for KNLs (OpenMP)</span>
 </pre></div>
 </div>
 </div>
@@ -413,7 +419,7 @@ Makefile.kokkos_phi            <span class="c1"># KOKKOS package for KNLs (OpenM
 <hr class="docutils" />
 </section>
 <section id="build-the-lammps-executable-and-library">
-<span id="library"></span><span id="exe"></span><h2><span class="section-number">3.4.3. </span>Build the LAMMPS executable and library<a class="headerlink" href="#build-the-lammps-executable-and-library" title="Permalink to this headline">¶</a></h2>
+<span id="library"></span><span id="exe"></span><h2><span class="section-number">3.4.3. </span>Build the LAMMPS executable and library<a class="headerlink" href="#build-the-lammps-executable-and-library" title="Permalink to this heading"></a></h2>
 <p>LAMMPS is always built as a library of C++ classes plus an executable.
 The executable is a simple <code class="docutils literal notranslate"><span class="pre">main()</span></code> function that sets up MPI and then
 creates a LAMMPS class instance from the LAMMPS library, which
@@ -429,16 +435,16 @@ between building a shared or a static LAMMPS library and what kind
 of suffix is added to them (in case you want to concurrently
 install multiple variants of binaries with different settings). If
 none are set, defaults are applied.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-D <span class="nv">BUILD_SHARED_LIBS</span><span class="o">=</span>value   <span class="c1"># yes or no (default)</span>
--D <span class="nv">LAMMPS_MACHINE</span><span class="o">=</span>name       <span class="c1"># name = mpi, serial, mybox, titan, laptop, etc</span>
-                             <span class="c1"># no default value</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-D<span class="w"> </span><span class="nv">BUILD_SHARED_LIBS</span><span class="o">=</span>value<span class="w">   </span><span class="c1"># yes or no (default)</span>
+-D<span class="w"> </span><span class="nv">LAMMPS_MACHINE</span><span class="o">=</span>name<span class="w">       </span><span class="c1"># name = mpi, serial, mybox, titan, laptop, etc</span>
+<span class="w">                             </span><span class="c1"># no default value</span>
 </pre></div>
 </div>
 <p>The compilation will always produce a LAMMPS library and an
-executable linked to it.  By default this will be a static library
-named <code class="docutils literal notranslate"><span class="pre">liblammps.a</span></code> and an executable named <code class="docutils literal notranslate"><span class="pre">lmp</span></code> Setting
-<code class="docutils literal notranslate"><span class="pre">BUILD_SHARED_LIBS=yes</span></code> will instead produce a shared library
-called <code class="docutils literal notranslate"><span class="pre">liblammps.so</span></code> (or <code class="docutils literal notranslate"><span class="pre">liblammps.dylib</span></code> or
+executable linked to it.  By default, this will be a static
+library named <code class="docutils literal notranslate"><span class="pre">liblammps.a</span></code> and an executable named <code class="docutils literal notranslate"><span class="pre">lmp</span></code>
+Setting <code class="docutils literal notranslate"><span class="pre">BUILD_SHARED_LIBS=yes</span></code> will instead produce a shared
+library called <code class="docutils literal notranslate"><span class="pre">liblammps.so</span></code> (or <code class="docutils literal notranslate"><span class="pre">liblammps.dylib</span></code> or
 <code class="docutils literal notranslate"><span class="pre">liblammps.dll</span></code> depending on the platform) If
 <code class="docutils literal notranslate"><span class="pre">LAMMPS_MACHINE=name</span></code> is set in addition, the name of the
 generated libraries will be changed to either <code class="docutils literal notranslate"><span class="pre">liblammps_name.a</span></code>
@@ -447,9 +453,9 @@ be called <code class="docutils literal notranslate"><span class="pre">lmp_name<
 </div><div aria-labelledby="tab-2-2-1" class="sphinx-tabs-panel" hidden="true" id="panel-2-2-1" name="2-1" role="tabpanel" tabindex="0"><p>With the traditional makefile based build process, the choice of
 the generated executable or library depends on the “mode” setting.
 Several options are available and <code class="docutils literal notranslate"><span class="pre">mode=static</span></code> is the default.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make machine               <span class="c1"># build LAMMPS executable lmp_machine</span>
-make <span class="nv">mode</span><span class="o">=</span>static machine   <span class="c1"># same as &quot;make machine&quot;</span>
-make <span class="nv">mode</span><span class="o">=</span>shared machine   <span class="c1"># build LAMMPS shared lib liblammps_machine.so instead</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>machine<span class="w">               </span><span class="c1"># build LAMMPS executable lmp_machine</span>
+make<span class="w"> </span><span class="nv">mode</span><span class="o">=</span>static<span class="w"> </span>machine<span class="w">   </span><span class="c1"># same as &quot;make machine&quot;</span>
+make<span class="w"> </span><span class="nv">mode</span><span class="o">=</span>shared<span class="w"> </span>machine<span class="w">   </span><span class="c1"># build LAMMPS shared lib liblammps_machine.so instead</span>
 </pre></div>
 </div>
 <p>The “static” build will generate a static library called
@@ -461,7 +467,7 @@ named <code class="docutils literal notranslate"><span class="pre">liblammps.a</
 specific <code class="docutils literal notranslate"><span class="pre">liblammps_machine.a/so</span></code> files.</p>
 </div></div>
 <section id="additional-information">
-<h3>Additional information<a class="headerlink" href="#additional-information" title="Permalink to this headline">¶</a></h3>
+<h3>Additional information<a class="headerlink" href="#additional-information" title="Permalink to this heading"></a></h3>
 <p>Note that for creating a shared library, all the libraries it depends on
 must be compiled to be compatible with shared libraries.  This should be
 the case for libraries included with LAMMPS, such as the dummy MPI
@@ -474,30 +480,31 @@ need to install a compatible version of the auxiliary library.  The
 build instructions for that library should tell you how to do this.</p>
 <p>As an example, here is how to build and install the <a class="reference external" href="https://www.mpich.org">MPICH library</a>, a popular open-source version of MPI, as a shared library
 in the default /usr/local/lib location:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./configure --enable-shared
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./configure<span class="w"> </span>--enable-shared
 make
-make install
+make<span class="w"> </span>install
 </pre></div>
 </div>
 <p>You may need to use <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span> <span class="pre">install</span></code> in place of the last line if
 you do not have write privileges for <code class="docutils literal notranslate"><span class="pre">/usr/local/lib</span></code> or use the
 <code class="docutils literal notranslate"><span class="pre">--prefix</span></code> configuration option to select an installation folder,
 where you do have write access.  The end result should be the file
-<code class="docutils literal notranslate"><span class="pre">/usr/local/lib/libmpich.so</span></code>.  On many Linux installations the folder
+<code class="docutils literal notranslate"><span class="pre">/usr/local/lib/libmpich.so</span></code>.  On many Linux installations, the folder
 <code class="docutils literal notranslate"><span class="pre">${HOME}/.local</span></code> is an alternative to using <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code> and does
 not require superuser or sudo access.  In that case the configuration
 step becomes:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./configure --enable-shared --prefix<span class="o">=</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/.local
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./configure<span class="w"> </span>--enable-shared<span class="w"> </span>--prefix<span class="o">=</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/.local
 </pre></div>
 </div>
-<p>Avoiding to use “sudo” for custom software installation (i.e. from source
-and not through a package manager tool provided by the OS) is generally
-recommended to ensure the integrity of the system software installation.</p>
+<p>Avoiding the use of “sudo” for custom software installation (i.e. from
+source and not through a package manager tool provided by the OS) is
+generally recommended to ensure the integrity of the system software
+installation.</p>
 <hr class="docutils" />
 </section>
 </section>
 <section id="including-or-removing-debug-support">
-<span id="debug"></span><h2><span class="section-number">3.4.4. </span>Including or removing debug support<a class="headerlink" href="#including-or-removing-debug-support" title="Permalink to this headline">¶</a></h2>
+<span id="debug"></span><h2><span class="section-number">3.4.4. </span>Including or removing debug support<a class="headerlink" href="#including-or-removing-debug-support" title="Permalink to this heading"></a></h2>
 <p>By default the compilation settings will include the <em>-g</em> flag which
 instructs the compiler to include debug information (e.g. which line of
 source code a particular instruction correspond to).  This can be
@@ -522,41 +529,41 @@ Do not strip libraries or object files, as that will render them unusable.</p></
 <hr class="docutils" />
 </section>
 <section id="build-lammps-tools">
-<span id="tools"></span><h2><span class="section-number">3.4.5. </span>Build LAMMPS tools<a class="headerlink" href="#build-lammps-tools" title="Permalink to this headline">¶</a></h2>
+<span id="tools"></span><h2><span class="section-number">3.4.5. </span>Build LAMMPS tools<a class="headerlink" href="#build-lammps-tools" title="Permalink to this heading"></a></h2>
 <p>Some tools described in <a class="reference internal" href="Tools.html"><span class="doc">Auxiliary tools</span></a> can be built directly
 using CMake or Make.</p>
 <div class="sphinx-tabs docutils container">
-<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-3-3-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-3-3-0" name="3-0" role="tab" tabindex="0">CMake build</button><button aria-controls="panel-3-3-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-3-3-1" name="3-1" role="tab" tabindex="-1">Traditional make</button></div><div aria-labelledby="tab-3-3-0" class="sphinx-tabs-panel" id="panel-3-3-0" name="3-0" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-D <span class="nv">BUILD_TOOLS</span><span class="o">=</span>value         <span class="c1"># yes or no (default)</span>
--D <span class="nv">BUILD_LAMMPS_SHELL</span><span class="o">=</span>value  <span class="c1"># yes or no (default)</span>
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-3-3-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-3-3-0" name="3-0" role="tab" tabindex="0">CMake build</button><button aria-controls="panel-3-3-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-3-3-1" name="3-1" role="tab" tabindex="-1">Traditional make</button></div><div aria-labelledby="tab-3-3-0" class="sphinx-tabs-panel" id="panel-3-3-0" name="3-0" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-D<span class="w"> </span><span class="nv">BUILD_TOOLS</span><span class="o">=</span>value<span class="w">         </span><span class="c1"># yes or no (default)</span>
+-D<span class="w"> </span><span class="nv">BUILD_LAMMPS_SHELL</span><span class="o">=</span>value<span class="w">  </span><span class="c1"># yes or no (default)</span>
 </pre></div>
 </div>
 <p>The generated binaries will also become part of the LAMMPS installation
 (see below).</p>
-</div><div aria-labelledby="tab-3-3-1" class="sphinx-tabs-panel" hidden="true" id="panel-3-3-1" name="3-1" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> lammps/tools
-make all              <span class="c1"># build all binaries of tools</span>
-make binary2txt       <span class="c1"># build only binary2txt tool</span>
-make chain            <span class="c1"># build only chain tool</span>
-make micelle2d        <span class="c1"># build only micelle2d tool</span>
-make thermo_extract   <span class="c1"># build only thermo_extract tool</span>
+</div><div aria-labelledby="tab-3-3-1" class="sphinx-tabs-panel" hidden="true" id="panel-3-3-1" name="3-1" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>lammps/tools
+make<span class="w"> </span>all<span class="w">              </span><span class="c1"># build all binaries of tools</span>
+make<span class="w"> </span>binary2txt<span class="w">       </span><span class="c1"># build only binary2txt tool</span>
+make<span class="w"> </span>chain<span class="w">            </span><span class="c1"># build only chain tool</span>
+make<span class="w"> </span>micelle2d<span class="w">        </span><span class="c1"># build only micelle2d tool</span>
+make<span class="w"> </span>thermo_extract<span class="w">   </span><span class="c1"># build only thermo_extract tool</span>
 
-<span class="nb">cd</span> lammps/tools/lammps-shell
-make                  <span class="c1"># build LAMMPS shell</span>
+<span class="nb">cd</span><span class="w"> </span>lammps/tools/lammps-shell
+make<span class="w">                  </span><span class="c1"># build LAMMPS shell</span>
 </pre></div>
 </div>
 </div></div>
 <hr class="docutils" />
 </section>
 <section id="install-lammps-after-a-build">
-<span id="install"></span><h2><span class="section-number">3.4.6. </span>Install LAMMPS after a build<a class="headerlink" href="#install-lammps-after-a-build" title="Permalink to this headline">¶</a></h2>
-<p>After building LAMMPS, you may wish to copy the LAMMPS executable of
-library, along with other LAMMPS files (library header, doc files) to
-a globally visible place on your system, for others to access.  Note
-that you may need super-user privileges (e.g. sudo) if the directory
-you want to copy files to is protected.</p>
+<span id="install"></span><h2><span class="section-number">3.4.6. </span>Install LAMMPS after a build<a class="headerlink" href="#install-lammps-after-a-build" title="Permalink to this heading"></a></h2>
+<p>After building LAMMPS, you may wish to copy the LAMMPS executable or
+library, along with other LAMMPS files (library header, doc files), to a
+globally visible place on your system, for others to access.  Note that
+you may need super-user privileges (e.g. sudo) if the directory you want
+to copy files to is protected.</p>
 <div class="sphinx-tabs docutils container">
-<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-4-4-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-4-4-0" name="4-0" role="tab" tabindex="0">CMake build</button><button aria-controls="panel-4-4-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-4-4-1" name="4-1" role="tab" tabindex="-1">Traditional make</button></div><div aria-labelledby="tab-4-4-0" class="sphinx-tabs-panel" id="panel-4-4-0" name="4-0" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake -D <span class="nv">CMAKE_INSTALL_PREFIX</span><span class="o">=</span>path <span class="o">[</span>options ...<span class="o">]</span> ../cmake
-make                        <span class="c1"># perform make after CMake command</span>
-make install                <span class="c1"># perform the installation into prefix</span>
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-4-4-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-4-4-0" name="4-0" role="tab" tabindex="0">CMake build</button><button aria-controls="panel-4-4-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-4-4-1" name="4-1" role="tab" tabindex="-1">Traditional make</button></div><div aria-labelledby="tab-4-4-0" class="sphinx-tabs-panel" id="panel-4-4-0" name="4-0" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-D<span class="w"> </span><span class="nv">CMAKE_INSTALL_PREFIX</span><span class="o">=</span>path<span class="w"> </span><span class="o">[</span>options<span class="w"> </span>...<span class="o">]</span><span class="w"> </span>../cmake
+make<span class="w">                        </span><span class="c1"># perform make after CMake command</span>
+make<span class="w"> </span>install<span class="w">                </span><span class="c1"># perform the installation into prefix</span>
 </pre></div>
 </div>
 <p>During the installation process CMake will by default remove any runtime
@@ -565,7 +572,7 @@ have to set or modify the <code class="docutils literal notranslate"><span class
 environment variable, if you are installing LAMMPS into a non-system
 location and/or are linking to libraries in a non-system location that
 depend on such runtime path settings.
-As an alternative you may set the CMake variable <code class="docutils literal notranslate"><span class="pre">LAMMPS_INSTALL_RPATH</span></code>
+As an alternative, you may set the CMake variable <code class="docutils literal notranslate"><span class="pre">LAMMPS_INSTALL_RPATH</span></code>
 to <code class="docutils literal notranslate"><span class="pre">on</span></code> and then the runtime paths for any linked shared libraries
 and the library installation folder for the LAMMPS library will be
 embedded and thus the requirement to set environment variables is avoided.
@@ -591,7 +598,7 @@ directories.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2003-2022 Sandia Corporation.</p>
+    <p>&#169; Copyright 2003-2023 Sandia Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
@@ -600,7 +607,6 @@ directories.</p>
    
 
 </footer>
-
         </div>
       </div>
     </section>
