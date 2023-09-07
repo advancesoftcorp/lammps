@@ -103,6 +103,10 @@ PACKAGE = \
 	ml-quip \
 	ml-rann \
 	ml-snap \
+	ml-sannp \
+	ml-oc20driver \
+	ml-m3gnet \
+	ml-chgnet \
 	mofff \
 	molecule \
 	molfile \
