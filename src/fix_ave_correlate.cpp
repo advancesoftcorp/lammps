@@ -156,7 +156,7 @@ FixAveCorrelate::FixAveCorrelate(LAMMPS *lmp, int narg, char **arg) :
   if (nevery <= 0) error->all(FLERR,"Illegal fix ave/correlate nevery value: {}", nevery);
   if (nrepeat <= 0) error->all(FLERR,"Illegal fix ave/correlate nrepeat value: {}", nrepeat);
   if (nfreq <= 0) error->all(FLERR,"Illegal fix ave/correlate nfreq value: {}", nfreq);
-  if (nfreq % nevery || nrepeat*nevery > nfreq)
+  if (nfreq % nevery || (ave == ONE && nrepeat*nevery > nfreq))
     error->all(FLERR,"Inconsistent fix ave/correlate nevery/nrepeat/nfreq values");
   if (ave != RUNNING && overwrite)
     error->all(FLERR,"Fix ave/correlate overwrite keyword requires ave running setting");
