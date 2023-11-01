@@ -181,6 +181,9 @@ def oc20_get_energy_and_forces(cell, atomic_numbers, positions):
     # Initialize Atoms
     global myAtoms
 
+    if myAtoms is not None and len(myAtoms.numbers) != len(atomic_numbers):
+        myAtoms = None
+
     if myAtoms is None:
         myAtoms = Atoms(
             numbers   = atomic_numbers,
