@@ -11,11 +11,12 @@ from ase.calculators.mixing import SumCalculator
 import matgl
 from matgl.ext.ase import M3GNetCalculator
 
-def m3gnet_initialize(model_name = None, dftd3 = False):
+def m3gnet_initialize(model_name = None,as_path = False, dftd3 = False):
     """
     Initialize GNNP of M3GNet.
     Args:
         model_name (str): name of model for GNNP.
+        as_path (bool): if true, model_name is path of model file.
         dftd3 (bool): to add correction of DFT-D3.
     Returns:
         cutoff: cutoff radius.
@@ -24,10 +25,12 @@ def m3gnet_initialize(model_name = None, dftd3 = False):
     # Create M3GNetCalculator, that is pre-trained
     global myCalculator
 
-    if model_name is not None:
+    if model_name is None:
+        myPotential = matgl.load_model("M3GNet-MP-2021.2.8-PES")
+    elif not as_path:
         myPotential = matgl.load_model(model_name)
     else:
-        myPotential = matgl.load_model("M3GNet-MP-2021.2.8-PES")
+        myPotential = matgl.load_model(path=model_name)
 
     myCalculator = M3GNetCalculator(
         potential      = myPotential,
