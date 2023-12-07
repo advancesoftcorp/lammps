@@ -226,21 +226,35 @@ void PairM3GNet::settings(int narg, char **arg)
 void PairM3GNet::coeff(int narg, char **arg)
 {
     int i, j;
+    int iarg;
     int count;
 
     int ntypes = atom->ntypes;
     int ntypesEff;
 
+    int as_path = 0;
     int dftd3 = withDFTD3();
 
-    if (narg != (3 + ntypes))
+    if (narg != (3 + ntypes) && narg != (4 + ntypes))
     {
         error->all(FLERR, "Incorrect number of arguments for pair_coeff.");
     }
+	
 
     if (strcmp(arg[0], "*") != 0 || strcmp(arg[1], "*") != 0)
     {
         error->all(FLERR, "Only wildcard asterisk is allowed in place of atom types for pair_coeff.");
+    }
+
+    if (strcmp(arg[2], "path") == 0)
+    {
+        iarg    = 4;
+        as_path = 1;
+    }
+    else
+    {
+        iarg    = 3;
+        as_path = 0;
     }
 
     if (this->atomNumMap != nullptr)
@@ -253,17 +267,17 @@ void PairM3GNet::coeff(int narg, char **arg)
     ntypesEff = 0;
     for (i = 0; i < ntypes; ++i)
     {
-        if (strcmp(arg[i + 3], "NULL") == 0)
+        if (strcmp(arg[i + iarg], "NULL") == 0)
         {
             this->atomNumMap[i + 1] = 0;
         }
         else
         {
-            this->atomNumMap[i + 1] = this->elementToAtomNum(arg[i + 3]);
+            this->atomNumMap[i + 1] = this->elementToAtomNum(arg[i + iarg]);
             ntypesEff++;
         }
     }
-
+	
     if (ntypesEff < 1)
     {
         error->all(FLERR, "There are no elements for pair_coeff of M3GNet.");
@@ -279,8 +293,8 @@ void PairM3GNet::coeff(int narg, char **arg)
         this->finalizePython();
     }
 
-    this->cutoff = this->initializePython(arg[2], dftd3);
-
+    this->cutoff = this->initializePython(arg[iarg - 1], as_path, dftd3);
+    
     if (this->cutoff <= 0.0)
     {
         error->all(FLERR, "Cutoff is not positive for pair_coeff of M3GNet.");
@@ -363,7 +377,7 @@ void PairM3GNet::finalizePython()
     Py_Finalize();
 }
 
-double PairM3GNet::initializePython(const char *name, int dftd3)
+double PairM3GNet::initializePython(const char *name, int as_path, int dftd3)
 {
     if (this->initializedPython != 0)
     {
@@ -380,6 +394,7 @@ double PairM3GNet::initializePython(const char *name, int dftd3)
     PyObject* pyArgs   = nullptr;
     PyObject* pyArg1   = nullptr;
     PyObject* pyArg2   = nullptr;
+    PyObject* pyArg3   = nullptr;
     PyObject* pyValue  = nullptr;
 
     Py_Initialize();
@@ -429,14 +444,16 @@ double PairM3GNet::initializePython(const char *name, int dftd3)
         if (pyFunc != nullptr && PyCallable_Check(pyFunc))
         {
             pyArg1 = PyUnicode_FromString(name);
-            pyArg2 = PyBool_FromLong(dftd3);
+            pyArg2 = PyBool_FromLong(as_path);
+            pyArg3 = PyBool_FromLong(dftd3);
 
-            pyArgs = PyTuple_New(2);
+            pyArgs = PyTuple_New(3);
             PyTuple_SetItem(pyArgs, 0, pyArg1);
             PyTuple_SetItem(pyArgs, 1, pyArg2);
+            PyTuple_SetItem(pyArgs, 2, pyArg3);
 
             pyValue = PyObject_CallObject(pyFunc, pyArgs);
-
+            
             Py_DECREF(pyArgs);
 
             if (pyValue != nullptr && PyFloat_Check(pyValue))
