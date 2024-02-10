@@ -11,7 +11,8 @@ from ase.calculators.mixing import SumCalculator
 import matgl
 from matgl.ext.ase import M3GNetCalculator
 
-def m3gnet_initialize(model_name = None, dftd3 = False):
+
+def m3gnet_initialize(model_name=None, dftd3=False):
     """
     Initialize GNNP of M3GNet.
     Args:
@@ -30,9 +31,7 @@ def m3gnet_initialize(model_name = None, dftd3 = False):
         myPotential = matgl.load_model("M3GNet-MP-2021.2.8-PES")
 
     myCalculator = M3GNetCalculator(
-        potential      = myPotential,
-        compute_stress = True,
-        stress_weight  = 1.0
+        potential=myPotential, compute_stress=True, stress_weight=1.0
     )
 
     # Add DFT-D3 to calculator without three-body term
@@ -40,22 +39,19 @@ def m3gnet_initialize(model_name = None, dftd3 = False):
     global dftd3Calculator
 
     m3gnetCalculator = myCalculator
-    dftd3Calculator  = None
+    dftd3Calculator = None
 
     if dftd3:
         from dftd3.ase import DFTD3
-        #from torch_dftd.torch_dftd3_calculator import TorchDFTD3Calculator
 
-        dftd3Calculator = DFTD3(
-            method  = "PBE",
-            damping = "d3zero",
-            s9      = 0.0
-        )
-        #dftd3Calculator = TorchDFTD3Calculator(
+        # from torch_dftd.torch_dftd3_calculator import TorchDFTD3Calculator
+
+        dftd3Calculator = DFTD3(method="PBE", damping="d3zero", s9=0.0)
+        # dftd3Calculator = TorchDFTD3Calculator(
         #    xc      = "pbe",
         #    damping = "zero",
         #    abc     = False
-        #)
+        # )
 
         myCalculator = SumCalculator([m3gnetCalculator, dftd3Calculator])
 
@@ -65,6 +61,7 @@ def m3gnet_initialize(model_name = None, dftd3 = False):
     myAtoms = None
 
     return myPotential.model.cutoff
+
 
 def m3gnet_get_energy_forces_stress(cell, atomic_numbers, positions):
     """
@@ -88,10 +85,10 @@ def m3gnet_get_energy_forces_stress(cell, atomic_numbers, positions):
 
     if myAtoms is None:
         myAtoms = Atoms(
-            numbers   = atomic_numbers,
-            positions = positions,
-            cell      = cell,
-            pbc       = [True, True, True]
+            numbers=atomic_numbers,
+            positions=positions,
+            cell=cell,
+            pbc=[True, True, True],
         )
 
         myAtoms.calc = myCalculator
@@ -102,7 +99,7 @@ def m3gnet_get_energy_forces_stress(cell, atomic_numbers, positions):
         myAtoms.set_positions(positions)
 
     # Predicting energy, forces and stress
-    energy = myAtoms.get_potential_energy().item()
+    energy = myAtoms.get_potential_energy()
     forces = myAtoms.get_forces().tolist()
 
     global m3gnetCalculator
@@ -124,4 +121,3 @@ def m3gnet_get_energy_forces_stress(cell, atomic_numbers, positions):
         myAtoms.calc = myCalculator
 
     return energy, forces, stress
-
