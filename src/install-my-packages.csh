@@ -17,6 +17,7 @@ FEP \
 MEAM \
 PHONON \
 REAXFF \
+REPLICA \
 )
 
 set i = 0
