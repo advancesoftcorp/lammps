@@ -16,6 +16,7 @@ from ocpmodels.common.registry import registry
 from ocpmodels.common.utils import (
     setup_imports,
     setup_logging,
+    update_config,
 )
 
 from ocpmodels.datasets import data_list_collater
