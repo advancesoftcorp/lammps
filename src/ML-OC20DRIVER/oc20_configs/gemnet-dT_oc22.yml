@@ -1,6 +1,6 @@
 trainer: forces
 
-normalizer:
+dataset:
   normalize_labels: False
 
 logger: wandb

@@ -20,8 +20,6 @@ from ocpmodels.common.utils import (
 
 from ocpmodels.datasets import data_list_collater
 from ocpmodels.preprocessing import AtomsToGraphs
-from ocpmodels.models import BaseModel
-from ocpmodels.trainers import BaseTrainer
 
 def oc20_initialize(model_name, gpu = True):
     """
@@ -128,19 +126,24 @@ def oc20_initialize(model_name, gpu = True):
     # Create trainer, that is pre-trained
     global myTrainer
 
+    config = update_config(config)
+
     myTrainer = registry.get_trainer_class(
         config.get("trainer", "forces")
     )(
-        task       = config["task"],
-        model      = config["model"],
-        dataset    = None,
-        normalizer = config["normalizer"],
-        optimizer  = config["optim"],
-        identifier = "",
-        slurm      = config.get("slurm", {}),
-        local_rank = config.get("local_rank", 0),
-        is_debug   = config.get("is_debug", True),
-        cpu        = not gpu_
+        task         = config["task"],
+        model        = config["model"],
+        dataset      = [config["dataset"]],
+        outputs      = config["outputs"],
+        loss_fns     = config["loss_fns"],
+        eval_metrics = config["eval_metrics"],
+        optimizer    = config["optim"],
+        identifier   = "",
+        slurm        = config.get("slurm", {}),
+        local_rank   = config.get("local_rank", 0),
+        is_debug     = config.get("is_debug", True),
+        cpu          = not gpu_,
+        amp          = config.get("amp", False)
     )
 
     # Load checkpoint
