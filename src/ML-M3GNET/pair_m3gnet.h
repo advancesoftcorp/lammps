@@ -76,7 +76,7 @@ private:
 
     void finalizePython();
 
-    double initializePython(const char *name, int dftd3);
+    double initializePython(const char *name, int as_path, int dftd3);
 
     double calculatePython();
 
