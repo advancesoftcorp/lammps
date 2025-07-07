@@ -176,56 +176,94 @@ def gnnp_initialize(gnnp_type, model_name = None, as_path = False, dftd3 = False
         cutoff = myCalculator.potential.model.model_args.get("cutoff", 5.0)
 
     elif gnnp_type == "fairchem":
-        # FAIR-Chem
-        from fairchem.core.common.relaxation.ase_utils import OCPCalculator
+        from importlib.metadata import version
+        major = int(version("fairchem-core").split(".")[0])
 
-        if as_path:
-            myCalculator = OCPCalculator(
-                checkpoint_path = model_name,
-                cpu             = not gpu
-            )
+        # FAIR-Chem v1
+        if major < 2:
+            from fairchem.core.common.relaxation.ase_utils import OCPCalculator
 
-        else:
-            OMAT_CHECKPTS = {
-                "EquiformerV2-31M-OMat"          : "eqV2_31M_omat.pt",
-                "EquiformerV2-86M-OMat"          : "eqV2_86M_omat.pt",
-                "EquiformerV2-153M-OMat"         : "eqV2_153M_omat.pt",
-                "EquiformerV2-31M-MP"            : "eqV2_31M_mp.pt",
-                "EquiformerV2-31M-DeNS-MP"       : "eqV2_dens_31M_mp.pt",
-                "EquiformerV2-86M-DeNS-MP"       : "eqV2_dens_86M_mp.pt",
-                "EquiformerV2-153M-DeNS-MP"      : "eqV2_dens_153M_mp.pt",
-                "EquiformerV2-31M-OMat-Alex-MP"  : "eqV2_31M_omat_mp_salex.pt",
-                "EquiformerV2-86M-OMat-Alex-MP"  : "eqV2_86M_omat_mp_salex.pt",
-                "EquiformerV2-153M-OMat-Alex-MP" : "eqV2_153M_omat_mp_salex.pt",
-            }
-
-            if model_name is not None:
-                checkpt_name = OMAT_CHECKPTS.get(model_name);
-            else:
-                checkpt_name = OMAT_CHECKPTS.get("EquiformerV2-31M-OMat");
-
-            if checkpt_name is not None:
-                base_path   = os.path.dirname (os.path.abspath(__file__))
-                checkpt_dir = os.path.normpath(os.path.join(base_path, "fairchem-omat24"))
-                model_path  = os.path.normpath(os.path.join(checkpt_dir, checkpt_name))
-
+            if as_path:
                 myCalculator = OCPCalculator(
-                    checkpoint_path = model_path,
+                    checkpoint_path = model_name,
                     cpu             = not gpu
                 )
 
             else:
-                #base_path   = os.path.dirname (os.path.abspath(__file__))
-                base_path   = os.path.expanduser("~")
-                checkpt_dir = os.path.normpath(os.path.join(base_path, ".fairchem"))
+                OMAT_CHECKPTS = {
+                    "EquiformerV2-31M-OMat"          : "eqV2_31M_omat.pt",
+                    "EquiformerV2-86M-OMat"          : "eqV2_86M_omat.pt",
+                    "EquiformerV2-153M-OMat"         : "eqV2_153M_omat.pt",
+                    "EquiformerV2-31M-MP"            : "eqV2_31M_mp.pt",
+                    "EquiformerV2-31M-DeNS-MP"       : "eqV2_dens_31M_mp.pt",
+                    "EquiformerV2-86M-DeNS-MP"       : "eqV2_dens_86M_mp.pt",
+                    "EquiformerV2-153M-DeNS-MP"      : "eqV2_dens_153M_mp.pt",
+                    "EquiformerV2-31M-OMat-Alex-MP"  : "eqV2_31M_omat_mp_salex.pt",
+                    "EquiformerV2-86M-OMat-Alex-MP"  : "eqV2_86M_omat_mp_salex.pt",
+                    "EquiformerV2-153M-OMat-Alex-MP" : "eqV2_153M_omat_mp_salex.pt",
+                }
 
-                myCalculator = OCPCalculator(
-                    model_name  = model_name,
-                    local_cache = checkpt_dir,
-                    cpu         = not gpu
-                )
+                if model_name is not None:
+                    checkpt_name = OMAT_CHECKPTS.get(model_name);
+                else:
+                    checkpt_name = OMAT_CHECKPTS.get("EquiformerV2-31M-OMat");
 
-        cutoff = myCalculator.config["model"].get("max_radius", 8.0)
+                if checkpt_name is not None:
+                    base_path   = os.path.dirname (os.path.abspath(__file__))
+                    checkpt_dir = os.path.normpath(os.path.join(base_path, "fairchem-omat24"))
+                    model_path  = os.path.normpath(os.path.join(checkpt_dir, checkpt_name))
+
+                    myCalculator = OCPCalculator(
+                        checkpoint_path = model_path,
+                        cpu             = not gpu
+                    )
+
+                else:
+                    #base_path   = os.path.dirname (os.path.abspath(__file__))
+                    base_path   = os.path.expanduser("~")
+                    checkpt_dir = os.path.normpath(os.path.join(base_path, ".fairchem"))
+
+                    myCalculator = OCPCalculator(
+                        model_name  = model_name,
+                        local_cache = checkpt_dir,
+                        cpu         = not gpu
+                    )
+
+            cutoff = myCalculator.config["model"].get("max_radius", 8.0)
+
+        # FAIR-Chem v2
+        else:
+            from fairchem.core import FAIRChemCalculator, pretrained_mlip
+            from fairchem.core.units.mlip_unit import load_predict_unit
+
+            task_name = "omat" #oc20|omat|omol|odac|omc
+
+            if as_path:
+                checkpt_name = model_name
+                predictor    = load_predict_unit(checkpt_name, device=device)
+                myCalculator = FAIRChemCalculator(predictor, task_name=task_name)
+            else:
+                # UMA_CHECKPTS = {
+                #     "UMA-S-1"    : "uma-s-1",
+                #     "UMA-S-1P1"  : "uma-s-1p1",
+                #     "UMA-M-1P1"  : "uma-m-1p1",
+                # }
+                # if model_name is not None:
+                #     checkpt_name = UMA_CHECKPTS.get(model_name.upper())
+                # else:
+                #     checkpt_name = UMA_CHECKPTS.get("UMA-S-1P1")
+
+                checkpt_name = "uma-s-1p1"
+                predictor    = pretrained_mlip.get_predict_unit(checkpt_name, device=device)
+                myCalculator = FAIRChemCalculator(predictor, task_name=task_name)
+
+            cutoff = getattr(predictor, "cutoff", 8.0)
+
+            import logging
+            logging.getLogger(__name__).warning(
+                "model_name = %s, The model actually used: %s",
+                model_name, checkpt_name
+            )
 
     else:
         raise ValueError("gnnp_type is incorrect: " + gnnp_type)
