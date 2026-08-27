@@ -215,9 +215,15 @@ void PairGNNP::performGNNP()
         virial[0] -= volume * this->stress[0]; // xx
         virial[1] -= volume * this->stress[1]; // yy
         virial[2] -= volume * this->stress[2]; // zz
-        virial[3] -= volume * this->stress[3]; // yz
+        // LAMMPS accumulates the virial as (xx, yy, zz, xy, xz, yz),
+        // while the driver returns the stress in ASE Voigt order
+        // (xx, yy, zz, yz, xz, xy). The off-diagonal conventions differ
+        // by an xy<->yz exchange, so virial[3] takes Voigt stress[5]
+        // (= xy) and virial[5] takes Voigt stress[3] (= yz); xz shares
+        // slot 4 in both orders.
+        virial[3] -= volume * this->stress[5]; // xy
         virial[4] -= volume * this->stress[4]; // xz
-        virial[5] -= volume * this->stress[5]; // xy
+        virial[5] -= volume * this->stress[3]; // yz
     }
 }
 
@@ -816,4 +822,5 @@ void PairGNNP::toRealElement(char *elem)
 
     elem[m] = '\0';
 }
+
 
